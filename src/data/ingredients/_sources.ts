@@ -89,6 +89,12 @@ export const NHS_AVOID_WEANING = nhs(
   '/best-start-in-life/baby/weaning/safe-weaning/food-and-drinks-to-avoid/',
 );
 
+/** Rostlinné zdroje železa a vliv vitaminu C na jeho vstřebávání. */
+export const NHS_VEGETARIAN = nhs(
+  'The vegetarian diet',
+  '/live-well/eat-well/how-to-eat-a-balanced-diet/the-vegetarian-diet/',
+);
+
 /** Dusičnany v listové zelenině a riziko pro malé děti. */
 export const EFSA_NITRATE: SourceRef = {
   org: 'EFSA',
