@@ -16,6 +16,7 @@ a přípravnými informacemi ke třem věkovým fázím, recepty vždy ve třech
 | [`docs/SUROVINY-SEZNAM.md`](docs/SUROVINY-SEZNAM.md) | Závazný seznam položek katalogu |
 | [`docs/GOALS.md`](docs/GOALS.md) | Fáze stavby a podmínky pro `/goal` |
 | [`docs/JAK-NA-TO.md`](docs/JAK-NA-TO.md) | Ruční kroky (GitHub Pages, Firebase) a postup pouštění fází |
+| [`docs/FIREBASE.md`](docs/FIREBASE.md) | Nasazení Firestore pravidel a omezení API klíče |
 
 ## Příkazy
 
@@ -39,7 +40,7 @@ verze nastav `PLAYWRIGHT_CHROMIUM_EXECUTABLE` na cestu k binárce.
 - [ ] **Fáze 2** — katalog surovin (≥190 položek)
 - [ ] **Fáze 3** — recepty (≥80, z toho ≥40 vegetariánských)
 - [ ] **Fáze 4** — uživatelské rozhraní
-- [ ] **Fáze 5** — synchronizace a PWA
+- [x] **Fáze 5** — synchronizace a PWA (mimo pořadí: fáze 2 čeká na síť)
 - [ ] **Fáze 6** — uzavření podle akceptačních kritérií
 
 ## Nasazení
@@ -48,6 +49,16 @@ Push do `main` spustí workflow `.github/workflows/deploy.yml`: `npm run validat
 `npm run build` a teprve pak deploy na Pages. **Když validace selže, nenasadí se nic.**
 
 Jednorázově je potřeba v repozitáři zapnout Settings → Pages → Source: **GitHub Actions**.
+
+## Synchronizace
+
+Výchozí je **lokální režim** nad IndexedDB — aplikace funguje celá, jen se
+nesynchronizuje. Firebase režim (Anonymous Auth + Firestore) se zapíná vložením
+konfigurace v Nastavení; do repozitáře se žádné klíče nedávají. Postup je
+v [`docs/FIREBASE.md`](docs/FIREBASE.md), pravidla v [`firestore.rules`](firestore.rules).
+
+Ochutnávky jsou **append-only** — když oba rodiče zapíšou offline, po připojení
+zůstanou oba záznamy. Ostatní pole jsou last-write-wins.
 
 ## Bezpečnostní vrstva
 

@@ -35,3 +35,32 @@ test.describe('kostra aplikace', () => {
     }
   });
 });
+
+test.describe('domácnost', () => {
+  test('založení domácnosti ukáže kód po pěticích i QR', async ({ page }) => {
+    await page.goto('./');
+    await page.getByTestId('disclaimer-accept').click();
+
+    await page.getByRole('link', { name: /Domácnost/ }).click();
+    await expect(page.getByTestId('stav-synchronizace')).toContainText('Jen na tomto zařízení');
+
+    await page.getByRole('button', { name: 'Založit domácnost' }).click();
+
+    const code = page.getByTestId('parovaci-kod');
+    await expect(code).toBeVisible();
+    // 10 znaků Crockford Base32 zobrazených po pěticích: K7M2X-9QRT4
+    await expect(code).toHaveText(/^[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$/);
+    await expect(page.getByTestId('qr-kod')).toBeVisible();
+  });
+
+  test('žádné vodorovné přetečení na obrazovce domácnosti', async ({ page }, testInfo) => {
+    await page.goto('./');
+    await page.getByTestId('disclaimer-accept').click();
+    await page.getByRole('link', { name: /Domácnost/ }).click();
+    await expect(page.getByTestId('stav-synchronizace')).toBeVisible();
+
+    const width = testInfo.project.use.viewport?.width ?? 0;
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(scrollWidth).toBeLessThanOrEqual(width);
+  });
+});

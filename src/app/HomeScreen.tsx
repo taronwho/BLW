@@ -1,5 +1,6 @@
 import { BookOpen, Carrot, NotebookPen, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { ingredients } from '@/data/ingredients';
 import { recipes } from '@/data/recipes';
 import { DISCLAIMER_PARAGRAPHS } from './disclaimer';
@@ -17,7 +18,7 @@ export function HomeScreen(): ReactNode {
   ];
 
   return (
-    <main className="mx-auto flex min-h-full w-full max-w-md flex-col gap-6 px-4 py-6">
+    <main className="flex flex-col gap-6">
       <header className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold leading-tight">BLW — příkrmy pro celou rodinu</h1>
         <p className="text-sm text-muted">
@@ -43,6 +44,19 @@ export function HomeScreen(): ReactNode {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section aria-labelledby="sekce-nastaveni" className="flex flex-col gap-2">
+        <h2 id="sekce-nastaveni" className="text-sm font-semibold uppercase tracking-wide text-muted">
+          Nastavení
+        </h2>
+        <Link
+          to="/domacnost"
+          className="flex min-h-touch items-center gap-2 rounded-xl bg-surface p-3 text-sm font-medium"
+        >
+          <Users aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+          Domácnost, párovací kód a synchronizace
+        </Link>
       </section>
 
       <section aria-labelledby="sekce-disclaimer" className="flex flex-col gap-2">
