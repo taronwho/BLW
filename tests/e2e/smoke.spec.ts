@@ -18,7 +18,7 @@ test.describe('kostra aplikace', () => {
 
     await accept.click();
     await expect(disclaimer).toBeHidden();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('BLW');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Suroviny');
   });
 
   test('žádné vodorovné přetečení', async ({ page }, testInfo) => {

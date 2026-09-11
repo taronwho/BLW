@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Download, KeyRound, Upload } from 'lucide-react';
 import { useHouseholdStore } from '@/storage/householdStore';
+import { ageInMonths, defaultStage, formatAge, stageLabel } from '@/lib/age';
 import {
   formatHouseholdCode,
   householdPairingUrl,
@@ -23,26 +24,73 @@ import { SyncStatusBadge } from './SyncStatusBadge';
  * Zbytek obrazovky doplní fáze 4.
  */
 export function HouseholdScreen(): ReactNode {
-  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState } =
+  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState, setChild } =
     useHouseholdStore();
   const [codeInput, setCodeInput] = useState('');
   const [configInput, setConfigInput] = useState('');
   const [message, setMessage] = useState<string | null>(null);
   const [hasConfig, setHasConfig] = useState(false);
+  const [childName, setChildName] = useState('');
+  const [childBirthDate, setChildBirthDate] = useState('');
 
   useEffect(() => {
     void init();
     setHasConfig(loadFirebaseConfig() !== null);
   }, [init]);
 
+  // Formulář se naplní, až dorazí stav z úložiště.
+  useEffect(() => {
+    setChildName(state.childName);
+    setChildBirthDate(state.childBirthDate);
+  }, [state.childName, state.childBirthDate]);
+
+  const age = childBirthDate === '' ? null : ageInMonths(childBirthDate);
+
   const pairingUrl =
     householdCode === null ? null : householdPairingUrl(householdCode, window.location.origin + import.meta.env.BASE_URL);
 
   return (
     <section className="flex flex-col gap-5" aria-labelledby="domacnost-nadpis">
-      <h2 id="domacnost-nadpis" className="text-lg font-semibold">
+      <h1 id="domacnost-nadpis" className="text-lg font-semibold">
         Domácnost
-      </h2>
+      </h1>
+
+      <form
+        className="flex flex-col gap-2 rounded-xl bg-surface p-4"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void setChild(childName.trim(), childBirthDate);
+          setMessage('Uloženo.');
+        }}
+      >
+        <label htmlFor="jmeno" className="text-sm font-medium">
+          Jméno dcery
+        </label>
+        <input
+          id="jmeno"
+          value={childName}
+          onChange={(event) => setChildName(event.target.value)}
+          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
+        />
+        <label htmlFor="narozeni" className="text-sm font-medium">
+          Datum narození
+        </label>
+        <input
+          id="narozeni"
+          type="date"
+          value={childBirthDate}
+          onChange={(event) => setChildBirthDate(event.target.value)}
+          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
+        />
+        <p className="text-xs text-muted">
+          {age === null
+            ? 'Podle data narození aplikace předvybírá fázi 6m+ / 9m+ / 12m+.'
+            : `Teď je jí ${formatAge(age)}, předvybraná fáze ${stageLabel(defaultStage(childBirthDate))}.`}
+        </p>
+        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">
+          Uložit
+        </button>
+      </form>
 
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />

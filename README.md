@@ -40,7 +40,7 @@ verze nastav `PLAYWRIGHT_CHROMIUM_EXECUTABLE` na cestu k binárce.
 - [x] **Fáze 1** — bezpečnostní vrstva `src/safety/` se spustitelnými testy
 - [ ] **Fáze 2** — katalog surovin (≥190 položek)
 - [ ] **Fáze 3** — recepty (≥80, z toho ≥40 vegetariánských)
-- [ ] **Fáze 4** — uživatelské rozhraní
+- [~] **Fáze 4** — uživatelské rozhraní (obrazovky a logika hotové, čekají na data)
 - [x] **Fáze 5** — synchronizace a PWA (mimo pořadí: fáze 2 čeká na síť)
 - [ ] **Fáze 6** — uzavření podle akceptačních kritérií
 

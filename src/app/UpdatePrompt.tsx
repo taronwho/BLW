@@ -18,7 +18,8 @@ export function UpdatePrompt(): ReactNode {
     <div
       role="status"
       data-testid="update-prompt"
-      className="fixed inset-x-0 bottom-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)]"
+      // Sedí nad spodní lištou, ne přes ni.
+      className="fixed inset-x-0 bottom-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+4.5rem)]"
     >
       <div className="mx-auto flex max-w-md items-center gap-3 rounded-xl bg-ink px-4 py-3 text-sm text-paper shadow-lg">
         <span className="flex-1">Je dostupná novější verze.</span>
