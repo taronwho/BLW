@@ -14,14 +14,14 @@ export function App(): ReactNode {
   return (
     <HashRouter>
       <DisclaimerGate>
-        <div className="mx-auto flex min-h-full w-full max-w-md flex-col gap-6 px-4 py-6">
+        <main className="mx-auto flex min-h-full w-full max-w-md flex-col gap-6 px-4 py-6">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/domacnost" element={<HouseholdScreen />} />
             <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </div>
+        </main>
         <UpdatePrompt />
       </DisclaimerGate>
     </HashRouter>

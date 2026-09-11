@@ -18,7 +18,7 @@ export function HomeScreen(): ReactNode {
   ];
 
   return (
-    <main className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold leading-tight">BLW — příkrmy pro celou rodinu</h1>
         <p className="text-sm text-muted">
@@ -71,6 +71,6 @@ export function HomeScreen(): ReactNode {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }
