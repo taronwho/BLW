@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "validate:data": "tsx scripts/validate-data.ts",
+    "check:sources": "tsx scripts/check-sources.ts",
     "validate": "npm run typecheck && npm run lint && vitest run && npm run validate:data",
     "test:e2e": "playwright test"
   },

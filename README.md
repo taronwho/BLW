@@ -25,6 +25,7 @@ npm install
 npm run dev            # vývoj
 npm run validate       # typecheck + lint + vitest + validace dat
 npm run validate:data  # jen datová vrstva, vypíše souhrnnou tabulku
+npm run check:sources  # zavolá každý SourceRef a ověří, že odkaz žije (vyžaduje síť)
 npm run test:e2e       # Playwright na viewportech 320 / 375 / 414 px
 npm run build          # produkční build
 ```
@@ -59,6 +60,21 @@ v [`docs/FIREBASE.md`](docs/FIREBASE.md), pravidla v [`firestore.rules`](firesto
 
 Ochutnávky jsou **append-only** — když oba rodiče zapíšou offline, po připojení
 zůstanou oba záznamy. Ostatní pole jsou last-write-wins.
+
+## Kontrola zdrojů
+
+`npm run validate` běží schválně offline, aby prošel i v CI. Ověření, že odkazy
+v datech skutečně vedou tam, kam mají, je zvlášť:
+
+```bash
+npm run check:sources                          # všechny zdroje v katalogu
+npm run check:sources -- https://www.nhs.uk/…  # ad-hoc jedno URL
+```
+
+Skript hlásí HTTP status, přesměrování (odhalí přesunutou stránku) a to, jestli
+doména odpovídá deklarovanému tieru. Skončí exit kódem 1, když některý odkaz
+nežije. Pouštěj ho po každé dávce surovin — tvrzení „zdroj jsem načetl" se tím
+mění v ověřitelný fakt.
 
 ## Bezpečnostní vrstva
 
