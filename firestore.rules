@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    match /households/{householdId} {
+      // Čtení jen pro přihlášeného, který zná přesné ID (capability model).
+      allow get: if request.auth != null;
+      allow list: if false;                    // zákaz enumerace
+      allow create: if request.auth != null
+                    && request.resource.data.members == [request.auth.uid];
+      allow update: if request.auth != null
+                    && request.auth.uid in resource.data.members
+                    && request.resource.data.members.size() <= 5;
+      allow delete: if false;
+    }
+  }
+}
