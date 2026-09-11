@@ -1,0 +1,316 @@
+# SPEC.md — funkční specifikace BLW aplikace
+
+## 1. Uživatelé a kontext
+
+Dva rodiče, jedna dcera. Matka je **vegetariánka** (nejí maso ani ryby, jí mléčné výrobky a vejce), otec a dcera jedí i maso. Cíl je jedno vaření pro celou rodinu.
+
+Typická situace použití: rodič stojí v kuchyni, drží dítě v jedné ruce, telefon v druhé, potřebuje za pět vteřin zjistit „můžu jí dát tohle a jak to nakrájet". Tomu podřiď celý návrh — velké dotykové cíle, žádné skryté gesto, žádná obrazovka, která vyžaduje dvě ruce.
+
+Datum narození dcery zadají rodiče v nastavení. Z něj se počítá aktuální věk v měsících a aplikace **automaticky předvybírá** odpovídající fázi (6m+ / 9m+ / 12m+); ručně lze přepnout.
+
+## 2. Datový model
+
+Vše v `src/types/`. Typy jsou zdrojem pravdy, data se proti nim validují.
+
+```ts
+export type Stage = '6m' | '9m' | '12m';
+export type ChokingRisk = 'low' | 'medium' | 'high';
+export type ReviewStatus = 'verified' | 'needs-review';
+
+export type IngredientCategory =
+  | 'zelenina' | 'ovoce' | 'obiloviny' | 'maso-ryby' | 'lusteniny'
+  | 'mlecne-vejce' | 'orechy-seminka-tuky' | 'bylinky-koreni' | 'ostatni';
+
+/** 9 alergenů klíčových pro zavádění + zbytek ze 14 povinně značených v EU */
+export type AllergenGroup =
+  | 'vejce' | 'arasidy' | 'mleko' | 'orechy' | 'psenice-lepek' | 'soja'
+  | 'ryby' | 'sezam' | 'korysi' | 'mekkysi' | 'celer' | 'horcice'
+  | 'lupina' | 'siricitany';
+
+export interface SourceRef {
+  /** Krátký název instituce, např. "ESPGHAN" nebo "NHS Start for Life" */
+  org: string;
+  title: string;
+  url: string;
+  /** ISO datum, kdy byl odkaz skutečně načten */
+  accessedAt: string;
+  /** 1 = odborná společnost / úřad, 2 = důvěryhodná odborná publikace */
+  tier: 1 | 2;
+}
+
+export interface StagePrep {
+  /** Jak to nakrájet a servírovat. 2–4 věty, konkrétně, česky. */
+  serving: string;
+  /** Na co si dát pozor právě v této fázi. Prázdné jen pokud opravdu nic. */
+  caution?: string;
+}
+
+export interface Ingredient {
+  id: string;                 // slug, např. "dyne-hokaido"
+  nameCz: string;
+  altNamesCz: string[];       // synonyma pro vyhledávání ("batáty", "sladké brambory")
+  category: IngredientCategory;
+  emoji?: string;
+
+  allergens: AllergenGroup[];
+  isKeyAllergen: boolean;     // patří mezi 9 klíčových pro plánované zavádění
+  chokingRisk: ChokingRisk;
+  /** Konkrétní důvod rizika, ne obecná fráze. Např. "kulatý tvar odpovídá průměru dýchacích cest". */
+  chokingReason?: string;
+
+  /** Strukturovaná rizika — validátor je kontroluje, UI je zobrazuje jako štítky */
+  hazards: Array<
+    | 'dusicnany' | 'rtut' | 'arsen' | 'vitamin-a' | 'sul'
+    | 'botulismus' | 'nepasterizovane' | 'syrove' | 'kosti' | 'cukr'
+  >;
+  /** Lidsky napsané vysvětlení ke každému hazardu, klíč = hazard */
+  hazardNotes: Record<string, string>;
+
+  /** Nejdřívější věk v měsících, kdy se surovina obvykle nabízí */
+  minAgeMonths: number;
+  /** Pokud existuje horní omezení četnosti, např. játra */
+  frequencyLimit?: string;
+
+  prep: Record<Stage, StagePrep>;
+  /** 3–4 konkrétní způsoby úpravy: pára, pečení, pyré, syrové... */
+  prepIdeas: string[];
+  /** Měsíce sezónnosti v ČR, 1–12. Prázdné pole = celoročně. */
+  seasonCz: number[];
+  /** Vhodné pro vegetariánskou stravu */
+  vegetarian: boolean;
+
+  sources: SourceRef[];
+  reviewStatus: ReviewStatus;
+  reviewNote?: string;
+}
+
+export type RecipeCategory = 'snidane' | 'obed-vecere' | 'polevky' | 'svaciny-peceni';
+export type DietTrack = 'vegetarian' | 'meat';
+
+export interface RecipeIngredientRef {
+  ingredientId: string;       // musí existovat v katalogu
+  amount: string;             // "150 g", "1 lžíce"
+  /** Do které linie složka patří. 'all' = společný základ. */
+  track: 'all' | DietTrack;
+  note?: string;              // "pro miminko odeber před přidáním"
+}
+
+export interface Recipe {
+  id: string;
+  titleCz: string;
+  category: RecipeCategory;
+  minAgeMonths: number;
+  timeMinutes: number;
+  servings: string;           // "2 dospělí + 1 miminko"
+
+  ingredients: RecipeIngredientRef[];
+  /** Společný postup pro celou rodinu, číslované kroky */
+  baseSteps: string[];
+  /** Kdy přesně odebrat porci pro miminko — povinné, nesmí být prázdné */
+  babySplitPoint: string;
+  babySteps: string[];
+  /** Jak porci miminku podat v dané fázi */
+  babyServing: Record<Stage, string>;
+  /** Dokončení masité verze (otec + dcera) */
+  meatSteps: string[];
+  /** Dokončení bezmasé verze (matka) — vždy vyplněné, i u čistě vegetariánského receptu */
+  vegetarianSteps: string[];
+  /** Čím se nahrazuje bílkovina v bezmasé verzi. Povinné, když recept obsahuje maso/rybu. */
+  vegetarianProteinSwap?: string;
+
+  allergens: AllergenGroup[];   // odvozené ze složek, dopočítá validátor
+  tags: string[];               // "bez lepku", "jednohrnec", "do ruky", "mrazitelné"
+  sources: SourceRef[];         // technika/bezpečnost, ne samotný recept
+  reviewStatus: ReviewStatus;
+}
+
+export interface TastingEvent {
+  id: string;
+  ingredientId: string;
+  date: string;               // ISO
+  amount: 'ochutnala' | 'snedla-cast' | 'snedla-vse' | 'odmitla';
+  reaction: 'zadna' | 'chutnalo' | 'nelibilo' | 'kozni' | 'travici' | 'jina';
+  note?: string;
+  createdBy: string;          // uid rodiče
+  createdAt: number;          // pro řešení konfliktů
+}
+
+export interface HouseholdState {
+  childName: string;
+  childBirthDate: string;     // ISO
+  members: string[];          // uid
+  tastings: TastingEvent[];
+  favorites: string[];        // ingredientId + recipeId
+  recipeNotes: Record<string, string>;
+  schemaVersion: number;
+}
+```
+
+## 3. Bezpečnostní vrstva — `src/safety/`
+
+Tohle je jádro důvěryhodnosti. Není to dokumentace, je to kód.
+
+`src/safety/rules.ts` exportuje pole pravidel. Každé pravidlo má `id`, `severity: 'error' | 'warning'`, `appliesTo: 'ingredient' | 'recipe'`, `check(item, catalog): string | null`. Vrátí text chyby nebo `null`.
+
+Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
+
+| id | severity | co kontroluje |
+|---|---|---|
+| `no-honey-baby` | error | slovo „med" (vč. tvarů) se neobjeví v `babySteps`, `babyServing` ani v instrukcích surovin s `minAgeMonths < 12` |
+| `no-salt-baby` | error | „sůl", „solit", „dosolit", „bujón", „vývar z kostky" v dětské linii; solení smí být až v `meatSteps`/`vegetarianSteps` |
+| `no-sugar-baby` | error | přidaný cukr, sirup, javorový sirup, agáve v dětské linii |
+| `no-whole-nuts` | error | celé ořechy / celá semínka v dětské linii bez slova „mleté"/"máslo"/"pasta" |
+| `round-food-shape` | error | suroviny s `chokingRisk: 'high'` a kulatým tvarem musí mít v `prep['6m'].serving` i `prep['9m'].serving` explicitní pokyn k podélnému rozčtvrcení |
+| `baby-split-required` | error | `babySplitPoint` je neprázdný a odkazuje na konkrétní krok z `baseSteps` |
+| `veg-track-complete` | error | `vegetarianSteps` neprázdné; pokud recept obsahuje surovinu z `maso-ryby`, musí být vyplněný `vegetarianProteinSwap` |
+| `hidden-animal-ingredients` | error | v `vegetarianSteps` se nesmí objevit želatina, sádlo, rybí omáčka, worcesterská omáčka, ančovičky, syřidlo živočišného původu; parmazán a pecorino jsou vedeny jako `vegetarian: false` a v bezmasé verzi se nahrazují |
+| `source-required` | error | každá surovina má ≥1 `SourceRef` s `tier: 1` nebo dva s `tier: 2` |
+| `source-url-shape` | error | URL je absolutní https, doména je v povoleném seznamu důvěryhodných zdrojů |
+| `no-placeholder` | error | nikde `TODO`, `lorem`, `doplnit`, `xxx`, prázdný povinný string |
+| `ingredient-refs-resolve` | error | každý `ingredientId` v receptu existuje v katalogu |
+| `stage-prep-complete` | error | všechny tři fáze vyplněné, každá ≥ 80 znaků, nejsou navzájem identické |
+| `allergen-consistency` | error | `allergens` receptu odpovídá sjednocení alergenů složek |
+| `min-age-consistency` | error | `minAgeMonths` receptu ≥ maximum z jeho složek |
+| `mercury-limit` | warning | ryby s `hazards: ['rtut']` mají vyplněný `frequencyLimit` |
+| `nitrate-note` | warning | suroviny s `hazards: ['dusicnany']` mají pokyn neohřívat opakovaně |
+| `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz` |
+| `text-uniqueness` | warning | žádné dva popisy `serving` nejsou shodné na >85 % (odhalí generování šablonou) |
+| `length-sanity` | warning | `serving` má 80–400 znaků; `chokingReason` není obecná fráze ze zakázaného seznamu („dbejte opatrnosti", „konzultujte s lékařem") |
+
+Validátor `scripts/validate-data.ts` projde všechna pravidla, vypíše **tabulku po kategoriích** a souhrn ve tvaru z `CLAUDE.md`, a skončí s exit kódem 1 při jakékoli chybě.
+
+## 4. Obrazovky
+
+Spodní navigace, 4 položky: **Suroviny · Recepty · Deník · Domácnost**.
+
+### 4.1 Suroviny
+- Vyhledávání (bez diakritiky i s ní, hledá i v `altNamesCz`)
+- Filtr kategorií jako vodorovně scrollovatelné čipy
+- Rychlé filtry: Vše / Neochutnáno / Ochutnáno / Klíčové alergeny / Oblíbené / Vhodné teď (podle věku) / Sezónní
+- Položka v seznamu: název, ikona kategorie, štítek fáze, štítek rizika, checkbox „ochutnáno"
+- Checkbox jedním klepnutím založí `TastingEvent` s dnešním datem; detail reakce lze doplnit později
+- Prázdný stav filtru není chybová hláška, ale nabídka: „Nic neodpovídá. Zkus zrušit filtr sezóny."
+
+### 4.2 Detail suroviny
+Pořadí odshora — bezpečnost první, protože kvůli ní se sem chodí:
+1. Název + štítky (alergen, riziko dušení, hazardy)
+2. **Bezpečnostní blok**: riziko dušení slovem, ikonou i barvou (nikdy jen barvou), konkrétní důvod, hazardy s vysvětlením
+3. Přepínač fází 6m+ / 9m+ / 12m+ — předvybraný podle věku dcery — s pokynem ke krájení a servírování
+4. Nápady na úpravu (3–4)
+5. Recepty s touto surovinou — klikací
+6. Historie ochutnávek + tlačítko „Zaznamenat ochutnávku"
+7. Zdroje (rozbalovací), datum ověření, u `needs-review` výrazný štítek „Neověřeno — zkontroluj s pediatričkou" a tlačítko „Označit jako ověřené"
+
+### 4.3 Recepty
+Karty s názvem, časem, kategorií, štítky (bez lepku, do ruky, mrazitelné), indikací „vhodné od X měsíců".
+Filtry: kategorie, čas do 20/40 minut, „mám doma" (výběr surovin), „jen vegetariánské", „bez alergenu X".
+
+### 4.4 Detail receptu
+- Suroviny se sloupcem, do které linie patří (společné / masité / bezmasé), každá klikací do katalogu
+- **Společný postup** číslovaný
+- Výrazně oddělený **moment odebrání porce pro miminko** — vizuálně nejsilnější prvek obrazovky, ne poznámka pod čarou
+- Tři panely dokončení: **Pro miminko** (s přepínačem fází) · **Masitá verze** · **Bezmasá verze**
+- Poznámka rodiny k receptu (sdílená)
+
+### 4.5 Deník
+- Časová osa ochutnávek, seskupená po dnech
+- Karta „Klíčové alergeny": 9 položek, u každé počet expozic a datum poslední; zavedený = 3+ expozice bez reakce
+- Statistiky: ochutnáno X z Y surovin, rozpad po kategoriích, oblíbené, odmítnuté (s poznámkou, že odmítnutí je normální a opakovaná nabídka je běžná)
+- „Co dnes zkusit?" — návrh 3 dosud neochutnaných surovin vhodných k věku a sezóně
+
+### 4.6 Domácnost a nastavení
+- Jméno a datum narození dcery
+- **Párovací kód domácnosti** + QR kód ke skenování druhým telefonem
+- Stav synchronizace: Připojeno / Jen na tomto zařízení / Offline (fronta N změn)
+- Zadání Firebase konfigurace (pole pro vložení JSON z konzole)
+- Export/import dat do JSON
+- Disclaimer a přehled zdrojů
+- Počet položek k revizi s odkazem na seznam
+
+## 5. Vizuální směr
+
+Nepoužívej výchozí AI paletu (krémová #F4F1EA + terakota #D97757 + serif display) — je to dnes poznávací znamení generovaného webu. Tady jde o kuchyni a bezpečnost, ne o lifestyle brand.
+
+Navrhovaná paleta (můžeš ji vylepšit, ne zploštit):
+
+```
+--paper:    #F8F8F5   podklad
+--ink:      #16211D   text
+--muted:    #67716D   sekundární text
+--accent:   #1F6F5C   primární akce
+--safe:     #2F7D4F   nízké riziko
+--caution:  #9A6510   střední riziko
+--risk:     #A32318   vysoké riziko
+--surface:  #FFFFFF   karty
+```
+
+- Písmo: `Inter` na text (má plnou českou diakritiku), volitelně jeden výraznější řez na nadpisy. Self-hostuj přes `@fontsource`.
+- **Riziko nikdy nesmí být sděleno jen barvou** — vždy barva + ikona + slovo. Daltonismus i kuchyňské světlo.
+- Jeden výrazný prvek na obrazovku, zbytek tiše. Ne každá karta s vlastním stínem a gradientem.
+- Animace jen jako odpověď na akci uživatele (rozbalení, potvrzení). Žádné fade-up při scrollu.
+
+## 6. Mobilní kvalita — měřitelné požadavky
+
+- Funguje od šířky **320 px** bez vodorovného scrollu
+- Dotykové cíle ≥ 44×44 px
+- Respektuje `env(safe-area-inset-bottom)` — spodní lišta se nesmí schovat pod gesto-bar
+- Respektuje `prefers-reduced-motion`
+- Viditelný focus ring pro klávesnici
+- Kontrast textu ≥ 4.5:1
+- Žádný text se neořezává; dlouhé názvy se zalamují, ne přetékají
+- Testováno Playwrightem na 320×568, 375×667 a 414×896 — test selže při jakémkoli vodorovném přetečení nebo překryvu
+
+## 7. Synchronizace
+
+### Lokální režim (výchozí)
+Bez Firebase konfigurace aplikace plně funguje nad IndexedDB. Žádná funkce se neschovává, jen se nesynchronizuje. V UI o tom informuje jeden nevtíravý pruh v nastavení.
+
+### Firebase režim
+- **Anonymous Auth** — žádná hesla
+- Dokument `households/{householdId}`, kde `householdId` je 10 znaků z abecedy Crockford Base32 (bez I, L, O, U — nepletou se při přepisování)
+- Kód se zobrazuje po pěticích: `K7M2X-9QRT4`
+- Druhý rodič ho zadá nebo naskenuje QR; jeho `uid` se přidá do `members` (max 5)
+- Realtime přes `onSnapshot`, offline přes `persistentLocalCache` — změny se frontují a dosynchronizují
+- Konflikty: `TastingEvent` je append-only (nikdy se nepřepisuje, jen přidává), ostatní pole last-write-wins podle `createdAt`
+
+### Firestore pravidla (nasadit, ne nechat v test mode)
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    match /households/{householdId} {
+      // čtení jen pro přihlášeného, který zná přesné ID (capability model)
+      allow get: if request.auth != null;
+      allow list: if false;                    // zákaz enumerace
+      allow create: if request.auth != null
+                    && request.resource.data.members == [request.auth.uid];
+      allow update: if request.auth != null
+                    && request.auth.uid in resource.data.members
+                    && request.resource.data.members.size() <= 5;
+      allow delete: if false;
+    }
+  }
+}
+```
+
+Do `docs/FIREBASE.md` napiš přesný postup nasazení pravidel a omezení API klíče na HTTP referrer domény GitHub Pages.
+
+## 8. PWA
+
+`vite-plugin-pwa`: manifest s českým názvem, ikony 192/512 + maskable, `display: standalone`, offline cache celé aplikace i dat (data jsou statická, jdou cachovat natvrdo), aktualizace s nenápadnou výzvou „Je dostupná novější verze — obnovit".
+
+## 9. Akceptační kritéria
+
+Aplikace je hotová, když platí **všechno**:
+
+1. `npm run validate` skončí exit kódem 0, `CHYB: 0` a `VAROVÁNÍ: 0`
+2. ≥190 surovin, každá se všemi třemi fázemi a ≥1 zdrojem tier 1
+3. 0 surovin ve stavu `needs-review`, nebo je jejich seznam explicitně vypsaný a odsouhlasený
+4. ≥80 receptů, z toho ≥40 čistě vegetariánských; každý recept s masem má vyplněný `vegetarianProteinSwap`
+5. Každý recept má `babySplitPoint` a všechny tři fáze `babyServing`
+6. `npm run test:e2e` prochází na všech třech viewportech, včetně testu na vodorovné přetečení
+7. `npm run build` prochází, výstup se nasadí a `https://<nick>.github.io/blw-app/` vrací 200
+8. Ruční průchod: založení domácnosti, spárování druhým zařízením, záznam ochutnávky na jednom zařízení se do 5 s objeví na druhém
+9. Aplikace po vypnutí sítě dál funguje a zobrazuje data
+10. Disclaimer je vidět při prvním spuštění
