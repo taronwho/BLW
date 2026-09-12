@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  BP_BEETROOT,
   EFSA_NITRATE,
   EMA_FENNEL,
   MZCR_COMPLEMENTARY,
@@ -232,7 +233,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [7, 8, 9, 10, 11],
     vegetarian: true,
-    sources: [EFSA_NITRATE, NHS_FIRST_FOODS],
+    sources: [EFSA_NITRATE, BP_BEETROOT, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
   {
