@@ -11,7 +11,10 @@
  */
 export const COVERAGE_EXCEPTIONS: Readonly<Record<string, string>> = {
   'detsky-caj-bez-cukru': 'Nápoj podávaný samostatně k jídlu, ne složka pokrmu.',
-  voda: 'Pitná voda a voda na vaření; není složkou, kterou by recept odměřoval jako surovinu.',
+  // `voda` tu byla také, ale audit 12. 9. 2026 ukázal, že ji osm receptů
+  // odměřuje jako běžnou složku. Výjimka se tím nikdy neuplatnila a jen
+  // zbytečně vyjímala surovinu z kontroly, takže je pryč — pravidlo
+  // `ingredient-coverage` teď vodu skutečně kontroluje a ta projde.
 };
 
 /** Ověří, jestli je surovina z povinnosti mít recept vyjmutá. */
