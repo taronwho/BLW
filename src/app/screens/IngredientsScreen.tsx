@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data';
+import { isIronSource, nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES } from '@/types';
 import type { Ingredient } from '@/types';
@@ -17,7 +18,15 @@ import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { matchesIngredient } from '../lib/search';
 
-type QuickFilter = 'vse' | 'neochutnano' | 'ochutnano' | 'alergeny' | 'oblibene' | 'vhodne' | 'sezonni';
+type QuickFilter =
+  | 'vse'
+  | 'neochutnano'
+  | 'ochutnano'
+  | 'alergeny'
+  | 'oblibene'
+  | 'vhodne'
+  | 'sezonni'
+  | 'zelezo';
 
 const QUICK_FILTERS: readonly ChipOption[] = [
   { id: 'vse', label: 'Vše' },
@@ -27,6 +36,7 @@ const QUICK_FILTERS: readonly ChipOption[] = [
   { id: 'oblibene', label: 'Oblíbené' },
   { id: 'vhodne', label: 'Vhodné teď' },
   { id: 'sezonni', label: 'Sezónní' },
+  { id: 'zelezo', label: 'Zdroj železa' },
 ];
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
@@ -64,6 +74,8 @@ export function IngredientsScreen(): ReactNode {
             return suitableNow(item, months);
           case 'sezonni':
             return item.seasonCz.length > 0 && inSeason(item, month);
+          case 'zelezo':
+            return isIronSource(item);
           default:
             return true;
         }
@@ -158,6 +170,11 @@ function IngredientRow({
             od {ingredient.minAgeMonths} měsíců
           </span>
           <ChokingBadge risk={ingredient.chokingRisk} />
+          {nutrientProfile(ingredient).iron === 'vyznamny' && (
+            <span className="rounded-lg bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent">
+              železo
+            </span>
+          )}
         </span>
       </Link>
       <TastedToggle

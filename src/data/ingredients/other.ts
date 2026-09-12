@@ -82,7 +82,7 @@ export const other: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ani teď čaj nepotřebuje a doporučení NHS zůstává stejné. Pokud ho přesto chceš podat, ať je neslazený a slabý a ať ho předem odsouhlasí pediatrička; drž malé množství, aby nevytlačil mléko ani vodu.',
+          'Ani teď čaj nepotřebuje a doporučení NHS zůstává stejné. Pokud ho přesto chceš podat, ať je neslazený a slabý a ať ho předem odsouhlasí pediatr; drž malé množství, aby nevytlačil mléko ani vodu.',
         caution: 'Instantní granulované čaje bývají silně slazené.',
       },
       '12m': {
@@ -92,7 +92,7 @@ export const other: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'jen výjimečně a jen neslazený, po domluvě s pediatričkou',
+      'jen výjimečně a jen neslazený, po domluvě s pediatrem',
       'podávaný vlažný v otevřeném hrnku',
       'nikdy jako náhrada vody nebo mléka',
       'bez fenyklové složky u dítěte do čtyř let',
@@ -127,7 +127,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí kokosový jogurt s ovocem i v omáčkách. Pokud doma řešíte alergii na bílkovinu kravského mléka, výběr konkrétního výrobku a zdroj vápníku proberte s pediatričkou.',
+          'Batole jí kokosový jogurt s ovocem i v omáčkách. Pokud doma řešíte alergii na bílkovinu kravského mléka, výběr konkrétního výrobku a zdroj vápníku proberte s pediatrem.',
         caution: 'Rostlinné jogurty nejsou náhradou mléka pro malé dítě.',
       },
     },
@@ -306,7 +306,7 @@ export const other: Ingredient[] = [
     sources: [NHS_AVOID, NHS_AVOID_WEANING, EFSA_CAFFEINE],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Ověřeno přímým načtením všech tří zdrojů 12. 9. 2026. NHS říká, že kofein pro kojence a malé děti vhodný není a že se do láhve nemá přidávat nic včetně čokoládového prášku. Stránka EFSA ke kofeinu doložila, že kakaové boby jsou přirozeným zdrojem kofeinu, že u dětí 3–10 let je čokoláda včetně kakaových nápojů nejčastějším zdrojem kofeinu a že bezpečná úroveň pro děti a dospívající je 3 mg/kg tělesné hmotnosti a den. Nejmladší sledovanou skupinou jsou ale batolata 12–36 měsíců, o kojencích do 12 měsíců tam nic není, a theobromin EFSA na téhle stránce neřeší vůbec. Zůstává tedy nedoložené dvojí: věk zavedení (minAgeMonths 12 je opatrný odhad odvozený od pravidla o přidaném cukru, ne převzaté doporučení) a jakýkoli limit theobrominu pro kojence. Termín zavedení prober s pediatričkou.',
+      'Ověřeno přímým načtením všech tří zdrojů 12. 9. 2026. NHS říká, že kofein pro kojence a malé děti vhodný není a že se do láhve nemá přidávat nic včetně čokoládového prášku. Stránka EFSA ke kofeinu doložila, že kakaové boby jsou přirozeným zdrojem kofeinu, že u dětí 3–10 let je čokoláda včetně kakaových nápojů nejčastějším zdrojem kofeinu a že bezpečná úroveň pro děti a dospívající je 3 mg/kg tělesné hmotnosti a den. Nejmladší sledovanou skupinou jsou ale batolata 12–36 měsíců, o kojencích do 12 měsíců tam nic není, a theobromin EFSA na téhle stránce neřeší vůbec. Zůstává tedy nedoložené dvojí: věk zavedení (minAgeMonths 12 je opatrný odhad odvozený od pravidla o přidaném cukru, ne převzaté doporučení) a jakýkoli limit theobrominu pro kojence. Termín zavedení prober s pediatrem.',
   },
   {
     id: 'karob',

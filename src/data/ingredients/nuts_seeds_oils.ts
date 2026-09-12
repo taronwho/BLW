@@ -336,7 +336,7 @@ export const nutsSeedsOils: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí mletá konopná semínka v kaši, v pomazánkách i v pečení. V domácnosti, kde maminka nejí maso, jsou praktickým doplňkem bílkovin ke každodennímu jídlu.',
+          'Batole jí mletá konopná semínka v kaši, v pomazánkách i v pečení. V domácnosti, kde někdo z rodičů nejí maso, jsou praktickým doplňkem bílkovin ke každodennímu jídlu.',
         caution: 'Kupuj potravinářská loupaná semena, ne krmné směsi.',
       },
     },
@@ -736,7 +736,7 @@ export const nutsSeedsOils: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí lněný olej v jogurtu, v tvarohu i na zelenině. V rodině, kde maminka nejí ryby, je vedle mletých lněných semínek klíčovým zdrojem rostlinných omega-3 mastných kyselin.',
+          'Batole jí lněný olej v jogurtu, v tvarohu i na zelenině. V rodině, kde se ryby nejedí, je vedle mletých lněných semínek klíčovým zdrojem rostlinných omega-3 mastných kyselin.',
         caution: 'Zhořklý olej poznáš čichem, ten už nepoužívej.',
       },
     },

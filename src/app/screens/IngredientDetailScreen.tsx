@@ -6,19 +6,18 @@ import { ingredientById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
+import { NutrientBlock } from '../components/NutrientBlock';
 import { StageSwitch } from '../components/StageSwitch';
-import { TastedToggle } from '../components/TastedToggle';
+import { TastingLog } from '../components/TastingLog';
 import { ageInMonths, stageForAge, STAGE_LABELS } from '../lib/age';
 import { CHOKING_PRESENTATION } from '../lib/choking';
 import { recipesWithIngredient, tastingsByIngredient } from '../lib/derive';
 import {
   ALLERGEN_LABELS,
-  AMOUNT_LABELS,
   CATEGORY_LABELS,
   formatDate,
   formatSeason,
   HAZARD_LABELS,
-  REACTION_LABELS,
 } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 
@@ -127,12 +126,12 @@ export function IngredientDetailScreen(): ReactNode {
         )}
         {ingredient.reviewStatus === 'needs-review' && (
           <div className="flex flex-col gap-2 rounded-lg bg-risk/10 p-3">
-            <p className="text-sm font-semibold text-risk">Neověřeno — zkontroluj s pediatričkou</p>
+            <p className="text-sm font-semibold text-risk">Neověřeno — zkontroluj s pediatrem</p>
             {ingredient.reviewNote !== undefined && (
               <p className="text-sm leading-relaxed">{ingredient.reviewNote}</p>
             )}
             {acknowledged ? (
-              <p className="text-sm font-medium">Označeno jako probrané s pediatričkou (jen na tomhle zařízení).</p>
+              <p className="text-sm font-medium">Označeno jako probrané s pediatrem (jen na tomhle zařízení).</p>
             ) : (
               <button
                 type="button"
@@ -172,6 +171,8 @@ export function IngredientDetailScreen(): ReactNode {
         </ul>
       </section>
 
+      <NutrientBlock ingredient={ingredient} />
+
       <section aria-labelledby="recepty-nadpis" className="flex flex-col gap-2">
         <h2 id="recepty-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
           Recepty s touto surovinou ({linkedRecipes.length})
@@ -202,26 +203,11 @@ export function IngredientDetailScreen(): ReactNode {
         <h2 id="ochutnavky-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
           Ochutnávky ({history.length})
         </h2>
-        <TastedToggle
+        <TastingLog
           ingredientId={ingredient.id}
           ingredientName={ingredient.nameCz}
-          tasted={history.length > 0}
-          withLabel
+          history={history}
         />
-        {history.length === 0 ? (
-          <p className="text-sm text-muted">Zatím nic. Odmítnutí je normální, nabízej dál.</p>
-        ) : (
-          <ul className="flex flex-col gap-1 text-sm" data-testid="historie-ochutnavek">
-            {history.map((event) => (
-              <li key={event.id} className="flex flex-wrap gap-x-2">
-                <span className="font-medium">{formatDate(event.date)}</span>
-                <span className="text-muted">
-                  {AMOUNT_LABELS[event.amount]} · {REACTION_LABELS[event.reaction]}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
       </section>
 
       <section aria-labelledby="zdroje-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">

@@ -543,7 +543,7 @@ export const dairyEggs: Ingredient[] = [
       '6m': {
         serving:
           'Parmazán nastrouhej najemno a posyp jím teplé jídlo, roztaví se a chuť se rozloží do celé porce. Úlomky ani kousky sýra dítěti nedávej, jsou tvrdé a mají ostré hrany.',
-        caution: 'Parmazán se vyrábí se živočišným syřidlem, pro maminku není vhodný.',
+        caution: 'Parmazán se vyrábí se živočišným syřidlem, pro vegetariány v rodině není vhodný.',
       },
       '9m': {
         serving:
@@ -589,7 +589,7 @@ export const dairyEggs: Ingredient[] = [
       '6m': {
         serving:
           'Pecorino používej jen nastrouhané a v opravdu malém množství na teplé jídlo. Jeho chuť je ostřejší než u parmazánu, takže i špetka výrazně změní charakter celé porce.',
-        caution: 'Pecorino se vyrábí se živočišným syřidlem, maminka ho nejí.',
+        caution: 'Pecorino se vyrábí se živočišným syřidlem, vegetariáni v rodině ho nejedí.',
       },
       '9m': {
         serving:

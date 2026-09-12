@@ -16,12 +16,25 @@ export async function acceptDisclaimer(page: Page): Promise<void> {
   await expect(page.getByTestId('disclaimer')).toBeHidden();
 }
 
+/**
+ * Odkaz ve spodní navigaci. Rozcestník na úvodní obrazovce nabízí stejné
+ * názvy, takže samotné `getByRole('link')` trefí dva prvky naráz.
+ */
+export function navLink(page: Page, name: string): ReturnType<Page['getByRole']> {
+  return page.getByRole('navigation', { name: 'Hlavní navigace' }).getByRole('link', { name });
+}
+
+/** Domácnost visí v hlavičce u jména dítěte, ve spodní navigaci není. */
+export function householdLink(page: Page): ReturnType<Page['getByTestId']> {
+  return page.getByTestId('dite-v-hlavicce');
+}
+
 export const SCREENS: readonly ScreenDef[] = [
   {
     id: 'suroviny',
     name: 'Suroviny',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Suroviny' }).click();
+      await navLink(page, 'Suroviny').click();
       await expect(page.getByTestId('seznam-surovin')).toBeVisible();
     },
   },
@@ -29,7 +42,7 @@ export const SCREENS: readonly ScreenDef[] = [
     id: 'detail-suroviny',
     name: 'Detail suroviny',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Suroviny' }).click();
+      await navLink(page, 'Suroviny').click();
       await page.getByTestId('hledat-surovinu').fill('brokolice');
       await page.getByTestId('seznam-surovin').getByRole('link').first().click();
       await expect(page.getByTestId('bezpecnostni-blok')).toBeVisible();
@@ -39,7 +52,7 @@ export const SCREENS: readonly ScreenDef[] = [
     id: 'recepty',
     name: 'Recepty',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Recepty' }).click();
+      await navLink(page, 'Recepty').click();
       await expect(page.getByTestId('seznam-receptu')).toBeVisible();
     },
   },
@@ -47,7 +60,7 @@ export const SCREENS: readonly ScreenDef[] = [
     id: 'detail-receptu',
     name: 'Detail receptu',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Recepty' }).click();
+      await navLink(page, 'Recepty').click();
       await page.getByTestId('seznam-receptu').getByRole('link').first().click();
       await expect(page.getByTestId('moment-odebrani')).toBeVisible();
     },
@@ -56,7 +69,7 @@ export const SCREENS: readonly ScreenDef[] = [
     id: 'denik',
     name: 'Deník',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Deník' }).click();
+      await navLink(page, 'Deník').click();
       await expect(page.getByTestId('pocet-ochutnanych')).toBeVisible();
     },
   },
@@ -64,7 +77,7 @@ export const SCREENS: readonly ScreenDef[] = [
     id: 'domacnost',
     name: 'Domácnost',
     open: async (page) => {
-      await page.getByRole('link', { name: 'Domácnost' }).click();
+      await householdLink(page).click();
       await expect(page.getByTestId('stav-synchronizace')).toBeVisible();
     },
   },

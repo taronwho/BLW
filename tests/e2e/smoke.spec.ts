@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { householdLink, navLink } from './helpers';
 
 /**
  * Vstup do aplikace: disclaimer při prvním spuštění a obrazovka Domácnost
@@ -18,21 +19,22 @@ test.describe('vstup do aplikace', () => {
 
     await accept.click();
     await expect(disclaimer).toBeHidden();
-    // Po potvrzení aplikace startuje na katalogu surovin.
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Suroviny');
+    // Po potvrzení aplikace startuje na úvodním rozcestníku.
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Příkrmy krok za krokem');
   });
 
-  test('spodní navigace vede na všechny čtyři obrazovky', async ({ page }) => {
+  test('spodní navigace vede na všechny obrazovky', async ({ page }) => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
     for (const [label, heading] of [
       ['Recepty', 'Recepty'],
+      ['Rady', 'Rady'],
       ['Deník', 'Deník'],
-      ['Domácnost', 'Domácnost'],
       ['Suroviny', 'Suroviny'],
+      ['Domů', 'Příkrmy krok za krokem'],
     ] as const) {
-      await page.getByRole('link', { name: label }).click();
+      await navLink(page, label).click();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
     }
   });
@@ -43,7 +45,7 @@ test.describe('domácnost', () => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
-    await page.getByRole('link', { name: 'Domácnost' }).click();
+    await householdLink(page).click();
     await expect(page.getByTestId('stav-synchronizace')).toContainText('Jen na tomto zařízení');
 
     await page.getByRole('button', { name: 'Založit domácnost' }).click();
@@ -59,14 +61,14 @@ test.describe('domácnost', () => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
-    await page.getByRole('link', { name: 'Domácnost' }).click();
+    await householdLink(page).click();
     await page.getByTestId('jmeno-ditete').fill('Ema');
     // Dítě starší 12 měsíců → předvybraná fáze 12m+.
     await page.getByTestId('datum-narozeni').fill('2024-01-15');
     await page.getByRole('button', { name: 'Uložit', exact: true }).click();
     await expect(page.getByTestId('dite-v-hlavicce')).toContainText('Ema');
 
-    await page.getByRole('link', { name: 'Suroviny' }).click();
+    await navLink(page, 'Suroviny').click();
     await page.getByTestId('hledat-surovinu').fill('brokolice');
     await page.getByTestId('seznam-surovin').getByRole('link').first().click();
     await expect(page.getByTestId('faze-12m')).toHaveAttribute('aria-pressed', 'true');
