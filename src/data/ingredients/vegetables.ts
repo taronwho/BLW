@@ -945,7 +945,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej.',
+        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej — rozmixování přeměnu dusičnanů na dusitany urychluje. Dítěti se střevní infekcí špenát podle EFSA nedávej vůbec.',
     },
     minAgeMonths: 6,
     prep: {
@@ -988,7 +988,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Mangold je listová zelenina s vyšším obsahem dusičnanů, na které EFSA u malých dětí upozorňuje. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
+        'Mangold je listová zelenina, kterou docs/BEZPECNOST.md vede mezi zdroji dusičnanů; hodnocení EFSA se týká špenátu a hlávkového salátu, mangold v něm není. Zařazuj ho proto z opatrnosti střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1031,7 +1031,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Rukola patří mezi listovou zeleninu s nejvyšším obsahem dusičnanů, na kterou EFSA u malých dětí upozorňuje. Podávej ji jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
+        'Rukolu vede docs/BEZPECNOST.md mezi listovou zeleninou s vyšším obsahem dusičnanů; načtené hodnocení EFSA se týká špenátu a hlávkového salátu, rukolu nehodnotí. Podávej ji proto z opatrnosti jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
