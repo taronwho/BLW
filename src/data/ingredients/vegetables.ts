@@ -44,7 +44,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Vařené hranolky nakrájej na kostky velikosti sousta, dcera je nabere klešťovým úchopem. Jemně nastrouhaná syrová mrkev je možná ve směsi s jogurtem, samostatné plátky ještě ne.',
+          'Vařené hranolky nakrájej na kostky velikosti sousta, dítě je nabere klešťovým úchopem. Jemně nastrouhaná syrová mrkev je možná ve směsi s jogurtem, samostatné plátky ještě ne.',
         caution: 'Strouhej najemno, hrubé nudličky zůstávají tvrdé.',
       },
       '12m': {
@@ -129,7 +129,7 @@ export const vegetables: Ingredient[] = [
       '9m': {
         serving:
           'Uvařený kořen nakrájej na kostky a promíchej ho s bramborem. V české kuchyni je základem vývaru, který se dá uvařit bez soli a použít na rozředění dětského pyré.',
-        caution: 'Vývar pro dceru vař bez soli, dospělým se dosolí zvlášť.',
+        caution: 'Vývar pro dítě vař bez soli, dospělým se dosolí zvlášť.',
       },
       '12m': {
         serving:
@@ -210,12 +210,12 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Řepu uvař ve slupce doměkka, pak ji oloupej a nakrájej na dlouhé díly. Zbarví dceři ruce i obličej, což je neškodné, stejně jako narůžovělá stolice po jejím snědení.',
+          'Řepu uvař ve slupce doměkka, pak ji oloupej a nakrájej na dlouhé díly. Zbarví dítěti ruce i obličej, což je neškodné, stejně jako narůžovělá stolice po jejím snědení.',
         caution: 'Uvařenou řepu zchlaď rychle a ulož ji do lednice.',
       },
       '9m': {
         serving:
-          'Vařenou řepu nakrájej na kostky nebo ji nastrouhej do jogurtu. Sladká chuť se dobře snáší s jablkem a s kmínem a barva jídla dceru obvykle zaujme.',
+          'Vařenou řepu nakrájej na kostky nebo ji nastrouhej do jogurtu. Sladká chuť se dobře snáší s jablkem a s kmínem a barva jídla dítě obvykle zaujme.',
         caution: 'Podávej ji obden, ne každý den, kvůli dusičnanům.',
       },
       '12m': {
@@ -255,7 +255,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z pečeného batátu nakrájej hranolky nebo ho rozmačkej s trochou olivového oleje. Dcera se na hranolku učí ukusovat a měkká dužina jí přitom nedělá problém.',
+          'Z pečeného batátu nakrájej hranolky nebo ho rozmačkej s trochou olivového oleje. Dítě se na hranolku učí ukusovat a měkká dužina jí přitom nedělá problém.',
         caution: 'Batát v páře zvlhne, na hranolky ho spíš peč.',
       },
       '12m': {
@@ -295,7 +295,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Bramborovou kaši dělej hustší, aby držela na lžíci, kterou dcera sama nabírá. Z rozmačkaného brambora se dají vytvarovat i placičky, které v ruce drží pohromadě.',
+          'Bramborovou kaši dělej hustší, aby držela na lžíci, kterou dítě samo nabírá. Z rozmačkaného brambora se dají vytvarovat i placičky, které v ruce drží pohromadě.',
         caution: 'Zelené a naklíčené brambory vůbec nepoužívej.',
       },
       '12m': {
@@ -330,12 +330,12 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Hokaido nemusíš loupat, slupka po upečení změkne a dá se sníst. Dýni rozkroj, vydlab vnitřek s jádry, nakrájej na měsíčky a peč doměkka, dcera si měsíček vezme do ruky.',
+          'Hokaido nemusíš loupat, slupka po upečení změkne a dá se sníst. Dýni rozkroj, vydlab vnitřek s jádry, nakrájej na měsíčky a peč doměkka, dítě si měsíček vezme do ruky.',
         caution: 'Slupka u velkých kusů zůstává tuhá, u těch ji odřízni.',
       },
       '9m': {
         serving:
-          'Pečenou dýni nakrájej na kostky nebo ji rozmačkej s bramborem. Sladká oranžová dužina je bohatá na karoteny a pro dceru bývá jednou z nejoblíbenějších zelenin.',
+          'Pečenou dýni nakrájej na kostky nebo ji rozmačkej s bramborem. Sladká oranžová dužina je bohatá na karoteny a pro dítě bývá jednou z nejoblíbenějších zelenin.',
         caution: 'Přezrálá dýně je vodnatá a chutná nevýrazně.',
       },
       '12m': {
@@ -415,7 +415,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nastrouhaná cuketa se skvěle přidává do placiček, kterým dodá vláhu. Uvařené kostky dcera nabere prsty, ale hlídej, aby nebyly kluzké, jinak jí utečou z ruky.',
+          'Nastrouhaná cuketa se skvěle přidává do placiček, kterým dodá vláhu. Uvařené kostky dítě nabere prsty, ale hlídej, aby nebyly kluzké, jinak jí utečou z ruky.',
         caution: 'Cuketa pouští při pečení hodně vody, osuš ji.',
       },
       '12m': {
@@ -492,12 +492,12 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Lilek rozkroj napůl, upeč ho v troubě a dužinu vyber lžící, slupku zahoď. Měkkou dužinu rozmixuj s olivovým olejem a citronem na pomazánku, kterou dcera olizuje z prstu.',
+          'Lilek rozkroj napůl, upeč ho v troubě a dužinu vyber lžící, slupku zahoď. Měkkou dužinu rozmixuj s olivovým olejem a citronem na pomazánku, kterou dítě olizuje z prstu.',
         caution: 'Syrový lilek je hořký a pro dítě nevhodný.',
       },
       '9m': {
         serving:
-          'Pečený lilek nakrájej na kostky bez slupky a promíchej ho s rajčaty. Chuť je výrazná a mírně nahořklá, takže ji nabídni opakovaně, než ji dcera přijme.',
+          'Pečený lilek nakrájej na kostky bez slupky a promíchej ho s rajčaty. Chuť je výrazná a mírně nahořklá, takže ji nabídni opakovaně, než ji dítě přijme.',
         caution: 'Slupku u dětské porce vždy odstraň.',
       },
       '12m': {
@@ -532,12 +532,12 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Brokolici rozděl na větší růžičky se stopkou, kterou dcera drží jako držadlo. Vař je v páře, dokud nejde stopka snadno propíchnout, květ pak funguje jako přirozený kartáček.',
+          'Brokolici rozděl na větší růžičky se stopkou, kterou dítě drží jako držadlo. Vař je v páře, dokud nejde stopka snadno propíchnout, květ pak funguje jako přirozený kartáček.',
         caution: 'Drobné rozpadlé kousky květu odstraň, lepí se na patro.',
       },
       '9m': {
         serving:
-          'Uvařené růžičky nakrájej na menší kusy, které dcera sbírá prsty. Brokolice není sladká, a právě proto ji nabízej často, aby si dcera zvykla i na hořčejší chutě.',
+          'Uvařené růžičky nakrájej na menší kusy, které dítě sbírá prsty. Brokolice není sladká, a právě proto ji nabízej často, aby si dítě zvyklo i na hořčejší chutě.',
         caution: 'Převařená brokolice ztrácí barvu i vitaminy.',
       },
       '12m': {
@@ -572,7 +572,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Květák rozeber na velké růžičky a vař je v páře, dokud nejsou úplně měkké. Stopka slouží dceři jako držadlo a květ se v ústech rozpadne, takže je to vděčné první sousto do ruky.',
+          'Květák rozeber na velké růžičky a vař je v páře, dokud nejsou úplně měkké. Stopka slouží dítěti jako držadlo a květ se v ústech rozpadne, takže je to vděčné první sousto do ruky.',
         caution: 'Drobné odpadlé kousky z talíře odstraň.',
       },
       '9m': {
@@ -656,7 +656,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zelí nakrájej nadrobno přes vlákna a dus ho doměkka, listy v celku dceři nedávej. Dušené zelí s kmínem je tradiční česká příloha, která se dá připravit úplně bez soli.',
+          'Zelí nakrájej nadrobno přes vlákna a dus ho doměkka, listy v celku dítěti nedávej. Dušené zelí s kmínem je tradiční česká příloha, která se dá připravit úplně bez soli.',
         caution: 'Syrové zelí ve velkém množství může způsobit nadýmání.',
       },
       '9m': {
@@ -704,7 +704,7 @@ export const vegetables: Ingredient[] = [
       '9m': {
         serving:
           'Dušená kapusta se hodí do polévek i jako příloha promíchaná s obilovinami. Je bohatá na vápník a vitamin K a v zimě patří k nejdostupnější listové zelenině.',
-        caution: 'Kapusta výrazně voní při vaření, dceru to může odradit.',
+        caution: 'Kapusta výrazně voní při vaření, dítě to může odradit.',
       },
       '12m': {
         serving:
@@ -782,12 +782,12 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Růžičky vař doměkka a před podáním je rozřízni na poloviny nebo na čtvrtiny. Celou růžičku dceři nedávej, i uvařená drží tvar a velikostí odpovídá rizikovému soustu.',
+          'Růžičky vař doměkka a před podáním je rozřízni na poloviny nebo na čtvrtiny. Celou růžičku dítěti nedávej, i uvařená drží tvar a velikostí odpovídá rizikovému soustu.',
         caution: 'Tvrdé okraje košťálu odřízni, zůstávají pevné.',
       },
       '9m': {
         serving:
-          'Rozčtvrcené vařené růžičky dcera nabere prsty a rozmělní dásněmi. Chuť je nahořklá, proto ji zjemni pečením, při kterém se v zelenině rozvinou sladší tóny.',
+          'Rozčtvrcené vařené růžičky dítě nabere prsty a rozmělní dásněmi. Chuť je nahořklá, proto ji zjemni pečením, při kterém se v zelenině rozvinou sladší tóny.',
         caution: 'Převařené růžičky chutnají silně, vař je kratší dobu.',
       },
       '12m': {
@@ -829,7 +829,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'I v devíti měsících hrášek mačkej nebo ho podávej ve směsi. Dcera si rozmačkaná zrnka sbírá prsty a trénuje na nich klešťový úchop, který právě v tomhle věku dozrává.',
+          'I v devíti měsících hrášek mačkej nebo ho podávej ve směsi. Dítě si rozmačkaná zrnka sbírá prsty a trénuje na nich klešťový úchop, který právě v tomhle věku dozrává.',
         caution: 'Mražený hrášek nech úplně rozmrznout a provař ho.',
       },
       '12m': {
@@ -871,7 +871,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařené fazolky nakrájej na kousky dlouhé jako nehet, ať se nemotají. Dcera je zvládne uchopit prsty, ale vlákna kontroluj, u starších lusků bývají tuhá.',
+          'Uvařené fazolky nakrájej na kousky dlouhé jako nehet, ať se nemotají. Dítě je zvládne uchopit prsty, ale vlákna kontroluj, u starších lusků bývají tuhá.',
         caution: 'Velké lusky mají tuhý vláknitý šev, ten odstraň.',
       },
       '12m': {
@@ -908,7 +908,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kukuřici uvař a zrna rozmačkej nebo rozmixuj do pyré, celá zrna v téhle fázi nenabízej. Druhá možnost je podat kus uvařeného klasu, ze kterého dcera zrna olizuje, ale nesbírá je.',
+          'Kukuřici uvař a zrna rozmačkej nebo rozmixuj do pyré, celá zrna v téhle fázi nenabízej. Druhá možnost je podat kus uvařeného klasu, ze kterého dítě zrna olizuje, ale nesbírá je.',
         caution: 'Klas podávej jen pod dohledem a nikdy ne s odlomenými zrny.',
       },
       '9m': {
@@ -999,7 +999,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dušený mangold promíchej s obilovinou nebo s luštěninou. Chuťově je jemnější než špenát a barevné řapíky dělají z jídla něco, co dceru zaujme i vizuálně.',
+          'Dušený mangold promíchej s obilovinou nebo s luštěninou. Chuťově je jemnější než špenát a barevné řapíky dělají z jídla něco, co dítě zaujme i vizuálně.',
         caution: 'Podávej ho obden, ne každý den, kvůli dusičnanům.',
       },
       '12m': {
@@ -1042,7 +1042,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nasekanou rukolu vmíchej do těstovin nebo do pomazánky. Její pepřová chuť rozšiřuje dceři chuťový rejstřík, ale množství drž opravdu malé kvůli dusičnanům.',
+          'Nasekanou rukolu vmíchej do těstovin nebo do pomazánky. Její pepřová chuť rozšiřuje dítěti chuťový rejstřík, ale množství drž opravdu malé kvůli dusičnanům.',
         caution: 'Celé lístky se lepí na patro, vždy je nasekej.',
       },
       '12m': {
@@ -1087,7 +1087,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nasekaný salát smíchej s jogurtem nebo s tvarohem do husté pomazánky. Samotné listy zatím nenabízej, ale dcera si na chuť zvykne v kombinaci s něčím, co drží pohromadě.',
+          'Nasekaný salát smíchej s jogurtem nebo s tvarohem do husté pomazánky. Samotné listy zatím nenabízej, ale dítě si na chuť zvykne v kombinaci s něčím, co drží pohromadě.',
         caution: 'Kupované mycí salátové směsi rychle hnijí, kupuj hlávku.',
       },
       '12m': {
@@ -1129,7 +1129,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Oloupanou okurku nakrájej na kostky, které dcera nabere prsty. Jemně nastrouhaná okurka smíchaná s jogurtem je osvěžující dip, do kterého se dobře namáčí pečivo.',
+          'Oloupanou okurku nakrájej na kostky, které dítě nabere prsty. Jemně nastrouhaná okurka smíchaná s jogurtem je osvěžující dip, do kterého se dobře namáčí pečivo.',
         caution: 'Hořká okurka se nesmí jíst, hořkost poznáš ochutnáním.',
       },
       '12m': {
@@ -1171,7 +1171,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Pravidlo krájet cherry rajčata podélně na čtvrtky platí beze změny. Dužinu velkých rajčat už můžeš podat i se slupkou, pokud je tenká a dcera dobře zpracovává sousta.',
+          'Pravidlo krájet cherry rajčata podélně na čtvrtky platí beze změny. Dužinu velkých rajčat už můžeš podat i se slupkou, pokud je tenká a dítě dobře zpracovává sousta.',
         caution: 'Kyselost rajčat dráždí kůži kolem úst, potři ji tukem.',
       },
       '12m': {
@@ -1213,7 +1213,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Pečené proužky bez slupky dcera uchopí prsty. Paprika je jedním z nejlepších zdrojů vitaminu C, který ve stejném jídle výrazně zvýší vstřebání železa z luštěnin.',
+          'Pečené proužky bez slupky dítě uchopí prsty. Paprika je jedním z nejlepších zdrojů vitaminu C, který ve stejném jídle výrazně zvýší vstřebání železa z luštěnin.',
         caution: 'Syrové proužky jsou křupavé a zatím nevhodné.',
       },
       '12m': {
@@ -1291,11 +1291,11 @@ export const vegetables: Ingredient[] = [
       '6m': {
         serving:
           'Cibuli nakrájej nadrobno a dus ji na tuku doměkka, dokud není skoro průsvitná. Dušením ztratí ostrost a zesládne, takže tvoří chuťový základ jídla, které se pak obejde bez soli.',
-        caution: 'Syrovou cibuli dceři nedávej, dráždí sliznici.',
+        caution: 'Syrovou cibuli dítěti nedávej, dráždí sliznici.',
       },
       '9m': {
         serving:
-          'Podušená cibule se dá vmíchat do každé omáčky, polévky i luštěninového pokrmu. Pokud dcera kousky cibule vybírá, rozmixuj ji do hladka a chuť v jídle přesto zůstane.',
+          'Podušená cibule se dá vmíchat do každé omáčky, polévky i luštěninového pokrmu. Pokud dítě kousky cibule vybírá, rozmixuj ji do hladka a chuť v jídle přesto zůstane.',
         caution: 'Spálená cibule chutná hořce, dus ji pomalu.',
       },
       '12m': {
@@ -1330,7 +1330,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Česnek přidávej jen v malém množství a vždy tepelně upravený, syrový je pro dceru příliš ostrý. Jeden prolisovaný stroužek do celého hrnce dodá chuť, která nahradí sůl.',
+          'Česnek přidávej jen v malém množství a vždy tepelně upravený, syrový je pro dítě příliš ostrý. Jeden prolisovaný stroužek do celého hrnce dodá chuť, která nahradí sůl.',
         caution: 'Česnek jako domácí lék pro kojence nepoužívej.',
       },
       '9m': {
@@ -1380,7 +1380,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dušený fenykl nakrájej na kostky nebo ho rozmixuj do polévky. Jeho výrazná vůně je pro dceru nová, proto ho nabídni opakovaně, i když ho napoprvé odmítne.',
+          'Dušený fenykl nakrájej na kostky nebo ho rozmixuj do polévky. Jeho výrazná vůně je pro dítě nová, proto ho nabídni opakovaně, i když ho napoprvé odmítne.',
         caution: 'Nať fenyklu je jemná a dá se použít jako bylinka.',
       },
       '12m': {
@@ -1419,7 +1419,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Chřestu odlom dřevnatý konec, bílý chřest navíc oloupej, a vař ho doměkka. Podávej celý měkký výhonek, který dcera drží v pěsti a ukusuje z něj měkkou špičku.',
+          'Chřestu odlom dřevnatý konec, bílý chřest navíc oloupej, a vař ho doměkka. Podávej celý měkký výhonek, který dítě drží v pěsti a ukusuje z něj měkkou špičku.',
         caution: 'Tvrdý spodek výhonku vždy odstraň, nedá se rozkousat.',
       },
       '9m': {
@@ -1462,11 +1462,11 @@ export const vegetables: Ingredient[] = [
       '6m': {
         serving:
           'Žampiony nakrájej na velmi tenké plátky a dus je doměkka, dokud nepustí vodu a nezměknou. Pro první porce je nasekej nadrobno a vmíchej do bramborové kaše.',
-        caution: 'Syrové žampiony dceři nikdy nedávej.',
+        caution: 'Syrové žampiony dítěti nikdy nedávej.',
       },
       '9m': {
         serving:
-          'Dušené houby nasekej najemno a přidej je do omáčky nebo do rizota. Houby jsou těžší na trávení, proto začni malým množstvím a sleduj, jak je dcera snáší.',
+          'Dušené houby nasekej najemno a přidej je do omáčky nebo do rizota. Houby jsou těžší na trávení, proto začni malým množstvím a sleduj, jak je dítě snáší.',
         caution: 'Volně rostoucí houby malému dítěti vůbec nepodávej.',
       },
       '12m': {
@@ -1546,7 +1546,7 @@ export const vegetables: Ingredient[] = [
       '6m': {
         serving:
           'Syrovou ředkvičku v tomhle věku nenabízej vůbec. Pokud ji chceš zařadit, uvař ji doměkka v páře a rozmačkej, vařením navíc zmizí většina její ostré chuti.',
-        caution: 'Celou ředkvičku nikdy nedávej dceři do ruky.',
+        caution: 'Celou ředkvičku nikdy nedávej dítěti do ruky.',
       },
       '9m': {
         serving:
@@ -1555,7 +1555,7 @@ export const vegetables: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí ředkvičku jemně strouhanou v salátu nebo vařenou. Syrové plátky nechávej až na dobu, kdy dítě spolehlivě kouše, ostrá chuť ho navíc často odradí sama.',
+          'Batole jí ředkvičku jemně strouhanou v salátu nebo vařenou. Syrové plátky nechávej až na dobu, kdy dítě spolehlivě kouše, ostrá chuť ho navíc často odradí samo.',
         caution: 'Nať ředkvičky je jedlá a hodí se do polévky.',
       },
     },
@@ -1632,7 +1632,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Vlákna dýně nakrájej na kratší kousky a promíchej je s rajčatovou omáčkou. Dcera se na nich učí manipulovat s podlouhlým jídlem podobně jako na těstovinách.',
+          'Vlákna dýně nakrájej na kratší kousky a promíchej je s rajčatovou omáčkou. Dítě se na nich učí manipulovat s podlouhlým jídlem podobně jako na těstovinách.',
         caution: 'Vlákna se kloužou, podávej je v mělké misce.',
       },
       '12m': {
@@ -1669,13 +1669,13 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Pro dceru použij jen měkké srdce artyčoku, tedy dno po odstranění listů a vláknitého středu. Uvař ho doměkka a rozmačkej s bramborem nebo s olivovým olejem do husté hmoty.',
+          'Pro dítě použij jen měkké srdce artyčoku, tedy dno po odstranění listů a vláknitého středu. Uvař ho doměkka a rozmačkej s bramborem nebo s olivovým olejem do husté hmoty.',
         caution: 'Vláknitý střed vždy vyškrábni celý, je nepoživatelný.',
       },
       '9m': {
         serving:
           'Uvařené artyčokové srdce nakrájej na kostky velikosti sousta. Chuť je jemně nahořklá a nezvyklá, takže ji nabízej v kombinaci s bramborem nebo s tvarohem.',
-        caution: 'Špičaté listy dceři nedávej ani k olizování.',
+        caution: 'Špičaté listy dítěti nedávej ani k olizování.',
       },
       '12m': {
         serving:

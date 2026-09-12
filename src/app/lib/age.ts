@@ -17,7 +17,7 @@ export function ageInMonths(birthDate: string, now: Date = new Date()): number |
   return Math.max(0, months);
 }
 
-/** Fáze předvybraná podle věku dcery; bez data narození začínáme na 6m+. */
+/** Fáze předvybraná podle věku dítěte; bez data narození začínáme na 6m+. */
 export function stageForAge(months: number | null): Stage {
   if (months === null) return '6m';
   if (months >= 12) return '12m';

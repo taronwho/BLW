@@ -46,9 +46,9 @@ export const snacksBaking: Recipe[] = [
       'Muffiny nech úplně vychladnout; teplé drobí a lepí se na patro.',
     ],
     babyServing: {
-      '6m': 'Muffin rozkroj na čtvrtky ve tvaru sloupečku, aby ho dcera sevřela v pěsti a horní část jí vyčnívala.',
-      '9m': 'Muffin nalámej na kousky velikosti nehtu, které si dcera sbírá špetkou z talíře.',
-      '12m': 'Podávej celý malý muffin do ruky a nech dceru, ať si z něj sama odkusuje po kouscích.',
+      '6m': 'Muffin rozkroj na čtvrtky ve tvaru sloupečku, aby ho dítě sevřelo v pěsti a horní část mu vyčnívala.',
+      '9m': 'Muffin nalámej na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
+      '12m': 'Podávej celý malý muffin do ruky a nech dítě, ať si z něj samo odkusuje po kouscích.',
     },
     meatSteps: [
       'Zbylé těsto dosuď podle chuti, rozděl do košíčků a peč 25 minut.',
@@ -84,16 +84,16 @@ export const snacksBaking: Recipe[] = [
       'Peč 18 minut při 180 °C, dokud sušenky po okrajích nezezlátnou.',
     ],
     babySplitPoint:
-      'Po kroku 4 odeber dvě lžíce hmoty a vytvaruj z nich dceřiny sušenky, dřív než se do zbytku přimíchá cokoli na doslazení.',
+      'Po kroku 4 odeber dvě lžíce hmoty a vytvaruj z nich dítětiny sušenky, dřív než se do zbytku přimíchá cokoli na doslazení.',
     babySteps: [
       'Dětské sušenky tvaruj do podlouhlých prstů, které se drží líp než kolečka.',
       'Rozinky v dětské porci musí být nasekané nadrobno; celé jsou lepivé a mají nevhodně kulatý tvar.',
-      'Peč je o dvě minuty déle, aby byly pevné a nedrolily se dcera v ruce.',
+      'Peč je o dvě minuty déle, aby byly pevné a nedrolily se dítě v ruce.',
     ],
     babyServing: {
-      '6m': 'Podávej sušenku ve tvaru prstu, kterou dcera sevře v dlani a okusuje z vyčnívajícího konce.',
+      '6m': 'Podávej sušenku ve tvaru prstu, kterou dítě sevře v dlani a okusuje z vyčnívajícího konce.',
       '9m': 'Sušenku nalámej na kousky velikosti nehtu ke sbírání špetkou.',
-      '12m': 'Nabídni celou sušenku do ruky; dcera už ji ukousne předními zuby a rozžvýká dásněmi.',
+      '12m': 'Nabídni celou sušenku do ruky; dítě už ji ukousne předními zuby a rozžvýká dásněmi.',
     },
     meatSteps: [
       'Zbytek hmoty dosuď podle chuti a peč z ní větší sušenky 18 minut.',
@@ -133,12 +133,12 @@ export const snacksBaking: Recipe[] = [
     babySteps: [
       'Dětskou misku peč vedle velké mísy asi 25 minut a před podáváním nech úplně vychladnout.',
       'Drobenka obsahuje jen mleté vlašské ořechy, které jsou v téhle podobě pro miminko bezpečné.',
-      'Jablka rozmačkej vidličkou, pokud je dcera zatím nepokouše, nebo je nech v plátcích do ruky.',
+      'Jablka rozmačkej vidličkou, pokud je dítě zatím nepokouše, nebo je nech v plátcích do ruky.',
     ],
     babyServing: {
       '6m': 'Podávej měkký plátek pečeného jablka delší než dětská dlaň a drobenku rozmačkanou navrch jako posyp.',
       '9m': 'Nakrájej jablka na kostičky a drobenku promíchej dovnitř, aby se dala nabrat špetkou.',
-      '12m': 'Servíruj porci v misce se lžící; dcera už si crumble nabírá sama a míchá si ho s jogurtem.',
+      '12m': 'Servíruj porci v misce se lžící; dítě už si crumble nabírá samo a míchá si ho s jogurtem.',
     },
     meatSteps: [
       'Velkou mísu dopeč a podávej teplou s kopečkem jogurtu nebo šlehačky.',
@@ -180,9 +180,9 @@ export const snacksBaking: Recipe[] = [
       'Do jednoho roku patří mandle výhradně mleté, nikdy celé ani hrubě sekané.',
     ],
     babyServing: {
-      '6m': 'Podávej váleček dlouhý jako prst, který dcera udrží v pěsti a saje z něj; hmota je hutná, proto sleduj tempo.',
-      '9m': 'Nakrájej tyčinky na kousky velikosti nehtu, které si dcera sbírá špetkou z talíře.',
-      '12m': 'Nabídni tyčinku do ruky a nech dceru, ať si ji sama láme a okusuje.',
+      '6m': 'Podávej váleček dlouhý jako prst, který dítě udrží v pěsti a saje z něj; hmota je hutná, proto sleduj tempo.',
+      '9m': 'Nakrájej tyčinky na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
+      '12m': 'Nabídni tyčinku do ruky a nech dítě, ať si ji samo láme a okusuje.',
     },
     meatSteps: [
       'Kuličky pro dospělé obal v karobu nebo v kokosu a nech je v lednici hodinu ztuhnout.',
@@ -220,13 +220,13 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 3 odeber jednu misku hummusu pro miminko, dřív než se zbylé dvě dochutí solí a olejem pro dospělé.',
     babySteps: [
       'Kedlubnové hranolky pro miminko krátce spař nebo podus v páře tři minuty; syrová kedlubna je pro dásně příliš tvrdá.',
-      'Okurku a papriku podávej syrové, ale oloupané, aby slupka nezůstala dceři v puse.',
+      'Okurku a papriku podávej syrové, ale oloupané, aby slupka nezůstala dítěti v puse.',
       'Hummus rozetři na hranolek v tenké vrstvě, nebo ho nabídni v misce k namáčení.',
     ],
     babyServing: {
       '6m': 'Podávej dušený hranolek kedlubny delší než dětská dlaň, na kterém je tenká vrstva hummusu.',
-      '9m': 'Nakrájej zeleninu na kostičky a hummus podávej v ploché misce, do které dcera dosáhne prsty.',
-      '12m': 'Nabídni misku hummusu a hranolky vedle; dcera si je sama namáčí a zvládne i syrovou kedlubnu nakrájenou tenčeji.',
+      '9m': 'Nakrájej zeleninu na kostičky a hummus podávej v ploché misce, do které dítě dosáhne prsty.',
+      '12m': 'Nabídni misku hummusu a hranolky vedle; dítě si je samo namáčí a zvládne i syrovou kedlubnu nakrájenou tenčeji.',
     },
     meatSteps: [
       'Hummus pro dospělé osol, zakápni olivovým olejem a posyp mletou paprikou.',
@@ -262,14 +262,14 @@ export const snacksBaking: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce jogurtové směsi do samostatné formičky, dřív než se zbytek pro dospělé dosladí.',
     babySteps: [
-      'Dětskou formičku plň jen do poloviny; menší nanuk se rychleji rozpouští a dcera ho zvládne sníst dřív, než roztaje.',
+      'Dětskou formičku plň jen do poloviny; menší nanuk se rychleji rozpouští a dítě ho zvládne sníst dřív, než roztaje.',
       'Nanuk před podáváním chvíli podrž v ruce, aby povrch povolil — ke rtům nesmí přimrznout.',
-      'Podávej ho vždy vsedě a pod dohledem; dcera si z něj bude ukusovat drobné kousky.',
+      'Podávej ho vždy vsedě a pod dohledem; dítě si z něj bude ukusovat drobné kousky.',
     ],
     babyServing: {
       '6m': 'V tomhle věku spíš nabídni směs nezmraženou na lžíci; zmrazený nanuk je tvrdý a chladem dráždí dásně.',
-      '9m': 'Nech nanuk pár minut povolit a podávej ho za dřevěnou tyčku, ze které dcera olizuje měkký povrch.',
-      '12m': 'Podávej nanuk rovnou z formičky a nech dceru, ať ho drží sama; kousky jsou měkké a rychle se rozpouští.',
+      '9m': 'Nech nanuk pár minut povolit a podávej ho za dřevěnou tyčku, ze které dítě olizuje měkký povrch.',
+      '12m': 'Podávej nanuk rovnou z formičky a nech dítě, ať ho drží samo; kousky jsou měkké a rychle se rozpouští.',
     },
     meatSteps: [
       'Zbylé formičky doplň jogurtem, podle chuti je dosuď a zamraz.',
@@ -311,9 +311,9 @@ export const snacksBaking: Recipe[] = [
       'Sezam je v těstě jen mletý, což je jediná podoba, ve které semínka do dětské svačiny patří.',
     ],
     babyServing: {
-      '6m': 'Podávej tyčinku dlouhou jako prst, kterou dcera sevře v pěsti; krekr ve slinách rychle měkne.',
+      '6m': 'Podávej tyčinku dlouhou jako prst, kterou dítě sevře v pěsti; krekr ve slinách rychle měkne.',
       '9m': 'Tyčinku nalámej na kousky velikosti nehtu a nabídni je s lžící tvarohu k namáčení.',
-      '12m': 'Nech dceru brát si krekry z misky samu a namáčet je do hummusu nebo pomazánky.',
+      '12m': 'Nech dítě brát si krekry z misky samu a namáčet je do hummusu nebo pomazánky.',
     },
     meatSteps: [
       'Plát pro dospělé posyp solí a kmínem, zlehka je zaválej a peč 12 minut.',
@@ -357,7 +357,7 @@ export const snacksBaking: Recipe[] = [
     babyServing: {
       '6m': 'Podávej rozmačkanou dužinu s náplní na lžíci a pruh měkkého jablka bez slupky jako sousto do ruky.',
       '9m': 'Nakrájej pečené jablko na kostičky a náplň podávej vedle v misce ke sbírání prsty.',
-      '12m': 'Servíruj půlku pečeného jablka s náplní na talíři a nech dceru, ať si ho sama vybírá lžící.',
+      '12m': 'Servíruj půlku pečeného jablka s náplní na talíři a nech dítě, ať si ho samo vybírá lžící.',
     },
     meatSteps: [
       'Jablka pro dospělé před pečením posyp skořicí a podle chuti přelij lžičkou medu.',
@@ -397,11 +397,11 @@ export const snacksBaking: Recipe[] = [
     babySteps: [
       'Dětskou formičku peč vedle velké formy asi 25 minut a zkontroluj špejlí, jestli je těsto propečené.',
       'Chlebíček nech úplně vychladnout, teprve pak ho krájej; teplý se drolí a lepí.',
-      'Krajíček nakrájej na sloupečky podle věku dcery.',
+      'Krajíček nakrájej na sloupečky podle věku dítěte.',
     ],
     babyServing: {
-      '6m': 'Podávej sloupeček chlebíčku dlouhý jako prst, který dcera sevře v pěsti a okusuje z konce.',
-      '9m': 'Nakrájej chlebíček na kostky velikosti nehtu, aby si je dcera sbírala špetkou.',
+      '6m': 'Podávej sloupeček chlebíčku dlouhý jako prst, který dítě sevře v pěsti a okusuje z konce.',
+      '9m': 'Nakrájej chlebíček na kostky velikosti nehtu, aby si je dítě sbíralo špetkou.',
       '12m': 'Nabídni celý krajíček do ruky s lžící tvarohu nebo jogurtu k namáčení.',
     },
     meatSteps: [
@@ -439,13 +439,13 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 1 odeber lžíci rozmíchaného arašídového másla, dřív než se do zbytku pro dospělé přidá sůl nebo sladká složka.',
     babySteps: [
       'Arašídové máslo pro miminko musí být hladké a rozmíchané ve vodě; hustá vrstva se v puse slepí a špatně polyká.',
-      'Chlebíček potři jen tenkou vrstvou a nalam ho na pásky, které dcera udrží.',
+      'Chlebíček potři jen tenkou vrstvou a nalam ho na pásky, které dítě udrží.',
       'Rýžové výrobky nabízej jen občas, ne jako každodenní svačinu — rýže na sebe váže anorganický arsen a malé děti ho snesou méně než dospělí.',
     ],
     babyServing: {
       '6m': 'Podávej pásek chlebíčku s tenkou vrstvou másla a k němu proužek banánu velikosti prstu zvlášť.',
       '9m': 'Nalam chlebíček na kousky velikosti nehtu a půlky koleček banánu polož vedle na talíř.',
-      '12m': 'Nabídni celý chlebíček s banánem navrch; dcera si ho sama drží a odkusuje z okraje.',
+      '12m': 'Nabídni celý chlebíček s banánem navrch; dítě si ho samo drží a odkusuje z okraje.',
     },
     meatSteps: [
       'Chlebíčky pro dospělé potři silnější vrstvou arašídového másla a posyp skořicí.',
@@ -483,13 +483,13 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce pomazánky do misky, dřív než se zbytek pro dospělé dochucuje.',
     babySteps: [
       'Kedlubnové hranolky pro miminko podus tři minuty v páře; syrové jsou příliš tvrdé na dásně.',
-      'Pomazánku pro dceru zřeď lžičkou vody, aby byla vláčná a nelepila se na patro.',
+      'Pomazánku pro dítě zřeď lžičkou vody, aby byla vláčná a nelepila se na patro.',
       'Zbylé bylinky do dětské porce nasekej ještě jemněji, nebo je rozetři mezi prsty.',
     ],
     babyServing: {
       '6m': 'Podej dušený hranolek kedlubny s tenkou vrstvou pomazánky, dlouhý přes celou dlaň.',
       '9m': 'Nakrájej kedlubnu na kostičky a pomazánku podávej v ploché misce k namáčení prsty.',
-      '12m': 'Nabídni misku pomazánky, hranolky kedlubny a kousek pečiva; dcera si svačinu poskládá sama.',
+      '12m': 'Nabídni misku pomazánky, hranolky kedlubny a kousek pečiva; dítě si svačinu poskládá samo.',
     },
     meatSteps: [
       'Zbylou pomazánku osol, opepři a promíchej se zbytkem bylinek.',
@@ -530,12 +530,12 @@ export const snacksBaking: Recipe[] = [
     babySteps: [
       'Dětskou formičku peč vedle plechu asi dvacet minut a zkontroluj špejlí, že je těsto propečené.',
       'Dýňová semínka jsou v těstě jen mletá, což je jediná podoba, ve které do dětské porce patří.',
-      'Řez nech vychladnout a nakrájej ho na sloupečky nebo kostičky podle věku dcery.',
+      'Řez nech vychladnout a nakrájej ho na sloupečky nebo kostičky podle věku dítěte.',
     ],
     babyServing: {
-      '6m': 'Podávej sloupeček dlouhý jako prst; je vláčný a dcera z něj saje i bez zubů.',
-      '9m': 'Nakrájej řez na kostky velikosti nehtu, které si dcera sbírá špetkou.',
-      '12m': 'Nabídni čtvereček do ruky a nech dceru, ať si ho sama láme; k tomu se hodí lžíce jogurtu.',
+      '6m': 'Podávej sloupeček dlouhý jako prst; je vláčný a dítě z něj saje i bez zubů.',
+      '9m': 'Nakrájej řez na kostky velikosti nehtu, které si dítě sbírá špetkou.',
+      '12m': 'Nabídni čtvereček do ruky a nech dítě, ať si ho samo láme; k tomu se hodí lžíce jogurtu.',
     },
     meatSteps: [
       'Plech pro dospělé dosuď podle chuti a před pečením posyp mletými dýňovými semínky.',
@@ -577,9 +577,9 @@ export const snacksBaking: Recipe[] = [
       'Lístek máty rozetři mezi prsty nad miskou; celý list nechávej pro dospělé.',
     ],
     babyServing: {
-      '6m': 'Podávej pruh melounu delší než dětská dlaň, ze kterého dcera saje šťávu, a měsíček zralé nektarinky.',
+      '6m': 'Podávej pruh melounu delší než dětská dlaň, ze kterého dítě saje šťávu, a měsíček zralé nektarinky.',
       '9m': 'Nakrájej ovoce na kostičky o hraně centimetr a nabídni je v mělké misce ke sbírání špetkou.',
-      '12m': 'Servíruj salát v misce s vidličkou nebo lžící; dcera si kousky napichuje a jí je sama.',
+      '12m': 'Servíruj salát v misce s vidličkou nebo lžící; dítě si kousky napichuje a jí je samo.',
     },
     meatSteps: [
       'Salát pro dospělé zakápni limetkou, posyp mátou a nech deset minut odležet v chladu.',
@@ -622,9 +622,9 @@ export const snacksBaking: Recipe[] = [
       'Dětskou formičku peč vedle plechu osmnáct minut a nech ji úplně vychladnout, než tyčinku nakrájíš.',
     ],
     babyServing: {
-      '6m': 'Podávej tyčinku ve tvaru prstu, kterou dcera sevře v dlani; ve slinách měkne a dá se dásněmi rozmačkat.',
-      '9m': 'Nalam tyčinku na kousky velikosti nehtu, které si dcera sbírá špetkou z talíře.',
-      '12m': 'Nabídni celou tyčinku do ruky jako svačinu na procházku a nech dceru, ať ji sní vlastním tempem.',
+      '6m': 'Podávej tyčinku ve tvaru prstu, kterou dítě sevře v dlani; ve slinách měkne a dá se dásněmi rozmačkat.',
+      '9m': 'Nalam tyčinku na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
+      '12m': 'Nabídni celou tyčinku do ruky jako svačinu na procházku a nech dítě, ať ji sní vlastním tempem.',
     },
     meatSteps: [
       'Zbytek hmoty osladˇ podle chuti, upěchuj na plech a peč 20 minut.',

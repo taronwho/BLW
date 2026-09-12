@@ -5,6 +5,9 @@ import { DisclaimerGate } from './DisclaimerGate';
 import { JoinHousehold } from './JoinHousehold';
 import { UpdatePrompt } from './UpdatePrompt';
 import { DiaryScreen } from './screens/DiaryScreen';
+import { GuideDetailScreen } from './screens/GuideDetailScreen';
+import { GuidesScreen } from './screens/GuidesScreen';
+import { HomeScreen } from './screens/HomeScreen';
 import { HouseholdScreen } from './screens/HouseholdScreen';
 import { IngredientDetailScreen } from './screens/IngredientDetailScreen';
 import { IngredientsScreen } from './screens/IngredientsScreen';
@@ -21,15 +24,17 @@ export function App(): ReactNode {
       <DisclaimerGate>
         <AppShell>
           <Routes>
-            <Route path="/" element={<Navigate to="/suroviny" replace />} />
+            <Route path="/" element={<HomeScreen />} />
             <Route path="/suroviny" element={<IngredientsScreen />} />
             <Route path="/suroviny/:id" element={<IngredientDetailScreen />} />
             <Route path="/recepty" element={<RecipesScreen />} />
             <Route path="/recepty/:id" element={<RecipeDetailScreen />} />
+            <Route path="/rady" element={<GuidesScreen />} />
+            <Route path="/rady/:id" element={<GuideDetailScreen />} />
             <Route path="/denik" element={<DiaryScreen />} />
             <Route path="/domacnost" element={<HouseholdScreen />} />
             <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />
-            <Route path="*" element={<Navigate to="/suroviny" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </AppShell>
         <UpdatePrompt />

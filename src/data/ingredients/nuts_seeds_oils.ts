@@ -366,7 +366,7 @@ export const nutsSeedsOils: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Dýňová semínka pro dceru používej vždy mletá na hrubou moučku, celá jsou tvrdá a plochá. Lžičku mleté moučky vmíchej do dýňového nebo do mrkvového pyré, chuťově se k sobě dobře hodí.',
+          'Dýňová semínka pro dítě používej vždy mletá na hrubou moučku, celá jsou tvrdá a plochá. Lžičku mleté moučky vmíchej do dýňového nebo do mrkvového pyré, chuťově se k sobě dobře hodí.',
         caution: 'Celá dýňová semínka do dětského jídla nepatří, jen mletá.',
       },
       '9m': {
@@ -406,7 +406,7 @@ export const nutsSeedsOils: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Slunečnicová semínka používej jen mletá najemno a vmíchej je do kaše nebo do zeleninového pyré. V celku jsou pro dceru nevhodná, protože jsou tvrdá a jejich tvar se snadno dostane do dýchacích cest.',
+          'Slunečnicová semínka používej jen mletá najemno a vmíchej je do kaše nebo do zeleninového pyré. V celku jsou pro dítě nevhodná, protože jsou tvrdá a jejich tvar se snadno dostane do dýchacích cest.',
         caution: 'Solená slunečnicová semínka nepoužívej ani mletá.',
       },
       '9m': {
@@ -526,7 +526,7 @@ export const nutsSeedsOils: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vlašské ořechy používej jen mleté najemno a vmíchej lžičku do kaše nebo do jogurtu. Celé ani nalámané ořechy dceři nikdy nedávej, bezpečná je jen mletá forma, protože vdechnutý kousek ořechu působí v plicích zánět.',
+          'Vlašské ořechy používej jen mleté najemno a vmíchej lžičku do kaše nebo do jogurtu. Celé ani nalámané ořechy dítěti nikdy nedávej, bezpečná je jen mletá forma, protože vdechnutý kousek ořechu působí v plicích zánět.',
         caution: 'Mleté ořechy jsou klíčový alergen, zaváděj je po jednom druhu.',
       },
       '9m': {

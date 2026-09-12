@@ -180,7 +180,7 @@ export function RecipeDetailScreen(): ReactNode {
             setNote(event.target.value);
             setSaved(false);
           }}
-          placeholder="Co příště jinak? Kolik toho snědla?"
+          placeholder="Co příště jinak? Kolik toho dítě snědlo?"
           className="rounded-lg border border-muted/30 p-2 text-sm"
         />
         <button

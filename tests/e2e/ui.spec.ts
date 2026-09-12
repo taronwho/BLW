@@ -122,7 +122,7 @@ test('filtry v seznamu surovin zužují výběr', async ({ page }) => {
   const count = page.getByTestId('pocet-surovin');
   const before = ((await count.textContent()) ?? '').trim();
 
-  await page.getByTestId('filtr-kategorii').getByTestId('chip-ovoce').click();
+  await page.getByTestId('filtr-kategorii').selectOption('ovoce');
   await expect(count).not.toHaveText(before);
   await expect(page.getByTestId('seznam-surovin')).toBeVisible();
 

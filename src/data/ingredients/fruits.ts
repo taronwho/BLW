@@ -44,7 +44,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Vařené měsíčky nechávej hrubší, ať se dcera učí kousat dásněmi. Jemně nastrouhaná syrová dužina je v tomhle věku také v pořádku, ale samostatné plátky syrového jablka ještě ne.',
+          'Vařené měsíčky nechávej hrubší, ať se dítě učí kousat dásněmi. Jemně nastrouhaná syrová dužina je v tomhle věku také v pořádku, ale samostatné plátky syrového jablka ještě ne.',
         caution: 'Strouhat začni těsně před podáním, nastrouhané jablko rychle zhnědne a ztrácí chuť.',
       },
       '12m': {
@@ -74,14 +74,14 @@ export const fruits: Ingredient[] = [
     isKeyAllergen: false,
     chokingRisk: 'medium',
     chokingReason:
-      'Nezralá hruška zůstává tvrdá a její povrch je kluzký, takže ukousnutý kus sklouzne dozadu dřív, než ho dcera stihne rozžvýkat.',
+      'Nezralá hruška zůstává tvrdá a její povrch je kluzký, takže ukousnutý kus sklouzne dozadu dřív, než ho dítě stihne rozžvýkat.',
     hazards: [],
     hazardNotes: {},
     minAgeMonths: 6,
     prep: {
       '6m': {
         serving:
-          'Vyber dobře uzrálou hrušku, která povolí pod palcem. Oloupej ji, zbav jádřince a podávej v dlouhých dílech, které dcera sevře v pěsti. Tvrdší kus krátce podus, ať změkne skrz naskrz.',
+          'Vyber dobře uzrálou hrušku, která povolí pod palcem. Oloupej ji, zbav jádřince a podávej v dlouhých dílech, které dítě sevře v pěsti. Tvrdší kus krátce podus, ať změkne skrz naskrz.',
         caution: 'Kompotovaná hruška ze sklenice bývá slazená, do prvního roku sáhni po čerstvé.',
       },
       '9m': {
@@ -121,12 +121,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Oloupej jen horní třetinu a nech spodek ve slupce jako držadlo, dcera pak drží banán jako zmrzlinu. Druhá varianta je půlka rozříznutá po délce, kterou sevře v pěsti.',
+          'Oloupej jen horní třetinu a nech spodek ve slupce jako držadlo, dítě pak drží banán jako zmrzlinu. Druhá varianta je půlka rozříznutá po délce, kterou sevře v pěsti.',
         caution: 'Zcela zralý banán klouže, proto ho můžeš obalit v jemných mletých vločkách pro lepší úchop.',
       },
       '9m': {
         serving:
-          'Banán nakrájej na kolečka o síle prstu a každé ještě rozpul, aby netvořilo souvislý kotouč. Dcera už si kousky bere klešťovým úchopem mezi palec a ukazovák.',
+          'Banán nakrájej na kolečka o síle prstu a každé ještě rozpul, aby netvořilo souvislý kotouč. Dítě už si kousky bere klešťovým úchopem mezi palec a ukazovák.',
         caution: 'Nedozrálý banán je svíravý a tuhý, počkej, až slupka dostane tmavé tečky.',
       },
       '12m': {
@@ -161,12 +161,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zralé avokádo rozkroj, vyjmi pecku a dužinu nakrájej na dlouhé měkké dílky. Kluzký povrch vyřeší obalení v jemných mletých ovesných vločkách, dcera pak dílek udrží v dlani.',
+          'Zralé avokádo rozkroj, vyjmi pecku a dužinu nakrájej na dlouhé měkké dílky. Kluzký povrch vyřeší obalení v jemných mletých ovesných vločkách, dítě pak dílek udrží v dlani.',
         caution: 'Tvrdé avokádo nechej dozrát v papírovém sáčku, tvrdá dužina se špatně mačká.',
       },
       '9m': {
         serving:
-          'Nakrájej dužinu na kostky velikosti sousta nebo ji rozmačkej vidličkou a nabídni na prstu pečiva. V tomhle věku už dcera zvládne nabírat i lžící, když je pyré dost husté.',
+          'Nakrájej dužinu na kostky velikosti sousta nebo ji rozmačkej vidličkou a nabídni na prstu pečiva. V tomhle věku už dítě zvládne nabírat i lžící, když je pyré dost husté.',
         caution: 'Rozříznuté avokádo rychle tmavne, pokap ho kapkou citronové šťávy.',
       },
       '12m': {
@@ -203,12 +203,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vypeckuj, oloupej a nakrájej na dlouhé dílky. Tvrdší plody krátce spař a slupku stáhni, pak stačí dužinu rozmačkat vidličkou na hrubé pyré, které dcera olizuje z prstů.',
+          'Vypeckuj, oloupej a nakrájej na dlouhé dílky. Tvrdší plody krátce spař a slupku stáhni, pak stačí dužinu rozmačkat vidličkou na hrubé pyré, které dítě olizuje z prstů.',
         caution: 'Pecku odstraň ještě v kuchyni, ne až na dětském talíři.',
       },
       '9m': {
         serving:
-          'Zralou vypeckovanou švestku podávej v osminkách i se slupkou, pokud je tenká. Dcera si dílek nabere klešťovým úchopem, tuhá slupka se dá po uvaření snadno oddělit.',
+          'Zralou vypeckovanou švestku podávej v osminkách i se slupkou, pokud je tenká. Dítě si dílek nabere klešťovým úchopem, tuhá slupka se dá po uvaření snadno oddělit.',
         caution: 'Švestky povzbuzují trávení, začni dvěma kusy denně.',
       },
       '12m': {
@@ -246,11 +246,11 @@ export const fruits: Ingredient[] = [
       '6m': {
         serving:
           'Meruňku rozlom, vyjmi pecku a slupku stáhni po krátkém spaření. Měkkou dužinu podávej v půlkách položených řezem dolů, aby se nekutálely, nebo rozmačkanou na lžíci.',
-        caution: 'Nezralé meruňky jsou kyselé a tuhé, dceři je nenabízej.',
+        caution: 'Nezralé meruňky jsou kyselé a tuhé, dítěti je nenabízej.',
       },
       '9m': {
         serving:
-          'Vypeckovanou meruňku krájej na proužky, které dcera uchopí mezi prsty. Slupku už můžeš nechat, pokud je plod měkký a slupka se při zmáčknutí trhá.',
+          'Vypeckovanou meruňku krájej na proužky, které dítě uchopí mezi prsty. Slupku už můžeš nechat, pokud je plod měkký a slupka se při zmáčknutí trhá.',
         caution: 'Meruňky z kompotu bývají ve sladkém nálevu, vybírej čerstvé.',
       },
       '12m': {
@@ -287,12 +287,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Broskev spař vroucí vodou, slupku stáhni a dužinu odkroj od pecky. Podávej v širokých měkkých dílech, které dcera drží v pěsti, nebo rozmačkané vidličkou do hrubého pyré.',
+          'Broskev spař vroucí vodou, slupku stáhni a dužinu odkroj od pecky. Podávej v širokých měkkých dílech, které dítě drží v pěsti, nebo rozmačkané vidličkou do hrubého pyré.',
         caution: 'Chlupatou slupku v téhle fázi vždy odstraň, dráždí patro.',
       },
       '9m': {
         serving:
-          'Oloupanou broskev krájej na kostky velikosti sousta. Dcera už si je nabírá prsty a učí se je posouvat do strany k dásním, kde je rozmačká.',
+          'Oloupanou broskev krájej na kostky velikosti sousta. Dítě už si je nabírá prsty a učí se je posouvat do strany k dásním, kde je rozmačká.',
         caution: 'Velmi šťavnaté plody kloužou, podávej je v mělké misce.',
       },
       '12m': {
@@ -334,7 +334,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nakrájej vypeckovanou dužinu na kostky a nech dceru, ať si je sbírá z podložky. Slupku můžeš ponechat, pokud se dá zmáčknutím protrhnout nehtem.',
+          'Nakrájej vypeckovanou dužinu na kostky a nech dítě, ať si je sbírá z podložky. Slupku můžeš ponechat, pokud se dá zmáčknutím protrhnout nehtem.',
         caution: 'Šťáva barví oblečení, počítej s bryndákem s rukávy.',
       },
       '12m': {
@@ -376,7 +376,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'I v tomhle věku platí pravidlo vypeckovat a krájet podélně na čtvrtky. Dcera už si díly nabírá sama, ale velikost sousta se proti fázi 6m nemění.',
+          'I v tomhle věku platí pravidlo vypeckovat a krájet podélně na čtvrtky. Dítě už si díly nabírá sama, ale velikost sousta se proti fázi 6m nemění.',
         caution: 'Nikdy nenechávej misku celých třešní v dosahu dítěte.',
       },
       '12m': {
@@ -413,12 +413,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Višně vypeckuj a rozřež podélně na čtvrtky. Kyselost změkči krátkým povařením s kouskem banánu, dcera pak přijme i výraznější chuť bez jakéhokoli slazení.',
+          'Višně vypeckuj a rozřež podélně na čtvrtky. Kyselost změkči krátkým povařením s kouskem banánu, dítě pak přijme i výraznější chuť bez jakéhokoli slazení.',
         caution: 'Višňový kompot ze sklenice je slazený, do prvního roku ho vynech.',
       },
       '9m': {
         serving:
-          'Vypeckované višně dál krájej podélně na čtvrtky a mísi je s jogurtem nebo kaší. Výrazná kyselost pomáhá dceři rozšířit chuťový rejstřík mimo sladké ovoce.',
+          'Vypeckované višně dál krájej podélně na čtvrtky a mísi je s jogurtem nebo kaší. Výrazná kyselost pomáhá dítěti rozšířit chuťový rejstřík mimo sladké ovoce.',
         caution: 'Zkontroluj každý plod, pecka se snadno přehlédne mezi dužinou.',
       },
       '12m': {
@@ -455,12 +455,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Odstraň zelenou stopku a velkou jahodu rozřež podélně na čtvrtky, menší plody rozmačkej vidličkou. Dcera dužinu olizuje a cvičí si úchop, aniž by hrozilo celé sousto.',
+          'Odstraň zelenou stopku a velkou jahodu rozřež podélně na čtvrtky, menší plody rozmačkej vidličkou. Dítě dužinu olizuje a cvičí si úchop, aniž by hrozilo celé sousto.',
         caution: 'Jahody dobře omyj, bývají na nich zbytky hlíny.',
       },
       '9m': {
         serving:
-          'Nakrájej jahody na tenké plátky nebo na osminky. Dcera už je sbírá dvěma prsty a zvládne i větší kus, pokud není zachovaný celý tvar plodu.',
+          'Nakrájej jahody na tenké plátky nebo na osminky. Dítě už je sbírá dvěma prsty a zvládne i větší kus, pokud není zachovaný celý tvar plodu.',
         caution: 'Po první ochutnávce sleduj kůži kolem úst, jahody dráždí mechanicky.',
       },
       '12m': {
@@ -502,7 +502,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Pravidlo zůstává stejné, borůvky dál krájej podélně na čtvrtky nebo je mačkej. Dcera si je sbírá klešťovým úchopem, což je skvělý trénink jemné motoriky.',
+          'Pravidlo zůstává stejné, borůvky dál krájej podélně na čtvrtky nebo je mačkej. Dítě si je sbírá klešťovým úchopem, což je skvělý trénink jemné motoriky.',
         caution: 'Mražené borůvky nech rozmrznout, zmrzlá bobule je tvrdá jako kamínek.',
       },
       '12m': {
@@ -542,7 +542,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nabídni celé maliny do klešťového úchopu, dcera si je bere po jedné a trénuje přesnost. Drobná jadérka projdou trávením beze změny a objeví se ve stolici.',
+          'Nabídni celé maliny do klešťového úchopu, dítě si je bere po jedné a trénuje přesnost. Drobná jadérka projdou trávením beze změny a objeví se ve stolici.',
         caution: 'Po první ochutnávce nech dva dny odstup, než přidáš další nové ovoce.',
       },
       '12m': {
@@ -584,7 +584,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozpůlené ostružiny už dcera zvládne sbírat sama. Zralý plod poznáš podle matné barvy a snadného odtržení, nezralý zůstává tvrdý a svíravě kyselý.',
+          'Rozpůlené ostružiny už dítě zvládne sbírat samo. Zralý plod poznáš podle matné barvy a snadného odtržení, nezralý zůstává tvrdý a svíravě kyselý.',
         caution: 'Tvrdá jadérka u některých odrůd dráždí, při odmítání zkus jinou odrůdu.',
       },
       '12m': {
@@ -626,7 +626,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'I v tomhle věku rybíz rozmačkávej nebo krájej podélně na čtvrtky. Kyselost dobře vyvažuje banán nebo hruška, dcera pak přijme i výraznou chuť bez sladidel.',
+          'I v tomhle věku rybíz rozmačkávej nebo krájej podélně na čtvrtky. Kyselost dobře vyvažuje banán nebo hruška, dítě pak přijme i výraznou chuť bez sladidel.',
         caution: 'Stopky odstraň do jedné, jsou tuhé a hořké.',
       },
       '12m': {
@@ -710,7 +710,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Povařený angrešt dál krájej podélně na čtvrtky, ať nevznikne souvislý plod. Dcera zvládne díly nabírat prsty, slupku ale stále kontroluj, u některých odrůd je tuhá.',
+          'Povařený angrešt dál krájej podélně na čtvrtky, ať nevznikne souvislý plod. Dítě zvládne díly nabírat prsty, slupku ale stále kontroluj, u některých odrůd je tuhá.',
         caution: 'Chlupaté odrůdy dráždí patro, vybírej hladké.',
       },
       '12m': {
@@ -752,7 +752,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Pravidlo krájet podélně na čtvrtky platí beze změny, bez ohledu na to, jak dobře už dcera žvýká. Jadérka u odrůd s peckami vyber, jsou tvrdá a hořká.',
+          'Pravidlo krájet podélně na čtvrtky platí beze změny, bez ohledu na to, jak dobře už dítě žvýká. Jadérka u odrůd s peckami vyber, jsou tvrdá a hořká.',
         caution: 'Hrozny nikdy nenech v dosahu, když si dítě hraje.',
       },
       '12m': {
@@ -789,7 +789,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vyber dužinu bez tmavých jadérek a nakrájej ji na dlouhé tyčinky, které dcera sevře v pěsti. Kůru odřízni až po bílou vrstvu, ta je tvrdá a nedá se rozžvýkat.',
+          'Vyber dužinu bez tmavých jadérek a nakrájej ji na dlouhé tyčinky, které dítě sevře v pěsti. Kůru odřízni až po bílou vrstvu, ta je tvrdá a nedá se rozžvýkat.',
         caution: 'Meloun hodně pouští šťávu, prostři podložku nebo ručník.',
       },
       '9m': {
@@ -836,7 +836,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Podávej kostky velikosti nehtu palce, dcera je sbírá dvěma prsty. Cantaloupe má výraznější aroma než vodní meloun, někdy ho děti přijmou až napodruhé.',
+          'Podávej kostky velikosti nehtu palce, dítě je sbírá dvěma prsty. Cantaloupe má výraznější aroma než vodní meloun, někdy ho děti přijmou až napodruhé.',
         caution: 'Nakrojený meloun nenechávej déle než den mimo lednici.',
       },
       '12m': {
@@ -873,12 +873,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Oloupej mango, odkroj dužinu od ploché pecky a nakrájej na dlouhé pásky. Kluzkost zmírni obalením v jemných mletých ovesných vločkách, dcera pak pásek udrží v pěsti.',
+          'Oloupej mango, odkroj dužinu od ploché pecky a nakrájej na dlouhé pásky. Kluzkost zmírni obalením v jemných mletých ovesných vločkách, dítě pak pásek udrží v pěsti.',
         caution: 'Vláknité odrůdy se špatně žvýkají, vybírej hladkou dužinu.',
       },
       '9m': {
         serving:
-          'Nakrájej dužinu na kostky, které dcera nabere klešťovým úchopem. Mango je bohaté na vitamin A i C a hodí se jako přirozeně sladká složka k neutrální kaši.',
+          'Nakrájej dužinu na kostky, které dítě nabere klešťovým úchopem. Mango je bohaté na vitamin A i C a hodí se jako přirozeně sladká složka k neutrální kaši.',
         caution: 'Šťáva z manga dráždí citlivou pokožku kolem úst.',
       },
       '12m': {
@@ -926,7 +926,7 @@ export const fruits: Ingredient[] = [
       '12m': {
         serving:
           'Batole jí ananas v kostkách, tvrdý střed mu ale nedávej ani teď. Kyselost dobře vyvažuje bílý jogurt nebo tvaroh, které zároveň chrání sklovinu.',
-        caution: 'Po ananasu vypláchni dceři pusu vodou.',
+        caution: 'Po ananasu vypláchni dítěti pusu vodou.',
       },
     },
     prepIdeas: [
@@ -960,7 +960,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Podávej kiwi v kostkách nebo v půlměsících, které dcera sbírá prsty. Je to silný zdroj vitaminu C, díky němuž se lépe vstřebá železo z luštěnin podaných v témže jídle.',
+          'Podávej kiwi v kostkách nebo v půlměsících, které dítě sbírá prsty. Je to silný zdroj vitaminu C, díky němuž se lépe vstřebá železo z luštěnin podaných v témže jídle.',
         caution: 'U dětí s ekzémem sleduj okolí úst, kiwi dráždí i mechanicky.',
       },
       '12m': {
@@ -1002,13 +1002,13 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Vyloupané dílky bez blan krájej na třetiny, aby netvořily dlouhé sousto. Dcera si je bere prsty, šťáva jí přitom stéká po ruce, což k učení patří.',
+          'Vyloupané dílky bez blan krájej na třetiny, aby netvořily dlouhé sousto. Dítě si je bere prsty, šťáva jí přitom stéká po ruce, což k učení patří.',
         caution: 'Jadérka u některých odrůd vyber, jsou hořká a tvrdá.',
       },
       '12m': {
         serving:
           'Batole zvládne pomerančové dílky i s tenkou blánou, pokud je nakrájíš na menší kusy. Šťávu místo vody nenabízej, celý plod je pro zoubky výrazně lepší volba.',
-        caution: 'Po citrusech vypláchni dceři pusu vodou.',
+        caution: 'Po citrusech vypláchni dítěti pusu vodou.',
       },
     },
     prepIdeas: [
@@ -1044,7 +1044,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dílky bez blány rozřež napůl, aby nevznikl celý váček. Dcera si je bere prsty a zvládne je rozmačkat dásněmi, šťáva přitom stéká, počítej s bryndákem.',
+          'Dílky bez blány rozřež napůl, aby nevznikl celý váček. Dítě si je bere prsty a zvládne je rozmačkat dásněmi, šťáva přitom stéká, počítej s bryndákem.',
         caution: 'Jadérka kontroluj i teď, jsou tvrdá a hořká.',
       },
       '12m': {
@@ -1080,7 +1080,7 @@ export const fruits: Ingredient[] = [
       '6m': {
         serving:
           'Citron používej jen jako šťávu, pár kapek do hotového jídla. Kyselina pomáhá tělu využít železo z luštěnin a zeleniny a zároveň brání tomu, aby nakrájené ovoce zhnědlo.',
-        caution: 'Celý plátek citronu dceři nedávej, kyselost dráždí sliznici.',
+        caution: 'Celý plátek citronu dítěti nedávej, kyselost dráždí sliznici.',
       },
       '9m': {
         serving:
@@ -1161,12 +1161,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zralý fík rozkroj a měkkou dužinu vyber lžičkou, slupku zahoď. Dužina je jemná a plná drobných zrníček, dcera ji zvládne olizovat z předložené lžíce i z prstu.',
+          'Zralý fík rozkroj a měkkou dužinu vyber lžičkou, slupku zahoď. Dužina je jemná a plná drobných zrníček, dítě ji zvládne olizovat z předložené lžíce i z prstu.',
         caution: 'Nezralý fík je tuhý a svíravý, nech ho dozrát.',
       },
       '9m': {
         serving:
-          'Oloupaný fík nakrájej na měsíčky, které dcera nabere prsty. Fík rozvolňuje stolici, proto pro začátek stačí polovina plodu za den.',
+          'Oloupaný fík nakrájej na měsíčky, které dítě nabere prsty. Fík rozvolňuje stolici, proto pro začátek stačí polovina plodu za den.',
         caution: 'Mléčná šťáva ze stopky dráždí kůži, stopku odřízni.',
       },
       '12m': {
@@ -1211,7 +1211,7 @@ export const fruits: Ingredient[] = [
       '9m': {
         serving:
           'Vypeckovanou a namočenou datli nasekej nadrobno a vmíchej ji do ovesné kaše nebo do těsta. Kousky nechávej menší než zrnko rýže, ať se v ústech nespojí dohromady.',
-        caution: 'Po datlích vždy nabídni vodu a otři dceři dásně.',
+        caution: 'Po datlích vždy nabídni vodu a otři dítěti dásně.',
       },
       '12m': {
         serving:
@@ -1250,7 +1250,7 @@ export const fruits: Ingredient[] = [
       '6m': {
         serving:
           'Rozinky namoč ve vroucí vodě, nech je nabobtnat a pak je rozmixuj do kaše nebo do těsta. V celku ani napůl je v téhle fázi nenabízej, lepivost je větší riziko než tvar.',
-        caution: 'Nikdy je nedávej dceři do ruky jako svačinu na cestu.',
+        caution: 'Nikdy je nedávej dítěti do ruky jako svačinu na cestu.',
       },
       '9m': {
         serving:
@@ -1342,7 +1342,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozvařené švestky nasekej nadrobno a vmíchej do jogurtu nebo do kaše. Účinek na trávení je silný, proto začni jednou lžičkou denně a sleduj, jak dcera reaguje.',
+          'Rozvařené švestky nasekej nadrobno a vmíchej do jogurtu nebo do kaše. Účinek na trávení je silný, proto začni jednou lžičkou denně a sleduj, jak dítě reaguje.',
         caution: 'Při řidší stolici množství okamžitě sniž.',
       },
       '12m': {
@@ -1426,7 +1426,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Podávej kostky, které dcera sbírá klešťovým úchopem. Papája obsahuje enzymy podporující trávení a její jemná chuť se dobře snáší s jogurtem i s ovesnou kaší.',
+          'Podávej kostky, které dítě sbírá klešťovým úchopem. Papája obsahuje enzymy podporující trávení a její jemná chuť se dobře snáší s jogurtem i s ovesnou kaší.',
         caution: 'Zrníčka jsou palčivá, vyber je do jednoho.',
       },
       '12m': {
@@ -1468,7 +1468,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nakrájej vypeckovanou dužinu na kostky velikosti sousta a nech dceru, ať si je bere sama. Slupku můžeš nechat jen tehdy, když se dá protrhnout nehtem.',
+          'Nakrájej vypeckovanou dužinu na kostky velikosti sousta a nech dítě, ať si je bere samo. Slupku můžeš nechat jen tehdy, když se dá protrhnout nehtem.',
         caution: 'Přezrálý plod se rozpadá, hodí se spíš rozmačkaný.',
       },
       '12m': {
@@ -1503,12 +1503,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Pyré bez cukru podávej na předložené lžíci nebo na prstu, ať ho dcera olizuje sama. Hodí se i k zahuštění jáhlové kaše, kde nahradí jakoukoli sladkou přísadu.',
+          'Pyré bez cukru podávej na předložené lžíci nebo na prstu, ať ho dítě olizuje samo. Hodí se i k zahuštění jáhlové kaše, kde nahradí jakoukoli sladkou přísadu.',
         caution: 'Kapsičky s hubičkou nenabízej, dítě z nich saje a neučí se jíst lžící.',
       },
       '9m': {
         serving:
-          'Nech dceru nabírat pyré vlastní lžící z mělké misky, i když se přitom umaže. Hustší pyré drží na lžíci lépe než řídké, proto ho případně zahusti mletými ovesnými vločkami.',
+          'Nech dítě nabírat pyré vlastní lžící z mělké misky, i když se přitom umaže. Hustší pyré drží na lžíci lépe než řídké, proto ho případně zahusti mletými ovesnými vločkami.',
         caution: 'Domácí pyré skladuj v lednici nejvýše dva dny.',
       },
       '12m': {

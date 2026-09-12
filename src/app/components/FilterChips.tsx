@@ -14,17 +14,14 @@ interface Props {
 }
 
 /**
- * Vodorovně scrollovatelné čipy. Scroll drží uvnitř kontejneru — stránka
- * sama nikdy nepřeteče (docs/SPEC.md kap. 6).
+ * Čipy zalomené do řádků — všechny možnosti jsou vidět najednou.
+ *
+ * Dřív se scrollovalo do boku a část filtrů zůstávala schovaná mimo obraz.
+ * Pro dlouhé číselníky (kategorie) se místo čipů používá FilterSelect.
  */
 export function FilterChips({ options, selected, onSelect, ariaLabel, testId }: Props): ReactNode {
   return (
-    <div
-      role="group"
-      aria-label={ariaLabel}
-      data-testid={testId}
-      className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1"
-    >
+    <div role="group" aria-label={ariaLabel} data-testid={testId} className="flex flex-wrap gap-2">
       {options.map((option) => {
         const active = option.id === selected;
         return (
@@ -34,8 +31,10 @@ export function FilterChips({ options, selected, onSelect, ariaLabel, testId }: 
             aria-pressed={active}
             data-testid={`chip-${option.id}`}
             onClick={() => onSelect(option.id)}
-            className={`min-h-touch shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium ${
-              active ? 'border-accent bg-accent text-white' : 'border-muted/30 bg-surface text-ink'
+            className={`min-h-touch rounded-full border px-4 py-2 text-sm font-medium transition ${
+              active
+                ? 'border-accent bg-accent text-white shadow-soft'
+                : 'border-line bg-surface text-ink hover:border-accent/40'
             }`}
           >
             {option.label}

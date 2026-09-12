@@ -13,7 +13,7 @@ import {
  * Druhá dávka snídaní. Tahle várka dostává do kuchařky ovoce, které nikde
  * nefigurovalo — exotické i drobné bobuloviny — a bezlepkový oves.
  *
- * Nic z dětské linie se nesladí. Kulaté plody se do porce pro dceru krájí
+ * Nic z dětské linie se nesladí. Kulaté plody se do porce pro dítě krájí
  * vždy podélně na čtvrtky, nikdy se nenabízejí v celku.
  */
 export const breakfast2: Recipe[] = [
@@ -42,16 +42,16 @@ export const breakfast2: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce kaše do misky, ještě než se do zbytku přidává cokoli na dochucení.',
     babySteps: [
       'Kaši zřeď lžící mléka, aby se dala olizovat ze lžíce a nebyla lepkavá.',
-      'Broskvový měsíček pro dceru rozmačkej nebo krátce poduš, syrová tvrdá broskev je pro tuhle fázi nevhodná.',
+      'Broskvový měsíček pro dítě rozmačkej nebo krátce poduš, syrová tvrdá broskev je pro tuhle fázi nevhodná.',
       'Nech porci vychladnout na vlažnou teplotu a zkus kapku na vnitřní straně zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej řidší kaši na předložené lžíci, kterou dcera olízne, když jí ji vložíš do dlaně.',
+      '6m': 'Podávej řidší kaši na předložené lžíci, kterou dítě olízne, když jí ji vložíš do dlaně.',
       '9m': 'Nabídni hustší kaši v misce a k ní měkké měsíčky broskve na sbírání prsty.',
       '12m': 'Servíruj kaši s kousky broskve promíchanými dovnitř; batole jí lžící samo.',
     },
     meatSteps: [
-      'Kaši pro tátu a dceru dochuť skořicí a doplň větší porcí broskví.',
+      'Kaši pro masitou variantu dochuť skořicí a doplň větší porcí broskví.',
       'Kdo má rád křupavou vrstvu, přisype si opražené vločky.',
     ],
     vegetarianSteps: [
@@ -92,12 +92,12 @@ export const breakfast2: Recipe[] = [
       'Přidej lžičku mletých mandlí a nech porci zvlažnět.',
     ],
     babyServing: {
-      '6m': 'Podávej jáhly s rozmačkanými třešněmi jako hustou kaši na lžíci, kterou dcera olizuje.',
+      '6m': 'Podávej jáhly s rozmačkanými třešněmi jako hustou kaši na lžíci, kterou dítě olizuje.',
       '9m': 'Z jáhel vytvaruj kuličky do ruky a třešně nabídni rozkrojené podélně na čtvrtky.',
       '12m': 'Servíruj kaši s třešněmi rozkrojenými podélně na čtvrtky; celé plody nenabízej ani teď.',
     },
     meatSteps: [
-      'Kaši pro tátu a dceru dochuť a doplň lžící zakysané smetany.',
+      'Kaši pro masitou variantu dochuť a doplň lžící zakysané smetany.',
       'Posyp ji opraženými mletými mandlemi.',
     ],
     vegetarianSteps: [
@@ -143,7 +143,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj krém ve sklenici s višněmi rozkrojenými podélně na čtvrtky promíchanými dovnitř.',
     },
     meatSteps: [
-      'Krém pro tátu a dceru dochuť a posyp nasekanými ořechy.',
+      'Krém pro masitou variantu dochuť a posyp nasekanými ořechy.',
       'Podávej vychlazený se lžící zakysané smetany.',
     ],
     vegetarianSteps: [
@@ -179,7 +179,7 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce tvarohového krému s jablečným pyré, dřív než se sypou vločky.',
     babySteps: [
-      'Ostružiny pro dceru rozkroj podélně na čtvrtky nebo je rozmačkej; celý plod drží pod dásněmi tvar.',
+      'Ostružiny pro dítě rozkroj podélně na čtvrtky nebo je rozmačkej; celý plod drží pod dásněmi tvar.',
       'Rozmačkanou dužinu vmíchej do krému, samotná ostružina je pro začátek moc kyselá.',
       'Vločky pro dětskou porci rozmixuj na hrubou moučku, celé lupínky jsou nasucho riziko.',
     ],
@@ -189,7 +189,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj krém s ostružinami rozkrojenými podélně na čtvrtky a hrstí změklých vloček.',
     },
     meatSteps: [
-      'Porci pro tátu a dceru doplň lžící medu až na talíři a posyp nasekanými ořechy.',
+      'Porci pro masitou variantu doplň lžící medu až na talíři a posyp nasekanými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
     ],
     vegetarianSteps: [
@@ -235,7 +235,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj kaši s rybízem rozkrojeným podélně na čtvrtky promíchaným dovnitř.',
     },
     meatSteps: [
-      'Kaši pro tátu a dceru zakápni citronovou šťávou a doplň lžící rybízového kompotu.',
+      'Kaši pro masitou variantu zakápni citronovou šťávou a doplň lžící rybízového kompotu.',
       'Kdo má rád hutnější snídani, přidá si lžíci tvarohu.',
     ],
     vegetarianSteps: [
@@ -273,7 +273,7 @@ export const breakfast2: Recipe[] = [
     babySteps: [
       'Pyré protlač přes sítko, aby v porci nezůstaly slupky ani tvrdá jadérka z angreštu.',
       'Promíchej ho s pohankou a lžící kefíru do souvislé hmoty.',
-      'Celé bobule dceři nenabízej; pokud je chceš použít, rozkroj je podélně na čtvrtky.',
+      'Celé bobule dítěti nenabízej; pokud je chceš použít, rozkroj je podélně na čtvrtky.',
     ],
     babyServing: {
       '6m': 'Podávej husté pyré s pohankou na lžíci; kefír přidej jen na zředění.',
@@ -281,7 +281,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj kefír s pohankou a pyré; celé plody rozkroj podélně na čtvrtky.',
     },
     meatSteps: [
-      'Porci pro tátu a dceru dochuť a posyp opraženými mletými dýňovými semínky.',
+      'Porci pro masitou variantu dochuť a posyp opraženými mletými dýňovými semínky.',
       'Podávej vychlazenou jako letní snídani.',
     ],
     vegetarianSteps: [
@@ -318,7 +318,7 @@ export const breakfast2: Recipe[] = [
       'Po kroku 4 odeber lžíci ricotty a hrst podélně rozčtvrcených hroznů, dřív než se chleba maže.',
     babySteps: [
       'Zkontroluj, že je každý hrozen rozkrojený podélně na čtyři díly, ne jen na půlky.',
-      'Ricottu rozetři na proužek chleba velikosti prstu, který dcera sevře v pěsti.',
+      'Ricottu rozetři na proužek chleba velikosti prstu, který dítě sevře v pěsti.',
       'Do ricotty vmíchej výhradně mleté ořechy, jiná podoba do téhle fáze nepatří.',
     ],
     babyServing: {
@@ -327,7 +327,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj celý krajíc s ricottou; hrozny i teď krájej podélně na čtvrtky.',
     },
     meatSteps: [
-      'Krajíce pro tátu a dceru dochuť a doplň plátkem šunky.',
+      'Krajíce pro masitou variantu dochuť a doplň plátkem šunky.',
       'Zakápni je olivovým olejem a posyp čerstvě mletým pepřem.',
     ],
     vegetarianSteps: [
@@ -363,9 +363,9 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 2 odeber dva plátky melounu stranou, dřív než se zakapávají limetkou.',
     babySteps: [
-      'Plátek melounu nakrájej na podlouhlý proužek velikosti prstu, který dceři čouhá z pěsti.',
+      'Plátek melounu nakrájej na podlouhlý proužek velikosti prstu, který dítěti čouhá z pěsti.',
       'Meloun je kluzký, proto ho pro jistotu obal v mletém sezamu, aby se lépe držel.',
-      'Cottage podávej samostatně v misce, dcera si do něj proužek namáčí.',
+      'Cottage podávej samostatně v misce, dítě si do něj proužek namáčí.',
     ],
     babyServing: {
       '6m': 'Podávej podlouhlé proužky melounu obalené v mletém sezamu a cottage sýr na lžíci.',
@@ -373,7 +373,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj plátky melounu s cottage sýrem navrch; batole si je bere samo.',
     },
     meatSteps: [
-      'Talíř pro tátu a dceru doplň tenkými plátky šunky, které se s melounem dobře snáší.',
+      'Talíř pro masitou variantu doplň tenkými plátky šunky, které se s melounem dobře snáší.',
       'Zakápni vše limetkou a posyp mletým pepřem.',
     ],
     vegetarianSteps: [
@@ -409,7 +409,7 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce kokosového jogurtu s mletými nabobtnalými chia semínky, dřív než se navrstvuje ovoce.',
     babySteps: [
-      'Ananas je vláknitý a kyselý; pro dceru ho krátce poduš, aby změkl skrz naskrz.',
+      'Ananas je vláknitý a kyselý; pro dítě ho krátce poduš, aby změkl skrz naskrz.',
       'Dušený ananas nasekej nadrobno a promíchej ho s jogurtem.',
       'Mango rozmačkej vidličkou a přidej ho pro jemnější chuť.',
     ],
@@ -419,7 +419,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj misku s kousky ananasu a manga; batole si je nabírá lžící samo.',
     },
     meatSteps: [
-      'Misku pro tátu a dceru doplň lžící medu a posyp praženými kokosovými lupínky.',
+      'Misku pro masitou variantu doplň lžící medu a posyp praženými kokosovými lupínky.',
       'Zakápni ji limetkou a podávej vychlazenou.',
     ],
     vegetarianSteps: [
@@ -465,7 +465,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj celý tousta s ovocem navrch; batole si ho rozláme samo.',
     },
     meatSteps: [
-      'Krajíce pro tátu a dceru posyp skořicí a doplň lžící medu.',
+      'Krajíce pro masitou variantu posyp skořicí a doplň lžící medu.',
       'Podávej je hned, dokud je chleba křupavý.',
     ],
     vegetarianSteps: [
@@ -503,7 +503,7 @@ export const breakfast2: Recipe[] = [
     babySteps: [
       'Mandarinkové dílky zbav blány a rozmačkej je, blána se v puse nerozpadne.',
       'Dužinu vmíchej do krému; mletý mák je v pořádku, celé zrnko projde trávením beze změny.',
-      'Praženou pohanku pro dceru rozdrť, celé zrno je nasucho tvrdé.',
+      'Praženou pohanku pro dítě rozdrť, celé zrno je nasucho tvrdé.',
     ],
     babyServing: {
       '6m': 'Podávej hladký krém s rozmačkanou mandarinkou na předložené lžíci.',
@@ -511,7 +511,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj krém s mandarinkou a praženou pohankou promíchanou dovnitř.',
     },
     meatSteps: [
-      'Misku pro tátu a dceru doplň lžící zakysané smetany a strouhanou citronovou kůrou.',
+      'Misku pro masitou variantu doplň lžící zakysané smetany a strouhanou citronovou kůrou.',
       'Posyp ji další praženou pohankou.',
     ],
     vegetarianSteps: [
@@ -547,7 +547,7 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce jogurtu s ořechovým máslem, dřív než se navrstvují fíky a vločky.',
     babySteps: [
-      'Slupku fíku pro dceru odstraň, je pružná a neroztrhne se pod dásněmi.',
+      'Slupku fíku pro dítě odstraň, je pružná a neroztrhne se pod dásněmi.',
       'Měkkou dužinu vyber lžičkou a vmíchej ji do jogurtu.',
       'Ověř, že je ořechové máslo v porci rozředěné, husté se lepí na patro.',
     ],
@@ -557,7 +557,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj fíky na čtvrtky i se slupkou, pokud je tenká, a jogurt s vločkami.',
     },
     meatSteps: [
-      'Misku pro tátu a dceru zakápni medem a posyp nasekanými lískovými ořechy.',
+      'Misku pro masitou variantu zakápni medem a posyp nasekanými lískovými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
     ],
     vegetarianSteps: [
@@ -599,11 +599,11 @@ export const breakfast2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej kuskus rozmačkaný se švestkami jako hustou kaši na lžíci.',
-      '9m': 'Nabídni kuskus v malých hromádkách, které dcera nabere klešťovým úchopem.',
+      '9m': 'Nabídni kuskus v malých hromádkách, které dítě nabere klešťovým úchopem.',
       '12m': 'Servíruj kuskus se švestkami nasekanými nadrobno a šťávou z pomeranče.',
     },
     meatSteps: [
-      'Porci pro tátu a dceru dochuť pomerančovou šťávou a doplň lžící zakysané smetany.',
+      'Porci pro masitou variantu dochuť pomerančovou šťávou a doplň lžící zakysané smetany.',
       'Posyp ji opraženými semínky.',
     ],
     vegetarianSteps: [
@@ -649,7 +649,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj kaši s kousky papáji i nektarinky promíchanými dovnitř.',
     },
     meatSteps: [
-      'Misku pro tátu a dceru zakápni limetkou a posyp praženými semínky.',
+      'Misku pro masitou variantu zakápni limetkou a posyp praženými semínky.',
       'Podávej ji vlažnou nebo vychlazenou podle chuti.',
     ],
     vegetarianSteps: [
@@ -695,7 +695,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Batoleti dej jogurt s nadrobno nasekanými brusinkami a rozdrcenými vločkami.',
     },
     meatSteps: [
-      'Misku pro tátu a dceru zakápni medem a posyp nasekanými ořechy.',
+      'Misku pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
     ],
     vegetarianSteps: [

@@ -10,6 +10,8 @@ import { ageInMonths } from '../lib/age';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
+import { FilterSelect } from '../components/FilterSelect';
+import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
 import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
@@ -27,7 +29,7 @@ const QUICK_FILTERS: readonly ChipOption[] = [
   { id: 'sezonni', label: 'Sezónní' },
 ];
 
-const CATEGORY_OPTIONS: readonly ChipOption[] = [
+const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny kategorie' },
   ...INGREDIENT_CATEGORIES.map((category) => ({ id: category, label: CATEGORY_LABELS[category] })),
 ];
@@ -75,7 +77,7 @@ export function IngredientsScreen(): ReactNode {
         Suroviny
       </h1>
 
-      <label className="flex min-h-touch items-center gap-2 rounded-xl border border-muted/30 bg-surface px-3">
+      <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
         <Search aria-hidden="true" className="h-5 w-5 shrink-0 text-muted" />
         <span className="sr-only">Hledat surovinu</span>
         <input
@@ -88,11 +90,11 @@ export function IngredientsScreen(): ReactNode {
         />
       </label>
 
-      <FilterChips
+      <FilterSelect
+        label="Kategorie"
         options={CATEGORY_OPTIONS}
         selected={category}
         onSelect={setCategory}
-        ariaLabel="Filtr kategorií"
         testId="filtr-kategorii"
       />
       <FilterChips

@@ -6,7 +6,7 @@ import { STAGE_LABELS } from '../lib/age';
 interface Props {
   value: Stage;
   onChange: (stage: Stage) => void;
-  /** Fáze odpovídající věku dcery se označí, aby bylo vidět, co je „teď". */
+  /** Fáze odpovídající věku dítěte se označí, aby bylo vidět, co je „teď". */
   currentStage?: Stage;
   label?: string;
 }

@@ -182,7 +182,7 @@ export interface Recipe {
   babySteps: string[];
   /** Jak porci miminku podat v dané fázi */
   babyServing: Record<Stage, string>;
-  /** Dokončení masité verze (otec + dcera) */
+  /** Dokončení masité verze (otec + dítě) */
   meatSteps: string[];
   /** Dokončení bezmasé verze (matka) — vždy vyplněné */
   vegetarianSteps: string[];
