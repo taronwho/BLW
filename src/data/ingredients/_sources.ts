@@ -289,6 +289,31 @@ export const SZU_BREASTFEEDING: SourceRef = {
   tier: 1,
 };
 
+/**
+ * Brožura SZÚ k zavádění příkrmu. Obrázkové PDF bez textové vrstvy, přečtené
+ * po stránkách 12. 9. 2026.
+ *
+ * Co doložitelně říká: příkrm zavádět ne před ukončeným 4. a nejpozději po
+ * ukončeném 6. měsíci, lepek nejpozději do ukončeného 7. měsíce; začínat
+ * zeleninou (mrkev, pak dýně) a nesolit, nesladit ani nepřidávat nic dalšího;
+ * mezi novými potravinami nechat 2–3 dny a sledovat alergickou reakci; maso
+ * v porci 30–50 g libového, upravené vařením, dušením nebo v páře, bez kostí,
+ * v žádném případě uzené maso ani masné výrobky, a bez soli a koření; u ryb
+ * dávat pozor na kosti; mléčné výrobky od 7. měsíce, nejvhodnější bílý jogurt
+ * s 3–3,5 % tuku; ovoce nesladit.
+ *
+ * POZOR na rozpor s britskou praxí: brožura řadí celozrnné obiloviny až od
+ * dvou let věku a dětem do roka nedoporučuje celozrnný chléb. Na tuhle věc ji
+ * necituj, dokud se rozpor nevyřeší podle docs/BEZPECNOST.md kap. 1 bodu 4.
+ */
+export const SZU_FIRST_SPOON: SourceRef = {
+  org: 'Státní zdravotní ústav',
+  title: 'Moje první lžička',
+  url: 'https://szu.gov.cz/wp-content/uploads/2023/11/Moje_prvni_lzicka_2016.pdf',
+  accessedAt: FETCHED,
+  tier: 1,
+};
+
 /** Stanoviska České pediatrické společnosti k doporučením WHO. */
 export const CPS_WHO: SourceRef = {
   org: 'Česká pediatrická společnost ČLS JEP',
