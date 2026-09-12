@@ -513,7 +513,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [BP_GLUTEN, WHO_COMPLEMENTARY],
+    sources: [BP_GLUTEN, NHS_YOUNG_CHILDREN, WHO_COMPLEMENTARY],
     reviewStatus: 'verified',
   },
   {

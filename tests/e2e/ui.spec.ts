@@ -1,5 +1,12 @@
 import { expect, test } from '@playwright/test';
-import { acceptDisclaimer, horizontalOverflow, SCREENS, tooSmallTargets } from './helpers';
+import { recipes } from '@/data';
+import {
+  acceptDisclaimer,
+  horizontalOverflow,
+  navLink,
+  SCREENS,
+  tooSmallTargets,
+} from './helpers';
 
 /**
  * Mobilní kvalita UI na 320×568, 375×667 a 414×896 (docs/SPEC.md kap. 6).
@@ -54,7 +61,7 @@ for (const screen of SCREENS) {
 
 test('proklik ze suroviny na recept a zpět', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Suroviny' }).click();
+  await navLink(page, 'Suroviny').click();
   await page.getByTestId('hledat-surovinu').fill('brokolice');
 
   const firstIngredient = page.getByTestId('seznam-surovin').getByRole('link').first();
@@ -83,15 +90,18 @@ test('proklik ze suroviny na recept a zpět', async ({ page }) => {
 
 test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Suroviny' }).click();
+  await navLink(page, 'Suroviny').click();
   await page.getByTestId('hledat-surovinu').fill('brokolice');
 
+  // Neochutnaná surovina je tlačítko rychlého zápisu; po zápisu se z něj
+  // stane odkaz do detailu, aby se dalšími klepnutími nepřidávaly duplicity.
   const toggle = page.getByTestId(/^ochutnano-/).first();
   await expect(toggle).toHaveAttribute('aria-pressed', 'false');
   await toggle.click();
-  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toHaveAttribute('aria-label', /ochutnáno, otevřít záznamy/);
+  await expect(toggle).toHaveRole('link');
 
-  await page.getByRole('link', { name: 'Deník' }).click();
+  await navLink(page, 'Deník').click();
   await expect(page.getByTestId('casova-osa')).toContainText(/brokolice/i);
   await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 1 z');
 
@@ -102,7 +112,7 @@ test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
 
 test('vyhledávání funguje bez diakritiky i s ní', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Suroviny' }).click();
+  await navLink(page, 'Suroviny').click();
   const search = page.getByTestId('hledat-surovinu');
 
   await search.fill('cocka');
@@ -117,7 +127,7 @@ test('vyhledávání funguje bez diakritiky i s ní', async ({ page }) => {
 
 test('filtry v seznamu surovin zužují výběr', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Suroviny' }).click();
+  await navLink(page, 'Suroviny').click();
 
   const count = page.getByTestId('pocet-surovin');
   const before = ((await count.textContent()) ?? '').trim();
@@ -132,7 +142,7 @@ test('filtry v seznamu surovin zužují výběr', async ({ page }) => {
 
 test('přepínač fází mění pokyn ke krájení', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Suroviny' }).click();
+  await navLink(page, 'Suroviny').click();
   await page.getByTestId('hledat-surovinu').fill('brokolice');
   await page.getByTestId('seznam-surovin').getByRole('link').first().click();
 
@@ -148,14 +158,18 @@ test('přepínač fází mění pokyn ke krájení', async ({ page }) => {
 
 test('filtry receptů: jen vegetariánské a čas do 20 minut', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.getByRole('link', { name: 'Recepty' }).click();
+  await navLink(page, 'Recepty').click();
 
+  // Počet se bere z katalogu, ne z natvrdo psaného čísla — jinak test
+  // zastará při každé další dávce receptů. Tvrzení zůstává stejné:
+  // nefiltrovaný seznam ukazuje všechny recepty, po filtru je jich míň.
+  const vsechny = `${recipes.length} z ${recipes.length}`;
   const count = page.getByTestId('pocet-receptu');
-  await expect(count).toContainText('80 z 80');
+  await expect(count).toContainText(vsechny);
 
   await page.getByTestId('filtr-vegetarianske').click();
   await expect(page.getByTestId('filtr-vegetarianske')).toHaveAttribute('aria-pressed', 'true');
-  await expect(count).not.toContainText('80 z 80');
+  await expect(count).not.toContainText(vsechny);
 
   await page.getByTestId('filtr-casu').getByTestId('chip-20').click();
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();

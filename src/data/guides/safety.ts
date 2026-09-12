@@ -131,7 +131,7 @@ export const safety: Guide[] = [
           'Nejužitečnější rada z celé metody zní: absolvuj kurz první pomoci zaměřený na kojence a malé děti ještě předtím, než začnete s příkrmem.',
           'Znalost postupu mění situaci u stolu podstatněji než cokoli jiného, protože odstraňuje bezmoc. Rodič, který ví, co udělá, se na dávící dítě dívá jinak než rodič, který to neví.',
           'Platí to stejně pro rodiny, které metodu vedenou dítětem nepoužívají. K tuhé stravě se dostane každé dítě, jen o něco později — a udusit se může i nad kouskem, který našlo na zemi.',
-          'Tenhle text kurz nenahrazuje. Je tu proto, aby sis postup připomněla, ne aby ses ho učila za pochodu.',
+          'Tenhle text kurz nenahrazuje. Je tu proto, aby se dal postup rychle připomenout, ne aby se člověk učil za pochodu.',
         ],
       },
     ],
@@ -207,7 +207,7 @@ export const safety: Guide[] = [
         heading: 'Jak postupovat',
         asList: true,
         body: [
-          'Zaváděj po jednom alergenu, s odstupem dvou až tří dnů, abys poznala, co reakci způsobilo.',
+          'Zaváděj po jednom alergenu, s odstupem dvou až tří dnů — jinak se nedá poznat, co reakci způsobilo.',
           'Začni malým množstvím, ideálně dopoledne, doma — ne v den očkování a ne když je dítě nemocné.',
           'Při dobré snášenlivosti nabízej potravinu opakovaně a pravidelně. Za zavedenou ji považuj po třech expozicích bez reakce.',
           'Má-li dítě diagnostikovanou potravinovou alergii nebo ekzém, nebo jsou alergie v rodině, prober postup napřed s pediatrem.',

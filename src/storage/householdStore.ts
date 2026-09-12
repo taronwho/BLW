@@ -33,6 +33,8 @@ interface HouseholdStore {
   createHousehold(): Promise<string>;
   setChild(name: string, birthDate: string): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
+  updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
+  deleteTasting(id: string): Promise<void>;
   toggleFavorite(id: string): Promise<void>;
   setRecipeNote(recipeId: string, note: string): Promise<void>;
   importState(state: HouseholdState): Promise<void>;
@@ -178,6 +180,22 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       const full: TastingEvent = { ...event, id: newTastingId(), createdAt: Date.now() };
       // Append-only: nikdy nepřepisujeme, jen přidáváme (docs/SPEC.md kap. 7).
       await persist({ ...get().state, tastings: [...get().state.tastings, full] });
+    },
+
+    /**
+     * Úprava existujícího záznamu. `createdAt` se zvedne, aby při slučování
+     * vyhrála novější verze nad tou, kterou má druhé zařízení.
+     */
+    async updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void> {
+      const next = get().state.tastings.map((event) =>
+        event.id === id ? { ...event, ...patch, id, createdAt: Date.now() } : event,
+      );
+      await persist({ ...get().state, tastings: next });
+    },
+
+    /** Měkké smazání — záznam zůstává jako náhrobek, ať ho sync nevzkřísí. */
+    async deleteTasting(id: string): Promise<void> {
+      await get().updateTasting(id, { deleted: true });
     },
 
     async toggleFavorite(id: string): Promise<void> {

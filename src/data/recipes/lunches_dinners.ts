@@ -13,7 +13,7 @@ import {
 /**
  * Obědy a večeře. Každý recept vaří rodina jednou a rozdělí se na tři linie:
  * porce pro miminko (bez soli a dochucení), masitá pro otce s dítětem a bezmasá
- * pro matku. Zdroje se týkají techniky a bezpečnosti, ne samotného receptu.
+ * pro vegetariány v rodině. Zdroje se týkají techniky a bezpečnosti, ne samotného receptu.
  */
 export const lunchesDinners: Recipe[] = [
   {

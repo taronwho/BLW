@@ -1,7 +1,7 @@
 const KEY = 'blw.reviewed.v1';
 
 /**
- * Potvrzení „probráno s pediatričkou" u položek se stavem needs-review.
+ * Potvrzení „probráno s pediatrem" u položek se stavem needs-review.
  * Drží se jen v tomhle prohlížeči: je to poznámka rodiče, ne změna katalogu —
  * data v repozitáři zůstávají tím, čím jsou, a aplikace nikdy nepřepisuje
  * zdravotní informaci podle klepnutí v UI.

@@ -213,6 +213,11 @@ export interface TastingEvent {
   createdBy: string;
   /** pro řešení konfliktů */
   createdAt: number;
+  /**
+   * Měkké smazání. Záznam se nemaže z pole, jen se označí — jinak by ho
+   * druhé zařízení při slučování vzkřísilo (docs/SPEC.md kap. 7).
+   */
+  deleted?: boolean;
 }
 
 export interface HouseholdState {

@@ -42,9 +42,17 @@ export function suitableNow(ingredient: Ingredient, ageMonths: number | null): b
   return ingredient.minAgeMonths <= (ageMonths ?? 6);
 }
 
+/**
+ * Nesmazané ochutnávky. Smazaný záznam zůstává v poli jako náhrobek kvůli
+ * slučování mezi zařízeními, ale do UI ani do statistik nepatří.
+ */
+export function activeTastings(state: HouseholdState): TastingEvent[] {
+  return state.tastings.filter((event) => event.deleted !== true);
+}
+
 export function tastingsByIngredient(state: HouseholdState): Map<string, TastingEvent[]> {
   const map = new Map<string, TastingEvent[]>();
-  for (const event of state.tastings) {
+  for (const event of activeTastings(state)) {
     const list = map.get(event.ingredientId) ?? [];
     list.push(event);
     map.set(event.ingredientId, list);
@@ -56,10 +64,10 @@ export function tastingsByIngredient(state: HouseholdState): Map<string, Tasting
 }
 
 export function tastedIds(state: HouseholdState): Set<string> {
-  return new Set(state.tastings.map((event) => event.ingredientId));
+  return new Set(activeTastings(state).map((event) => event.ingredientId));
 }
 
-/** Reakce, které rodič hlásí pediatričce — kvůli nim se alergen nepočítá jako zavedený. */
+/** Reakce, které rodič hlásí pediatrovi — kvůli nim se alergen nepočítá jako zavedený. */
 const ADVERSE: ReadonlySet<string> = new Set(['kozni', 'travici', 'jina']);
 
 export function isAdverse(event: TastingEvent): boolean {

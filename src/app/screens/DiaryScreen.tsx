@@ -9,7 +9,7 @@ import type { TastingEvent } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { ageInMonths } from '../lib/age';
-import { isAdverse, suggestions, tastedIds } from '../lib/derive';
+import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
 
 /** Deník ochutnávek (docs/SPEC.md kap. 4.5). */
@@ -20,21 +20,21 @@ export function DiaryScreen(): ReactNode {
 
   const byDay = useMemo(() => {
     const map = new Map<string, TastingEvent[]>();
-    for (const event of state.tastings) {
+    for (const event of activeTastings(state)) {
       const list = map.get(event.date) ?? [];
       list.push(event);
       map.set(event.date, list);
     }
     return [...map.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
-  }, [state.tastings]);
+  }, [state]);
 
   const tasted = useMemo(() => tastedIds(state), [state]);
   const tips = useMemo(() => suggestions(state, months, month), [state, months, month]);
 
   const refused = useMemo(
     () =>
-      [...new Set(state.tastings.filter((event) => event.amount === 'odmitla').map((e) => e.ingredientId))],
-    [state.tastings],
+      [...new Set(activeTastings(state).filter((event) => event.amount === 'odmitla').map((e) => e.ingredientId))],
+    [state],
   );
   const favorites = state.favorites.filter((id) => ingredientById.has(id));
 
@@ -89,7 +89,7 @@ export function DiaryScreen(): ReactNode {
         </h2>
         <ul className="flex flex-col gap-2" data-testid="karta-alergenu">
           {KEY_ALLERGENS.map((allergen) => {
-            const events = state.tastings.filter((event) =>
+            const events = activeTastings(state).filter((event) =>
               ingredientById.get(event.ingredientId)?.allergens.includes(allergen),
             );
             const clean = events.filter((event) => !isAdverse(event));
@@ -108,7 +108,7 @@ export function DiaryScreen(): ReactNode {
         </ul>
         <p className="text-xs leading-relaxed text-muted">
           Zavedený = 3 a více expozic bez reakce. Aplikace nediagnostikuje alergii; při jakékoli
-          reakci se ptej pediatričky.
+          reakci se ptej pediatra.
         </p>
       </section>
 

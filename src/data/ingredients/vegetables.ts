@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  BP_BEETROOT,
   EFSA_NITRATE,
   EMA_FENNEL,
   MZCR_COMPLEMENTARY,
@@ -232,7 +233,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [7, 8, 9, 10, 11],
     vegetarian: true,
-    sources: [EFSA_NITRATE, NHS_FIRST_FOODS],
+    sources: [EFSA_NITRATE, BP_BEETROOT, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
   {
@@ -1400,7 +1401,7 @@ export const vegetables: Ingredient[] = [
     sources: [EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Ověřeno přímým načtením zdrojů 12. 9. 2026. Stránka EMA říká, že přípravky ze sladkého fenyklového plodu se používají od 4 let a mladším dětem se nedoporučují, protože o bezpečném užívání v této skupině není dost údajů; týká se to plodu, tedy i fenyklového čaje, ne zeleninové hlízy. Stránka EFSA k dusičnanům hodnotí špenát a hlávkový salát, o fenyklu nemluví. Druhé kolo hledání na bezpecnostpotravin.cz to nezměnilo: článek o dusičnanech v rukole vyjmenovává jako rostliny s vysokým obsahem dusičnanů hlávkový salát, špenát, kapustu, bílé zelí, ředkev a červenou řepu — fenykl mezi nimi není. Hazard `dusicnany` u fenyklové hlízy tedy vychází z docs/BEZPECNOST.md kap. 3, ne z měření v načteném zdroji, a je nastavený na stranu opatrnosti. Obojí zůstává otevřené: před pravidelným zařazením se zeptej pediatričky.',
+      'Ověřeno přímým načtením zdrojů 12. 9. 2026. Stránka EMA říká, že přípravky ze sladkého fenyklového plodu se používají od 4 let a mladším dětem se nedoporučují, protože o bezpečném užívání v této skupině není dost údajů; týká se to plodu, tedy i fenyklového čaje, ne zeleninové hlízy. Stránka EFSA k dusičnanům hodnotí špenát a hlávkový salát, o fenyklu nemluví. Druhé kolo hledání na bezpecnostpotravin.cz to nezměnilo: článek o dusičnanech v rukole vyjmenovává jako rostliny s vysokým obsahem dusičnanů hlávkový salát, špenát, kapustu, bílé zelí, ředkev a červenou řepu — fenykl mezi nimi není. Hazard `dusicnany` u fenyklové hlízy tedy vychází z docs/BEZPECNOST.md kap. 3, ne z měření v načteném zdroji, a je nastavený na stranu opatrnosti. Obojí zůstává otevřené: před pravidelným zařazením se zeptej pediatra.',
   },
   {
     id: 'chrest',
