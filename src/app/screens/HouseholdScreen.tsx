@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Download, KeyRound, Upload } from 'lucide-react';
+import { Baby, Download, KeyRound, ShieldAlert, Upload } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ingredients } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import {
   formatHouseholdCode,
@@ -14,35 +16,89 @@ import {
   parseFirebaseConfig,
   saveFirebaseConfig,
 } from '@/storage/firebaseConfig';
-import { QrCode } from './QrCode';
-import { SyncStatusBadge } from './SyncStatusBadge';
+import { QrCode } from '../QrCode';
+import { SyncStatusBadge } from '../SyncStatusBadge';
+import { ChokingLegend } from '../components/ChokingLegend';
+import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
+import { ageInMonths, formatAge } from '../lib/age';
 
-/**
- * Domácnost a nastavení (docs/SPEC.md kapitola 4.6) v rozsahu fáze 5:
- * párovací kód, QR, stav synchronizace, Firebase konfigurace a export dat.
- * Zbytek obrazovky doplní fáze 4.
- */
+/** Domácnost a nastavení (docs/SPEC.md kap. 4.6). */
 export function HouseholdScreen(): ReactNode {
-  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState } =
+  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState, setChild } =
     useHouseholdStore();
   const [codeInput, setCodeInput] = useState('');
   const [configInput, setConfigInput] = useState('');
   const [message, setMessage] = useState<string | null>(null);
   const [hasConfig, setHasConfig] = useState(false);
+  const [childName, setChildName] = useState('');
+  const [childBirthDate, setChildBirthDate] = useState('');
 
   useEffect(() => {
     void init();
     setHasConfig(loadFirebaseConfig() !== null);
   }, [init]);
 
+  useEffect(() => {
+    setChildName(state.childName);
+    setChildBirthDate(state.childBirthDate);
+  }, [state.childName, state.childBirthDate]);
+
   const pairingUrl =
-    householdCode === null ? null : householdPairingUrl(householdCode, window.location.origin + import.meta.env.BASE_URL);
+    householdCode === null
+      ? null
+      : householdPairingUrl(householdCode, window.location.origin + import.meta.env.BASE_URL);
+
+  const needsReview = ingredients.filter((item) => item.reviewStatus === 'needs-review');
+  const sourceCount = ingredients.reduce((sum, item) => sum + item.sources.length, 0);
+  const organizations = [...new Set(ingredients.flatMap((item) => item.sources.map((s) => s.org)))].sort();
 
   return (
     <section className="flex flex-col gap-5" aria-labelledby="domacnost-nadpis">
-      <h2 id="domacnost-nadpis" className="text-lg font-semibold">
+      <h1 id="domacnost-nadpis" className="text-xl font-bold">
         Domácnost
-      </h2>
+      </h1>
+
+      <form
+        className="flex flex-col gap-2 rounded-xl bg-surface p-4"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void setChild(childName.trim(), childBirthDate);
+          setMessage('Údaje o dceři uloženy.');
+        }}
+      >
+        <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
+          <Baby aria-hidden="true" className="h-4 w-4 shrink-0" />
+          Dcera
+        </h2>
+        <label htmlFor="jmeno" className="text-sm font-medium">
+          Jméno
+        </label>
+        <input
+          id="jmeno"
+          value={childName}
+          data-testid="jmeno-ditete"
+          onChange={(event) => setChildName(event.target.value)}
+          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
+        />
+        <label htmlFor="narozeni" className="text-sm font-medium">
+          Datum narození
+        </label>
+        <input
+          id="narozeni"
+          type="date"
+          value={childBirthDate}
+          data-testid="datum-narozeni"
+          onChange={(event) => setChildBirthDate(event.target.value)}
+          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
+        />
+        <p className="text-xs text-muted">
+          Podle data narození se předvybírá fáze 6m+ / 9m+ / 12m+ a filtr „Vhodné teď".
+          {state.childBirthDate.length > 0 && ` Teď: ${formatAge(ageInMonths(state.childBirthDate))}.`}
+        </p>
+        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">
+          Uložit
+        </button>
+      </form>
 
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />
@@ -60,10 +116,7 @@ export function HouseholdScreen(): ReactNode {
         ) : (
           <div className="flex flex-col items-center gap-3">
             <p className="text-xs uppercase tracking-wide text-muted">Párovací kód</p>
-            <p
-              data-testid="parovaci-kod"
-              className="font-mono text-2xl font-bold tracking-[0.2em]"
-            >
+            <p data-testid="parovaci-kod" className="font-mono text-2xl font-bold tracking-[0.2em]">
               {formatHouseholdCode(householdCode)}
             </p>
             {pairingUrl !== null && (
@@ -76,7 +129,7 @@ export function HouseholdScreen(): ReactNode {
             <button
               type="button"
               onClick={disconnect}
-              className="min-h-touch text-sm font-medium text-muted underline"
+              className="min-h-touch rounded-xl border border-muted/30 px-4 text-sm font-medium text-muted"
             >
               Odpojit tohle zařízení
             </button>
@@ -205,6 +258,47 @@ export function HouseholdScreen(): ReactNode {
           />
         </label>
       </div>
+
+      <section aria-labelledby="revize-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
+        <h2 id="revize-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
+          K revizi
+        </h2>
+        <p className="text-sm font-medium" data-testid="pocet-k-revizi">
+          {needsReview.length} položek čeká na ověření z {ingredients.length} surovin
+        </p>
+        <ul className="flex flex-col gap-1">
+          {needsReview.map((item) => (
+            <li key={item.id}>
+              <Link
+                to={`/suroviny/${item.id}`}
+                className="flex min-h-touch items-center rounded-lg text-sm font-medium text-accent"
+              >
+                {item.nameCz}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="zdroje-prehled" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
+        <h2
+          id="zdroje-prehled"
+          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
+        >
+          <ShieldAlert aria-hidden="true" className="h-4 w-4 shrink-0" />
+          Disclaimer a zdroje
+        </h2>
+        {DISCLAIMER_PARAGRAPHS.map((paragraph) => (
+          <p key={paragraph.slice(0, 24)} className="text-xs leading-relaxed text-muted">
+            {paragraph}
+          </p>
+        ))}
+        <p className="text-xs leading-relaxed text-muted">
+          Katalog se opírá o {sourceCount} odkazů od: {organizations.join(', ')}.
+        </p>
+      </section>
+
+      <ChokingLegend />
 
       {message !== null && (
         <p role="status" className="text-sm text-accent">

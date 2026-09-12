@@ -10,3 +10,6 @@ test-results
 coverage
 .DS_Store
 .vscode
+
+# screenshoty z Playwrightu
+tests/e2e/screenshots
