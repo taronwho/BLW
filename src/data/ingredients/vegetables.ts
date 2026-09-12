@@ -678,7 +678,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [6, 7, 8, 9, 10, 11],
     vegetarian: true,
-    sources: [NHS_AVOID, MZCR_COMPLEMENTARY],
+    sources: [NHS_AVOID, NHS_VEGETARIAN, MZCR_COMPLEMENTARY],
     reviewStatus: 'verified',
   },
   {
@@ -945,7 +945,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej.',
+        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej — rozmixování přeměnu dusičnanů na dusitany urychluje. Dítěti se střevní infekcí špenát podle EFSA nedávej vůbec.',
     },
     minAgeMonths: 6,
     prep: {
@@ -988,7 +988,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Mangold je listová zelenina s vyšším obsahem dusičnanů, na které EFSA u malých dětí upozorňuje. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
+        'Mangold je listová zelenina, kterou docs/BEZPECNOST.md vede mezi zdroji dusičnanů; hodnocení EFSA se týká špenátu a hlávkového salátu, mangold v něm není. Zařazuj ho proto z opatrnosti střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1031,7 +1031,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Rukola patří mezi listovou zeleninu s nejvyšším obsahem dusičnanů, na kterou EFSA u malých dětí upozorňuje. Podávej ji jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
+        'Rukolu vede docs/BEZPECNOST.md mezi listovou zeleninou s vyšším obsahem dusičnanů; načtené hodnocení EFSA se týká špenátu a hlávkového salátu, rukolu nehodnotí. Podávej ji proto z opatrnosti jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1400,7 +1400,7 @@ export const vegetables: Ingredient[] = [
     sources: [EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
     reviewStatus: 'needs-review',
     reviewNote:
-      'EMA nedoporučuje léčivé přípravky ze sladkého fenyklového plodu dětem do 4 let, protože o jejich bezpečnosti v této skupině není dost dat. Týká se to plodu, tedy i fenyklového čaje — ne zeleninové hlízy. Zda se má omezení vztáhnout i na hlízu, se načteným zdrojem doložit nepodařilo. Nepodařilo se dohledat ani měření dusičnanů přímo u fenyklu; dostupné hodnocení EFSA se týká špenátu a salátu. Před pravidelným zařazením se zeptej pediatričky.',
+      'Ověřeno přímým načtením zdrojů 12. 9. 2026. Stránka EMA říká, že přípravky ze sladkého fenyklového plodu se používají od 4 let a mladším dětem se nedoporučují, protože o bezpečném užívání v této skupině není dost údajů; týká se to plodu, tedy i fenyklového čaje, ne zeleninové hlízy. Stránka EFSA k dusičnanům hodnotí špenát a hlávkový salát, o fenyklu nemluví. Druhé kolo hledání na bezpecnostpotravin.cz to nezměnilo: článek o dusičnanech v rukole vyjmenovává jako rostliny s vysokým obsahem dusičnanů hlávkový salát, špenát, kapustu, bílé zelí, ředkev a červenou řepu — fenykl mezi nimi není. Hazard `dusicnany` u fenyklové hlízy tedy vychází z docs/BEZPECNOST.md kap. 3, ne z měření v načteném zdroji, a je nastavený na stranu opatrnosti. Obojí zůstává otevřené: před pravidelným zařazením se zeptej pediatričky.',
   },
   {
     id: 'chrest',

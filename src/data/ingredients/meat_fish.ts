@@ -9,6 +9,7 @@ import {
   NHS_PREP_SAFELY,
   NHS_VITAMIN_A,
   NHS_YOUNG_CHILDREN,
+  SZU_FIRST_SPOON,
   WHO_COMPLEMENTARY,
 } from './_sources';
 
@@ -146,7 +147,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_6M, MZCR_COMPLEMENTARY],
+    sources: [NHS_6M, MZCR_COMPLEMENTARY, SZU_FIRST_SPOON],
     reviewStatus: 'verified',
   },
   {
@@ -317,7 +318,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_6M, MZCR_COMPLEMENTARY],
+    sources: [NHS_6M, MZCR_COMPLEMENTARY, SZU_FIRST_SPOON],
     reviewStatus: 'verified',
   },
   {
@@ -446,7 +447,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_PREP_SAFELY, MZCR_COMPLEMENTARY],
+    sources: [NHS_PREP_SAFELY, MZCR_COMPLEMENTARY, SZU_FIRST_SPOON],
     reviewStatus: 'verified',
   },
   {

@@ -1,5 +1,7 @@
 import type { Ingredient } from '@/types';
 import {
+  BP_CINNAMON,
+  BP_COUMARIN_EFSA,
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
   NHS_6M,
@@ -642,17 +644,17 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, aniž bys jídlo musela sladit. Vybírej cejlonskou, protože běžná kasie obsahuje víc kumarinu, jehož příjem se u dětí sleduje.',
+          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, aniž bys jídlo musela sladit. Cejlonskou vybírej záměrně: běžná kasie obsahuje až 4 g kumarinu na kilogram, cejlonská skořice výrazně méně. Tolerovatelný denní příjem kumarinu je 0,1 mg na kilogram tělesné hmotnosti, takže u malého dítěte je to opravdu jen špetka.',
         caution: 'Skořicovou tyčinku v jídle nenechávej, je tvrdá.',
       },
       '9m': {
         serving:
-          'Skořice se hodí k jablkům, k hruškám, k dýni i do ovesné kaše. Vůně přitom dělá velkou část chuťového zážitku, takže dcera vnímá jídlo jako sladší, než ve skutečnosti je.',
+          'Skořice se hodí k jablkům, k hruškám, k dýni i do ovesné kaše. Vůně přitom dělá velkou část chuťového zážitku, takže dcera vnímá jídlo jako sladší, než ve skutečnosti je. Kaše a cereálie ochucené skořicí ale nedávej denně, doporučení zní nejvýše jednou týdně.',
         caution: 'Levná mletá skořice bývá kasie, čti původ na obalu.',
       },
       '12m': {
         serving:
-          'Batole jí skořici v kaši, v pečení i v kompotu. Používej ji po špetkách, protože kumarin se v těle kumuluje a u malých dětí se s velkými dávkami zbytečně nepracuje.',
+          'Batole jí skořici v kaši, v pečení i v kompotu, pořád ale po špetkách a spíš jednou za týden než denně. Děti jsou ke kumarinu citlivější než dospělí prostě proto, že váží míň. Cejlonská skořice má kumarinu málo, zato víc eugenolu, jehož přípustný denní příjem je 2,5 mg na kilogram tělesné hmotnosti — i proto zůstaň u koření na dochucení.',
         caution: 'Skořicové bonbony a nápoje obsahují hodně sladké složky.',
       },
     },
@@ -664,10 +666,8 @@ export const herbsSpices: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Konkrétní bezpečný denní příjem kumarinu u kojenců se v této session nepodařilo dohledat v tier 1 zdroji, který by šlo načíst. Doporučení „používej po špetkách a vybírej cejlonskou" je proto vedeno jako obecná opatrnost, ne jako ověřený limit. Před stanovením pravidelné denní dávky se zeptej pediatričky.',
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, BP_CINNAMON, BP_COUMARIN_EFSA],
+    reviewStatus: 'verified',
   },
   {
     id: 'kurkuma',

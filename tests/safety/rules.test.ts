@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { COVERAGE_EXCEPTIONS } from '../../src/safety/coverage-exceptions';
 import { safetyRules } from '../../src/safety/rules';
 import { runSafetyRules } from '../../src/safety/run';
 import {
@@ -527,6 +528,41 @@ describe('length-sanity', () => {
   });
 });
 
+describe('ingredient-coverage', () => {
+  it('projde surovina, která je složkou některého receptu', () => {
+    expectPass('ingredient-coverage', makeCarrot(), catalog);
+  });
+
+  it('zachytí surovinu, na kterou se neodkazuje žádný recept', () => {
+    const orphan = makeIngredient({
+      id: 'topinambur',
+      nameCz: 'Topinambur',
+      altNamesCz: ['slunecnice hliznata'],
+    });
+    const message = expectFail(
+      'ingredient-coverage',
+      orphan,
+      makeCatalog({ ingredients: [orphan] }),
+    );
+    expect(message).toContain('není složkou žádného receptu');
+  });
+
+  it('nechá projít surovinu uvedenou ve výjimkách i bez receptu', () => {
+    const drink = makeIngredient({
+      id: 'detsky-caj-bez-cukru',
+      nameCz: 'Dětský čaj bez cukru',
+      altNamesCz: ['caj pro deti'],
+    });
+    expectPass('ingredient-coverage', drink, makeCatalog({ ingredients: [drink] }));
+  });
+
+  it('každá výjimka má neprázdný důvod', () => {
+    for (const [id, reason] of Object.entries(COVERAGE_EXCEPTIONS)) {
+      expect(reason.trim().length, `Výjimka ${id} nemá důvod.`).toBeGreaterThan(0);
+    }
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -550,6 +586,7 @@ describe('pokrytí pravidel', () => {
       'duplicate-detection',
       'text-uniqueness',
       'length-sanity',
+      'ingredient-coverage',
     ];
     expect(safetyRules.map((rule) => rule.id)).toEqual(expected);
   });

@@ -486,9 +486,11 @@ export const dairyEggs: Ingredient[] = [
     chokingRisk: 'medium',
     chokingReason:
       'Ementál je tvrdý a pružný zároveň, ukousnutý kus si drží tvar a jeho hladké stěny se v hrdle nezachytí o nic.',
-    hazards: ['sul'],
+    hazards: ['sul', 'nepasterizovane'],
     hazardNotes: {
       sul: 'Ementál je dlouho zrající tvrdý sýr a jeho obsah soli je vyšší než u čerstvých sýrů. Pro dítě do prvního roku ho používej jen nastrouhaný jako dochucení, ne jako samostatnou porci.',
+      nepasterizovane:
+        'Švýcarský Emmentaler AOP se vyrábí ze syrového mléka, zatímco běžný ementál z českých mlékáren bývá z pasterizovaného. NHS sýry z nepasterizovaného mléka malým dětem nedoporučuje, takže si druh ověř na obalu a při pochybnosti sýr do jídla zapeč.',
     },
     minAgeMonths: 6,
     prep: {
@@ -530,9 +532,11 @@ export const dairyEggs: Ingredient[] = [
     chokingRisk: 'medium',
     chokingReason:
       'Parmazán se láme na tvrdé ostré úlomky s hranami, které dásně nerozdrtí a které se zabodnou do sliznice.',
-    hazards: ['sul'],
+    hazards: ['sul', 'nepasterizovane'],
     hazardNotes: {
       sul: 'Parmazán je jedním z nejslanějších sýrů vůbec, protože zraje v solné lázni dlouhé měsíce. Pro dítě do prvního roku platí, že se používá jen jako špetka nastrouhaného sýra na dochucení, ne jako složka porce.',
+      nepasterizovane:
+        'Parmigiano Reggiano se podle své receptury vyrábí ze syrového mléka a NHS doporučuje sýry z nepasterizovaného mléka malým dětem nedávat kvůli listeriím. Před nákupem si tedy na obalu ověř, že jde o sýr z pasterizovaného mléka; pokud to na etiketě není, nech ho jen pro dospělé nebo ho použij zapečený v hotovém pokrmu.',
     },
     minAgeMonths: 6,
     prep: {
@@ -574,9 +578,11 @@ export const dairyEggs: Ingredient[] = [
     chokingRisk: 'medium',
     chokingReason:
       'Pecorino je velmi tvrdý ovčí sýr, jehož odlomený kus zůstane v ústech celý a jeho hrany jsou ostré jako u parmazánu.',
-    hazards: ['sul'],
+    hazards: ['sul', 'nepasterizovane'],
     hazardNotes: {
       sul: 'Pecorino romano patří mezi nejslanější sýry na trhu, sůl je u něj součástí technologie zrání. Pro dítě do prvního roku se hodí nanejvýš jako špetka na dochucení hotového jídla.',
+      nepasterizovane:
+        'Pecorino romano se tradičně vyrábí ze syrového ovčího mléka a NHS sýry z nepasterizovaného mléka malým dětem nedoporučuje. Na obalu si proto ověř pasterizaci; sýr bez tohoto údaje dceři nedávej nastrouhaný nastudeno, jen tepelně zpracovaný v pokrmu.',
     },
     minAgeMonths: 6,
     prep: {
@@ -618,9 +624,11 @@ export const dairyEggs: Ingredient[] = [
     chokingRisk: 'medium',
     chokingReason:
       'Grana padano má zrnitou strukturu, která se při ukousnutí rozpadne na tvrdé krystalické kousky s ostrými hranami.',
-    hazards: ['sul'],
+    hazards: ['sul', 'nepasterizovane'],
     hazardNotes: {
       sul: 'Grana padano zraje v solné lázni podobně jako parmazán, takže je také výrazně slaný. Pro dítě do prvního roku ho používej jen jako nastrouhané dochucení, nikdy jako samostatné sousto.',
+      nepasterizovane:
+        'Grana padano se vyrábí ze syrového mléka stejně jako parmazán a NHS doporučuje sýry z nepasterizovaného mléka malým dětem vynechat. Zkontroluj etiketu a bez údaje o pasterizaci ho použij jen zapečený, ne nastrouhaný na hotové jídlo.',
     },
     minAgeMonths: 6,
     prep: {

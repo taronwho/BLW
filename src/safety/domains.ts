@@ -9,8 +9,13 @@ export const TIER1_DOMAINS: readonly string[] = [
   'efsa.europa.eu',
   'ema.europa.eu',
   'pediatrics.cz',
+  // Stará i nová doména SZÚ a Ministerstva zdravotnictví — instituce se
+  // nezměnily, jen přešly na `gov.cz`. Staré domény zůstávají, ať projdou
+  // dříve ověřené odkazy.
   'szu.cz',
+  'szu.gov.cz',
   'mzcr.cz',
+  'mzd.gov.cz',
   'bezpecnostpotravin.cz',
   'nhs.uk',
   'eaaci.org',
