@@ -1,6 +1,7 @@
 import type { Ingredient } from '@/types';
 import {
   BP_COMPLEMENTARY,
+  BP_RAW_BEANS,
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
   NHS_6M,
@@ -18,6 +19,11 @@ import {
  * Luštěniny jsou pro bezmasou linii hlavním zdrojem bílkovin a železa.
  * Fazole kidney nese hazard `syrove` kvůli nutnosti důkladného provaření,
  * uzené tofu hazard `sul` a minAgeMonths 12.
+ *
+ * Konkrétní časy namáčení a varu u fazolí a hrachu vycházejí z doporučení
+ * FSAI přetištěného na bezpecnostpotravin.cz (`BP_RAW_BEANS`), které bylo
+ * načtené 12. 9. 2026: sušené fazole namáčet nejméně 12 hodin, namáčecí
+ * vodu slít a vařit nejméně 30 minut prudkým varem.
  */
 export const legumes: Ingredient[] = [
   {
@@ -179,7 +185,7 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_VEGETARIAN, NHS_7_9M],
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, NHS_7_9M],
     reviewStatus: 'verified',
   },
   {
@@ -221,7 +227,7 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_VEGETARIAN, WHO_COMPLEMENTARY],
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, WHO_COMPLEMENTARY],
     reviewStatus: 'verified',
   },
   {
@@ -238,13 +244,13 @@ export const legumes: Ingredient[] = [
     hazards: ['syrove'],
     hazardNotes: {
       syrove:
-        'Syrové a nedostatečně provařené červené fazole obsahují přirozenou látku, která vyvolává zvracení a průjem. Fazole proto vždy namoč nejméně osm hodin, vodu slij a vař je v čerstvé vodě prudkým varem, dokud nejsou úplně měkké. Pomalé vaření při nízké teplotě nestačí.',
+        'Syrové a nedostatečně provařené fazole obsahují lektiny, které způsobují zvracení a průjem. Podle doporučení FSAI namoč sušené fazole nejméně dvanáct hodin, namáčecí vodu slij a v čerstvé vodě je vař prudkým varem nejméně třicet minut. Pomalé vaření při nízké teplotě nestačí; fazole z konzervy jsou už provařené.',
     },
     minAgeMonths: 6,
     prep: {
       '6m': {
         serving:
-          'Fazole po namočení a slití vody prudce vař a pak je protlač přes sítko na hladké pyré. Do dětské porce nikdy nedávej fazoli, která nejde rozmáčknout mezi dvěma prsty bez odporu.',
+          'Fazole po dvanáctihodinovém namočení a slití vody vař prudkým varem nejméně třicet minut a pak je protlač přes sítko na hladké pyré. Do dětské porce nikdy nedávej fazoli, která nejde rozmáčknout mezi dvěma prsty bez odporu.',
         caution: 'Namáčecí vodu vždy slij, nikdy v ní nevař.',
       },
       '9m': {
@@ -259,14 +265,14 @@ export const legumes: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'namočené, prudce vařené a protlačené',
+      'namočené 12 hodin, vařené 30 minut a protlačené',
       'rozmačkané do rajčatové omáčky',
       'bezmasé chilli bez pálivého koření',
       'zapečené s kukuřicí a paprikou',
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_VEGETARIAN],
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN],
     reviewStatus: 'verified',
   },
   {
@@ -306,7 +312,7 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_VEGETARIAN, WHO_COMPLEMENTARY],
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, WHO_COMPLEMENTARY],
     reviewStatus: 'verified',
   },
   {
@@ -428,7 +434,7 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_VEGETARIAN, NHS_6M],
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, NHS_6M],
     reviewStatus: 'verified',
   },
   {

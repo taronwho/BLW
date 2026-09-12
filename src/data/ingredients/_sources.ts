@@ -220,6 +220,20 @@ export const BP_COMPLEMENTARY: SourceRef = {
   tier: 1,
 };
 
+/**
+ * Lektiny v syrových a nedostatečně provařených fazolích: namáčení nejméně
+ * 12 hodin, slití namáčecí vody, var nejméně 30 minut. Konzervované fazole
+ * jsou už provařené.
+ */
+export const BP_RAW_BEANS: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title:
+    'FSAI: Preventivní doporučení ohledně konzumace tepelně neupravených nebo syrových fazolí',
+  url: 'https://bezpecnostpotravin.cz/fsai-preventivni-doporuceni-ohledne-konzumace-tepelne-neupravenych-nebo-syrovych-fazoli/',
+  accessedAt: FETCHED,
+  tier: 1,
+};
+
 /** Metodický manuál podpory kojení. */
 export const SZU_BREASTFEEDING: SourceRef = {
   org: 'Státní zdravotní ústav',
