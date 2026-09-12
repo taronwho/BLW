@@ -5,6 +5,7 @@ import { extras } from './extras';
 import { lunchesDinners } from './lunches_dinners';
 import { lunchesDinners2 } from './lunches_dinners_2';
 import { snacksBaking } from './snacks_baking';
+import { snacksBaking2 } from './snacks_baking_2';
 import { soups } from './soups';
 import { soups2 } from './soups_2';
 
@@ -19,6 +20,7 @@ export const recipes: Recipe[] = [
   ...soups,
   ...soups2,
   ...snacksBaking,
+  ...snacksBaking2,
   ...extras,
 ];
 
