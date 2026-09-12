@@ -9,7 +9,9 @@ Aplikace nedává lékařská doporučení. Shromažďuje obecně dostupná dopo
 ### Povolené domény pro `SourceRef`
 
 **Tier 1 — odborné společnosti a úřady:**
-`who.int`, `espghan.org`, `efsa.europa.eu`, `ema.europa.eu`, `pediatrics.cz` (Česká pediatrická společnost ČLS JEP), `szu.cz`, `mzcr.cz`, `bezpecnostpotravin.cz`, `nhs.uk` (vč. `nhs.uk/start-for-life`), `eaaci.org`, `cpzp.cz` není přípustné (pojišťovna, ne odborná společnost).
+`who.int`, `espghan.org`, `efsa.europa.eu`, `ema.europa.eu`, `pediatrics.cz` (Česká pediatrická společnost ČLS JEP), `szu.cz` a `szu.gov.cz` (Státní zdravotní ústav), `mzcr.cz` a `mzd.gov.cz` (Ministerstvo zdravotnictví), `bezpecnostpotravin.cz`, `nhs.uk` (vč. `nhs.uk/start-for-life`), `eaaci.org`, `cpzp.cz` není přípustné (pojišťovna, ne odborná společnost).
+
+SZÚ i Ministerstvo zdravotnictví přešly na domény pod `gov.cz`. Jde o tytéž instituce, proto jsou nové domény v tier 1 stejně jako staré; staré zůstávají v seznamu, aby prošly dříve ověřené odkazy, které ještě nebyly přesměrovány.
 
 **Tier 2 — důvěryhodné odborné publikace a projekty:**
 `kojeni.cz` (Laktační liga), `vyzivadeti.cz`, `solidstarts.com` (jen pro tvary porcí a rizika dušení), `healthychildren.org` (AAP), `nutricia.cz` a `hipp.cz` **nejsou** přípustné (výrobci).

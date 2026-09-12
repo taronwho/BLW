@@ -11,24 +11,18 @@ import type { SourceRef } from '@/types';
  * vyhledávačem. Datum u zdroje zvyšuj jen tehdy, když jsi stránku sám znovu
  * načetl.
  *
- * DVĚ VÝJIMKY, které se načíst nepodařilo:
+ * ZBÝVAJÍCÍ VÝJIMKA: články EFSA Journal (`/en/efsajournal/pub/<číslo>`) dnes
+ * přesměrovávají na `efsa.onlinelibrary.wiley.com`, tedy mimo povolené domény.
+ * Proto se u arsenu cituje tisková zpráva a shrnutí, které EFSA hostuje na
+ * vlastní doméně — obojí bylo načtené.
  *
- * 1. `MZCR_COMPLEMENTARY` — `www.mzcr.cz` odpovídá `301` na `mzd.gov.cz`.
- *    Ministerstvo zdravotnictví přešlo na doménu `mzd.gov.cz`, kterou
- *    docs/BEZPECNOST.md zatím nemá v seznamu povolených domén. Odkaz proto
- *    zůstává na původní adrese a s původním datem ověření; nezvyšuj ho,
- *    dokud se dokument nedá načíst.
- * 2. Články EFSA Journal (`/en/efsajournal/pub/<číslo>`) dnes přesměrovávají
- *    na `efsa.onlinelibrary.wiley.com`, tedy mimo povolené domény. Proto se
- *    u arsenu cituje tisková zpráva a shrnutí, které EFSA hostuje na vlastní
- *    doméně — obojí bylo načtené.
- *
- * Totéž platí o `szu.cz`: kořen domény přesměrovává na `szu.gov.cz`, ale
- * `epoz.szu.cz` (kde leží citovaný manuál) odpovídá a byl načtený.
+ * VYŘEŠENO 12. 9. 2026: Ministerstvo zdravotnictví i SZÚ přešly na domény pod
+ * `gov.cz`. Obě jsou doplněné do docs/BEZPECNOST.md kap. 1 a do
+ * `TIER1_DOMAINS`. Původní adresa dokumentu ministerstva
+ * (`/Odbornik/dokumenty/…_7542_1154_3.html`) vrací i na nové doméně `404`;
+ * dokument je dnes na `mzd.gov.cz/doporuceni-k-zavadeni-komplementarni-vyzivy-prikrmuu-kojencu/`
+ * a byl v téhle session stažený a přečtený celý.
  */
-
-/** Datum ověření zdrojů, které se v této session nepodařilo načíst. */
-const UNVERIFIED_TODAY = '2026-09-11';
 
 /** Datum, kdy byl zdroj skutečně stažen a přečten (curl, HTTP 200). */
 const FETCHED = '2026-09-12';
@@ -187,18 +181,29 @@ export const WHO_IYCF: SourceRef = {
 };
 
 /**
- * České doporučení k zavádění příkrmu.
+ * České doporučení k zavádění příkrmu, stanovisko Pracovní skupiny
+ * Ministerstva zdravotnictví pro výživu dětí.
  *
- * POZOR: tuhle adresu se v této session načíst nepodařilo — `www.mzcr.cz`
- * vrací `301` na `mzd.gov.cz`, což je nová doména ministerstva a
- * docs/BEZPECNOST.md ji zatím mezi povolenými nemá. Datum ověření proto
- * zůstává na dřívějším a nezvyšuj ho, dokud dokument sám nenačteš.
+ * ROZSAH DOKUMENTU — cituj ho jen na tvrzení, která v něm opravdu jsou:
+ * - výlučné kojení do ukončeného 6. měsíce, kojení s příkrmem do 2 let i déle;
+ * - příkrm zavádět nejpozději po ukončeném 6. měsíci (180 dní, 26. týden)
+ *   a ne před ukončeným 4. měsícem (17 týdnů) — tohle je opora pro
+ *   `minAgeMonths: 6` u běžných surovin;
+ * - zvláštní postup u dětí narozených před 37., resp. 35. týdnem;
+ * - podmínkou je vývojová zralost (stabilní hlava, koordinace oko–ruka–ústa,
+ *   polykání a tolerance tuhé stravy);
+ * - lepek zavést nejpozději do ukončeného 7. měsíce, optimálně ještě při kojení;
+ * - u dětí s vysokým rizikem alergie zavádět po jedné potravině a sledovat reakci.
+ *
+ * Dokument NEŘEŠÍ jednotlivé suroviny, sůl, cukr, dušení, textury ani
+ * kontaminanty. Na tyhle věci ho necituj — patří k nim NHS, WHO, EFSA
+ * a bezpecnostpotravin.cz.
  */
 export const MZCR_COMPLEMENTARY: SourceRef = {
   org: 'Ministerstvo zdravotnictví ČR',
   title: 'Doporučení k zavádění komplementární výživy (příkrmu) u kojenců',
-  url: 'https://www.mzcr.cz/Odbornik/dokumenty/doporuceni-k-zavadeni-komplementarni-vyzivyprikrmu-u-kojencu_7542_1154_3.html',
-  accessedAt: UNVERIFIED_TODAY,
+  url: 'https://mzd.gov.cz/doporuceni-k-zavadeni-komplementarni-vyzivy-prikrmuu-kojencu/',
+  accessedAt: FETCHED,
   tier: 1,
 };
 
