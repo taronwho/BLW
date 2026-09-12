@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { recipes } from '@/data';
 import { acceptDisclaimer, horizontalOverflow, SCREENS, tooSmallTargets } from './helpers';
 
 /**
@@ -150,12 +151,16 @@ test('filtry receptů: jen vegetariánské a čas do 20 minut', async ({ page })
   await acceptDisclaimer(page);
   await page.getByRole('link', { name: 'Recepty' }).click();
 
+  // Počet se bere z katalogu, ne z natvrdo psaného čísla — jinak test
+  // zastará při každé další dávce receptů. Tvrzení zůstává stejné:
+  // nefiltrovaný seznam ukazuje všechny recepty, po filtru je jich míň.
+  const vsechny = `${recipes.length} z ${recipes.length}`;
   const count = page.getByTestId('pocet-receptu');
-  await expect(count).toContainText('80 z 80');
+  await expect(count).toContainText(vsechny);
 
   await page.getByTestId('filtr-vegetarianske').click();
   await expect(page.getByTestId('filtr-vegetarianske')).toHaveAttribute('aria-pressed', 'true');
-  await expect(count).not.toContainText('80 z 80');
+  await expect(count).not.toContainText(vsechny);
 
   await page.getByTestId('filtr-casu').getByTestId('chip-20').click();
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();
