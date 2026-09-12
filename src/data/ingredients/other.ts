@@ -42,7 +42,7 @@ export const other: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Hrnek s vodou dávej ke každému jídlu na dosah, dcera se ho naučí zvedat sama. Rozlévání je součást učení, prostři proto pod židli utěrku a neřeš to.',
+          'Hrnek s vodou dávej ke každému jídlu na dosah, dítě se ho naučí zvedat samo. Rozlévání je součást učení, prostři proto pod židli utěrku a neřeš to.',
         caution: 'Slazené nápoje ani šťávy z ovoce do jídelníčku nepatří.',
       },
       '12m': {
@@ -157,12 +157,12 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Droždí se nepodává samostatně, používá se k nakynutí těsta, které se potom upeče. Domácí kynuté pečivo bez soli je pro dceru lepší volbou než rohlík z pekárny.',
-        caution: 'Syrové kynuté těsto dceři nedávej, kvasinky v něm dál pracují.',
+          'Droždí se nepodává samostatně, používá se k nakynutí těsta, které se potom upeče. Domácí kynuté pečivo bez soli je pro dítě lepší volbou než rohlík z pekárny.',
+        caution: 'Syrové kynuté těsto dítěti nedávej, kvasinky v něm dál pracují.',
       },
       '9m': {
         serving:
-          'Z droždí, mouky a vody upeč měkké housky bez soli, které dcera uchopí do ruky. Domácí pečivo vydrží měkké jen den, proto ho peč v menším množství a zbytek zamraz.',
+          'Z droždí, mouky a vody upeč měkké housky bez soli, které dítě uchopí do ruky. Domácí pečivo vydrží měkké jen den, proto ho peč v menším množství a zbytek zamraz.',
         caution: 'Čerstvé droždí vydrží v lednici jen pár dní.',
       },
       '12m': {
@@ -365,7 +365,7 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jablečný ocet používej jen jako kuchyňskou kyselou složku, tedy pár kapek do hotového jídla nebo do těsta. Samotný ocet ani ocet ve vodě dceři nikdy nedávej, dráždí sliznici.',
+          'Jablečný ocet používej jen jako kuchyňskou kyselou složku, tedy pár kapek do hotového jídla nebo do těsta. Samotný ocet ani ocet ve vodě dítěti nikdy nedávej, dráždí sliznici.',
         caution: 'Ocet jako domácí lék pro kojence nepoužívej vůbec.',
       },
       '9m': {
@@ -376,7 +376,7 @@ export const other: Ingredient[] = [
       '12m': {
         serving:
           'Batole jí jídla s octem v zálivce, v luštěninách i v pečení. Používej ho v množství, které chuť jen podtrhne, ne aby jídlo bylo kyselé na první ochutnání.',
-        caution: 'Po kyselém jídle nech odstup, než dceři vyčistíš zoubky.',
+        caution: 'Po kyselém jídle nech odstup, než dítěti vyčistíš zoubky.',
       },
     },
     prepIdeas: [
@@ -410,7 +410,7 @@ export const other: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Škrobem zahusť ovocné pyré nebo mléko na domácí pudink bez sladidel. Hustší strukturu dcera nabere lžící lépe než řídkou, takže zahuštění pomáhá i při učení jíst samostatně.',
+          'Škrobem zahusť ovocné pyré nebo mléko na domácí pudink bez sladidel. Hustší strukturu dítě nabere lžící lépe než řídkou, takže zahuštění pomáhá i při učení jíst samostatně.',
         caution: 'Škrob sám o sobě nemá výživovou hodnotu, nepřeháněj to.',
       },
       '12m': {

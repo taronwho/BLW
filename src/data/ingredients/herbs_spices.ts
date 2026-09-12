@@ -38,7 +38,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Petrželku nasekej co nejjemněji a vmíchej ji do hotového pyré nebo do kaše. Dodá jídlu svěží chuť, takže se dcera učí rozeznávat i jinou chuť než sladkou, aniž bys jídlo solila.',
+          'Petrželku nasekej co nejjemněji a vmíchej ji do hotového pyré nebo do kaše. Dodá jídlu svěží chuť, takže se dítě učí rozeznávat i jinou chuť než sladkou, aniž bys jídlo solila.',
         caution: 'Přidávej ji až na konec, varem ztrácí vůni i vitamin C.',
       },
       '9m': {
@@ -78,12 +78,12 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Pažitku stříhej nůžkami na krátké kousky, dlouhá stébla by se dceři motala v ústech. Jemná cibulová chuť se dobře snáší s tvarohem i s vařeným bramborem a nahrazuje dochucení solí.',
+          'Pažitku stříhej nůžkami na krátké kousky, dlouhá stébla by se dítěti motala v ústech. Jemná cibulová chuť se dobře snáší s tvarohem i s vařeným bramborem a nahrazuje dochucení solí.',
         caution: 'Stébla stříhej opravdu nakrátko, dlouhá se lepí na patro.',
       },
       '9m': {
         serving:
-          'Nastříhanou pažitkou posyp vajíčka, tvaroh nebo dušenou zeleninu. Dcera si tím rozšiřuje chuťový rejstřík o jemně ostrou chuť, která je předstupněm k cibuli a česneku.',
+          'Nastříhanou pažitkou posyp vajíčka, tvaroh nebo dušenou zeleninu. Dítě si tím rozšiřuje chuťový rejstřík o jemně ostrou chuť, která je předstupněm k cibuli a česneku.',
         caution: 'Pažitka po nastříhání rychle vadne, použij ji hned.',
       },
       '12m': {
@@ -118,7 +118,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kopr nasekej najemno a přidej ho do bílé omáčky nebo do bramborového pyré. Jeho výrazná vůně je pro dceru nová a pomáhá jí přijmout, že jídlo nemusí být vždy chuťově neutrální.',
+          'Kopr nasekej najemno a přidej ho do bílé omáčky nebo do bramborového pyré. Jeho výrazná vůně je pro dítě nová a pomáhá jí přijmout, že jídlo nemusí být vždy chuťově neutrální.',
         caution: 'Tvrdé stonky odstraň, používej jen jemné listy.',
       },
       '9m': {
@@ -158,12 +158,12 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Bazalkové listy natrhej na malé kousky a vmíchej je do rajčatové omáčky nebo do zeleninového pyré. Celý velký list dceři nedávej, ve vlhku se v ústech slepí do jednoho kusu.',
+          'Bazalkové listy natrhej na malé kousky a vmíchej je do rajčatové omáčky nebo do zeleninového pyré. Celý velký list dítěti nedávej, ve vlhku se v ústech slepí do jednoho kusu.',
         caution: 'Listy natrhej rukou, nožem zčernají.',
       },
       '9m': {
         serving:
-          'Natrhanou bazalku přidej do hotových těstovin nebo na pečenou zeleninu. Voní intenzivně a dcera si podle vůně jídlo zařadí ještě dřív, než ho ochutná.',
+          'Natrhanou bazalku přidej do hotových těstovin nebo na pečenou zeleninu. Voní intenzivně a dítě si podle vůně jídlo zařadí ještě dřív, než ho ochutná.',
         caution: 'Bazalka se vařením rozpadne, přidávej ji na konci.',
       },
       '12m': {
@@ -283,7 +283,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Majoránka patří do bramborové polévky, do čočky i do zelných pokrmů. Právě díky ní bude jídlo pro dceru chutnat povědomě, i když ho vaříš úplně bez soli.',
+          'Majoránka patří do bramborové polévky, do čočky i do zelných pokrmů. Právě díky ní bude jídlo pro dítě chutnat povědomě, i když ho vaříš úplně bez soli.',
         caution: 'Do jídla ji přidej ke konci vaření, jinak vyprchá.',
       },
       '12m': {
@@ -320,7 +320,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Rozmarýn používej tak, že celou větvičku přidáš při vaření a před podáním ji vyndáš. Jehličky pro dceru nesekej, ani nasekané zůstávají tvrdé a ostré.',
+          'Rozmarýn používej tak, že celou větvičku přidáš při vaření a před podáním ji vyndáš. Jehličky pro dítě nesekej, ani nasekané zůstávají tvrdé a ostré.',
         caution: 'Zkontroluj, že v jídle nezůstala žádná jehlička.',
       },
       '9m': {
@@ -361,7 +361,7 @@ export const herbsSpices: Ingredient[] = [
       '6m': {
         serving:
           'Šalvěj má velmi výraznou chuť, proto z ní použij jen jeden malý list na celou porci. Nasekej ho najemno a krátce prohřej na másle, tepelná úprava hořkost zmírní.',
-        caution: 'Šalvějový čaj ani odvar dceři nepodávej.',
+        caution: 'Šalvějový čaj ani odvar dítěti nepodávej.',
       },
       '9m': {
         serving:
@@ -400,12 +400,12 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Mátové listy nasekej najemno a vmíchej je do jogurtu nebo do ovocného pyré. Chladivá chuť je pro dceru překvapivá a hodí se v létě k melounu i k okurce.',
-        caution: 'Mátový olej ani bonbony s mátou dceři nedávej.',
+          'Mátové listy nasekej najemno a vmíchej je do jogurtu nebo do ovocného pyré. Chladivá chuť je pro dítě překvapivá a hodí se v létě k melounu i k okurce.',
+        caution: 'Mátový olej ani bonbony s mátou dítěti nedávej.',
       },
       '9m': {
         serving:
-          'Nasekanou mátu přidej do okurkového salátu nebo do jogurtového dipu. V kombinaci s hráškem a s jogurtem vznikne jednoduchá pomazánka, kterou dcera nabere na prst chleba.',
+          'Nasekanou mátu přidej do okurkového salátu nebo do jogurtového dipu. V kombinaci s hráškem a s jogurtem vznikne jednoduchá pomazánka, kterou dítě nabere na prst chleba.',
         caution: 'Mátové čaje pro kojence konzultuj s pediatrem.',
       },
       '12m': {
@@ -482,7 +482,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Bobkový list přidej při vaření do hrnce a před podáním ho vždy vyndej. Nikdy nesmí zůstat v porci, kterou dcera dostane, ani rozlámaný na menší kousky.',
+          'Bobkový list přidej při vaření do hrnce a před podáním ho vždy vyndej. Nikdy nesmí zůstat v porci, kterou dítě dostane, ani rozlámaný na menší kousky.',
         caution: 'Spočítej si listy, které dáváš do hrnce, a stejný počet vylov.',
       },
       '9m': {
@@ -649,7 +649,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Skořice se hodí k jablkům, k hruškám, k dýni i do ovesné kaše. Vůně přitom dělá velkou část chuťového zážitku, takže dcera vnímá jídlo jako sladší, než ve skutečnosti je. Kaše a cereálie ochucené skořicí ale nedávej denně, doporučení zní nejvýše jednou týdně.',
+          'Skořice se hodí k jablkům, k hruškám, k dýni i do ovesné kaše. Vůně přitom dělá velkou část chuťového zážitku, takže dítě vnímá jídlo jako sladší, než ve skutečnosti je. Kaše a cereálie ochucené skořicí ale nedávej denně, doporučení zní nejvýše jednou týdně.',
         caution: 'Levná mletá skořice bývá kasie, čti původ na obalu.',
       },
       '12m': {
@@ -689,7 +689,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Kurkumu použij do jemné kari směsi spolu s mletým koriandrem a kmínem. Barevné jídlo bývá pro dceru zajímavější, což pomáhá v období, kdy začíná jídlo očima vybírat.',
+          'Kurkumu použij do jemné kari směsi spolu s mletým koriandrem a kmínem. Barevné jídlo bývá pro dítě zajímavější, což pomáhá v období, kdy začíná jídlo očima vybírat.',
         caution: 'Doplňky stravy s kurkuminem dítěti nepodávej.',
       },
       '12m': {
@@ -724,7 +724,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zázvor oloupej a nastrouhej na nejjemnějším struhadle, kousky vlákna v jídle nenechávej. Úplně malé množství stačí, protože zázvor lehce pálí a dcera na ostrost není zvyklá.',
+          'Zázvor oloupej a nastrouhej na nejjemnějším struhadle, kousky vlákna v jídle nenechávej. Úplně malé množství stačí, protože zázvor lehce pálí a dítě na ostrost není zvyklá.',
         caution: 'Zázvorový čaj ani nálev pro kojence nepřipravuj bez porady s pediatrem.',
       },
       '9m': {
@@ -769,7 +769,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Paprika se hodí do bramborových pokrmů, do luštěnin i do rajčatových omáček. Je bohatá na karoteny a v malém množství výrazně zlepší vzhled jídla, které dcera vybírá očima.',
+          'Paprika se hodí do bramborových pokrmů, do luštěnin i do rajčatových omáček. Je bohatá na karoteny a v malém množství výrazně zlepší vzhled jídla, které dítě vybírá očima.',
         caution: 'Uzená paprika má výraznější chuť, začni s malým množstvím.',
       },
       '12m': {

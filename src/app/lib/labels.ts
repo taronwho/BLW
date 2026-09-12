@@ -1,4 +1,12 @@
-import type { AllergenGroup, Hazard, IngredientCategory, RecipeCategory, TastingAmount, TastingReaction } from '@/types';
+import type {
+  AllergenGroup,
+  GuideCategory,
+  Hazard,
+  IngredientCategory,
+  RecipeCategory,
+  TastingAmount,
+  TastingReaction,
+} from '@/types';
 
 /** České popisky číselníků. Jedno místo, ať se v UI neliší obrazovka od obrazovky. */
 
@@ -19,6 +27,13 @@ export const RECIPE_CATEGORY_LABELS: Record<RecipeCategory, string> = {
   'obed-vecere': 'Oběd a večeře',
   polevky: 'Polévky',
   'svaciny-peceni': 'Svačiny a pečení',
+};
+
+export const GUIDE_CATEGORY_LABELS: Record<GuideCategory, string> = {
+  bezpecnost: 'Bezpečnost',
+  vyziva: 'Výživa',
+  zacatek: 'Začínáme',
+  praxe: 'Praxe',
 };
 
 export const ALLERGEN_LABELS: Record<AllergenGroup, string> = {
@@ -52,10 +67,10 @@ export const HAZARD_LABELS: Record<Hazard, string> = {
 };
 
 export const AMOUNT_LABELS: Record<TastingAmount, string> = {
-  ochutnala: 'ochutnala',
-  'snedla-cast': 'snědla část',
-  'snedla-vse': 'snědla vše',
-  odmitla: 'odmítla',
+  ochutnala: 'ochutnalo',
+  'snedla-cast': 'snědlo část',
+  'snedla-vse': 'snědlo vše',
+  odmitla: 'odmítlo',
 };
 
 export const REACTION_LABELS: Record<TastingReaction, string> = {

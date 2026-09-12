@@ -45,9 +45,9 @@ export const soups: Recipe[] = [
       'Pokud je porce řídká, zahusti ji lžící vařené dýně rozmačkané vidličkou.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci, kterou dáš dceři do ruky, nebo namoč do ní proužek chleba a nech ji sát.',
-      '9m': 'Nabídni polévku v mělké misce s kousky vařené dýně, které si dcera loví prsty.',
-      '12m': 'Servíruj polévku v hrnečku se dvěma uchy; dcera už zvládne pár loků sama a zbytek dojídá lžící.',
+      '6m': 'Podávej hustou polévku na lžíci, kterou dáš dítěti do ruky, nebo namoč do ní proužek chleba a nech ji sát.',
+      '9m': 'Nabídni polévku v mělké misce s kousky vařené dýně, které si dítě loví prsty.',
+      '12m': 'Servíruj polévku v hrnečku se dvěma uchy; dítě už zvládne pár loků samo a zbytek dojídá lžící.',
     },
     meatSteps: [
       'Polévku pro dospělé osol, dochuť čerstvě nastrouhaným zázvorem a zakápni kokosovým mlékem.',
@@ -94,8 +94,8 @@ export const soups: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Vývar samotný miminku nesytí: podávej hlavně kousky vařené zeleniny velikosti prstu a maso ve vláknech, vývar jen na navlhčení.',
-      '9m': 'Nabídni hustou polévku s kostičkami zeleniny a krátkými nudlemi, které si dcera sbírá prsty z mělké misky.',
-      '12m': 'Servíruj polévku v misce se lžící; dcera už si nudle nabírá sama a vývar dopije z hrnečku.',
+      '9m': 'Nabídni hustou polévku s kostičkami zeleniny a krátkými nudlemi, které si dítě sbírá prsty z mělké misky.',
+      '12m': 'Servíruj polévku v misce se lžící; dítě už si nudle nabírá samo a vývar dopije z hrnečku.',
     },
     meatSteps: [
       'Kuřecí stehna vlož do vývaru po odebrání dětské porce, vař je čtyřicet minut a maso obeř od kostí.',
@@ -142,9 +142,9 @@ export const soups: Recipe[] = [
       'Nech vychladnout a před podáváním promíchej; hustá polévka drží teplo uprostřed dlouho.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku rozetřenou po misce, do které dcera zaboří dlaň, nebo ji nabídni na lžíci.',
+      '6m': 'Podávej hustou polévku rozetřenou po misce, do které dítě zaboří dlaň, nebo ji nabídni na lžíci.',
       '9m': 'Nech v polévce kostky brambor a petržele a podávej ji v mělké misce ke sbírání prsty.',
-      '12m': 'Servíruj polévku v misce se lžící; dcera už zvládne nabírat sama, jen počítej s úklidem.',
+      '12m': 'Servíruj polévku v misce se lžící; dítě už zvládne nabírat samo, jen počítej s úklidem.',
     },
     meatSteps: [
       'Polévku pro dospělé osol, zakápni jablečným octem a povař pět minut, aby se kyselost spojila s čočkou.',
@@ -185,7 +185,7 @@ export const soups: Recipe[] = [
     babySteps: [
       'Houby v dětské porci nakrájej nadrobno; plátky jsou pružné a malé děti je v puse dlouho převalují.',
       'Brambory rozmačkej vidličkou přímo v polévce, aby vznikla hustá kaše.',
-      'Polévku podávej čerstvě uvařenou a zbytek pro dceru znovu neohřívej.',
+      'Polévku podávej čerstvě uvařenou a zbytek pro dítě znovu neohřívej.',
     ],
     babyServing: {
       '6m': 'Podávej hustou polévku na lžíci a k ní kostku vařené brambory velikosti prstu jako samostatné sousto.',
@@ -234,9 +234,9 @@ export const soups: Recipe[] = [
       'Přidej špetku nasekaného kopru, ať má porce stejnou vůni jako talíře dospělých.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci a k ní kostku brambory velikosti prstu, kterou dcera sevře v dlani.',
+      '6m': 'Podávej hustou polévku na lžíci a k ní kostku brambory velikosti prstu, kterou dítě sevře v dlani.',
       '9m': 'Nabídni polévku s kostkami brambor a rybími vločkami v mělké misce ke sbírání prsty.',
-      '12m': 'Servíruj polévku v misce se lžící a kousky ryby navrch; dcera si porci sama míchá.',
+      '12m': 'Servíruj polévku v misce se lžící a kousky ryby navrch; dítě si porci samo míchá.',
     },
     meatSteps: [
       'Tresku nakrájej na kostky, vlož do horké polévky a nech ji pět minut táhnout, dokud maso nezbělá.',
@@ -281,9 +281,9 @@ export const soups: Recipe[] = [
       'Nech porci vychladnout a zkontroluj teplotu kapkou na zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej hustý hráškový krém na lžíci a k němu proužek chleba na namáčení, ze kterého dcera saje.',
+      '6m': 'Podávej hustý hráškový krém na lžíci a k němu proužek chleba na namáčení, ze kterého dítě saje.',
       '9m': 'Nabídni polévku v mělké misce s lžící celého hrášku rozmačkaného vidličkou, aby zrnka nebyla celá.',
-      '12m': 'Servíruj polévku v hrnečku se dvěma uchy a lžící vedle; dcera si vybere, čím ji bude jíst.',
+      '12m': 'Servíruj polévku v hrnečku se dvěma uchy a lžící vedle; dítě si vybere, čím ji bude jíst.',
     },
     meatSteps: [
       'Polévku pro dospělé osol, promíchej s lžící jogurtu a posyp nasekanou mátou.',
@@ -324,12 +324,12 @@ export const soups: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky s cizrnou, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Dětskou porci rozmixuj, aby v ní nezůstaly slupky z rajčat ani celá zrna cizrny.',
-      'Přidej lístek bazalky rozetřený mezi prsty — stačí vůně, celý list je pro dceru zbytečně velký.',
+      'Přidej lístek bazalky rozetřený mezi prsty — stačí vůně, celý list je pro dítě zbytečně velký.',
       'Kyselost rajčat vyrovnej lžičkou ghí; polévka tím zjemní a lépe se snáší.',
     ],
     babyServing: {
-      '6m': 'Podávej polévku hustou jako pyré na lžíci nebo namoč do ní pásek chleba, ze kterého bude dcera sát.',
-      '9m': 'Nabídni polévku s rozmačkanou cizrnou v mělké misce, kterou si dcera sbírá prsty.',
+      '6m': 'Podávej polévku hustou jako pyré na lžíci nebo namoč do ní pásek chleba, ze kterého bude dítě sát.',
+      '9m': 'Nabídni polévku s rozmačkanou cizrnou v mělké misce, kterou si dítě sbírá prsty.',
       '12m': 'Servíruj polévku v misce se lžící a celými zrny cizrny rozmačkanými napůl.',
     },
     meatSteps: [
@@ -371,13 +371,13 @@ export const soups: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky s kroupami a zeleninou, dřív než se do hrnce vloží maso a dřív než se polévka dochucuje pro dospělé.',
     babySteps: [
       'Hovězí maso pro miminko uvař zvlášť hodinu doměkka a rozeber ho na krátká vlákna napříč svalem.',
-      'Kroupy v dětské porci rozmačkej vidličkou a zeleninu nakrájej podle věku dcery.',
+      'Kroupy v dětské porci rozmačkej vidličkou a zeleninu nakrájej podle věku dítěte.',
       'Polévku zahusti rozmačkanými kroupami, aby zůstala na lžíci a nestékala.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci a k ní vlákno masa delší než dětská dlaň, které dcera sevře v pěsti.',
-      '9m': 'Nabídni polévku s kostičkami zeleniny a rozmačkanými kroupami, které si dcera sbírá špetkou.',
-      '12m': 'Servíruj polévku v misce se lžící a kousky masa navrch; dcera si porci nabírá sama.',
+      '6m': 'Podávej hustou polévku na lžíci a k ní vlákno masa delší než dětská dlaň, které dítě sevře v pěsti.',
+      '9m': 'Nabídni polévku s kostičkami zeleniny a rozmačkanými kroupami, které si dítě sbírá špetkou.',
+      '12m': 'Servíruj polévku v misce se lžící a kousky masa navrch; dítě si porci nabírá samo.',
     },
     meatSteps: [
       'Hovězí nakrájej na kostky, vlož do polévky po odebrání dětské porce a vař hodinu doměkka.',
@@ -469,8 +469,8 @@ export const soups: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej hustou polévku na lžíci a k ní kostku vařené mrkve velikosti prstu jako sousto do ruky.',
-      '9m': 'Nabídni polévku s kostičkami zeleniny a jáhlami, které si dcera sbírá prsty z mělké misky.',
-      '12m': 'Servíruj polévku v misce se lžící a masem nakrájeným nadrobno; dcera už jí samostatně.',
+      '9m': 'Nabídni polévku s kostičkami zeleniny a jáhlami, které si dítě sbírá prsty z mělké misky.',
+      '12m': 'Servíruj polévku v misce se lžící a masem nakrájeným nadrobno; dítě už jí samostatně.',
     },
     meatSteps: [
       'Krůtí stehno nakrájej na kostky, vlož do polévky po odebrání dětské porce a vař dvacet minut doměkka.',

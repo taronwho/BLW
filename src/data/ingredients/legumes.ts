@@ -46,7 +46,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Hustou čočkovou kaši zahusť tak, aby se z ní daly tvarovat hromádky nebo placičky. Dcera tak dostane rostlinné bílkoviny i železo, jehož vstřebávání podpoří kousek papriky nebo citron.',
+          'Hustou čočkovou kaši zahusť tak, aby se z ní daly tvarovat hromádky nebo placičky. Dítě tak dostane rostlinné bílkoviny i železo, jehož vstřebávání podpoří kousek papriky nebo citron.',
         caution: 'Luštěniny zaváděj postupně, nadýmání se zmírní za pár dní.',
       },
       '12m': {
@@ -86,7 +86,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařená hnědá čočka se dá podávat celá, promíchaná s hustou zeleninovou omáčkou. Dcera ji sbírá prsty a zrnka jsou dost malá na to, aby je zvládla rozmělnit dásněmi.',
+          'Uvařená hnědá čočka se dá podávat celá, promíchaná s hustou zeleninovou omáčkou. Dítě ji sbírá prsty a zrnka jsou dost malá na to, aby je zvládla rozmělnit dásněmi.',
         caution: 'Slupky se někdy objeví ve stolici, není to problém.',
       },
       '12m': {
@@ -126,7 +126,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařená beluga se dá podávat celá promíchaná s dušenou zeleninou a s kapkou oleje. Drobná zrna se dobře sbírají prsty a dcera na nich trénuje klešťový úchop.',
+          'Uvařená beluga se dá podávat celá promíchaná s dušenou zeleninou a s kapkou oleje. Drobná zrna se dobře sbírají prsty a dítě na nich trénuje klešťový úchop.',
         caution: 'Vař ji o něco déle, než uvádí obal, ať je opravdu měkká.',
       },
       '12m': {
@@ -168,7 +168,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Měkká cizrna se dá podávat rozpůlená nebo rozmačkaná mezi prsty. Z rozmixované cizrny vytvaruj placičky, které dcera uchopí a které jí dodají bílkoviny i železo.',
+          'Měkká cizrna se dá podávat rozpůlená nebo rozmačkaná mezi prsty. Z rozmixované cizrny vytvaruj placičky, které dítě uchopí a které jí dodají bílkoviny i železo.',
         caution: 'Slupky odplavou při proplachování, dají se snadno odstranit.',
       },
       '12m': {
@@ -255,7 +255,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dobře provařené fazole rozmačkej a promíchej s rajčatovou omáčkou nebo s rýží. Dcera zvládne i hrubší strukturu, slupku ale kontroluj, u kidney fazolí bývá tuhá.',
+          'Dobře provařené fazole rozmačkej a promíchej s rajčatovou omáčkou nebo s rýží. Dítě zvládne i hrubší strukturu, slupku ale kontroluj, u kidney fazolí bývá tuhá.',
         caution: 'Konzervované fazole jsou už provařené, stačí je propláchnout.',
       },
       '12m': {
@@ -331,11 +331,11 @@ export const legumes: Ingredient[] = [
       '6m': {
         serving:
           'Mungo se vaří rychle a rozpadá se do měkké kaše, proto patří mezi nejsnáze stravitelné luštěniny. Uvař ho doměkka a rozmixuj s dušenou mrkví nebo s cuketou do hladké hmoty.',
-        caution: 'Naklíčené mungo v syrovém stavu dceři nepodávej.',
+        caution: 'Naklíčené mungo v syrovém stavu dítěti nepodávej.',
       },
       '9m': {
         serving:
-          'Uvařené mungo promíchej s rýží nebo s bramborem a dochuť kmínem. Kombinace luštěniny s obilovinou dodá dceři plnohodnotnou bílkovinu, což je v bezmasé kuchyni zásadní.',
+          'Uvařené mungo promíchej s rýží nebo s bramborem a dochuť kmínem. Kombinace luštěniny s obilovinou dodá dítěti plnohodnotnou bílkovinu, což je v bezmasé kuchyni zásadní.',
         caution: 'Klíčky vždy tepelně uprav, syrové nesou riziko bakterií.',
       },
       '12m': {
@@ -375,7 +375,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z hustší hrachové kaše vytvaruj hromádky nebo placičky, které dcera uchopí prsty. Hrách je dobrým zdrojem bílkovin a v české kuchyni má tradiční místo i mimo maso.',
+          'Z hustší hrachové kaše vytvaruj hromádky nebo placičky, které dítě uchopí prsty. Hrách je dobrým zdrojem bílkovin a v české kuchyni má tradiční místo i mimo maso.',
         caution: 'Kaši podávej vlažnou, uvnitř drží teplo dlouho.',
       },
       '12m': {
@@ -417,7 +417,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozvařený hrách rozmačkej vidličkou a promíchej s dušenou zeleninou. Dcera zvládne hrubší strukturu, celá zrna se slupkou ale stále rozmačkávej mezi prsty.',
+          'Rozvařený hrách rozmačkej vidličkou a promíchej s dušenou zeleninou. Dítě zvládne hrubší strukturu, celá zrna se slupkou ale stále rozmačkávej mezi prsty.',
         caution: 'Slupky ve stolici jsou běžné, není to důvod k obavám.',
       },
       '12m': {
@@ -454,7 +454,7 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Edamame vyloupej z lusku, provař doměkka a každý bob rozmačkej nebo rozpul. Lusk dceři nedávej vůbec, je vláknitý a nedá se rozžvýkat. Sója patří mezi klíčové alergeny.',
+          'Edamame vyloupej z lusku, provař doměkka a každý bob rozmačkej nebo rozpul. Lusk dítěti nedávej vůbec, je vláknitý a nedá se rozžvýkat. Sója patří mezi klíčové alergeny.',
         caution: 'Sóju zaváděj dopoledne a odděleně od dalších nových potravin.',
       },
       '9m': {
@@ -494,7 +494,7 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tofu osuš, nakrájej na dlouhé hranolky a krátce je opeč, aby povrch nebyl kluzký. Hranolek dcera sevře v pěsti a měkký vnitřek rozmačká dásněmi bez námahy.',
+          'Tofu osuš, nakrájej na dlouhé hranolky a krátce je opeč, aby povrch nebyl kluzký. Hranolek dítě sevře v pěsti a měkký vnitřek rozmačká dásněmi bez námahy.',
         caution: 'Tofu obsahuje sóju, zaváděj ji jako samostatný alergen.',
       },
       '9m': {
@@ -536,7 +536,7 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'V šesti měsících uzené tofu nezařazuj. Pokud chceš dceři nabídnout sóju, použij tofu natural, které má stejné bílkoviny a stejnou strukturu, jen bez solného nálevu.',
+          'V šesti měsících uzené tofu nezařazuj. Pokud chceš dítěti nabídnout sóju, použij tofu natural, které má stejné bílkoviny a stejnou strukturu, jen bez solného nálevu.',
         caution: 'Uzené tofu v hotových salátech z obchodu je stejně slané.',
       },
       '9m': {
@@ -576,7 +576,7 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tempeh je fermentovaná sója slisovaná do bloku, takže je pevnější než tofu. Pro dceru ho nejdřív deset minut poduš v páře, pak nakrájej na tenké proužky a krátce opeč.',
+          'Tempeh je fermentovaná sója slisovaná do bloku, takže je pevnější než tofu. Pro dítě ho nejdřív deset minut poduš v páře, pak nakrájej na tenké proužky a krátce opeč.',
         caution: 'Syrový tempeh má nahořklou chuť, vždy ho tepelně uprav.',
       },
       '9m': {
@@ -616,12 +616,12 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Cizrnová mouka je mletá cizrna, takže nese bílkoviny i železo a neobsahuje lepek. Smíchej ji s vodou na řídké těsto a upeč tenkou placku, kterou dcera uchopí do ruky.',
+          'Cizrnová mouka je mletá cizrna, takže nese bílkoviny i železo a neobsahuje lepek. Smíchej ji s vodou na řídké těsto a upeč tenkou placku, kterou dítě uchopí do ruky.',
         caution: 'Těsto musí být propečené, syrová cizrnová mouka je nestravitelná.',
       },
       '9m': {
         serving:
-          'Z cizrnové mouky upeč placky s nastrouhanou cuketou nebo mrkví. Dodají dceři rostlinnou bílkovinu a zároveň se dobře drží v ruce, takže se hodí i na svačinu mimo domov.',
+          'Z cizrnové mouky upeč placky s nastrouhanou cuketou nebo mrkví. Dodají dítěti rostlinnou bílkovinu a zároveň se dobře drží v ruce, takže se hodí i na svačinu mimo domov.',
         caution: 'Placky peč do sucha, vlhké těsto uvnitř se lepí.',
       },
       '12m': {
@@ -661,7 +661,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Domácí hummus rozřeď vodou do konzistence hustého jogurtu, aby se dobře olizoval z prstu. Dcera ho zvládne nabrat sama a zároveň se přes něj potká s pastou z mletého sezamu.',
+          'Domácí hummus rozřeď vodou do konzistence hustého jogurtu, aby se dobře olizoval z prstu. Dítě ho zvládne nabrat sama a zároveň se přes něj potká s pastou z mletého sezamu.',
         caution: 'Kupovaný hummus obsahuje sůl, do prvního roku dělej vlastní.',
       },
       '12m': {

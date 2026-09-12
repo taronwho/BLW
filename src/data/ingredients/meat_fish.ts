@@ -43,7 +43,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařené maso rozeber na jednotlivá vlákna nebo ho nasekej na drobno a promíchej s dušenou zeleninou. Dcera už si sousta bere prsty a učí se je drtit dásněmi.',
+          'Uvařené maso rozeber na jednotlivá vlákna nebo ho nasekej na drobno a promíchej s dušenou zeleninou. Dítě už si sousta bere prsty a učí se je drtit dásněmi.',
         caution: 'Suché maso zvyšuje riziko dávení, vždy ho podávej s omáčkou.',
       },
       '12m': {
@@ -83,12 +83,12 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Stehno upeč nebo podus doměkka, sundej kůži a maso obeber od kosti. Tmavé maso je šťavnatější než prso, takže se z něj dají odtrhnout měkké proužky, které dcera udrží v pěsti.',
+          'Stehno upeč nebo podus doměkka, sundej kůži a maso obeber od kosti. Tmavé maso je šťavnatější než prso, takže se z něj dají odtrhnout měkké proužky, které dítě udrží v pěsti.',
         caution: 'Kůži nepodávej, je tučná a kluzká a špatně se kouše.',
       },
       '9m': {
         serving:
-          'Vykostěné maso nasekej na kousky a promíchej ho s bramborovým pyré. Dcera zvládne i větší sousta, ale každý kousek předtím prohmatej, jestli v něm nezůstala chrupavka.',
+          'Vykostěné maso nasekej na kousky a promíchej ho s bramborovým pyré. Dítě zvládne i větší sousta, ale každý kousek předtím prohmatej, jestli v něm nezůstala chrupavka.',
         caution: 'Po jídle zkontroluj talíř, úlomky kostí bývají malé.',
       },
       '12m': {
@@ -259,7 +259,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z mletého masa můžeš udělat placičky, které dcera uchopí a ukusuje z nich. Placička musí být vláčná, proto do ní přidej strouhanou cuketu nebo mrkev, jinak se rozpadne na drobky.',
+          'Z mletého masa můžeš udělat placičky, které dítě uchopí a ukusuje z nich. Placička musí být vláčná, proto do ní přidej strouhanou cuketu nebo mrkev, jinak se rozpadne na drobky.',
         caution: 'Kulaté masové kuličky nedělej, tvar je rizikový.',
       },
       '12m': {
@@ -343,7 +343,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nakrájená panenka se dobře kombinuje s dušeným fenyklem nebo s jablkem. Dcera si proužky bere prsty, sledovat ale musíš, jestli je opravdu rozmělňuje, a ne polyká celé.',
+          'Nakrájená panenka se dobře kombinuje s dušeným fenyklem nebo s jablkem. Dítě si proužky bere prsty, sledovat ale musíš, jestli je opravdu rozmělňuje, a ne polyká celé.',
         caution: 'Stříbrnou blánu na povrchu vždy odřízni, je tuhá.',
       },
       '12m': {
@@ -467,8 +467,8 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kachní prso peč doměkka, kůži i podkožní tuk sundej a maso nakrájej přes vlákna na tenké plátky. Plátek rozeber na proužky, které dcera sevře v pěsti a olizuje z nich šťávu.',
-        caution: 'Kůži dceři nedávej, gumovou strukturu nepřekouše.',
+          'Kachní prso peč doměkka, kůži i podkožní tuk sundej a maso nakrájej přes vlákna na tenké plátky. Plátek rozeber na proužky, které dítě sevře v pěsti a olizuje z nich šťávu.',
+        caution: 'Kůži dítěti nedávej, gumovou strukturu nepřekouše.',
       },
       '9m': {
         serving:
@@ -514,7 +514,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nasekané jehněčí promíchej s cuketou a s kuskusem. Maso je bohaté na železo a zinek a jeho výrazná chuť rozšiřuje dceři chuťový rejstřík mimo jemné kuřecí.',
+          'Nasekané jehněčí promíchej s cuketou a s kuskusem. Maso je bohaté na železo a zinek a jeho výrazná chuť rozšiřuje dítěti chuťový rejstřík mimo jemné kuřecí.',
         caution: 'Pokud dítě jehněčí odmítá, zkus ho nabídnout znovu za týden.',
       },
       '12m': {
@@ -603,7 +603,7 @@ export const meatFish: Ingredient[] = [
       '9m': {
         serving:
           'Nakrájej dušená játra na drobné kousky a promíchej je s bramborem a s petrželkou. Železo z jater se vstřebává výborně, ale právě proto nepřekračuj jednu porci za týden.',
-        caution: 'Zapisuj si, kdy dcera játra měla, limit se snadno přehlédne.',
+        caution: 'Zapisuj si, kdy dítě játra měla, limit se snadno přehlédne.',
       },
       '12m': {
         serving:
@@ -641,7 +641,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'V šesti měsících šunka do jídelníčku nepatří. Pokud chceš dceři nabídnout vepřové maso, použij čerstvou kýtu nebo panenku dušenou bez soli, chuťově i nutričně je to lepší volba.',
+          'V šesti měsících šunka do jídelníčku nepatří. Pokud chceš dítěti nabídnout vepřové maso, použij čerstvou kýtu nebo panenku dušenou bez soli, chuťově i nutričně je to lepší volba.',
         caution: 'Dětské šunky z obchodu jsou také slané, název je zavádějící.',
       },
       '9m': {
@@ -688,7 +688,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Lososa upeč v alobalu nebo poduš v páře, sundej kůži a maso rozeber na vločky. Každou vločku promni mezi prsty, teprve pak ji podej v hromádce, kterou dcera nabere dlaní.',
+          'Lososa upeč v alobalu nebo poduš v páře, sundej kůži a maso rozeber na vločky. Každou vločku promni mezi prsty, teprve pak ji podej v hromádce, kterou dítě nabere dlaní.',
         caution: 'Syrového ani uzeného lososa nikdy nepodávej.',
       },
       '9m': {
@@ -734,7 +734,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Pstruha upeč vcelku, odděl filety od páteře a maso rozmělni na talíři na drobné kousky. Každou vrstvu prohlédni proti světlu a promni prsty, teprve pak ji dceři nabídni.',
+          'Pstruha upeč vcelku, odděl filety od páteře a maso rozmělni na talíři na drobné kousky. Každou vrstvu prohlédni proti světlu a promni prsty, teprve pak ji dítěti nabídni.',
         caution: 'Nikdy nepodávej pstruha v kuse, kosti se nedají odhadnout.',
       },
       '9m': {
@@ -779,12 +779,12 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tresku poduš v páře nebo ji zapeč v troubě pod pokličkou, ať zůstane vlhká. Maso rozeber na vločky, prohmatej je a smíchej s bramborovým pyré, samotná treska je pro dceru suchá.',
+          'Tresku poduš v páře nebo ji zapeč v troubě pod pokličkou, ať zůstane vlhká. Maso rozeber na vločky, prohmatej je a smíchej s bramborovým pyré, samotná treska je pro dítě suchá.',
         caution: 'Mražené rybí prsty pro miminko nepoužívej, jsou slané a obalované.',
       },
       '9m': {
         serving:
-          'Z rozebrané tresky a brambor vytvaruj placičky, které dcera uchopí prsty. Bílá ryba je libová, má jemnou chuť a patří mezi ryby s nízkým obsahem rtuti.',
+          'Z rozebrané tresky a brambor vytvaruj placičky, které dítě uchopí prsty. Bílá ryba je libová, má jemnou chuť a patří mezi ryby s nízkým obsahem rtuti.',
         caution: 'Rozmrazuj v lednici, ne při pokojové teplotě.',
       },
       '12m': {
@@ -874,7 +874,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Prohmatané maso smíchej s bramborovou kaší nebo s dušenou kořenovou zeleninou. Dcera zvládne i větší vločky, pokud jsou vlhké a spojené s přílohou.',
+          'Prohmatané maso smíchej s bramborovou kaší nebo s dušenou kořenovou zeleninou. Dítě zvládne i větší vločky, pokud jsou vlhké a spojené s přílohou.',
         caution: 'Filet kupuj čerstvý, sladkovodní ryba se kazí rychle.',
       },
       '12m': {
@@ -908,7 +908,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['kosti'],
     hazardNotes: {
       kosti:
-        'Vidličkovité kosti štiky se nedají odstranit tahem. Filet po uvaření rozeber po jednotlivých svalových vrstvách, každou rozetři mezi prsty a hmatem projeď po celé délce. Když si nejsi jistá, štiku dceři raději nedávej.',
+        'Vidličkovité kosti štiky se nedají odstranit tahem. Filet po uvaření rozeber po jednotlivých svalových vrstvách, každou rozetři mezi prsty a hmatem projeď po celé délce. Když si nejsi jistá, štiku dítěti raději nedávej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -960,7 +960,7 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Použij jen hřbetní část kapra, tu poduš a rozeber na tenké vrstvy. Každou vrstvu prohmatej mezi prsty a nabídni ji rozmělněnou s bramborovým pyré, které sousto spojí.',
-        caution: 'Smaženého vánočního kapra s kostmi dceři nedávej.',
+        caution: 'Smaženého vánočního kapra s kostmi dítěti nedávej.',
       },
       '9m': {
         serving:
@@ -1053,7 +1053,7 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Čerstvou makrelu upeč v alobalu, sundej kůži a maso rozeber na vrstvy. Chuť je výrazná a mastná, proto ji spoj s bramborovým pyré nebo s dušenou mrkví, které ji zjemní.',
-        caution: 'Uzenou makrelu dceři nenabízej, obsahuje velké množství soli.',
+        caution: 'Uzenou makrelu dítěti nenabízej, obsahuje velké množství soli.',
       },
       '9m': {
         serving:
@@ -1098,7 +1098,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Použij tuňáka ve vlastní šťávě, propláchni ho vodou a rozetři vidličkou s avokádem nebo s tvarohem. Samotný tuňák je suchý a drolivý, dcera ho bez vláčné složky nespolkne.',
+          'Použij tuňáka ve vlastní šťávě, propláchni ho vodou a rozetři vidličkou s avokádem nebo s tvarohem. Samotný tuňák je suchý a drolivý, dítě ho bez vláčné složky nespolkne.',
         caution: 'Tuňák v oleji nebo v nálevu s dochucením pro dítě nekupuj.',
       },
       '9m': {
@@ -1148,7 +1148,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Provařenou krevetu rozkroj podélně na poloviny a ještě na menší kousky. Dcera je zvládne uchopit prsty, ale celou krevetu jí nedávej, tvar i pružnost jsou rizikové.',
+          'Provařenou krevetu rozkroj podélně na poloviny a ještě na menší kousky. Dítě je zvládne uchopit prsty, ale celou krevetu jí nedávej, tvar i pružnost jsou rizikové.',
         caution: 'Při prvním podání sleduj dvě hodiny reakci kůže i dýchání.',
       },
       '12m': {

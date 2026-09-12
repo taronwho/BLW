@@ -5,10 +5,11 @@
  * souhrn ve tvaru z CLAUDE.md a skončí s exit kódem 1 při jakékoli chybě.
  */
 import { catalog } from '../src/data/index';
+import { checkGuides } from '../src/safety/guides';
 import { errorsOf, runSafetyRules, warningsOf } from '../src/safety/run';
 import { safetyRules } from '../src/safety/rules';
 import type { Finding } from '../src/safety/types';
-import { INGREDIENT_CATEGORIES, RECIPE_CATEGORIES } from '../src/types';
+import { GUIDE_CATEGORIES, INGREDIENT_CATEGORIES, RECIPE_CATEGORIES } from '../src/types';
 
 const MIN_INGREDIENTS = 190;
 const MIN_RECIPES = 80;
@@ -79,6 +80,20 @@ function printFindings(title: string, findings: readonly Finding[]): void {
   }
 }
 
+function printGuideTable(): void {
+  console.log('\nRADY PO KATEGORIÍCH');
+  console.log(`${pad('kategorie', 22)}${padLeft('počet', 7)}${padLeft('naléhavých', 12)}`);
+  console.log('-'.repeat(41));
+  for (const category of GUIDE_CATEGORIES) {
+    const items = catalog.guides.filter((g) => g.category === category);
+    console.log(
+      pad(category, 22) +
+        padLeft(String(items.length), 7) +
+        padLeft(String(items.filter((g) => g.urgent === true).length), 12),
+    );
+  }
+}
+
 function main(): void {
   const findings = runSafetyRules(catalog);
   const errors = errorsOf(findings);
@@ -87,6 +102,7 @@ function main(): void {
   console.log(`Pravidel v src/safety/rules.ts: ${safetyRules.length}`);
   printIngredientTable(findings);
   printRecipeTable(findings);
+  printGuideTable();
   printFindings('CHYBY', errors);
   printFindings('VAROVÁNÍ', warnings);
 
@@ -102,7 +118,14 @@ function main(): void {
   console.log(
     `RECEPTŮ: ${catalog.recipes.length}   (vegetariánských: ${vegetarian}, s masitou i bezmasou variantou: ${withBothTracks})`,
   );
-  console.log(`CHYB: ${errors.length}`);
+  const guideFindings = checkGuides(catalog.guides);
+  if (guideFindings.length > 0) {
+    console.log('\nCHYBY V RADÁCH');
+    for (const f of guideFindings) console.log(`  guide/${f.guideId}: ${f.message}`);
+  }
+  const urgent = catalog.guides.filter((g) => g.urgent === true).length;
+  console.log(`RAD: ${catalog.guides.length}     (naléhavých: ${urgent})`);
+  console.log(`CHYB: ${errors.length + guideFindings.length}`);
   console.log(`VAROVÁNÍ: ${warnings.length}`);
 
   // Cílové počty z docs/SPEC.md kapitola 9. Dokud se katalog plní, jsou to
@@ -121,7 +144,7 @@ function main(): void {
     console.log(`ROZPRACOVÁNO: ${belowTarget.join(', ')}`);
   }
 
-  if (errors.length > 0) {
+  if (errors.length + guideFindings.length > 0) {
     console.error('\nValidace selhala — oprav data, ne pravidla.');
     process.exit(1);
   }

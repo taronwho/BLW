@@ -172,6 +172,7 @@ export function makeCatalog(overrides: Partial<Catalog> = {}): Catalog {
   const base: Catalog = {
     ingredients: [makeIngredient(), makeCarrot(), makeChicken()],
     recipes: [makeRecipe(), makeMeatRecipe()],
+    guides: [],
   };
   return { ...base, ...overrides };
 }

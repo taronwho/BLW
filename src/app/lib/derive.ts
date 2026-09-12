@@ -37,7 +37,7 @@ export function inSeason(ingredient: Ingredient, month: number): boolean {
   return ingredient.seasonCz.length === 0 || ingredient.seasonCz.includes(month);
 }
 
-/** „Vhodné teď" = fáze podle věku dcery už tuhle surovinu dovoluje. */
+/** „Vhodné teď" = fáze podle věku dítěte už tuhle surovinu dovoluje. */
 export function suitableNow(ingredient: Ingredient, ageMonths: number | null): boolean {
   return ingredient.minAgeMonths <= (ageMonths ?? 6);
 }

@@ -63,12 +63,12 @@ export function HouseholdScreen(): ReactNode {
         onSubmit={(event) => {
           event.preventDefault();
           void setChild(childName.trim(), childBirthDate);
-          setMessage('Údaje o dceři uloženy.');
+          setMessage('Údaje o dítěti uloženy.');
         }}
       >
         <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
           <Baby aria-hidden="true" className="h-4 w-4 shrink-0" />
-          Dcera
+          Dítě
         </h2>
         <label htmlFor="jmeno" className="text-sm font-medium">
           Jméno

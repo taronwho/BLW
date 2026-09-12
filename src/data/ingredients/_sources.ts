@@ -280,6 +280,29 @@ export const EFSA_CAFFEINE: SourceRef = {
   tier: 1,
 };
 
+/**
+ * Postup při dušení u dítěte. Stránka rozlišuje účinný a neúčinný kašel,
+ * popisuje pět úderů mezi lopatky a u kojence do jednoho roku pět stlačení
+ * hrudníku dvěma prsty pod úrovní bradavek; břišní stlačení (Heimlichův
+ * manévr) uvádí až u dětí nad jeden rok. Varuje před slepým šátráním prsty
+ * v ústech, protože to zasune předmět hlouběji.
+ */
+export const NHS_CHOKING = nhs(
+  'How to stop a child from choking',
+  '/conditions/baby/first-aid-and-safety/first-aid/how-to-stop-a-child-from-choking/',
+  FETCHED,
+);
+
+/** Železo: zdroje ve stravě a vliv vitaminu C na vstřebávání nehemového železa. */
+export const NHS_IRON = nhs('Iron', '/conditions/vitamins-and-minerals/iron/', FETCHED);
+
+/** Zinek a další stopové prvky — doporučené příjmy a potravinové zdroje. */
+export const NHS_TRACE_MINERALS = nhs(
+  'Vitamins and minerals – others',
+  '/conditions/vitamins-and-minerals/others/',
+  FETCHED,
+);
+
 /** Metodický manuál podpory kojení. */
 export const SZU_BREASTFEEDING: SourceRef = {
   org: 'Státní zdravotní ústav',

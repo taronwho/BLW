@@ -9,12 +9,14 @@ import type { AllergenGroup, Recipe } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
+import { FilterSelect } from '../components/FilterSelect';
+import type { SelectOption } from '../components/FilterSelect';
 import { ageInMonths } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
 
-const CATEGORY_OPTIONS: readonly ChipOption[] = [
+const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny kategorie' },
   ...RECIPE_CATEGORIES.map((category) => ({ id: category, label: RECIPE_CATEGORY_LABELS[category] })),
 ];
@@ -68,7 +70,7 @@ export function RecipesScreen(): ReactNode {
         Recepty
       </h1>
 
-      <label className="flex min-h-touch items-center gap-2 rounded-xl border border-muted/30 bg-surface px-3">
+      <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
         <Search aria-hidden="true" className="h-5 w-5 shrink-0 text-muted" />
         <span className="sr-only">Hledat recept</span>
         <input
@@ -81,11 +83,11 @@ export function RecipesScreen(): ReactNode {
         />
       </label>
 
-      <FilterChips
+      <FilterSelect
+        label="Kategorie"
         options={CATEGORY_OPTIONS}
         selected={category}
         onSelect={setCategory}
-        ariaLabel="Filtr kategorií receptů"
         testId="filtr-kategorii-receptu"
       />
       <FilterChips
@@ -235,7 +237,7 @@ function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: numb
             {RECIPE_CATEGORY_LABELS[recipe.category]}
           </span>
           <span className="rounded-lg bg-paper px-2 py-0.5 font-medium">
-            vhodné od {recipe.minAgeMonths} měsíců{tooEarly ? ' — na dceru ještě brzy' : ''}
+            vhodné od {recipe.minAgeMonths} měsíců{tooEarly ? ' — na dítě ještě brzy' : ''}
           </span>
           {vegetarian && (
             <span className="flex items-center gap-1 rounded-lg bg-accent/10 px-2 py-0.5 font-medium text-accent">

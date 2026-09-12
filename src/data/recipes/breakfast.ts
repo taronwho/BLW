@@ -43,9 +43,9 @@ export const breakfast: Recipe[] = [
       'Před podáváním promíchej a zkus teplotu na vnitřní straně zápěstí — kaše drží horko uprostřed.',
     ],
     babyServing: {
-      '6m': 'Nabídni hustou kaši na lžíci, kterou dáš dceři do ruky, a k tomu plátek syrové hrušky velikosti prstu na okusování.',
-      '9m': 'Kaši nech hustší a hruškové kostičky do ní jen zamíchej — dcera je loví prsty a trénuje špetku.',
-      '12m': 'Servíruj kaši v misce s vlastní lžící a kousky hrušky navrch; dcera už si nabírá sama a dojídá s malou pomocí.',
+      '6m': 'Nabídni hustou kaši na lžíci, kterou dáš dítěti do ruky, a k tomu plátek syrové hrušky velikosti prstu na okusování.',
+      '9m': 'Kaši nech hustší a hruškové kostičky do ní jen zamíchej — dítě je loví prsty a trénuje špetku.',
+      '12m': 'Servíruj kaši v misce s vlastní lžící a kousky hrušky navrch; dítě už si nabírá samo a dojídá s malou pomocí.',
     },
     meatSteps: [
       'Kaši pro dospělé dosuď skořicí, případně lžičkou medu, a přisyp zbytek syrových hrušek.',
@@ -84,12 +84,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Do odebrané porce vmíchej půl lžičky mandlového másla a rozmíchej ho dohladka; do dětské porce patří mandle jedině v podobě hladkého másla.',
       'Přidej lžíci teplé vody, aby kaše nebyla lepivá a dala se snadno polknout.',
-      'Meruňky rozmačkej vidličkou; slupka je pevná a dcera by ji vyplivla.',
+      'Meruňky rozmačkej vidličkou; slupka je pevná a dítě by ji vyplivlo.',
     ],
     babyServing: {
       '6m': 'Kaši nabídni hustou, slepenou do hrudky na okraji misky, aby ji šlo sebrat celou dlaní, a meruňku podej jako rozmačkané pyré.',
       '9m': 'Meruňkové kousky nech v kaši celé a nabídni ji v mělké misce ke sbírání prsty.',
-      '12m': 'Podávej kaši v misce se lžící a meruňky nakrájené na osminky navrch; dcera si porci míchá sama.',
+      '12m': 'Podávej kaši v misce se lžící a meruňky nakrájené na osminky navrch; dítě si porci míchá samo.',
     },
     meatSteps: [
       'Do kaše pro dospělé vmíchej zbytek mandlového másla, přidej zbývající meruňky a případně dosladˇ podle chuti.',
@@ -133,9 +133,9 @@ export const breakfast: Recipe[] = [
       'Nech je vychladnout na mřížce, aby nezvlhly, a podávej vlažné.',
     ],
     babyServing: {
-      '6m': 'Podávej lívanec ve tvaru prstu, který dcera sevře v pěsti, a borůvky jen rozkrojené a rozmačkané vidličkou.',
+      '6m': 'Podávej lívanec ve tvaru prstu, který dítě sevře v pěsti, a borůvky jen rozkrojené a rozmačkané vidličkou.',
       '9m': 'Lívanec nalámej na kousky velikosti nehtu a rozkrojené borůvky polož vedle na talíř ke sbírání špetkou.',
-      '12m': 'Nabídni celý lívanec a nech dceru, ať si ho sama láme; borůvky stále podávej rozkrojené, ne celé.',
+      '12m': 'Nabídni celý lívanec a nech dítě, ať si ho samo láme; borůvky stále podávej rozkrojené, ne celé.',
     },
     meatSteps: [
       'Zbylé lívance peč na másle dozlatova a navrš na ně tvaroh se zbylými borůvkami.',
@@ -171,16 +171,16 @@ export const breakfast: Recipe[] = [
       'Omeletu rozděl na tři díly a každý dokonči podle linie.',
     ],
     babySplitPoint:
-      'Po kroku 4 odkroj dceřin díl omelety, dřív než přijde na řadu dochucení pro dospělé a než se na pánev přidá cottage.',
+      'Po kroku 4 odkroj dítětin díl omelety, dřív než přijde na řadu dochucení pro dospělé a než se na pánev přidá cottage.',
     babySteps: [
-      'Dceřin díl omelety nakrájej na proužky nebo kostičky podle věku; vejce musí být propečené skrz naskrz, ne tekuté.',
+      'Dítětin díl omelety nakrájej na proužky nebo kostičky podle věku; vejce musí být propečené skrz naskrz, ne tekuté.',
       'Nasekaný špenát v omeletě prohlédni — delší kusy listu nastříhej nůžkami, aby se nelepily na patro.',
       'Navrch dej lžičku cottage bez dochucení, které porci zvláční.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek omelety široký jako prst a dlouhý přes dlaň, aby ho dcera uchopila a kousek jí vyčníval z pěsti.',
+      '6m': 'Podávej proužek omelety široký jako prst a dlouhý přes dlaň, aby ho dítě uchopilo a kousek mu vyčníval z pěsti.',
       '9m': 'Nakrájej omeletu na kostičky o hraně centimetr a cottage podávej v samostatné misce ke smáčení.',
-      '12m': 'Servíruj čtvrtku omelety na talíři s lžící cottage vedle; dcera už si sousta sama láme a namáčí.',
+      '12m': 'Servíruj čtvrtku omelety na talíři s lžící cottage vedle; dítě už si sousta samo láme a namáčí.',
     },
     meatSteps: [
       'Zbytek omelety osol, rozetři po něm polovinu cottage, přelož ji napůl a nech minutu dojít pod pokličkou.',
@@ -222,9 +222,9 @@ export const breakfast: Recipe[] = [
       'Zbytek nech v lednici nejdéle do večera a znovu ho nemixuj.',
     ],
     babyServing: {
-      '6m': 'Nabídni husté smoothie na lžíci nebo rozetřené po okraji misky, aby ho dcera sbírala dlaní a olizovala z prstů.',
+      '6m': 'Nabídni husté smoothie na lžíci nebo rozetřené po okraji misky, aby ho dítě sbíralo dlaní a olizovalo z prstů.',
       '9m': 'Konzistenci nech hustší jako jogurt a nabídni k ní kousek banánu velikosti prstu jako doprovod.',
-      '12m': 'Podej smoothie v otevřeném hrnečku se dvěma uchy; dcera už zvládne pár loků bez pomoci.',
+      '12m': 'Podej smoothie v otevřeném hrnečku se dvěma uchy; dítě už zvládne pár loků bez pomoci.',
     },
     meatSteps: [
       'Do sklenic pro dospělé přidej zbytek vloček, promíchej a podle chuti dosladˇ lžičkou medu.',
@@ -266,9 +266,9 @@ export const breakfast: Recipe[] = [
       'Nabídni ho čerstvý, vydrží v lednici do druhého dne a pak už ho nepodávej.',
     ],
     babyServing: {
-      '6m': 'Podávej hladký pudink na lžíci předané do ruky a k němu pruh manga velikosti prstu, po kterém dcera saje.',
-      '9m': 'Nech pudink hustší a mango nakrájej na kostičky, které si dcera sbírá špetkou z okraje misky.',
-      '12m': 'Servíruj vrstvený pudink ve skleničce s lžičkou; dcera už si vybírá, kolik manga si přimíchá.',
+      '6m': 'Podávej hladký pudink na lžíci předané do ruky a k němu pruh manga velikosti prstu, po kterém dítě saje.',
+      '9m': 'Nech pudink hustší a mango nakrájej na kostičky, které si dítě sbírá špetkou z okraje misky.',
+      '12m': 'Servíruj vrstvený pudink ve skleničce s lžičkou; dítě už si vybírá, kolik manga si přimíchá.',
     },
     meatSteps: [
       'Sklenice pro dospělé dolij jogurtem, přidej kostky manga a podle chuti dosladˇ javorovým sirupem.',
@@ -307,12 +307,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Krajíc chleba pro miminko neopékej do křupava — měkčí střídka se lépe mačká v dásních. Kůrku odkroj.',
       'Střídku nakrájej na pásky široké jako dva prsty a potři je odebranou pomazánkou.',
-      'Uvařené vejce nakrájej na měsíčky a polož je vedle; bílek je kluzký, proto sleduj, aby si ho dcera nenacpala do pusy najednou.',
+      'Uvařené vejce nakrájej na měsíčky a polož je vedle; bílek je kluzký, proto sleduj, aby si ho dítě nenacpalo do pusy najednou.',
     ],
     babyServing: {
       '6m': 'Podávej pásek chleba s pomazánkou dlouhý přes dlaň a měsíček vejce položený bokem, aby šel uchopit.',
-      '9m': 'Chléb nakrájej na kostky velikosti nehtu a vejce nadrob; dcera si obojí sbírá prsty.',
-      '12m': 'Nabídni malý krajíček s pomazánkou a vejcem navrch, který si dcera sama drží a odkusuje z něj.',
+      '9m': 'Chléb nakrájej na kostky velikosti nehtu a vejce nadrob; dítě si obojí sbírá prsty.',
+      '12m': 'Nabídni malý krajíček s pomazánkou a vejcem navrch, který si dítě samo drží a odkusuje z něj.',
     },
     meatSteps: [
       'Pomazánku pro dospělé osol, opepři a rozetři na opečený chléb; navrch polož vejce nakrájené na kolečka.',
@@ -356,8 +356,8 @@ export const breakfast: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej hustou kaši na lžíci a osminku pečeného jablka bez slupky jako měkké držadlo do dlaně.',
-      '9m': 'Kaši nech hrudkovitou s kousky jablka, které dcera loví prsty z mělké misky.',
-      '12m': 'Servíruj kaši v misce se lžící a pečeným jablkem navrch; dcera si mletý mák přimíchá sama.',
+      '9m': 'Kaši nech hrudkovitou s kousky jablka, které dítě loví prsty z mělké misky.',
+      '12m': 'Servíruj kaši v misce se lžící a pečeným jablkem navrch; dítě si mletý mák přimíchá samo.',
     },
     meatSteps: [
       'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a zbytkem mletého máku.',
@@ -399,7 +399,7 @@ export const breakfast: Recipe[] = [
       'Kolečka banánu pro miminko podávej podélně rozkrojená, aby se nekutálela a lépe se držela.',
     ],
     babyServing: {
-      '6m': 'Nabídni kaši slepenou do hrudky a proužek banánu dlouhý jako prst, který dcera uchopí a saje z něj.',
+      '6m': 'Nabídni kaši slepenou do hrudky a proužek banánu dlouhý jako prst, který dítě uchopí a saje z něj.',
       '9m': 'Kaši podávej volnější a banán nakrájej na kostičky ke sbírání špetkou z mělké misky.',
       '12m': 'Servíruj kaši v misce s kolečky banánu navrch a lžičkou tahini zakápnutou přes ni.',
     },
@@ -444,9 +444,9 @@ export const breakfast: Recipe[] = [
       'Přidej špetku nastříhané pažitky, ať porce voní stejně jako talíře dospělých.',
     ],
     babyServing: {
-      '6m': 'Podávej pásek toustu s rozmačkanými vejci dlouhý přes dlaň, který dcera sevře a saje z něj.',
+      '6m': 'Podávej pásek toustu s rozmačkanými vejci dlouhý přes dlaň, který dítě sevře a saje z něj.',
       '9m': 'Toust nakrájej na kostky a míchaná vejce nabídni vedle v mělké misce ke sbírání prsty.',
-      '12m': 'Servíruj půlku toustu s vejci navrch na talíři; dcera si ho sama zvedá a odkusuje.',
+      '12m': 'Servíruj půlku toustu s vejci navrch na talíři; dítě si ho samo zvedá a odkusuje.',
     },
     meatSteps: [
       'Zbytek vajec osol, opepři a navrš na opečené tousty; posyp zbylou pažitkou.',
@@ -489,8 +489,8 @@ export const breakfast: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši rozetřenou po dně misky a kousek dušené dýně bez slupky velikosti prstu jako doprovod.',
-      '9m': 'Kaši podávej hrudkovitou a dýni v kostičkách navrch, ať si dcera vybírá sousta sama.',
-      '12m': 'Servíruj kaši v misce se lžící a lžící tvarohu navrch, kterou si dcera zamíchá podle chuti.',
+      '9m': 'Kaši podávej hrudkovitou a dýni v kostičkách navrch, ať si dítě vybírá sousta samo.',
+      '12m': 'Servíruj kaši v misce se lžící a lžící tvarohu navrch, kterou si dítě zamíchá podle chuti.',
     },
     meatSteps: [
       'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a navrš na ni lžíci tvarohu.',
@@ -528,16 +528,16 @@ export const breakfast: Recipe[] = [
       'Pánev potři kokosovým olejem a peč lívanečky po dvou minutách z každé strany.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dvě lžíce těsta a upeč z nich dceřiny lívanečky, dřív než se zbytek těsta dosladí pro dospělé.',
+      'Po kroku 3 odeber dvě lžíce těsta a upeč z nich dítětiny lívanečky, dřív než se zbytek těsta dosladí pro dospělé.',
     babySteps: [
-      'Z odebraného těsta tvaruj protáhlé lívanečky, které dcera lépe udrží v pěsti než kulaté.',
+      'Z odebraného těsta tvaruj protáhlé lívanečky, které dítě lépe udrží v pěsti než kulaté.',
       'Peč je na mírném plameni a jeden rozlom, ať víš, že uvnitř nezůstalo syrové těsto.',
       'K lívanečkům podávej lžíci bílého jogurtu bez dochucení a jahody nakrájené na plátky.',
     ],
     babyServing: {
       '6m': 'Podej protáhlý lívaneček velikosti prstu a plátek jahody položený na okraj talíře, aby šel uchopit celou dlaní.',
       '9m': 'Lívaneček nalámej na kousky velikosti nehtu a jahody nakrájej na drobno ke sbírání špetkou.',
-      '12m': 'Nabídni dva lívanečky s jogurtem v misce vedle a nech dceru, ať si je sama namáčí.',
+      '12m': 'Nabídni dva lívanečky s jogurtem v misce vedle a nech dítě, ať si je samo namáčí.',
     },
     meatSteps: [
       'Zbylé lívanečky peč na kokosovém oleji dozlatova a navrš na ně jogurt s jahodami.',
@@ -579,9 +579,9 @@ export const breakfast: Recipe[] = [
       'Nech porci vychladnout a promíchej ji — uprostřed drží teplo výrazně déle než u okrajů.',
     ],
     babyServing: {
-      '6m': 'Nabídni kaši v hustší podobě na lžíci, kterou dáš dceři do ruky, a lžičku malinového pyré rozetři navrch.',
+      '6m': 'Nabídni kaši v hustší podobě na lžíci, kterou dáš dítěti do ruky, a lžičku malinového pyré rozetři navrch.',
       '9m': 'Kaši podávej řidší v mělké misce a celé maliny rozmačkej vidličkou, aby netvořily kulaté sousto.',
-      '12m': 'Servíruj kaši v misce s malinami navrch; dcera už si je sama zamíchá a kaši nabírá lžící.',
+      '12m': 'Servíruj kaši v misce s malinami navrch; dítě už si je samo zamíchá a kaši nabírá lžící.',
     },
     meatSteps: [
       'Kaši pro dospělé osladˇ podle chuti, nalij do misek a přelij malinovým pyré.',
@@ -624,8 +624,8 @@ export const breakfast: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Kaši nabídni slepenou do hrudky na okraji misky a k ní proužek banánu delší než dětská dlaň.',
-      '9m': 'Podávej kaši volnější a banán v kostičkách vedle; dcera si obojí sbírá špetkou.',
-      '12m': 'Servíruj kaši s kolečky banánu navrch a lžící vedle misky, aby si dcera nabírala sama.',
+      '9m': 'Podávej kaši volnější a banán v kostičkách vedle; dítě si obojí sbírá špetkou.',
+      '12m': 'Servíruj kaši s kolečky banánu navrch a lžící vedle misky, aby si dítě nabíralo samo.',
     },
     meatSteps: [
       'Kaši pro dospělé dochuť karobem, zalij kefírem a navrš na ni kolečka banánu.',
@@ -664,12 +664,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Z dětské porce vyber větší kousky ředkvičky nebo je rozmačkej, aby v pomazánce nezůstaly tvrdé kousky.',
       'Housku pro miminko zbav kůrky a nakrájej střídku na pásky široké jako dva prsty.',
-      'Pásky potři pomazánkou v tenké vrstvě; silná vrstva se při kousnutí vytlačí a dcera ji setře po tváři.',
+      'Pásky potři pomazánkou v tenké vrstvě; silná vrstva se při kousnutí vytlačí a dítě ji setře po tváři.',
     ],
     babyServing: {
       '6m': 'Podávej pásek housky s tenkou vrstvou pomazánky dlouhý přes celou dlaň, ať kus vyčnívá z pěsti.',
-      '9m': 'Housku nakrájej na kostky a pomazánku podávej v samostatné misce, do které si dcera kostky namáčí.',
-      '12m': 'Nabídni půlku housky namazanou pomazánkou a nech dceru, ať ji sama drží a odkusuje.',
+      '9m': 'Housku nakrájej na kostky a pomazánku podávej v samostatné misce, do které si dítě kostky namáčí.',
+      '12m': 'Nabídni půlku housky namazanou pomazánkou a nech dítě, ať ji samo drží a odkusuje.',
     },
     meatSteps: [
       'Zbylou pomazánku osol, opepři a rozetři na housky; navrch polož kolečka ředkvičky.',
@@ -709,12 +709,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Do dětské misky vmíchej půl lžičky rozmíchaného lískooříškového másla; právě v podobě hladkého másla jsou oříšky pro miminko bezpečné.',
       'Zapékej misku spolu s velkou mísou asi 25 minut, dokud směs nepevní a navrchu nezezlátne.',
-      'Porci nech vychladnout a nakrájej ji podle věku dcery na pásky nebo kostičky.',
+      'Porci nech vychladnout a nakrájej ji podle věku dítěte na pásky nebo kostičky.',
     ],
     babyServing: {
       '6m': 'Podávej pásek zapečených vloček velikosti prstu, který drží tvar a dá se sevřít v pěsti.',
       '9m': 'Nakrájej porci na kostky o hraně dva centimetry a přidej kousek pečené hrušky vedle.',
-      '12m': 'Servíruj čtvereček zapečených vloček na talíři s lžící jogurtu, pokud ho máš doma, a nech dceru jíst rukou.',
+      '12m': 'Servíruj čtvereček zapečených vloček na talíři s lžící jogurtu, pokud ho máš doma, a nech dítě jíst rukou.',
     },
     meatSteps: [
       'Velkou mísu dopeč do zlatova, nech deset minut odstát a nakrájej na dílky.',
@@ -756,7 +756,7 @@ export const breakfast: Recipe[] = [
       'Kaši zřeď lžící vody nebo jogurtu, protože polenta po vychladnutí tuhne.',
     ],
     babyServing: {
-      '6m': 'Rozetři kaši na talíř v tenké vrstvě, nech ji ztuhnout a nakrájej na hranolky, které dcera udrží v pěsti.',
+      '6m': 'Rozetři kaši na talíř v tenké vrstvě, nech ji ztuhnout a nakrájej na hranolky, které dítě udrží v pěsti.',
       '9m': 'Podávej kaši měkkou v misce s rozmačkanou švestkou zamíchanou dovnitř ke sbírání prsty.',
       '12m': 'Servíruj měkkou polentu v misce se lžící a pečenou švestkou nakrájenou na kousky navrch.',
     },
@@ -801,8 +801,8 @@ export const breakfast: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši na lžíci předané do ruky a k ní plátek syrového jablka velikosti prstu na okusování.',
-      '9m': 'Kaši podávej hrudkovitou v mělké misce, ať dcera sbírá zrnka quinoy špetkou.',
-      '12m': 'Servíruj kaši v misce se lžící a strouhaným jablkem navrch; dcera už zvládne jíst sama.',
+      '9m': 'Kaši podávej hrudkovitou v mělké misce, ať dítě sbírá zrnka quinoy špetkou.',
+      '12m': 'Servíruj kaši v misce se lžící a strouhaným jablkem navrch; dítě už zvládne jíst samo.',
     },
     meatSteps: [
       'Kaši pro dospělé dochuť zbytkem mletých mandlí, osladˇ podle chuti a promíchej.',
@@ -841,12 +841,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Krajíc pro miminko zbav kůrky a nakrájej střídku na pásky; kůrka je tuhá a v puse se sbalí do knedlíku.',
       'Pásky potři tenkou vrstvou žervé a polož na ně plátek oloupané okurky.',
-      'Pokud dcera chleba zatím nezvládá, nabídni žervé na lžíci a okurku samostatně jako držadlo.',
+      'Pokud dítě chleba zatím nezvládá, nabídni žervé na lžíci a okurku samostatně jako držadlo.',
     ],
     babyServing: {
-      '6m': 'Podávej pásek chleba s žervé přes celou dlaň a k tomu delší plátek okurky, ze kterého dcera saje šťávu.',
-      '9m': 'Chléb nakrájej na kostky a okurku na kostičky; obojí si dcera sbírá špetkou z talíře.',
-      '12m': 'Nabídni malý obložený chlebíček, který si dcera sama drží, a nech ji odkusovat vlastním tempem.',
+      '6m': 'Podávej pásek chleba s žervé přes celou dlaň a k tomu delší plátek okurky, ze kterého dítě saje šťávu.',
+      '9m': 'Chléb nakrájej na kostky a okurku na kostičky; obojí si dítě sbírá špetkou z talíře.',
+      '12m': 'Nabídni malý obložený chlebíček, který si dítě samo drží, a nech ji odkusovat vlastním tempem.',
     },
     meatSteps: [
       'Zbylé žervé osol, opepři a namaž na krajíce; navrch narovnej plátky okurky a posyp pažitkou.',
@@ -889,9 +889,9 @@ export const breakfast: Recipe[] = [
       'Borůvky pro miminko vždy rozkroj a zlehka rozmačkej, nikdy je nenabízej celé.',
     ],
     babyServing: {
-      '6m': 'Nabídni hustou hmotu na lžíci a k ní proužek banánu dlouhý jako prst, který dcera sevře v dlani.',
+      '6m': 'Nabídni hustou hmotu na lžíci a k ní proužek banánu dlouhý jako prst, který dítě sevře v dlani.',
       '9m': 'Podávej hmotu v mělké misce s rozkrojenými borůvkami navrch ke sbírání špetkou.',
-      '12m': 'Servíruj misku se lžící a nech dceru, ať si borůvky a banán sama přimíchá; borůvky stále krájej napůl.',
+      '12m': 'Servíruj misku se lžící a nech dítě, ať si borůvky a banán samo přimíchá; borůvky stále krájej napůl.',
     },
     meatSteps: [
       'Misky pro dospělé posyp konopnými semínky a opraženými vločkami.',

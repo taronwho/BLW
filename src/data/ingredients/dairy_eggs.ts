@@ -41,7 +41,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dej jogurt do mělké misky a nech dceru nabírat vlastní lžící. Hustotu zvýšíš lžící mletých ovesných vloček, řídký jogurt z lžíce steče dřív, než ho dcera dopraví do pusy.',
+          'Dej jogurt do mělké misky a nech dítě nabírat vlastní lžící. Hustotu zvýšíš lžící mletých ovesných vloček, řídký jogurt z lžíce steče dřív, než ho dítě dopraví do pusy.',
         caution: 'Jogurt s ovocem na dně bývá slazený, míchej si vlastní.',
       },
       '12m': {
@@ -76,12 +76,12 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Řecký jogurt je odkapaný, a proto hustší a bohatší na bílkoviny než bílý. Jeho hustota se pro první lžíce hodí, protože drží tvar a nestéká dceři po bradě ani po ruce.',
+          'Řecký jogurt je odkapaný, a proto hustší a bohatší na bílkoviny než bílý. Jeho hustota se pro první lžíce hodí, protože drží tvar a nestéká dítěti po bradě ani po ruce.',
         caution: 'Rozlišuj řecký jogurt od výrobku řeckého typu, složení se liší.',
       },
       '9m': {
         serving:
-          'Hustý jogurt se skvěle hodí na obalování kluzkého ovoce, třeba kousků manga nebo hrušky. Dcera pak úchop zvládne a zároveň se naučí kombinovat dvě chuti v jednom soustu.',
+          'Hustý jogurt se skvěle hodí na obalování kluzkého ovoce, třeba kousků manga nebo hrušky. Dítě pak úchop zvládne a zároveň se naučí kombinovat dvě chuti v jednom soustu.',
         caution: 'Odtučněné varianty pro dítě do dvou let nejsou vhodné.',
       },
       '12m': {
@@ -116,12 +116,12 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kefír je kysaný mléčný nápoj s živou kulturou a jeho kyselejší chuť dceru překvapí. Do prvního roku ho nenabízej jako nápoj, ale vmíchej ho do kaše nebo do zeleninového pyré.',
+          'Kefír je kysaný mléčný nápoj s živou kulturou a jeho kyselejší chuť dítě překvapí. Do prvního roku ho nenabízej jako nápoj, ale vmíchej ho do kaše nebo do zeleninového pyré.',
         caution: 'Kefír nesmí nahradit mateřské ani umělé mléko.',
       },
       '9m': {
         serving:
-          'Lžíci kefíru přidej do ovesné kaše nebo z něj udělej hustý koktejl s banánem. Kyselost dobře vyváží sladké ovoce a dcera si zvyká na širší škálu mléčných chutí.',
+          'Lžíci kefíru přidej do ovesné kaše nebo z něj udělej hustý koktejl s banánem. Kyselost dobře vyváží sladké ovoce a dítě si zvyká na širší škálu mléčných chutí.',
         caution: 'Z lahvičky ani z hrnku ho nenabízej místo vody.',
       },
       '12m': {
@@ -156,7 +156,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Měkký tvaroh je hustý a suchý, proto ho rozmíchej s trochou mléka nebo s ovocným pyré. Vzniklou krémovou hmotu rozetři na prst chleba, aby ji dcera mohla olizovat i kousat.',
+          'Měkký tvaroh je hustý a suchý, proto ho rozmíchej s trochou mléka nebo s ovocným pyré. Vzniklou krémovou hmotu rozetři na prst chleba, aby ji dítě mohlo olizovat i kousat.',
         caution: 'Samotný hutný tvaroh se lepí na patro, vždy ho rozřeď.',
       },
       '9m': {
@@ -196,12 +196,12 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tvaroh v kostce je pevnější a sušší než měkký, takže ho pro dceru nastrouhej a rozmíchej s mlékem. Bez rozmíchání zůstává drobivý a sousta se v ústech rozpadají na suchý prach.',
+          'Tvaroh v kostce je pevnější a sušší než měkký, takže ho pro dítě nastrouhej a rozmíchej s mlékem. Bez rozmíchání zůstává drobivý a sousta se v ústech rozpadají na suchý prach.',
         caution: 'Do dvou let volej spíš plnotučné varianty kvůli energii.',
       },
       '9m': {
         serving:
-          'Rozmíchaný polotučný tvaroh se dobře hodí do slaných pomazánek s bylinkami i do sladkých s ovocem. Dcera z něj dostane bílkoviny, aniž by jídlo bylo příliš tučné.',
+          'Rozmíchaný polotučný tvaroh se dobře hodí do slaných pomazánek s bylinkami i do sladkých s ovocem. Dítě z něj dostane bílkoviny, aniž by jídlo bylo příliš tučné.',
         caution: 'Tvrdý tvaroh z kostky nikdy nepodávej v kusu.',
       },
       '12m': {
@@ -276,7 +276,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Mascarpone je velmi tučný smetanový sýr s minimem soli. Lžičku vmíchej do zeleninového pyré nebo do kaše, dodá energii a hladkou strukturu, kterou dcera snadno polkne.',
+          'Mascarpone je velmi tučný smetanový sýr s minimem soli. Lžičku vmíchej do zeleninového pyré nebo do kaše, dodá energii a hladkou strukturu, kterou dítě snadno polkne.',
         caution: 'Kvůli vysokému obsahu tuku ho používej po lžičkách, ne po lžících.',
       },
       '9m': {
@@ -318,12 +318,12 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Cottage má zrnitou strukturu, kterou dcera zpočátku neudrží na lžíci. Rozmačkej ho proto vidličkou nebo rozmixuj s dušenou zeleninou do hladké hmoty a podávej po lžičkách.',
+          'Cottage má zrnitou strukturu, kterou dítě zpočátku neudrží na lžíci. Rozmačkej ho proto vidličkou nebo rozmixuj s dušenou zeleninou do hladké hmoty a podávej po lžičkách.',
         caution: 'Ochucené varianty s bylinkami obsahují víc soli než čistý.',
       },
       '9m': {
         serving:
-          'Zrnka cottage jsou v tomhle věku dobrým tréninkem, dcera je sbírá prsty po jednom. Smíchej ho s rozmačkaným avokádem, aby zrna držela pohromadě a dala se nabrat.',
+          'Zrnka cottage jsou v tomhle věku dobrým tréninkem, dítě je sbírá prsty po jednom. Smíchej ho s rozmačkaným avokádem, aby zrna držela pohromadě a dala se nabrat.',
         caution: 'Množství drž malé, cottage je slanější než tvaroh.',
       },
       '12m': {
@@ -406,12 +406,12 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Eidam pro dceru vždy nastrouhej najemno a promíchej ho s teplou zeleninou nebo s bramborem. Kostky ani plátky v téhle fázi nenabízej, tvrdý sýr se dásněmi nedá rozmělnit.',
+          'Eidam pro dítě vždy nastrouhej najemno a promíchej ho s teplou zeleninou nebo s bramborem. Kostky ani plátky v téhle fázi nenabízej, tvrdý sýr se dásněmi nedá rozmělnit.',
         caution: 'Vybírej sýr z pasterizovaného mléka, je to na obalu.',
       },
       '9m': {
         serving:
-          'Nastrouhaný eidam posyp na dušenou zeleninu nebo ho zapeč do placky. Dcera dostane vápník i bílkoviny, ale porci drž malou, protože sýr je zároveň zdrojem soli.',
+          'Nastrouhaný eidam posyp na dušenou zeleninu nebo ho zapeč do placky. Dítě dostane vápník i bílkoviny, ale porci drž malou, protože sýr je zároveň zdrojem soli.',
         caution: 'Roztavený sýr se táhne, rozděl ho před podáním.',
       },
       '12m': {
@@ -542,7 +542,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Parmazán nastrouhej najemno a posyp jím teplé jídlo, roztaví se a chuť se rozloží do celé porce. Úlomky ani kousky sýra dceři nedávej, jsou tvrdé a mají ostré hrany.',
+          'Parmazán nastrouhej najemno a posyp jím teplé jídlo, roztaví se a chuť se rozloží do celé porce. Úlomky ani kousky sýra dítěti nedávej, jsou tvrdé a mají ostré hrany.',
         caution: 'Parmazán se vyrábí se živočišným syřidlem, pro maminku není vhodný.',
       },
       '9m': {
@@ -582,7 +582,7 @@ export const dairyEggs: Ingredient[] = [
     hazardNotes: {
       sul: 'Pecorino romano patří mezi nejslanější sýry na trhu, sůl je u něj součástí technologie zrání. Pro dítě do prvního roku se hodí nanejvýš jako špetka na dochucení hotového jídla.',
       nepasterizovane:
-        'Pecorino romano se tradičně vyrábí ze syrového ovčího mléka a NHS sýry z nepasterizovaného mléka malým dětem nedoporučuje. Na obalu si proto ověř pasterizaci; sýr bez tohoto údaje dceři nedávej nastrouhaný nastudeno, jen tepelně zpracovaný v pokrmu.',
+        'Pecorino romano se tradičně vyrábí ze syrového ovčího mléka a NHS sýry z nepasterizovaného mléka malým dětem nedoporučuje. Na obalu si proto ověř pasterizaci; sýr bez tohoto údaje dítěti nedávej nastrouhaný nastudeno, jen tepelně zpracovaný v pokrmu.',
     },
     minAgeMonths: 6,
     prep: {
@@ -639,7 +639,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nastrouhaný sýr posyp na dušenou zeleninu nebo na rizoto. Dcera tím dostane vápník a zvýrazněnou chuť jídla, které jinak nesolíš vůbec.',
+          'Nastrouhaný sýr posyp na dušenou zeleninu nebo na rizoto. Dítě tím dostane vápník a zvýrazněnou chuť jídla, které jinak nesolíš vůbec.',
         caution: 'Do bezmasé varianty pokrmu ho nedávej, není vegetariánský.',
       },
       '12m': {
@@ -681,7 +681,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Smíchej žervé s nastrouhanou okurkou nebo s bylinkami a udělej z něj pomazánku. Dcera se u ní naučí mazat a zároveň dostane bílkoviny i vápník v přijatelné podobě.',
+          'Smíchej žervé s nastrouhanou okurkou nebo s bylinkami a udělej z něj pomazánku. Dítě se u ní naučí mazat a zároveň dostane bílkoviny i vápník v přijatelné podobě.',
         caution: 'Tvaroh je z hlediska soli lepší základ pomazánky.',
       },
       '12m': {
@@ -796,7 +796,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Smetanu používej jako složku vaření, tedy lžíci do zeleninové polévky nebo do omáčky. Ušlehanou šlehačku dceři nenabízej, obvykle se sladí a samotný nadýchaný tuk nemá výživovou hodnotu.',
+          'Smetanu používej jako složku vaření, tedy lžíci do zeleninové polévky nebo do omáčky. Ušlehanou šlehačku dítěti nenabízej, obvykle se sladí a samotný nadýchaný tuk nemá výživovou hodnotu.',
         caution: 'Smetana musí být z pasterizovaného mléka.',
       },
       '9m': {
@@ -841,7 +841,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ze zakysané smetany a bylinek udělej dip, do kterého dcera namáčí zeleninové hranolky. Namáčení je pro ni zábava a zároveň se tím učí koordinaci ruky a úst.',
+          'Ze zakysané smetany a bylinek udělej dip, do kterého dítě namáčí zeleninové hranolky. Namáčení je pro ni zábava a zároveň se tím učí koordinaci ruky a úst.',
         caution: 'Kyselá chuť nemusí sednout napoprvé, nabídni ji znovu.',
       },
       '12m': {
@@ -873,7 +873,7 @@ export const dairyEggs: Ingredient[] = [
     hazards: ['nepasterizovane'],
     hazardNotes: {
       nepasterizovane:
-        'Nepasterizované mléko z automatu nebo přímo od farmáře může obsahovat listerie a další bakterie, na které je malé dítě citlivé. Pro dceru používej výhradně pasterizované mléko, a to i tehdy, když ho budeš vařit.',
+        'Nepasterizované mléko z automatu nebo přímo od farmáře může obsahovat listerie a další bakterie, na které je malé dítě citlivé. Pro dítě používej výhradně pasterizované mléko, a to i tehdy, když ho budeš vařit.',
     },
     minAgeMonths: 6,
     prep: {
@@ -884,7 +884,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Mléko dál používej ve vaření, v kaši i v pomazánkách, ale ne do lahve nebo hrnku. K pití patří v tomhle věku voda a mléko mateřské nebo umělé, které dceři dodá dost železa.',
+          'Mléko dál používej ve vaření, v kaši i v pomazánkách, ale ne do lahve nebo hrnku. K pití patří v tomhle věku voda a mléko mateřské nebo umělé, které dítěti dodá dost železa.',
         caution: 'Rostlinné nápoje nejsou pro miminko náhradou mléka.',
       },
       '12m': {
@@ -916,7 +916,7 @@ export const dairyEggs: Ingredient[] = [
     hazards: ['syrove'],
     hazardNotes: {
       syrove:
-        'Syrové a nedovařené vejce nese riziko salmonelózy, na kterou je malé dítě citlivější než dospělý. Pro dceru proto vejce vždy provař tak, aby bílek i žloutek byly úplně pevné, a vynech majonézu, tiramisu i syrové těsto.',
+        'Syrové a nedovařené vejce nese riziko salmonelózy, na kterou je malé dítě citlivější než dospělý. Pro dítě proto vejce vždy provař tak, aby bílek i žloutek byly úplně pevné, a vynech majonézu, tiramisu i syrové těsto.',
     },
     minAgeMonths: 6,
     prep: {
@@ -927,7 +927,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z dobře provařeného vejce udělej omeletu nebo míchaná vajíčka nakrájená na proužky. Dcera je uchopí prsty a zvládne je rozmělnit dásněmi, protože struktura je měkká.',
+          'Z dobře provařeného vejce udělej omeletu nebo míchaná vajíčka nakrájená na proužky. Dítě je uchopí prsty a zvládne je rozmělnit dásněmi, protože struktura je měkká.',
         caution: 'Míchaná vajíčka musí být pevná, ne tekutá.',
       },
       '12m': {

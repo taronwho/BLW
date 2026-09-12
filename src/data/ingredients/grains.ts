@@ -39,12 +39,12 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jemné vločky rozvař v mateřském mléce, umělém mléce nebo ve vodě do husté kaše, která drží na obrácené lžíci. Hustá kaše se dá nabrat, řídká jen kape a dcera se u ní vzteká.',
+          'Jemné vločky rozvař v mateřském mléce, umělém mléce nebo ve vodě do husté kaše, která drží na obrácené lžíci. Hustá kaše se dá nabrat, řídká jen kape a dítě se u ní vzteká.',
         caution: 'Kaši nech vychladnout a před podáním promíchej, uprostřed bývá horká.',
       },
       '9m': {
         serving:
-          'Kaši dělej hrubší a přimíchej kousky ovoce, ať má dcera co objevovat. V tomhle věku už zvládne nabírat vlastní lžící, i když polovina skončí na bryndáku.',
+          'Kaši dělej hrubší a přimíchej kousky ovoce, ať má dítě co objevovat. V tomhle věku už zvládne nabírat vlastní lžící, i když polovina skončí na bryndáku.',
         caution: 'Nesypej vločky nikdy nasucho do pusy, suché lepí na patro.',
       },
       '12m': {
@@ -84,7 +84,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dobře rozvařené velké vločky nech v kaši celé, dcera si zvyká na strukturu. Dá se z nich upéct i placka, kterou udrží v ruce a rozkouše dásněmi.',
+          'Dobře rozvařené velké vločky nech v kaši celé, dítě si zvyká na strukturu. Dá se z nich upéct i placka, kterou udrží v ruce a rozkouše dásněmi.',
         caution: 'Müsli směsi obvykle obsahují celé kusy sušeného ovoce, ty vyber.',
       },
       '12m': {
@@ -160,11 +160,11 @@ export const grains: Ingredient[] = [
       '6m': {
         serving:
           'Hladká mouka se sama o sobě nepodává, slouží jako základ placek, lívanců a zahuštění. Právě přes ni se obvykle poprvé dostane do jídelníčku lepek, který se zavádí postupně a v malém množství.',
-        caution: 'Syrové těsto dceři nedávej, mouka není tepelně ošetřená.',
+        caution: 'Syrové těsto dítěti nedávej, mouka není tepelně ošetřená.',
       },
       '9m': {
         serving:
-          'Z hladké mouky upeč lívance bez sladké složky nebo tenké placky, které dcera drží v ruce. Zahustit s ní můžeš i zeleninovou omáčku, aby lépe držela na těstovině.',
+          'Z hladké mouky upeč lívance bez sladké složky nebo tenké placky, které dítě drží v ruce. Zahustit s ní můžeš i zeleninovou omáčku, aby lépe držela na těstovině.',
         caution: 'Placky peč na suché pánvi nebo s kapkou oleje.',
       },
       '12m': {
@@ -244,7 +244,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ze špaldové mouky upeč měkké placky nebo lívance, které dcera udrží v pěsti. Těsto potřebuje kratší hnětení než pšeničné, jinak se lepek naruší a pečivo se drolí.',
+          'Ze špaldové mouky upeč měkké placky nebo lívance, které dítě udrží v pěsti. Těsto potřebuje kratší hnětení než pšeničné, jinak se lepek naruší a pečivo se drolí.',
         caution: 'Špaldové pečivo z obchodu bývá dražší, doma vyjde levněji.',
       },
       '12m': {
@@ -279,7 +279,7 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Žitná mouka má tmavší barvu, výraznější chuť a slabší lepkovou síť než pšeničná. Samotné žitné těsto je lepivé, proto ho pro dceru vždy mísi s moukou pšeničnou nebo špaldovou.',
+          'Žitná mouka má tmavší barvu, výraznější chuť a slabší lepkovou síť než pšeničná. Samotné žitné těsto je lepivé, proto ho pro dítě vždy mísi s moukou pšeničnou nebo špaldovou.',
         caution: 'Žito patří mezi obiloviny s lepkem, značí se jako alergen.',
       },
       '9m': {
@@ -314,7 +314,7 @@ export const grains: Ingredient[] = [
     isKeyAllergen: true,
     chokingRisk: 'medium',
     chokingReason:
-      'Měkká střída se v ústech slepí do kompaktního těsta, které dcera nedokáže rozdělit na menší kusy a spolkne ho vcelku.',
+      'Měkká střída se v ústech slepí do kompaktního těsta, které dítě nedokáže rozdělit na menší kusy a spolkne ho vcelku.',
     hazards: ['sul'],
     hazardNotes: {
       sul: 'Chléb je v českém jídelníčku jedním z největších zdrojů soli. Do prvního roku by měl být příjem soli velmi nízký, proto z něj podávej jen malé kousky a zbytek dne k nim už žádné slané potraviny nepřidávej.',
@@ -328,7 +328,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Osušené prsty chleba potři tvarohem nebo avokádem, aby se lépe polykaly. Dcera už se s nimi naučí mířit do pusy a trénuje si kousání o tužší okraj.',
+          'Osušené prsty chleba potři tvarohem nebo avokádem, aby se lépe polykaly. Dítě už se s nimi naučí mířit do pusy a trénuje si kousání o tužší okraj.',
         caution: 'Množství drž malé, jeden až dva prsty chleba denně stačí.',
       },
       '12m': {
@@ -372,7 +372,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Opečené proužky potři tenkou vrstvou tvarohu nebo ořechového másla rozředěného vodou. Dcera se na nich učí ukusovat a její kousání získá rytmus.',
+          'Opečené proužky potři tenkou vrstvou tvarohu nebo ořechového másla rozředěného vodou. Dítě se na nich učí ukusovat a její kousání získá rytmus.',
         caution: 'Ořechové máslo vždy rozřeď, husté se lepí v hrdle.',
       },
       '12m': {
@@ -416,7 +416,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Osušené proužky namoč do zeleninové polévky nebo je potři pomazánkou. Dcera se na nich učí odkusovat, ale sleduj, kolik si toho strčí do pusy najednou.',
+          'Osušené proužky namoč do zeleninové polévky nebo je potři pomazánkou. Dítě se na nich učí odkusovat, ale sleduj, kolik si toho strčí do pusy najednou.',
         caution: 'Dbej na to, aby k pečivu vždy měla vodu.',
       },
       '12m': {
@@ -451,7 +451,7 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vař těstoviny déle, než uvádí obal, měly by být měkké až rozvařené. Vybírej velké tvary, třeba široké nudle nebo veliké mušle, které dcera pohodlně uchopí celou dlaní.',
+          'Vař těstoviny déle, než uvádí obal, měly by být měkké až rozvařené. Vybírej velké tvary, třeba široké nudle nebo veliké mušle, které dítě pohodlně uchopí celou dlaní.',
         caution: 'Vodu na vaření nesol, těstoviny sůl nasávají do sebe.',
       },
       '9m': {
@@ -531,13 +531,13 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kuskus zalij vroucí vodou, nech deset minut nabobtnat a rozvolni vidličkou. Samotná sypká zrnka dcera nenabere, proto je smíchej se zeleninovým pyré do hustší hmoty.',
+          'Kuskus zalij vroucí vodou, nech deset minut nabobtnat a rozvolni vidličkou. Samotná sypká zrnka dítě nenabere, proto je smíchej se zeleninovým pyré do hustší hmoty.',
         caution: 'Sypký kuskus se snadno vdechne, vždy ho podávej vlhký.',
       },
       '9m': {
         serving:
-          'Nabobtnalý kuskus smíchej s dušenou zeleninou a s lžící jogurtu, aby držel pohromadě. Dá se z něj vytvarovat i malá kulička, kterou dcera uchopí prsty.',
-        caution: 'Po jídle zkontroluj dceři ústa, zrnka se lepí za tvář.',
+          'Nabobtnalý kuskus smíchej s dušenou zeleninou a s lžící jogurtu, aby držel pohromadě. Dá se z něj vytvarovat i malá kulička, kterou dítě uchopí prsty.',
+        caution: 'Po jídle zkontroluj dítěti ústa, zrnka se lepí za tvář.',
       },
       '12m': {
         serving:
@@ -619,8 +619,8 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Dobře uvařená basmati zůstává sypká, proto ji spoj s omáčkou nebo s jogurtem, aby ji dcera nabrala. Dlouhé zrno se hodí ke kari zelenině i k dušeným luštěninám.',
-        caution: 'Ohřívej jen jednou a jen porci, kterou dcera sní.',
+          'Dobře uvařená basmati zůstává sypká, proto ji spoj s omáčkou nebo s jogurtem, aby ji dítě nabralo. Dlouhé zrno se hodí ke kari zelenině i k dušeným luštěninám.',
+        caution: 'Ohřívej jen jednou a jen porci, kterou dítě sní.',
       },
       '12m': {
         serving:
@@ -662,7 +662,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Hustší rýžová kaše drží na lžíci a dcera se u ní učí samostatně jíst. Do hotové kaše vmíchej ovocné pyré nebo lžíci mletých lněných semínek pro zdroj tuků.',
+          'Hustší rýžová kaše drží na lžíci a dítě se u ní učí samostatně jíst. Do hotové kaše vmíchej ovocné pyré nebo lžíci mletých lněných semínek pro zdroj tuků.',
         caution: 'Uvařenou kaši nenech na lince, ukládej ji hned do lednice.',
       },
       '12m': {
@@ -705,7 +705,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozvařená natural rýže má zemitou chuť a víc vlákniny než bílá. Smíchej ji s dušenou zeleninou a kouskem tofu, dcera tak dostane rostlinné železo i vitamin C ze zeleniny.',
+          'Rozvařená natural rýže má zemitou chuť a víc vlákniny než bílá. Smíchej ji s dušenou zeleninou a kouskem tofu, dítě tak dostane rostlinné železo i vitamin C ze zeleniny.',
         caution: 'Vzhledem k obalu zrna ji střídej s jinými obilovinami častěji.',
       },
       '12m': {
@@ -746,7 +746,7 @@ export const grains: Ingredient[] = [
       '6m': {
         serving:
           'Chlebíček nabízej jen výjimečně a vždy potřený tenkou vrstvou avokáda nebo tvarohu, aby úlomky držely pohromadě. Suchý chlebíček do ruky v téhle fázi nepatří.',
-        caution: 'Nikdy nenech dceru jíst rýžový chlebíček nasucho a bez dozoru.',
+        caution: 'Nikdy nenech dítě jíst rýžový chlebíček nasucho a bez dozoru.',
       },
       '9m': {
         serving:
@@ -790,7 +790,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z uvařených jáhel vytvaruj kuličky nebo placičky, které dcera uchopí prsty. Jsou bez lepku a nesou železo i hořčík, takže jsou dobrou náhradou za rýži.',
+          'Z uvařených jáhel vytvaruj kuličky nebo placičky, které dítě uchopí prsty. Jsou bez lepku a nesou železo i hořčík, takže jsou dobrou náhradou za rýži.',
         caution: 'Jáhly rychle tuhnou, podávej je vlažné a čerstvě uvařené.',
       },
       '12m': {
@@ -830,7 +830,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Hustší lámanková kaše se dá tvarovat do malých hromádek, které dcera nabere prsty. Pohanka neobsahuje lepek a je dobrým zdrojem hořčíku i rostlinných bílkovin.',
+          'Hustší lámanková kaše se dá tvarovat do malých hromádek, které dítě nabere prsty. Pohanka neobsahuje lepek a je dobrým zdrojem hořčíku i rostlinných bílkovin.',
         caution: 'Kaši podávej vlažnou, horká kaše drží teplo uprostřed.',
       },
       '12m': {
@@ -870,7 +870,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařená zrna promíchej s dušenou zeleninou a s trochou tvarohu, aby držela pohromadě. Dcera si je nabírá prsty po malých hromádkách a učí se s nimi manipulovat.',
+          'Uvařená zrna promíchej s dušenou zeleninou a s trochou tvarohu, aby držela pohromadě. Dítě si je nabírá prsty po malých hromádkách a učí se s nimi manipulovat.',
         caution: 'Samotná sypká zrna se špatně sbírají, vždy je něčím spoj.',
       },
       '12m': {
@@ -905,7 +905,7 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Quinou před vařením důkladně propláchni, jinak zůstane hořká od přírodní ochranné vrstvy. Vař ji patnáct minut, pak rozmixuj se zeleninou, samotná drobná zrna dcera nenabere.',
+          'Quinou před vařením důkladně propláchni, jinak zůstane hořká od přírodní ochranné vrstvy. Vař ji patnáct minut, pak rozmixuj se zeleninou, samotná drobná zrna dítě nenabere.',
         caution: 'Neproplachovaná quinoa chutná mýdlově a dítě jídlo odmítne.',
       },
       '9m': {
@@ -990,7 +990,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Hustou polentu rozlij na plech, nech ztuhnout a nakrájej na hranolky, které dcera uchopí. Krátce je opeč na pánvi, získají pevnější povrch a lépe se drží v ruce.',
+          'Hustou polentu rozlij na plech, nech ztuhnout a nakrájej na hranolky, které dítě uchopí. Krátce je opeč na pánvi, získají pevnější povrch a lépe se drží v ruce.',
         caution: 'Ztuhlou polentu krájej na prsty, ne na malé kostky.',
       },
       '12m': {

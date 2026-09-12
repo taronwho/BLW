@@ -47,12 +47,12 @@ export const soups2: Recipe[] = [
       'Polévku nech vychladnout na teplotu ruky a zkus kapku na vnitřní straně zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej hustý krém na předložené lžíci nebo do něj namoč proužek chleba, ze kterého dcera saje.',
+      '6m': 'Podávej hustý krém na předložené lžíci nebo do něj namoč proužek chleba, ze kterého dítě saje.',
       '9m': 'Nabídni krém v mělké misce a k němu podélně rozkrojené špičky chřestu na uchopení.',
       '12m': 'Servíruj polévku v hrnečku se dvěma uchy a kousky chřestu na lžíci vedle.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a ozdob osmaženými chřestovými špičkami.',
+      'Polévku pro masitou variantu osol, opepři a ozdob osmaženými chřestovými špičkami.',
       'Kdo chce sytější talíř, přidá si opečený kousek slaniny.',
     ],
     vegetarianSteps: [
@@ -93,12 +93,12 @@ export const soups2: Recipe[] = [
       'Podávej porci hned a zbytek už znovu neohřívej.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci; dcera ji olízne, když jí lžíci vložíš do dlaně.',
+      '6m': 'Podávej hustou polévku na lžíci; dítě ji olízne, když jí lžíci vložíš do dlaně.',
       '9m': 'Nabídni polévku v mělké misce a k ní půlky vařené kapusty na sbírání prsty.',
       '12m': 'Servíruj polévku v hrnečku s kousky kapusty rozkrojenými na čtvrtky.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a zakápni jablečným octem.',
+      'Polévku pro masitou variantu osol, opepři a zakápni jablečným octem.',
       'Navrch přidej opražená dýňová semínka.',
     ],
     vegetarianSteps: [
@@ -139,12 +139,12 @@ export const soups2: Recipe[] = [
       'Nech porci zvlažnět a podávej ji na lžíci.',
     ],
     babyServing: {
-      '6m': 'Podávej hladkou protlačenou polévku na předložené lžíci, kterou dcera olizuje.',
+      '6m': 'Podávej hladkou protlačenou polévku na předložené lžíci, kterou dítě olizuje.',
       '9m': 'Nabídni polévku v mělké misce a k ní pruhy dušeného batátu na uchopení.',
       '12m': 'Servíruj polévku v hrnečku s kousky pečené papriky nakrájenými nadrobno.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, dochuť pálivou paprikou a zakápni limetkou.',
+      'Polévku pro masitou variantu osol, dochuť pálivou paprikou a zakápni limetkou.',
       'Navrch přidej opečené kousky slaniny.',
     ],
     vegetarianSteps: [
@@ -190,7 +190,7 @@ export const soups2: Recipe[] = [
       '12m': 'Servíruj polévku v hrnečku a kousky artyčoku podávej na lžíci vedle.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a zakápni dobrým olivovým olejem.',
+      'Polévku pro masitou variantu osol, opepři a zakápni dobrým olivovým olejem.',
       'Podávej ji s opečeným kváskovým chlebem.',
     ],
     vegetarianSteps: [
@@ -282,11 +282,11 @@ export const soups2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej hustou rozmačkanou polévku na lžíci nebo do ní namoč proužek chleba.',
-      '9m': 'Nabídni polévku s měkkými kousky mrkve, které dcera sbírá klešťovým úchopem.',
+      '9m': 'Nabídni polévku s měkkými kousky mrkve, které dítě sbírá klešťovým úchopem.',
       '12m': 'Servíruj polévku v hrnečku s kousky mrkve i hrachu; batole dojídá lžící.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol a doplň ji opečenými kostkami uzeného masa.',
+      'Polévku pro masitou variantu osol a doplň ji opečenými kostkami uzeného masa.',
       'Navrch přisyp další majoránku a opraženou cibulku.',
     ],
     vegetarianSteps: [
@@ -327,12 +327,12 @@ export const soups2: Recipe[] = [
       'Podávej ji hned; uvařený fenykl kvůli dusičnanům znovu neohřívej.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na předložené lžíci, kterou dcera olizuje sama.',
+      '6m': 'Podávej hustou polévku na předložené lžíci, kterou dítě olizuje samo.',
       '9m': 'Nabídni polévku v mělké misce a k ní pruhy vařeného patizonu na uchopení.',
       '12m': 'Servíruj polévku v hrnečku s kousky patizonu a lžící ricotty navrch.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a zakápni olivovým olejem.',
+      'Polévku pro masitou variantu osol, opepři a zakápni olivovým olejem.',
       'Podávej ji s opečeným chlebem potřeným česnekem.',
     ],
     vegetarianSteps: [
@@ -375,11 +375,11 @@ export const soups2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej polévku rozmačkanou s kroupami jako hustou kaši na lžíci.',
-      '9m': 'Nabídni polévku s celými měkkými kroupami, které dcera sbírá prsty z mělké misky.',
+      '9m': 'Nabídni polévku s celými měkkými kroupami, které dítě sbírá prsty z mělké misky.',
       '12m': 'Servíruj polévku v hrnečku s kroupami a čočkou promíchanými dovnitř.',
     },
     meatSteps: [
-      'Tuňáka sceď, rozeber vidličkou a vmíchej ho do porce pro tátu a dceru.',
+      'Tuňáka sceď, rozeber vidličkou a vmíchej ho do porce pro masitou variantu.',
       'Polévku osol, opepři a zakápni olivovým olejem.',
     ],
     vegetarianSteps: [
@@ -419,16 +419,16 @@ export const soups2: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky, dřív než se do hrnce přidává nasekaná rukola.',
     babySteps: [
       'Fazole v dětské porci rozmačkej vidličkou, celý bob je pro tenhle věk moc pevný.',
-      'Rukolu pro dceru nasekej opravdu nadrobno a vmíchej ji do porce zvlášť.',
+      'Rukolu pro dítě nasekej opravdu nadrobno a vmíchej ji do porce zvlášť.',
       'Bobkový list i tvrdé jehličky rozmarýnu z porce vylov a podávej ji hned.',
     ],
     babyServing: {
       '6m': 'Podávej hustou rozmačkanou polévku na lžíci nebo do ní namoč proužek chleba.',
-      '9m': 'Nabídni polévku s celými měkkými fazolemi, které dcera sbírá klešťovým úchopem.',
+      '9m': 'Nabídni polévku s celými měkkými fazolemi, které dítě sbírá klešťovým úchopem.',
       '12m': 'Servíruj polévku v hrnečku s fazolemi a nadrobno nasekanou rukolou.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a zakápni dobrým olivovým olejem.',
+      'Polévku pro masitou variantu osol, opepři a zakápni dobrým olivovým olejem.',
       'Podávej ji s opečeným kváskovým chlebem potřeným česnekem.',
     ],
     vegetarianSteps: [
@@ -469,12 +469,12 @@ export const soups2: Recipe[] = [
       'Podávej ji hned; listová zelenina se kvůli dusičnanům znovu neohřívá.',
     ],
     babyServing: {
-      '6m': 'Podávej hladkou polévku na předložené lžíci, kterou dcera olizuje z dlaně.',
+      '6m': 'Podávej hladkou polévku na předložené lžíci, kterou dítě olizuje z dlaně.',
       '9m': 'Nabídni polévku v mělké misce a k ní rozmačkaný hrášek na sbírání prsty.',
       '12m': 'Servíruj polévku v hrnečku se lžící tvarohu a hrstí máty navrch.',
     },
     meatSteps: [
-      'Polévku pro tátu a dceru osol, opepři a doplň ji opečenými kostkami chleba.',
+      'Polévku pro masitou variantu osol, opepři a doplň ji opečenými kostkami chleba.',
       'Kdo chce sytější talíř, přidá si plátek šunky nakrájený na proužky.',
     ],
     vegetarianSteps: [
