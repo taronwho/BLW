@@ -642,7 +642,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, aniž bys jídlo musela sladit. Vybírej cejlonskou, protože běžná kasie obsahuje víc kumarinu, jehož příjem se u dětí sleduje.',
+          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, aniž bys jídlo musela sladit. Cejlonskou vybírej z opatrnosti: obsah kumarinu se mezi druhy skořice liší a ověřený limit pro kojence v datech nemáme, viz poznámka k revizi.',
         caution: 'Skořicovou tyčinku v jídle nenechávej, je tvrdá.',
       },
       '9m': {
@@ -652,7 +652,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí skořici v kaši, v pečení i v kompotu. Používej ji po špetkách, protože kumarin se v těle kumuluje a u malých dětí se s velkými dávkami zbytečně nepracuje.',
+          'Batole jí skořici v kaši, v pečení i v kompotu. Používej ji po špetkách — jako koření na dochucení, ne jako složku, které je v jídle hodně. Konkrétní bezpečné množství pro tenhle věk v ověřeném zdroji nemáme.',
         caution: 'Skořicové bonbony a nápoje obsahují hodně sladké složky.',
       },
     },
@@ -667,7 +667,7 @@ export const herbsSpices: Ingredient[] = [
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Konkrétní bezpečný denní příjem kumarinu u kojenců se v této session nepodařilo dohledat v tier 1 zdroji, který by šlo načíst. Doporučení „používej po špetkách a vybírej cejlonskou" je proto vedeno jako obecná opatrnost, ne jako ověřený limit. Před stanovením pravidelné denní dávky se zeptej pediatričky.',
+      'Stanovisko EFSA ke kumarinu existuje, ale plné texty EFSA Journal dnes přesměrovávají na efsa.onlinelibrary.wiley.com, což docs/BEZPECNOST.md mezi povolenými doménami nemá — načíst a citovat ho tedy nešlo. Konkrétní bezpečný denní příjem kumarinu u kojenců proto v datech není. Doporučení „používej po špetkách a vybírej cejlonskou" je obecná opatrnost, ne ověřený limit. Před stanovením pravidelné denní dávky se zeptej pediatričky.',
   },
   {
     id: 'kurkuma',

@@ -608,7 +608,7 @@ export const grains: Ingredient[] = [
     hazards: ['arsen'],
     hazardNotes: {
       arsen:
-        'Rýže přijímá z půdy víc anorganického arsenu než ostatní obiloviny a EFSA vede malé děti jako nejexponovanější skupinu. Zrno proto před vařením propláchni a vař ho v nadbytku vody, kterou pak slij; rýži zároveň nedávej jako jediný denní zdroj obilovin.',
+        'Rýže podle NHS přijímá z půdy víc anorganického arsenu než ostatní obiloviny a EFSA ji jmenuje mezi hlavními zdroji expozice v evropské stravě. Zrno proto před vařením propláchni a vař ho v nadbytku vody, kterou pak slij; rýži zároveň nedávej jako jediný denní zdroj obilovin.',
     },
     minAgeMonths: 6,
     prep: {

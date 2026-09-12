@@ -14,10 +14,11 @@ import {
 /**
  * Kategorie „ostatni" podle docs/SUROVINY-SEZNAM.md (10 položek).
  *
- * Dětský čaj a kakao jsou vedené jako needs-review — u fenyklu i u
- * theobrominu se nepodařilo v této session načíst tier 1 zdroj s konkrétním
- * limitem pro kojence, a docs/BEZPECNOST.md výslovně zakazuje doplňovat
- * taková doporučení z paměti.
+ * Kakao a karob zůstávají needs-review: ani po přímém načtení povolených
+ * zdrojů (12. 9. 2026) se nepodařilo doložit limit theobrominu pro kojence
+ * ani složení karobu, a docs/BEZPECNOST.md zakazuje doplňovat taková
+ * tvrzení z paměti. Dětský čaj už needs-review není — NHS i EMA se k němu
+ * vyjadřují dost jasně na to, aby položka mohla říct „nedoporučuje se".
  */
 export const other: Ingredient[] = [
   {
@@ -75,32 +76,30 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Voda je pro dceru v tomhle věku jediný potřebný nápoj a čaj ji nenahrazuje. Pokud čaj přesto podáváš, zkontroluj složení: u fenyklových přípravků platí evropské omezení pro malé děti.',
+          'Vedle mléka je jediný potřebný nápoj voda. NHS uvádí, že dětské a bylinné nápoje bývají slazené, a nedoporučuje je; přípravky ze sladkého fenyklu se podle EMA používají až od čtyř let. Čaj tedy v tomhle věku nezařazuj.',
         caution: 'Složení dětských čajů se liší značku od značky, čti etiketu.',
       },
       '9m': {
         serving:
-          'Nabízej nanejvýš slabý neslazený nálev z bylin, které máš odsouhlasené od pediatričky. Množství drž malé, aby čaj nevytlačil mléko ani vodu, které dcera opravdu potřebuje.',
+          'Ani teď čaj nepotřebuje a doporučení NHS zůstává stejné. Pokud ho přesto chceš podat, ať je neslazený a slabý a ať ho předem odsouhlasí pediatrička; drž malé množství, aby nevytlačil mléko ani vodu.',
         caution: 'Instantní granulované čaje bývají silně slazené.',
       },
       '12m': {
         serving:
-          'Batole může dostat slabý neslazený čaj jako zpestření, hlavním nápojem zůstává voda. Čaj obsahuje látky, které snižují vstřebávání železa, proto ho nepodávej k jídlu.',
-        caution: 'Černý a zelený čaj obsahují kofein, ty vynech.',
+          'Hlavním nápojem batolete zůstává voda a vedle ní mléko. Dětské a bylinné nápoje NHS nedoporučuje ani v tomhle věku, takže z nich nedělej denní zvyk a ber je nanejvýš jako občasné zpestření.',
+        caution: 'Černý a zelený čaj obsahují kofein, ten pro malé děti vhodný není.',
       },
     },
     prepIdeas: [
-      'slabý neslazený nálev po konzultaci s pediatričkou',
+      'jen výjimečně a jen neslazený, po domluvě s pediatričkou',
       'podávaný vlažný v otevřeném hrnku',
-      'mimo hlavní jídla kvůli vstřebávání železa',
-      'jako občasné zpestření, ne jako denní nápoj',
+      'nikdy jako náhrada vody nebo mléka',
+      'bez fenyklové složky u dítěte do čtyř let',
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EMA_FENNEL, NHS_DRINKS],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'EMA vede přípravky ze sladkého fenyklu jako nedoporučené pro děti pod 4 roky bez doporučení pediatra, konkrétní limit pro fenyklové složky v běžných dětských čajích se ale v této session nepodařilo načíst. Složení dětských čajů v ČR se navíc liší značku od značky. Vhodnost konkrétního čaje řeš s pediatričkou.',
+    sources: [EMA_FENNEL, NHS_DRINKS, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
   },
   {
     id: 'kokosovy-jogurt',
@@ -306,7 +305,7 @@ export const other: Ingredient[] = [
     sources: [NHS_AVOID, NHS_AVOID_WEANING],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Konkrétní doporučený věk pro zavedení kakaa ani limit theobrominu u kojenců se v této session nepodařilo dohledat v načtitelném tier 1 zdroji. Hodnota minAgeMonths 12 je proto opatrný odhad odvozený od pravidla o přidaném cukru, ne ověřené doporučení. Termín zavedení prober s pediatričkou.',
+      'Ověřeno přímým načtením obou stránek NHS 12. 9. 2026. NHS říká, že kofein pro kojence a malé děti vhodný není a že se do láhve nemá přidávat nic včetně čokoládového prášku — o theobrominu ani o věku pro zavedení kakaa ale nemluví. Hodnota minAgeMonths 12 tedy zůstává opatrným odhadem odvozeným od pravidla o přidaném cukru, ne ověřeným doporučením. Termín zavedení prober s pediatričkou.',
   },
   {
     id: 'karob',
@@ -333,7 +332,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí karob v kaši, v pudinku i v pečení. V rodině, která zatím drží jídelníček bez kakaa, je karob nejjednodušší cestou k čokoládové chuti bez povzbuzujících látek.',
+          'Batole jí karob v kaši, v pudinku i v pečení. V rodině, která zatím drží jídelníček bez kakaa, je nejjednodušší cestou k čokoládové chuti — a hlavně ho nemusíš doslazovat, což je důvod, který doložit umíme.',
         caution: 'Karob rychle nasává vlhkost, skladuj ho v uzavřené nádobě.',
       },
     },
@@ -348,7 +347,7 @@ export const other: Ingredient[] = [
     sources: [NHS_AVOID, NHS_10_12M],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Tvrzení, že karob neobsahuje theobromin ani kofein, se v této session nepodařilo doložit načteným tier 1 zdrojem. Položka je proto vedená k revizi; informace o přidaném cukru vychází z NHS, samotné srovnání karobu s kakaem ověř před tím, než ho budeš brát jako jistotu.',
+      'Tvrzení, že karob neobsahuje theobromin ani kofein, se nepodařilo doložit ani po přímém načtení povolených zdrojů 12. 9. 2026 — žádný z nich karob nezmiňuje. Texty položky proto tvrdí jen to, co doložit umíme: karob se nemusí doslazovat. Srovnání karobu s kakaem co do povzbuzujících látek ověř dřív, než ho budeš brát jako jistotu.',
   },
   {
     id: 'ocet-jablecny',

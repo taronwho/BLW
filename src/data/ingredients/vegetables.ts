@@ -1400,7 +1400,7 @@ export const vegetables: Ingredient[] = [
     sources: [EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
     reviewStatus: 'needs-review',
     reviewNote:
-      'EMA nedoporučuje léčivé přípravky ze sladkého fenyklového plodu dětem do 4 let, protože o jejich bezpečnosti v této skupině není dost dat. Týká se to plodu, tedy i fenyklového čaje — ne zeleninové hlízy. Zda se má omezení vztáhnout i na hlízu, se načteným zdrojem doložit nepodařilo. Nepodařilo se dohledat ani měření dusičnanů přímo u fenyklu; dostupné hodnocení EFSA se týká špenátu a salátu. Před pravidelným zařazením se zeptej pediatričky.',
+      'Ověřeno přímým načtením obou zdrojů 12. 9. 2026. Stránka EMA říká, že přípravky ze sladkého fenyklového plodu se používají od 4 let a mladším dětem se nedoporučují, protože o bezpečném užívání v této skupině není dost údajů; týká se to plodu, tedy i fenyklového čaje, ne zeleninové hlízy. Stránka EFSA k dusičnanům hodnotí špenát a hlávkový salát, o fenyklu nemluví — hazard `dusicnany` u hlízy tedy vychází z docs/BEZPECNOST.md, ne z měření ve zdroji. Obojí zůstává otevřené: před pravidelným zařazením se zeptej pediatričky.',
   },
   {
     id: 'chrest',
