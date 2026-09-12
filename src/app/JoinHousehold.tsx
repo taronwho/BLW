@@ -22,7 +22,7 @@ export function JoinHousehold(): ReactNode {
   if (kod === undefined || !isValidHouseholdCode(kod)) {
     return (
       <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-semibold">Neplatný kód</h2>
+        <h1 className="text-lg font-semibold">Neplatný kód</h1>
         <p className="text-sm text-muted">
           Odkaz neobsahuje platný párovací kód. Zkus ho na druhém telefonu načíst znovu.
         </p>
@@ -32,7 +32,7 @@ export function JoinHousehold(): ReactNode {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-lg font-semibold">Připojit se k domácnosti</h2>
+      <h1 className="text-lg font-semibold">Připojit se k domácnosti</h1>
       <p className="font-mono text-2xl font-bold tracking-[0.2em]">{formatHouseholdCode(kod)}</p>
       <p className="text-sm text-muted">
         Po připojení uvidíš stejné ochutnávky a poznámky jako druhý rodič.

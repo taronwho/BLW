@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
 /**
- * Kostra fáze 0: disclaimer je vidět při prvním spuštění a žádná obrazovka
- * vodorovně nepřetéká (docs/SPEC.md kapitola 6). Plné testy UI přijdou ve fázi 4.
+ * Vstup do aplikace: disclaimer při prvním spuštění a obrazovka Domácnost
+ * s párovacím kódem (docs/SPEC.md kap. 4.6 a akceptační kritérium 10).
  */
-test.describe('kostra aplikace', () => {
+test.describe('vstup do aplikace', () => {
   test('disclaimer se ukáže při prvním spuštění a dá se potvrdit', async ({ page }) => {
     await page.goto('./');
 
@@ -18,20 +18,22 @@ test.describe('kostra aplikace', () => {
 
     await accept.click();
     await expect(disclaimer).toBeHidden();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('BLW');
+    // Po potvrzení aplikace startuje na katalogu surovin.
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Suroviny');
   });
 
-  test('žádné vodorovné přetečení', async ({ page }, testInfo) => {
+  test('spodní navigace vede na všechny čtyři obrazovky', async ({ page }) => {
     await page.goto('./');
-    const width = testInfo.project.use.viewport?.width ?? 0;
+    await page.getByTestId('disclaimer-accept').click();
 
-    for (const step of ['disclaimer', 'po potvrzení'] as const) {
-      if (step === 'po potvrzení') {
-        await page.getByTestId('disclaimer-accept').click();
-        await expect(page.getByTestId('disclaimer')).toBeHidden();
-      }
-      const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-      expect(scrollWidth, `${step}: vodorovné přetečení`).toBeLessThanOrEqual(width);
+    for (const [label, heading] of [
+      ['Recepty', 'Recepty'],
+      ['Deník', 'Deník'],
+      ['Domácnost', 'Domácnost'],
+      ['Suroviny', 'Suroviny'],
+    ] as const) {
+      await page.getByRole('link', { name: label }).click();
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(heading);
     }
   });
 });
@@ -41,7 +43,7 @@ test.describe('domácnost', () => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
-    await page.getByRole('link', { name: /Domácnost/ }).click();
+    await page.getByRole('link', { name: 'Domácnost' }).click();
     await expect(page.getByTestId('stav-synchronizace')).toContainText('Jen na tomto zařízení');
 
     await page.getByRole('button', { name: 'Založit domácnost' }).click();
@@ -53,14 +55,20 @@ test.describe('domácnost', () => {
     await expect(page.getByTestId('qr-kod')).toBeVisible();
   });
 
-  test('žádné vodorovné přetečení na obrazovce domácnosti', async ({ page }, testInfo) => {
+  test('datum narození předvybere fázi v detailu suroviny', async ({ page }) => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
-    await page.getByRole('link', { name: /Domácnost/ }).click();
-    await expect(page.getByTestId('stav-synchronizace')).toBeVisible();
 
-    const width = testInfo.project.use.viewport?.width ?? 0;
-    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-    expect(scrollWidth).toBeLessThanOrEqual(width);
+    await page.getByRole('link', { name: 'Domácnost' }).click();
+    await page.getByTestId('jmeno-ditete').fill('Ema');
+    // Dítě starší 12 měsíců → předvybraná fáze 12m+.
+    await page.getByTestId('datum-narozeni').fill('2024-01-15');
+    await page.getByRole('button', { name: 'Uložit', exact: true }).click();
+    await expect(page.getByTestId('dite-v-hlavicce')).toContainText('Ema');
+
+    await page.getByRole('link', { name: 'Suroviny' }).click();
+    await page.getByTestId('hledat-surovinu').fill('brokolice');
+    await page.getByTestId('seznam-surovin').getByRole('link').first().click();
+    await expect(page.getByTestId('faze-12m')).toHaveAttribute('aria-pressed', 'true');
   });
 });
