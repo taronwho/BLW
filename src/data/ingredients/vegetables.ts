@@ -1,6 +1,7 @@
 import type { Ingredient } from '@/types';
 import {
   EFSA_NITRATE,
+  EMA_FENNEL,
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
   NHS_6M,
@@ -1368,7 +1369,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Fenykl je v docs/BEZPECNOST.md vedený mezi zeleninou s vyšším obsahem dusičnanů. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
+        'Fenyklová hlíza patří k zelenině, u které se obsah dusičnanů sleduje. Nabízej ji střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď, nenechávej ho stát v teple a podruhé už ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1396,10 +1397,10 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [9, 10, 11],
     vegetarian: true,
-    sources: [EFSA_NITRATE, NHS_FIRST_FOODS],
+    sources: [EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Omezující stanovisko EMA se týká přípravků ze sladkého fenyklového plodu, ne zeleninové hlízy; jestli a jak se vztahuje i na hlízu, se v této session nepodařilo doložit načteným zdrojem. Údaj o dusičnanech vychází z docs/BEZPECNOST.md a z obecného hodnocení EFSA k listové zelenině, ne z měření u fenyklu. Před pravidelným zařazením se zeptej pediatričky.',
+      'EMA nedoporučuje léčivé přípravky ze sladkého fenyklového plodu dětem do 4 let, protože o jejich bezpečnosti v této skupině není dost dat. Týká se to plodu, tedy i fenyklového čaje — ne zeleninové hlízy. Zda se má omezení vztáhnout i na hlízu, se načteným zdrojem doložit nepodařilo. Nepodařilo se dohledat ani měření dusičnanů přímo u fenyklu; dostupné hodnocení EFSA se týká špenátu a salátu. Před pravidelným zařazením se zeptej pediatričky.',
   },
   {
     id: 'chrest',

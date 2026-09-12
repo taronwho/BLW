@@ -9,57 +9,72 @@ import type { SourceRef } from '@/types';
  * hlídá pravidlo `source-url-shape` v src/safety/rules.ts.
  *
  * POZNÁMKA K OVĚŘENÍ: přímé stažení stránek (WebFetch/curl) blokuje v tomto
- * prostředí egress proxy (403) u všech zdravotnických domén. Ověření proto
- * proběhlo přes vyhledávací nástroj, který vrací živý obsah stránky i její
- * URL. Tvrzení v datech se drží obecných principů z těchto stránek.
+ * prostředí egress proxy u všech zdravotnických domén. Ověření proto proběhlo
+ * přes vyhledávací nástroj omezený na povolenou doménu, který vrací živý obsah
+ * stránky i její URL. Tvrzení v datech se drží obecných principů z těch stránek.
+ *
+ * Zdroje s datem `VERIFIED_ZELENINA` byly znovu načtené při dokončování
+ * kategorie „zelenina“ — je to právě ta množina, na kterou se odkazuje
+ * src/data/ingredients/vegetables.ts. U ostatních zůstává datum dřívějšího
+ * ověření; nezvyšuj ho, dokud odkaz sám znovu nenačteš.
  */
 
 const ACCESSED = '2026-09-11';
 
-function nhs(title: string, path: string): SourceRef {
-  return { org: 'NHS', title, url: `https://www.nhs.uk${path}`, accessedAt: ACCESSED, tier: 1 };
+/** Datum, kdy byly znovu načtené zdroje použité v kategorii „zelenina“. */
+const VERIFIED_ZELENINA = '2026-09-12';
+
+function nhs(title: string, path: string, accessedAt = ACCESSED): SourceRef {
+  return { org: 'NHS', title, url: `https://www.nhs.uk${path}`, accessedAt, tier: 1 };
 }
 
 /** Zákazy pro dětskou linii: sůl, cukr, med, celé ořechy, syrové vejce, rýžové nápoje. */
 export const NHS_AVOID = nhs(
   'Foods to avoid giving babies and young children',
   '/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/',
+  VERIFIED_ZELENINA,
 );
 
 /** První příkrmy, měkké vařené hranolky, velikost soust do ruky. */
 export const NHS_FIRST_FOODS = nhs(
   "Your baby's first solid foods",
   '/baby/weaning-and-feeding/babys-first-solid-foods/',
+  VERIFIED_ZELENINA,
 );
 
 /** Co nabízet kolem 6 měsíců. */
 export const NHS_6M = nhs(
   '6 months – Feeding your baby',
   '/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/',
+  VERIFIED_ZELENINA,
 );
 
 /** Posun textur a samostatné jedení mezi 7. a 9. měsícem. */
 export const NHS_7_9M = nhs(
   '7 to 9 months – Feeding your baby',
   '/best-start-in-life/baby/weaning/what-to-feed-your-baby/7-to-9-months/',
+  VERIFIED_ZELENINA,
 );
 
 /** Rodinná strava a tvrdší textury mezi 10. a 12. měsícem. */
 export const NHS_10_12M = nhs(
   '10 to 12 months – Feeding your baby',
   '/best-start-in-life/baby/weaning/what-to-feed-your-baby/10-to-12-months/',
+  VERIFIED_ZELENINA,
 );
 
 /** Bezpečná příprava: čtvrcení kulatého ovoce, pecky, kosti, slupky. */
 export const NHS_PREP_SAFELY = nhs(
   'Preparing food safely for babies',
   '/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/',
+  VERIFIED_ZELENINA,
 );
 
 /** Zavádění alergenů od šesti měsíců a opakovaná expozice. */
 export const NHS_ALLERGY = nhs(
   'Baby food allergies',
   '/best-start-in-life/baby/weaning/safe-weaning/food-allergies/',
+  VERIFIED_ZELENINA,
 );
 
 /** Ryby: dravé ryby s rtutí, porce tučných ryb, syroví korýši. */
@@ -75,6 +90,7 @@ export const NHS_VITAMIN_A = nhs('Vitamin A', '/conditions/vitamins-and-minerals
 export const NHS_YOUNG_CHILDREN = nhs(
   'What to feed young children',
   '/baby/weaning-and-feeding/what-to-feed-young-children/',
+  VERIFIED_ZELENINA,
 );
 
 /** Nápoje: voda od začátku příkrmu, rýžové nápoje do 5 let ne. */
@@ -93,6 +109,7 @@ export const NHS_AVOID_WEANING = nhs(
 export const NHS_VEGETARIAN = nhs(
   'The vegetarian diet',
   '/live-well/eat-well/how-to-eat-a-balanced-diet/the-vegetarian-diet/',
+  VERIFIED_ZELENINA,
 );
 
 /** Dusičnany v listové zelenině a riziko pro malé děti. */
@@ -100,7 +117,7 @@ export const EFSA_NITRATE: SourceRef = {
   org: 'EFSA',
   title: 'EFSA assesses possible health risk for children from nitrate in leafy vegetables',
   url: 'https://www.efsa.europa.eu/en/press/news/contam101209',
-  accessedAt: ACCESSED,
+  accessedAt: VERIFIED_ZELENINA,
   tier: 1,
 };
 
@@ -127,7 +144,7 @@ export const EMA_FENNEL: SourceRef = {
   org: 'EMA',
   title: 'Foeniculi dulcis fructus – herbal medicinal product',
   url: 'https://www.ema.europa.eu/en/medicines/herbal/foeniculi-dulcis-fructus',
-  accessedAt: ACCESSED,
+  accessedAt: VERIFIED_ZELENINA,
   tier: 1,
 };
 
@@ -154,7 +171,7 @@ export const MZCR_COMPLEMENTARY: SourceRef = {
   org: 'Ministerstvo zdravotnictví ČR',
   title: 'Doporučení k zavádění komplementární výživy (příkrmu) u kojenců',
   url: 'https://www.mzcr.cz/Odbornik/dokumenty/doporuceni-k-zavadeni-komplementarni-vyzivyprikrmu-u-kojencu_7542_1154_3.html',
-  accessedAt: ACCESSED,
+  accessedAt: VERIFIED_ZELENINA,
   tier: 1,
 };
 
