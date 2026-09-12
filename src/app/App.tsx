@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { AppShell } from './components/AppShell';
 import { DisclaimerGate } from './DisclaimerGate';
 import { JoinHousehold } from './JoinHousehold';
+import { ScrollToTop } from './components/ScrollToTop';
 import { UpdatePrompt } from './UpdatePrompt';
 import { DiaryScreen } from './screens/DiaryScreen';
 import { GuideDetailScreen } from './screens/GuideDetailScreen';
@@ -21,6 +22,7 @@ import { RecipesScreen } from './screens/RecipesScreen';
 export function App(): ReactNode {
   return (
     <HashRouter>
+      <ScrollToTop />
       <DisclaimerGate>
         <AppShell>
           <Routes>

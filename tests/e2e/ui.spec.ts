@@ -174,3 +174,85 @@ test('filtry receptů: jen vegetariánské a čas do 20 minut', async ({ page })
   await page.getByTestId('filtr-casu').getByTestId('chip-20').click();
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();
 });
+
+test('nová obrazovka začíná nahoře', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+  await expect(page.getByTestId('seznam-receptu')).toBeVisible();
+
+  await page.mouse.wheel(0, 2000);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(500);
+
+  await page.getByTestId('seznam-receptu').getByRole('link').first().click();
+  await expect(page.getByTestId('moment-odebrani')).toBeVisible();
+  // Detail se dřív otevíral sescrollovaný tam, kde skončil seznam.
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
+test('značka železa otevře okénko místo detailu receptu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  await page.locator('[data-testid^="zeleza-"]').first().click();
+
+  const okenko = page.getByTestId('okenko-zivin');
+  await expect(okenko).toBeVisible();
+  await expect(okenko).toContainText('Železo');
+  await expect(okenko).toContainText('ne měřená hodnota v miligramech');
+  // Značka je uvnitř odkazu na detail — proklik se nesmí spustit.
+  await expect(page.getByTestId('seznam-receptu')).toBeVisible();
+
+  await page.getByTestId('okenko-zavrit').click();
+  await expect(okenko).toBeHidden();
+});
+
+test('filtr železa a řazení přerovnají seznam receptů', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  const count = page.getByTestId('pocet-receptu');
+  const vse = (await count.textContent()) ?? '';
+
+  await page.getByTestId('filtr-zeleza').getByText('Hemové z masa').click();
+  await expect(count).not.toHaveText(vse);
+
+  await page.getByTestId('filtr-zeleza').getByText('Železo: vše').click();
+  await expect(count).toHaveText(vse);
+
+  const prvniAbecedne = await page
+    .getByTestId('seznam-receptu')
+    .getByRole('link')
+    .first()
+    .textContent();
+  await page.getByTestId('razeni-receptu').selectOption('zelezo');
+  await expect(page.getByTestId('seznam-receptu').getByRole('link').first()).not.toHaveText(
+    prvniAbecedne ?? '',
+  );
+});
+
+test('recept ukazuje vlastní zdroje i zdroje svých surovin', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+  await page.getByTestId('seznam-receptu').getByRole('link').first().click();
+
+  await page.getByTestId('zdroje-receptu').click();
+  await expect(page.locator('[data-testid="seznam-zdroju"] a').first()).toBeVisible();
+
+  await page.getByTestId('zdroje-surovin').click();
+  await expect.poll(() => page.locator('[data-testid="seznam-zdroju"] a').count()).toBeGreaterThan(
+    1,
+  );
+});
+
+test('suroviny jdou seřadit podle obsahu železa', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const prvni = page.getByTestId('seznam-surovin').getByRole('link').first();
+  const abecedne = await prvni.textContent();
+
+  await page.getByTestId('razeni-surovin').selectOption('zelezo');
+  await expect(prvni).not.toHaveText(abecedne ?? '');
+  // Nahoře musí stát významný zdroj, ne první položka podle abecedy.
+  await expect(page.getByTestId('seznam-surovin').locator('li').first()).toContainText('železo');
+});

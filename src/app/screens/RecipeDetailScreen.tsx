@@ -4,12 +4,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
-import type { Recipe, RecipeIngredientRef, Stage } from '@/types';
+import type { Ingredient, Recipe, RecipeIngredientRef, Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { GripHint } from '../components/GripHint';
+import { SourceDisclosure, SourceLinks } from '../components/SourceList';
 import { StageSwitch } from '../components/StageSwitch';
 import { ageInMonths, stageForAge } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
+import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
@@ -96,6 +98,12 @@ export function RecipeDetailScreen(): ReactNode {
           Štítek ukazuje nejvyšší riziko ze surovin receptu. Krájení řeš u konkrétní suroviny.
         </p>
       </header>
+
+      <SourceDisclosure
+        sources={recipe.sources}
+        label="Zdroje receptu"
+        testId="zdroje-receptu"
+      />
 
       <IngredientsBlock recipe={recipe} />
 
@@ -207,6 +215,15 @@ export function RecipeDetailScreen(): ReactNode {
 
 function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
   const tracks: RecipeIngredientRef['track'][] = ['all', 'meat', 'vegetarian'];
+
+  // Doklady k surovinám patří k receptu stejně jako k detailu suroviny —
+  // rodič, který stojí u sporáku, se kvůli nim nemá proklikávat jinam.
+  const podleSuroviny = [
+    ...new Map(recipe.ingredients.map((ref) => [ref.ingredientId, ref])).values(),
+  ]
+    .map((ref) => ingredientById.get(ref.ingredientId))
+    .filter((one): one is Ingredient => one !== undefined && one.sources.length > 0)
+    .map((one) => ({ ingredient: one, sources: dedupeSources(one.sources) }));
   return (
     <section aria-labelledby="suroviny-nadpis" className="flex flex-col gap-3">
       <h2 id="suroviny-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
@@ -245,6 +262,23 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
           </div>
         );
       })}
+
+      <SourceDisclosure
+        sources={[]}
+        label={`Zdroje u surovin (${podleSuroviny.length})`}
+        testId="zdroje-surovin"
+      >
+        <ul className="flex flex-col gap-3">
+          {podleSuroviny.map(({ ingredient, sources }) => (
+            <li key={ingredient.id} className="flex flex-col gap-1.5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+                {ingredient.nameCz}
+              </p>
+              <SourceLinks sources={sources} />
+            </li>
+          ))}
+        </ul>
+      </SourceDisclosure>
     </section>
   );
 }

@@ -12,11 +12,14 @@ import { ChokingBadge } from '../components/ChokingBadge';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
+import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
 import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { matchesIngredient } from '../lib/search';
+import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
+import type { SortKey } from '../lib/sorting';
 
 type QuickFilter =
   | 'vse'
@@ -39,6 +42,11 @@ const QUICK_FILTERS: readonly ChipOption[] = [
   { id: 'zelezo', label: 'Zdroj železa' },
 ];
 
+const SORT_OPTIONS: readonly SelectOption[] = INGREDIENT_SORTS.map((one) => ({
+  id: one.id,
+  label: one.label,
+}));
+
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny kategorie' },
   ...INGREDIENT_CATEGORIES.map((category) => ({ id: category, label: CATEGORY_LABELS[category] })),
@@ -50,6 +58,7 @@ export function IngredientsScreen(): ReactNode {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('vse');
   const [quick, setQuick] = useState<QuickFilter>('vse');
+  const [sort, setSort] = useState<SortKey>('abeceda');
 
   const tasted = useMemo(() => tastedIds(state), [state]);
   const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
@@ -82,6 +91,8 @@ export function IngredientsScreen(): ReactNode {
       }),
     [query, category, quick, tasted, favorites, months, month],
   );
+
+  const serazene = useMemo(() => sortIngredients(visible, sort), [visible, sort]);
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="suroviny-nadpis">
@@ -116,6 +127,13 @@ export function IngredientsScreen(): ReactNode {
         ariaLabel="Rychlé filtry"
         testId="rychle-filtry"
       />
+      <FilterSelect
+        label="Řazení"
+        options={SORT_OPTIONS}
+        selected={sort}
+        onSelect={(id) => setSort(id as SortKey)}
+        testId="razeni-surovin"
+      />
 
       <p className="text-xs text-muted" data-testid="pocet-surovin">
         {visible.length} z {ingredients.length} surovin
@@ -128,7 +146,7 @@ export function IngredientsScreen(): ReactNode {
         </p>
       ) : (
         <ul className="flex flex-col gap-2" data-testid="seznam-surovin">
-          {visible.map((item) => (
+          {serazene.map((item) => (
             <IngredientRow
               key={item.id}
               ingredient={item}
@@ -170,13 +188,15 @@ function IngredientRow({
             od {ingredient.minAgeMonths} měsíců
           </span>
           <ChokingBadge risk={ingredient.chokingRisk} />
-          {nutrientProfile(ingredient).iron === 'vyznamny' && (
-            <span className="rounded-lg bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent">
-              železo
-            </span>
-          )}
         </span>
       </Link>
+      <span className="flex shrink-0 items-center self-center">
+        <NutrientBadge
+          profile={nutrientProfile(ingredient)}
+          title={ingredient.nameCz}
+          testId={`zeleza-${ingredient.id}`}
+        />
+      </span>
       <TastedToggle
         ingredientId={ingredient.id}
         ingredientName={ingredient.nameCz}
