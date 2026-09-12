@@ -85,7 +85,7 @@ export function makeChicken(overrides: Partial<Ingredient> = {}): Ingredient {
     chokingReason: 'Vlákna masa jsou pevná a suchý kus se v ústech nerozpadne, dítě ho spolkne vcelku.',
     prep: {
       '6m': prep(
-        'Kuřecí maso dus doměkka a nabídni v podélném proužku velikosti prstu, který dcera sevře v pěsti. Suché kostičky v tomhle věku nedávej, špatně se s nimi v puse pracuje.',
+        'Kuřecí maso dus doměkka a nabídni v podélném proužku velikosti prstu, který dítě sevře v pěsti. Suché kostičky v tomhle věku nedávej, špatně se s nimi v puse pracuje.',
       ),
       '9m': prep(
         'Maso natrhej podél vláken na jemné cucky nebo nabídni v kostičkách do velikosti hrášku. Vždy dobře propečené a šťavnaté, klidně promíchané s trochou omáčky.',
@@ -126,7 +126,7 @@ export function makeRecipe(overrides: Partial<Recipe> = {}): Recipe {
     babyServing: {
       '6m': 'Podávej placku nakrájenou na podlouhlé proužky velikosti prstu, aby šly uchopit v pěsti.',
       '9m': 'Placku nakrájej na kostičky do velikosti hrášku pro klešťový úchop.',
-      '12m': 'Placku nabídni vcelku nebo na větší sousta, dcera už si ji rozdělí sama.',
+      '12m': 'Placku nabídni vcelku nebo na větší sousta, dítě už si ji rozdělí samo.',
     },
     meatSteps: ['Placky dosol podle chuti a podávej s opečeným kuřecím masem.'],
     vegetarianSteps: ['Placky dosol a podávej s bílým jogurtem a citronovou šťávou.'],
