@@ -6,6 +6,7 @@ import { lunchesDinners } from './lunches_dinners';
 import { lunchesDinners2 } from './lunches_dinners_2';
 import { snacksBaking } from './snacks_baking';
 import { soups } from './soups';
+import { soups2 } from './soups_2';
 
 /**
  * Kuchařka. Plní se po kategoriích ve fázi 3 (docs/GOALS.md).
@@ -16,6 +17,7 @@ export const recipes: Recipe[] = [
   ...breakfast,
   ...breakfast2,
   ...soups,
+  ...soups2,
   ...snacksBaking,
   ...extras,
 ];

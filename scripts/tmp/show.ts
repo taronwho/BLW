@@ -1,3 +1,5 @@
 import { catalog } from '../../src/data/index';
-const r = catalog.recipes.find((x) => x.id === 'krupicova-kase-maliny');
-console.log(r?.titleCz, '|', r?.ingredients.map((i) => i.ingredientId).join(', '));
+for (const id of ['rybi-polevka-treska-tmava','hraskova-polevka-mata']) {
+  const r = catalog.recipes.find((x) => x.id === id);
+  console.log(id, '|', r?.ingredients.map((i) => i.ingredientId).join(', '));
+}

@@ -1,8 +1,9 @@
 import { ingredients } from '../../src/data/ingredients';
 import { lunchesDinners2 } from '../../src/data/recipes/lunches_dinners_2';
 import { breakfast2 } from '../../src/data/recipes/breakfast_2';
+import { soups2 } from '../../src/data/recipes/soups_2';
 const byId = new Map(ingredients.map((i) => [i.id, i]));
-for (const r of [...lunchesDinners2, ...breakfast2]) {
+for (const r of [...lunchesDinners2, ...breakfast2, ...soups2]) {
   const exp = new Set<string>();
   for (const ref of r.ingredients) {
     const ing = byId.get(ref.ingredientId);
