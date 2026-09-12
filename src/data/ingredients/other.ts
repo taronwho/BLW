@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  EFSA_CAFFEINE,
   EMA_FENNEL,
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
@@ -280,18 +281,18 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'V šesti měsících kakao do jídelníčku nezařazuj. Obsahuje theobromin, tedy povzbuzující látku příbuznou kofeinu, a v kombinaci s obvyklým doslazováním se pro miminko nehodí.',
+          'V šesti měsících kakao do jídelníčku nezařazuj. Kakaové boby patří mezi přirozené zdroje kofeinu, tedy povzbuzující látky, a kakao se navíc skoro vždy podává doslazené.',
         caution: 'Kakaové sušenky a nápoje z obchodu jsou silně slazené.',
       },
       '9m': {
         serving:
-          'Ani v devíti měsících se kakao nedoporučuje. Pokud chceš podobnou tmavou chuť do kaše, použij karob, který povzbuzující látky neobsahuje a je přirozeně sladký.',
+          'Ani v devíti měsících se kakao nedoporučuje. Pokud chceš podobnou tmavou chuť do kaše, sáhni po karobu — je přirozeně sladký, takže ho nemusíš doslazovat.',
         caution: 'Čokoládové pomazánky nejsou pro dítě do roka vhodné.',
       },
       '12m': {
         serving:
-          'Po prvním roce může batole občas dostat malé množství čistého kakaa v jídle. Kakaové nápoje z obchodu jsou z větší části sladká složka, proto si kakao míchej sama do mléka.',
-        caution: 'Kakao podávej dopoledne, theobromin může narušit usínání.',
+          'Po prvním roce může batole občas dostat malé množství čistého kakaa v jídle. Kakaové nápoje z obchodu jsou z větší části sladká složka, proto si kakao míchej sama do mléka. U dětí od tří let je právě čokoláda a kakaové nápoje nejčastějším zdrojem kofeinu v jídelníčku.',
+        caution: 'Kakao podávej spíš dopoledne, kofein z něj může rušit usínání.',
       },
     },
     prepIdeas: [
@@ -302,10 +303,10 @@ export const other: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    sources: [NHS_AVOID, NHS_AVOID_WEANING, EFSA_CAFFEINE],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Ověřeno přímým načtením obou stránek NHS 12. 9. 2026. NHS říká, že kofein pro kojence a malé děti vhodný není a že se do láhve nemá přidávat nic včetně čokoládového prášku — o theobrominu ani o věku pro zavedení kakaa ale nemluví. Hodnota minAgeMonths 12 tedy zůstává opatrným odhadem odvozeným od pravidla o přidaném cukru, ne ověřeným doporučením. Termín zavedení prober s pediatričkou.',
+      'Ověřeno přímým načtením všech tří zdrojů 12. 9. 2026. NHS říká, že kofein pro kojence a malé děti vhodný není a že se do láhve nemá přidávat nic včetně čokoládového prášku. Stránka EFSA ke kofeinu doložila, že kakaové boby jsou přirozeným zdrojem kofeinu, že u dětí 3–10 let je čokoláda včetně kakaových nápojů nejčastějším zdrojem kofeinu a že bezpečná úroveň pro děti a dospívající je 3 mg/kg tělesné hmotnosti a den. Nejmladší sledovanou skupinou jsou ale batolata 12–36 měsíců, o kojencích do 12 měsíců tam nic není, a theobromin EFSA na téhle stránce neřeší vůbec. Zůstává tedy nedoložené dvojí: věk zavedení (minAgeMonths 12 je opatrný odhad odvozený od pravidla o přidaném cukru, ne převzaté doporučení) a jakýkoli limit theobrominu pro kojence. Termín zavedení prober s pediatričkou.',
   },
   {
     id: 'karob',
@@ -332,7 +333,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí karob v kaši, v pudinku i v pečení. V rodině, která zatím drží jídelníček bez kakaa, je nejjednodušší cestou k čokoládové chuti — a hlavně ho nemusíš doslazovat, což je důvod, který doložit umíme.',
+          'Batole jí karob v kaši, v pudinku i v pečení. V rodině, která zatím drží jídelníček bez kakaa, je nejjednodušší cestou k čokoládové chuti — a hlavně ho nemusíš doslazovat, což je jediný důvod, který doložit umíme.',
         caution: 'Karob rychle nasává vlhkost, skladuj ho v uzavřené nádobě.',
       },
     },
@@ -347,7 +348,7 @@ export const other: Ingredient[] = [
     sources: [NHS_AVOID, NHS_10_12M],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Tvrzení, že karob neobsahuje theobromin ani kofein, se nepodařilo doložit ani po přímém načtení povolených zdrojů 12. 9. 2026 — žádný z nich karob nezmiňuje. Texty položky proto tvrdí jen to, co doložit umíme: karob se nemusí doslazovat. Srovnání karobu s kakaem co do povzbuzujících látek ověř dřív, než ho budeš brát jako jistotu.',
+      'Tvrzení, že karob neobsahuje theobromin ani kofein, se nepodařilo doložit ani po druhém kole přímého načtení povolených zdrojů 12. 9. 2026. Prohledány byly bezpecnostpotravin.cz, szu.gov.cz a efsa.europa.eu; karob v nich jako zdroj povzbuzujících látek nefiguruje, ale stránka EFSA ke kofeinu jmenuje jen kávu, kakaové boby, čajové listy, guaranu a kolu — z toho, že karob v jejím výčtu není, se nedá udělat tvrzení, že povzbuzující látky neobsahuje. Texty položky proto tvrdí jen to, co doložit umíme: karob se nemusí doslazovat. Srovnání karobu s kakaem co do povzbuzujících látek ověř dřív, než ho budeš brát jako jistotu.',
   },
   {
     id: 'ocet-jablecny',

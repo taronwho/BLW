@@ -239,6 +239,47 @@ export const BP_RAW_BEANS: SourceRef = {
   tier: 1,
 };
 
+/**
+ * Kumarin ve skořici. Kasie obsahuje až 4 g kumarinu/kg, cejlonská skořice
+ * výrazně méně, zato víc eugenolu (ADI 2,5 mg/kg t. hm.). Tolerovatelný denní
+ * příjem kumarinu je 0,1 mg/kg tělesné hmotnosti. Článek doporučuje omezit
+ * cereálie, kaše a další výrobky ochucené skořicí na nejvýše jednou týdně
+ * a upozorňuje, že děti jsou kvůli nižší tělesné hmotnosti citlivější.
+ */
+export const BP_CINNAMON: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Nebezpečí z konzumace skořice',
+  url: 'https://bezpecnostpotravin.cz/nebezpeci-z-konzumace-skorice/',
+  accessedAt: FETCHED,
+  tier: 1,
+};
+
+/** Potvrzení TDI kumarinu 0,1 mg/kg t. hm. panelem EFSA; krátkodobé překročení není zásadní riziko. */
+export const BP_COUMARIN_EFSA: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Potvrzené stanovisko EFSA ke kumarinu',
+  url: 'https://bezpecnostpotravin.cz/potvrzene-stanovisko-efsa-ke-kumarinu/',
+  accessedAt: FETCHED,
+  tier: 1,
+};
+
+/**
+ * Bezpečnost kofeinu. Stránka jmenuje kakaové boby mezi přirozenými zdroji
+ * kofeinu, uvádí, že u dětí 3–10 let je čokoláda včetně kakaových nápojů
+ * nejčastějším zdrojem kofeinu, a navrhuje bezpečnou úroveň 3 mg/kg tělesné
+ * hmotnosti a den pro děti a dospívající.
+ *
+ * POZOR: nejmladší sledovanou skupinou jsou batolata 12–36 měsíců. O kojencích
+ * do 12 měsíců ani o theobrominu stránka nemluví.
+ */
+export const EFSA_CAFFEINE: SourceRef = {
+  org: 'EFSA',
+  title: 'Caffeine – topic page',
+  url: 'https://www.efsa.europa.eu/en/topics/topic/caffeine',
+  accessedAt: FETCHED,
+  tier: 1,
+};
+
 /** Metodický manuál podpory kojení. */
 export const SZU_BREASTFEEDING: SourceRef = {
   org: 'Státní zdravotní ústav',
