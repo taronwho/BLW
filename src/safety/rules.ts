@@ -10,6 +10,7 @@ import {
   similarity,
   trigrams,
 } from './text';
+import { coverageExceptionReason, isCoverageException } from './coverage-exceptions';
 import { isIngredient, isRecipe, type SafetyRule } from './types';
 import {
   BANNED_GENERIC_PHRASES,
@@ -532,6 +533,27 @@ const lengthSanity: SafetyRule = {
   },
 };
 
+const ingredientCoverage: SafetyRule = {
+  id: 'ingredient-coverage',
+  severity: 'error',
+  appliesTo: 'ingredient',
+  description:
+    'Každá surovina je složkou aspoň jednoho receptu, pokud není v src/safety/coverage-exceptions.ts.',
+  check(item, catalog) {
+    if (!isIngredient(item)) return null;
+    if (isCoverageException(item.id)) {
+      const reason = coverageExceptionReason(item.id)?.trim() ?? '';
+      return reason.length > 0
+        ? null
+        : `Surovina „${item.id}" je ve výjimkách bez uvedeného důvodu.`;
+    }
+    const used = catalog.recipes.some((recipe) =>
+      recipe.ingredients.some((ref) => ref.ingredientId === item.id),
+    );
+    return used ? null : `Surovina „${item.nameCz}" není složkou žádného receptu.`;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -554,6 +576,7 @@ export const safetyRules: readonly SafetyRule[] = [
   duplicateDetection,
   textUniqueness,
   lengthSanity,
+  ingredientCoverage,
 ];
 
 export const rulesById: ReadonlyMap<string, SafetyRule> = new Map(
