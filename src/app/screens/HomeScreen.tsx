@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { guides, ingredients, recipes } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from '../lib/age';
+import { GRIP_LABELS, GRIP_SHORT, gripForAge } from '../lib/grip';
 import { tastedIds } from '../lib/derive';
 
 const TILES = [
@@ -55,6 +56,7 @@ export function HomeScreen(): ReactNode {
   const tasted = useMemo(() => tastedIds(state), [state]);
   const hasChild = state.childName.trim().length > 0 || state.childBirthDate.length > 0;
   const stage = STAGE_LABELS[stageForAge(months)];
+  const grip = state.childGrip;
 
   return (
     <div className="flex flex-col gap-5">
@@ -70,12 +72,17 @@ export function HomeScreen(): ReactNode {
             ? `Aktuální fáze ${stage}${months === null ? '' : ` · ${formatAge(months)}`}. Vše v aplikaci se přizpůsobuje tomuhle věku.`
             : 'Nastavte věk dítěte v Domácnosti a aplikace vám bude rovnou ukazovat pokyny pro správnou fázi.'}
         </p>
-        {!hasChild && (
+        <p className="mt-2 text-sm leading-relaxed text-white/90" data-testid="uchop-v-hlavicce">
+          {grip === undefined
+            ? `Tvar sousta zatím odhadujeme z věku (${GRIP_LABELS[gripForAge(months)]} úchop). Co dítě opravdu umí, se dá nastavit v Domácnosti.`
+            : `Úchop ${GRIP_LABELS[grip]} — ${GRIP_SHORT[grip]}. Podle toho se řídí tvar sousta; výběr surovin a měkkost dál podle věku.`}
+        </p>
+        {(!hasChild || grip === undefined) && (
           <Link
             to="/domacnost"
             className="mt-3 inline-flex min-h-touch items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-accent-deep"
           >
-            Nastavit dítě
+            {hasChild ? 'Nastavit úchop' : 'Nastavit dítě'}
             <ChevronRight aria-hidden="true" className="h-4 w-4" />
           </Link>
         )}

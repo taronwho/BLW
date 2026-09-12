@@ -70,10 +70,14 @@ export function mergeHouseholdState(
   meta: MergeMeta,
 ): HouseholdState {
   const localNewer = meta.localUpdatedAt > meta.remoteUpdatedAt;
+  const grip = lastWriteWins(local.childGrip, remote.childGrip, localNewer);
 
   return {
     childName: lastWriteWins(local.childName, remote.childName, localNewer),
     childBirthDate: lastWriteWins(local.childBirthDate, remote.childBirthDate, localNewer),
+    // Nevyplněný úchop se do stavu nepropisuje jako `undefined` klíč — v poli
+    // by pak ležel prázdný záznam, který nic neznamená.
+    ...(grip === undefined ? {} : { childGrip: grip }),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),

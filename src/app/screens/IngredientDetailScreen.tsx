@@ -6,6 +6,7 @@ import { ingredientById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
+import { GripHint } from '../components/GripHint';
 import { NutrientBlock } from '../components/NutrientBlock';
 import { StageSwitch } from '../components/StageSwitch';
 import { TastingLog } from '../components/TastingLog';
@@ -158,6 +159,7 @@ export function IngredientDetailScreen(): ReactNode {
             Pozor ve fázi {STAGE_LABELS[stage]}: {prep.caution}
           </p>
         )}
+        <GripHint chokingRisk={ingredient.chokingRisk} />
       </section>
 
       <section aria-labelledby="napady-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">

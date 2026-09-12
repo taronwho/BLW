@@ -17,6 +17,7 @@ import {
   saveFirebaseConfig,
 } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
+import { GripPicker } from '../components/GripPicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
@@ -99,6 +100,10 @@ export function HouseholdScreen(): ReactNode {
           Uložit
         </button>
       </form>
+
+      <div className="rounded-xl bg-surface p-4">
+        <GripPicker />
+      </div>
 
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />

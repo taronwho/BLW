@@ -38,6 +38,9 @@ export async function connectFirebase(config: FirebaseConfig): Promise<FirebaseS
   const db = initializeFirestore(app, {
     // Offline fronta: změny se ukládají lokálně a dosynchronizují po připojení.
     localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }),
+    // Nepovinná pole (`childGrip`, `note` u ochutnávky) můžou být `undefined`.
+    // Bez tohohle by je setDoc odmítl a zápis by spadl celý.
+    ignoreUndefinedProperties: true,
   });
   const auth = getAuth(app);
   const credential = await signInAnonymously(auth);

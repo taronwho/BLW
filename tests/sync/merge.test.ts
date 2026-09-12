@@ -134,3 +134,24 @@ describe('mergeHouseholdState', () => {
     expect(merged.recipeNotes['kase']).toBe('jen lokální');
   });
 });
+
+describe('úchop dítěte při slučování', () => {
+  it('vyhrává novější zápis, stejně jako ostatní údaje o dítěti', () => {
+    const local: HouseholdState = { ...emptyHouseholdState(), childGrip: 'pinzetovy' };
+    const remote: HouseholdState = { ...emptyHouseholdState(), childGrip: 'dlanovy' };
+    expect(
+      mergeHouseholdState(local, remote, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).childGrip,
+    ).toBe('pinzetovy');
+    expect(
+      mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 }).childGrip,
+    ).toBe('dlanovy');
+  });
+
+  it('nevyplněný úchop v poli nenechá prázdný klíč', () => {
+    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
+      localUpdatedAt: 1,
+      remoteUpdatedAt: 2,
+    });
+    expect('childGrip' in merged).toBe(false);
+  });
+});
