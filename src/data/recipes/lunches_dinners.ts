@@ -148,7 +148,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Odebranou kaši zřeď lžící teplé vody nebo mléka, aby byla vláčná a nelepila se na patro.',
       'Z jedné lžíce kaše, lžičky vloček a kousku rozšlehaného vejce utvoř malou placičku a opeč ji na sucho na pánvi z obou stran do pevna.',
-      'Placičku nech vychladnout a rozlom, aby ses přesvědčila, že je propečená až do středu.',
+      'Placičku nech vychladnout a rozlom — musí být propečená až do středu.',
     ],
     babyServing: {
       '6m': 'Placičku podej jako podlouhlý váleček, který dítě sevře v pěsti; kaši nabídni na lžičce předané do ruky, ať si ji samo strká do pusy.',
