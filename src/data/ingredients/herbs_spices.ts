@@ -724,7 +724,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zázvor oloupej a nastrouhej na nejjemnějším struhadle, kousky vlákna v jídle nenechávej. Úplně malé množství stačí, protože zázvor lehce pálí a dítě na ostrost není zvyklá.',
+          'Zázvor oloupej a nastrouhej na nejjemnějším struhadle, kousky vlákna v jídle nenechávej. Úplně malé množství stačí, protože zázvor lehce pálí a dítě na ostrost není zvyklé.',
         caution: 'Zázvorový čaj ani nálev pro kojence nepřipravuj bez porady s pediatrem.',
       },
       '9m': {

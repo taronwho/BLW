@@ -235,3 +235,58 @@ export const ROUND_SHAPE_MARKERS: readonly string[] = [
 /** Pokyn k podélnému rozčtvrcení — vyžadovaný u kulatých surovin. */
 export const LENGTHWISE_QUARTER_MARKERS: readonly string[] = ['podel*', 'na delku', 'po delce'];
 export const QUARTER_MARKERS: readonly string[] = ['ctvrt*', 'na ctyri dily', 'na ctyri casti'];
+
+/**
+ * Oslovení, které z rodiče dělá ženu, a shoda, která z dítěte dělá holčičku.
+ *
+ * Aplikaci používají oba rodiče. Kdykoli text řekne „zůstaň klidná" nebo
+ * „když si nejsi jistá", vyřadí polovinu uživatelů; „dítě nabírá sama" je
+ * navíc i chyba ve shodě — `dítě` je střední rod.
+ *
+ * Ve tvaru pro `findPatterns`, tedy bez diakritiky a s `*` pro kmen.
+ */
+export const GENDERED_ADDRESS_PATTERNS: readonly string[] = [
+  // přísudek jmenný: „buď/zůstaň … -á"
+  'jsi jista',
+  'nejsi jista',
+  'bys jista',
+  'zustan klidna',
+  'bud klidna',
+  'bud opatrna',
+  'bud trpeliva',
+  'zustan opatrna',
+  // minulý čas 2. osoby v ženském rodě
+  'abys nemusela',
+  'abys musela',
+  'abys poznala',
+  'abys vedela',
+  'abys videla',
+  'abys mela',
+  'abys stihla',
+  'abys nemela',
+  'ses presvedcila',
+  'ses naucila',
+  'sis pripomnela',
+  'ses ucila',
+  'jsi videla',
+  'jsi poznala',
+  'jsi mela',
+  // rodič jako matka
+  'maminka',
+  'maminku',
+  'mamince',
+  'maminkou',
+];
+
+/**
+ * Shoda po slově „dítě". Střední rod, tedy `samo`, ne `sama`; `zvyklé`, ne
+ * `zvyklá`. Chytá zbytky po přepisu textů z dcery na obecné dítě.
+ *
+ * Tohle jsou regulární výrazy nad textem bez diakritiky, ne vzory pro
+ * `findPatterns` — mezi „dítě" a špatným tvarem stojí pokaždé jiná slova.
+ */
+export const NEUTER_CHILD_REGEXPS: readonly RegExp[] = [
+  /\bdite\b[^.!?]{0,80}\bsama\b/,
+  /\bdite\b[^.!?]{0,80}\b(zvykla|jista|schopna|nucena|rada)\b/,
+  /\bmiminko\b[^.!?]{0,80}\bsama\b/,
+];

@@ -53,7 +53,7 @@ export const safety: Guide[] = [
         heading: 'Co dělat při dávení',
         asList: true,
         body: [
-          'Zůstaň klidná a zůstaň u dítěte. Dávení odezní během několika vteřin samo.',
+          'Zachovej klid a zůstaň u dítěte. Dávení odezní během několika vteřin samo.',
           'Nesahej dítěti do úst a nešátrej prstem. Zásah posune sousto směrem k dýchacím cestám.',
           'Nezvedej dítě ze židličky a nepřevracej ho. Vzpřímený sed dávení pomáhá.',
           'Nekřič a neplácej dítě po zádech — při účinném kašli to není potřeba a dítě to vyleká.',
