@@ -291,7 +291,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Po prvním roce může batole občas dostat malé množství čistého kakaa v jídle. Kakaové nápoje z obchodu jsou z větší části sladká složka, proto si kakao míchej sama do mléka. U dětí od tří let je právě čokoláda a kakaové nápoje nejčastějším zdrojem kofeinu v jídelníčku.',
+          'Po prvním roce může batole občas dostat malé množství čistého kakaa v jídle. Kakaové nápoje z obchodu jsou z větší části sladká složka, proto si kakao do mléka míchej doma sám. U dětí od tří let je právě čokoláda a kakaové nápoje nejčastějším zdrojem kofeinu v jídelníčku.',
         caution: 'Kakao podávej spíš dopoledne, kofein z něj může rušit usínání.',
       },
     },

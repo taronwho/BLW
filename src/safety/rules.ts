@@ -14,10 +14,12 @@ import { coverageExceptionReason, isCoverageException } from './coverage-excepti
 import { isIngredient, isRecipe, type SafetyRule } from './types';
 import {
   BANNED_GENERIC_PHRASES,
+  GENDERED_ADDRESS_PATTERNS,
   HIDDEN_ANIMAL_PATTERNS,
   HONEY_PATTERNS,
   LENGTHWISE_QUARTER_MARKERS,
   NUT_SAFE_FORMS,
+  NEUTER_CHILD_REGEXPS,
   NUT_SEED_NOUNS,
   PLACEHOLDER_PATTERNS,
   PROTEIN_SWAP_SOURCES,
@@ -26,6 +28,29 @@ import {
   SALT_ADD_PATTERNS,
   SUGAR_PATTERNS,
 } from './vocabulary';
+
+/** Obecná slova pro maso a ryby — doplňují kmeny konkrétních názvů. */
+const MEAT_WORDS: readonly string[] = [
+  'maso',
+  'masa',
+  'masem',
+  'masit*',
+  'ryb*',
+  'filet*',
+  'vlakn*',
+  'drubez*',
+];
+
+/**
+ * Kmeny z názvu suroviny, na které se dá chytit i skloňovaný tvar.
+ * „králík" → „kral", takže projde „králičí" i „králíka".
+ */
+function nameStems(nameCz: string): string[] {
+  return normalize(nameCz)
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length >= 5)
+    .map((word) => `${word.slice(0, word.length - 2)}*`);
+}
 
 /** Věk, do kterého platí absolutní zákazy z docs/BEZPECNOST.md kapitola 2. */
 export const BABY_AGE_LIMIT_MONTHS = 12;
@@ -554,6 +579,63 @@ const ingredientCoverage: SafetyRule = {
   },
 };
 
+const neutralAddress: SafetyRule = {
+  id: 'neutral-address',
+  severity: 'error',
+  appliesTo: 'both',
+  description:
+    'Texty neoslovují rodiče jako ženu a u slova „dítě" drží střední rod.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = findPatterns(value, GENDERED_ADDRESS_PATTERNS, { honorNegation: false })[0];
+      if (nalez !== undefined) {
+        return `Oslovení v ženském rodě v poli ${field}: „${nalez.pattern}". O dítě se stará kdokoli z rodiny.`;
+      }
+      const bezDiakritiky = normalize(value);
+      for (const re of NEUTER_CHILD_REGEXPS) {
+        const shoda = re.exec(bezDiakritiky);
+        if (shoda !== null) {
+          return `Špatná shoda po slově „dítě" v poli ${field}: „${shoda[0]}". Dítě je střední rod.`;
+        }
+      }
+    }
+    return null;
+  },
+};
+
+/**
+ * Když dětská linie maso připravuje, musí i říct, jak ho podat.
+ *
+ * Recept, kde `babySteps` maso dusí a obírá od kostí, ale `babyServing` o něm
+ * v dané fázi mlčí, nechá rodiče u sporáku s hotovým masem a bez pokynu, jak
+ * velký kus dítěti dát — a přitom právě tvar masa je u dušení to podstatné.
+ */
+const babyServingMentionsMeat: SafetyRule = {
+  id: 'baby-serving-mentions-meat',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description:
+    'Když dětská linie připravuje maso nebo rybu, každá fáze podávání říká, jak ji podat.',
+  check(item, catalog) {
+    if (!isRecipe(item)) return null;
+
+    const masa = item.ingredients
+      .map((ref) => catalog.ingredients.find((one) => one.id === ref.ingredientId))
+      .filter((one): one is Ingredient => one !== undefined && one.category === 'maso-ryby');
+    if (masa.length === 0) return null;
+
+    const kmeny = [...new Set([...masa.flatMap((one) => nameStems(one.nameCz)), ...MEAT_WORDS])];
+    const zminka = (text: string): boolean => containsPattern(text, kmeny, { honorNegation: false });
+
+    // Bez zmínky v dětských krocích se maso do dětské porce nedostává vůbec.
+    if (!item.babySteps.some(zminka)) return null;
+
+    const chybi = STAGES.filter((stage) => !zminka(item.babyServing[stage]));
+    if (chybi.length === 0) return null;
+    return `Dětská linie připravuje maso nebo rybu, ale podání ve fázi ${chybi.join(', ')} o něm mlčí.`;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -577,6 +659,8 @@ export const safetyRules: readonly SafetyRule[] = [
   textUniqueness,
   lengthSanity,
   ingredientCoverage,
+  neutralAddress,
+  babyServingMentionsMeat,
 ];
 
 export const rulesById: ReadonlyMap<string, SafetyRule> = new Map(

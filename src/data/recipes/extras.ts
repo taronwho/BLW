@@ -46,7 +46,7 @@ export const extras: Recipe[] = [
       'Vepřovou kýtu pro dítě duš zvlášť v troše vody čtyřicet minut a rozvláknej ji napříč svalem.',
     ],
     babyServing: {
-      '6m': 'Podávej nudličku dušeného zelí přeloženou přes prst a kroupy slepené do hrudky, kterou dítě sevře v dlani.',
+      '6m': 'Podávej nudličku dušeného zelí přeloženou přes prst a kroupy slepené do hrudky, kterou dítě sevře v dlani. Vepřové maso podej jako jedno dlouhé vlákno s koncem čouhajícím z pěsti.',
       '9m': 'Zelí nasekej nadrobno, maso natrhej na krátká vlákna a kroupy nech volnější ke sbírání špetkou.',
       '12m': 'Servíruj porci jako zmenšený talíř dospělých: kroupy, dušené zelí a kousky masa vedle sebe, jen bez dochucení.',
     },

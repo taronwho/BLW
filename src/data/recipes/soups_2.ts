@@ -374,9 +374,9 @@ export const soups2: Recipe[] = [
       'Místo něj vmíchej lžíci rozmačkané uvařené čočky a nech porci zvlažnět.',
     ],
     babyServing: {
-      '6m': 'Podávej polévku rozmačkanou s kroupami jako hustou kaši na lžíci.',
-      '9m': 'Nabídni polévku s celými měkkými kroupami, které dítě sbírá prsty z mělké misky.',
-      '12m': 'Servíruj polévku v hrnečku s kroupami a čočkou promíchanými dovnitř.',
+      '6m': 'Podávej polévku rozmačkanou s kroupami jako hustou kaši na lžíci; tuňák z konzervy v dětské porci není, bílkovinu nese rozmačkaná čočka.',
+      '9m': 'Nabídni polévku s celými měkkými kroupami, které dítě sbírá prsty z mělké misky; tuňák kvůli soli z konzervy zůstává dospělým.',
+      '12m': 'Servíruj polévku v hrnečku s kroupami a čočkou promíchanými dovnitř; tuňáka z konzervy nepřidávej ani batoleti.',
     },
     meatSteps: [
       'Tuňáka sceď, rozeber vidličkou a vmíchej ho do porce pro masitou variantu.',

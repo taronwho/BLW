@@ -1,4 +1,4 @@
-import { ArrowLeft, BookOpen, ChevronDown, ExternalLink, Star } from 'lucide-react';
+import { ArrowLeft, BookOpen, Star } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
@@ -8,18 +8,13 @@ import type { Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { GripHint } from '../components/GripHint';
 import { NutrientBlock } from '../components/NutrientBlock';
+import { SourceDisclosure } from '../components/SourceList';
 import { StageSwitch } from '../components/StageSwitch';
 import { TastingLog } from '../components/TastingLog';
 import { ageInMonths, stageForAge, STAGE_LABELS } from '../lib/age';
 import { CHOKING_PRESENTATION } from '../lib/choking';
 import { recipesWithIngredient, tastingsByIngredient } from '../lib/derive';
-import {
-  ALLERGEN_LABELS,
-  CATEGORY_LABELS,
-  formatDate,
-  formatSeason,
-  HAZARD_LABELS,
-} from '../lib/labels';
+import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
@@ -32,7 +27,6 @@ export function IngredientDetailScreen(): ReactNode {
   const months = ageInMonths(state.childBirthDate);
   const currentStage = stageForAge(months);
   const [stage, setStage] = useState<Stage>(currentStage);
-  const [sourcesOpen, setSourcesOpen] = useState(false);
   const [acks, setAcks] = useState<Set<string>>(() => new Set<string>());
 
   useEffect(() => setStage(currentStage), [currentStage]);
@@ -212,42 +206,8 @@ export function IngredientDetailScreen(): ReactNode {
         />
       </section>
 
-      <section aria-labelledby="zdroje-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
-        <h2 id="zdroje-nadpis" className="sr-only">
-          Zdroje
-        </h2>
-        <button
-          type="button"
-          aria-expanded={sourcesOpen}
-          onClick={() => setSourcesOpen((open) => !open)}
-          className="flex min-h-touch items-center justify-between gap-2 text-sm font-semibold"
-        >
-          Zdroje ({ingredient.sources.length})
-          <ChevronDown aria-hidden="true" className={`h-5 w-5 shrink-0 ${sourcesOpen ? 'rotate-180' : ''}`} />
-        </button>
-        {sourcesOpen && (
-          <ul className="flex flex-col gap-2" data-testid="seznam-zdroju">
-            {ingredient.sources.map((source) => (
-              <li key={source.url} className="flex flex-col gap-1">
-                <a
-                  href={source.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex min-h-touch items-center gap-2 text-sm font-medium text-accent"
-                >
-                  <ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0" />
-                  <span className="min-w-0">
-                    {source.org} — {source.title}
-                  </span>
-                </a>
-                <span className="text-xs text-muted">
-                  tier {source.tier} · ověřeno {formatDate(source.accessedAt)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <SourceDisclosure sources={ingredient.sources} testId="prepinac-zdroju" />
+
     </article>
   );
 }

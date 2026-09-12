@@ -51,8 +51,8 @@ export const lunchesDinners2: Recipe[] = [
       'Nech porci vychladnout na vlažnou teplotu a zkus kapku na vnitřní straně zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej husté pyré na předložené lžíci, kterou dítě olizuje, nebo namočený proužek kváskového chleba.',
-      '9m': 'Nabídni pyré v misce s pruhy dušeného pastináku po straně, dítě je sbírá prsty.',
+      '6m': 'Podávej husté pyré na předložené lžíci, kterou dítě olizuje, nebo namočený proužek kváskového chleba. Játra podávej jen rozetřená v pyré; samostatný kousek je v tomhle věku na uchopení moc malý.',
+      '9m': 'Nabídni pyré v misce s pruhy dušeného pastináku po straně, dítě je sbírá prsty. Játra nech vmíchaná v pyré, ať se nedrolí mimo misku.',
       '12m': 'Servíruj pyré s nasekanými játry promíchanými dovnitř; batole už zvládne lžíci samo.',
     },
     meatSteps: [
@@ -101,7 +101,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši s rybou na lžíci nebo jako hromádku, ze které dítě olizuje prsty.',
-      '9m': 'Podávej kaši vytvarovanou do malých hromádek plus pruhy dušeného fenyklu na uchopení.',
+      '9m': 'Podávej kaši vytvarovanou do malých hromádek plus pruhy dušeného fenyklu na uchopení. Štika zůstává rozmělněná v kaši — v hromádce se případná kostička uhlídá líp než v samostatném kousku.',
       '12m': 'Servíruj brambor rozmačkaný nahrubo s kousky ryby a fenyklem promíchaným dovnitř.',
     },
     meatSteps: [
@@ -198,9 +198,9 @@ export const lunchesDinners2: Recipe[] = [
       'Sardinky drž z dětské porce stranou, jsou z konzervy a mají vysoký obsah soli.',
     ],
     babyServing: {
-      '6m': 'V šesti měsících tuhle pomazánku nenabízej — recept je postavený na konzervě a počítá až s batoletem.',
-      '9m': 'Ani v devíti měsících se konzerva nehodí; nabídni jen tvaroh s pažitkou na proužku chleba.',
-      '12m': 'Batoleti namaž tenkou vrstvu tvarohové pomazánky na žitný proužek a přilož plátky ředkvičky.',
+      '6m': 'V šesti měsících tuhle pomazánku nenabízej — recept stojí na sardinkách z konzervy a počítá až s batoletem. Sardinky do dětské porce nepatří v žádné podobě.',
+      '9m': 'Ani v devíti měsících se sardinky z konzervy nehodí; nabídni jen tvaroh s pažitkou na proužku chleba.',
+      '12m': 'Batoleti namaž tenkou vrstvu tvarohové pomazánky na žitný proužek a přilož plátky ředkvičky. Sardinky nech dospělým — kvůli soli z konzervy zůstávají mimo dětskou porci i teď.',
     },
     meatSteps: [
       'Sardinky sceď, rozmačkej je vidličkou i s měkkými kůstkami a vmíchej do poloviny pomazánky.',
@@ -1146,7 +1146,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej kroupy s masem rozmačkané do husté hmoty na lžíci, jednotlivá zrna se ještě špatně sbírají.',
-      '9m': 'Nabídni kroupy v hromádkách a k nim měkká kolečka mrkve na uchopení prsty.',
+      '9m': 'Nabídni kroupy v hromádkách a k nim měkká kolečka mrkve na uchopení prsty. Nasekané králičí maso nech vmíchané v kroupách, ať se vlákna nerozutečou po tácku.',
       '12m': 'Servíruj kroupy s kostkami obraného masa a mrkví; kůstky zkontroluj i teď.',
     },
     meatSteps: [
@@ -1291,7 +1291,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej rozmačkanou rýži s fazolkami na lžíci; krevetu zamíchej nasekanou dovnitř.',
-      '9m': 'Nabídni krátké kousky fazolek do ruky a rýži v hromádkách vedle.',
+      '9m': 'Nabídni krátké kousky fazolek do ruky a rýži v hromádkách vedle; nasekané krevety nech vmíchané v rýži, ať se dají nabrat spolu s ní.',
       '12m': 'Servíruj rýži s fazolkami a nasekanými krevetami promíchanými dovnitř.',
     },
     meatSteps: [
@@ -1534,7 +1534,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej jáhly s rozmačkanou kedlubnou a rozvlákněným masem jako hustou kaši na lžíci.',
-      '9m': 'Z jáhel vytvaruj kuličky do ruky a k nim přidej měkké kostky kedlubny na sbírání prsty.',
+      '9m': 'Z jáhel vytvaruj kuličky do ruky a k nim přidej měkké kostky kedlubny na sbírání prsty; rozvlákněné hovězí zapracuj do kuliček, samotné vlákno se ze stolu sbírá špatně.',
       '12m': 'Servíruj jáhly s kostkami masa a kedlubnou; batole jí z vlastní misky lžící.',
     },
     meatSteps: [

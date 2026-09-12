@@ -50,7 +50,7 @@ export const lunchesDinners: Recipe[] = [
     babyServing: {
       '6m': 'Hranolek mrkve i pastináku dlouhý jako prst dospělého, aby kus vyčníval z pěsti. Kuřecí vlákna podej delší a měkká, ať je miminko udrží celou dlaní.',
       '9m': 'Zeleninu nakrájej na kostičky velikosti hrášku a maso natrhej na krátká vlákna — v tomhle věku už dítě sbírá sousta špetkou mezi palcem a ukazovákem.',
-      '12m': 'Podávej stejnou porci jako dospělí, jen nedochucenou: kostky zeleniny a kousky masa velikosti nehtu na malíčku, k tomu lžičku, se kterou už si nabírá sama.',
+      '12m': 'Podávej stejnou porci jako dospělí, jen nedochucenou: kostky zeleniny a kousky masa velikosti nehtu na malíčku, k tomu lžičku, se kterou už si nabírá samo.',
     },
     meatSteps: [
       'Kuřecí stehna otři do sucha, osol z obou stran, polož je kůží nahoru na zeleninu a peč dalších 35 minut, dokud kůže nezezlátne.',
@@ -250,7 +250,7 @@ export const lunchesDinners: Recipe[] = [
       'Tresku pro dítě uvař zvlášť v páře šest minut, rozeber ji na vločky a každou prohmatej mezi prsty kvůli kostičkám.',
     ],
     babyServing: {
-      '6m': 'Podej půlku měkké brambory vcelku, aby ji dítě sevřelo v pěsti, a pyré nabídni jako silnou vrstvu rozetřenou na okraji misky.',
+      '6m': 'Podej půlku měkké brambory vcelku, aby ji dítě sevřelo v pěsti, a pyré nabídni jako silnou vrstvu rozetřenou na okraji misky. Rybí vločky vmíchej do pyré — samotná vločka je pro sevřenou pěst příliš drobná a v dlani se ztratí.',
       '9m': 'Brambory nakrájej na kostky do dvou centimetrů a rybí vločky promíchej přímo s pyré, aby držely na lžíci.',
       '12m': 'Rozdělené hromádky brambor, pyré a ryby polož vedle sebe a přidej lžíci — dítě už si nabírá a míchá samo.',
     },
@@ -300,7 +300,7 @@ export const lunchesDinners: Recipe[] = [
       'Vepřovou panenku pro dítě uvař zvlášť: plátek dus v troše vody pod pokličkou patnáct minut a rozeber na jemná vlákna.',
     ],
     babyServing: {
-      '6m': 'Podávej plátek fenyklu vcelku jako pásek do dlaně a jáhly ulep do podlouhlého válečku, který dítě sevře v pěsti.',
+      '6m': 'Podávej plátek fenyklu vcelku jako pásek do dlaně a jáhly ulep do podlouhlého válečku, který dítě sevře v pěsti. Vlákna vepřové panenky nech dlouhá přes prst, ať konec čouhá z pěsti a dítě si ho dopraví do úst.',
       '9m': 'Fenykl nakrájej na proužky po dvou centimetrech a jáhly nabídni s masem promíchané do husté směsi na lžíci.',
       '12m': 'Nabídni fenykl, jáhly i maso odděleně na talíři a nech dítě vybírat pořadí; kousky můžou být velikosti fazole.',
     },
@@ -351,7 +351,7 @@ export const lunchesDinners: Recipe[] = [
       'Králičí maso pro miminko odeber z hřbetu, duš ho zvlášť dvacet minut v troše vody a pečlivě prohmatej, aby v porci nezůstala žádná kost.',
     ],
     babyServing: {
-      '6m': 'Podej proužek měkké petržele delší než dětská dlaň a kroupy promíchané se zeleninou do husté kaše, kterou nabereš na lžíci.',
+      '6m': 'Podej proužek měkké petržele delší než dětská dlaň a kroupy promíchané se zeleninou do husté kaše, kterou nabereš na lžíci. Králičí maso podej jako jedno dlouhé vlákno do pěsti, nebo ho nadrob do kaše — krátký kousek se v dlani ztratí.',
       '9m': 'Zeleninu nakrájej na kostičky, maso natrhej na krátká vlákna a kroupy nech volnější — dítě si je sbírá po zrnkách.',
       '12m': 'Servíruj porci jako zmenšenou verzi talíře dospělých: hromádka krup, dušená zelenina a nadrobno nakrájené maso vedle sebe.',
     },
@@ -404,8 +404,8 @@ export const lunchesDinners: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podej rýži s omáčkou slepenou do hrudky, kterou dítě nabere celou dlaní, a vlákna masa dlouhá přes prst.',
-      '9m': 'Omáčku nech hustší a rýži podávej volně sypanou; dítě trénuje sbírání jednotlivých zrnek špetkou.',
-      '12m': 'Nabídni celou porci v misce s lžící a nech dítě míchat si rýži s omáčkou samostatně.',
+      '9m': 'Omáčku nech hustší a rýži podávej volně sypanou; dítě trénuje sbírání jednotlivých zrnek špetkou. Telecí maso k tomu natrhej na krátká vlákna, která už zvládne uchopit dvěma prsty.',
+      '12m': 'Nabídni celou porci v misce s lžící a nech dítě míchat si rýži s omáčkou samostatně. Telecí maso nakrájej napříč vlákny na kousky velikosti fazole a přidej je do misky.',
     },
     meatSteps: [
       'Telecí nakrájej na kostky, osol, opeč na pánvi dozlatova a vlož do poloviny paprikového základu.',
@@ -453,7 +453,7 @@ export const lunchesDinners: Recipe[] = [
       'Kachní maso pro dítě odeber bez kůže, duš ho zvlášť v troše vody dvacet minut a nakrájej napříč vlákny na jemné proužky.',
     ],
     babyServing: {
-      '6m': 'Nabídni pruh měkké dýně bez slupky velikosti prstu a pohanku s jablkem jako hustou kaši rozetřenou po misce.',
+      '6m': 'Nabídni pruh měkké dýně bez slupky velikosti prstu a pohanku s jablkem jako hustou kaši rozetřenou po misce. Kachní maso podej v jednom širším proužku přes celou dlaň — kachní vlákna jsou pevná a krátký kousek se ocucává těžko.',
       '9m': 'Dýni nakrájej na kostičky, maso na krátké proužky a pohanku nech volnější, aby ji dítě sbíralo po hrstech.',
       '12m': 'Talíř postav jako pro dospělé: měsíček dýně, lžíce pohanky a plátky masa vedle sebe, jen bez dochucení.',
     },
@@ -504,7 +504,7 @@ export const lunchesDinners: Recipe[] = [
       'Jehněčí pro dítě duš zvlášť v hrnci s trochou vody čtyřicet minut a rozvláknej ho prsty na jemné nitky.',
     ],
     babyServing: {
-      '6m': 'Podej půlměsíc cukety vcelku jako držadlo a kuskus slepený jogurtem do hrudky, kterou dítě sevře v dlani.',
+      '6m': 'Podej půlměsíc cukety vcelku jako držadlo a kuskus slepený jogurtem do hrudky, kterou dítě sevře v dlani. Jehněčí nitky slep jogurtem ke kuskusu, aby se daly nabrat spolu s ním.',
       '9m': 'Cuketu nakrájej na kostičky, maso natrhej na krátká vlákna a kuskus podávej v hromádce na lžíci.',
       '12m': 'Nabídni kuskus v misce, cuketu a maso vedle sebe a lžíci jogurtu jako dip, do kterého si dítě sousta samo namáčí.',
     },
@@ -555,7 +555,7 @@ export const lunchesDinners: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Kaši nabídni v silné vrstvě na okraji misky, odkud ji dítě setře celou dlaní; rybu podávej ve větších vločkách položených bokem.',
-      '9m': 'Brambory nech v kostičkách a omáčku hustší, aby se dala nabrat prsty a přitom nestékala po bradě.',
+      '9m': 'Brambory nech v kostičkách a omáčku hustší, aby se dala nabrat prsty a přitom nestékala po bradě. Vločky candáta vmíchej do omáčky, ať se po tácku nedrolí.',
       '12m': 'Podávej kostky brambor politých omáčkou a rybu vedle nich, k tomu lžíci, kterou už dítě otáčí v ruce samo.',
     },
     meatSteps: [
@@ -604,7 +604,7 @@ export const lunchesDinners: Recipe[] = [
       'Kus pstruha bez kůže zabal do vlastního alobalu bez dochucení, upeč patnáct minut a pak vlákna pečlivě prohmatej kvůli kostem.',
     ],
     babyServing: {
-      '6m': 'Podávej pruh dušené cukety přes celou dlaň a quinou slepenou do hrudky na okraji misky, aby šla sebrat hrstí.',
+      '6m': 'Podávej pruh dušené cukety přes celou dlaň a quinou slepenou do hrudky na okraji misky, aby šla sebrat hrstí. Pstruží vločky vmačkej do té hrudky — samy o sobě jsou pro sevřenou pěst příliš drobné.',
       '9m': 'Cuketu nakrájej na kostičky, rybí vločky promíchej s quinoou a nabídni je v mělké misce k sebrání špetkou.',
       '12m': 'Nech balíček rozbalit u stolu a servíruj obsah na talíř: dítě už si kousky ryby, cukety i quinoy přebírá samo.',
     },
@@ -755,7 +755,7 @@ export const lunchesDinners: Recipe[] = [
       'Makrelu pro dítě upeč zvlášť bez soli deset minut, rozeber ji na vločky a pečlivě prohmatej kvůli kostem. Makrela je tučná ryba, nabízej ji zhruba jednou týdně.',
     ],
     babyServing: {
-      '6m': 'Podávej pruh pečené řepy velikosti prstu a bramborovou kaši v silné vrstvě, do které se dá zabořit celá dlaň.',
+      '6m': 'Podávej pruh pečené řepy velikosti prstu a bramborovou kaši v silné vrstvě, do které se dá zabořit celá dlaň. Makrelu rozlož ve větších vločkách po kaši, aby je dítě setřelo dlaní spolu s ní.',
       '9m': 'Řepu i brambor nakrájej na kostičky a rybí vločky rozlož vedle nich, ať si dítě bere sousta špetkou.',
       '12m': 'Servíruj řepný salát s bramborem promíchaný a rybu navrch — dítě už zvládne nabrat obojí najednou na vidličku.',
     },
@@ -905,7 +905,7 @@ export const lunchesDinners: Recipe[] = [
       'Krůtí prso pro dítě duš zvlášť patnáct minut v troše vody a rozeber ho na vlákna.',
     ],
     babyServing: {
-      '6m': 'Podávej hranolek vychladlé polenty velikosti prstu a mangold vmíchaný do měkké polenty na lžíci.',
+      '6m': 'Podávej hranolek vychladlé polenty velikosti prstu a mangold vmíchaný do měkké polenty na lžíci. Krůtí maso podej v jednom dlouhém vláknu, které přečnívá z pěsti.',
       '9m': 'Hranolky polenty nakrájej na kostičky, mangold nasekej najemno a maso podávej v krátkých vláknech.',
       '12m': 'Servíruj měkkou polentu v misce s mangoldem a masem navrch; dítě už ji zvládne nabírat lžící bez pomoci.',
     },

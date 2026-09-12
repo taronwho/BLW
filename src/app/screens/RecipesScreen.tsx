@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
+import { recipeNutrients } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { KEY_ALLERGENS, RECIPE_CATEGORIES } from '@/types';
 import type { AllergenGroup, Recipe } from '@/types';
@@ -10,15 +11,31 @@ import { ChokingBadge } from '../components/ChokingBadge';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
+import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { ageInMonths } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
+import { RECIPE_SORTS, sortRecipes } from '../lib/sorting';
+import type { SortKey } from '../lib/sorting';
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny kategorie' },
   ...RECIPE_CATEGORIES.map((category) => ({ id: category, label: RECIPE_CATEGORY_LABELS[category] })),
+];
+
+const SORT_OPTIONS: readonly SelectOption[] = RECIPE_SORTS.map((one) => ({
+  id: one.id,
+  label: one.label,
+}));
+
+/** Filtr obsahu železa — stejná stupnice jako značka v náhledu. */
+const IRON_OPTIONS: readonly ChipOption[] = [
+  { id: 'vse', label: 'Železo: vše' },
+  { id: 'aspon', label: 'Aspoň nějaké' },
+  { id: 'vyznamny', label: 'Významný zdroj' },
+  { id: 'hemove', label: 'Hemové z masa' },
 ];
 
 const TIME_OPTIONS: readonly ChipOption[] = [
@@ -33,6 +50,8 @@ export function RecipesScreen(): ReactNode {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('vse');
   const [time, setTime] = useState('vse');
+  const [iron, setIron] = useState('vse');
+  const [sort, setSort] = useState<SortKey>('abeceda');
   const [vegetarianOnly, setVegetarianOnly] = useState(false);
   const [withoutAllergen, setWithoutAllergen] = useState<AllergenGroup | ''>('');
   const [pantryOpen, setPantryOpen] = useState(false);
@@ -50,14 +69,22 @@ export function RecipesScreen(): ReactNode {
         if (category !== 'vse' && recipe.category !== category) return false;
         if (time !== 'vse' && recipe.timeMinutes > Number(time)) return false;
         if (vegetarianOnly && !recipeIsVegetarian(recipe)) return false;
+        if (iron !== 'vse') {
+          const profile = recipeNutrients(recipe);
+          if (iron === 'aspon' && profile.iron === 'nevyznamny') return false;
+          if (iron === 'vyznamny' && profile.iron !== 'vyznamny') return false;
+          if (iron === 'hemove' && profile.ironForm !== 'hemove') return false;
+        }
         if (withoutAllergen !== '' && recipeAllergens(recipe).includes(withoutAllergen)) return false;
         if (pantrySet.size > 0 && !recipe.ingredients.some((ref) => pantrySet.has(ref.ingredientId))) {
           return false;
         }
         return true;
       }),
-    [query, category, time, vegetarianOnly, withoutAllergen, pantrySet],
+    [query, category, time, iron, vegetarianOnly, withoutAllergen, pantrySet],
   );
+
+  const serazene = useMemo(() => sortRecipes(visible, sort), [visible, sort]);
 
   const pantryChoices = useMemo(
     () => ingredients.filter((item) => matchesIngredient(item, pantryQuery)).slice(0, 40),
@@ -96,6 +123,20 @@ export function RecipesScreen(): ReactNode {
         onSelect={setTime}
         ariaLabel="Filtr času přípravy"
         testId="filtr-casu"
+      />
+      <FilterChips
+        options={IRON_OPTIONS}
+        selected={iron}
+        onSelect={setIron}
+        ariaLabel="Filtr obsahu železa"
+        testId="filtr-zeleza"
+      />
+      <FilterSelect
+        label="Řazení"
+        options={SORT_OPTIONS}
+        selected={sort}
+        onSelect={(id) => setSort(id as SortKey)}
+        testId="razeni-receptu"
       />
 
       <div className="flex flex-wrap gap-2">
@@ -208,7 +249,7 @@ export function RecipesScreen(): ReactNode {
         </p>
       ) : (
         <ul className="flex flex-col gap-2" data-testid="seznam-receptu">
-          {visible.map((recipe) => (
+          {serazene.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} childMonths={months} />
           ))}
         </ul>
@@ -220,6 +261,7 @@ export function RecipesScreen(): ReactNode {
 function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: number | null }): ReactNode {
   const vegetarian = recipeIsVegetarian(recipe);
   const tooEarly = childMonths !== null && childMonths < recipe.minAgeMonths;
+  const nutrients = recipeNutrients(recipe);
   return (
     <li>
       <Link
@@ -251,7 +293,16 @@ function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: numb
             </span>
           ))}
         </span>
-        <ChokingBadge risk={recipeChokingRisk(recipe)} />
+        <span className="flex flex-wrap items-center gap-2">
+          <ChokingBadge risk={recipeChokingRisk(recipe)} />
+          <NutrientBadge
+            profile={nutrients}
+            title={recipe.titleCz}
+            ironFrom={nutrients.ironFrom}
+            vitaminCFrom={nutrients.vitaminCFrom}
+            testId={`zeleza-${recipe.id}`}
+          />
+        </span>
       </Link>
     </li>
   );

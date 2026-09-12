@@ -563,6 +563,105 @@ describe('ingredient-coverage', () => {
   });
 });
 
+describe('neutral-address', () => {
+  it('projde text, který oslovuje rodiče bez rodu', () => {
+    expectPass('neutral-address', makeRecipe(), catalog);
+  });
+
+  it('zachytí „zůstaň klidná" v kroku receptu', () => {
+    const recipe = makeRecipe({
+      babySteps: ['Zůstaň klidná a nech dítě dávit, odezní to samo.', 'Placku nech vychladnout.'],
+    });
+    expect(expectFail('neutral-address', recipe, catalog)).toContain('ženském rodě');
+  });
+
+  it('zachytí „když si nejsi jistá" u suroviny', () => {
+    const ingredient = makeIngredient({
+      prepIdeas: ['v páře', 'pyré', 'pečená — když si nejsi jistá, raději nepodávej'],
+    });
+    expectFail('neutral-address', ingredient, catalog);
+  });
+
+  it('zachytí rodiče popsaného jako maminka', () => {
+    const ingredient = makeIngredient({
+      prepIdeas: ['v páře', 'pyré', 'hodí se v rodině s vegetariánskou maminkou'],
+    });
+    expectFail('neutral-address', ingredient, catalog);
+  });
+
+  it('zachytí ženskou shodu po slově dítě', () => {
+    const recipe = makeRecipe({
+      babyServing: {
+        '6m': 'Podávej proužky velikosti prstu, dítě si je nabírá sama.',
+        '9m': 'Nakrájej na kostičky do velikosti hrášku.',
+        '12m': 'Nabídni vcelku, ať si sousto rozdělí samo.',
+      },
+    });
+    expect(expectFail('neutral-address', recipe, catalog)).toContain('střední rod');
+  });
+
+  it('nevadí mu „metoda sama o sobě" — tam o dítě nejde', () => {
+    expectPass(
+      'neutral-address',
+      makeIngredient({ prepIdeas: ['mouka sama o sobě se nepodává', 'v páře', 'pyré'] }),
+      catalog,
+    );
+  });
+});
+
+describe('baby-serving-mentions-meat', () => {
+  it('projde recept bez masa', () => {
+    expectPass('baby-serving-mentions-meat', makeRecipe(), catalog);
+  });
+
+  it('projde recept, kde se maso do dětské porce vůbec nedostane', () => {
+    // babySteps mluví jen o mrkvi — dětská porce je bezmasá a je to v pořádku.
+    expectPass('baby-serving-mentions-meat', makeMeatRecipe(), catalog);
+  });
+
+  it('zachytí maso připravené pro dítě, o kterém podání mlčí', () => {
+    const recipe = makeMeatRecipe({
+      babySteps: [
+        'Kuřecí maso pro miminko dus zvlášť dvacet minut a rozeber ho na vlákna.',
+        'Mrkev rozmačkej vidličkou.',
+      ],
+      babyServing: {
+        '6m': 'Podávej hranolky mrkve delší než dětská dlaň.',
+        '9m': 'Mrkev nakrájej na kostičky do velikosti hrášku.',
+        '12m': 'Nabídni mrkev vcelku vedle hromádky přílohy.',
+      },
+    });
+    const message = expectFail('baby-serving-mentions-meat', recipe, catalog);
+    expect(message).toContain('6m, 9m, 12m');
+  });
+
+  it('pojmenuje jen tu fázi, která maso opomíjí', () => {
+    const recipe = makeMeatRecipe({
+      babySteps: ['Kuřecí maso pro miminko dus zvlášť a rozvláknej.', 'Mrkev rozmačkej.'],
+      babyServing: {
+        '6m': 'Vlákno masa podej dlouhé přes prst, ať konec čouhá z pěsti.',
+        '9m': 'Mrkev nakrájej na kostičky do velikosti hrášku.',
+        '12m': 'Maso nakrájej na kousky velikosti fazole vedle mrkve.',
+      },
+    });
+    const message = expectFail('baby-serving-mentions-meat', recipe, catalog);
+    expect(message).toContain('9m');
+    expect(message).not.toContain('6m');
+  });
+
+  it('uzná i obecné slovo maso, nejen název suroviny', () => {
+    const recipe = makeMeatRecipe({
+      babySteps: ['Kuřecí maso pro miminko dus zvlášť a rozvláknej.', 'Mrkev rozmačkej.'],
+      babyServing: {
+        '6m': 'Maso podej v dlouhém vlákně přes celou dlaň.',
+        '9m': 'Maso natrhej na krátká vlákna k rozmačkané mrkvi.',
+        '12m': 'Maso nakrájej nadrobno vedle hromádky mrkve.',
+      },
+    });
+    expectPass('baby-serving-mentions-meat', recipe, catalog);
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -587,6 +686,8 @@ describe('pokrytí pravidel', () => {
       'text-uniqueness',
       'length-sanity',
       'ingredient-coverage',
+      'neutral-address',
+      'baby-serving-mentions-meat',
     ];
     expect(safetyRules.map((rule) => rule.id)).toEqual(expected);
   });

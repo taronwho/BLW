@@ -376,7 +376,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'I v tomhle věku platí pravidlo vypeckovat a krájet podélně na čtvrtky. Dítě už si díly nabírá sama, ale velikost sousta se proti fázi 6m nemění.',
+          'I v tomhle věku platí pravidlo vypeckovat a krájet podélně na čtvrtky. Dítě už si díly nabírá samo, ale velikost sousta se proti fázi 6m nemění.',
         caution: 'Nikdy nenechávej misku celých třešní v dosahu dítěte.',
       },
       '12m': {

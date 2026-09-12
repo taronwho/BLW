@@ -206,7 +206,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí polotučný tvaroh v nákypu, v knedlíkách i jako náplň do palačinek. Je to univerzální surovina, kterou v rodině s vegetariánskou maminkou využiješ na desítky způsobů.',
+          'Batole jí polotučný tvaroh v nákypu, v knedlíkách i jako náplň do palačinek. Je to univerzální surovina, kterou v rodině s vegetariány využiješ na desítky způsobů.',
         caution: 'Při pečení tvaroh hodně vysychá, přidej jogurt nebo mléko.',
       },
     },
@@ -552,7 +552,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí parmazán nastrouhaný na těstovinách nebo v polévce. V domácnosti s vegetariánskou maminkou ho drž v samostatné krabičce, aby se nepletl se sýry vhodnými pro ni.',
+          'Batole jí parmazán nastrouhaný na těstovinách nebo v polévce. V domácnosti s vegetariány ho drž v samostatné krabičce, aby se nepletl se sýry, které jsou pro ně vhodné.',
         caution: 'Hotové strouhané směsi obsahují protispékavé látky.',
       },
     },

@@ -459,7 +459,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozpůlené vařené boby promíchej s rýží nebo s bramborem. Edamame je zdrojem kvalitní rostlinné bílkoviny, což se v domácnosti s vegetariánskou maminkou hodí obzvlášť.',
+          'Rozpůlené vařené boby promíchej s rýží nebo s bramborem. Edamame je zdrojem kvalitní rostlinné bílkoviny, což se v domácnosti s vegetariány hodí obzvlášť.',
         caution: 'Celé boby nenabízej, tvar i pružnost jsou rizikové.',
       },
       '12m': {
@@ -661,7 +661,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Domácí hummus rozřeď vodou do konzistence hustého jogurtu, aby se dobře olizoval z prstu. Dítě ho zvládne nabrat sama a zároveň se přes něj potká s pastou z mletého sezamu.',
+          'Domácí hummus rozřeď vodou do konzistence hustého jogurtu, aby se dobře olizoval z prstu. Dítě ho zvládne nabrat samo a zároveň se přes něj potká s pastou z mletého sezamu.',
         caution: 'Kupovaný hummus obsahuje sůl, do prvního roku dělej vlastní.',
       },
       '12m': {

@@ -908,7 +908,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['kosti'],
     hazardNotes: {
       kosti:
-        'Vidličkovité kosti štiky se nedají odstranit tahem. Filet po uvaření rozeber po jednotlivých svalových vrstvách, každou rozetři mezi prsty a hmatem projeď po celé délce. Když si nejsi jistá, štiku dítěti raději nedávej.',
+        'Vidličkovité kosti štiky se nedají odstranit tahem. Filet po uvaření rozeber po jednotlivých svalových vrstvách, každou rozetři mezi prsty a hmatem projeď po celé délce. Když si nejsi jistý, štiku dítěti raději nedávej.',
     },
     minAgeMonths: 6,
     prep: {
