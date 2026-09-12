@@ -229,7 +229,49 @@ export interface HouseholdState {
 }
 
 /** Katalog, proti kterému běží validační pravidla */
+/** Kategorie rady v sekci Rady. */
+export type GuideCategory = 'bezpecnost' | 'vyziva' | 'zacatek' | 'praxe';
+
+export const GUIDE_CATEGORIES: readonly GuideCategory[] = [
+  'bezpecnost',
+  'vyziva',
+  'zacatek',
+  'praxe',
+] as const;
+
+/** Blok textu uvnitř rady. */
+export interface GuideSection {
+  heading: string;
+  /** Odstavce nebo odrážky, každá položka jedna myšlenka. */
+  body: string[];
+  /** Odrážky se vykreslí jako seznam, jinak jako odstavce. */
+  asList?: boolean;
+}
+
+/**
+ * Rada — souvislý text, který nepatří ke konkrétní surovině ani receptu.
+ * Bezpečnostní tvrzení platí stejná pravidla jako u surovin: každá rada má
+ * aspoň jeden ověřený zdroj (docs/BEZPECNOST.md kap. 1).
+ */
+export interface Guide {
+  id: string;
+  titleCz: string;
+  category: GuideCategory;
+  /** Jedna věta do seznamu a na dlaždici. */
+  summary: string;
+  /** Klíčové věty vypíchnuté nad textem. Prázdné pole je v pořádku. */
+  keyPoints: string[];
+  sections: GuideSection[];
+  /** Rada, na kterou se musí dát sáhnout rychle — dostane červený rám a místo na úvodní obrazovce. */
+  urgent?: boolean;
+  sources: SourceRef[];
+  /** Odborná literatura bez URL; doplněk ke `sources`, nenahrazuje je. */
+  literature?: string[];
+  reviewStatus: ReviewStatus;
+}
+
 export interface Catalog {
   ingredients: Ingredient[];
   recipes: Recipe[];
+  guides: Guide[];
 }
