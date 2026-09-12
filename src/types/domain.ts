@@ -6,6 +6,15 @@
 export type Stage = '6m' | '9m' | '12m';
 export const STAGES: readonly Stage[] = ['6m', '9m', '12m'] as const;
 
+/**
+ * Úchop dítěte. Rozhoduje o TVARU sousta — co dítě zvedne z tácku — zatímco
+ * fáze podle věku dál rozhoduje o tom, CO se vůbec nabízí a jak měkké to musí
+ * být. Posloupnost dlaňový → nůžkový/klešťový → pinzetový popsala vývojová
+ * psychologie dávno před metodou; věk u ní je jen orientační.
+ */
+export type Grip = 'dlanovy' | 'nuzkovy' | 'pinzetovy';
+export const GRIPS: readonly Grip[] = ['dlanovy', 'nuzkovy', 'pinzetovy'] as const;
+
 export type ChokingRisk = 'low' | 'medium' | 'high';
 export type ReviewStatus = 'verified' | 'needs-review';
 
@@ -224,6 +233,8 @@ export interface HouseholdState {
   childName: string;
   /** ISO datum */
   childBirthDate: string;
+  /** Úchop, který rodič u dítěte pozoruje. Nevyplněný = řídíme se jen věkem. */
+  childGrip?: Grip;
   /** uid členů domácnosti */
   members: string[];
   tastings: TastingEvent[];

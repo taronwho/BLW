@@ -6,6 +6,7 @@ import { ingredientById, recipeById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Recipe, RecipeIngredientRef, Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
+import { GripHint } from '../components/GripHint';
 import { StageSwitch } from '../components/StageSwitch';
 import { ageInMonths, stageForAge } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
@@ -135,6 +136,7 @@ export function RecipeDetailScreen(): ReactNode {
         <p className="rounded-lg bg-paper p-3 text-sm leading-relaxed" data-testid="podani-miminko">
           {recipe.babyServing[stage]}
         </p>
+        <GripHint chokingRisk={recipeChokingRisk(recipe)} />
       </section>
 
       <div className="flex flex-col gap-3">

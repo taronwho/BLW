@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { HouseholdState, TastingEvent } from '@/types';
+import type { Grip, HouseholdState, TastingEvent } from '@/types';
 import {
   emptyHouseholdState,
   mergeHouseholdState,
@@ -32,6 +32,7 @@ interface HouseholdStore {
   disconnect(): void;
   createHousehold(): Promise<string>;
   setChild(name: string, birthDate: string): Promise<void>;
+  setGrip(grip: Grip | undefined): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
   deleteTasting(id: string): Promise<void>;
@@ -174,6 +175,13 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 
     async setChild(name: string, birthDate: string): Promise<void> {
       await persist({ ...get().state, childName: name, childBirthDate: birthDate });
+    },
+
+    /** Úchop mění tvar sousta, ne výběr surovin — ten se dál řídí věkem. */
+    async setGrip(grip: Grip | undefined): Promise<void> {
+      const zbytek = { ...get().state };
+      delete zbytek.childGrip;
+      await persist(grip === undefined ? zbytek : { ...zbytek, childGrip: grip });
     },
 
     async recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void> {

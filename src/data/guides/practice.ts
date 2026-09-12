@@ -1,6 +1,7 @@
 import type { Guide } from '@/types';
 import {
   NHS_7_9M,
+  NHS_PREP_SAFELY,
   NHS_10_12M,
   NHS_VEGETARIAN,
   NHS_YOUNG_CHILDREN,
@@ -136,6 +137,60 @@ export const practice: Guide[] = [
       },
     ],
     sources: [NHS_7_9M, NHS_10_12M, SZU_FIRST_SPOON],
+    literature: [KNIHA],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'uchop-rozhoduje-o-tvaru',
+    titleCz: 'Úchop rozhoduje o tvaru, věk o výběru',
+    category: 'praxe',
+    summary:
+      'Jestli nabídnout proužek nebo malý kousek, neurčuje kalendář, ale to, co ruka dítěte právě umí. Co se smí nabízet a jak měkké to musí být, se dál řídí věkem.',
+    keyPoints: [
+      'Dlaňový úchop: sousto dlouhé jako dospělý prst, aby konec čouhal z pěsti.',
+      'Pinzetový úchop: dítě zvedne hrášek nebo drobek a dlouhé proužky ztrácejí smysl.',
+      'Úchop nemění, co dítě smí dostat — jen jaký tvar mu to podáte.',
+      'U potravin s vysokým rizikem dušení rozhoduje pravidlo o tvaru, ne zručnost ruky.',
+    ],
+    sections: [
+      {
+        heading: 'Proč zrovna ruka',
+        body: [
+          'Ze tří vývojových podmínek, na kterých metoda stojí, je úchop ta nejzajímavější, protože se mění týden po týdnu a je vidět pouhým okem.',
+          'Šestiměsíční dítě uchopuje dlaňovým úchopem: předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst přitom neumí otevřít cíleně a neumí uvolnit jen část obsahu.',
+          'Z toho plyne jediný praktický důsledek: cokoli menšího než dětská pěst dítě sevře a už se k tomu nedostane. Proto se v prvních týdnech krájí na kusy dlouhé zhruba jako dospělý prst — konec čouhá z pěsti a dítě si ho strčí do úst.',
+          'Posloupnost úchopů popsala vývojová psychologie dávno před metodou vedenou dítětem, v pracích Arnolda Gesella ve třicátých letech a později u Jeana Piageta. Nové na tom bylo až použití: vývojová tabulka se proměnila v návod ke krájení, který si rodič ověří pohledem na to, jak dítě zvedá kostku.',
+        ],
+      },
+      {
+        heading: 'Jak se úchop mění',
+        asList: true,
+        body: [
+          'Dlaňový, zhruba od šesti měsíců: celé sousto mizí v pěsti. Krájej na proužky jako dospělý prst.',
+          'Nůžkový, obvykle mezi osmým a desátým měsícem: dítě přitiskne kousek mezi palec a bok ukazováku. Proužky pořád platí, menší kousky už se dají přidat.',
+          'Klešťový, krátce po něm: sevření mezi palcem a ohnutým ukazovákem, jistější než nůžkový.',
+          'Pinzetový, u většiny dětí mezi devátým a dvanáctým měsícem: sevření mezi bříškem palce a bříškem ukazováku. Dítě zvedne hrášek, kousek těstoviny nebo drobek a dlouhé proužky přestává potřebovat.',
+        ],
+      },
+      {
+        heading: 'Co úchop neurčuje',
+        body: [
+          'Úchop říká, co dítě z tácku zvedne. Neříká nic o tom, jak dobře žvýká, jak měkké jídlo musí být ani co už smí dostat.',
+          'Měkkost a výběr se dál řídí věkem, protože spouštěcí zóna dávicího reflexu leží u kojence blíž ke špičce jazyka a posouvá se dozadu v průběhu celého prvního roku. Ruka může být napřed, patro a hltan tím nespěchají.',
+          'U potravin s vysokým rizikem dušení to platí dvojnásob. Pinzetový úchop znamená, že dítě drobný kousek zvedne, ne že ho bezpečně zpracuje. Kulaté ovoce jako hrozny, třešně, bobuloviny, jahody a cherry rajčata se krájí na čtvrtiny bez ohledu na to, jak zručné jsou prsty; melouny a jablka se nabízejí jako plátky, ne jako malé kostky.',
+          'Britské doporučení mluví stejným jazykem: na kousky do ruky a na hrudkovitou stravu se přechází, jakmile to dítě zvládne, ne k určitému datu.',
+        ],
+      },
+      {
+        heading: 'Co s tím v aplikaci',
+        body: [
+          'V Domácnosti se dá vybrat úchop podle popisu toho, co je u dítěte vidět. U každé suroviny a u každého receptu se pak vedle pokynu ke krájení ukáže tvar, který z úchopu plyne.',
+          'Dokud úchop nevyberete, aplikace ho odhaduje z věku a řekne to. Výběr jde kdykoli změnit i zrušit.',
+          'Fáze 6m+ / 9m+ / 12m+ zůstává na věku. Kdyby úchop posouval i ji, měnil by tím výběr surovin a jejich měkkost — a to je přesně to, co z úchopu nevyplývá.',
+        ],
+      },
+    ],
+    sources: [NHS_7_9M, NHS_PREP_SAFELY],
     literature: [KNIHA],
     reviewStatus: 'verified',
   },
