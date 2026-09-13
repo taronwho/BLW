@@ -2004,4 +2004,90 @@ export const vegetables: Ingredient[] = [
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
+  {
+    id: 'rajcatovy-protlak',
+    nameCz: 'rajčatový protlak',
+    altNamesCz: ['passata', 'rajčatový koncentrát', 'protlak'],
+    category: 'zelenina',
+    servingForm: 'kasovite',
+    emoji: '🍅',
+    icon: 'rajcatovy-protlak',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Protlak je uvařená a přecezená rajčata bez slupek a jadérek, takže odpadá spařování i loupání. Lžíci rozřeď vodou nebo vývarem a vmíchej do kaše, do rozmačkané zeleniny nebo do těstovin — kyselost zjemní kapka olivového oleje.',
+        caution:
+          'Vybírej passatu, ve které je ve složení jedině rajče. Hotové omáčky a koncentráty bývají dochucené už z výroby.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících je z protlaku hotový základ omáčky. Zaduš na oleji cibuli s mrkví, přilij protlak a povař; hustá omáčka drží na těstovinách líp než řídká.',
+        caution: 'Rajčata barví — počítej s tím, že se porce podepíše na tričku.',
+      },
+      '12m': {
+        serving:
+          'Batole jí omáčku z protlaku na těstovinách, na rýži i jako základ pod zapečenou zeleninu. Otevřený protlak přelij v lednici tenkou vrstvou oleje a spotřebuj do několika dnů.',
+        caution: 'Otevřenou konzervu přendej do skla, v plechovce se obsah rychleji kazí.',
+      },
+    },
+    prepIdeas: [
+      'základ rajčatové omáčky na těstoviny',
+      'lžíce do zeleninového pyré',
+      'omáčka pod zapečenou zeleninu',
+      'základ do luštěninového ragú',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'rajcata-loupana-konzerva',
+    nameCz: 'rajčata loupaná v konzervě',
+    altNamesCz: ['pelati', 'krájená rajčata', 'konzervovaná rajčata'],
+    category: 'zelenina',
+    servingForm: 'kasovite',
+    emoji: '🥫',
+    icon: 'rajcata-loupana-konzerva',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Loupaná rajčata z konzervy odpadají práci se spařováním a slupkou, která se v puse svine do proužku. Rozmačkej je vidličkou nebo rozmixuj, povař deset minut, aby zhoustla, a vmíchej do kaše nebo do zeleninového pyré.',
+        caution:
+          'Na obalu hledej jen rajčata a rajčatovou šťávu. Varianty s bylinkami a s cibulí bývají solené.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech kousky hrubší, ať má dítě co žvýkat. Konzerva se hodí i mimo sezónu — rajčata do ní jdou zralá, takže chutnají líp než bledá čerstvá v zimě.',
+        caution: 'Tvrdý úponek u stopky vykroj, v konzervě občas zbyde.',
+      },
+      '12m': {
+        serving:
+          'Batole zvládne omáčku s většími kusy i zapečená rajčata. Zbytek z konzervy přendej do sklenice, v otevřené plechovce chuť rychle mění.',
+        caution: 'Otevřenou konzervu spotřebuj do dvou dnů.',
+      },
+    },
+    prepIdeas: [
+      'rychlá omáčka na těstoviny',
+      'základ luštěninového ragú',
+      'rozmačkaná do zeleninového pyré',
+      'do polévky místo čerstvých rajčat',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
 ];

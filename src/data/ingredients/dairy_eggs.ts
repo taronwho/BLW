@@ -1079,4 +1079,49 @@ export const dairyEggs: Ingredient[] = [
     sources: [NHS_DRINKS, NHS_AVOID],
     reviewStatus: 'verified',
   },
+  {
+    id: 'cedar',
+    nameCz: 'čedar',
+    altNamesCz: ['cheddar'],
+    category: 'mlecne-vejce',
+    servingForm: 'kusove',
+    emoji: '🧀',
+    icon: 'cedar',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Kostka tvrdého sýra má tvar i velikost, které dítě nerozžvýká na kaši, a v puse zůstane celá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'NHS jmenuje jemný čedar přímo mezi sýry, které kojenec od šesti měsíců dostat může — musí být z pasterizovaného mléka a plnotučný. Nastrouhej ho najemno do kaše, do zeleninového pyré nebo do omáčky; kostky zatím ne.',
+        caution:
+          'Vybírej jemný, ne vyzrálý. Zrání zvyšuje slanost a ta je u kojence tím, co rozhoduje.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících už jde nabídnout tenký plátek nebo proužek, který se v puse rozpouští. Strouhaný čedar zapečený na zelenině dodá chuť i vápník bez toho, aby se muselo solit.',
+        caution: 'Kostky a kolečka nekrájej, tvrdý sýr v tomhle tvaru drží pohromadě.',
+      },
+      '12m': {
+        serving:
+          'Batole zvládne i větší kousky. Čedar je slanější než eidam, takže ho ber jako chuť navrch, ne jako denní základ.',
+        caution: 'Sýr je jeden z hlavních zdrojů soli v jídelníčku malých dětí, i když se nesolí.',
+      },
+    },
+    prepIdeas: [
+      'nastrouhaný do zeleninového pyré',
+      'zapečený na dušené zelenině',
+      'proužek k obědu od devíti měsíců',
+      'do omáčky na těstoviny',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
 ];

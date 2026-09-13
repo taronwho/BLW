@@ -202,6 +202,71 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 2: rajčatové základy, mletá masa, luštěniny ─────────────────
+  'rajcatovy-protlak': (
+    <>
+      <path d="M22 22h20v30a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4V22Z" fill={C.bilaStin} />
+      <path d="M25 28h14v24H25V28Z" fill="#B93326" />
+      <path d="M24 14h16v8H24Z" fill={C.sedaTmava} />
+      <path d="M32 36c3 0 5 2 5 5s-2 5-5 5-5-2-5-5 2-5 5-5Z" fill="#E0563F" />
+      <path d="M32 34c1-2 3-3 5-3-1 2-3 3-5 3Z" fill={C.zelen} />
+    </>
+  ),
+  'rajcata-loupana-konzerva': (
+    <>
+      <ellipse cx="32" cy="20" rx="18" ry="6" fill={C.seda} />
+      <path d="M14 20h36v28a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6V20Z" fill={C.sedaTmava} />
+      <path d="M18 26h28v20H18V26Z" fill="#C23A2B" />
+      <circle cx="26" cy="34" r="5" fill="#E0563F" />
+      <circle cx="38" cy="40" r="5" fill="#E0563F" />
+      <ellipse cx="32" cy="20" rx="13" ry="4" fill={C.bilaStin} />
+    </>
+  ),
+  cedar: klin('#E8A33C', '#C9812A'),
+  'kureci-mlete': (
+    <>
+      <path d="M10 44c0-5 4-9 9-11 3-6 8-9 13-9s10 3 13 9c5 2 9 6 9 11 0 4-11 8-22 8s-22-4-22-8Z" fill="#E8CDA8" />
+      <path d="M18 40c4-3 8-4 12-3M28 32c4-2 8-2 12 0M34 42c4-2 8-3 12-2M20 46c5-2 9-2 13-1" stroke="#C2A175" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  'kruti-mlete': (
+    <>
+      <path d="M10 44c0-5 4-9 9-11 3-6 8-9 13-9s10 3 13 9c5 2 9 6 9 11 0 4-11 8-22 8s-22-4-22-8Z" fill="#D8A88E" />
+      <path d="M18 40c4-3 8-4 12-3M28 32c4-2 8-2 12 0M34 42c4-2 8-3 12-2M20 46c5-2 9-2 13-1" stroke="#B07E62" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  'veprove-mlete': (
+    <>
+      <path d="M10 44c0-5 4-9 9-11 3-6 8-9 13-9s10 3 13 9c5 2 9 6 9 11 0 4-11 8-22 8s-22-4-22-8Z" fill="#E09A9A" />
+      <path d="M18 40c4-3 8-4 12-3M28 32c4-2 8-2 12 0M34 42c4-2 8-3 12-2M20 46c5-2 9-2 13-1" stroke="#BC6B6B" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  strouhanka: hromadka((x, y, u, i) => (
+    <rect key={i} x={x - 3} y={y - 2.5} width="6" height="5" rx="1.5" transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? '#D3A96B' : '#B98A4E'} />
+  )),
+  'tortilla-psenicna': (
+    <>
+      <circle cx="32" cy="32" r="22" fill={C.krem} stroke={C.kremTmavy} strokeWidth="2" />
+      <circle cx="24" cy="26" r="3" fill={C.kremTmavy} />
+      <circle cx="39" cy="30" r="2.5" fill={C.kremTmavy} />
+      <circle cx="30" cy="40" r="3" fill={C.kremTmavy} />
+      <circle cx="41" cy="42" r="2" fill={C.kremTmavy} />
+    </>
+  ),
+  'fazole-cerne': (
+    <>
+      {fazole(20, 40, -12, '#3B3138', 1, '#211A20')}
+      {fazole(42, 42, 14, '#4A3F47', 2, '#211A20')}
+      {fazole(31, 26, -4, '#3B3138', 3, '#211A20')}
+    </>
+  ),
+  'cocka-zelena': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#6F8A43' : '#55703A'} />
+      <path d={`M${x - 3.4} ${y}a3.4 3.4 0 0 1 6.8 0`} fill="#93AC63" />
+    </g>
+  )),
+
   // ── sladidla, dochucovadla a nápoje ───────────────────────────────────
   med: (
     <>

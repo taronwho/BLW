@@ -6,6 +6,8 @@ import {
   NHS_ALLERGY,
   NHS_AVOID,
   NHS_FISH,
+  NHS_FIRST_FOODS,
+  NHS_IRON,
   NHS_PREP_SAFELY,
   NHS_VITAMIN_A,
   NHS_YOUNG_CHILDREN,
@@ -1497,6 +1499,140 @@ export const meatFish: Ingredient[] = [
     seasonCz: [],
     vegetarian: false,
     sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kureci-mlete',
+    nameCz: 'kuřecí mleté',
+    altNamesCz: ['mleté kuřecí maso', 'kuřecí mleso'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🍗',
+    icon: 'kureci-mlete',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Kulatá masová kulička má tvar, který se do dýchacích cest vejde celý. Placka nebo podlouhlý váleček tuhle vlastnost nemá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Mleté maso je pro první sousta vděčnější než plátek — rozpadne se v puse samo. Smíchej ho s rozmačkanou vařenou zeleninou, vytvaruj podlouhlé válečky dlouhé jako dospělý prst a upeč doměkka. Kuličky netvaruj, kulatý tvar je u masa zbytečné riziko.',
+        caution:
+          'Drůbeží maso propeč celé, dokud z něj nevytéká čirá šťáva; syrové drůbeží může nést kampylobakter.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících už drží i placička z mletého kuřete se strouhankou a vejcem. Uvnitř musí zůstat vláčná, proto ji peč přikrytou nebo duš v omáčce.',
+        caution: 'Prkénko a nůž po syrovém mase umyj dřív, než na ně přijde cokoli jiného.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kuličky i karbanátky nakrájené na kousky, směs v omáčce na těstovinách i v plněné zelenině. Mleté maso je zároveň nejsnazší cesta, jak do jídla dostat železo.',
+        caution: 'Mleté maso se kazí rychleji než celý kus — zpracuj ho v den nákupu, nebo zamraz.',
+      },
+    },
+    prepIdeas: [
+      'podlouhlé válečky pečené se zeleninou',
+      'placičky se strouhankou',
+      'směs do rajčatové omáčky',
+      'náplň do dušené papriky',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY, NHS_IRON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kruti-mlete',
+    nameCz: 'krůtí mleté',
+    altNamesCz: ['mleté krůtí maso'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🍗',
+    icon: 'kruti-mlete',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Kulatá masová kulička má tvar, který se do dýchacích cest vejde celý. Placka nebo podlouhlý váleček tuhle vlastnost nemá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Krůtí je libovější než kuřecí, takže snadno vyschne. Smíchej ho s rozmačkanou dýní, s mrkví nebo s vařenou bramborou, vytvaruj podlouhlé válečky dlouhé jako dospělý prst a duš je přikryté. Kulaté kuličky netvaruj.',
+        caution: 'Propeč celé maso, dokud z něj nevytéká čirá šťáva.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících drží placička z krůtího se strouhankou a vejcem. Vláčnost zachráníš lžící zakysané smetany nebo strouhanou cuketou ve směsi.',
+        caution: 'Suché maso dítě vyplivne — vlhkost ve směsi je tu důležitější než koření.',
+      },
+      '12m': {
+        serving:
+          'Batole jí krůtí karbanátky, směs v omáčce i pod zapečenou zeleninou. Chuťově je jemnější než kuřecí, takže projde i u vybíravého jedlíka.',
+        caution: 'Mleté maso zpracuj v den nákupu, nebo ho hned zamraz.',
+      },
+    },
+    prepIdeas: [
+      'válečky dušené s dýní',
+      'placičky s cuketou',
+      'směs do zeleninové omáčky',
+      'náplň do dušené kapusty',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY, NHS_IRON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'veprove-mlete',
+    nameCz: 'vepřové mleté',
+    altNamesCz: ['mleté vepřové maso'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🥩',
+    icon: 'veprove-mlete',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Kulatá masová kulička má tvar, který se do dýchacích cest vejde celý. Placka nebo podlouhlý váleček tuhle vlastnost nemá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Vepřové mleté je tučnější, takže zůstane vláčné i bez přídavků. Vytvaruj podlouhlé válečky dlouhé jako dospělý prst a duš je v zeleninovém základu doměkka; kulaté kuličky netvaruj.',
+        caution:
+          'Vepřové propeč celé. Mleté maso z pultu má velký povrch, na kterém se bakterie množí rychleji než na celém kusu.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí do rajčatové omáčky i do zelí. Vepřové drží pohromadě líp než drůbeží, takže z něj placička nepadá.',
+        caution: 'Vepřové mleté z obchodu bývá směs s kůží a sádlem; u řezníka víš, co v něm je.',
+      },
+      '12m': {
+        serving:
+          'Batole jí karbanátky, sekanou i směs v omáčce. Domácí varianta je tu podstatná: hotové mleté výrobky a uzeniny obsahují sůl, kterou dítě nepotřebuje.',
+        caution: 'Klobásy a sekaná z obchodu nejsou totéž co domácí mleté maso.',
+      },
+    },
+    prepIdeas: [
+      'válečky dušené v rajčatovém základu',
+      'placičky se strouhankou',
+      'směs do zelí',
+      'náplň do plněné papriky',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY, NHS_AVOID],
     reviewStatus: 'verified',
   },
 ];
