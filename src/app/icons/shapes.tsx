@@ -766,6 +766,157 @@ export const SHAPES: Record<string, ReactNode> = {
       <circle cx="32" cy="38" r="19" fill="none" stroke="#C25E10" strokeWidth="2" strokeDasharray="2 5" />
     </>
   ),
+
+  // ── citrusy, fík a sušené ovoce ────────────────────────────────────────
+  mandarinka: (
+    <>
+      <path d="M40 15c4-3 9-3 12 0-2 5-7 7-12 6v-6Z" fill={C.zelen} />
+      <ellipse cx="30" cy="40" rx="18" ry="15" fill="#EE8A22" />
+      <path d="M30 25v30M15 40h30M18 30l24 20M42 30L18 50" stroke="#C96A0E" strokeWidth="1.6" fill="none" />
+      <path d="M48 34c6 2 9 7 8 12-6 1-11-3-12-9l4-3Z" fill="#F6A94E" />
+    </>
+  ),
+
+  citron: (
+    <>
+      <path d="M42 16c4-3 8-3 11-1-2 4-6 6-11 5v-4Z" fill={C.zelen} />
+      <path d="M12 34c0-10 9-16 20-16s20 6 20 16-9 17-20 17-20-7-20-17Z" fill={C.zluta} />
+      <path d="M52 34c4-1 7 0 8 2-2 2-5 3-8 2v-4ZM12 34c-4-1-7 0-8 2 2 2 5 3 8 2v-4Z" fill={C.zlutaTmava} />
+      <path d="M22 27c3-3 7-4 11-4" stroke="#F7E294" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  limetka: (
+    <>
+      <path d="M40 14c4-3 9-3 12 0-2 5-7 7-12 6v-6Z" fill={C.zelenTmava} />
+      <circle cx="26" cy="38" r="17" fill="#6FA82A" />
+      <path d="M17 30c2-3 5-5 8-6" stroke="#A8CE62" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M46 22a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z" fill="#D9E8AE" />
+      <path d="M46 22v32M46 38h16M40 27l12 22M52 27L40 49" stroke="#8FBF4A" strokeWidth="1.8" fill="none" />
+    </>
+  ),
+
+  fik: (
+    <>
+      <rect x="30" y="8" width="4" height="7" rx="2" fill={C.hneda} />
+      <path d="M32 13c3-3 8-4 11-2-2 4-7 6-11 5Z" fill={C.zelen} />
+      <path d="M25 16c4 0 7 2 7 5 0 8 12 11 12 22 0 8-6 13-14 13s-14-5-14-13c0-11 9-15 9-22 0-3-1-5 0-5Z" fill="#6E4A78" />
+      <path d="M32 25c6 0 10 6 10 14s-4 12-10 12-10-4-10-12 4-14 10-14Z" fill="#D4506B" />
+      <path d="M32 31c3 0 5 4 5 9s-2 7-5 7-5-2-5-7 2-9 5-9Z" fill="#F2C0C4" />
+    </>
+  ),
+
+  datle: (
+    <>
+      <ellipse cx="22" cy="28" rx="8" ry="13" transform="rotate(-24 22 28)" fill="#7A4A22" />
+      <ellipse cx="40" cy="31" rx="8" ry="13" transform="rotate(16 40 31)" fill="#5E3617" />
+      <ellipse cx="30" cy="45" rx="8" ry="13" transform="rotate(-8 30 45)" fill="#8C5A2C" />
+      <path d="M17 25c4 2 8 2 11 0M35 29c4 2 8 2 11 0M25 43c4 2 7 2 10 0" stroke="#B08048" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  rozinky: (
+    <>
+      <ellipse cx="20" cy="28" rx="8" ry="6" transform="rotate(-18 20 28)" fill="#4A2A30" />
+      <ellipse cx="40" cy="25" rx="8" ry="6" transform="rotate(14 40 25)" fill="#3A2026" />
+      <ellipse cx="30" cy="37" rx="8.5" ry="6.5" fill="#5A343C" />
+      <ellipse cx="46" cy="39" rx="7.5" ry="6" transform="rotate(-10 46 39)" fill="#4A2A30" />
+      <ellipse cx="22" cy="47" rx="8" ry="6" transform="rotate(8 22 47)" fill="#3A2026" />
+      <ellipse cx="38" cy="49" rx="7.5" ry="6" fill="#5A343C" />
+      <path d="M16 27c3 2 5 2 8 0M36 24c3 2 5 2 8 0M26 36c3 2 5 2 8 0" stroke="#8A6068" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'susene-merunky': (
+    <>
+      <path d="M10 30c0-6 6-10 13-10s13 4 13 10-6 12-13 12-13-6-13-12Z" fill="#D9812A" />
+      <path d="M14 29c0-4 4-6 9-6s9 2 9 6-4 8-9 8-9-4-9-8Z" fill="#E8A055" />
+      <path d="M30 44c0-6 6-10 13-10s13 4 13 10-6 12-13 12-13-6-13-12Z" fill="#C56E1C" />
+      <path d="M34 43c0-4 4-6 9-6s9 2 9 6-4 8-9 8-9-4-9-8Z" fill="#DE9448" />
+    </>
+  ),
+
+  'susene-svestky': (
+    <>
+      <ellipse cx="23" cy="30" rx="11" ry="9" transform="rotate(-14 23 30)" fill="#33223A" />
+      <ellipse cx="42" cy="34" rx="10" ry="8.5" transform="rotate(12 42 34)" fill="#241729" />
+      <ellipse cx="30" cy="46" rx="11" ry="9" fill="#422C4A" />
+      <path d="M16 28c4 3 9 3 13 0M34 33c4 3 8 3 12 0M24 45c4 3 8 3 12 0" stroke="#6E5478" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'jablecne-pyre': (
+    <>
+      <path d="M18 24h28v24a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V24Z" fill="#EFE2C6" />
+      <path d="M18 24h28v6H18Z" fill={C.kremTmavy} />
+      <path d="M21 34h22v14a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4V34Z" fill="#E8C87A" />
+      <path d="M32 10c3-2 7-2 9 0-1 4-5 6-9 5v-5Z" fill={C.zelen} />
+      <path d="M26 22c-2-5 1-10 6-10s8 5 6 10Z" fill="#CE3B36" />
+    </>
+  ),
+
+  // ── obiloviny ──────────────────────────────────────────────────────────
+  'vlocky-jemne': (
+    <>
+      <path d="M10 40c0-3 3-5 8-6 3-6 8-9 14-9s11 3 14 9c5 1 8 3 8 6 0 5-10 9-22 9s-22-4-22-9Z" fill={C.krem} />
+      <ellipse cx="22" cy="38" rx="4" ry="2.5" fill={C.kremTmavy} />
+      <ellipse cx="33" cy="34" rx="4" ry="2.5" fill={C.kremTmavy} />
+      <ellipse cx="43" cy="39" rx="4" ry="2.5" fill={C.kremTmavy} />
+      <ellipse cx="28" cy="43" rx="4" ry="2.5" fill={C.kremTmavy} />
+      <ellipse cx="39" cy="44" rx="4" ry="2.5" fill={C.kremTmavy} />
+    </>
+  ),
+
+  'vlocky-velke': (
+    <>
+      <ellipse cx="20" cy="28" rx="10" ry="6.5" transform="rotate(-16 20 28)" fill={C.krem} />
+      <ellipse cx="42" cy="27" rx="10" ry="6.5" transform="rotate(14 42 27)" fill={C.kremTmavy} />
+      <ellipse cx="31" cy="38" rx="11" ry="7" fill={C.krem} />
+      <ellipse cx="46" cy="42" rx="9" ry="6" transform="rotate(-12 46 42)" fill={C.kremTmavy} />
+      <ellipse cx="20" cy="46" rx="10" ry="6.5" transform="rotate(10 20 46)" fill={C.kremTmavy} />
+      <path d="M13 27c5 2 9 2 14 0M36 26c4 2 8 2 12 0M24 37c5 2 9 2 14 0" stroke="#BFA574" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  oves: (
+    <>
+      <path d="M32 58V26" stroke="#B8A468" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 30c-6-2-10-6-11-11 6 0 10 4 11 11ZM32 40c-6-2-10-6-11-11 6 0 10 4 11 11ZM32 50c-6-2-10-6-11-11 6 0 10 4 11 11Z" fill={C.zlutaTmava} />
+      <path d="M32 26c6-2 10-6 11-11-6 0-10 4-11 11ZM32 36c6-2 10-6 11-11-6 0-10 4-11 11ZM32 46c6-2 10-6 11-11-6 0-10 4-11 11Z" fill={C.zluta} />
+    </>
+  ),
+
+  'mouka-psenicna': (
+    <>
+      {/* Hromádka bílé mouky potřebuje vlastní okraj, jinak na světlém
+          podkladu zmizí; proto tmavší spodek a světlý vrch. */}
+      <path d="M6 48c0-7 6-12 12-14 4-8 10-13 16-13s12 5 16 13c6 2 12 7 12 14H6Z" fill={C.bilaStin} />
+      <path d="M14 48c0-6 5-10 10-12 3-6 7-10 10-10s7 4 10 10c5 2 10 6 10 12H14Z" fill={C.bila} />
+      <path d="M34 21V9" stroke={C.zlutaTmava} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M34 12c-4-1-6-3-7-6 4 0 6 2 7 6ZM34 18c-4-1-6-3-7-6 4 0 6 2 7 6ZM34 10c4-1 6-3 7-6-4 0-6 2-7 6ZM34 16c4-1 6-3 7-6-4 0-6 2-7 6Z" fill={C.zluta} />
+    </>
+  ),
+
+  'mouka-celozrnna': (
+    <>
+      <path d="M6 48c0-7 6-12 12-14 4-8 10-13 16-13s12 5 16 13c6 2 12 7 12 14H6Z" fill={C.krem} />
+      <path d="M18 44c6-3 22-3 28 0" stroke={C.kremTmavy} strokeWidth="2.5" fill="none" />
+      <circle cx="24" cy="40" r="1.8" fill="#B08048" />
+      <circle cx="40" cy="41" r="1.8" fill="#B08048" />
+      <circle cx="32" cy="37" r="1.8" fill="#B08048" />
+      <path d="M34 21V9" stroke={C.hneda} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M34 12c-4-1-6-3-7-6 4 0 6 2 7 6ZM34 18c-4-1-6-3-7-6 4 0 6 2 7 6ZM34 10c4-1 6-3 7-6-4 0-6 2-7 6ZM34 16c4-1 6-3 7-6-4 0-6 2-7 6Z" fill={C.hnedaSvetla} />
+    </>
+  ),
+
+  'mouka-spaldova': (
+    <>
+      <path d="M6 48c0-7 6-12 12-14 4-8 10-13 16-13s12 5 16 13c6 2 12 7 12 14H6Z" fill={C.kremTmavy} />
+      <path d="M18 44c6-3 22-3 28 0" stroke="#B08048" strokeWidth="2.5" fill="none" />
+      <path d="M34 21V6" stroke="#8C6239" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M28 10l6 4-6 4M40 10l-6 4 6 4M28 18l6 4-6 4M40 18l-6 4 6 4" stroke="#B98A56" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;

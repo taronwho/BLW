@@ -3,8 +3,8 @@
  * motivu pod sebou. Spouští se ručně:
  *   npx tsx scripts/preview-icons.tsx /cesta/nahled.html [predpona]
  *
- * Nepovinná předpona vybere jen ikony, jejichž klíč jí začíná — hodí se při
- * kreslení další dávky. Rozhoduje malá velikost: 20 px je to, co rodič
+ * Nepovinný filtr je seznam předpon oddělený čárkou; vybere ikony, jejichž
+ * klíč některou z nich začíná — hodí se při kreslení další dávky. Rozhoduje malá velikost: 20 px je to, co rodič
  * v seznamu opravdu vidí. Co se tam rozpadne na skvrnu, patří překreslit.
  */
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -15,7 +15,10 @@ const cil = process.argv[2];
 const filtr = process.argv[3] ?? '';
 if (cil === undefined) throw new Error('Chybí cesta k výstupnímu souboru.');
 
-const ids = Object.keys(SHAPES).filter((id) => id.startsWith(filtr));
+const predpony = filtr === '' ? [] : filtr.split(',');
+const ids = Object.keys(SHAPES).filter(
+  (id) => predpony.length === 0 || predpony.some((p) => id.startsWith(p)),
+);
 
 function svg(id: string, size: number): string {
   const kresba = SHAPES[id];
