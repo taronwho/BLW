@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  NHS_IRON,
   BP_COMPLEMENTARY,
   BP_RAW_BEANS,
   MZCR_COMPLEMENTARY,
@@ -711,6 +712,93 @@ export const legumes: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_ALLERGY, NHS_YOUNG_CHILDREN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'fazole-cerne',
+    nameCz: 'fazole černé',
+    altNamesCz: ['černé fazole', 'black beans'],
+    category: 'lusteniny',
+    servingForm: 'drobne',
+    emoji: '🫘',
+    icon: 'fazole-cerne',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Celá fazole má hladkou slupku a velikost, se kterou si dásně neporadí; rozmačkaná tuhle vlastnost ztrácí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Sušené fazole namoč přes noc, vodu slij a vař je v čerstvé vodě doměkka. Pro první porce je rozmačkej vidličkou na hrubé pyré a smíchej s rajčatovým základem nebo s rozmačkanou dýní.',
+        caution:
+          'Syrové ani nedovařené fazole se nepodávají — obsahují látku, která se ničí až dostatečně dlouhým varem v čerstvé vodě.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech část fazolí celých a část rozmačkanou, ať se porce drží pohromadě. Černé fazole mají výraznější chuť než bílé a dobře snesou kmín i papriku.',
+        caution: 'Celé fazole vždycky rozmáčkni mezi prsty, dokud jsou v porci pro dítě.',
+      },
+      '12m': {
+        serving:
+          'Batole jí fazole celé, když jsou uvařené doměkka. Spolu s obilovinou a s vitaminem C v jednom jídle jsou dobrým zdrojem rostlinného železa.',
+        caution: 'Z konzervy je propláchni, nálev bývá solený.',
+      },
+    },
+    prepIdeas: [
+      'rozmačkané s rajčatovým základem',
+      'do zeleninového ragú',
+      'pomazánka s avokádem',
+      'do polévky s kořenovou zeleninou',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, NHS_IRON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'cocka-zelena',
+    nameCz: 'čočka zelená',
+    altNamesCz: ['zelená čočka', 'čočka na salát'],
+    category: 'lusteniny',
+    servingForm: 'drobne',
+    emoji: '🫘',
+    icon: 'cocka-zelena',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Zelená čočka drží po uvaření tvar líp než červená, takže se nerozpadne do kaše sama. Pro první porce ji proto uvař doměkka a rozmačkej vidličkou nebo rozmixuj se zeleninou.',
+        caution: 'Nedovařená čočka je tvrdá a dítě ji nerozžvýká; vař ji déle, než uvádí obal.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech zrna celá, ale měkká — dítě je sbírá z tácku a trénuje na nich prsty. Kapka citronu v porci zlepší vstřebání železa, které čočka nese.',
+        caution: 'Čočku před vařením propláchni a přeber, občas se mezi zrny najde kamínek.',
+      },
+      '12m': {
+        serving:
+          'Batole jí čočku v salátu, v polévce i jako přílohu místo rýže. Zelená se hodí tam, kde mají být zrna vidět.',
+        caution: 'Luštěniny zaváděj postupně, prudký nárůst vlákniny nadýmá.',
+      },
+    },
+    prepIdeas: [
+      'rozmačkaná se zeleninou',
+      'do rajčatového ragú místo masa',
+      'do polévky s mrkví',
+      'vlažný salát s kapkou citronu',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_VEGETARIAN, NHS_IRON, BP_RAW_BEANS],
     reviewStatus: 'verified',
   },
 ];

@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  NHS_ALLERGY,
   BP_GLUTEN,
   EFSA_ARSENIC,
   EFSA_ARSENIC_UPDATE,
@@ -1186,6 +1187,92 @@ export const grains: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [BP_GLUTEN, NHS_FIRST_FOODS, NHS_YOUNG_CHILDREN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'strouhanka',
+    nameCz: 'strouhanka',
+    altNamesCz: ['strouhaná houska', 'domácí strouhanka'],
+    category: 'obiloviny',
+    servingForm: 'kasovite',
+    emoji: '🍞',
+    icon: 'strouhanka',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Strouhanka je tu hlavně proto, aby směs držela pohromadě: lžíce do mletého masa nebo do zeleninové placičky udělá z kašovité hmoty tvar, který dítě uchopí. Sama o sobě se nepodává.',
+        caution:
+          'Obsahuje pšenici a lepek. Ten se zavádí jako ostatní klíčové alergeny, od šesti měsíců a v malém množství.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících jí můžeš obalit kousky zeleniny nebo ryby a zapéct je v troubě. Obalované se peče, nesmaží — na pánvi nasákne tukem a ztvrdne.',
+        caution: 'Kupovaná strouhanka bývá solená; usušená houska rozmixovaná doma solená není.',
+      },
+      '12m': {
+        serving:
+          'Batole jí obalované kousky i placičky. Domácí strouhanka z okoralého pečiva je levnější a víš, co je v ní.',
+        caution: 'Skladuj v suchu a v uzavřené nádobě, jinak zvlhne a zplesniví.',
+      },
+    },
+    prepIdeas: [
+      'pojivo do masových placiček',
+      'pojivo do zeleninových placiček',
+      'obalení zeleniny k zapečení',
+      'zahuštění řídké směsi',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_ALLERGY, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'tortilla-psenicna',
+    nameCz: 'tortilla pšeničná',
+    altNamesCz: ['pšeničná placka', 'wrap'],
+    category: 'obiloviny',
+    servingForm: 'kusove',
+    emoji: '🫓',
+    icon: 'tortilla-psenicna',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Tortilla je měkká placka, ze které se dá ukrojit proužek dlouhý jako dospělý prst — přesně tvar pro dlaňový úchop. Hodí se jako nosič: nanes na ni hummus, avokádo nebo tvaroh a srolovanou nakrájej.',
+        caution:
+          'Obsahuje pšenici a lepek. Suchá tortilla se v puse svine do chuchvalce, proto ji vždycky něčím potři.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí srolovaná s náplní a nakrájená na kolečka, která dítě zvedne dvěma prsty. Krátce ohřátá na suché pánvi je vláčnější než studená.',
+        caution: 'Čti složení — některé tortilly mají hodně soli.',
+      },
+      '12m': {
+        serving:
+          'Batole jí wrap i s kousky zeleniny uvnitř. Celozrnná varianta dodá víc vlákniny než bílá.',
+        caution: 'Náplň nedávej příliš vlhkou, jinak se placka roztrhne.',
+      },
+    },
+    prepIdeas: [
+      'proužky s hummusem',
+      'srolovaná s avokádem a nakrájená na kolečka',
+      'nosič pro tvarohovou pomazánku',
+      'ohřátá k dušené zelenině',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_ALLERGY, BP_GLUTEN],
     reviewStatus: 'verified',
   },
 ];
