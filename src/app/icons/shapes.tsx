@@ -97,6 +97,33 @@ function palicka(maso: string, stin: string): ReactNode {
   );
 }
 
+/** Celá ryba z profilu; `znaky` doplní pruhy nebo skvrny daného druhu. */
+function ryba(telo: string, brich: string, znaky?: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M50 32c4-5 8-8 10-8 1 5 1 11 0 16-2 0-6-3-10-8Z" fill={telo} />
+      <path d="M8 32c0-9 10-16 22-16s20 7 20 16-8 16-20 16S8 41 8 32Z" fill={telo} />
+      <path d="M12 36c4 6 12 10 20 10 8 0 15-3 18-8-3 6-10 10-18 10-9 0-16-4-20-12Z" fill={brich} />
+      <path d="M26 16c2-5 6-8 9-8 1 4 0 7-2 9l-7-1Z" fill={telo} />
+      {znaky}
+      <circle cx="17" cy="28" r="2.6" fill="#20262A" />
+    </>
+  );
+}
+
+/** Filet: klín s viditelnými svalovými pruhy. */
+function filet(maso: string, pruhy: string, kuze?: string): ReactNode {
+  return (
+    <>
+      <path d="M6 40c2-10 14-18 28-19 12-1 22 3 24 9 2 7-6 15-19 18-14 3-30 0-33-8Z" fill={maso} />
+      {kuze !== undefined && (
+        <path d="M6 40c-1-3 0-6 2-9 8 5 22 7 34 4 6-1 11-4 15-7 1 2 1 4 1 6-4 4-11 7-19 9-14 3-30 0-33-3Z" fill={kuze} />
+      )}
+      <path d="M18 26c1 6 1 12 0 17M28 22c1 7 1 14 0 20M38 22c1 6 1 12 0 17M47 25c1 5 1 9 0 13" stroke={pruhy} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1359,6 +1386,136 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M20 44c8 4 20 4 28-1" stroke="#C4736A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
       <path d="M14 48l-6 8" stroke={C.krem} strokeWidth="7" strokeLinecap="round" fill="none" />
       <circle cx="8" cy="55" r="5.5" fill={C.bila} />
+    </>
+  ),
+
+  // ── ryby a mořské plody ────────────────────────────────────────────────
+  losos: filet('#E8804E', '#F7C3A2', '#C9C4B8'),
+
+  'treska-obecna': filet('#F0E6D6', '#D4C8B4', '#BFB8A4'),
+
+  'treska-tmava': filet('#D8CFC0', '#A89C88', '#6E6A62'),
+
+  tunak: (
+    <>
+      <path d="M10 34c0-10 10-18 22-18s22 8 22 18-10 18-22 18-22-8-22-18Z" fill="#8E2A2E" />
+      <path d="M14 34c0-8 8-14 18-14s18 6 18 14-8 14-18 14-18-6-18-14Z" fill="#A8353A" />
+      <path d="M24 22c2 8 2 16 0 24M32 20c2 9 2 19 0 28M40 22c2 8 2 16 0 24" stroke="#C4595E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'pstruh-duhovy': ryba(
+    '#8E9AA8',
+    '#E4E8EC',
+    <>
+      {/* Duhový pruh patří pod čáru očí, jinak se čte jako ústa. */}
+      <path d="M13 35c9 2 22 1 33-4" stroke="#D9628E" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="24" cy="23" r="1.5" fill="#3E4750" />
+      <circle cx="32" cy="26" r="1.5" fill="#3E4750" />
+      <circle cx="40" cy="22" r="1.5" fill="#3E4750" />
+      <circle cx="36" cy="33" r="1.5" fill="#3E4750" />
+      <circle cx="28" cy="38" r="1.5" fill="#3E4750" />
+    </>,
+  ),
+
+  candat: ryba(
+    '#9EA890',
+    '#E8EAE0',
+    <>
+      <path d="M22 20l3-7 3 7 3-7 3 7 3-6 3 6" stroke="#6E7A62" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M20 34c8 2 18 2 26-2" stroke="#7E8A70" strokeWidth="2.5" fill="none" />
+    </>,
+  ),
+
+  stika: (
+    <>
+      <path d="M54 32c3-4 6-6 8-6 1 4 1 9 0 13-2 0-5-3-8-7Z" fill="#5E7A4A" />
+      <path d="M2 32c2-5 8-8 16-9 12-2 28 0 36 5 4 2 4 6 0 8-8 5-24 7-36 5-8-1-14-4-16-9Z" fill="#5E7A4A" />
+      <path d="M6 36c6 4 16 6 26 6 9 0 18-2 24-5-6 5-15 8-24 8-11 0-21-3-26-9Z" fill="#D8E0C8" />
+      <path d="M28 27c2 3 2 7 0 10M36 26c2 4 2 8 0 12M44 27c2 3 2 7 0 10" stroke="#8FA870" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="12" cy="30" r="2.4" fill="#20262A" />
+    </>
+  ),
+
+  kapr: (
+    <>
+      <path d="M52 32c4-5 8-8 10-8 1 5 1 12 0 17-2 0-6-4-10-9Z" fill="#8E7A46" />
+      <path d="M6 32c0-11 11-19 24-19s22 8 22 19-9 19-22 19S6 43 6 32Z" fill="#A8924E" />
+      <path d="M10 37c5 7 14 11 22 11 9 0 17-4 20-9-4 7-11 11-20 11-10 0-18-5-22-13Z" fill="#E0D4A8" />
+      <path d="M20 24c3 2 3 6 0 8M28 21c3 2 3 6 0 8M36 23c3 2 3 6 0 8M24 34c3 2 3 6 0 8M32 33c3 2 3 6 0 8M40 32c3 2 3 6 0 8" stroke="#7E6A36" strokeWidth="2" fill="none" />
+      <circle cx="15" cy="27" r="2.6" fill="#20262A" />
+    </>
+  ),
+
+  makrela: ryba(
+    '#5E7A8E',
+    '#E4EAEE',
+    <path
+      d="M14 24c4 3 8 3 12 0M26 22c4 3 8 3 12 0M38 23c4 3 7 3 10 0M18 30c4 3 8 3 12 0M32 29c4 3 8 3 12 0"
+      stroke="#2E3E4E"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      fill="none"
+    />,
+  ),
+
+  'sardinky-v-oleji': (
+    <>
+      <path d="M8 26h48v22a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V26Z" fill="#B8BCC0" />
+      <path d="M12 30h40v18H12Z" fill="#8E9AA8" />
+      <path d="M14 36c4-3 12-3 16 0-4 3-12 3-16 0ZM34 36c4-3 12-3 16 0-4 3-12 3-16 0ZM14 44c4-3 12-3 16 0-4 3-12 3-16 0ZM34 44c4-3 12-3 16 0-4 3-12 3-16 0Z" fill="#E4E8EC" />
+      <path d="M56 26l4-12c1 5 1 9 0 13l-4 1Z" fill="#D8DCE0" />
+    </>
+  ),
+
+  krevety: (
+    <>
+      <path d="M44 16c-14 0-24 9-24 20 0 8 6 14 14 14 6 0 11-4 11-10 0-5-4-8-8-8-3 0-5 2-5 4" stroke="#E8734E" strokeWidth="9" strokeLinecap="round" fill="none" />
+      <path d="M44 16c-11 0-19 6-22 14M30 46c5 2 10 0 12-4" stroke="#F6A98A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M44 16c5-3 10-4 14-2-3 4-8 6-14 6v-4Z" fill="#E8734E" />
+      <circle cx="44" cy="19" r="2.2" fill="#3A2018" />
+    </>
+  ),
+
+  // ── mléčné výrobky ─────────────────────────────────────────────────────
+  'jogurt-bily': (
+    <>
+      <path d="M16 20h32l-4 32a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4L16 20Z" fill={C.bila} />
+      <path d="M14 16h36v6H14Z" fill={C.bilaStin} />
+      <path d="M21 26h22l-3 24H24l-3-24Z" fill="#F8F5EC" />
+      <path d="M25 32c4-2 10-2 14 0" stroke={C.bilaStin} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'jogurt-recky': (
+    <>
+      <path d="M16 24h32l-4 28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4L16 24Z" fill={C.bilaStin} />
+      <path d="M14 20h36v6H14Z" fill={C.kremTmavy} />
+      <path d="M32 6c6 0 10 4 10 8 0 3-2 5-5 6h-10c-3-1-5-3-5-6 0-4 4-8 10-8Z" fill={C.bila} />
+      <path d="M21 30h22l-3 22H24l-3-22Z" fill={C.bila} />
+    </>
+  ),
+
+  kefir: (
+    <>
+      <path d="M26 8h12v8l6 8v28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V24l6-8V8Z" fill={C.bilaStin} />
+      <path d="M23 28h18v22a2 2 0 0 1-2 2H25a2 2 0 0 1-2-2V28Z" fill={C.bila} />
+      <circle cx="29" cy="36" r="2.4" fill={C.bilaStin} />
+      <circle cx="36" cy="42" r="2" fill={C.bilaStin} />
+      <circle cx="29" cy="46" r="1.8" fill={C.bilaStin} />
+      <path d="M25 6h14v4H25Z" fill={C.kremTmavy} />
+    </>
+  ),
+
+  'tvaroh-mekky': (
+    <>
+      <path d="M12 30l20-10 20 10-20 10-20-10Z" fill={C.bila} />
+      <path d="M12 30v14l20 10V40L12 30Z" fill={C.bilaStin} />
+      <path d="M52 30v14L32 54V40l20-10Z" fill="#E4DECD" />
+      <circle cx="22" cy="29" r="2.2" fill={C.bilaStin} />
+      <circle cx="34" cy="25" r="2.4" fill={C.bilaStin} />
+      <circle cx="42" cy="31" r="2" fill={C.bilaStin} />
+      <circle cx="30" cy="33" r="2" fill={C.bilaStin} />
     </>
   ),
 };
