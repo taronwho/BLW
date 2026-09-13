@@ -24,7 +24,6 @@ export const COVERAGE_EXCEPTIONS: Readonly<Record<string, string>> = {
   'napoj-ovesny': 'Nápoj; jako složka vaření přichází v úvahu až po prvním roce.',
   'napoj-sojovy': 'Nápoj; jako složka vaření přichází v úvahu až po prvním roce.',
   'napoj-mandlovy': 'Nápoj; jako složka vaření přichází v úvahu až po prvním roce.',
-  'mleko-kozi': 'Nápoj; jako hlavní mléko až po prvních narozeninách.',
 
   // Položky, které katalog vede proto, aby řekl, že se do roka nepoužívají.
   // V dětské lince nesmí být vůbec a do dochucení pro dospělé se píšou

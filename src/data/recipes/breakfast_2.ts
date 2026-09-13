@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import {
+  NHS_DRINKS,
   NHS_10_12M,
   NHS_7_9M,
   NHS_ALLERGY,
@@ -645,6 +646,87 @@ export const breakfast2: Recipe[] = [
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'studená kuchyně', 'rychlé'],
     sources: [NHS_AVOID, NHS_10_12M],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'podmaslove-livanecky',
+    titleCz: 'Podmáslové lívanečky',
+    category: 'snidane',
+    minAgeMonths: 6,
+    timeMinutes: 25,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'podmasli', amount: '300 ml', track: 'all' },
+      { ingredientId: 'mouka-spaldova', amount: '250 g', track: 'all' },
+      { ingredientId: 'vejce-slepici', amount: '2 kusy', track: 'all' },
+      { ingredientId: 'jedla-soda', amount: 'půl lžičky', track: 'all' },
+      { ingredientId: 'boruvky', amount: 'hrst', track: 'all' },
+      { ingredientId: 'olej-repkovy', amount: 'na pánev', track: 'all' },
+    ],
+    baseSteps: [
+      'Mouku smíchej se sodou. Podmáslí rozšlehej s vejci a vlij do mouky; míchej jen do spojení, těsto má zůstat hrudkaté.',
+      'Nech deset minut odpočinout — soda s podmáslím mezitím těsto nadzvedne a lívanečky vyjdou vláčné.',
+      'Pánev potři tenkou vrstvou oleje a rozehřej na mírný plamen.',
+    ],
+    babySplitPoint:
+      'Po kroku 2 odeber dvě naběračky těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
+    babySteps: [
+      'Borůvky pro dětskou porci rozmačkej vidličkou — celá borůvka má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí.',
+      'Vmíchej je do odebraného těsta a smaž dva podlouhlé lívanečky dlouhé jako dospělý prst, ne kolečka.',
+      'Peč je na mírném plameni z obou stran, dokud uvnitř nezpevní, a nech vychladnout na teplotu ruky.',
+    ],
+    babyServing: {
+      '6m': 'Podávej podlouhlý lívaneček vcelku, aby konec čouhal z pěsti.',
+      '9m': 'Lívaneček překroj podél na dva užší proužky pro uchopení dvěma prsty.',
+      '12m': 'Batole si bere lívanečky nakrájené na sousta a namáčí si je do jogurtu.',
+    },
+    adultSteps: [
+      'Do zbytku těsta vmíchej celé borůvky a smaž lívanečky obvyklé velikosti.',
+      'Podávej s jogurtem; kdo chce, dosladí si na talíři sám.',
+    ],
+    allergens: ['psenice-lepek', 'mleko', 'vejce'],
+    tags: ['vegetariánské', 'rychlé'],
+    sources: [NHS_ALLERGY, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'jahlova-kase-na-kozim-mlece',
+    titleCz: 'Jáhlová kaše na kozím mléce s hruškou',
+    category: 'snidane',
+    minAgeMonths: 12,
+    timeMinutes: 30,
+    servings: '2 dospělí + 1 batole',
+    ingredients: [
+      { ingredientId: 'mleko-kozi', amount: '500 ml', track: 'all' },
+      { ingredientId: 'jahly', amount: '150 g', track: 'all' },
+      { ingredientId: 'hruska', amount: '2 zralé', track: 'all' },
+      { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'mandle-mlete', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Jáhly spař vroucí vodou a slij ji — zmizí tím nahořklá chuť.',
+      'Zalij je kozím mlékem a vař na mírném plameni dvacet minut doměkka; občas zamíchej, ať se nepřipálí.',
+      'Hrušky oloupej, zbav jádřinců, nakrájej na kostky a nech je v kaši poslední tři minuty změknout.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
+    babySteps: [
+      'Odebranou kaši rozmíchej, ať je hladká, a posyp lžičkou mleté mandlové moučky.',
+      'Přidej špetku skořice — vůně udělá kaši sladší, aniž by se do ní cokoli přidávalo.',
+      'Nech vychladnout na teplotu ruky.',
+    ],
+    babyServing: {
+      '6m': 'V šesti měsících se tenhle recept nepodává: kozí mléko není pro kojence vhodné jako hlavní mléko a tady tvoří základ kaše.',
+      '9m': 'Ani v devíti měsících. Stejnou kaši uvař na kravském mléce nebo na vodě, obojí je pro tenhle věk vhodnější.',
+      '12m': 'Batole jí kaši lžící z misky. Hustší kaše drží na lžíci líp než řídká, takže jí projde kolem pusy víc.',
+    },
+    adultSteps: [
+      'Zbytek kaše rozděl do misek, posyp mletými mandlemi a skořicí.',
+      'Kdo chce, dosladí si na talíři sám.',
+    ],
+    allergens: ['mleko', 'orechy'],
+    tags: ['vegetariánské', 'bez lepku'],
+    sources: [NHS_DRINKS, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
 ];

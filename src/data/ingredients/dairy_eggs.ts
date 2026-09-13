@@ -1124,4 +1124,303 @@ export const dairyEggs: Ingredient[] = [
     sources: [NHS_AVOID, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
+  {
+    id: 'hermelin',
+    nameCz: 'hermelín',
+    altNamesCz: ['camembert', 'brie', 'plísňový sýr s bílou plísní'],
+    category: 'mlecne-vejce',
+    servingForm: 'kusove',
+    emoji: '🧀',
+    icon: 'hermelin',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Syrový se nepodává. NHS řadí měkké sýry zrající pod bílou plísní mezi ty, které kojencům ani malým dětem nepatří, protože mohou nést listerii. Propečený je ale v pořádku — zapečení tuhle bakterii ničí, a NHS zapečený hermelín uvádí přímo jako bezpečnější volbu.',
+        caution:
+          'Rozhoduje propečení skrz naskrz, ne jen ohřátí. Sýr musí být uvnitř horký a rozteklý.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nabídni lžičku propečeného hermelínu vmíchanou do zeleniny nebo natřenou na proužek pečiva. Chuť je výrazná, takže stačí malé množství.',
+        caution: 'Za studena vytažený ze zapékací misky už zase nechlaď a znovu neohřívej.',
+      },
+      '12m': {
+        serving:
+          'I batole ho dostává propečený, ne ze studeného talíře. Do pěti let se u téhle skupiny sýrů drž vařených a pečených úprav.',
+        caution: 'Zkontroluj na obalu, že je z pasterizovaného mléka.',
+      },
+    },
+    prepIdeas: [
+      'zapečený s hruškou',
+      'propečený vmíchaný do dušené zeleniny',
+      'zapečený v bramborovém gratinu',
+      'rozpečený a natřený na proužek pečiva',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'niva',
+    nameCz: 'niva',
+    altNamesCz: ['modrý sýr', 'roquefort', 'gorgonzola'],
+    category: 'mlecne-vejce',
+    servingForm: 'drobne',
+    emoji: '🧀',
+    icon: 'niva',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Za studena se nepodává. NHS jmenuje měkké sýry s modrou plísní mezi těmi, které kojencům ani malým dětem nepatří kvůli listerii. Ve vařeném nebo zapečeném jídle je to jiná věc — varem se bakterie ničí.',
+        caution:
+          'Niva je navíc výrazně slaná, takže ji do dětské porce dávej po troškách jako chuť, ne jako složku.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících rozpusť špetku nivy v horké omáčce na zelenině. Jedna špetka nahradí solení a dítě dostane chuť, kterou jinak nezná.',
+        caution: 'Studený drobený sýr na salát nepatří do porce pro dítě ani po prvním roce.',
+      },
+      '12m': {
+        serving:
+          'Batole zvládne nivu rozpuštěnou v omáčce nebo zapečenou v gratinu. Kvůli slanosti zůstává ozdobou, ne základem.',
+        caution: 'Do pěti let se u modrých sýrů drž vařených a pečených úprav.',
+      },
+    },
+    prepIdeas: [
+      'špetka rozpuštěná v omáčce na zelenině',
+      'zapečená v bramborovém gratinu',
+      'rozpuštěná do dýňové polévky',
+      'zapečená s hruškou',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kozi-syr-zrajici',
+    nameCz: 'kozí sýr zrající',
+    altNamesCz: ['kozí rohlíček', 'chèvre'],
+    category: 'mlecne-vejce',
+    servingForm: 'kusove',
+    emoji: '🧀',
+    icon: 'kozi-syr-zrajici',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Zrající kozí sýr NHS jmenuje vedle hermelínu a nivy jako ten, který kojenci ani malé děti nedostávají syrový — kvůli listerii. Zapečený nebo rozpuštěný v horkém jídle v pořádku je.',
+        caution: 'Čerstvý kozí tvaroh z pasterizovaného mléka je jiná kategorie než zrající rohlíček.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících ho rozpusť v omáčce nebo zapeč kolečko na zelenině a nabídni ho lžičkou. Chuť je výraznější než u kravských sýrů.',
+        caution: 'Zkontroluj na obalu, že je sýr z pasterizovaného mléka.',
+      },
+      '12m': {
+        serving:
+          'I batole ho dostává propečený. Do pěti let se u zrajících kozích sýrů drž tepelně upravených jídel.',
+        caution: 'Kozí mléko jako nápoj je samostatná věc a řídí se jinou hranicí.',
+      },
+    },
+    prepIdeas: [
+      'kolečko zapečené na dušené zelenině',
+      'rozpuštěný v bramborovém gratinu',
+      'rozpuštěný do omáčky na těstoviny',
+      'zapečený s červenou řepou',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'podmasli',
+    nameCz: 'podmáslí',
+    altNamesCz: ['buttermilk'],
+    category: 'mlecne-vejce',
+    servingForm: 'neresi',
+    emoji: '🥛',
+    icon: 'podmasli',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Jako nápoj kojenci nepatří — mléčné výrobky se od šesti měsíců používají v jídle a ve vaření, ale nápojem zůstává mateřské mléko nebo umělá výživa. Ve vaření je podmáslí vděčné: v těstě reaguje se sodou a nadzvedne ho, takže lívanečky vyjdou vláčné.',
+        caution: 'Kupuj z pasterizovaného mléka a neslazené.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí do těsta na placičky i do studené zálivky na vařenou zeleninu. Kyselost zjemní lžička jogurtu.',
+        caution: 'Ochucená podmáslí z obchodu bývají slazená, čti složení.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce ho batole může dostat i k pití. Podmáslí zbývá po stloukání másla, takže má méně tuku než mléko a víc bílkoviny než smetana.',
+        caution: 'Rychle se kazí, spotřebuj do data a drž v lednici.',
+      },
+    },
+    prepIdeas: [
+      'do těsta na lívanečky',
+      'do těsta na celozrnné placičky',
+      'zálivka na vařenou zeleninu',
+      'do bramborové kaše místo mléka',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'acidofilni-mleko',
+    nameCz: 'acidofilní mléko',
+    altNamesCz: ['acidofilka', 'zakysané mléko'],
+    category: 'mlecne-vejce',
+    servingForm: 'neresi',
+    emoji: '🥛',
+    icon: 'acidofilni-mleko',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Jako nápoj kojenci nepatří, ve vaření a v jídle od šesti měsíců ano. Je to mléko zakysané bakteriemi, takže má hustší strukturu a nakyslou chuť; lžíce do zeleninového pyré ho zjemní.',
+        caution: 'Vybírej neslazené a z pasterizovaného mléka.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících z něj udělej zálivku na vařenou zeleninu nebo ho vmíchej do bramborové kaše. Nakyslá chuť rozšiřuje repertoár, na který je dítě zvyklé.',
+        caution: 'Nezahřívej ho prudce, srazí se.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce ho batole může pít. Stejně jako u jogurtu platí, že neslazená varianta je základ a sladit se dá ovocem.',
+        caution: 'Skladuj v lednici a spotřebuj do data na obalu.',
+      },
+    },
+    prepIdeas: [
+      'zálivka na vařenou zeleninu',
+      'lžíce do zeleninového pyré',
+      'do bramborové kaše',
+      'do těsta na placičky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'vejce-kreplci',
+    nameCz: 'křepelčí vejce',
+    altNamesCz: ['křepelčí vajíčka'],
+    category: 'mlecne-vejce',
+    servingForm: 'drobne',
+    emoji: '🥚',
+    icon: 'vejce-kreplci',
+    allergens: ['vejce'],
+    isKeyAllergen: true,
+    chokingRisk: 'high',
+    chokingReason:
+      'Celé křepelčí vejce má tvar i průměr, které dýchací cesty malého dítěte uzavřou celé. Musí se podélně rozčtvrtit.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Křepelčí vejce se vždycky vaří natvrdo — NHS u kachních, husích a křepelčích vajec uvádí, že se mají uvařit, dokud bílek i žloutek nejsou pevné. Uvařené oloupej a rozčtvrť podélně, nikdy nepodávej celé ani přepůlené na kolečka.',
+        caution:
+          'Značka British Lion, která u slepičích vajec dovoluje i nedovařenou úpravu, se na křepelčí vejce nevztahuje.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících platí totéž: uvařit natvrdo a rozčtvrtit podélně. Rozmačkané vidličkou se dají vmíchat do pomazánky nebo do salátu.',
+        caution: 'Kulatý tvar zůstává rizikový i u zručného dítěte — čtvrtky podélně, vždycky.',
+      },
+      '12m': {
+        serving:
+          'I batole dostává vejce natvrdo a podélně rozkrájené. Vejce patří mezi klíčové alergeny, takže po prvním podání nech den nebo dva odstup.',
+        caution: 'Skořápka je křehčí než u slepičích, po oloupání porci prohlédni.',
+      },
+    },
+    prepIdeas: [
+      'natvrdo a podélně rozčtvrcené',
+      'rozmačkané do pomazánky',
+      'nasekané do zeleninového salátu',
+      'natvrdo k dušené zelenině',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'creme-fraiche',
+    nameCz: 'crème fraîche',
+    altNamesCz: ['creme fraiche', 'zakysaná smetana francouzská'],
+    category: 'mlecne-vejce',
+    servingForm: 'kasovite',
+    emoji: '🥛',
+    icon: 'creme-fraiche',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Plnotučné mléčné výrobky z pasterizovaného mléka se od šesti měsíců do jídla přidávat můžou. Lžíce crème fraîche zjemní kyselost rajčat a dodá porci tuk, který malé dítě potřebuje víc než dospělý.',
+        caution: 'Vybírej plnotučnou variantu, odtučněné výrobky pro kojence nejsou vhodné.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí do omáčky i navrch polévky. Na rozdíl od zakysané smetany se nesrazí ani v horkém, takže se dá vařit.',
+        caution: 'Ochucené varianty s bylinkami bývají solené.',
+      },
+      '12m': {
+        serving:
+          'Batole ji jí v omáčkách, v gratinu i lžící navrch dušené zeleniny. Je tučnější než zakysaná smetana, proto v jídle víc drží.',
+        caution: 'Po otevření spotřebuj do několika dnů.',
+      },
+    },
+    prepIdeas: [
+      'lžíce do rajčatové omáčky',
+      'navrch zeleninové polévky',
+      'do bramborového gratinu',
+      'jemná zálivka na vařenou zeleninu',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
 ];

@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  NHS_CHOKING,
   BP_NITRATES_VEG,
   BP_BEETROOT,
   EFSA_NITRATE,
@@ -2088,6 +2089,138 @@ export const vegetables: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_FIRST_FOODS, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'zeli-cervene',
+    nameCz: 'zelí červené',
+    altNamesCz: ['červené zelí', 'modré zelí'],
+    category: 'zelenina',
+    servingForm: 'drobne',
+    emoji: '🥬',
+    icon: 'zeli-cervene',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Syrový list se v puse svine do celistvého kusu a tvrdé žebro se nerozžvýká. Dušené a nasekané tuhle vlastnost ztrácí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Syrové nepodávej. Odkroj tvrdý košťál, list nakrájej najemno a duš ho nejméně dvacet minut doměkka. Barva pouští, takže obarví i bramboru vedle — na chuti to nic nemění.',
+        caution: 'Tvrdá bílá žebra vyřízni, nerozžvýkají se ani po dušení.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech kousky větší, ale pořád měkké. Kapka jablečného octa nebo citronu barvu oživí z modré zpátky do červené a zároveň zjemní chuť.',
+        caution: 'Zelí u některých dětí nadýmá; zaváděj ho po menších porcích.',
+      },
+      '12m': {
+        serving:
+          'Batole zvládne dušené zelí jako přílohu i najemno nastrouhané do salátu, pokud je nakrájené nadrobno. Červené zelí drží po dušení tvar líp než bílé.',
+        caution: 'Syrový salát krájej co nejjemněji, dlouhé proužky se v puse svinou.',
+      },
+    },
+    prepIdeas: [
+      'dušené nadrobno s jablkem',
+      'nastrouhané do vlažného salátu',
+      'zapečené s brambory',
+      'dušené jako příloha k masu',
+    ],
+    seasonCz: [7, 8, 9, 10, 11, 12],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'jarni-cibulka',
+    nameCz: 'jarní cibulka',
+    altNamesCz: ['mladá cibulka', 'pažitková cibulka', 'jarní cibule'],
+    category: 'zelenina',
+    servingForm: 'drobne',
+    emoji: '🧅',
+    icon: 'jarni-cibulka',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Zelená dutá nať se v puse svine do trubičky a kolečko nakrájené napříč drží tvar prstenu. Nasekaná nadrobno tuhle vlastnost nemá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Nať i bílou část nasekej nadrobno a krátce orestuj nebo přidej do jídla na konci vaření. Kolečka nekrájej — prsten z duté natě drží tvar i v puse.',
+        caution: 'Syrová je ostřejší než dušená; pro první porce ji vždycky krátce prohřej.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí nasekaná do placiček, do vaječné omelety i navrch polévky. Chuť je jemnější než u velké cibule, takže ji dítě přijme snáz.',
+        caution: 'Dlouhé kousky natě nakrájej napříč nadrobno, ne na proužky.',
+      },
+      '12m': {
+        serving:
+          'Batole ji jí i syrovou v salátu, pokud je nasekaná nadrobno. Bílá část snese kratší tepelnou úpravu a zůstane šťavnatá.',
+        caution: 'Skladuj ji ve sklenici s vodou, nať jinak rychle zvadne.',
+      },
+    },
+    prepIdeas: [
+      'nasekaná do vaječné omelety',
+      'do zeleninových placiček',
+      'navrch bramborové polévky',
+      'krátce orestovaná jako základ omáčky',
+    ],
+    seasonCz: [3, 4, 5, 6],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'salotka',
+    nameCz: 'šalotka',
+    altNamesCz: ['šalotky', 'echalion'],
+    category: 'zelenina',
+    servingForm: 'kusove',
+    emoji: '🧅',
+    icon: 'salotka',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Vrstvy cibule se od sebe po uvaření oddělí a jednotlivý prstenec drží v puse tvar. Nakrájená nadrobno tuhle vlastnost ztrácí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Šalotka je jemnější a sladší než běžná cibule, takže se hodí tam, kde by cibule přebila zbytek. Nakrájej ji nadrobno a nech ji na oleji pomalu zesklovatět — prstence nepodávej.',
+        caution: 'Syrová je ostrá; pro dítě ji vždycky nech změknout na tuku.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících ji můžeš upéct celou v troubě doměkka a rozmačkat vidličkou. Pečením zesládne a dodá jídlu chuť místo soli.',
+        caution: 'Jednotlivé vrstvy po pečení rozděl a nakrájej, ať nezůstane celý prstenec.',
+      },
+      '12m': {
+        serving:
+          'Batole zvládne pečenou šalotku nakrájenou na kousky i nadrobno nasekanou v zálivce. Je základ mnoha omáček, kde nahradí část soli.',
+        caution: 'Skladuj v suchu a v šeru, na světle rychle raší.',
+      },
+    },
+    prepIdeas: [
+      'nadrobno zesklovatělá jako základ omáčky',
+      'pečená celá a rozmačkaná',
+      'nasekaná do bramborového salátu',
+      'karamelizovaná k pečené zelenině',
+    ],
+    seasonCz: [7, 8, 9, 10],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
     reviewStatus: 'verified',
   },
 ];
