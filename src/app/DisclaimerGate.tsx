@@ -37,7 +37,7 @@ export function DisclaimerGate({ children }: Props): ReactNode {
           type="button"
           onClick={accept}
           data-testid="disclaimer-accept"
-          className="min-h-touch w-full rounded-xl bg-accent px-4 py-3 text-base font-semibold text-white"
+          className="min-h-touch w-full rounded-xl bg-accent px-4 py-3 text-base font-semibold text-on-accent"
         >
           Rozumím
         </button>

@@ -146,7 +146,7 @@ export function RecipesScreen(): ReactNode {
           data-testid="filtr-vegetarianske"
           onClick={() => setVegetarianOnly((value) => !value)}
           className={`flex min-h-touch items-center gap-2 rounded-xl border px-4 text-sm font-medium ${
-            vegetarianOnly ? 'border-accent bg-accent text-white' : 'border-muted/30 bg-surface'
+            vegetarianOnly ? 'border-accent bg-accent text-on-accent' : 'border-muted/30 bg-surface'
           }`}
         >
           <Leaf aria-hidden="true" className="h-4 w-4 shrink-0" />
@@ -158,7 +158,7 @@ export function RecipesScreen(): ReactNode {
           data-testid="filtr-mam-doma"
           onClick={() => setPantryOpen((open) => !open)}
           className={`flex min-h-touch items-center gap-2 rounded-xl border px-4 text-sm font-medium ${
-            pantrySet.size > 0 ? 'border-accent bg-accent text-white' : 'border-muted/30 bg-surface'
+            pantrySet.size > 0 ? 'border-accent bg-accent text-on-accent' : 'border-muted/30 bg-surface'
           }`}
         >
           <ShoppingBasket aria-hidden="true" className="h-4 w-4 shrink-0" />

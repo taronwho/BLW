@@ -201,7 +201,7 @@ export function RecipeDetailScreen(): ReactNode {
             void setRecipeNote(recipe.id, note);
             setSaved(true);
           }}
-          className="min-h-touch rounded-xl bg-accent px-4 py-2 font-semibold text-white"
+          className="min-h-touch rounded-xl bg-accent px-4 py-2 font-semibold text-on-accent"
         >
           Uložit poznámku
         </button>

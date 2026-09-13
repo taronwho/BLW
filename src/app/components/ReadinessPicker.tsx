@@ -46,7 +46,7 @@ export function ReadinessPicker(): ReactNode {
                 <span
                   aria-hidden="true"
                   className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${
-                    active ? 'border-safe bg-safe text-white' : 'border-muted/50'
+                    active ? 'border-safe bg-safe text-on-accent' : 'border-muted/50'
                   }`}
                 >
                   {active && <Check className="h-3.5 w-3.5" />}

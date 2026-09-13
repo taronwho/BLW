@@ -33,7 +33,7 @@ export function FilterChips({ options, selected, onSelect, ariaLabel, testId }: 
             onClick={() => onSelect(option.id)}
             className={`min-h-touch rounded-full border px-4 py-2 text-sm font-medium transition ${
               active
-                ? 'border-accent bg-accent text-white shadow-soft'
+                ? 'border-accent bg-accent text-on-accent shadow-soft'
                 : 'border-line bg-surface text-ink hover:border-accent/40'
             }`}
           >

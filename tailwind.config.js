@@ -1,33 +1,42 @@
 /** @type {import('tailwindcss').Config} */
+
+/**
+ * Barvy nejsou zapsané tady, ale jako proměnné v src/index.css — jinak by
+ * nešlo překlopit celou aplikaci do tmavého motivu jedním atributem na <html>.
+ * Zápis `rgb(var(--c-x) / <alpha-value>)` zachovává i průhlednost (`bg-safe/10`).
+ */
+const token = (name) => `rgb(var(--c-${name}) / <alpha-value>)`;
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        paper: '#F8F8F5',
-        ink: '#16211D',
-        muted: '#67716D',
-        accent: '#1F6F5C',
-        // Ztmaveno na poměr 4,5:1 proti měkkým podkladům — štítky rizika dušení
-        // musí být čitelné (docs/SPEC.md kap. 6, WCAG AA).
-        safe: '#2C754A',
-        caution: '#8F5D0E',
-        risk: '#A32318',
-        surface: '#FFFFFF',
+        paper: token('paper'),
+        ink: token('ink'),
+        muted: token('muted'),
+        accent: token('accent'),
+        safe: token('safe'),
+        caution: token('caution'),
+        risk: token('risk'),
+        surface: token('surface'),
         /* Jemné plochy a linky pro modernější, méně „ohraničený" vzhled. */
-        line: '#E4E7E5',
-        'accent-soft': '#E8F2EE',
-        'accent-deep': '#14513F',
-        'risk-soft': '#FCECEA',
-        'caution-soft': '#FBF2E3',
-        'safe-soft': '#E9F4ED',
+        line: token('line'),
+        'accent-soft': token('accent-soft'),
+        'accent-deep': token('accent-deep'),
+        'risk-soft': token('risk-soft'),
+        'caution-soft': token('caution-soft'),
+        'safe-soft': token('safe-soft'),
+        /* Písmo na plné accent/safe ploše a zástin pod okénky. */
+        'on-accent': token('on-accent'),
+        scrim: token('scrim'),
       },
       boxShadow: {
-        soft: '0 1px 2px rgba(22, 33, 29, 0.05), 0 1px 8px rgba(22, 33, 29, 0.04)',
-        lift: '0 2px 6px rgba(22, 33, 29, 0.07), 0 12px 28px rgba(22, 33, 29, 0.07)',
+        soft: 'var(--shadow-soft)',
+        lift: 'var(--shadow-lift)',
       },
       backgroundImage: {
-        'accent-sheen': 'linear-gradient(135deg, #1F6F5C 0%, #2C8C6F 60%, #3AA183 100%)',
+        'accent-sheen': 'linear-gradient(135deg, var(--sheen-1) 0%, var(--sheen-2) 60%, var(--sheen-3) 100%)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],

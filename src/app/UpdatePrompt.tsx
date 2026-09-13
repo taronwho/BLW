@@ -27,7 +27,7 @@ export function UpdatePrompt(): ReactNode {
           onClick={() => {
             void updateServiceWorker(true);
           }}
-          className="flex min-h-touch items-center gap-2 rounded-lg bg-accent px-3 py-2 font-semibold text-white"
+          className="flex min-h-touch items-center gap-2 rounded-lg bg-accent px-3 py-2 font-semibold text-on-accent"
         >
           <RefreshCw aria-hidden="true" className="h-4 w-4" />
           Obnovit
