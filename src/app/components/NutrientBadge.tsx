@@ -44,6 +44,26 @@ const CHIPS: readonly ChipSpec[] = [
   { key: 'vitaminC', label: 'vitamin C', aria: 'Vitamin C', Icon: Citrus, suffix: '-cecko' },
 ];
 
+/**
+ * Věta o tom, co položka obsahuje. Čím není, se nevypisuje — rodič v kuchyni
+ * hledá, co použít, ne seznam toho, co v surovině chybí. Věta musí dávat
+ * smysl sama o sobě: okénko se otevírá i nad surovinou, která má jen
+ * vitamin C. Když není co dodat, vrací null a odstavec se vůbec nevykreslí.
+ */
+function popisZivin(profile: NutrientProfile): string | null {
+  if (profile.ironForm === 'hemove') {
+    return 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta — kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.';
+  }
+  if (profile.ironForm === 'nehemove') {
+    return 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.';
+  }
+  if (profile.zinc !== 'nevyznamny') {
+    return 'Zinek se v jídelníčku drží stejných potravin jako železo — masa, luštěnin, semínek a celozrnných obilovin. Jedno takové jídlo proto obvykle dodá obojí.';
+  }
+  // Zbývá jen vitamin C a o tom mluví další odstavec; opakovat se nemá smysl.
+  return null;
+}
+
 function Row({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-3 py-2">
@@ -87,6 +107,7 @@ export function NutrientBadge({
   const base = testId ?? 'znacka-zeleza';
   const videt = CHIPS.filter((chip) => profile[chip.key] !== 'nevyznamny');
   if (videt.length === 0) return null;
+  const popis = popisZivin(profile);
 
   return (
     <>
@@ -160,17 +181,11 @@ export function NutrientBadge({
               </button>
             </div>
 
-            <Row label="Železo" level={profile.iron} />
-            <Row label="Zinek" level={profile.zinc} />
-            <Row label="Vitamin C" level={profile.vitaminC} />
+            {videt.map(({ key, aria }) => (
+              <Row key={key} label={aria} level={profile[key]} />
+            ))}
 
-            <p className="text-sm leading-relaxed">
-              {profile.ironForm === 'hemove'
-                ? 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta — kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.'
-                : profile.ironForm === 'nehemove'
-                  ? 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.'
-                  : 'Tahle položka není významným zdrojem železa. Zinek a železo se v jídelníčku většinou potkávají v týchž potravinách.'}
-            </p>
+            {popis !== null && <p className="text-sm leading-relaxed">{popis}</p>}
 
             {profile.vitaminC !== 'nevyznamny' && (
               <p className="text-sm leading-relaxed" data-testid="okenko-k-cemu-cecko">
@@ -231,7 +246,9 @@ export function NutrientBadge({
               </span>
             </p>
 
-            <p className="text-xs text-muted">{IRON_FORM_LABELS[profile.ironForm]}.</p>
+            {profile.ironForm !== 'zadne' && (
+              <p className="text-xs text-muted">{IRON_FORM_LABELS[profile.ironForm]}.</p>
+            )}
           </div>
         </div>
       )}

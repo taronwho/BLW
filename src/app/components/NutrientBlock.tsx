@@ -18,7 +18,7 @@ function Pill({ label, level }: { label: string; level: NutrientLevel }): ReactN
 }
 
 /**
- * Železo a zinek u konkrétní suroviny.
+ * Živiny u konkrétní suroviny: železo, zinek a vitamin C.
  *
  * Ukazuje zařazení do skupiny potravin, ne miligramy — měřené hodnoty by se
  * musely vzít z potravinové tabulky, kterou politika zdrojů nemá mezi
@@ -57,13 +57,15 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
         className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
       >
         <Droplet aria-hidden="true" className="h-4 w-4 text-accent" />
-        Železo a zinek
+        Živiny
       </h2>
 
-      <div className="flex gap-2">
-        <Pill label="Železo" level={profile.iron} />
-        <Pill label="Zinek" level={profile.zinc} />
-        <Pill label="Vitamin C" level={profile.vitaminC} />
+      {/* Vypisuje se jen to, co surovina opravdu nese. Trojice řádků
+          „není zdroj" nikomu u sporáku nepomůže. */}
+      <div className="flex flex-wrap gap-2">
+        {profile.iron !== 'nevyznamny' && <Pill label="Železo" level={profile.iron} />}
+        {profile.zinc !== 'nevyznamny' && <Pill label="Zinek" level={profile.zinc} />}
+        {profile.vitaminC !== 'nevyznamny' && <Pill label="Vitamin C" level={profile.vitaminC} />}
       </div>
 
       {profile.ironForm === 'hemove' && profile.iron !== 'nevyznamny' && (
@@ -77,9 +79,9 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
       {nehemove && (
         <>
           <p className="text-sm leading-relaxed">
-            Tohle je rostlinné, tedy nehemové železo. Vstřebává se hůř než železo z masa, ale
-            výrazně mu pomáhá vitamin C ve stejném jídle. Kombinuj proto tuhle surovinu s ovocem
-            nebo zeleninou bohatou na vitamin C.
+            Železo v téhle surovině je rostlinné, tedy nehemové. Vstřebává se hůř než železo
+            z masa, ale výrazně mu pomáhá vitamin C ve stejném jídle. Podávej proto tuhle surovinu
+            spolu s ovocem nebo zeleninou bohatou na vitamin C.
           </p>
           {partners.length > 0 && (
             <div>
@@ -104,7 +106,7 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
           {kombinace.length > 0 && (
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
-                Recepty, kde je ta kombinace hotová
+                Recepty, kde se tahle surovina potkává s vitaminem C
               </p>
               <ul className="mt-1.5 flex flex-col gap-1.5" data-testid="recepty-kombinace">
                 {kombinace.map((recipe) => (
@@ -124,10 +126,18 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
         </>
       )}
 
-      {profile.vitaminC === 'vyznamny' && (
+      {profile.zinc !== 'nevyznamny' && (
         <p className="text-sm leading-relaxed">
-          Tahle surovina je naopak tím pomocníkem: přidaná k luštěninám, obilovinám nebo semenům
-          zlepší vstřebání jejich železa.
+          Zinek se v jídelníčku drží stejných potravin jako železo — masa, luštěnin, semínek
+          a celozrnných obilovin. Jedno takové jídlo proto obvykle dodá obojí najednou.
+        </p>
+      )}
+
+      {profile.vitaminC !== 'nevyznamny' && (
+        <p className="text-sm leading-relaxed">
+          {profile.vitaminC === 'vyznamny'
+            ? 'Vitamin C pomáhá tělu vstřebat železo z rostlin. Podávej tuhle surovinu spolu s luštěninami, obilovinami nebo semínky a dítě z nich získá víc železa, než by získalo ze samotné porce.'
+            : 'Vitamin C tahle surovina obsahuje, i když k jeho nejbohatším zdrojům nepatří. I tak ve stejném jídle podporuje vstřebávání železa z luštěnin, obilovin a semínek.'}
         </p>
       )}
 

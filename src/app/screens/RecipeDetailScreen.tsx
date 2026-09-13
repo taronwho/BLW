@@ -5,7 +5,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
 import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
-import type { Ingredient, Recipe, RecipeIngredientRef, Stage } from '@/types';
+import type { ChokingRisk, Ingredient, Recipe, RecipeIngredientRef, Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { GripHint } from '../components/GripHint';
 import { NutrientBadge } from '../components/NutrientBadge';
@@ -16,6 +16,26 @@ import { ageInMonths, stageForAge } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
 import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { CHOKING_PRESENTATION } from '../lib/choking';
+
+/**
+ * Riziko dušení u jedné suroviny v receptu — drobný štítek do řádky se
+ * živinami. Barva, ikona i slovo zároveň (docs/SPEC.md kap. 5); podrobnosti
+ * a pokyn ke krájení jsou po klepnutí na název suroviny.
+ */
+function RizikoStitek({ risk, testId }: { risk: ChokingRisk; testId: string }): ReactNode {
+  const { word, Icon, text, chip } = CHOKING_PRESENTATION[risk];
+  return (
+    <span
+      data-testid={testId}
+      data-risk={risk}
+      className={`flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[11px] font-medium ${chip} ${text}`}
+    >
+      <Icon aria-hidden="true" className="h-3 w-3 shrink-0" />
+      {word.toLowerCase()} riziko dušení
+    </span>
+  );
+}
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
   all: 'Společné',
@@ -279,6 +299,10 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                   (profil.iron !== 'nevyznamny' ||
                     profil.zinc !== 'nevyznamny' ||
                     profil.vitaminC !== 'nevyznamny');
+                // Nízké riziko se nevypisuje. Kdyby svítilo u většiny surovin,
+                // přestalo by upozornění u té jedné nebezpečné být vidět.
+                const riziko = ingredient?.chokingRisk;
+                const rizikoVidet = riziko === 'medium' || riziko === 'high';
                 return (
                   <li key={`${ref.ingredientId}-${ref.track}`}>
                     <Link
@@ -292,17 +316,23 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                       <span className="shrink-0 text-xs text-muted">{ref.amount}</span>
                     </Link>
                     {/* Stejné štítky jako v přehledu surovin — u sporáku je vidět,
-                        která složka nese železo, zinek nebo vitamin C. */}
-                    {maZiviny && profil !== undefined && ingredient !== undefined && (
+                        která složka nese železo, zinek nebo vitamin C a u které
+                        rozhoduje tvar sousta. */}
+                    {(maZiviny || rizikoVidet) && (
                       <span
                         className="flex flex-wrap items-center gap-1.5 px-2"
                         data-testid={`ziviny-suroviny-${ref.ingredientId}`}
                       >
-                        <NutrientBadge
-                          profile={profil}
-                          title={ingredient.nameCz}
-                          testId={`zeleza-recept-${ref.ingredientId}`}
-                        />
+                        {rizikoVidet && riziko !== undefined && (
+                          <RizikoStitek risk={riziko} testId={`duseni-suroviny-${ref.ingredientId}`} />
+                        )}
+                        {maZiviny && profil !== undefined && ingredient !== undefined && (
+                          <NutrientBadge
+                            profile={profil}
+                            title={ingredient.nameCz}
+                            testId={`zeleza-recept-${ref.ingredientId}`}
+                          />
+                        )}
                       </span>
                     )}
                     {ref.note !== undefined && (
