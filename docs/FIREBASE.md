@@ -40,7 +40,7 @@ varianta A). Kdo ji tam mít nechce, použije proměnné na GitHubu (varianta B)
 ## 2. Přidání webové aplikace
 
 1. Na úvodní stránce projektu klikni na ikonu **`</>`** (Web).
-2. Přezdívka aplikace: třeba `BLW web`.
+2. Přezdívka aplikace: třeba `Drobek web`.
 3. **„Also set up Firebase Hosting" nezaškrtávej** — běžíme na GitHub Pages.
 4. **Register app.**
 5. Ukáže se blok kódu s objektem `firebaseConfig`. **Tenhle blok si nech

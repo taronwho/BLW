@@ -1,8 +1,12 @@
-# CLAUDE.md — pravidla projektu BLW aplikace
+# CLAUDE.md — pravidla projektu Drobek
 
 Tento soubor čti vždy. Plná specifikace je v `docs/SPEC.md`, zdravotní pravidla v `docs/BEZPECNOST.md`, seznam surovin v `docs/SUROVINY-SEZNAM.md`, fáze a cíle v `docs/GOALS.md`.
 
 ## Co stavíme
+
+Aplikace se jmenuje **Drobek**. Repozitář zůstává `BLW`, takže adresa je
+`https://taronwho.github.io/BLW/` — „BLW" v cestě i v textech je zkratka metody
+(baby-led weaning), ne název aplikace. Nepřejmenovávej ho.
 
 Česká webová aplikace pro Baby-Led Weaning. Používají ji dva rodiče na mobilech, sdílejí jeden účet domácnosti přes párovací kód. Obsahuje katalog ≥190 surovin dostupných v ČR s bezpečnostními a přípravnými informacemi ke třem věkovým fázím (6m+, 9m+, 12m+), ≥80 receptů vždy ve třech liniích (miminko / masitá / bezmasá) a deník ochutnávek. Běží na GitHub Pages jako statická PWA.
 

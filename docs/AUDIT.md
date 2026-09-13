@@ -1,4 +1,4 @@
-# Závěrečný audit aplikace BLW
+# Závěrečný audit aplikace Drobek
 
 **Datum:** 12. 9. 2026
 **Větev:** `claude/epic-hawking-l1py1m`
