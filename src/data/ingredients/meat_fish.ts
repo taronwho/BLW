@@ -1129,8 +1129,8 @@ export const meatFish: Ingredient[] = [
   },
   {
     id: 'tunak',
-    nameCz: 'tuňák',
-    altNamesCz: ['tuňák ve vlastní šťávě', 'tuňák čerstvý'],
+    nameCz: 'tuňák čerstvý',
+    altNamesCz: ['tuňák steak', 'čerstvý tuňák'],
     category: 'maso-ryby',
     servingForm: 'kusove',
     emoji: '🐟',
@@ -1633,6 +1633,450 @@ export const meatFish: Ingredient[] = [
     seasonCz: [],
     vegetarian: false,
     sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'platys',
+    nameCz: 'platýs',
+    altNamesCz: ['halibut', 'platýz'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🐟',
+    icon: 'platys',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Rybí maso se rozpadá na vlákna a mezi nimi zůstávají drobné kosti. Nerozpoznaná kost je u malého dítěte hlavní riziko, proto se každá porce prohmatává prsty.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Platýs je bílá ryba s jemným, pevným masem, které se po upečení dá rozdělit na plátky dlouhé jako prst. Peč ho v troubě nebo duste v páře, dokud maso není celé neprůhledné a nerozpadá se vidličkou.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nabídni kousky, které dítě uchopí dvěma prsty. Filet je plochý, takže se prohmatává snadněji než kulaté ryby.',
+        caution: 'Mražený filet nech rozmrznout v lednici, ne na lince.',
+      },
+      '12m': {
+        serving:
+          'Batole jí platýse jako součást hlavního jídla. NHS doporučuje aspoň dvě porce ryb týdně, z toho jednu tučnou — platýs patří mezi ty bílé.',
+        caution: 'Smažený v těstíčku má víc tuku než pečený nebo dušený v páře.',
+      },
+    },
+    prepIdeas: [
+      'pečený s bramborem',
+      'dušený v páře s mrkví',
+      'rozebraný do zeleninového pyré',
+      'zapečený s koprem',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kambala',
+    nameCz: 'kambala',
+    altNamesCz: ['kambala velká', 'turbot'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🐟',
+    icon: 'kambala',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Rybí maso se rozpadá na vlákna a mezi nimi zůstávají drobné kosti. Nerozpoznaná kost je u malého dítěte hlavní riziko, proto se každá porce prohmatává prsty.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Kambala je plochá bílá ryba s jemným masem. Upeč ji celou nebo jako filet, dokud maso není neprůhledné, a rozeber ho na plátky; kosti u plochých ryb sedí přehledně a dají se snadno vybrat.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech kousky větší, ať je dítě uchopí dvěma prsty. Kambala vydrží šťavnatá i po delším pečení.',
+        caution: 'Kupuj chlazenou nebo hluboce zmraženou, ne opakovaně rozmrazenou.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kambalu s bramborem i se zeleninou. Mezi bílými rybami patří k těm chuťově nejjemnějším.',
+        caution: 'Rybu podávej v den, kdy ji připravíš; ohřívaná ztrácí strukturu.',
+      },
+    },
+    prepIdeas: [
+      'pečená celá s bylinkami',
+      'filet dušený v páře',
+      'rozebraná do bramborové kaše',
+      'zapečená se zeleninou',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'morsky-vlk',
+    nameCz: 'mořský vlk',
+    altNamesCz: ['mořčák', 'branzino', 'sea bass'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🐟',
+    icon: 'morsky-vlk',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Rybí maso se rozpadá na vlákna a mezi nimi zůstávají drobné kosti. Nerozpoznaná kost je u malého dítěte hlavní riziko, proto se každá porce prohmatává prsty.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Mořský vlk má pevné bílé maso, které se po upečení dělí na velké plátky. Peč ho v alobalu nebo v páře, dokud maso u páteře není neprůhledné, a pečlivě ho prohmatej.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících podávej plátky, které dítě zvedne dvěma prsty. Kůži pro dětskou porci sundej, je tuhá.',
+        caution: 'Celá ryba se prohmatává hůř než filet — u celé počítej s tím, že to zabere čas.',
+      },
+      '12m': {
+        serving:
+          'Batole jí mořského vlka jako hlavní chod. Je to bílá ryba, takže se počítá do doporučených dvou porcí ryb týdně vedle jedné tučné.',
+        caution: 'Pečený v soli pro dospělé není vhodný pro dětskou porci.',
+      },
+    },
+    prepIdeas: [
+      'pečený v alobalu s citronem',
+      'dušený v páře',
+      'rozebraný do rizota',
+      'zapečený s fenyklem',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'prazma',
+    nameCz: 'pražma',
+    altNamesCz: ['dorada', 'mořan zlatý'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🐟',
+    icon: 'prazma',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Rybí maso se rozpadá na vlákna a mezi nimi zůstávají drobné kosti. Nerozpoznaná kost je u malého dítěte hlavní riziko, proto se každá porce prohmatává prsty.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Pražma je bílá mořská ryba s jemným, mírně nasládlým masem. Upeč ji doměkka, oddělej kůži i ploutve a maso rozeber na plátky, které prohmatáš prsty.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nabídni větší kousky. Pražma drží tvar líp než treska, takže se nerozpadne na drobky.',
+        caution: 'Vyber rybu s jasnýma očima a pevným masem; čerstvost u ryb rozhoduje.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pražmu s bramborem, s rýží i se zeleninou. Patří mezi bílé ryby, takže se hodí do dvou doporučených porcí týdně.',
+        caution: 'Grilovaná s křupavou kůží není pro dětskou porci vhodná, kůže je tuhá.',
+      },
+    },
+    prepIdeas: [
+      'pečená s citronem a bylinkami',
+      'dušená v páře',
+      'rozebraná do bramborové kaše',
+      'zapečená s cuketou',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'okoun-ricni',
+    nameCz: 'okoun říční',
+    altNamesCz: ['okoun', 'candát okoun'],
+    category: 'maso-ryby',
+    servingForm: 'kusove',
+    emoji: '🐟',
+    icon: 'okoun-ricni',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Rybí maso se rozpadá na vlákna a mezi nimi zůstávají drobné kosti. Nerozpoznaná kost je u malého dítěte hlavní riziko, proto se každá porce prohmatává prsty.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Okoun je sladkovodní ryba s pevným bílým masem. Filet upeč nebo duste doměkka a rozeber na plátky; u sladkovodních ryb je prohmatání porce ještě důležitější, mívají drobné kosti.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících podávej plátky na uchopení dvěma prsty. Okoun má málo tuku, takže vysychá — peč ho přikrytý nebo v omáčce.',
+        caution: 'Sladkovodní ryby kupuj z ověřeného zdroje.',
+      },
+      '12m': {
+        serving:
+          'Batole jí okouna s bramborem i v polévce. Chuťově je jemnější než kapr a děti ho přijímají snáz.',
+        caution: 'Dětskou porci nikdy nepodávej bez prohmatání, i když je filet kupovaný.',
+      },
+    },
+    prepIdeas: [
+      'filet pečený s koprem',
+      'dušený v páře',
+      'rozebraný do bramborové kaše',
+      'v rybí polévce',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kalamary',
+    nameCz: 'kalamáry',
+    altNamesCz: ['oliheň', 'chobotničky malé', 'squid'],
+    category: 'maso-ryby',
+    servingForm: 'drobne',
+    emoji: '🦑',
+    icon: 'kalamary',
+    allergens: ['mekkysi'],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Kroužek z olihně drží tvar prstenu a maso je pružné — dásně ho nerozmělní a v puse zůstane celý.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'NHS řadí oliheň mezi měkkýše a korýše, kteří jsou zdrojem selenu, zinku, jódu a mědi. Pro dítě je ale rozhodující tvar a měkkost: kroužky nikdy nepodávej, maso rozkrájej podélně na tenké proužky a duste ho nejméně třicet minut doměkka.',
+        caution:
+          'Krátce osmažené kalamáry jsou pružné jako guma. Buď velmi krátce, nebo velmi dlouho — pro dítě platí jedině to druhé.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících podávej dušené proužky, které se dají rozmáčknout mezi prsty. Když se maso nedá rozmáčknout, duste dál.',
+        caution: 'Měkkýši patří mezi alergeny, které se uvádějí na obalu; zaváděj je samostatně a s odstupem.',
+      },
+      '12m': {
+        serving:
+          'Batole jí dušené kalamáry v omáčce nebo s těstovinami. Smažené kroužky pro malé dítě vhodné nejsou ani po prvním roce.',
+        caution: 'Mražené kalamáry nech rozmrznout v lednici a dobře je osuš.',
+      },
+    },
+    prepIdeas: [
+      'dušené proužky v rajčatové omáčce',
+      'dlouze dušené s těstovinami',
+      'v rybí polévce',
+      'dušené s fenyklem',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'hrebenatky',
+    nameCz: 'hřebenatky',
+    altNamesCz: ['svatojakubské mušle', 'scallops'],
+    category: 'maso-ryby',
+    servingForm: 'drobne',
+    emoji: '🐚',
+    icon: 'hrebenatky',
+    allergens: ['mekkysi'],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Celý svalový terčík je pružný a hladký, takže ho dásně nerozmělní. Nakrájený na plátky tuhle vlastnost ztrácí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Hřebenatky NHS jmenuje mezi měkkýši a korýši, kteří jsou zdrojem selenu, zinku, jódu a mědi. Maso je jemné a rychle se připraví: propeč ho celé, dokud není neprůhledné, a nakrájej na tenké plátky nebo rozmačkej do pyré.',
+        caution:
+          'Musí být propečené skrz naskrz. Syrové ani jen zatažené se malému dítěti nepodávají.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nabídni plátky, které dítě uchopí dvěma prsty. Hřebenatka je měkčí než kalamáry, takže nepotřebuje dlouhé dušení.',
+        caution: 'Přepečená hřebenatka ztvrdne; peč ji krátce, ale celou.',
+      },
+      '12m': {
+        serving:
+          'Batole jí hřebenatky s bramborem i s těstovinami. Chuť je jemně nasládlá, takže projdou i u vybíravého jedlíka.',
+        caution: 'Kupuj chlazené nebo hluboce zmražené a spotřebuj je hned.',
+      },
+    },
+    prepIdeas: [
+      'propečené a nakrájené na plátky',
+      'rozmačkané do bramborové kaše',
+      'zapečené s dýní',
+      's těstovinami a rajčaty',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'krabi-maso-bile',
+    nameCz: 'krabí maso bílé',
+    altNamesCz: ['bílé krabí maso', 'krab'],
+    category: 'maso-ryby',
+    servingForm: 'drobne',
+    emoji: '🦀',
+    icon: 'krabi-maso-bile',
+    allergens: ['korysi'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Rozhoduje, jestli je maso bílé nebo hnědé. NHS uvádí, že hnědé krabí maso obsahuje kadmium, které při nadbytku působí na kosti a ledviny, a že pro bílé krabí maso ani pro ostatní měkkýše a korýše žádné nejvyšší množství doporučené není. Pro dítě proto používej jedině bílé maso z klepet a nožiček.',
+        caution:
+          'Krabí tyčinky nejsou krab — bývá to drcená bílá ryba se škrobem a solí a pro kojence nejsou vhodné.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících vmíchej rozebrané bílé maso do avokádové pomazánky nebo do bramborové kaše. Korýši patří mezi klíčové alergeny, zaváděj je samostatně.',
+        caution: 'Maso vždycky prohmatej, mezi vlákny zůstávají úlomky krunýře.',
+      },
+      '12m': {
+        serving:
+          'Batole jí krabí maso v pomazánce, v salátu i s těstovinami. Hnědé maso z krunýře ale do dětské porce nepatří ani po prvním roce.',
+        caution: 'Konzervované krabí maso bývá solené; propláchni ho a čti složení.',
+      },
+    },
+    prepIdeas: [
+      'do avokádové pomazánky',
+      'vmíchané do bramborové kaše',
+      'na proužek pečiva',
+      's těstovinami a rajčaty',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'tunak-v-konzerve',
+    nameCz: 'tuňák v konzervě',
+    altNamesCz: ['tuňák ve vlastní šťávě', 'konzervovaný tuňák'],
+    category: 'maso-ryby',
+    servingForm: 'drobne',
+    emoji: '🐟',
+    icon: 'tunak-v-konzerve',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: ['rtut'],
+    hazardNotes: {
+      rtut:
+        'Tuňák patří mezi ryby s vyšším obsahem rtuti, proto se u něj drží omezené množství. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby — konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Vyber tuňáka ve vlastní šťávě, ne v nálevu se solí, a propláchni ho. Rozeber ho vidličkou na vlákna a vmíchej do bramborové kaše nebo do avokádové pomazánky.',
+        caution:
+          'Nedávej ho často. Kvůli rtuti je to ryba na občas, ne na každý týden, a tučnou rybu nenahrazuje.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se hodí do pomazánky na proužek pečiva nebo do těstovinového salátu. Konzerva je praktická, ale čerstvá bílá ryba je pro běžný jídelníček lepší základ.',
+        caution: 'Otevřenou konzervu přendej do skla a spotřebuj do druhého dne.',
+      },
+      '12m': {
+        serving:
+          'Batole jí tuňáka v pomazánce i v těstovinách. Pořád platí, že do dvou doporučených porcí ryb týdně se počítá spíš čerstvá ryba.',
+        caution: 'Tuňáka v oleji sceď; olej z konzervy bývá slaný.',
+      },
+    },
+    prepIdeas: [
+      'do avokádové pomazánky',
+      'vmíchaný do bramborové kaše',
+      'do těstovinového salátu',
+      'na proužek pečiva',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    frequencyLimit:
+      'Kvůli rtuti jen občas, ne jako pravidelná týdenní ryba; tučnou rybu navíc nenahrazuje.',
+    sources: [NHS_FISH, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'ancovicky',
+    nameCz: 'ančovičky',
+    altNamesCz: ['sardele', 'anchovies'],
+    category: 'maso-ryby',
+    servingForm: 'neresi',
+    emoji: '🐟',
+    icon: 'ancovicky',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Do dětské porce nepatří. Ančovičky se nakládají do soli a jsou to jedny z nejslanějších potravin v běžné spíži — NHS u kojenců slané potraviny odmítá kvůli ledvinám. Rybu v jídelníčku dítěte zastane čerstvý filet bílé ryby.',
+        caution: 'Týká se i ančovičkové pasty a omáček, ve kterých jsou ančovičky skryté.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících. Když vaříš omáčku s ančovičkami, odeber dětskou porci základu dřív, než se do hrnce přidají.',
+        caution: 'Worcesterská omáčka je obsahuje také, i když to na první pohled není poznat.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce se malé množství v rodinném jídle připustit dá, ale zůstává to výrazné dochucení pro dospělé. Jedna ančovička rozpuštěná v celém hrnci dá chuť, kterou jinak nahrazuje sůl.',
+        caution: 'Ančovičky patří mezi ryby, tedy mezi klíčové alergeny.',
+      },
+    },
+    prepIdeas: [
+      'rozpuštěná do omáčky pro dospělé',
+      'do zálivky na salát pro dospělé',
+      'nahrazení čerstvým filetem v dětské porci',
+      'do dochucení pečené zeleniny pro dospělé',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    frequencyLimit: 'Do 12 měsíců se nepoužívá; potom jen jako dochucení pro dospělé.',
+    sources: [NHS_AVOID, NHS_FISH],
     reviewStatus: 'verified',
   },
 ];
