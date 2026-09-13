@@ -124,6 +124,29 @@ function filet(maso: string, pruhy: string, kuze?: string): ReactNode {
   );
 }
 
+/** Sýrový klín: tělo, kůrka na zadní hraně a volitelná struktura. */
+function klin(telo: string, kura: string, znaky?: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M8 46L48 14c6 0 8 3 8 7v25H12a4 4 0 0 1-4-4v4Z" fill={kura} />
+      <path d="M8 46L46 17c5 0 7 2 7 6v23H11a3 3 0 0 1-3-3v3Z" fill={telo} />
+      {znaky}
+    </>
+  );
+}
+
+/** Kelímek s hladkým obsahem; liší se barvou a tím, co je na povrchu. */
+function kelimek(obsah: string, vicko: string, navrch?: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M16 24h32l-4 28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4L16 24Z" fill={vicko} />
+      <path d="M21 30h22l-3 22H24l-3-22Z" fill={obsah} />
+      <path d="M14 20h36v6H14Z" fill={vicko} />
+      {navrch}
+    </>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1507,7 +1530,7 @@ export const SHAPES: Record<string, ReactNode> = {
     </>
   ),
 
-  'tvaroh-mekky': (
+  'tvaroh-polotucny': (
     <>
       <path d="M12 30l20-10 20 10-20 10-20-10Z" fill={C.bila} />
       <path d="M12 30v14l20 10V40L12 30Z" fill={C.bilaStin} />
@@ -1516,6 +1539,175 @@ export const SHAPES: Record<string, ReactNode> = {
       <circle cx="34" cy="25" r="2.4" fill={C.bilaStin} />
       <circle cx="42" cy="31" r="2" fill={C.bilaStin} />
       <circle cx="30" cy="33" r="2" fill={C.bilaStin} />
+    </>
+  ),
+
+  // ── tvarohy, sýry a tuky ───────────────────────────────────────────────
+  'tvaroh-mekky': kelimek(
+    C.bila,
+    C.bilaStin,
+    <path d="M24 34c4-3 12-3 16 0-4 4-12 4-16 0Z" fill="#F8F5EC" />,
+  ),
+
+  ricotta: (
+    <>
+      {/* Ricotta se cedí v košíčku, takže má po obvodu rýhy — bez nich by
+          z ní byla jen bílá kupole. */}
+      <path d="M10 52c0-14 10-26 22-26s22 12 22 26H10Z" fill={C.bilaStin} />
+      <path d="M14 52c0-12 8-22 18-22s18 10 18 22H14Z" fill={C.bila} />
+      <path d="M20 38c8-3 16-3 24 0M15 45c11-4 23-4 34 0" stroke="#D2CBB8" strokeWidth="2.5" fill="none" />
+      <path d="M32 26c-3 0-6 2-6 5h12c0-3-3-5-6-5Z" fill="#FBFAF6" />
+    </>
+  ),
+
+  mascarpone: kelimek(
+    '#FBF8F0',
+    C.kremTmavy,
+    <path d="M26 36c3-4 9-4 12 0-3 3-9 3-12 0Z" fill={C.bilaStin} />,
+  ),
+
+  cottage: kelimek(
+    C.bilaStin,
+    '#C9D6DE',
+    <>
+      <circle cx="27" cy="36" r="3" fill={C.bila} />
+      <circle cx="36" cy="34" r="3" fill={C.bila} />
+      <circle cx="31" cy="43" r="3" fill={C.bila} />
+      <circle cx="38" cy="44" r="2.6" fill={C.bila} />
+    </>,
+  ),
+
+  mozzarella: (
+    <>
+      <path d="M8 44c0-4 4-6 8-7 3-2 8-3 16-3s13 1 16 3c4 1 8 3 8 7 0 5-11 8-24 8S8 49 8 44Z" fill="#D8E4EA" />
+      <circle cx="32" cy="30" r="17" fill={C.bila} />
+      <path d="M21 22c4-4 9-6 14-6" stroke="#FBFAF6" strokeWidth="5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  zerve: (
+    <>
+      {/* Porcička v kelímku s víčkem; samotný bílý disk byl na světlém
+          podkladu sotva vidět. */}
+      <path d="M32 20c11 0 20 4 20 9v13c0 6-9 10-20 10s-20-4-20-10V29c0-5 9-9 20-9Z" fill="#D9D3C2" />
+      <ellipse cx="32" cy="29" rx="20" ry="9" fill={C.bila} />
+      <ellipse cx="32" cy="29" rx="13" ry="5.5" fill="#E8E2D2" />
+      <path d="M12 29v13c0 6 9 10 20 10" stroke="#BFB8A4" strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  eidam: klin(
+    '#F0C74A',
+    '#D9A92E',
+    <>
+      <circle cx="26" cy="36" r="3.4" fill="#D9A92E" />
+      <circle cx="38" cy="32" r="2.8" fill="#D9A92E" />
+      <circle cx="42" cy="41" r="2.4" fill="#D9A92E" />
+    </>,
+  ),
+
+  gouda: klin(
+    '#EFBF52',
+    '#C4382C',
+    <>
+      <circle cx="28" cy="38" r="2.6" fill="#D2A035" />
+      <circle cx="40" cy="35" r="2.2" fill="#D2A035" />
+    </>,
+  ),
+
+  emental: klin(
+    '#F5DE8E',
+    '#DCC15E',
+    <>
+      <circle cx="24" cy="38" r="5" fill="#DCC15E" />
+      <circle cx="38" cy="31" r="4.4" fill="#DCC15E" />
+      <circle cx="44" cy="42" r="3.6" fill="#DCC15E" />
+    </>,
+  ),
+
+  parmazan: klin(
+    '#F0DCA0',
+    '#C9A96E',
+    <>
+      <circle cx="26" cy="36" r="1.4" fill="#CFB884" />
+      <circle cx="33" cy="32" r="1.4" fill="#CFB884" />
+      <circle cx="39" cy="38" r="1.4" fill="#CFB884" />
+      <circle cx="45" cy="32" r="1.4" fill="#CFB884" />
+      <circle cx="31" cy="41" r="1.4" fill="#CFB884" />
+    </>,
+  ),
+
+  pecorino: klin(
+    '#EFD07A',
+    '#4E3A22',
+    <>
+      <circle cx="28" cy="37" r="1.4" fill="#CDA94E" />
+      <circle cx="36" cy="32" r="1.4" fill="#CDA94E" />
+      <circle cx="43" cy="38" r="1.4" fill="#CDA94E" />
+    </>,
+  ),
+
+  'grana-padano': (
+    <>
+      {klin('#F2E4B8', '#D9C48A')}
+      <path d="M10 52l10-8 8 6-6 8-12-6Z" fill="#F2E4B8" />
+      <path d="M14 50l6 4" stroke="#D9C48A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  maslo: (
+    <>
+      <path d="M10 34l14-8 30 8-14 8-30-8Z" fill="#F7DC7E" />
+      <path d="M10 34v10l30 8V42L10 34Z" fill="#EFC94E" />
+      <path d="M54 34v10l-14 8V42l14-8Z" fill="#D9AE2E" />
+      <path d="M24 26l30 8" stroke="#FBEFB8" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  ghi: (
+    <>
+      <path d="M26 8h12v6l4 6v30a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4V20l4-6V8Z" fill="#EFE6D2" />
+      <path d="M25 26h14v26a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V26Z" fill="#E8B93E" />
+      <path d="M25 6h14v5H25Z" fill={C.hnedaSvetla} />
+      <path d="M28 32c4-2 8-2 8 0" stroke="#F5D88A" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'smetana-ke-slehani': (
+    <>
+      {/* Krabice má vlastní barvu, jinak bílá na bílém podkladu zmizí. */}
+      <path d="M18 26h28v26a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V26Z" fill="#BFD2DE" />
+      <path d="M18 26l14-14 14 14H18Z" fill="#9FBACB" />
+      <path d="M23 34h18v18H23Z" fill={C.bila} />
+      <path d="M32 6c5 0 8 3 8 6 0 3-2 5-5 6h-6c-3-1-5-3-5-6 0-3 3-6 8-6Z" fill={C.bila} />
+      <path d="M27 40c4-2 8-2 11 0" stroke="#D9D3C2" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'zakysana-smetana': kelimek(
+    C.bila,
+    '#BFD4C4',
+    <>
+      <path d="M24 36c5-4 11-4 16 0-5 4-11 4-16 0Z" fill={C.bilaStin} />
+      <path d="M42 20l8-10" stroke={C.bilaStin} strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>,
+  ),
+
+  'kravske-mleko': (
+    <>
+      <path d="M22 16h20v8l4 8v20a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V32l4-8v-8Z" fill={C.bilaStin} />
+      <path d="M21 34h22v18a2 2 0 0 1-2 2H23a2 2 0 0 1-2-2V34Z" fill={C.bila} />
+      <path d="M21 12h22v6H21Z" fill="#8FB6D9" />
+      <path d="M25 40c5-2 10-2 14 0" stroke={C.bilaStin} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'vejce-slepici': (
+    <>
+      <ellipse cx="24" cy="36" rx="14" ry="18" fill="#F2E0C8" />
+      <path d="M15 30c2-6 6-10 10-11" stroke="#FBF2E4" strokeWidth="5" strokeLinecap="round" fill="none" />
+      <ellipse cx="45" cy="44" rx="15" ry="11" fill={C.bila} />
+      <circle cx="45" cy="44" r="6" fill="#EFB92E" />
     </>
   ),
 };
