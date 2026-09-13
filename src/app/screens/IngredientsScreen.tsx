@@ -169,39 +169,55 @@ function IngredientRow({
   tasted: boolean;
   favorite: boolean;
 }): ReactNode {
+  const profile = nutrientProfile(ingredient);
+  // Tři štítky se vedle jména nevejdou ani na 320 px, proto mají vlastní
+  // řádku pod ním. Když položka není zdrojem žádné ze tří živin, řádka se
+  // nevykreslí — prázdná mezera by jen rozhodila seznam.
+  const maZiviny =
+    profile.iron !== 'nevyznamny' ||
+    profile.zinc !== 'nevyznamny' ||
+    profile.vitaminC !== 'nevyznamny';
+
   return (
-    <li className="flex items-stretch gap-2 rounded-xl bg-surface p-2">
-      <Link
-        to={`/suroviny/${ingredient.id}`}
-        data-testid={`surovina-${ingredient.id}`}
-        className="flex min-h-touch min-w-0 flex-1 flex-col gap-1 rounded-lg p-2"
-      >
-        <span className="flex items-center gap-2 font-medium">
-          <span aria-hidden="true" className="shrink-0 text-lg">
-            {ingredient.emoji ?? '🍽️'}
+    <li className="flex flex-col rounded-xl bg-surface p-2">
+      <div className="flex items-stretch gap-2">
+        <Link
+          to={`/suroviny/${ingredient.id}`}
+          data-testid={`surovina-${ingredient.id}`}
+          className="flex min-h-touch min-w-0 flex-1 flex-col gap-1 rounded-lg p-2"
+        >
+          <span className="flex items-center gap-2 font-medium">
+            <span aria-hidden="true" className="shrink-0 text-lg">
+              {ingredient.emoji ?? '🍽️'}
+            </span>
+            <span className="min-w-0">{ingredient.nameCz}</span>
+            {favorite && <Star aria-label="Oblíbené" className="h-4 w-4 shrink-0 text-caution" />}
           </span>
-          <span className="min-w-0">{ingredient.nameCz}</span>
-          {favorite && <Star aria-label="Oblíbené" className="h-4 w-4 shrink-0 text-caution" />}
-        </span>
-        <span className="flex flex-wrap items-center gap-1.5">
-          <span className="rounded-lg bg-paper px-2 py-0.5 text-[11px] font-medium text-muted">
-            od {ingredient.minAgeMonths} měsíců
+          <span className="flex flex-wrap items-center gap-1.5">
+            <span className="rounded-lg bg-paper px-2 py-0.5 text-[11px] font-medium text-muted">
+              od {ingredient.minAgeMonths} měsíců
+            </span>
+            <ChokingBadge risk={ingredient.chokingRisk} />
           </span>
-          <ChokingBadge risk={ingredient.chokingRisk} />
-        </span>
-      </Link>
-      <span className="flex shrink-0 items-center self-center">
-        <NutrientBadge
-          profile={nutrientProfile(ingredient)}
-          title={ingredient.nameCz}
-          testId={`zeleza-${ingredient.id}`}
+        </Link>
+        <TastedToggle
+          ingredientId={ingredient.id}
+          ingredientName={ingredient.nameCz}
+          tasted={tasted}
         />
-      </span>
-      <TastedToggle
-        ingredientId={ingredient.id}
-        ingredientName={ingredient.nameCz}
-        tasted={tasted}
-      />
+      </div>
+      {maZiviny && (
+        <span
+          className="flex flex-wrap items-center gap-1.5 px-2"
+          data-testid={`ziviny-${ingredient.id}`}
+        >
+          <NutrientBadge
+            profile={profile}
+            title={ingredient.nameCz}
+            testId={`zeleza-${ingredient.id}`}
+          />
+        </span>
+      )}
     </li>
   );
 }

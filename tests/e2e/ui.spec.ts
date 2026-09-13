@@ -112,13 +112,21 @@ test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
   await navLink(page, 'Suroviny').click();
   await page.getByTestId('hledat-surovinu').fill('brokolice');
 
-  // Neochutnaná surovina je tlačítko rychlého zápisu; po zápisu se z něj
-  // stane odkaz do detailu, aby se dalšími klepnutími nepřidávaly duplicity.
+  // Fajfka v seznamu otevře tutéž nabídku jako detail suroviny — jedno
+  // klepnutí už nic samo neuloží, rodič vybírá množství i reakci.
   const toggle = page.getByTestId(/^ochutnano-/).first();
-  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(toggle).toHaveAttribute('aria-label', /zapsat ochutnávku/);
   await toggle.click();
+
+  const okenko = page.getByTestId('okenko-ochutnavky');
+  await expect(okenko).toBeVisible();
+  await okenko.getByTestId('volba-mnozstvi-snedla-vse').click();
+  await okenko.getByTestId('volba-reakce-chutnalo').click();
+  await okenko.getByTestId('ochutnavka-poznamka').fill('Snědla celý stvol.');
+  await okenko.getByTestId('ochutnavka-ulozit').click();
+
+  await expect(okenko).toBeHidden();
   await expect(toggle).toHaveAttribute('aria-label', /ochutnáno, otevřít záznamy/);
-  await expect(toggle).toHaveRole('link');
 
   await navLink(page, 'Deník').click();
   await expect(page.getByTestId('casova-osa')).toContainText(/brokolice/i);

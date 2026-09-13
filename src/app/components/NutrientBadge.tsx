@@ -1,4 +1,5 @@
-import { Droplet, Info, Sparkles, X } from 'lucide-react';
+import { Citrus, Droplet, Info, ShieldCheck, Sparkles, X } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -17,6 +18,31 @@ export interface NutrientBadgeProps {
   testId?: string;
 }
 
+interface ChipSpec {
+  /** Klíč do profilu živin. */
+  key: 'iron' | 'zinc' | 'vitaminC';
+  label: string;
+  /** Do aria-label, kde věta začíná velkým písmenem. */
+  aria: string;
+  Icon: LucideIcon;
+  /** Přípona testId; železo ji nemá, aby staré `zeleza-…` zůstalo beze změny. */
+  suffix: string;
+}
+
+/**
+ * Tři živiny v pořadí, v jakém se čtou.
+ *
+ * Železo je první, protože kvůli němu se po šestém měsíci příkrm zavádí.
+ * Zinek s ním chodí ve stejných potravinách a vitamin C je tu proto, že
+ * zlepšuje vstřebávání rostlinného železa — dohromady to dává smysl jako
+ * jedna řádka.
+ */
+const CHIPS: readonly ChipSpec[] = [
+  { key: 'iron', label: 'železo', aria: 'Železo', Icon: Droplet, suffix: '' },
+  { key: 'zinc', label: 'zinek', aria: 'Zinek', Icon: ShieldCheck, suffix: '-zinek' },
+  { key: 'vitaminC', label: 'vitamin C', aria: 'Vitamin C', Icon: Citrus, suffix: '-cecko' },
+];
+
 function Row({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-3 py-2">
@@ -32,11 +58,12 @@ function Row({ label, level }: { label: string; level: NutrientLevel }): ReactNo
 }
 
 /**
- * Značka obsahu železa v náhledu, po klepnutí s podrobnostmi.
+ * Značky obsahu živin v náhledu, po klepnutí s podrobnostmi.
  *
- * V seznamu je vidět jen stupnice teček a slovo — na víc na řádku není
- * místo. Vysvětlení, proč zrovna tahle položka a s čím ji kombinovat, se
- * otevře až na vyžádání, aby seznam zůstal čitelný.
+ * V seznamu je vidět jen jméno živiny a stupnice teček — na víc na řádku
+ * není místo. Vysvětlení, proč zrovna tahle položka a s čím ji kombinovat,
+ * se otevře až na vyžádání, aby seznam zůstal čitelný. Živina, která tu
+ * není významná, se nevypisuje vůbec; prázdná řádka nikomu nepomůže.
  */
 export function NutrientBadge({
   profile,
@@ -56,38 +83,44 @@ export function NutrientBadge({
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  if (profile.iron === 'nevyznamny' && profile.zinc === 'nevyznamny') return null;
+  const base = testId ?? 'znacka-zeleza';
+  const videt = CHIPS.filter((chip) => profile[chip.key] !== 'nevyznamny');
+  if (videt.length === 0) return null;
 
   return (
     <>
-      <button
-        type="button"
-        data-testid={testId ?? 'znacka-zeleza'}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        aria-label={`Železo: ${LEVEL_LABELS[profile.iron]}. Otevřít podrobnosti.`}
-        onClick={(event) => {
-          // Značka bývá uvnitř odkazu na detail — proklik nesmí přebít okénko.
-          event.preventDefault();
-          event.stopPropagation();
-          setOpen(true);
-        }}
-        // Vizuálně drobný štítek, ale dotykový cíl musí mít 44 px (docs/SPEC.md
-        // kap. 6) — proto je plocha na tlačítku a vzhled na vnitřním štítku.
-        className="flex min-h-touch items-center"
-      >
-        <span
-          className={`flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[11px] font-medium ${
-            LEVEL_CHIP[profile.iron]
-          }`}
-        >
-          <Droplet aria-hidden="true" className="h-3 w-3 shrink-0" />
-          železo
-          <span aria-hidden="true" className="font-mono tracking-tight">
-            {LEVEL_DOTS[profile.iron]}
-          </span>
-        </span>
-      </button>
+      {videt.map(({ key, label, aria, Icon, suffix }) => {
+        const level = profile[key];
+        return (
+          <button
+            key={key}
+            type="button"
+            data-testid={`${base}${suffix}`}
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            aria-label={`${aria}: ${LEVEL_LABELS[level]}. Otevřít podrobnosti.`}
+            onClick={(event) => {
+              // Značka bývá uvnitř odkazu na detail — proklik nesmí přebít okénko.
+              event.preventDefault();
+              event.stopPropagation();
+              setOpen(true);
+            }}
+            // Vizuálně drobný štítek, ale dotykový cíl musí mít 44 px (docs/SPEC.md
+            // kap. 6) — proto je plocha na tlačítku a vzhled na vnitřním štítku.
+            className="flex min-h-touch items-center"
+          >
+            <span
+              className={`flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[11px] font-medium ${LEVEL_CHIP[level]}`}
+            >
+              <Icon aria-hidden="true" className="h-3 w-3 shrink-0" />
+              {label}
+              <span aria-hidden="true" className="font-mono tracking-tight">
+                {LEVEL_DOTS[level]}
+              </span>
+            </span>
+          </button>
+        );
+      })}
 
       {open && (
         <div
@@ -137,6 +170,14 @@ export function NutrientBadge({
                   ? 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.'
                   : 'Tahle položka není významným zdrojem železa. Zinek a železo se v jídelníčku většinou potkávají v týchž potravinách.'}
             </p>
+
+            {profile.vitaminC !== 'nevyznamny' && (
+              <p className="text-sm leading-relaxed" data-testid="okenko-k-cemu-cecko">
+                Vitamin C se tu nepočítá kvůli imunitě, ale kvůli železu: ve stejném jídle zvyšuje
+                vstřebávání toho rostlinného. Proto se vyplatí dát luštěninu nebo obilninu dohromady
+                s paprikou, brokolicí či ovocem.
+              </p>
+            )}
 
             {ironFrom.length > 0 && (
               <div>
@@ -189,9 +230,7 @@ export function NutrientBadge({
               </span>
             </p>
 
-            <p className="text-xs text-muted">
-              {IRON_FORM_LABELS[profile.ironForm]}.
-            </p>
+            <p className="text-xs text-muted">{IRON_FORM_LABELS[profile.ironForm]}.</p>
           </div>
         </div>
       )}
