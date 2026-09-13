@@ -2145,6 +2145,105 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M36 12c-3 0-5-1-5-3 3-1 7-1 10 0 0 2-2 3-5 3Z" fill={C.zelenTmava} />
     </>
   ),
+
+  // ── ostatní ────────────────────────────────────────────────────────────
+  voda: (
+    <>
+      <path d="M18 14h28l-4 38a5 5 0 0 1-5 5H27a5 5 0 0 1-5-5L18 14Z" fill="#DCE8EE" />
+      <path d="M21 28h22l-3 24a3 3 0 0 1-3 3H27a3 3 0 0 1-3-3l-3-24Z" fill="#7EB4D9" />
+      <path d="M21 28c4 3 8 3 11 0 3 3 7 3 11 0" stroke="#A8D2EA" strokeWidth="3" fill="none" />
+    </>
+  ),
+
+  'detsky-caj': (
+    <>
+      <path d="M12 26h32v18c0 7-7 12-16 12s-16-5-16-12V26Z" fill={C.bila} />
+      <path d="M16 30h24v14c0 5-5 8-12 8s-12-3-12-8V30Z" fill="#E0C486" />
+      <path d="M44 30h6a6 6 0 0 1 0 12h-6" stroke={C.bila} strokeWidth="5" fill="none" />
+      <path d="M28 18c-3-4-2-8 1-10 3 2 4 6 1 10Z" fill={C.zelen} />
+      <path d="M36 18c3-4 2-8-1-10-3 2-4 6-1 10Z" fill={C.zelenSvetla} />
+    </>
+  ),
+
+  'kokosovy-jogurt': (
+    <>
+      <path d="M14 24h28l-3 28a4 4 0 0 1-4 4H21a4 4 0 0 1-4-4L14 24Z" fill={C.bilaStin} />
+      <path d="M19 30h18l-3 22H22l-3-22Z" fill={C.bila} />
+      <path d="M12 20h32v6H12Z" fill="#B4A48E" />
+      <path d="M50 22c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9Z" fill="#7A5230" />
+      <path d="M50 26c3 0 5 2 5 5s-2 5-5 5-5-2-5-5 2-5 5-5Z" fill={C.bila} />
+    </>
+  ),
+
+  'kvasnice-drozdi': (
+    <>
+      <path d="M12 30l20-9 20 9-20 9-20-9Z" fill="#E4D4A8" />
+      <path d="M12 30v13l20 9V39l-20-9Z" fill="#CFBC86" />
+      <path d="M52 30v13l-20 9V39l20-9Z" fill="#B8A46C" />
+      <circle cx="22" cy="30" r="2" fill="#B8A46C" />
+      <circle cx="34" cy="26" r="2.2" fill="#B8A46C" />
+      <circle cx="41" cy="32" r="1.8" fill="#CFBC86" />
+      <path d="M20 42c4 2 8 3 10 3" stroke="#E4D4A8" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'prasek-do-peciva': (
+    <>
+      <path d="M20 16h24v36a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V16Z" fill="#9FC0D9" />
+      <path d="M24 24h16v20H24V24Z" fill={C.bila} />
+      <path d="M18 12h28v6H18Z" fill="#6E94B4" />
+      <path d="M28 30c3-2 6-2 8 0M27 36c4-2 7-2 10 0" stroke="#C9D8E4" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M46 44c5-4 11-4 14 0-4 4-10 4-14 0Z" fill={C.bila} />
+    </>
+  ),
+
+  'jedla-soda': (
+    <>
+      <path d="M16 22h32v30a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V22Z" fill="#E8A83A" />
+      <path d="M20 30h24v18H20V30Z" fill={C.bila} />
+      <path d="M16 22l6-8h20l6 8H16Z" fill="#D9922A" />
+      <path d="M25 36h14M25 42h10" stroke="#D2CBB8" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'kakao-100': (
+    <>
+      {prasek('#5E3A22', '#8E5E38')}
+      <path d="M28 18c6-4 14-2 17 4 3 7-1 15-8 18-6 2-13-1-15-7-2-6 1-12 6-15Z" fill="#4A2A16" />
+      <path d="M31 22c4-2 8 0 10 4" stroke="#7E5230" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  karob: (
+    <>
+      {/* Světlý prášek a výrazně tmavší lusk s hrbolky po semenech — ve
+          stejném odstínu se obojí slilo v jednu skvrnu. */}
+      {prasek('#C49460', '#E0B588')}
+      <path d="M10 26c11-5 28-5 40 2 3 2 3 6-1 7-11 3-26 1-36-4-3-1-4-4-3-5Z" fill="#5E3A1E" />
+      <circle cx="20" cy="28" r="3" fill="#8E6032" />
+      <circle cx="30" cy="30" r="3" fill="#8E6032" />
+      <circle cx="40" cy="32" r="3" fill="#8E6032" />
+      <path d="M50 28c4 0 6 1 7 3-3 2-6 2-8 0l1-3Z" fill="#5E3A1E" />
+    </>
+  ),
+
+  'ocet-jablecny': (
+    <>
+      <path d="M26 10h12v10l6 10v22a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V30l6-10V10Z" fill={C.bilaStin} />
+      <path d="M23 32h18v20a2 2 0 0 1-2 2H25a2 2 0 0 1-2-2V32Z" fill="#D9A83A" />
+      <path d="M25 8h14v5H25Z" fill={C.hnedaSvetla} />
+      <circle cx="49" cy="24" r="9" fill="#CE3B36" />
+      <path d="M49 15c2-3 5-4 7-3-1 3-4 5-7 5v-2Z" fill={C.zelen} />
+    </>
+  ),
+
+  'skrob-kukuricny': (
+    <>
+      {prasek(C.bilaStin, C.bila)}
+      <path d="M32 16c5 0 8 5 8 12s-3 12-8 12-8-5-8-12 3-12 8-12Z" fill={C.zluta} />
+      <path d="M28 22c0 8 0 12 1 15M36 22c0 8 0 12-1 15M25 27c5 1 9 1 14 0" stroke={C.zlutaTmava} strokeWidth="1.8" fill="none" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;
