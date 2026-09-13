@@ -240,10 +240,20 @@ test('filtr železa a řazení přerovnají seznam receptů', async ({ page }) =
   const count = page.getByTestId('pocet-receptu');
   const vse = (await count.textContent()) ?? '';
 
-  await page.getByTestId('filtr-zeleza').getByText('Hemové z masa').click();
-  await expect(count).not.toHaveText(vse);
+  // Živiny se zaškrtávají nezávisle a podmínky se sčítají.
+  await page.getByTestId('prepinac-zelezo').click();
+  const jenZelezo = (await count.textContent()) ?? '';
+  expect(jenZelezo).not.toBe(vse);
 
-  await page.getByTestId('filtr-zeleza').getByText('Železo: vše').click();
+  await page.getByTestId('prepinac-cecko').click();
+  const zelezoACecko = (await count.textContent()) ?? '';
+  expect(zelezoACecko).not.toBe(jenZelezo);
+
+  // Druh železa se nabídne, až když je železo vybrané.
+  await page.getByTestId('filtr-druhu-zeleza').getByTestId('chip-hemove').click();
+  await expect(count).not.toHaveText(zelezoACecko);
+
+  await page.getByTestId('zrusit-filtry').click();
   await expect(count).toHaveText(vse);
 
   const prvniAbecedne = await page
@@ -404,4 +414,69 @@ test('u surovin v receptu jsou vidět úrovně živin', async ({ page }) => {
   const okenko = page.getByTestId('okenko-zivin');
   await expect(okenko).toBeVisible();
   await expect(okenko).toContainText('Vitamin C');
+});
+
+test('dvojice rostlinné železo + vitamin C se zapne jedním klepnutím', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  const count = page.getByTestId('pocet-receptu');
+  const vse = (await count.textContent()) ?? '';
+
+  await page.getByTestId('filtr-dvojice').click();
+  await expect(page.getByTestId('filtr-dvojice')).toHaveAttribute('aria-pressed', 'true');
+  await expect(count).not.toHaveText(vse);
+
+  // Zkratka nastaví přesně ty tři volby, které by šlo naklikat i ručně.
+  await expect(page.getByTestId('prepinac-zelezo')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('prepinac-cecko')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('prepinac-zinek')).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.getByTestId('filtr-druhu-zeleza').getByTestId('chip-nehemove')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+
+  await page.getByTestId('filtr-dvojice').click();
+  await expect(count).toHaveText(vse);
+});
+
+test('druh železa a síla zdroje se nabídnou, až když jsou k čemu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
+  await expect(page.getByTestId('filtr-sily')).toBeHidden();
+
+  // Vitamin C sám o sobě druh železa neotevře — jen sílu zdroje.
+  await page.getByTestId('prepinac-cecko').click();
+  await expect(page.getByTestId('filtr-sily')).toBeVisible();
+  await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
+
+  await page.getByTestId('prepinac-zelezo').click();
+  await expect(page.getByTestId('filtr-druhu-zeleza')).toBeVisible();
+});
+
+test('u surovin v receptu je vidět střední a vysoké riziko dušení', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty/hovezi-ragu-testoviny');
+
+  await expect(page.getByTestId('duseni-suroviny-rajce')).toContainText('vysoké riziko dušení');
+  await expect(page.getByTestId('duseni-suroviny-hovezi-mlete')).toContainText(
+    'střední riziko dušení',
+  );
+
+  // Nízké riziko se nevypisuje, jinak by štítek zevšedněl a přestal varovat.
+  await expect(page.getByTestId('duseni-suroviny-cibule')).toBeHidden();
+  await expect(page.getByTestId('duseni-suroviny-olej-olivovy')).toBeHidden();
+});
+
+test('okénko živin nevypisuje, čeho surovina není zdrojem', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty/hovezi-ragu-testoviny');
+
+  await page.getByTestId('zeleza-recept-testoviny-semolinove-zinek').click();
+  const okenko = page.getByTestId('okenko-zivin');
+  await expect(okenko).toBeVisible();
+  await expect(okenko).toContainText('Zinek');
+  await expect(okenko).not.toContainText('není zdroj');
 });

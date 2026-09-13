@@ -17,12 +17,6 @@ function Pill({ label, level }: { label: string; level: NutrientLevel }): ReactN
   );
 }
 
-/** Nadpis bloku podle toho, co surovina opravdu nese: „železo a zinek", „vitamin C". */
-function spojNazvy(nazvy: readonly string[]): string {
-  if (nazvy.length <= 1) return nazvy[0] ?? '';
-  return `${nazvy.slice(0, -1).join(', ')} a ${nazvy.at(-1) ?? ''}`;
-}
-
 /**
  * Živiny u konkrétní suroviny: železo, zinek a vitamin C.
  *
@@ -35,15 +29,6 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
   const zajimave =
     profile.iron !== 'nevyznamny' || profile.zinc !== 'nevyznamny' || profile.vitaminC !== 'nevyznamny';
   if (!zajimave) return null;
-
-  // Nadpis pojmenuje jen to, co surovina skutečně nese. Blok nadepsaný
-  // „železo a zinek" nad jahodou, která má jen vitamin C, mate.
-  const nese = [
-    profile.iron !== 'nevyznamny' ? 'železo' : null,
-    profile.zinc !== 'nevyznamny' ? 'zinek' : null,
-    profile.vitaminC !== 'nevyznamny' ? 'vitamin C' : null,
-  ].filter((jedno): jedno is string => jedno !== null);
-  const nadpis = spojNazvy(nese);
 
   const nehemove = profile.ironForm === 'nehemove' && profile.iron !== 'nevyznamny';
   const partners = nehemove ? vitaminCPartners(ingredient, 5) : [];
@@ -72,13 +57,15 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
         className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
       >
         <Droplet aria-hidden="true" className="h-4 w-4 text-accent" />
-        {nadpis.charAt(0).toUpperCase() + nadpis.slice(1)}
+        Živiny
       </h2>
 
-      <div className="flex gap-2">
-        <Pill label="Železo" level={profile.iron} />
-        <Pill label="Zinek" level={profile.zinc} />
-        <Pill label="Vitamin C" level={profile.vitaminC} />
+      {/* Vypisuje se jen to, co surovina opravdu nese. Trojice řádků
+          „není zdroj" nikomu u sporáku nepomůže. */}
+      <div className="flex flex-wrap gap-2">
+        {profile.iron !== 'nevyznamny' && <Pill label="Železo" level={profile.iron} />}
+        {profile.zinc !== 'nevyznamny' && <Pill label="Zinek" level={profile.zinc} />}
+        {profile.vitaminC !== 'nevyznamny' && <Pill label="Vitamin C" level={profile.vitaminC} />}
       </div>
 
       {profile.ironForm === 'hemove' && profile.iron !== 'nevyznamny' && (
