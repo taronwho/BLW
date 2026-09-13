@@ -48,6 +48,16 @@ let localAdapter: StorageAdapter | null = null;
 let remoteAdapter: StorageAdapter | null = null;
 let remoteUnsubscribe: (() => void) | null = null;
 
+/**
+ * O start i o připojení žádá nezávisle několik obrazovek naráz (hlavička,
+ * Domácnost, párovací odkaz). Bez těchhle dvou pojistek běžely dva starty
+ * současně, druhý se pokusil otevřít Firestore podruhé a spadl — a protože
+ * skončil až po tom úspěšném, přebil ho a rodiči se ukázala červená hláška,
+ * kterou další načtení stránky smazalo.
+ */
+let rozjednanyStart: Promise<void> | null = null;
+let rozjednanePripojeni: { id: string; hotovo: Promise<void> } | null = null;
+
 function local(): StorageAdapter {
   localAdapter ??= new IndexedDbAdapter();
   return localAdapter;
@@ -87,6 +97,71 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     }
   }
 
+  /** Načtení lokálních dat a případné připojení k domácnosti. Běží jednou. */
+  async function spustStart(): Promise<void> {
+    const stored = await local().load();
+    const code = readStoredCode();
+    set({
+      ready: true,
+      state: stored?.state ?? emptyHouseholdState(),
+      updatedAt: stored?.updatedAt ?? 0,
+      householdCode: code,
+    });
+
+    if (code !== null && loadFirebaseConfig() !== null) {
+      await get().connect(code);
+    }
+  }
+
+  /** Vlastní připojení k Firestore. Volá se jen přes `connect`, který ho hlídá. */
+  async function pripojSe(householdId: string): Promise<void> {
+    const config = loadFirebaseConfig();
+    if (config === null || householdId.length === 0) {
+      set({ status: { kind: 'local-only' } });
+      return;
+    }
+
+    set({ status: { kind: 'connecting' } });
+    try {
+      const session = await connectFirebase(config);
+      const adapter = new FirestoreAdapter(session, householdId);
+      remoteAdapter = adapter;
+      writeStoredCode(householdId);
+
+      const remote = await adapter.load();
+      const localState = get().state;
+      if (remote !== null) {
+        const merged = mergeHouseholdState(localState, remote.state, {
+          localUpdatedAt: get().updatedAt,
+          remoteUpdatedAt: remote.updatedAt,
+        });
+        await persist(withMember(merged, session.uid));
+      } else {
+        await persist(withMember(localState, session.uid));
+      }
+
+      // Poslouchá vždycky jen jeden odběr; starý se ruší, ať se změny
+      // nezpracují dvakrát.
+      remoteUnsubscribe?.();
+      remoteUnsubscribe = adapter.subscribe((incoming) => {
+        const merged = mergeHouseholdState(get().state, incoming.state, {
+          localUpdatedAt: get().updatedAt,
+          remoteUpdatedAt: incoming.updatedAt,
+        });
+        set({ state: merged });
+        void local().save({ state: merged, updatedAt: Date.now() });
+      });
+
+      set({
+        householdCode: householdId,
+        status: { kind: 'connected', householdCode: householdId, uid: session.uid },
+      });
+    } catch (error) {
+      remoteAdapter = null;
+      set({ status: { kind: 'error', message: describeError(error) } });
+    }
+  }
+
   return {
     ready: false,
     state: emptyHouseholdState(),
@@ -95,70 +170,24 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     householdCode: null,
 
     async init(): Promise<void> {
-      const stored = await local().load();
-      set({
-        ready: true,
-        state: stored?.state ?? emptyHouseholdState(),
-        updatedAt: stored?.updatedAt ?? 0,
-        householdCode: readStoredCode(),
-      });
-
-      const code = readStoredCode();
-      if (code !== null && loadFirebaseConfig() !== null) {
-        await get().connect(code);
-      }
+      rozjednanyStart ??= spustStart();
+      return rozjednanyStart;
     },
 
     async connect(code?: string): Promise<void> {
-      const config = loadFirebaseConfig();
-      if (config === null) {
-        set({ status: { kind: 'local-only' } });
-        return;
-      }
       const householdId = normalizeHouseholdCode(code ?? get().householdCode ?? '');
-      if (householdId.length === 0) {
-        set({ status: { kind: 'local-only' } });
-        return;
+      // Druhá obrazovka se sveze na výsledku první místo druhého spojení.
+      if (rozjednanePripojeni !== null && rozjednanePripojeni.id === householdId) {
+        return rozjednanePripojeni.hotovo;
       }
-
-      set({ status: { kind: 'connecting' } });
+      const hotovo = pripojSe(householdId);
+      rozjednanePripojeni = { id: householdId, hotovo };
       try {
-        const session = await connectFirebase(config);
-        const adapter = new FirestoreAdapter(session, householdId);
-        remoteAdapter = adapter;
-        writeStoredCode(householdId);
-
-        const remote = await adapter.load();
-        const localState = get().state;
-        if (remote !== null) {
-          const merged = mergeHouseholdState(localState, remote.state, {
-            localUpdatedAt: get().updatedAt,
-            remoteUpdatedAt: remote.updatedAt,
-          });
-          await persist(withMember(merged, session.uid));
-        } else {
-          await persist(withMember(localState, session.uid));
-        }
-
-        remoteUnsubscribe = adapter.subscribe((incoming) => {
-          const merged = mergeHouseholdState(get().state, incoming.state, {
-            localUpdatedAt: get().updatedAt,
-            remoteUpdatedAt: incoming.updatedAt,
-          });
-          set({ state: merged });
-          void local().save({ state: merged, updatedAt: Date.now() });
-        });
-
-        set({
-          householdCode: householdId,
-          status: { kind: 'connected', householdCode: householdId, uid: session.uid },
-        });
-      } catch (error) {
-        remoteAdapter = null;
-        set({ status: { kind: 'error', message: describeError(error) } });
+        await hotovo;
+      } finally {
+        if (rozjednanePripojeni?.hotovo === hotovo) rozjednanePripojeni = null;
       }
     },
-
     disconnect(): void {
       remoteUnsubscribe?.();
       remoteUnsubscribe = null;
@@ -270,14 +299,26 @@ function withMember(state: HouseholdState, uid: string): HouseholdState {
   return { ...state, members, memberSeenAt: { ...state.memberSeenAt, [uid]: Date.now() } };
 }
 
+/**
+ * Hláška, kterou uvidí rodič. Firebase mluví anglicky a technicky, takže se
+ * sem jeho text nikdy nepouští doslova — je nesrozumitelný a v aplikaci pro
+ * rodiče nemá co dělat. Podrobnost zůstává v konzoli prohlížeče.
+ */
 function describeError(error: unknown): string {
-  if (error instanceof Error) {
-    // Firestore vrátí u zamítnutého zápisu jen „permission-denied“. Nejčastější
-    // příčinou je plná domácnost, což ze samotné hlášky nikdo nepozná.
-    if (/permission|insufficient/i.test(error.message)) {
-      return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení — odeber některé v Domácnosti na jiném telefonu), nebo nemá databáze nahraná pravidla přístupu; to se nastavuje jednou při zprovoznění sdílení.`;
-    }
-    return error.message;
+  const text = error instanceof Error ? error.message : String(error);
+  // Podrobnost pro ladění, ne pro rodiče.
+  console.warn('Synchronizace:', text);
+
+  // Firestore vrátí u zamítnutého zápisu jen „permission-denied“. Nejčastější
+  // příčinou je plná domácnost, což ze samotné hlášky nikdo nepozná.
+  if (/permission|insufficient/i.test(text)) {
+    return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení — odeber některé v Domácnosti na jiném telefonu), nebo nemá databáze nahraná pravidla přístupu; to se nastavuje jednou při zprovoznění sdílení.`;
   }
-  return 'Neznámá chyba synchronizace.';
+  if (/unavailable|network|offline|failed to (get|fetch)/i.test(text)) {
+    return 'Zařízení je teď bez spojení. Zapsané změny máš uložené v telefonu a odešlou se samy, jakmile bude síť zpátky.';
+  }
+  if (/not-found|no document/i.test(text)) {
+    return 'Domácnost s tímhle kódem neexistuje. Zkontroluj kód na druhém telefonu, nebo tam založ novou domácnost.';
+  }
+  return 'Sdílení se teď nepodařilo navázat. Data máš uložená v telefonu a nic se neztratilo; zkus to za chvíli znovu.';
 }

@@ -1,8 +1,9 @@
-import { initializeApp, type FirebaseApp } from 'firebase/app';
+import { getApp, getApps, initializeApp, type FirebaseApp } from 'firebase/app';
 import { getAuth, signInAnonymously, type Auth } from 'firebase/auth';
 import {
   doc,
   getDoc,
+  getFirestore,
   initializeFirestore,
   onSnapshot,
   persistentLocalCache,
@@ -33,18 +34,46 @@ export interface FirebaseSession {
   uid: string;
 }
 
-export async function connectFirebase(config: FirebaseConfig): Promise<FirebaseSession> {
-  const app = initializeApp(config);
-  const db = initializeFirestore(app, {
-    // Offline fronta: změny se ukládají lokálně a dosynchronizují po připojení.
-    localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }),
-    // Nepovinná pole (`childGrip`, `note` u ochutnávky) můžou být `undefined`.
-    // Bez tohohle by je setDoc odmítl a zápis by spadl celý.
-    ignoreUndefinedProperties: true,
+/**
+ * Rozjednané nebo hotové spojení. Firebase smí být v jedné záložce otevřený
+ * jen jednou a o připojení žádá nezávisle několik obrazovek naráz, takže
+ * druhý žadatel dostane týž příslib místo druhého spojení.
+ */
+let rozjednane: Promise<FirebaseSession> | null = null;
+
+export function connectFirebase(config: FirebaseConfig): Promise<FirebaseSession> {
+  if (rozjednane !== null) return rozjednane;
+  const spojeni = otevriSpojeni(config);
+  rozjednane = spojeni;
+  // Neúspěch (třeba výpadek sítě při přihlášení) nesmí zablokovat další pokus.
+  void spojeni.catch(() => {
+    if (rozjednane === spojeni) rozjednane = null;
   });
+  return spojeni;
+}
+
+async function otevriSpojeni(config: FirebaseConfig): Promise<FirebaseSession> {
+  const app = getApps().length === 0 ? initializeApp(config) : getApp();
+  const db = otevriFirestore(app);
   const auth = getAuth(app);
   const credential = await signInAnonymously(auth);
   return { app, auth, db, uid: credential.user.uid };
+}
+
+function otevriFirestore(app: FirebaseApp): Firestore {
+  try {
+    return initializeFirestore(app, {
+      // Offline fronta: změny se ukládají lokálně a dosynchronizují po připojení.
+      localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }),
+      // Nepovinná pole (`childGrip`, `note` u ochutnávky) můžou být `undefined`.
+      // Bez tohohle by je setDoc odmítl a zápis by spadl celý.
+      ignoreUndefinedProperties: true,
+    });
+  } catch {
+    // Firestore už v téhle záložce běží — nastavení se mu už měnit nedá,
+    // takže si vezmeme existující instanci místo vyhození chyby.
+    return getFirestore(app);
+  }
 }
 
 interface HouseholdDocument {
