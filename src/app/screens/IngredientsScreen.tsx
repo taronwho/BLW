@@ -129,6 +129,7 @@ export function IngredientsScreen(): ReactNode {
         testId="rychle-filtry"
       />
       <FilterSelect
+        neutralId="abeceda"
         label="Řazení"
         options={SORT_OPTIONS}
         selected={sort}
