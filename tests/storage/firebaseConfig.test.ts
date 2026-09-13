@@ -1,61 +1,51 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import {
-  hasBuiltInConfig,
-  isCompleteConfig,
-  parseFirebaseConfig,
-} from '../../src/storage/firebaseConfig';
+import { hasFirebaseConfig, isCompleteConfig, loadFirebaseConfig } from '../../src/storage/firebaseConfig';
+import { FIREBASE_DEFAULTS } from '../../src/storage/firebaseDefaults';
+import { FIREBASE_CONFIG_KEYS } from '../../src/storage/types';
 
-const CONSOLE_SNIPPET = `
-const firebaseConfig = {
-  apiKey: "ukazkovy-klic-neni-skutecny",
-  authDomain: "blw-ukazka.firebaseapp.com",
-  projectId: "blw-ukazka",
-  storageBucket: "blw-ukazka.appspot.com",
-  messagingSenderId: "123456789012",
-  appId: "1:123456789012:web:abcdef123456"
-};
-`;
-
-describe('Firebase konfigurace', () => {
-  it('přijme objekt zkopírovaný z konzole i s klíči bez uvozovek', () => {
-    const config = parseFirebaseConfig(CONSOLE_SNIPPET);
-    expect(config?.projectId).toBe('blw-ukazka');
-    expect(config?.appId).toBe('1:123456789012:web:abcdef123456');
+describe('úplnost konfigurace', () => {
+  it('úplná sada projde', () => {
+    expect(
+      isCompleteConfig({
+        apiKey: 'a',
+        authDomain: 'b',
+        projectId: 'c',
+        storageBucket: 'd',
+        messagingSenderId: 'e',
+        appId: 'f',
+      }),
+    ).toBe(true);
   });
 
-  it('přijme čistý JSON', () => {
-    const json = JSON.stringify({
-      apiKey: 'a',
-      authDomain: 'b',
-      projectId: 'c',
-      storageBucket: 'd',
-      messagingSenderId: 'e',
-      appId: 'f',
-    });
-    expect(parseFirebaseConfig(json)?.apiKey).toBe('a');
+  it('neúplná sada se zahodí celá', () => {
+    // Jinak by Firebase nastartoval a spadl až za běhu, tedy před rodičem.
+    expect(isCompleteConfig({ apiKey: 'a', projectId: 'c' })).toBe(false);
   });
 
-  it('odmítne neúplnou konfiguraci', () => {
-    expect(parseFirebaseConfig('{ "apiKey": "a" }')).toBeNull();
-    expect(isCompleteConfig({ apiKey: 'a' })).toBe(false);
+  it('prázdné a mezerové hodnoty se nepočítají', () => {
+    const vsechny = Object.fromEntries(FIREBASE_CONFIG_KEYS.map((k) => [k, '  ']));
+    expect(isCompleteConfig(vsechny)).toBe(false);
   });
 
-  it('odmítne nesmysl místo JSON', () => {
-    expect(parseFirebaseConfig('tohle není konfigurace')).toBeNull();
-    expect(parseFirebaseConfig('')).toBeNull();
+  it('null není konfigurace', () => {
+    expect(isCompleteConfig(null)).toBe(false);
   });
 });
 
-describe('konfigurace zapečená v buildu', () => {
-  it('bez proměnných prostředí hlásí, že vestavěná není', () => {
-    // V testovacím běhu nejsou VITE_FIREBASE_* nastavené, takže se aplikace
-    // chová jako čerstvě naklonovaný repozitář.
-    expect(hasBuiltInConfig()).toBe(false);
+describe('odkud se konfigurace bere', () => {
+  it('výchozí soubor má všechny klíče, i když jsou prázdné', () => {
+    // Kdyby některý chyběl, chyběl by i v návodu a nikdo by si toho nevšiml.
+    for (const key of FIREBASE_CONFIG_KEYS) {
+      expect(FIREBASE_DEFAULTS).toHaveProperty(key);
+    }
   });
 
-  it('neúplná sada proměnných se nepočítá jako konfigurace', () => {
-    // Kdyby se do buildu dostala jen část hodnot, Firebase by spadl až za běhu.
-    expect(isCompleteConfig({ apiKey: 'x', projectId: 'y' })).toBe(false);
+  it('nevyplněné hodnoty znamenají lokální režim, ne pád', () => {
+    // V testovacím běhu nejsou VITE_FIREBASE_* nastavené; tohle je tedy stav
+    // čerstvě naklonovaného repozitáře.
+    const vyplneno = isCompleteConfig(FIREBASE_DEFAULTS);
+    expect(hasFirebaseConfig()).toBe(vyplneno);
+    expect(loadFirebaseConfig()).toEqual(vyplneno ? FIREBASE_DEFAULTS : null);
   });
 });
