@@ -26,6 +26,23 @@ export type Grip = 'dlanovy' | 'nuzkovy' | 'pinzetovy';
 export const GRIPS: readonly Grip[] = ['dlanovy', 'nuzkovy', 'pinzetovy'] as const;
 
 export type ChokingRisk = 'low' | 'medium' | 'high';
+
+/**
+ * V jaké podobě se surovina dostane na talíř.
+ *
+ * Rozhoduje o tom, jestli má u ní vůbec smysl radit tvar sousta. Rada
+ * „krájej na proužky dlouhé jako prst" je u amarantu i u ředkvičky nesmysl —
+ * jedno je kaše, druhé je menší než prst samo o sobě. Nesmyslná rada přitom
+ * není neškodná: naučí rodiče panel přeskakovat i tam, kde na něm záleží.
+ *
+ *  - `kusove`   — dá se nakrájet na proužky a kousky (mrkev, kuře, jablko)
+ *  - `drobne`   — samo o sobě menší než prst; řeší se půlení a čtvrcení,
+ *                 ne délka proužku (ředkvička, hrášek, borůvky, těstoviny)
+ *  - `kasovite` — kaše, pyré, pomazánka, mletá surovina; podává se na lžíci
+ *                 nebo nanesená na nosiči (amarant, jogurt, tahini)
+ *  - `neresi`   — nápoj, tuk, koření, sladidlo; sousto z toho nevzniká
+ */
+export type ServingForm = 'kusove' | 'drobne' | 'kasovite' | 'neresi';
 export type ReviewStatus = 'verified' | 'needs-review';
 
 export type IngredientCategory =
@@ -141,6 +158,8 @@ export interface Ingredient {
   chokingRisk: ChokingRisk;
   /** Konkrétní důvod rizika, ne obecná fráze. */
   chokingReason?: string;
+  /** Podoba na talíři; podle ní se řídí rada o tvaru sousta. */
+  servingForm: ServingForm;
 
   /** Strukturovaná rizika — validátor je kontroluje, UI je zobrazuje jako štítky */
   hazards: Hazard[];

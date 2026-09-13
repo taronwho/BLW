@@ -156,7 +156,7 @@ export function IngredientDetailScreen(): ReactNode {
           </p>
         )}
         <ReadinessNote stage={stage} />
-        <GripHint chokingRisk={ingredient.chokingRisk} />
+        <GripHint chokingRisk={ingredient.chokingRisk} servingForm={ingredient.servingForm} />
       </section>
 
       <section aria-labelledby="napady-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
