@@ -1,12 +1,22 @@
+import { FIREBASE_DEFAULTS } from './firebaseDefaults';
 import { FIREBASE_CONFIG_KEYS, type FirebaseConfig } from './types';
 
 /**
- * Firebase web-konfigurace se do repozitáře nedává. Bere se buď z `.env.local`
- * pro lokální vývoj, nebo ji rodič vloží v Nastavení a uloží se do prohlížeče.
- * Bezpečnost dělají Firestore pravidla, ne skrytí klíče — viz docs/FIREBASE.md.
+ * Odkud se bere připojení k Firebase.
+ *
+ * Dřív se konfigurace vyplňovala v aplikaci a ukládala do prohlížeče. To ale
+ * znamenalo, že každý, komu se aplikace pošle, musel něco opisovat z konzole —
+ * přesně to, co má sdílení odbourat. Konfigurace proto patří do buildu:
+ *
+ *   1. `.env.local` nebo proměnné prostředí (`VITE_FIREBASE_*`) — kvůli
+ *      lokálnímu vývoji a kvůli tomu, aby šlo nasadit vlastní projekt bez
+ *      zásahu do zdrojáku.
+ *   2. `src/storage/firebaseDefaults.ts` — hodnoty zapsané v repozitáři.
+ *
+ * Když ani jedno není vyplněné, aplikace běží lokálně a nic se nesdílí.
+ * Bezpečnost dělají firestore.rules a párovací kód, ne skrytí klíče — proto
+ * je v pořádku mít hodnoty v repozitáři i v JavaScriptu.
  */
-
-const STORAGE_KEY = 'blw.firebase.config.v1';
 
 function fromEnv(): FirebaseConfig | null {
   const env = import.meta.env;
@@ -21,65 +31,26 @@ function fromEnv(): FirebaseConfig | null {
   return isCompleteConfig(candidate) ? candidate : null;
 }
 
+function fromDefaults(): FirebaseConfig | null {
+  return isCompleteConfig(FIREBASE_DEFAULTS) ? FIREBASE_DEFAULTS : null;
+}
+
+/**
+ * Neúplná sada se zahazuje celá.
+ *
+ * Kdyby se do buildu dostala jen část hodnot, Firebase by se pokusil nastartovat
+ * a spadl by až za běhu — a rodič by viděl chybu místo aplikace.
+ */
 export function isCompleteConfig(value: Partial<FirebaseConfig> | null): value is FirebaseConfig {
   if (value === null) return false;
   return FIREBASE_CONFIG_KEYS.every((key) => (value[key] ?? '').trim().length > 0);
 }
 
-/** Přijme i celý objekt zkopírovaný z Firebase konzole. */
-export function parseFirebaseConfig(input: string): FirebaseConfig | null {
-  const trimmed = input.trim();
-  if (trimmed.length === 0) return null;
-  // Konzole nabízí JS objekt, ne JSON — klíče bez uvozovek a s koncovou čárkou.
-  const jsonish = trimmed
-    .replace(/^[^{]*/, '')
-    .replace(/[^}]*$/, '')
-    .replace(/([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/g, '$1"$2":')
-    .replace(/'/g, '"')
-    .replace(/,(\s*})/g, '$1');
-  try {
-    const parsed: unknown = JSON.parse(jsonish);
-    if (typeof parsed !== 'object' || parsed === null) return null;
-    const record = parsed as Record<string, unknown>;
-    const config: Partial<FirebaseConfig> = {};
-    for (const key of FIREBASE_CONFIG_KEYS) {
-      const value = record[key];
-      if (typeof value === 'string') config[key] = value;
-    }
-    return isCompleteConfig(config) ? config : null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Je konfigurace zapečená rovnou v buildu?
- *
- * Když ano, nikdo nic nevyplňuje — aplikace se rovnou umí připojit a ruční
- * pole v Domácnosti se schová, aby nemátlo. Když ne, zbývá vložit konfiguraci
- * do prohlížeče ručně.
- */
-export function hasBuiltInConfig(): boolean {
-  return fromEnv() !== null;
+/** Je sdílení vůbec nastavené? Podle toho se v Domácnosti ukazuje, co se dá dělat. */
+export function hasFirebaseConfig(): boolean {
+  return loadFirebaseConfig() !== null;
 }
 
 export function loadFirebaseConfig(): FirebaseConfig | null {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (raw !== null) {
-      const parsed: unknown = JSON.parse(raw);
-      if (isCompleteConfig(parsed as Partial<FirebaseConfig>)) return parsed as FirebaseConfig;
-    }
-  } catch {
-    // Nedostupné úložiště není chyba — spadne se na .env.local nebo lokální režim.
-  }
-  return fromEnv();
-}
-
-export function saveFirebaseConfig(config: FirebaseConfig): void {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
-}
-
-export function clearFirebaseConfig(): void {
-  window.localStorage.removeItem(STORAGE_KEY);
+  return fromEnv() ?? fromDefaults();
 }

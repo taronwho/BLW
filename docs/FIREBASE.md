@@ -5,8 +5,9 @@ telefon má vlastní deník a nic se nesdílí. Firebase zapínáš jen kvůli t
 víc lidí vidělo tytéž ochutnávky.
 
 Cíl téhle příručky: nastavit to tak, aby **nikdo z uživatelů nic nevyplňoval**.
-Konfigurace se zapeče do buildu na GitHubu, člověk dostane odkaz, klepne na něj
-a je připojený.
+Konfigurace se zapeče do buildu, člověk dostane odkaz, klepne na něj a je
+připojený. V samotné aplikaci se nedá nic nastavit a záměrně tam ani žádné
+pole na konfiguraci není.
 
 ## Co je a co není tajemství
 
@@ -22,8 +23,8 @@ Bezpečnost dělá trojice:
    takže cizí domácnost nikdo nenajde náhodou.
 3. **Omezení klíče na doménu** — API klíč funguje jen ze stránek tvého webu.
 
-Proto se konfigurace klidně smí nastavit jako **repository variables** na
-GitHubu. Kdo chce, může místo nich použít secrets; workflow zvládne obojí.
+Proto se konfigurace klidně smí zapsat rovnou do repozitáře (krok 7,
+varianta A). Kdo ji tam mít nechce, použije proměnné na GitHubu (varianta B).
 
 ---
 
@@ -113,11 +114,35 @@ Nepovinné, ale doporučené — zabrání použití klíče z cizích stránek.
    - `http://localhost:*` (kvůli vývoji; můžeš vynechat)
 5. **Save.** Projeví se to do pěti minut.
 
-## 7. Zapečení konfigurace do buildu
+## 7. Vložení konfigurace
 
-Aby uživatelé nic nevyplňovali, musí konfigurace vstoupit do buildu na GitHubu.
+Máš dvě možnosti; stačí jedna.
 
-1. V repozitáři na GitHubu: **Settings → Secrets and variables → Actions**.
+### A. Do souvisejícího souboru v repozitáři (jednodušší)
+
+Otevři **`src/storage/firebaseDefaults.ts`** a opiš šest hodnot z bloku
+z kroku 2 mezi apostrofy:
+
+```ts
+export const FIREBASE_DEFAULTS: FirebaseConfig = {
+  apiKey: 'AIzaSy…',
+  authDomain: 'blw-prikrmy.firebaseapp.com',
+  projectId: 'blw-prikrmy',
+  storageBucket: 'blw-prikrmy.firebasestorage.app',
+  messagingSenderId: '123456789012',
+  appId: '1:123456789012:web:abc123…',
+};
+```
+
+Commitni a pushni do `main`. Nasazení se spustí samo.
+
+Hodnoty budou v repozitáři vidět — a to je v pořádku. Firebase je posílá do
+prohlížeče každému návštěvníkovi jako součást JavaScriptu, takže veřejné jsou
+tak jako tak. Chrání to pravidla z kroku 5 a omezení klíče z kroku 6.
+
+### B. Přes proměnné na GitHubu (když hodnoty v repozitáři mít nechceš)
+
+1. V repozitáři: **Settings → Secrets and variables → Actions**.
 2. Záložka **Variables** → **New repository variable**.
 3. Založ postupně šest proměnných. Hodnoty opiš z bloku z kroku 2:
 
@@ -130,20 +155,17 @@ Aby uživatelé nic nevyplňovali, musí konfigurace vstoupit do buildu na GitHu
 | `VITE_FIREBASE_MESSAGING_SENDER_ID` | `messagingSenderId` |
 | `VITE_FIREBASE_APP_ID` | `appId` |
 
-Hodnoty piš **bez uvozovek**.
+Hodnoty piš **bez uvozovek**. Pak spusť nasazení: **Actions → Deploy na GitHub
+Pages → Run workflow**, nebo pushni cokoli do `main`. V logu kroku „Kontrola
+konfigurace Firebase" musí být vypsané ID projektu.
 
-4. Spusť nasazení: **Actions → Deploy na GitHub Pages → Run workflow**, nebo
-   prostě pushni cokoli do `main`.
-5. V logu kroku „Kontrola konfigurace Firebase" musí být vypsané ID projektu.
-   Když tam je varování „Firebase není nastavený", některá proměnná chybí nebo
-   má překlep v názvu.
+Proměnné mají přednost před souborem, takže jdou obě cesty i kombinovat.
 
 ## 8. Zkouška
 
 1. Otevři nasazenou aplikaci, **Domácnost**.
-2. Dole musí být napsané, že připojení je součástí aplikace a není co
-   vyplňovat. Kdyby tam místo toho bylo pole na vložení konfigurace, krok 7
-   neproběhl.
+2. Nesmí tam být žádná zmínka o tom, že sdílení není nastavené. Kdyby tam
+   byla, krok 7 neproběhl nebo se nenasadil.
 3. Klikni na **Založit domácnost**. Objeví se kód, QR a odkaz k připojení.
 4. **Kopírovat odkaz** a pošli ho druhému člověku.
 5. Ten odkaz otevře, klepne na **Připojit tohle zařízení** — a od té chvíle
@@ -151,10 +173,12 @@ Hodnoty piš **bez uvozovek**.
 
 ## Jak to funguje bez nastavení
 
-Když proměnné nenastavíš, nic se nerozbije: aplikace poběží dál v lokálním
-režimu a v Domácnosti se ukáže pole, kam jde konfiguraci vložit ručně (uloží
-se jen do prohlížeče). Pro lokální vývoj slouží `.env.local` podle vzoru
-v `.env.local.example`.
+Když konfiguraci nevyplníš, nic se nerozbije: aplikace poběží dál v lokálním
+režimu, každé zařízení samo za sebe, a v Domácnosti se objeví jedna věta, že
+sdílení není nastavené. V aplikaci se nikdy nic nevyplňuje — pole na vkládání
+konfigurace v ní záměrně není.
+
+Pro lokální vývoj slouží `.env.local` podle vzoru v `.env.local.example`.
 
 ## Když se něco nedaří
 
@@ -164,7 +188,7 @@ v `.env.local.example`.
 | Druhý telefon vidí data, ale jeho zápisy se nepropíšou | Ve Firestore jsou staré verze pravidel (krok 5). |
 | `Missing or insufficient permissions` | Pravidla nejsou publikovaná, nebo je domácnost už plná (pět zařízení). |
 | `auth/api-key-not-valid` | Překlep v `VITE_FIREBASE_API_KEY`, nebo omezení klíče nesedí s doménou. |
-| V Domácnosti je pořád pole na konfiguraci | Proměnné nejsou nastavené jako *repository* (ne *environment*) variables, nebo build po jejich přidání neproběhl znovu. |
+| V Domácnosti pořád stojí, že sdílení není nastavené | Některá z šesti hodnot je prázdná, nebo build po jejich vyplnění neproběhl znovu. U varianty B: proměnné musí být *repository*, ne *environment*. |
 
 ## Náklady
 

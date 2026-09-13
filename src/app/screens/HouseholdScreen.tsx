@@ -10,13 +10,7 @@ import {
   isValidHouseholdCode,
   normalizeHouseholdCode,
 } from '@/sync/householdCode';
-import {
-  clearFirebaseConfig,
-  hasBuiltInConfig,
-  loadFirebaseConfig,
-  parseFirebaseConfig,
-  saveFirebaseConfig,
-} from '@/storage/firebaseConfig';
+import { hasFirebaseConfig } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
 import { GripPicker } from '../components/GripPicker';
 import { ReadinessPicker } from '../components/ReadinessPicker';
@@ -30,15 +24,12 @@ export function HouseholdScreen(): ReactNode {
   const { state, status, householdCode, init, connect, disconnect, createHousehold, importState, setChild } =
     useHouseholdStore();
   const [codeInput, setCodeInput] = useState('');
-  const [configInput, setConfigInput] = useState('');
   const [message, setMessage] = useState<string | null>(null);
-  const [hasConfig, setHasConfig] = useState(false);
   const [childName, setChildName] = useState('');
   const [childBirthDate, setChildBirthDate] = useState('');
 
   useEffect(() => {
     void init();
-    setHasConfig(loadFirebaseConfig() !== null);
   }, [init]);
 
   useEffect(() => {
@@ -46,7 +37,7 @@ export function HouseholdScreen(): ReactNode {
     setChildBirthDate(state.childBirthDate);
   }, [state.childName, state.childBirthDate]);
 
-  const vestavenaKonfigurace = hasBuiltInConfig();
+  const sdileniNastavene = hasFirebaseConfig();
 
   const pairingUrl =
     householdCode === null
@@ -204,67 +195,14 @@ export function HouseholdScreen(): ReactNode {
         </button>
       </form>
 
-      {vestavenaKonfigurace ? (
+      {!sdileniNastavene && (
         <p className="flex items-start gap-2 rounded-xl bg-surface p-4 text-xs leading-relaxed text-muted">
           <KeyRound aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
           <span>
-            Připojení k Firebase je součástí aplikace, není co vyplňovat. Stačí založit domácnost
-            a poslat ostatním odkaz.
+            Sdílení mezi telefony zatím není nastavené, aplikace běží jen na tomhle zařízení.
+            Nastavuje se jednou v repozitáři podle docs/FIREBASE.md, v aplikaci se nic nevyplňuje.
           </span>
         </p>
-      ) : (
-      <form
-        className="flex flex-col gap-2 rounded-xl bg-surface p-4"
-        onSubmit={(event) => {
-          event.preventDefault();
-          const parsed = parseFirebaseConfig(configInput);
-          if (parsed === null) {
-            setMessage('Konfiguraci se nepodařilo přečíst. Vlož celý objekt z Firebase konzole.');
-            return;
-          }
-          saveFirebaseConfig(parsed);
-          setHasConfig(true);
-          setConfigInput('');
-          setMessage('Konfigurace uložena do tohoto prohlížeče.');
-        }}
-      >
-        <label htmlFor="firebase" className="flex items-center gap-2 text-sm font-medium">
-          <KeyRound aria-hidden="true" className="h-4 w-4 text-accent" />
-          Firebase konfigurace
-        </label>
-        <p className="text-xs text-muted">
-          {hasConfig
-            ? 'Konfigurace je uložená v tomhle prohlížeči. Do repozitáře se nikdy nedostane.'
-            : 'Bez konfigurace aplikace funguje dál, jen se nesynchronizuje. Postup je v docs/FIREBASE.md.'}
-        </p>
-        <textarea
-          id="firebase"
-          value={configInput}
-          onChange={(event) => setConfigInput(event.target.value)}
-          rows={4}
-          placeholder='{ "apiKey": "…", "projectId": "…" }'
-          className="rounded-lg border border-muted/40 p-2 font-mono text-xs"
-        />
-        <div className="flex flex-wrap gap-2">
-          <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">
-            Uložit konfiguraci
-          </button>
-          {hasConfig && (
-            <button
-              type="button"
-              onClick={() => {
-                clearFirebaseConfig();
-                setHasConfig(false);
-                disconnect();
-                setMessage('Konfigurace smazána, aplikace běží lokálně.');
-              }}
-              className="min-h-touch rounded-xl border border-muted/40 px-4 py-3 font-medium"
-            >
-              Smazat
-            </button>
-          )}
-        </div>
-      </form>
       )}
 
       <div className="flex flex-wrap gap-2 rounded-xl bg-surface p-4">
