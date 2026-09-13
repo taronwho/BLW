@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 import { recipes } from '@/data';
 import {
   acceptDisclaimer,
@@ -7,6 +8,22 @@ import {
   SCREENS,
   tooSmallTargets,
 } from './helpers';
+
+/**
+ * Barvy úrovní rizika se čtou z tailwind.config.js, ne opisují.
+ *
+ * Když se paleta kvůli kontrastu doladí, test se má přizpůsobit sám —
+ * napsané natvrdo tady tři hodnoty už jednou zbytečně shodily celou sadu.
+ */
+function barvaZKonfigurace(token: string): string {
+  const config = readFileSync(new URL('../../tailwind.config.js', import.meta.url), 'utf-8');
+  const m = new RegExp(`^\\s*${token}: '#([0-9A-Fa-f]{6})',`, 'm').exec(config);
+  if (m === null) throw new Error(`V tailwind.config.js chybí barva ${token}.`);
+  const n = Number.parseInt(m[1] as string, 16);
+  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+}
+
+const BARVY_RIZIKA = ['safe', 'caution', 'risk'].map(barvaZKonfigurace);
 
 /**
  * Mobilní kvalita UI na 320×568, 375×667 a 414×896 (docs/SPEC.md kap. 6).
@@ -53,9 +70,10 @@ for (const screen of SCREENS) {
     await expect(badge).toContainText(/(Nízké|Střední|Vysoké) riziko dušení/);
     // ikona
     await expect(badge.locator('svg')).toHaveCount(1);
-    // barva — barva textu odpovídá úrovni, nikdy není jediným nositelem informace
+    // barva — odpovídá úrovni, ale nikdy není jediným nositelem informace.
+    // Hodnoty se berou z tailwind.config.js, aby test nepadal po úpravě palety.
     const color = await badge.evaluate((element) => window.getComputedStyle(element).color);
-    expect(['rgb(47, 125, 79)', 'rgb(154, 101, 16)', 'rgb(163, 35, 24)']).toContain(color);
+    expect(BARVY_RIZIKA).toContain(color);
   });
 }
 

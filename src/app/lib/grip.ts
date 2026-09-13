@@ -32,7 +32,7 @@ export const GRIP_SHORT: Record<Grip, string> = {
 /** Podle čeho rodič úchop pozná — pozorovatelné, ne odvozené z věku. */
 export const GRIP_HOW_TO_TELL: Record<Grip, string> = {
   dlanovy:
-    'Dítě předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst neumí otevřít cíleně a neumí pustit jen část obsahu.',
+    'Dítě předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst se přitom cíleně neotevře a nepustí jen část obsahu.',
   nuzkovy:
     'Dlaňový úchop se začíná rozpadat: dítě přitiskne kousek mezi palec a bok ukazováku, později mezi palec a ohnutý ukazovák. Menší sousta už zvedne, ale nejistě.',
   pinzetovy:
@@ -69,7 +69,7 @@ export const GRIP_STAGE: Record<Grip, Stage> = {
   pinzetovy: '12m',
 };
 
-export const STAGE_ORDER: Record<Stage, number> = { '6m': 0, '9m': 1, '12m': 2 };
+const STAGE_ORDER: Record<Stage, number> = { '6m': 0, '9m': 1, '12m': 2 };
 
 /** Úchop, který se u daného věku dá čekat — jen jako výchozí nabídka. */
 export function gripForAge(months: number | null): Grip {

@@ -18,7 +18,7 @@
 
 const ABECEDA = 'a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ';
 
-export function ceskeSlovo(jadro: string): RegExp {
+function ceskeSlovo(jadro: string): RegExp {
   return new RegExp(`(?<![${ABECEDA}])(?:${jadro})(?![${ABECEDA}])`, 'iu');
 }
 

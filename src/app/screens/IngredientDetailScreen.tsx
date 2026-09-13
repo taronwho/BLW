@@ -97,7 +97,7 @@ export function IngredientDetailScreen(): ReactNode {
       <section
         aria-labelledby="bezpecnost-nadpis"
         data-testid="bezpecnostni-blok"
-        className={`flex flex-col gap-3 rounded-xl border p-4 ${presentation.chip}`}
+        className={`flex flex-col gap-3 rounded-xl border bg-surface p-4 ${presentation.chip}`}
       >
         <h2 id="bezpecnost-nadpis" className="text-sm font-semibold uppercase tracking-wide">
           Bezpečnost

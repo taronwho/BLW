@@ -8,8 +8,10 @@ export default {
         ink: '#16211D',
         muted: '#67716D',
         accent: '#1F6F5C',
-        safe: '#2F7D4F',
-        caution: '#9A6510',
+        // Ztmaveno na poměr 4,5:1 proti měkkým podkladům — štítky rizika dušení
+        // musí být čitelné (docs/SPEC.md kap. 6, WCAG AA).
+        safe: '#2C754A',
+        caution: '#8F5D0E',
         risk: '#A32318',
         surface: '#FFFFFF',
         /* Jemné plochy a linky pro modernější, méně „ohraničený" vzhled. */
