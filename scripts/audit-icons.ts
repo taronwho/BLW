@@ -268,35 +268,51 @@ if (navic.length > 0) {
 }
 if (chybi.length > 0 || navic.length > 0) process.exit(1);
 
+/**
+ * Verdikty popisují emoji. Surovina s vlastní kresbou už žádný nemá —
+ * proto se počítá zvlášť a tabulka ukazuje, kolik práce zbývá.
+ */
 const pocty: Record<Verdikt, number> = { ok: 0, blizko: 0, spatne: 0 };
-const poKategoriich = new Map<string, Record<Verdikt, number>>();
+const poKategoriich = new Map<string, { kresba: number } & Record<Verdikt, number>>();
+let kresby = 0;
+
 for (const item of ingredients) {
-  const [verdikt] = VERDIKTY[item.nameCz] as [Verdikt, string];
-  pocty[verdikt] += 1;
-  const radek = poKategoriich.get(item.category) ?? { ok: 0, blizko: 0, spatne: 0 };
-  radek[verdikt] += 1;
+  const radek = poKategoriich.get(item.category) ?? { kresba: 0, ok: 0, blizko: 0, spatne: 0 };
+  if (item.icon !== undefined) {
+    kresby += 1;
+    radek.kresba += 1;
+  } else {
+    const [verdikt] = VERDIKTY[item.nameCz] as [Verdikt, string];
+    pocty[verdikt] += 1;
+    radek[verdikt] += 1;
+  }
   poKategoriich.set(item.category, radek);
 }
 
-console.log('KONTROLA IKON U SUROVIN\n');
-console.log('kategorie               celkem   ok  blízko  špatně');
-console.log('-----------------------------------------------------');
+console.log('IKONY SUROVIN\n');
+console.log('kategorie               celkem  kresba   ok  blízko  špatně');
+console.log('-------------------------------------------------------------');
 for (const [kategorie, radek] of poKategoriich) {
-  const celkem = radek.ok + radek.blizko + radek.spatne;
+  const celkem = radek.kresba + radek.ok + radek.blizko + radek.spatne;
   console.log(
     kategorie.padEnd(22) +
       String(celkem).padStart(7) +
+      String(radek.kresba).padStart(8) +
       String(radek.ok).padStart(5) +
       String(radek.blizko).padStart(8) +
       String(radek.spatne).padStart(8),
   );
 }
-console.log('-----------------------------------------------------');
+console.log('-------------------------------------------------------------');
 console.log(
   'CELKEM'.padEnd(22) +
     String(ingredients.length).padStart(7) +
+    String(kresby).padStart(8) +
     String(pocty.ok).padStart(5) +
     String(pocty.blizko).padStart(8) +
     String(pocty.spatne).padStart(8),
 );
-console.log('\nK PŘEKRESLENÍ: ' + (pocty.blizko + pocty.spatne) + ' z ' + ingredients.length);
+console.log(
+  '\nNAKRESLENO: ' + kresby + ' z ' + ingredients.length +
+    '   ZBÝVÁ: ' + (ingredients.length - kresby),
+);

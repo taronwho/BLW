@@ -30,4 +30,14 @@ describe('ikony surovin', () => {
       .map((item) => item.nameCz);
     expect(bez).toEqual([]);
   });
+
+  /**
+   * Sada je kompletní a má taková zůstat. Emoji je v katalogu už jen jako
+   * záloha pro případ, že by kresba zmizela; nová surovina bez kresby by
+   * sadu rozbila zpátky na půl emoji a půl obrázků.
+   */
+  it('každá surovina má vlastní kresbu, ne emoji', () => {
+    const naEmoji = ingredients.filter((item) => item.icon === undefined).map((item) => item.nameCz);
+    expect(naEmoji).toEqual([]);
+  });
 });

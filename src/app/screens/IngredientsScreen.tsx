@@ -189,7 +189,7 @@ function IngredientRow({
         >
           <span className="flex items-center gap-2 font-medium">
             <span aria-hidden="true" className="shrink-0 text-lg">
-              <IngredientIcon ingredient={ingredient} className="h-6 w-6" />
+              <IngredientIcon ingredient={ingredient} className="h-7 w-7" />
             </span>
             <span className="min-w-0">{ingredient.nameCz}</span>
             {favorite && <Star aria-label="Oblíbené" className="h-4 w-4 shrink-0 text-caution" />}
