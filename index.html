@@ -9,6 +9,23 @@
       content="Příkrmy metodou BLW — katalog surovin, recepty pro celou rodinu a deník ochutnávek."
     />
     <title>BLW — příkrmy pro celou rodinu</title>
+    <script>
+      /* Motiv se musí nastavit dřív, než se vykreslí první pixel — jinak
+         tmavá aplikace problikne bíle. Proto tenhle skript, ne React. */
+      (function () {
+        try {
+          var volba = localStorage.getItem('blw-motiv') || 'system';
+          var tmavy =
+            volba === 'tmavy' ||
+            (volba === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.dataset.theme = tmavy ? 'dark' : 'light';
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', tmavy ? '#121715' : '#1F6F5C');
+        } catch (chyba) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -46,7 +46,7 @@ export function JoinHousehold(): ReactNode {
             void navigate('/domacnost');
           });
         }}
-        className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white disabled:opacity-60"
+        className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-on-accent disabled:opacity-60"
       >
         {pending ? 'Připojuji…' : 'Připojit tohle zařízení'}
       </button>

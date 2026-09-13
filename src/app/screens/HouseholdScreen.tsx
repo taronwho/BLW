@@ -15,6 +15,7 @@ import { QrCode } from '../QrCode';
 import { GripPicker } from '../components/GripPicker';
 import { MemberList } from '../components/MemberList';
 import { ReadinessPicker } from '../components/ReadinessPicker';
+import { ThemePicker } from '../components/ThemePicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
@@ -92,7 +93,7 @@ export function HouseholdScreen(): ReactNode {
           Podle data narození se předvybírá fáze 6m+ / 9m+ / 12m+ a filtr „Vhodné teď“.
           {state.childBirthDate.length > 0 && ` Teď: ${formatAge(ageInMonths(state.childBirthDate))}.`}
         </p>
-        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">
+        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-on-accent">
           Uložit
         </button>
       </form>
@@ -105,6 +106,10 @@ export function HouseholdScreen(): ReactNode {
         <GripPicker />
       </div>
 
+      <div className="rounded-xl bg-surface p-4">
+        <ThemePicker />
+      </div>
+
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />
 
@@ -114,7 +119,7 @@ export function HouseholdScreen(): ReactNode {
             onClick={() => {
               void createHousehold().then((code) => setMessage(`Kód domácnosti: ${formatHouseholdCode(code)}`));
             }}
-            className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white"
+            className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-on-accent"
           >
             Založit domácnost
           </button>
@@ -192,7 +197,7 @@ export function HouseholdScreen(): ReactNode {
           spellCheck={false}
           className="min-h-touch rounded-lg border border-muted/40 px-3 py-2 font-mono uppercase"
         />
-        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">
+        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-on-accent">
           Připojit
         </button>
       </form>

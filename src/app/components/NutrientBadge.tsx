@@ -128,7 +128,7 @@ export function NutrientBadge({
           aria-modal="true"
           aria-label={`Živiny — ${title}`}
           data-testid="okenko-zivin"
-          className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-3 sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/50 p-3 sm:items-center"
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();

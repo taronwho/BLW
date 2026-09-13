@@ -61,18 +61,18 @@ export function HomeScreen(): ReactNode {
   return (
     <div className="flex flex-col gap-5">
       <header className="rounded-3xl bg-accent-sheen p-5 text-white shadow-lift">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
           Příkrmy metodou BLW
         </p>
         <h1 className="mt-1 text-2xl font-bold leading-tight">
           {state.childName.trim().length > 0 ? state.childName.trim() : 'Příkrmy krok za krokem'}
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-white/90">
+        <p className="mt-2 text-sm leading-relaxed text-white">
           {hasChild
             ? `Aktuální fáze ${stage}${months === null ? '' : ` · ${formatAge(months)}`}. Vše v aplikaci se přizpůsobuje tomuhle věku.`
             : 'Nastav věk dítěte v Domácnosti a aplikace ti bude rovnou ukazovat pokyny pro správnou fázi.'}
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-white/90" data-testid="uchop-v-hlavicce">
+        <p className="mt-2 text-sm leading-relaxed text-white" data-testid="uchop-v-hlavicce">
           {grip === undefined
             ? `Tvar sousta zatím odhadujeme z věku (${GRIP_LABELS[gripForAge(months)]} úchop). Co dítě opravdu umí, se dá nastavit v Domácnosti.`
             : `Úchop ${GRIP_LABELS[grip]} — ${GRIP_SHORT[grip]}. Podle toho se řídí tvar sousta; výběr surovin a měkkost dál podle věku.`}

@@ -79,7 +79,7 @@ export function TastedToggle({ ingredientId, ingredientName, tasted }: Props): R
           aria-modal="true"
           aria-label={`Ochutnávka — ${ingredientName}`}
           data-testid="okenko-ochutnavky"
-          className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-3 sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/50 p-3 sm:items-center"
           onClick={() => setOpen(false)}
         >
           <div

@@ -13,10 +13,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Barvy jsou proměnné, ne pevné hodnoty v tailwind.config.js.
+ *
+ * Díky tomu stačí na tmavý motiv přepsat proměnné na <html data-theme="dark">
+ * a překlopí se celá aplikace — žádná třída `dark:` u jednotlivých prvků,
+ * takže nemůže zůstat obrazovka, na kterou se zapomnělo. Kanály jsou zapsané
+ * odděleně mezerami, protože Tailwind do nich dosazuje průhlednost
+ * (`bg-safe/10`) přes rgb(... / <alpha-value>).
+ *
+ * Oba motivy splňují WCAG 2.1 AA; kontrast se měří auditem v tests/e2e.
+ */
+:root {
+  color-scheme: light;
+
+  --c-paper: 248 248 245;
+  --c-surface: 255 255 255;
+  --c-ink: 22 33 29;
+  --c-muted: 103 113 109;
+  --c-line: 228 231 229;
+
+  --c-accent: 31 111 92;
+  --c-accent-deep: 20 81 63;
+  --c-accent-soft: 232 242 238;
+
+  /* Ztmaveno na poměr 4,5:1 proti měkkým podkladům — štítky rizika dušení
+     musí být čitelné (docs/SPEC.md kap. 6, WCAG AA). */
+  --c-safe: 44 117 74;
+  --c-safe-soft: 233 244 237;
+  --c-caution: 143 93 14;
+  --c-caution-soft: 251 242 227;
+  --c-risk: 163 35 24;
+  --c-risk-soft: 252 236 234;
+
+  /* Písmo na plné accent/safe ploše. Ve světlém je bílé, v tmavém tmavé —
+     accent je tam totiž světlý, aby byl čitelný jako text na pozadí. */
+  --c-on-accent: 255 255 255;
+  /* Zástin pod okénky. Nejde použít --c-ink: v tmavém motivu je světlý. */
+  --c-scrim: 22 33 29;
+
+  /* Konce přechodu jsou ztmavené tak, aby bílý text platil po celé délce
+     (kontrast 4,7:1 i na nejsvětlejším konci) — axe kontrast na přechodu
+     neumí změřit, tak je spočítaný ručně. */
+  --sheen-1: #1f6f5c;
+  --sheen-2: #26765f;
+  --sheen-3: #2d8169;
+
+  --shadow-soft: 0 1px 2px rgba(22, 33, 29, 0.05), 0 1px 8px rgba(22, 33, 29, 0.04);
+  --shadow-lift: 0 2px 6px rgba(22, 33, 29, 0.07), 0 12px 28px rgba(22, 33, 29, 0.07);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --c-paper: 18 23 21;
+  --c-surface: 27 34 32;
+  --c-ink: 232 237 234;
+  --c-muted: 154 165 160;
+  --c-line: 44 53 50;
+
+  --c-accent: 85 196 163;
+  --c-accent-deep: 15 58 47;
+  --c-accent-soft: 30 58 51;
+
+  --c-safe: 79 185 124;
+  --c-safe-soft: 23 49 31;
+  --c-caution: 224 168 60;
+  --c-caution-soft: 51 38 14;
+  --c-risk: 241 135 123;
+  --c-risk-soft: 58 29 26;
+
+  --c-on-accent: 6 18 14;
+  --c-scrim: 0 0 0;
+
+  /* Přechod v hlavičce zůstává tmavě zelený, aby na něm bílý text platil
+     v obou motivech. */
+  --sheen-1: #14493c;
+  --sheen-2: #1c6350;
+  --sheen-3: #24775f;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.45), 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
 @layer base {
-  :root {
-    color-scheme: light;
-  }
 
   html,
   body,

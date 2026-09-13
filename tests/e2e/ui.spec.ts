@@ -11,20 +11,20 @@ import {
 } from './helpers';
 
 /**
- * Barvy úrovní rizika se čtou z tailwind.config.js, ne opisují.
+ * Barvy úrovní rizika se čtou ze src/index.css, ne opisují.
  *
  * Když se paleta kvůli kontrastu doladí, test se má přizpůsobit sám —
  * napsané natvrdo tady tři hodnoty už jednou zbytečně shodily celou sadu.
+ * Bere se první výskyt, tedy světlý motiv; testy běží v něm.
  */
-function barvaZKonfigurace(token: string): string {
-  const config = readFileSync(new URL('../../tailwind.config.js', import.meta.url), 'utf-8');
-  const m = new RegExp(`^\\s*${token}: '#([0-9A-Fa-f]{6})',`, 'm').exec(config);
-  if (m === null) throw new Error(`V tailwind.config.js chybí barva ${token}.`);
-  const n = Number.parseInt(m[1] as string, 16);
-  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+function barvaZeStylu(token: string): string {
+  const css = readFileSync(new URL('../../src/index.css', import.meta.url), 'utf-8');
+  const m = new RegExp(`--c-${token}: (\\d+) (\\d+) (\\d+);`).exec(css);
+  if (m === null) throw new Error(`V src/index.css chybí barva --c-${token}.`);
+  return `rgb(${m[1]}, ${m[2]}, ${m[3]})`;
 }
 
-const BARVY_RIZIKA = ['safe', 'caution', 'risk'].map(barvaZKonfigurace);
+const BARVY_RIZIKA = ['safe', 'caution', 'risk'].map(barvaZeStylu);
 
 /**
  * Mobilní kvalita UI na 320×568, 375×667 a 414×896 (docs/SPEC.md kap. 6).
@@ -316,4 +316,25 @@ test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', as
   await navLink(page, 'Recepty').click();
   await page.getByTestId('seznam-receptu').getByRole('link').first().click();
   await expect(upozorneni).toBeHidden();
+});
+
+test('tmavý motiv se přepne a přežije obnovení stránky', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await householdLink(page).click();
+
+  const html = page.locator('html');
+  await expect(html).toHaveAttribute('data-theme', 'light');
+
+  await page.getByTestId('motiv-tmavy').click();
+  await expect(html).toHaveAttribute('data-theme', 'dark');
+  // Pozadí stránky se mění přes proměnné, ne přes třídy `dark:` — kdyby se
+  // někde zapomnělo, tahle kontrola to nechytí, ale audit v a11y.spec.ts ano.
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(18, 23, 21)');
+
+  await page.reload();
+  await expect(html).toHaveAttribute('data-theme', 'dark');
+
+  await page.getByTestId('motiv-svetly').click();
+  await expect(html).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 248, 245)');
 });

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { ageInMonths, formatAge } from '../lib/age';
+import { useTheme } from '../lib/useTheme';
 
 const NAV = [
   { to: '/', label: 'Domů', Icon: Home, end: true },
@@ -17,6 +18,8 @@ const NAV = [
 export function AppShell({ children }: { children: ReactNode }): ReactNode {
   const init = useHouseholdStore((store) => store.init);
   const state = useHouseholdStore((store) => store.state);
+  // Drží motiv v souladu i na obrazovkách bez přepínače.
+  useTheme();
 
   useEffect(() => {
     void init();

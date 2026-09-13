@@ -27,12 +27,12 @@ export function StageSwitch({ value, onChange, currentStage, label = 'Fáze' }: 
               data-testid={`faze-${stage}`}
               onClick={() => onChange(stage)}
               className={`min-h-touch min-w-touch flex-1 rounded-xl border px-3 py-2 text-sm font-semibold ${
-                active ? 'border-accent bg-accent text-white' : 'border-muted/30 bg-surface text-ink'
+                active ? 'border-accent bg-accent text-on-accent' : 'border-muted/30 bg-surface text-ink'
               }`}
             >
               {STAGE_LABELS[stage]}
               {currentStage === stage && (
-                <span className={`block text-[10px] font-medium ${active ? 'text-white' : 'text-muted'}`}>
+                <span className={`block text-[10px] font-medium ${active ? 'text-on-accent' : 'text-muted'}`}>
                   teď
                 </span>
               )}

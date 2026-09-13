@@ -49,7 +49,7 @@ function ChoiceRow<T extends string>({
               onClick={() => onChange(option)}
               className={`min-h-touch rounded-full border px-3.5 py-2 text-sm font-medium transition ${
                 active
-                  ? 'border-accent bg-accent text-white shadow-soft'
+                  ? 'border-accent bg-accent text-on-accent shadow-soft'
                   : 'border-line bg-surface text-ink'
               }`}
             >
@@ -145,7 +145,7 @@ export function TastingForm({
         <button
           type="submit"
           data-testid="ochutnavka-ulozit"
-          className="flex min-h-touch flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-white"
+          className="flex min-h-touch flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-on-accent"
         >
           <Check aria-hidden="true" className="h-4 w-4" />
           {submitLabel}

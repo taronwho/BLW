@@ -47,7 +47,8 @@ export function QrCode({ value, label, size = 176 }: Props): ReactNode {
       alt={label}
       width={size}
       height={size}
-      className="rounded-lg"
+      /* Bílý podklad i v tmavém motivu — QR kód se čte tmavý na světlém. */
+      className="rounded-lg bg-white p-1"
       data-testid="qr-kod"
     />
   );
