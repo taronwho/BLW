@@ -178,6 +178,16 @@ function mleto(barva: string): ReactNode {
   );
 }
 
+/** Hromádka mletého koření pod celým plodem. */
+function prasek(barva: string, svetlejsi: string): ReactNode {
+  return (
+    <>
+      <path d="M6 54c0-6 6-11 12-12 4-5 9-8 14-8s10 3 14 8c6 1 12 6 12 12H6Z" fill={barva} />
+      <path d="M14 50c6-4 14-6 20-5" stroke={svetlejsi} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1950,6 +1960,189 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M20 14h24v6H20Z" fill="#9EA8AE" />
       <path d="M48 22c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9Z" fill="#7A5230" />
       <path d="M48 26c3 0 5 2 5 5s-2 5-5 5-5-2-5-5 2-5 5-5Z" fill={C.bila} />
+    </>
+  ),
+
+  // ── bylinky a koření ───────────────────────────────────────────────────
+  petrzelka: (
+    <>
+      <path d="M32 56V30" stroke="#5E8C36" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 30c-4-4-4-9-1-12 2 2 4 1 5-1 2 3 4 3 6 1 1 3 3 4 6 3-2 4-2 7 0 10-6-2-12-2-16-1Z" fill="#4E8C3A" />
+      <path d="M30 34c-4-3-9-4-13-2 1-3 0-5-2-7 3-1 4-3 4-6 3 2 5 2 7 0 2 4 4 9 4 15Z" fill="#3F7A2E" />
+      <path d="M32 30c2-6 6-10 10-11" stroke="#8FBF5A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  pazitka: (
+    <>
+      <path d="M18 56c-2-16 0-30 4-40M26 56c-1-18 1-32 3-42M34 56c1-18 2-32 5-41M42 56c2-15 4-27 8-35" stroke="#4E9E42" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M30 14c1-5 4-8 7-8 0 5-2 8-5 10" fill="#8FC45A" />
+    </>
+  ),
+
+  kopr: (
+    <>
+      <path d="M32 56V20" stroke="#5E8C36" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M32 22c-6-4-10-3-14 1M32 22c6-4 10-3 14 1M32 30c-7-3-12-1-16 4M32 30c7-3 12-1 16 4M32 38c-6-2-11 0-14 4M32 38c6-2 11 0 14 4" stroke="#6EB04A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M28 18c-2-4-5-6-9-6 1 4 4 7 8 8M36 18c2-4 5-6 9-6-1 4-4 7-8 8" stroke="#8FC45A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  bazalka: (
+    <>
+      <path d="M32 56V28" stroke="#3F7A2E" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 30c-10 0-17-6-18-14 10-3 18 4 18 14Z" fill="#357A2E" />
+      <path d="M32 30c10 0 17-6 18-14-10-3-18 4-18 14Z" fill="#4E9E42" />
+      <path d="M32 42c-8 0-14-5-15-11 8-2 15 3 15 11Z" fill="#4E9E42" />
+      <path d="M20 20c4 3 8 6 10 10M44 20c-4 3-8 6-10 10" stroke="#8FC45A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  oregano: (
+    <>
+      <path d="M32 56V16" stroke="#6E8C4A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="24" cy="22" r="5.5" fill="#5E8C3A" />
+      <circle cx="40" cy="22" r="5.5" fill="#7EA84E" />
+      <circle cx="23" cy="33" r="5.5" fill="#7EA84E" />
+      <circle cx="41" cy="33" r="5.5" fill="#5E8C3A" />
+      <circle cx="25" cy="44" r="5" fill="#5E8C3A" />
+      <circle cx="39" cy="44" r="5" fill="#7EA84E" />
+    </>
+  ),
+
+  tymian: (
+    <>
+      <path d="M22 56c4-16 8-28 14-38" stroke="#7E6A48" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M30 40c-4 0-7-2-8-5 4-1 7 1 8 5ZM33 33c-4 0-7-2-8-5 4-1 7 1 8 5ZM36 26c-4 0-7-2-8-5 4-1 7 1 8 5ZM30 38c3-2 4-5 3-8-3 2-4 5-3 8ZM33 31c3-2 4-5 3-8-3 2-4 5-3 8ZM36 24c3-2 4-5 3-8-3 2-4 5-3 8Z" fill="#5E8C4A" />
+      <circle cx="40" cy="14" r="4" fill="#8FA85E" />
+    </>
+  ),
+
+  majoranka: (
+    <>
+      <path d="M32 56V18" stroke="#8E9470" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <ellipse cx="24" cy="24" rx="6.5" ry="4.5" transform="rotate(-24 24 24)" fill="#9EA87E" />
+      <ellipse cx="40" cy="24" rx="6.5" ry="4.5" transform="rotate(24 40 24)" fill="#8E9A6E" />
+      <ellipse cx="23" cy="36" rx="6.5" ry="4.5" transform="rotate(-18 23 36)" fill="#8E9A6E" />
+      <ellipse cx="41" cy="36" rx="6.5" ry="4.5" transform="rotate(18 41 36)" fill="#9EA87E" />
+      <ellipse cx="26" cy="46" rx="6" ry="4" transform="rotate(-14 26 46)" fill="#9EA87E" />
+    </>
+  ),
+
+  rozmaryn: (
+    <>
+      <path d="M32 56V10" stroke="#6E7A50" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M30 20l-12-4M34 20l12-4M30 28l-13-3M34 28l13-3M30 36l-12-3M34 36l12-3M30 44l-11-3M34 44l11-3M31 14l-8-4M33 14l8-4" stroke="#4E7A3A" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  salvej: (
+    <>
+      {/* Podlouhlé listy s výraznou žilkou a zubatým okrajem; tři splývající
+          elipsy z první verze vypadaly jako houba. */}
+      <path d="M32 56V34" stroke="#8E9A80" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M31 36c-9-2-16-9-17-17 9-2 17 5 17 17Z" fill="#8FA08E" />
+      <path d="M33 36c9-2 16-9 17-17-9-2-17 5-17 17Z" fill="#7E9080" />
+      <path d="M32 30c-5-5-6-13-3-19 6 4 8 13 3 19Z" fill="#9EB09C" />
+      <path d="M18 21c4 4 8 8 11 13M46 21c-4 4-8 8-11 13M32 13c1 6 1 12 0 17" stroke="#C2CCBE" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  mata: (
+    <>
+      <path d="M32 56V26" stroke="#3F8C4A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 28c-11 1-18-5-18-13 10-3 18 3 18 13Z" fill="#3F9E52" />
+      <path d="M32 28c11 1 18-5 18-13-10-3-18 3-18 13Z" fill="#5EBF6E" />
+      <path d="M32 42c-9 1-15-4-15-10 8-2 15 2 15 10Z" fill="#5EBF6E" />
+      <path d="M18 18c5 3 10 6 13 10M46 18c-5 3-10 6-13 10" stroke="#A8E0AE" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  libecek: (
+    <>
+      {/* Jeden velký trojdílný list na řapíku — proti drobnějším lístkům
+          petrželky je hrubší a tmavší. */}
+      <path d="M32 56V36" stroke="#4E7A2E" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 38c-12-2-19-11-18-21 6 2 10 1 12-2 3 5 6 6 10 4 2 6 0 13-4 19Z" fill="#2E6E2A" />
+      <path d="M32 38c12-2 19-11 18-21-6 2-10 1-12-2-3 5-6 6-10 4-2 6 0 13 4 19Z" fill="#3F8C36" />
+      <path d="M32 24c-4-5-4-12-1-17 5 4 6 12 1 17Z" fill="#4E9E42" />
+      <path d="M22 20c4 4 7 9 9 14M42 20c-4 4-7 9-9 14" stroke="#8FBF5A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'bobkovy-list': (
+    <>
+      <path d="M32 8c10 8 14 20 12 30-2 9-8 16-12 18-4-2-10-9-12-18-2-10 2-22 12-30Z" fill="#3A6E3E" />
+      <path d="M32 10v44" stroke="#2A5A2E" strokeWidth="2.5" fill="none" />
+      <path d="M32 20c4 2 7 5 8 9M32 20c-4 2-7 5-8 9M32 32c4 2 7 5 8 9M32 32c-4 2-7 5-8 9" stroke="#5E9E5E" strokeWidth="1.8" fill="none" />
+    </>
+  ),
+
+  'kmin-cely': hromadka((x, y, u, i) => (
+    <g key={i} transform={`rotate(${u} ${x} ${y})`}>
+      <path d={`M${x} ${y - 6}c3 2 4 5 3 8-2 3-4 4-6 4s-4-1-3-4c0-3 3-6 6-8Z`} fill={i % 2 === 0 ? '#8E6432' : '#6E4A22'} />
+    </g>
+  )),
+
+  'kmin-mlety': (
+    <>
+      {prasek('#9E7440', '#C49A66')}
+      <path d="M30 22c3 2 4 5 3 8-2 3-4 4-6 4s-4-1-3-4c0-3 3-6 6-8Z" fill="#6E4A22" />
+      <path d="M40 18c3 2 4 5 3 8-2 3-4 4-6 4s-4-1-3-4c0-3 3-6 6-8Z" fill="#8E6432" />
+    </>
+  ),
+
+  'koriandr-mlety': (
+    <>
+      {prasek('#C4A472', '#E0C79C')}
+      <circle cx="28" cy="26" r="6" fill="#BFA06A" />
+      <circle cx="40" cy="22" r="5.5" fill="#D2B586" />
+      <path d="M24 26h8M36 22h8" stroke="#9E7E4A" strokeWidth="1.6" fill="none" />
+    </>
+  ),
+
+  skorice: (
+    <>
+      {/* Svitky kůry, ne sud: na čele je vidět, že je kůra srolovaná. */}
+      <path d="M10 42c0-4 3-7 7-8l28-8c4-1 8 1 9 5 1 4-1 8-5 9l-28 8c-4 1-8-1-9-5l-2-1Z" fill="#A05E2A" />
+      <path d="M12 40c0-3 2-5 5-6l28-8c3-1 6 1 7 4 1 3-1 6-4 7l-28 8c-3 1-6-1-7-4l-1-1Z" fill="#C07A3E" />
+      <ellipse cx="49" cy="29" rx="4" ry="6" transform="rotate(16 49 29)" fill="#D9924E" />
+      <ellipse cx="49" cy="29" rx="2" ry="3.4" transform="rotate(16 49 29)" fill="#8E4E1E" />
+      <path d="M18 47c0-3 3-6 7-7l26-6c4-1 8 2 8 6s-2 7-6 8l-26 5c-4 1-8-2-9-6Z" fill="#8E4E1E" />
+      <ellipse cx="56" cy="37" rx="3.6" ry="5.6" transform="rotate(12 56 37)" fill="#C07A3E" />
+    </>
+  ),
+
+  kurkuma: (
+    <>
+      {prasek('#E8952A', '#F5BE6E')}
+      <path d="M24 30c-4-4-4-10 0-14 3-3 7-3 9 0 2-3 6-3 9 0 3 3 3 8 0 11-3 3-7 3-9 1-2 3-6 4-9 2Z" fill="#C4661A" />
+      <path d="M28 22c2-2 4-2 6 0" stroke="#E8952A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  vanilka: (
+    <>
+      <path d="M18 10c3-1 6 1 7 5 3 14 6 28 7 38 0 3-2 5-5 5s-5-2-6-5c-3-12-6-26-7-38 0-3 1-5 4-5Z" fill="#3A2A20" />
+      <path d="M40 12c3-1 6 1 6 5 1 14 1 28 0 38 0 3-2 5-5 5s-5-2-5-5c-1-12-1-26 0-38 0-3 1-5 4-5Z" fill="#2A1C14" />
+      <path d="M41 20c0 10 0 22 1 30" stroke="#7E6450" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="22" cy="30" r="1.6" fill="#8E7460" />
+      <circle cx="24" cy="40" r="1.6" fill="#8E7460" />
+    </>
+  ),
+
+  zazvor: (
+    <>
+      <path d="M10 36c0-8 6-13 14-13 5 0 8 2 10 5 3-4 8-6 13-4 6 2 9 8 7 14-2 5-7 8-12 7-1 4-5 7-10 7-6 0-11-4-12-9-6-1-10-4-10-7Z" fill="#D9B87E" />
+      <path d="M24 28c3 2 5 5 5 8M40 30c2 3 2 7 0 10M18 38c3 1 6 1 8 0" stroke="#B4914E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'paprika-mleta': (
+    <>
+      {prasek('#C4361E', '#E06A50')}
+      <path d="M36 12c8 0 14 6 14 13 0 5-3 9-7 9-2 0-3-1-4-3-1 2-2 3-4 3-4 0-7-4-7-9 0-7 6-13 8-13Z" fill="#A82A18" />
+      <path d="M36 12c-3 0-5-1-5-3 3-1 7-1 10 0 0 2-2 3-5 3Z" fill={C.zelenTmava} />
     </>
   ),
 };
