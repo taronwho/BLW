@@ -24,10 +24,10 @@ import type { FirebaseConfig } from './types';
  * zařízení samo za sebe. Nic se nerozbije.
  */
 export const FIREBASE_DEFAULTS: FirebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
+  apiKey: 'AIzaSyBrv9osEbztiip2cJuKhu39SdrO1SoQedI',
+  authDomain: 'blwapp-5cceb.firebaseapp.com',
+  projectId: 'blwapp-5cceb',
+  storageBucket: 'blwapp-5cceb.firebasestorage.app',
+  messagingSenderId: '861478834416',
+  appId: '1:861478834416:web:d2a616903040aa11f6f235',
 };
