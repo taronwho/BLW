@@ -19,6 +19,7 @@ import {
 } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
 import { GripPicker } from '../components/GripPicker';
+import { ReadinessPicker } from '../components/ReadinessPicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
@@ -103,6 +104,10 @@ export function HouseholdScreen(): ReactNode {
           Uložit
         </button>
       </form>
+
+      <div className="rounded-xl bg-surface p-4">
+        <ReadinessPicker />
+      </div>
 
       <div className="rounded-xl bg-surface p-4">
         <GripPicker />

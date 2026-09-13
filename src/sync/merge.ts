@@ -71,6 +71,9 @@ export function mergeHouseholdState(
 ): HouseholdState {
   const localNewer = meta.localUpdatedAt > meta.remoteUpdatedAt;
   const grip = lastWriteWins(local.childGrip, remote.childGrip, localNewer);
+  // Znaky připravenosti jdou i odškrtnout, takže se nesjednocují — vyhrává
+  // novější zápis, stejně jako u ostatních údajů o dítěti.
+  const znaky = lastWriteWins(local.readySigns, remote.readySigns, localNewer);
 
   return {
     childName: lastWriteWins(local.childName, remote.childName, localNewer),
@@ -78,6 +81,7 @@ export function mergeHouseholdState(
     // Nevyplněný úchop se do stavu nepropisuje jako `undefined` klíč — v poli
     // by pak ležel prázdný záznam, který nic neznamená.
     ...(grip === undefined ? {} : { childGrip: grip }),
+    ...(znaky === undefined ? {} : { readySigns: [...znaky] }),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),

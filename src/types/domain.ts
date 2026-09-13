@@ -12,6 +12,16 @@ export const STAGES: readonly Stage[] = ['6m', '9m', '12m'] as const;
  * být. Posloupnost dlaňový → nůžkový/klešťový → pinzetový popsala vývojová
  * psychologie dávno před metodou; věk u ní je jen orientační.
  */
+/**
+ * Tři vývojové znaky, na kterých metoda stojí (rada `je-dite-pripravene`).
+ *
+ * Nejsou to položky k odškrtání pro parádu: dokud nejsou pohromadě, nemá
+ * začínat žádná metoda příkrmu, a to bez ohledu na to, kolik je dítěti
+ * měsíců. Proto se podle nich řídí upozornění u fáze 6m+.
+ */
+export type ReadySign = 'sed' | 'koordinace' | 'reflex';
+export const READY_SIGNS: readonly ReadySign[] = ['sed', 'koordinace', 'reflex'] as const;
+
 export type Grip = 'dlanovy' | 'nuzkovy' | 'pinzetovy';
 export const GRIPS: readonly Grip[] = ['dlanovy', 'nuzkovy', 'pinzetovy'] as const;
 
@@ -235,6 +245,8 @@ export interface HouseholdState {
   childBirthDate: string;
   /** Úchop, který rodič u dítěte pozoruje. Nevyplněný = řídíme se jen věkem. */
   childGrip?: Grip;
+  /** Odškrtnuté znaky připravenosti. Nevyplněné = ještě se nezačalo. */
+  readySigns?: ReadySign[];
   /** uid členů domácnosti */
   members: string[];
   tastings: TastingEvent[];

@@ -155,3 +155,27 @@ describe('úchop dítěte při slučování', () => {
     expect('childGrip' in merged).toBe(false);
   });
 });
+
+describe('znaky připravenosti při slučování', () => {
+  it('vyhrává novější zápis, aby šlo znak i odškrtnout zpět', () => {
+    const local: HouseholdState = { ...emptyHouseholdState(), readySigns: ['sed'] };
+    const remote: HouseholdState = {
+      ...emptyHouseholdState(),
+      readySigns: ['sed', 'koordinace', 'reflex'],
+    };
+    expect(
+      mergeHouseholdState(local, remote, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).readySigns,
+    ).toEqual(['sed']);
+    expect(
+      mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 }).readySigns,
+    ).toEqual(['sed', 'koordinace', 'reflex']);
+  });
+
+  it('nevyplněné znaky v poli nenechají prázdný klíč', () => {
+    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
+      localUpdatedAt: 1,
+      remoteUpdatedAt: 2,
+    });
+    expect('readySigns' in merged).toBe(false);
+  });
+});

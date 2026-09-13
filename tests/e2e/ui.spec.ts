@@ -4,6 +4,7 @@ import { recipes } from '@/data';
 import {
   acceptDisclaimer,
   horizontalOverflow,
+  householdLink,
   navLink,
   SCREENS,
   tooSmallTargets,
@@ -273,4 +274,38 @@ test('suroviny jdou seřadit podle obsahu železa', async ({ page }) => {
   await expect(prvni).not.toHaveText(abecedne ?? '');
   // Nahoře musí stát významný zdroj, ne první položka podle abecedy.
   await expect(page.getByTestId('seznam-surovin').locator('li').first()).toContainText('železo');
+});
+
+test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Bez odškrtnutí se u fáze 6m+ upozorňuje — to je stav před začátkem příkrmu.
+  await page.goto('./#/suroviny/brokolice');
+  const upozorneni = page.getByTestId('upozorneni-pripravenost');
+  await expect(upozorneni).toBeVisible();
+  await expect(upozorneni).toContainText('Šest měsíců není pevné datum');
+
+  // U vyšších fází je připomínka jen šum, tam mlčí.
+  await page.getByTestId('faze-12m').click();
+  await expect(upozorneni).toBeHidden();
+
+  await householdLink(page).click();
+  await page.getByTestId('znak-sed').click();
+  await page.getByTestId('znak-koordinace').click();
+  await expect(page.getByTestId('znak-sed')).toHaveAttribute('aria-checked', 'true');
+
+  // Dva ze tří nestačí, ale text má jmenovat ten chybějící.
+  await page.goto('./#/suroviny/brokolice');
+  await expect(upozorneni).toContainText('vyhasnutí vypuzovacího reflexu');
+
+  await householdLink(page).click();
+  await page.getByTestId('znak-reflex').click();
+  await expect(page.getByTestId('stav-pripravenosti')).toContainText('pohromadě');
+
+  // Po třetím znaku zmizí i u suroviny, i u receptu.
+  await page.goto('./#/suroviny/brokolice');
+  await expect(upozorneni).toBeHidden();
+  await navLink(page, 'Recepty').click();
+  await page.getByTestId('seznam-receptu').getByRole('link').first().click();
+  await expect(upozorneni).toBeHidden();
 });

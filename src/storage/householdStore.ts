@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Grip, HouseholdState, TastingEvent } from '@/types';
+import type { Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
 import {
   emptyHouseholdState,
   mergeHouseholdState,
@@ -33,6 +33,7 @@ interface HouseholdStore {
   createHousehold(): Promise<string>;
   setChild(name: string, birthDate: string): Promise<void>;
   setGrip(grip: Grip | undefined): Promise<void>;
+  toggleReadySign(sign: ReadySign): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
   deleteTasting(id: string): Promise<void>;
@@ -175,6 +176,17 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 
     async setChild(name: string, birthDate: string): Promise<void> {
       await persist({ ...get().state, childName: name, childBirthDate: birthDate });
+    },
+
+    /** Odškrtnutí či zrušení jednoho znaku připravenosti. */
+    async toggleReadySign(sign: ReadySign): Promise<void> {
+      const soucasne = get().state.readySigns ?? [];
+      const dalsi = soucasne.includes(sign)
+        ? soucasne.filter((one) => one !== sign)
+        : [...soucasne, sign];
+      const zbytek = { ...get().state };
+      delete zbytek.readySigns;
+      await persist(dalsi.length === 0 ? zbytek : { ...zbytek, readySigns: dalsi });
     },
 
     /** Úchop mění tvar sousta, ne výběr surovin — ten se dál řídí věkem. */
