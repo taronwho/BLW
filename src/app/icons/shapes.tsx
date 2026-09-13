@@ -202,6 +202,72 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 5: ryby a mořské plody ──────────────────────────────────────
+  platys: (
+    <>
+      <ellipse cx="32" cy="34" rx="22" ry="15" fill="#8E9AA4" />
+      <ellipse cx="32" cy="34" rx="15" ry="9" fill="#AAB6C0" />
+      <circle cx="22" cy="29" r="2.5" fill={C.hnedaTmava} />
+      <circle cx="28" cy="28" r="2.5" fill={C.hnedaTmava} />
+      <path d="M54 34l8-7v14l-8-7Z" fill="#6F7B85" />
+    </>
+  ),
+  kambala: (
+    <>
+      <ellipse cx="32" cy="34" rx="21" ry="17" fill="#7F7466" />
+      <circle cx="24" cy="28" r="3" fill={C.krem} />
+      <circle cx="34" cy="25" r="2.5" fill={C.krem} />
+      <circle cx="40" cy="36" r="2.5" fill={C.krem} />
+      <circle cx="27" cy="41" r="2.5" fill={C.krem} />
+      <path d="M53 34l9-6v12l-9-6Z" fill="#5F564B" />
+    </>
+  ),
+  'morsky-vlk': ryba('#93A3AE', '#D7DEE3', <path d="M20 30c6-3 12-3 18 0" stroke="#6E7C86" strokeWidth="2.5" strokeLinecap="round" fill="none" />),
+  prazma: ryba('#C9C3AE', '#EFEADC', <path d="M24 26c3 1 5 3 6 6" stroke={C.zlutaTmava} strokeWidth="3" strokeLinecap="round" fill="none" />),
+  'okoun-ricni': ryba('#7E8C4E', '#D5D9B4', <path d="M22 24v16M28 23v18M34 24v16" stroke="#4E5A2C" strokeWidth="2.5" strokeLinecap="round" fill="none" />),
+  kalamary: (
+    <>
+      <path d="M32 10c7 0 11 6 11 13 0 5-2 9-4 11h-14c-2-2-4-6-4-11 0-7 4-13 11-13Z" fill="#E2A6A6" />
+      <path d="M25 34c-1 8-3 14-6 18M29 34c-1 9-2 15-3 19M35 34c1 9 2 15 3 19M39 34c1 8 3 14 6 18" stroke="#C97F7F" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="27" cy="22" r="2.5" fill={C.hnedaTmava} />
+      <circle cx="37" cy="22" r="2.5" fill={C.hnedaTmava} />
+    </>
+  ),
+  hrebenatky: (
+    <>
+      <path d="M32 52c-13 0-21-9-21-19 0-5 3-9 7-9 2-4 7-6 14-6s12 2 14 6c4 0 7 4 7 9 0 10-8 19-21 19Z" fill={C.krem} stroke={C.kremTmavy} strokeWidth="2" />
+      <path d="M32 20v30M22 24c-2 9-1 18 3 25M42 24c2 9 1 18-3 25" stroke={C.kremTmavy} strokeWidth="2.5" fill="none" />
+    </>
+  ),
+  'krabi-maso-bile': (
+    <>
+      <ellipse cx="32" cy="36" rx="15" ry="11" fill="#D9694F" />
+      <path d="M17 32c-5-2-9-6-10-11 4 1 8 4 10 8M47 32c5-2 9-6 10-11-4 1-8 4-10 8" fill="#C0523A" />
+      <path d="M20 46c-4 3-7 6-9 10M44 46c4 3 7 6 9 10" stroke="#C0523A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="27" cy="33" r="2" fill={C.bila} />
+      <circle cx="37" cy="33" r="2" fill={C.bila} />
+    </>
+  ),
+  'tunak-v-konzerve': (
+    <>
+      <ellipse cx="32" cy="22" rx="18" ry="6" fill={C.seda} />
+      <path d="M14 22h36v24a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6V22Z" fill={C.sedaTmava} />
+      <path d="M18 28h28v18H18V28Z" fill="#C4756A" />
+      <path d="M22 36c4-3 8-3 12 0M28 42c4-3 8-3 12 0" stroke="#8E4A42" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <ellipse cx="32" cy="22" rx="13" ry="4" fill={C.bilaStin} />
+    </>
+  ),
+  ancovicky: (
+    <>
+      <path d="M8 34c8-6 16-8 24-8s16 2 24 8c-8 6-16 8-24 8s-16-2-24-8Z" fill="#8E7F70" />
+      <path d="M8 34c8-4 16-5 24-5s16 1 24 5" stroke="#B5A797" strokeWidth="2.5" fill="none" />
+      <circle cx="18" cy="33" r="2" fill={C.bila} />
+      <circle cx="24" cy="44" r="2" fill={C.bilaStin} />
+      <circle cx="40" cy="24" r="2" fill={C.bilaStin} />
+      <circle cx="46" cy="43" r="2" fill={C.bilaStin} />
+    </>
+  ),
+
   // ── dávka 4: mouky, vločky a bezlepkové základy ───────────────────────
   'mouka-ryzova': (
     <>

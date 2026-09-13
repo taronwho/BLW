@@ -33,6 +33,7 @@ export const COVERAGE_EXCEPTIONS: Readonly<Record<string, string>> = {
   'cukr-krystal': 'Do 12 měsíců se nepřidává; v receptech se nahrazuje ovocem.',
   'javorovy-sirup': 'Do 12 měsíců se nepřidává; jde o dochucení pro dospělé.',
   'bujon-kostka': 'Do dětského jídla nepatří; recepty používají vývar bez soli.',
+  ancovicky: 'Nakládané v soli; do dětské porce nepatří, pro dospělé jde o dochucení popsané textem.',
   // `voda` tu byla také, ale audit 12. 9. 2026 ukázal, že ji osm receptů
   // odměřuje jako běžnou složku. Výjimka se tím nikdy neuplatnila a jen
   // zbytečně vyjímala surovinu z kontroly, takže je pryč — pravidlo
