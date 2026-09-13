@@ -2,7 +2,7 @@ import { CalendarDays, Sparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ingredientById, ingredients } from '@/data';
+import { ingredientById, ingredients, recipeById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES, KEY_ALLERGENS } from '@/types';
 import type { TastingEvent } from '@/types';
@@ -36,7 +36,11 @@ export function DiaryScreen(): ReactNode {
       [...new Set(activeTastings(state).filter((event) => event.amount === 'odmitla').map((e) => e.ingredientId))],
     [state],
   );
-  const favorites = state.favorites.filter((id) => ingredientById.has(id));
+  // Oblíbit se dá surovina i recept; dřív se sem dostaly jen suroviny
+  // a označený recept tu zmizel beze stopy.
+  const favorites = state.favorites
+    .map((id) => ingredientById.get(id)?.nameCz ?? recipeById.get(id)?.titleCz)
+    .filter((name): name is string => name !== undefined);
 
   return (
     <section className="flex flex-col gap-5" aria-labelledby="denik-nadpis">
@@ -65,11 +69,11 @@ export function DiaryScreen(): ReactNode {
             );
           })}
         </ul>
-        <p className="text-sm">
+        <p className="text-sm" data-testid="oblibene-polozky">
           <strong className="font-semibold">Oblíbené: </strong>
           {favorites.length === 0
             ? 'zatím nic označeného'
-            : favorites.map((id) => ingredientById.get(id)?.nameCz ?? id).join(', ')}
+            : favorites.join(', ')}
         </p>
         <p className="text-sm">
           <strong className="font-semibold">Odmítnuté: </strong>
