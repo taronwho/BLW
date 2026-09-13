@@ -207,7 +207,7 @@ export function HouseholdScreen(): ReactNode {
           <KeyRound aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
           <span>
             Sdílení mezi telefony zatím není nastavené, aplikace běží jen na tomhle zařízení.
-            Nastavuje se jednou v repozitáři podle docs/FIREBASE.md, v aplikaci se nic nevyplňuje.
+            Zapíná se jednou při zprovoznění aplikace; v ní samotné se nic nevyplňuje.
           </span>
         </p>
       )}
