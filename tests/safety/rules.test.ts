@@ -662,6 +662,62 @@ describe('baby-serving-mentions-meat', () => {
   });
 });
 
+describe('czech-typography', () => {
+  it('projde text s českými uvozovkami a výpustkou', () => {
+    expectPass('czech-typography', makeRecipe(), catalog);
+  });
+
+  it('zachytí rovnou uvozovku', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku nech vychladnout, ať není "horká".'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('rovná uvozovka');
+  });
+
+  it('zachytí tři tečky místo výpustky', () => {
+    const recipe = makeRecipe({ babySteps: ['Nech vychladnout a zkontroluj prstem...'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('výpustky');
+  });
+
+  it('zachytí dvojitou mezeru', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku  nech vychladnout na vlažnou teplotu.'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('dvojitá mezera');
+  });
+
+  it('nevadí mu spojovník ani pomlčka uvnitř věty', () => {
+    expectPass(
+      'czech-typography',
+      makeRecipe({ babySteps: ['Placku nech vychladnout — vlažná je tak akorát.'] }),
+      catalog,
+    );
+  });
+});
+
+describe('consistent-address', () => {
+  it('projde text, který rodiči tyká', () => {
+    expectPass('consistent-address', makeRecipe(), catalog);
+  });
+
+  it('zachytí rozkaz v množném čísle', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku nechte vychladnout a podávejte vlažnou.'] });
+    expect(expectFail('consistent-address', recipe, catalog)).toContain('vykání');
+  });
+
+  it('zachytí přivlastňovací vykání', () => {
+    const ingredient = makeIngredient({
+      prepIdeas: ['v páře', 'pyré', 'postup u vašeho dítěte prober s pediatrem'],
+    });
+    expectFail('consistent-address', ingredient, catalog);
+  });
+
+  it('nevadí mu tvar, který jen náhodou končí na -te', () => {
+    // „chutě“, „soustě“ apod. nejsou rozkazy — hranice slova musí umět česky.
+    expectPass(
+      'consistent-address',
+      makeRecipe({ babySteps: ['Nech dítě poznat různé chutě a soustě neposouvej.'] }),
+      catalog,
+    );
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -688,6 +744,8 @@ describe('pokrytí pravidel', () => {
       'ingredient-coverage',
       'neutral-address',
       'baby-serving-mentions-meat',
+      'czech-typography',
+      'consistent-address',
     ];
     expect(safetyRules.map((rule) => rule.id)).toEqual(expected);
   });

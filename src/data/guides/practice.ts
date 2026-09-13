@@ -61,15 +61,15 @@ export const practice: Guide[] = [
     keyPoints: [
       'Vař základ bez soli — dosolit jde vždycky, odsolit ne.',
       'Porce pro dítě se odebírá v konkrétním kroku, ještě před dochucením.',
-      'Metoda nešetří čas plošně. Šetří ho těm, komu jejich stravování vyhovovalo už předtím.',
+      'Metoda nešetří čas plošně. Šetří ho rodinám, kterým jejich způsob stravování vyhovoval už předtím.',
     ],
     sections: [
       {
         heading: 'Jak to funguje v receptech',
         body: [
           'Každý recept v aplikaci má společný základ, bod odběru dětské porce a pak tři zakončení: dětské, masité a bezmasé.',
-          'Bod odběru je vždy uvedený doslova — „po kroku 3 odeber…" — není potřeba odhadovat, kdy je ještě čas.',
-          'Teprve po odběru se solí, kořeníme a dochucuje pro dospělé.',
+          'Bod odběru je vždy uvedený doslova — „po kroku 3 odeber…“ — není potřeba odhadovat, kdy je ještě čas.',
+          'Teprve po odběru se solí, koření a dochucuje pro dospělé.',
         ],
       },
       {
@@ -84,7 +84,7 @@ export const practice: Guide[] = [
         heading: 'Upřímně o čase',
         body: [
           'Tvrzení, že odpadá vaření zvláštních porcí, platí jen částečně. Když rodina jí hodně soleně a kořeněně nebo hodně polotovarů, musí se pro dítě stejně vařit zvlášť — a úspora se ztrácí.',
-          'Metoda tedy nešetří čas plošně. Šetří ho těm, jejichž stravování jí vyhovovalo už předtím.',
+          'Metoda tedy nešetří čas plošně. Šetří ho rodinám, které se i předtím stravovaly podobně — bez hromady soli, koření a polotovarů.',
         ],
       },
       {
@@ -132,7 +132,7 @@ export const practice: Guide[] = [
         body: [
           'U každé suroviny je popis pro všechny tři fáze zvlášť — jak ji nakrájet, na co si dát pozor a jak ji podat.',
           'U každého receptu najdeš totéž pro hotové jídlo: jak porci podat v šesti, v devíti a ve dvanácti měsících.',
-          'Přepínač fáze v Domácnosti se předvybírá podle data narození, ale můžeš ho kdykoli přepnout ručně.',
+          'Přepínač fází je přímo u každé suroviny a u každého receptu. Předvybírá se podle data narození z Domácnosti, ale kdykoli ho přepneš ručně.',
         ],
       },
     ],
@@ -149,7 +149,7 @@ export const practice: Guide[] = [
     keyPoints: [
       'Dlaňový úchop: sousto dlouhé jako dospělý prst, aby konec čouhal z pěsti.',
       'Pinzetový úchop: dítě zvedne hrášek nebo drobek a dlouhé proužky ztrácejí smysl.',
-      'Úchop nemění, co dítě smí dostat — jen jaký tvar mu to podáte.',
+      'Úchop nemění, co dítě smí dostat — jen jaký tvar mu to podáš.',
       'U potravin s vysokým rizikem dušení rozhoduje pravidlo o tvaru, ne zručnost ruky.',
     ],
     sections: [
@@ -157,7 +157,7 @@ export const practice: Guide[] = [
         heading: 'Proč zrovna ruka',
         body: [
           'Ze tří vývojových podmínek, na kterých metoda stojí, je úchop ta nejzajímavější, protože se mění týden po týdnu a je vidět pouhým okem.',
-          'Šestiměsíční dítě uchopuje dlaňovým úchopem: předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst přitom neumí otevřít cíleně a neumí uvolnit jen část obsahu.',
+          'Šestiměsíční dítě uchopuje dlaňovým úchopem: předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst se přitom cíleně neotevře a neuvolní jen část obsahu.',
           'Z toho plyne jediný praktický důsledek: cokoli menšího než dětská pěst dítě sevře a už se k tomu nedostane. Proto se v prvních týdnech krájí na kusy dlouhé zhruba jako dospělý prst — konec čouhá z pěsti a dítě si ho strčí do úst.',
           'Posloupnost úchopů popsala vývojová psychologie dávno před metodou vedenou dítětem, v pracích Arnolda Gesella ve třicátých letech a později u Jeana Piageta. Nové na tom bylo až použití: vývojová tabulka se proměnila v návod ke krájení, který si rodič ověří pohledem na to, jak dítě zvedá kostku.',
         ],
@@ -185,7 +185,7 @@ export const practice: Guide[] = [
         heading: 'Co s tím v aplikaci',
         body: [
           'V Domácnosti se dá vybrat úchop podle popisu toho, co je u dítěte vidět. U každé suroviny a u každého receptu se pak vedle pokynu ke krájení ukáže tvar, který z úchopu plyne.',
-          'Dokud úchop nevyberete, aplikace ho odhaduje z věku a řekne to. Výběr jde kdykoli změnit i zrušit.',
+          'Dokud úchop nevybereš, aplikace ho odhaduje z věku a řekne to. Výběr jde kdykoli změnit i zrušit.',
           'Fáze 6m+ / 9m+ / 12m+ zůstává na věku. Kdyby úchop posouval i ji, měnil by tím výběr surovin a jejich měkkost — a to je přesně to, co z úchopu nevyplývá.',
         ],
       },

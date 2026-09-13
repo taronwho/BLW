@@ -244,7 +244,7 @@ export function RecipesScreen(): ReactNode {
 
       {visible.length === 0 ? (
         <p className="rounded-xl bg-surface p-4 text-sm text-muted" data-testid="prazdny-stav-recepty">
-          Nic neodpovídá. Zkus zrušit filtr času, vyprázdnit „Mám doma" nebo povolit všechny
+          Nic neodpovídá. Zkus zrušit filtr času, vyprázdnit „Mám doma“ nebo povolit všechny
           kategorie.
         </p>
       ) : (

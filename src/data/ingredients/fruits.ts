@@ -757,7 +757,7 @@ export const fruits: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batoleti dál krájej hrozny alespoň na čtvrtiny. Odborná doporučení vedou celé hrozny jako nevhodné až do pěti let, doma z toho udělejte pravidlo pro všechny.',
+          'Batoleti dál krájej hrozny alespoň na čtvrtiny. Odborná doporučení vedou celé hrozny jako nevhodné až do pěti let, doma z toho udělej pravidlo pro všechny.',
         caution: 'Pravidlo vysvětli i prarodičům, tady se nedělají výjimky.',
       },
     },

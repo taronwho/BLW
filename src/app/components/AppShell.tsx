@@ -25,7 +25,7 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
   const months = ageInMonths(state.childBirthDate);
   const childLabel =
     state.childName.trim().length === 0
-      ? 'Nastavte dítě v Domácnosti'
+      ? 'Nastav dítě v Domácnosti'
       : `${state.childName} · ${formatAge(months)}`;
 
   return (

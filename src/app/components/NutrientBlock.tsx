@@ -77,7 +77,7 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
         <>
           <p className="text-sm leading-relaxed">
             Tohle je rostlinné, tedy nehemové železo. Vstřebává se hůř než železo z masa, ale
-            výrazně mu pomáhá vitamin C ve stejném jídle. Kombinujte proto tuhle surovinu s ovocem
+            výrazně mu pomáhá vitamin C ve stejném jídle. Kombinuj proto tuhle surovinu s ovocem
             nebo zeleninou bohatou na vitamin C.
           </p>
           {partners.length > 0 && (

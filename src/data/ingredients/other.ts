@@ -127,7 +127,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí kokosový jogurt s ovocem i v omáčkách. Pokud doma řešíte alergii na bílkovinu kravského mléka, výběr konkrétního výrobku a zdroj vápníku proberte s pediatrem.',
+          'Batole jí kokosový jogurt s ovocem i v omáčkách. Pokud doma řešíte alergii na bílkovinu kravského mléka, výběr konkrétního výrobku a zdroj vápníku prober s pediatrem.',
         caution: 'Rostlinné jogurty nejsou náhradou mléka pro malé dítě.',
       },
     },

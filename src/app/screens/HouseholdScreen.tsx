@@ -93,7 +93,7 @@ export function HouseholdScreen(): ReactNode {
           className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
         />
         <p className="text-xs text-muted">
-          Podle data narození se předvybírá fáze 6m+ / 9m+ / 12m+ a filtr „Vhodné teď".
+          Podle data narození se předvybírá fáze 6m+ / 9m+ / 12m+ a filtr „Vhodné teď“.
           {state.childBirthDate.length > 0 && ` Teď: ${formatAge(ageInMonths(state.childBirthDate))}.`}
         </p>
         <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-white">

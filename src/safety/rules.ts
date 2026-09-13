@@ -11,6 +11,7 @@ import {
   trigrams,
 } from './text';
 import { coverageExceptionReason, isCoverageException } from './coverage-exceptions';
+import { najdiTypografii, najdiVykani } from './language';
 import { isIngredient, isRecipe, type SafetyRule } from './types';
 import {
   BANNED_GENERIC_PHRASES,
@@ -636,6 +637,34 @@ const babyServingMentionsMeat: SafetyRule = {
   },
 };
 
+const czechTypography: SafetyRule = {
+  id: 'czech-typography',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty používají české uvozovky, výpustku … a jednoduché mezery.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = najdiTypografii(value);
+      if (nalez !== null) return `${nalez.problem} v poli ${field}: „${nalez.ukazka}“.`;
+    }
+    return null;
+  },
+};
+
+const consistentAddress: SafetyRule = {
+  id: 'consistent-address',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty rodiči tykají — vykání se mezi ně nemíchá.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = najdiVykani(value);
+      if (nalez !== null) return `${nalez.problem}, pole ${field}: „${nalez.ukazka}“.`;
+    }
+    return null;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -661,6 +690,8 @@ export const safetyRules: readonly SafetyRule[] = [
   ingredientCoverage,
   neutralAddress,
   babyServingMentionsMeat,
+  czechTypography,
+  consistentAddress,
 ];
 
 export const rulesById: ReadonlyMap<string, SafetyRule> = new Map(

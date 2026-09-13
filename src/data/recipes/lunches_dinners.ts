@@ -1193,7 +1193,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Fazolky pro miminko podus ještě pět minut navíc pod pokličkou — restované jsou pro dítě moc pevné.',
       'Tofu rozmačkej vidličkou nebo nakrájej na hranolky podle toho, co dítě zvládá; kostky jsou kluzké a špatně se drží.',
-      'Přimíchej lžíci rýže a lžíci vody z vaření zeleniny, aby porce držela na lžíci.',
+      'Přimíchej lžíci rýže a trochu vody z vaření zeleniny, aby porce držela na lžíci.',
     ],
     babyServing: {
       '6m': 'Podávej hranolek tofu delší než dětská dlaň a dušené fazolky vcelku, aby je dítě uchopilo za konec.',

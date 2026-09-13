@@ -86,7 +86,7 @@ export const starting: Guide[] = [
         body: [
           'Sousto má být podlouhlé, zhruba velikosti prstu dospělého, a má z pěsti vyčnívat. Dítě v tomhle věku ještě neumí uvolnit, co sevře v dlani — co zmizí celé v pěsti, k ústům nedoputuje.',
           'Kolem devátého měsíce se rozvíjí klešťový úchop mezi palcem a ukazovákem. Od té chvíle dávají smysl menší kousky velikosti fazole.',
-          'Kluzké kousky se drží špatně. Obalení v mletých vločkách, v strouhance nebo v mletých semínkách problém vyřeší.',
+          'Kluzké kousky se drží špatně. Obalení v mletých vločkách, ve strouhance nebo v mletých semínkách problém vyřeší.',
         ],
       },
       {
@@ -94,7 +94,7 @@ export const starting: Guide[] = [
         body: [
           'Brožura SZÚ doporučuje začít zeleninou, nejčastěji mrkví, druhou v pořadí bývá dýně. Nesolí se, nesladí a nepřidává se nic dalšího.',
           'Mezi novými potravinami se nechávají dva až tři dny, aby se dala zachytit případná alergická reakce.',
-          'Pro začátek stačí jedna až dvě lžičky podané před kojením v poledne nebo odpoledne. Masa se pak přidává zhruba 30 až 50 g libového, upraveného vařením, dušením nebo v páře.',
+          'Pro začátek stačí jedna až dvě lžičky podané před kojením v poledne nebo odpoledne. Libového masa se pak přidává zhruba 30 až 50 g, upraveného vařením, dušením nebo v páře.',
         ],
       },
     ],
@@ -127,7 +127,7 @@ export const starting: Guide[] = [
         body: [
           'Prevence vybíravosti je tvrzení, které se metodě připisuje nejčastěji a které je zároveň nejhůř podložené. Vybíravost je vývojová fáze, která se u většiny dětí objevuje mezi druhým a čtvrtým rokem a má svůj biologický smysl.',
           'Ochrana před nadváhou se v randomizovaném pokusu neprokázala.',
-          'Vyšší příjem železa a energie se neprokázal také. Metoda tedy nemá být volena kvůli výživovým výhodám — ty musí zařídit složení talíře.',
+          'Vyšší příjem železa ani energie se neprokázal. Metoda se tedy nemá volit kvůli výživovým výhodám — ty musí zařídit složení talíře.',
         ],
       },
       {

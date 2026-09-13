@@ -70,7 +70,7 @@ export function HomeScreen(): ReactNode {
         <p className="mt-2 text-sm leading-relaxed text-white/90">
           {hasChild
             ? `Aktuální fáze ${stage}${months === null ? '' : ` · ${formatAge(months)}`}. Vše v aplikaci se přizpůsobuje tomuhle věku.`
-            : 'Nastavte věk dítěte v Domácnosti a aplikace vám bude rovnou ukazovat pokyny pro správnou fázi.'}
+            : 'Nastav věk dítěte v Domácnosti a aplikace ti bude rovnou ukazovat pokyny pro správnou fázi.'}
         </p>
         <p className="mt-2 text-sm leading-relaxed text-white/90" data-testid="uchop-v-hlavicce">
           {grip === undefined

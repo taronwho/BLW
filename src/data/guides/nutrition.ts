@@ -40,9 +40,9 @@ export const nutrition: Guide[] = [
       {
         heading: 'Kdo má zásobu menší',
         body: [
-          'Děti narozené předčasně mají zásobu menší. Stejně tak děti, kterým se pupečník podvázal okamžitě po porodu — rozdíl v množství krve z placenty znamená v železe zásobu navíc na několik týdnů.',
+          'Děti narozené předčasně mají zásobu menší. Stejně tak děti, kterým se pupečník podvázal okamžitě po porodu — rozdíl v množství krve z placenty znamená zásobu železa navíc na několik týdnů.',
           'Menší zásobu mívají i děti matek, které měly v těhotenství chudokrevnost.',
-          'Pro rodiče z toho plyne praktický důsledek: takové dítě potřebuje potraviny bohaté na železo dřív a v jistější podobě. Konkrétní postup u vašeho dítěte patří pediatrovi, ne aplikaci.',
+          'Pro rodiče z toho plyne praktický důsledek: takové dítě potřebuje potraviny bohaté na železo dřív a v jistější podobě. Konkrétní postup u tvého dítěte patří pediatrovi, ne aplikaci.',
         ],
       },
       {
@@ -150,7 +150,7 @@ export const nutrition: Guide[] = [
         body: [
           'Metoda nezvyšuje riziko dušení. To byla první a nejočekávanější odpověď.',
           'Zároveň ale metoda sama o sobě nezajišťuje víc železa ani energie a nechrání před nadváhou. Nízký příjem železa v druhé polovině prvního roku je problém obou postupů, ne jednoho z nich.',
-          'Vzorek dvou set šesti dětí stačí na srovnání hmotnosti a příjmu živin. Nestačí na to, aby se změřil výskyt jevu, který se vyskytuje řídce — a udušení je právě takový jev. Z toho pokusu tedy nelze vyčíst, že je metoda v tomhle ohledu prokazatelně bezpečná; lze vyčíst, že se v něm zvýšené riziko neukázalo.',
+          'Vzorek dvou set šesti dětí stačí na srovnání hmotnosti a příjmu živin. Nestačí na to, aby se změřil výskyt jevu, který nastává řídce — a udušení je právě takový jev. Z toho pokusu tedy nelze vyčíst, že je metoda v tomhle ohledu prokazatelně bezpečná; lze vyčíst, že se v něm zvýšené riziko neukázalo.',
         ],
       },
       {
@@ -181,7 +181,7 @@ export const nutrition: Guide[] = [
       {
         heading: 'Vitamin D',
         body: [
-          'Mateřské mléko ho obsahuje minimálně a kojenecká kůže ho v našich zeměpisných šířkách po většinu roku nevytvoří dost. Doporučení proto uvádějí denní suplementaci po celý první rok, v Česku obvykle pěti sty mezinárodních jednotek denně.',
+          'Mateřské mléko ho obsahuje minimálně a kojenecká kůže ho v našich zeměpisných šířkách po většinu roku nevytvoří dost. Doporučení proto uvádějí denní suplementaci po celý první rok, v Česku obvykle pět set mezinárodních jednotek denně.',
           'Kapky se podávají bez ohledu na to, jestli dítě jí pyré nebo si bere kusy do ruky. Je to jediná položka, u které se do dítěte něco dostává výhradně z rukou dospělého.',
           'Rodiče, kteří metodu zvolili z přesvědčení, že do dítěte nemá nikdo nic dávat, tenhle bod občas přehlíželi — a je to jedno z mála míst, kde metoda skutečně způsobovala škodu. Konkrétní dávkování urči s pediatrem.',
         ],
