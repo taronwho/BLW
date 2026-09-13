@@ -38,7 +38,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Petrželku nasekej co nejjemněji a vmíchej ji do hotového pyré nebo do kaše. Dodá jídlu svěží chuť, takže se dítě učí rozeznávat i jinou chuť než sladkou, aniž bys jídlo solila.',
+          'Petrželku nasekej co nejjemněji a vmíchej ji do hotového pyré nebo do kaše. Dodá jídlu svěží chuť, takže se dítě učí rozeznávat i jinou chuť než sladkou, a jídlo přitom zůstane nesolené.',
         caution: 'Přidávej ji až na konec, varem ztrácí vůni i vitamin C.',
       },
       '9m': {
@@ -644,7 +644,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, aniž bys jídlo musela sladit. Cejlonskou vybírej záměrně: běžná kasie obsahuje až 4 g kumarinu na kilogram, cejlonská skořice výrazně méně. Tolerovatelný denní příjem kumarinu je 0,1 mg na kilogram tělesné hmotnosti, takže u malého dítěte je to opravdu jen špetka.',
+          'Špetka skořice v jablečném pyré nebo v kaši dodá sladkou vůni, a jídlo přitom nemusíš sladit. Cejlonskou vybírej záměrně: běžná kasie obsahuje až 4 g kumarinu na kilogram, cejlonská skořice výrazně méně. Tolerovatelný denní příjem kumarinu je 0,1 mg na kilogram tělesné hmotnosti, takže u malého dítěte je to opravdu jen špetka.',
         caution: 'Skořicovou tyčinku v jídle nenechávej, je tvrdá.',
       },
       '9m': {
@@ -804,7 +804,7 @@ export const herbsSpices: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vanilkový lusk rozřízni, vyškrábni dřeň a vmíchej ji do kaše nebo do jogurtu. Vůně vanilky vytváří dojem sladké chuti, takže jídlo chutná sladce, aniž bys ho musela sladit.',
+          'Vanilkový lusk rozřízni, vyškrábni dřeň a vmíchej ji do kaše nebo do jogurtu. Vůně vanilky vytváří dojem sladké chuti, takže jídlo chutná sladce, a přitom ho nemusíš sladit.',
         caution: 'Vyvařený lusk z jídla vždy vyndej, je tuhý a vláknitý.',
       },
       '9m': {

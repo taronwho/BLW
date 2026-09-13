@@ -50,10 +50,34 @@ const VYKANI_SLOVESA = [
   'zůstaňte',
 ].join('|');
 
+/**
+ * Tvary 1. osoby množného čísla („uvaříme“, „necháme“).
+ *
+ * Nejde o vykání, ale o totéž nepohodlí: recept, který jinde říká „nakrájej“,
+ * najednou mluví za kuchařku v množném čísle.
+ */
+const MY_TVARY = [
+  'vaříme',
+  'uvaříme',
+  'kořeníme',
+  'mícháme',
+  'zamícháme',
+  'podáváme',
+  'nakrájíme',
+  'přidáme',
+  'necháme',
+  'dáme',
+  'zaděláme',
+  'upečeme',
+  'odebereme',
+  'zkontrolujeme',
+  'servírujeme',
+].join('|');
+
 /** Přivlastňovací zájmena, kterými se vyká jednomu člověku. */
 const VYKANI_ZAJMENA = ['vašeho', 'vaše', 'vaší', 'vašich', 'vašemu', 'vašem', 'váš'].join('|');
 
-const VYKANI = ceskeSlovo(`${VYKANI_SLOVESA}|${VYKANI_ZAJMENA}`);
+const VYKANI = ceskeSlovo(`${VYKANI_SLOVESA}|${VYKANI_ZAJMENA}|${MY_TVARY}`);
 
 export interface JazykNalez {
   /** Krátké pojmenování problému do hlášky validátoru. */
@@ -80,11 +104,14 @@ export function najdiTypografii(text: string): JazykNalez | null {
   return null;
 }
 
-/** Vykání v textu, který jinde tyká. */
+/** Vykání nebo „my“ v textu, který jinde tyká. */
 export function najdiVykani(text: string): JazykNalez | null {
   const m = VYKANI.exec(text);
   if (m === null) return null;
-  return { problem: `vykání „${m[0]}“ v textu, který jinde tyká`, ukazka: vyrizni(text, m.index) };
+  return {
+    problem: `jiné oslovení („${m[0]}“) v textu, který jinde tyká`,
+    ukazka: vyrizni(text, m.index),
+  };
 }
 
 function vyrizni(text: string, index: number): string {

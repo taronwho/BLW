@@ -698,7 +698,7 @@ describe('consistent-address', () => {
 
   it('zachytí rozkaz v množném čísle', () => {
     const recipe = makeRecipe({ babySteps: ['Placku nechte vychladnout a podávejte vlažnou.'] });
-    expect(expectFail('consistent-address', recipe, catalog)).toContain('vykání');
+    expect(expectFail('consistent-address', recipe, catalog)).toContain('jiné oslovení');
   });
 
   it('zachytí přivlastňovací vykání', () => {
@@ -708,11 +708,40 @@ describe('consistent-address', () => {
     expectFail('consistent-address', ingredient, catalog);
   });
 
+  it('zachytí i „my“ tvary, kterými mluví kuchařka za sebe', () => {
+    const recipe = makeRecipe({ babySteps: ['Ze žitné mouky zaděláme těsto a upečeme bochník.'] });
+    expect(expectFail('consistent-address', recipe, catalog)).toContain('zaděláme');
+  });
+
   it('nevadí mu tvar, který jen náhodou končí na -te', () => {
     // „chutě“, „soustě“ apod. nejsou rozkazy — hranice slova musí umět česky.
     expectPass(
       'consistent-address',
       makeRecipe({ babySteps: ['Nech dítě poznat různé chutě a soustě neposouvej.'] }),
+      catalog,
+    );
+  });
+});
+
+describe('known-typos', () => {
+  it('projde text bez známých překlepů', () => {
+    expectPass('known-typos', makeRecipe(), catalog);
+  });
+
+  it('zachytí „srolej“ místo „sroluj“', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku srolej do závitku a nech vychladnout.'] });
+    expect(expectFail('known-typos', recipe, catalog)).toContain('srolej');
+  });
+
+  it('zachytí „nastroubaný“ místo „nastrouhaný“', () => {
+    const recipe = makeRecipe({ meatSteps: ['Zamíchej nastroubaný sýr a dosol.'] });
+    expectFail('known-typos', recipe, catalog);
+  });
+
+  it('nevadí mu správný tvar „sroluj“', () => {
+    expectPass(
+      'known-typos',
+      makeRecipe({ babySteps: ['Placku sroluj do závitku a nech vychladnout.'] }),
       catalog,
     );
   });
@@ -746,6 +775,7 @@ describe('pokrytí pravidel', () => {
       'baby-serving-mentions-meat',
       'czech-typography',
       'consistent-address',
+      'known-typos',
     ];
     expect(safetyRules.map((rule) => rule.id)).toEqual(expected);
   });

@@ -115,7 +115,7 @@ export const nutrition: Guide[] = [
       {
         heading: 'Dobrá zpráva',
         body: [
-          'Zdroje zinku se se zdroji železa překrývají téměř dokonale — maso, vnitřnosti, luštěniny, semena a celozrnné obiloviny.',
+          'Zdroje zinku se překrývají se zdroji železa téměř dokonale — maso, vnitřnosti, luštěniny, semena a celozrnné obiloviny.',
           'Rada, jak se vyhnout jednomu nedostatku, se tedy kryje s radou, jak se vyhnout druhému. Dítě, které nezískává dost jednoho, obvykle nezískává dost ani druhého — a naopak.',
           'V katalogu surovin poznáš tyhle položky podle kategorií Maso a ryby, Luštěniny a Ořechy, semínka a tuky.',
         ],

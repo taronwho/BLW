@@ -51,7 +51,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Podávej celý malý muffin do ruky a nech dítě, ať si z něj samo odkusuje po kouscích.',
     },
     meatSteps: [
-      'Zbylé těsto dosuď podle chuti, rozděl do košíčků a peč 25 minut.',
+      'Zbylé těsto dolaď podle chuti, rozděl do košíčků a peč 25 minut.',
       'Vychladlé muffiny můžeš přelít tenkou vrstvou tvarohové polevy nebo je podávat jen tak.',
     ],
     vegetarianSteps: [
@@ -96,7 +96,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Nabídni celou sušenku do ruky; dítě už ji ukousne předními zuby a rozžvýká dásněmi.',
     },
     meatSteps: [
-      'Zbytek hmoty dosuď podle chuti a peč z ní větší sušenky 18 minut.',
+      'Zbytek hmoty dolaď podle chuti a peč z ní větší sušenky 18 minut.',
       'Do těsta pro dospělé se hodí i lžíce mletých ořechů nebo hořké čokolády.',
     ],
     vegetarianSteps: [
@@ -272,7 +272,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Podávej nanuk rovnou z formičky a nech dítě, ať ho drží samo; kousky jsou měkké a rychle se rozpouští.',
     },
     meatSteps: [
-      'Zbylé formičky doplň jogurtem, podle chuti je dosuď a zamraz.',
+      'Zbylé formičky doplň jogurtem, podle chuti je dolaď a zamraz.',
       'Před podáváním namoč formičku na pár vteřin do teplé vody, nanuk pak vyklouzne sám.',
     ],
     vegetarianSteps: [
@@ -405,7 +405,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Nabídni celý krajíček do ruky s lžící tvarohu nebo jogurtu k namáčení.',
     },
     meatSteps: [
-      'Zbylé těsto dosuď podle chuti a peč 45 minut; před podáváním nech chlebíček vychladnout ve formě.',
+      'Zbylé těsto dolaď podle chuti a peč 45 minut; před podáváním nech chlebíček vychladnout ve formě.',
       'Do těsta pro dospělé se hodí hrst mletých ořechů nebo kousky hořké čokolády.',
     ],
     vegetarianSteps: [
@@ -538,7 +538,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Nabídni čtvereček do ruky a nech dítě, ať si ho samo láme; k tomu se hodí lžíce jogurtu.',
     },
     meatSteps: [
-      'Plech pro dospělé dosuď podle chuti a před pečením posyp mletými dýňovými semínky.',
+      'Plech pro dospělé dolaď podle chuti a před pečením posyp mletými dýňovými semínky.',
       'Vychladlé řezy nakrájej na čtverečky a podávej s kávou nebo čajem.',
     ],
     vegetarianSteps: [

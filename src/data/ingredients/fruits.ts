@@ -1039,7 +1039,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Mandarinku oloupej, dílky zbav blány a dužinu rozdruž na kousky. Prohmatej každý dílek proti světlu a vyber z něj jadérka, u klementinek bez jader je práce podstatně rychlejší.',
+          'Mandarinku oloupej, dílky zbav blány a dužinu rozděl na kousky. Prohmatej každý dílek proti světlu a vyber z něj jadérka, u klementinek bez jader je práce podstatně rychlejší.',
         caution: 'Bílá vlákna kolem plodu jsou tuhá, odstraň je také.',
       },
       '9m': {
@@ -1055,7 +1055,7 @@ export const fruits: Ingredient[] = [
     },
     prepIdeas: [
       'dílky bez blan a jader do ruky',
-      'rozdružená dužina do jogurtu',
+      'rozdělená dužina do jogurtu',
       'šťáva do dušené mrkve',
       'kousky v ovocném salátu',
     ],

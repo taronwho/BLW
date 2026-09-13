@@ -45,7 +45,7 @@ export const soups: Recipe[] = [
       'Pokud je porce řídká, zahusti ji lžící vařené dýně rozmačkané vidličkou.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci, kterou dáš dítěti do ruky, nebo namoč do ní proužek chleba a nech ji sát.',
+      '6m': 'Podávej hustou polévku na lžíci, kterou dáš dítěti do ruky, nebo do ní namoč proužek chleba a nech dítě, ať z něj saje.',
       '9m': 'Nabídni polévku v mělké misce s kousky vařené dýně, které si dítě loví prsty.',
       '12m': 'Servíruj polévku v hrnečku se dvěma uchy; dítě už zvládne pár loků samo a zbytek dojídá lžící.',
     },
@@ -98,7 +98,7 @@ export const soups: Recipe[] = [
       '12m': 'Servíruj polévku v misce se lžící; dítě už si nudle i kousky kuřecího masa nabírá samo a vývar dopije z hrnečku.',
     },
     meatSteps: [
-      'Kuřecí stehna vlož do vývaru po odebrání dětské porce, vař je čtyřicet minut a maso obeř od kostí.',
+      'Kuřecí stehna vlož do vývaru po odebrání dětské porce, vař je čtyřicet minut a maso obeber od kostí.',
       'Vývar osol, vrať do něj zeleninu a maso, přidej uvařené nudle a posyp libečkem.',
     ],
     vegetarianSteps: [

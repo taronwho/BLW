@@ -18,8 +18,10 @@ import {
   GENDERED_ADDRESS_PATTERNS,
   HIDDEN_ANIMAL_PATTERNS,
   HONEY_PATTERNS,
+  KNOWN_TYPO_PATTERNS,
   LENGTHWISE_QUARTER_MARKERS,
   NUT_SAFE_FORMS,
+  GENDERED_SECOND_PERSON_REGEXPS,
   NEUTER_CHILD_REGEXPS,
   NUT_SEED_NOUNS,
   PLACEHOLDER_PATTERNS,
@@ -593,6 +595,12 @@ const neutralAddress: SafetyRule = {
         return `Oslovení v ženském rodě v poli ${field}: „${nalez.pattern}". O dítě se stará kdokoli z rodiny.`;
       }
       const bezDiakritiky = normalize(value);
+      for (const re of GENDERED_SECOND_PERSON_REGEXPS) {
+        const shoda = re.exec(bezDiakritiky);
+        if (shoda !== null) {
+          return `Ženský rod v oslovení rodiče, pole ${field}: „${shoda[0]}". O dítě se stará kdokoli z rodiny.`;
+        }
+      }
       for (const re of NEUTER_CHILD_REGEXPS) {
         const shoda = re.exec(bezDiakritiky);
         if (shoda !== null) {
@@ -634,6 +642,22 @@ const babyServingMentionsMeat: SafetyRule = {
     const chybi = STAGES.filter((stage) => !zminka(item.babyServing[stage]));
     if (chybi.length === 0) return null;
     return `Dětská linie připravuje maso nebo rybu, ale podání ve fázi ${chybi.join(', ')} o něm mlčí.`;
+  },
+};
+
+const knownTypos: SafetyRule = {
+  id: 'known-typos',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty neobsahují tvary, které už jednou prošly korekturou jako chybné.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = findPatterns(value, KNOWN_TYPO_PATTERNS, { honorNegation: false })[0];
+      if (nalez !== undefined) {
+        return `Chybný tvar „${nalez.pattern}" v poli ${field} — viz KNOWN_TYPO_PATTERNS.`;
+      }
+    }
+    return null;
   },
 };
 
@@ -692,6 +716,7 @@ export const safetyRules: readonly SafetyRule[] = [
   babyServingMentionsMeat,
   czechTypography,
   consistentAddress,
+  knownTypos,
 ];
 
 export const rulesById: ReadonlyMap<string, SafetyRule> = new Map(

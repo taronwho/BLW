@@ -57,7 +57,7 @@ export const lunchesDinners: Recipe[] = [
       'Před podáváním nech maso pět minut odpočinout a výpek z pekáče přelij přes zeleninu.',
     ],
     vegetarianSteps: [
-      'Na druhou polovinu pekáče nasyp uvařenou cizrnu, osol ji, promíchej s výpekem a peč 20 minut, dokud se navrchu nezačne škvírkovat.',
+      'Na druhou polovinu pekáče nasyp uvařenou cizrnu, osol ji, promíchej s výpekem a peč 20 minut, dokud cizrna navrchu nezačne křupat.',
       'Hotovou cizrnu s pečenou zeleninou posyp čerstvým tymiánem a zakápni lžící řepkového oleje.',
     ],
     vegetarianProteinSwap:
@@ -742,7 +742,7 @@ export const lunchesDinners: Recipe[] = [
     ],
     baseSteps: [
       'Červenou řepu vydrhni, zabal každou zvlášť do alobalu a peč při 190 °C hodinu, dokud jí nůž projede bez odporu.',
-      'Brambory uvař ve slupce v nesolené vodě a nech je vychladnout natolik, abys je udržela v ruce.',
+      'Brambory uvař ve slupce v nesolené vodě a nech je vychladnout natolik, aby se daly vzít do ruky.',
       'Upečenou řepu oloupej pod studenou vodou, nakrájej ji na kostky a zakápni jablečným octem.',
       'Brambory oloupej, nakrájej na kostky a smíchej s řepou i s nasekaným koprem.',
       'Salát rozděl na tři porce a dokonči podle linií.',
