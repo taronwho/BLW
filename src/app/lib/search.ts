@@ -1,4 +1,4 @@
-import { normalize } from '@/safety';
+import { normalize } from '@/safety/text';
 import type { Ingredient, Recipe } from '@/types';
 
 /**
