@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-import { recipes } from '@/data';
+import { ingredients, recipes } from '@/data';
 import {
   acceptDisclaimer,
   horizontalOverflow,
@@ -65,16 +65,32 @@ for (const screen of SCREENS) {
     await acceptDisclaimer(page);
     await screen.open(page);
 
-    const badge = page.getByTestId('riziko-duseni').first();
-    await expect(badge).toBeVisible();
-    // slovo
-    await expect(badge).toContainText(/(Nízké|Střední|Vysoké) riziko dušení/);
-    // ikona
-    await expect(badge.locator('svg')).toHaveCount(1);
-    // barva — odpovídá úrovni, ale nikdy není jediným nositelem informace.
-    // Hodnoty se berou z tailwind.config.js, aby test nepadal po úpravě palety.
-    const color = await badge.evaluate((element) => window.getComputedStyle(element).color);
-    expect(BARVY_RIZIKA).toContain(color);
+    // Kontroluje se každý štítek rizika na obrazovce, ne jen první. Seznam
+    // i detail používají jiné komponenty a obě musí držet totéž pravidlo,
+    // proto se hledá podle `data-risk`, ne podle testId jedné z nich.
+    const stitky = page.locator('[data-risk]');
+    const pocet = await stitky.count();
+    expect(pocet, `${screen.name}: na obrazovce není žádný štítek rizika dušení`).toBeGreaterThan(0);
+
+    // docs/SPEC.md kap. 5: barva nikdy nesmí být jediným nositelem informace,
+    // proto musí každý štítek nést i slovo a ikonu.
+    const vady = await stitky.evaluateAll((prvky) =>
+      prvky
+        .map((prvek) => ({
+          text: prvek.textContent ?? '',
+          slovo: /(nízké|střední|vysoké) riziko dušení/i.test(prvek.textContent ?? ''),
+          ikona: prvek.querySelectorAll('svg').length === 1,
+        }))
+        .filter((one) => !one.slovo || !one.ikona),
+    );
+    expect(vady, `${screen.name}: štítek bez slova nebo bez ikony`).toEqual([]);
+
+    // Barva odpovídá úrovni. Hodnoty se berou z tailwind.config.js, aby test
+    // nepadal po úpravě palety.
+    const barvy = await stitky.evaluateAll((prvky) => [
+      ...new Set(prvky.map((prvek) => window.getComputedStyle(prvek).color)),
+    ]);
+    for (const barva of barvy) expect(BARVY_RIZIKA).toContain(barva);
   });
 }
 
@@ -521,4 +537,77 @@ test('filtr živin u surovin upřesňuje druh železa', async ({ page }) => {
   await page.getByTestId('filtr-sily').getByTestId('chip-vyznamny').click();
   const vyznamne = (await count.textContent()) ?? '';
   expect(Number(vyznamne.split(' ')[0])).toBeLessThanOrEqual(Number(hemove.split(' ')[0]));
+});
+
+test('oblíbenou surovinu jde označit rovnou ze seznamu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await page.getByTestId('hledat-surovinu').fill('brokolice');
+
+  const hvezda = page.getByTestId('oblibene-brokolice');
+  await expect(hvezda).toHaveAttribute('aria-pressed', 'false');
+  await hvezda.click();
+  await expect(hvezda).toHaveAttribute('aria-pressed', 'true');
+
+  // Klepnutí na hvězdičku nesmí otevřít detail suroviny.
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+
+  await page.getByTestId('hledat-surovinu').fill('');
+  await page.getByTestId('filtr-oblibene').click();
+  await expect(page.getByTestId('pocet-surovin')).toHaveText(`1 z ${ingredients.length} surovin`);
+
+  // A objeví se v deníku mezi oblíbenými.
+  await navLink(page, 'Deník').click();
+  await expect(page.getByTestId('pocet-ochutnanych')).toBeVisible();
+  await expect(page.getByTestId('oblibene-polozky')).toContainText('brokolice');
+});
+
+test('oblíbený recept jde označit rovnou ze seznamu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  const count = page.getByTestId('pocet-receptu');
+  const vse = (await count.textContent()) ?? '';
+  const karta = page.getByTestId('seznam-receptu').locator('li').first();
+  const hvezda = karta.getByRole('button', { name: /oblíbených/ });
+
+  await hvezda.click();
+  await expect(hvezda).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('seznam-receptu')).toBeVisible();
+
+  await page.getByTestId('filtr-oblibene').click();
+  await expect(count).toHaveText(`1 z ${recipes.length} receptů`);
+  await expect(count).not.toHaveText(vse);
+});
+
+test('alergen je vidět u suroviny v seznamu i uvnitř receptu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await page.getByTestId('hledat-surovinu').fill('vejce slepici');
+  await expect(page.getByTestId('alergen-vejce-slepici')).toContainText('alergen: vejce');
+
+  // Surovina bez alergenu štítek nemá — prázdné místo by jen rozhodilo řádku.
+  await page.getByTestId('hledat-surovinu').fill('mrkev');
+  await expect(page.getByTestId('alergen-mrkev')).toBeHidden();
+
+  await page.goto('./#/recepty/hovezi-ragu-testoviny');
+  await expect(page.getByTestId('alergen-suroviny-testoviny-semolinove')).toContainText(
+    'alergen: pšenice a lepek',
+  );
+});
+
+test('v seznamu se nízké riziko dušení nevypisuje', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  // Mrkev je vysoké riziko, cibule nízké — v seznamu svítí jen ta první.
+  await page.getByTestId('hledat-surovinu').fill('mrkev');
+  await expect(page.getByTestId('duseni-mrkev')).toContainText('vysoké riziko dušení');
+
+  await page.getByTestId('hledat-surovinu').fill('cibule');
+  await expect(page.getByTestId('duseni-cibule')).toBeHidden();
+
+  // V detailu suroviny stupnice zůstává celá, i s nízkým rizikem.
+  await page.getByTestId('surovina-cibule').click();
+  await expect(page.getByTestId('riziko-duseni')).toContainText('Nízké riziko dušení');
 });

@@ -1,4 +1,4 @@
-import { Clock, Leaf, RotateCcw, Search, ShoppingBasket, Sparkles, X } from 'lucide-react';
+import { Clock, Leaf, RotateCcw, Search, ShoppingBasket, Sparkles, Star, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,8 @@ import { recipeNutrients } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { KEY_ALLERGENS, RECIPE_CATEGORIES } from '@/types';
 import type { AllergenGroup, Recipe } from '@/types';
-import { ChokingBadge } from '../components/ChokingBadge';
+import { ChokingChip } from '../components/SafetyChips';
+import { FavoriteToggle } from '../components/FavoriteToggle';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
@@ -52,6 +53,7 @@ const TIME_OPTIONS: readonly ChipOption[] = [
 /** Seznam receptů s filtry (docs/SPEC.md kap. 4.3). */
 export function RecipesScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
+  const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('vse');
   const [time, setTime] = useState('vse');
@@ -60,6 +62,7 @@ export function RecipesScreen(): ReactNode {
   const [sila, setSila] = useState('aspon');
   const [sort, setSort] = useState<SortKey>('abeceda');
   const [vegetarianOnly, setVegetarianOnly] = useState(false);
+  const [oblibene, setOblibene] = useState(false);
   const [withoutAllergen, setWithoutAllergen] = useState<AllergenGroup | ''>('');
   const [pantryOpen, setPantryOpen] = useState(false);
   const [pantry, setPantry] = useState<string[]>([]);
@@ -82,6 +85,7 @@ export function RecipesScreen(): ReactNode {
     time !== 'vse' ||
     ziviny.length > 0 ||
     vegetarianOnly ||
+    oblibene ||
     withoutAllergen !== '' ||
     pantry.length > 0;
 
@@ -112,6 +116,7 @@ export function RecipesScreen(): ReactNode {
     setDruhZeleza('vse');
     setSila('aspon');
     setVegetarianOnly(false);
+    setOblibene(false);
     setWithoutAllergen('');
     setPantry([]);
   }
@@ -124,6 +129,7 @@ export function RecipesScreen(): ReactNode {
         if (category !== 'vse' && recipe.category !== category) return false;
         if (time !== 'vse' && recipe.timeMinutes > Number(time)) return false;
         if (vegetarianOnly && !recipeIsVegetarian(recipe)) return false;
+        if (oblibene && !favorites.has(recipe.id)) return false;
         if (!vyhovujeZivinam(recipeNutrients(recipe), ziviny, druhZeleza, sila)) return false;
         if (withoutAllergen !== '' && recipeAllergens(recipe).includes(withoutAllergen)) return false;
         if (pantrySet.size > 0 && !recipe.ingredients.some((ref) => pantrySet.has(ref.ingredientId))) {
@@ -131,7 +137,19 @@ export function RecipesScreen(): ReactNode {
         }
         return true;
       }),
-    [query, category, time, ziviny, druhZeleza, sila, vegetarianOnly, withoutAllergen, pantrySet],
+    [
+      query,
+      category,
+      time,
+      ziviny,
+      druhZeleza,
+      sila,
+      vegetarianOnly,
+      oblibene,
+      favorites,
+      withoutAllergen,
+      pantrySet,
+    ],
   );
 
   const serazene = useMemo(() => sortRecipes(visible, sort), [visible, sort]);
@@ -239,6 +257,13 @@ export function RecipesScreen(): ReactNode {
         <FilterGroup nadpis="Další">
           <div className="flex flex-wrap gap-x-2">
             <ChipButton
+              label="oblíbené"
+              Icon={Star}
+              pressed={oblibene}
+              onClick={() => setOblibene((value) => !value)}
+              testId="filtr-oblibene"
+            />
+            <ChipButton
               label="jen vegetariánské"
               Icon={Leaf}
               pressed={vegetarianOnly}
@@ -343,7 +368,12 @@ export function RecipesScreen(): ReactNode {
       ) : (
         <ul className="flex flex-col gap-2" data-testid="seznam-receptu">
           {serazene.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} childMonths={months} />
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              childMonths={months}
+              favorite={favorites.has(recipe.id)}
+            />
           ))}
         </ul>
       )}
@@ -351,16 +381,24 @@ export function RecipesScreen(): ReactNode {
   );
 }
 
-function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: number | null }): ReactNode {
+function RecipeCard({
+  recipe,
+  childMonths,
+  favorite,
+}: {
+  recipe: Recipe;
+  childMonths: number | null;
+  favorite: boolean;
+}): ReactNode {
   const vegetarian = recipeIsVegetarian(recipe);
   const tooEarly = childMonths !== null && childMonths < recipe.minAgeMonths;
   const nutrients = recipeNutrients(recipe);
   return (
-    <li>
+    <li className="flex items-stretch gap-2 rounded-xl bg-surface p-2">
       <Link
         to={`/recepty/${recipe.id}`}
         data-testid={`recept-${recipe.id}`}
-        className="flex min-h-touch flex-col gap-2 rounded-xl bg-surface p-3"
+        className="flex min-h-touch min-w-0 flex-1 flex-col gap-2 rounded-lg p-1"
       >
         <span className="font-medium">{recipe.titleCz}</span>
         <span className="flex flex-wrap items-center gap-1.5 text-[11px] text-muted">
@@ -380,14 +418,18 @@ function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: numb
               bezmasý základ
             </span>
           )}
-          {recipe.tags.map((tag) => (
-            <span key={tag} className="rounded-lg bg-paper px-2 py-0.5 font-medium">
-              {tag}
-            </span>
-          ))}
+          {/* Štítek „vegetariánské" nesou všechny bezmasé recepty, takže vedle
+              chlebíčku „bezmasý základ" by stál dvakrát totéž. */}
+          {recipe.tags
+            .filter((tag) => !(vegetarian && tag === 'vegetariánské'))
+            .map((tag) => (
+              <span key={tag} className="rounded-lg bg-paper px-2 py-0.5 font-medium">
+                {tag}
+              </span>
+            ))}
         </span>
-        <span className="flex flex-wrap items-center gap-2">
-          <ChokingBadge risk={recipeChokingRisk(recipe)} />
+        <span className="flex flex-wrap items-center gap-x-1.5">
+          <ChokingChip risk={recipeChokingRisk(recipe)} testId={`duseni-receptu-${recipe.id}`} />
           <NutrientBadge
             profile={nutrients}
             title={recipe.titleCz}
@@ -397,6 +439,9 @@ function RecipeCard({ recipe, childMonths }: { recipe: Recipe; childMonths: numb
           />
         </span>
       </Link>
+      <span className="flex shrink-0 items-start">
+        <FavoriteToggle id={recipe.id} name={recipe.titleCz} favorite={favorite} />
+      </span>
     </li>
   );
 }
