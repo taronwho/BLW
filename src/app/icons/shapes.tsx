@@ -202,6 +202,79 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 3: plísňové sýry, kysané mléčné, zelenina ───────────────────
+  hermelin: (
+    <>
+      <circle cx="32" cy="34" r="20" fill={C.bila} stroke={C.bilaStin} strokeWidth="2" />
+      <path d="M32 14a20 20 0 0 1 17 30H15a20 20 0 0 1 17-30Z" fill={C.krem} opacity="0.5" />
+      <path d="M22 30c3-2 6-2 9 0M36 40c3-2 6-2 9 0M26 42c2-2 5-2 7 0" stroke={C.bilaStin} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M32 34l12 12a17 17 0 0 1-24 0l12-12Z" fill={C.zluta} opacity="0.35" />
+    </>
+  ),
+  niva: (
+    <>
+      {klin(C.bila, C.bilaStin)}
+      <circle cx="30" cy="36" r="3" fill="#4A6B8A" />
+      <circle cx="39" cy="42" r="2.5" fill="#3A5570" />
+      <circle cx="34" cy="46" r="2.5" fill="#4A6B8A" />
+      <circle cx="42" cy="34" r="2" fill="#3A5570" />
+    </>
+  ),
+  'kozi-syr-zrajici': (
+    <>
+      <ellipse cx="32" cy="36" rx="17" ry="15" fill={C.bila} stroke={C.hnedaSvetla} strokeWidth="2.5" />
+      <ellipse cx="32" cy="36" rx="9" ry="8" fill={C.kremTmavy} />
+      <path d="M24 28c-3-2-4-5-3-8M40 28c3-2 4-5 3-8" stroke={C.hnedaSvetla} strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  podmasli: krabice(
+    C.zlutaTmava,
+    <>
+      <ellipse cx="32" cy="44" rx="10" ry="8" fill={C.krem} stroke={C.hnedaSvetla} strokeWidth="2" />
+      <path d="M27 44c3-3 7-3 10 0" stroke={C.hnedaSvetla} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>,
+  ),
+  'acidofilni-mleko': kelimek(C.bila, C.zelenBleda, <path d="M26 38c4-3 8-3 12 0" stroke={C.zelen} strokeWidth="2.5" strokeLinecap="round" fill="none" />),
+  'vejce-kreplci': (
+    <>
+      <ellipse cx="24" cy="38" rx="9" ry="12" fill={C.krem} />
+      <ellipse cx="41" cy="34" rx="9" ry="12" fill={C.bila} />
+      <circle cx="22" cy="34" r="2" fill={C.hneda} />
+      <circle cx="27" cy="42" r="1.8" fill={C.hneda} />
+      <circle cx="21" cy="44" r="1.5" fill={C.hnedaTmava} />
+      <circle cx="39" cy="30" r="2" fill={C.hneda} />
+      <circle cx="44" cy="38" r="1.8" fill={C.hnedaTmava} />
+    </>
+  ),
+  'creme-fraiche': kelimek(
+    C.bila,
+    C.hneda,
+    <path d="M24 40c3-5 7-7 8-12 1 5 5 7 8 12-2 5-6 7-8 7s-6-2-8-7Z" fill={C.bila} stroke={C.hnedaSvetla} strokeWidth="2" />,
+  ),
+  'zeli-cervene': (
+    <>
+      <circle cx="32" cy="34" r="20" fill="#7C3A78" />
+      <path d="M32 14c-7 6-10 13-10 20s3 13 10 20" stroke="#A85FA0" strokeWidth="3" fill="none" />
+      <path d="M32 14c7 6 10 13 10 20s-3 13-10 20" stroke="#A85FA0" strokeWidth="3" fill="none" />
+      <path d="M12 34h40" stroke="#5E2A5C" strokeWidth="2.5" />
+    </>
+  ),
+  'jarni-cibulka': (
+    <>
+      <path d="M28 52c0-4 1-7 2-9h4c1 2 2 5 2 9-1 2-3 3-4 3s-3-1-4-3Z" fill={C.bila} />
+      <path d="M30 44c-2-10-6-18-10-24 5 2 9 8 11 16M34 44c2-10 6-18 10-24-5 2-9 8-11 16" fill={C.zelen} />
+      <path d="M31 44c-1-12-1-22 1-30 2 8 2 18 1 30Z" fill={C.zelenTmava} />
+    </>
+  ),
+  salotka: (
+    <>
+      <path d="M32 20c8 0 13 8 13 17s-6 15-13 15-13-6-13-15 5-17 13-17Z" fill="#C08A6E" />
+      <path d="M32 20c3 0 5 8 5 17s-2 15-5 15" stroke="#9E6B52" strokeWidth="2.5" fill="none" />
+      <path d="M32 20c-3 0-5 8-5 17s2 15 5 15" stroke="#9E6B52" strokeWidth="2.5" fill="none" />
+      <path d="M30 20c-1-5-2-8-4-10 3 1 5 4 6 9M34 20c1-5 2-8 4-10-3 1-5 4-6 9" fill={C.zelenTmava} />
+    </>
+  ),
+
   // ── dávka 2: rajčatové základy, mletá masa, luštěniny ─────────────────
   'rajcatovy-protlak': (
     <>
