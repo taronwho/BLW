@@ -6,7 +6,7 @@ import { ingredients } from '@/data';
 import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES } from '@/types';
-import type { Ingredient } from '@/types';
+import type { AllergenGroup, Ingredient } from '@/types';
 import { ageInMonths } from '../lib/age';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
@@ -26,6 +26,7 @@ import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
 import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
+import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
 import { matchesIngredient } from '../lib/search';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
@@ -64,6 +65,7 @@ export function IngredientsScreen(): ReactNode {
   const [vhodneTed, setVhodneTed] = useState(false);
   const [sezonni, setSezonni] = useState(false);
   const [alergeny, setAlergeny] = useState(false);
+  const [bezAlergenu, setBezAlergenu] = useState<AllergenGroup | ''>('');
   const [sort, setSort] = useState<SortKey>('abeceda');
 
   const tasted = useMemo(() => tastedIds(state), [state]);
@@ -84,6 +86,7 @@ export function IngredientsScreen(): ReactNode {
         if (vhodneTed && !suitableNow(item, months)) return false;
         if (sezonni && !(item.seasonCz.length > 0 && inSeason(item, month))) return false;
         if (alergeny && !item.isKeyAllergen) return false;
+        if (bezAlergenu !== '' && item.allergens.includes(bezAlergenu)) return false;
         if (!vyhovujeZivinam(nutrientProfile(item), ziviny, druhZeleza, sila)) return false;
         return true;
       }),
@@ -95,6 +98,7 @@ export function IngredientsScreen(): ReactNode {
       vhodneTed,
       sezonni,
       alergeny,
+      bezAlergenu,
       ziviny,
       druhZeleza,
       sila,
@@ -116,6 +120,7 @@ export function IngredientsScreen(): ReactNode {
     vhodneTed ||
     sezonni ||
     alergeny ||
+    bezAlergenu !== '' ||
     ziviny.length > 0;
 
   function prepniZivinu(id: string): void {
@@ -138,6 +143,7 @@ export function IngredientsScreen(): ReactNode {
     setVhodneTed(false);
     setSezonni(false);
     setAlergeny(false);
+    setBezAlergenu('');
   }
 
   return (
@@ -256,6 +262,13 @@ export function IngredientsScreen(): ReactNode {
               testId="filtr-alergeny"
             />
           </div>
+          <FilterSelect
+            label="Bez alergenu"
+            options={ALLERGEN_FILTER_OPTIONS}
+            selected={bezAlergenu === '' ? 'vse' : bezAlergenu}
+            onSelect={(id) => setBezAlergenu(id === 'vse' ? '' : (id as AllergenGroup))}
+            testId="filtr-bez-alergenu"
+          />
         </FilterGroup>
 
         {filtrujeSe && (
