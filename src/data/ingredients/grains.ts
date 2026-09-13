@@ -49,7 +49,7 @@ export const grains: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí ovesnou kaši i s většími kusy ovoce nebo s mletými ořechovými máslem. Vločky se hodí i jako zahušťovadlo do polévek a do placek pečených bez tuku.',
+          'Batole jí ovesnou kaši i s většími kusy ovoce nebo s ořechovým máslem. Vločky se hodí i jako zahušťovadlo do polévek a do placek pečených bez tuku.',
         caution: 'Instantní kaše z obchodu kontroluj na přidanou sladkou složku.',
       },
     },

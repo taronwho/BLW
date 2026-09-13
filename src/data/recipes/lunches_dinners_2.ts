@@ -184,7 +184,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'fazole-bile', amount: '250 g uvařených', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Ze žitné mouky a vody zaděláme těsto na chléb, necháme vykynout a upečeme bochník.',
+      'Ze žitné mouky a vody zadělej těsto na chléb, nech ho vykynout a upeč bochník.',
       'Vychladlý chléb nakrájej na tenké krajíce a odkroj tvrdou patku.',
       'Měkký tvaroh promíchej s nasekanou pažitkou do hladké pomazánky.',
       'Ředkvičky omyj a nakrájej je na tenké plátky, ne na kolečka v celku.',
@@ -395,7 +395,7 @@ export const lunchesDinners2: Recipe[] = [
       '12m': 'Servíruj rizoto v misce s celými kolečky chřestu; batole už s ním zachází lžící samo.',
     },
     meatSteps: [
-      'Do porce pro masitou variantu zamíchej nastroubaný tvrdý sýr grana padano, osol a opepři.',
+      'Do porce pro masitou variantu zamíchej nastrouhaný tvrdý sýr grana padano, osol a opepři.',
       'Rizoto podávej hned, po vychladnutí ztuhne.',
     ],
     vegetarianSteps: [
@@ -613,7 +613,7 @@ export const lunchesDinners2: Recipe[] = [
       'Listy krátce spař vroucí vodou, aby zvláčněly a daly se srolovat.',
       'Tvaroh promíchej s uvařenou quinoou a nasekaným koprem do hutné náplně.',
       'Okurku nastrouhej nahrubo, vymačkej z ní vodu a vmíchej ji do náplně.',
-      'Na každý list dej lžíci náplně a srolej ho do závitku.',
+      'Na každý list dej lžíci náplně a sroluj ho do závitku.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce tvarohové náplně do misky, dřív než se plní a rolují listy.',
@@ -1095,7 +1095,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Z odebrané směsi vytvaruj podlouhlý váleček velikosti prstu, který dítě sevře v pěsti.',
       'Opeč ho pomaleji a zkontroluj rozlomením, že je propečený skrz naskrz.',
-      'Dip pro dítě ředěj jogurtem víc než pro dospělé, husté tahini se lepí na patro.',
+      'Dip pro dítě řeď jogurtem víc než pro dospělé, husté tahini se lepí na patro.',
     ],
     babyServing: {
       '6m': 'Podávej váleček velikosti prstu a k němu řídký jogurtový dip na namáčení.',
@@ -1134,7 +1134,7 @@ export const lunchesDinners2: Recipe[] = [
       'Kroupy propláchni a vař je čtyřicet minut, dokud nejsou úplně měkké.',
       'Mrkev nakrájej na silnější kolečka a osmahni ji na ghí se snítkami tymiánu.',
       'Králičí stehna vlož k mrkvi, podlij vodou a dus je hodinu pod pokličkou doměkka.',
-      'Uvařené maso vyjmi a nech ho zchladnout natolik, abys ho mohla obrat od kostí.',
+      'Uvařené maso vyjmi a nech ho zchladnout natolik, aby šlo obrat od kostí.',
       'Kroupy promíchej s mrkví a šťávou z dušení a rozděl vše podle linií.',
     ],
     babySplitPoint:

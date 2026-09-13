@@ -48,7 +48,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj kaši v misce s vlastní lžící a kousky hrušky navrch; dítě už si nabírá samo a dojídá s malou pomocí.',
     },
     meatSteps: [
-      'Kaši pro dospělé dosuď skořicí, případně lžičkou medu, a přisyp zbytek syrových hrušek.',
+      'Kaši pro dospělé dochuť skořicí, případně lžičkou medu, a přisyp zbytek syrových hrušek.',
       'Navrch přidej lžíci mletých lněných semínek a dolij trochu mléka, pokud je kaše příliš hustá.',
     ],
     vegetarianSteps: [
@@ -846,7 +846,7 @@ export const breakfast: Recipe[] = [
     babyServing: {
       '6m': 'Podávej pásek chleba s žervé přes celou dlaň a k tomu delší plátek okurky, ze kterého dítě saje šťávu.',
       '9m': 'Chléb nakrájej na kostky a okurku na kostičky; obojí si dítě sbírá špetkou z talíře.',
-      '12m': 'Nabídni malý obložený chlebíček, který si dítě samo drží, a nech ji odkusovat vlastním tempem.',
+      '12m': 'Nabídni malý obložený chlebíček, který si dítě samo drží, a nech ho odkusovat vlastním tempem.',
     },
     meatSteps: [
       'Zbylé žervé osol, opepři a namaž na krajíce; navrch narovnej plátky okurky a posyp pažitkou.',

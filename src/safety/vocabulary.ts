@@ -279,14 +279,53 @@ export const GENDERED_ADDRESS_PATTERNS: readonly string[] = [
 ];
 
 /**
- * Shoda po slově „dítě". Střední rod, tedy `samo`, ne `sama`; `zvyklé`, ne
- * `zvyklá`. Chytá zbytky po přepisu textů z dcery na obecné dítě.
+ * Ženský rod v oslovení rodiče a shoda po slově „dítě".
  *
- * Tohle jsou regulární výrazy nad textem bez diakritiky, ne vzory pro
- * `findPatterns` — mezi „dítě" a špatným tvarem stojí pokaždé jiná slova.
+ * Regulární výrazy nad textem bez diakritiky, ne vzory pro `findPatterns` —
+ * mezi spojkou a špatným tvarem stojí pokaždé jiná slova.
+ */
+export const GENDERED_SECOND_PERSON_REGEXPS: readonly RegExp[] = [
+  // „bys“ je vždycky 2. osoba jednotného čísla, takže příčestí za ním patří
+  // rodiči. Ženský tvar tam tedy vylučuje polovinu uživatelů — na rozdíl od
+  // „aby se chuť rozjasnila“, kde je podmětem věc.
+  /\b(?:bys|abys|kdybys)\b(?:\s+\w+){0,4}\s+\w{2,}(?:la|ila|ala|ela|ovala|yla)\b/,
+  /\baniz bys\b/,
+];
+
+/**
+ * Shoda po slově „dítě". Střední rod, tedy `samo`, ne `sama`; `zvyklé`, ne
+ * `zvyklá`.
  */
 export const NEUTER_CHILD_REGEXPS: readonly RegExp[] = [
   /\bdite\b[^.!?]{0,80}\bsama\b/,
   /\bdite\b[^.!?]{0,80}\b(zvykla|jista|schopna|nucena|rada)\b/,
   /\bmiminko\b[^.!?]{0,80}\bsama\b/,
 ];
+
+/**
+ * Tvary, které v korektuře prošly českým slovníkem jako neexistující.
+ *
+ * Kontrola pravopisu proti hunspellovému slovníku je jednorázový audit —
+ * potřebuje slovník o třech megabajtech a Python, což do `npm run validate`
+ * nepatří. Co ale audit najde, se sem zapíše, aby se to nevrátilo příští
+ * dávkou textů. Zapisuje se jen to, co slovník nezná a co má zřejmý správný
+ * tvar; kuchařské termíny jako „poduš“ nebo „zvlažnět“ sem nepatří.
+ *
+ * Ve tvaru pro `findPatterns`, tedy bez diakritiky.
+ */
+export const KNOWN_TYPO_PATTERNS: readonly string[] = [
+  'dosud podle chuti', // „dosuď“ je tvar od dosoudit, ne od dochutit
+  'skvirkovat',
+  'skvirkuje',
+  'obermag',
+  'nastroubany',
+  'nastroubana',
+  'nastroubane',
+  'rozdruz',
+  'rozdruzena',
+  'rozdruzene',
+  'redej', // rozkaz od ředit je „řeď“
+  'srolej', // rozkaz od srolovat je „sroluj“
+  'zadel vlacne', // rozkaz od zadělat je „zadělej“
+];
+

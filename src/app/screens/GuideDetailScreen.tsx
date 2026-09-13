@@ -134,7 +134,7 @@ export function GuideDetailScreen(): ReactNode {
       </section>
 
       <p className="rounded-2xl bg-surface/60 px-4 py-3 text-xs leading-relaxed text-muted">
-        Tenhle text nenahrazuje kurz první pomoci ani pediatra. Konkrétní postup u vašeho dítěte
+        Tenhle text nenahrazuje kurz první pomoci ani pediatra. Konkrétní postup u tvého dítěte
         patří dětskému lékaři.
       </p>
     </article>

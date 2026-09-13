@@ -11,14 +11,17 @@ import {
   trigrams,
 } from './text';
 import { coverageExceptionReason, isCoverageException } from './coverage-exceptions';
+import { najdiTypografii, najdiVykani } from './language';
 import { isIngredient, isRecipe, type SafetyRule } from './types';
 import {
   BANNED_GENERIC_PHRASES,
   GENDERED_ADDRESS_PATTERNS,
   HIDDEN_ANIMAL_PATTERNS,
   HONEY_PATTERNS,
+  KNOWN_TYPO_PATTERNS,
   LENGTHWISE_QUARTER_MARKERS,
   NUT_SAFE_FORMS,
+  GENDERED_SECOND_PERSON_REGEXPS,
   NEUTER_CHILD_REGEXPS,
   NUT_SEED_NOUNS,
   PLACEHOLDER_PATTERNS,
@@ -592,6 +595,12 @@ const neutralAddress: SafetyRule = {
         return `Oslovení v ženském rodě v poli ${field}: „${nalez.pattern}". O dítě se stará kdokoli z rodiny.`;
       }
       const bezDiakritiky = normalize(value);
+      for (const re of GENDERED_SECOND_PERSON_REGEXPS) {
+        const shoda = re.exec(bezDiakritiky);
+        if (shoda !== null) {
+          return `Ženský rod v oslovení rodiče, pole ${field}: „${shoda[0]}". O dítě se stará kdokoli z rodiny.`;
+        }
+      }
       for (const re of NEUTER_CHILD_REGEXPS) {
         const shoda = re.exec(bezDiakritiky);
         if (shoda !== null) {
@@ -636,6 +645,50 @@ const babyServingMentionsMeat: SafetyRule = {
   },
 };
 
+const knownTypos: SafetyRule = {
+  id: 'known-typos',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty neobsahují tvary, které už jednou prošly korekturou jako chybné.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = findPatterns(value, KNOWN_TYPO_PATTERNS, { honorNegation: false })[0];
+      if (nalez !== undefined) {
+        return `Chybný tvar „${nalez.pattern}" v poli ${field} — viz KNOWN_TYPO_PATTERNS.`;
+      }
+    }
+    return null;
+  },
+};
+
+const czechTypography: SafetyRule = {
+  id: 'czech-typography',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty používají české uvozovky, výpustku … a jednoduché mezery.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = najdiTypografii(value);
+      if (nalez !== null) return `${nalez.problem} v poli ${field}: „${nalez.ukazka}“.`;
+    }
+    return null;
+  },
+};
+
+const consistentAddress: SafetyRule = {
+  id: 'consistent-address',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Texty rodiči tykají — vykání se mezi ně nemíchá.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const nalez = najdiVykani(value);
+      if (nalez !== null) return `${nalez.problem}, pole ${field}: „${nalez.ukazka}“.`;
+    }
+    return null;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -661,6 +714,9 @@ export const safetyRules: readonly SafetyRule[] = [
   ingredientCoverage,
   neutralAddress,
   babyServingMentionsMeat,
+  czechTypography,
+  consistentAddress,
+  knownTypos,
 ];
 
 export const rulesById: ReadonlyMap<string, SafetyRule> = new Map(

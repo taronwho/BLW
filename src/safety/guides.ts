@@ -1,5 +1,6 @@
 import type { Guide } from '@/types';
 import { DENIED_DOMAINS, TIER1_DOMAINS, TIER2_DOMAINS } from './domains';
+import { najdiTypografii, najdiVykani } from './language';
 import { containsPattern, hostMatches } from './text';
 import { PLACEHOLDER_PATTERNS } from './vocabulary';
 
@@ -58,6 +59,10 @@ export function checkGuides(guides: readonly Guide[]): GuideFinding[] {
       if (containsPattern(value, PLACEHOLDER_PATTERNS, { honorNegation: false })) {
         push(guide.id, `Zástupný text v poli ${field}: „${value.slice(0, 60)}".`);
       }
+      const typo = najdiTypografii(value);
+      if (typo !== null) push(guide.id, `${typo.problem} v poli ${field}: „${typo.ukazka}“.`);
+      const vykani = najdiVykani(value);
+      if (vykani !== null) push(guide.id, `${vykani.problem}, pole ${field}: „${vykani.ukazka}“.`);
     }
 
     // Zdroje: stejná politika domén jako u surovin (docs/BEZPECNOST.md kap. 1).

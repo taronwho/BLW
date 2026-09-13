@@ -32,7 +32,7 @@ export function StageSwitch({ value, onChange, currentStage, label = 'Fáze' }: 
             >
               {STAGE_LABELS[stage]}
               {currentStage === stage && (
-                <span className={`block text-[10px] font-medium ${active ? 'text-white/80' : 'text-muted'}`}>
+                <span className={`block text-[10px] font-medium ${active ? 'text-white' : 'text-muted'}`}>
                   teď
                 </span>
               )}

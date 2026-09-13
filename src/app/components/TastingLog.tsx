@@ -127,7 +127,7 @@ function DraftForm({
       {ADVERSE.has(draft.reaction) && (
         <p className="rounded-xl border border-caution/40 bg-caution-soft px-3 py-2 text-xs leading-relaxed">
           Aplikace alergii nediagnostikuje. Při otoku rtů či víček, dušnosti, zvracení s bledostí
-          nebo náhlé ochablosti volejte <strong>155</strong>; jinak reakci proberte s pediatrem.
+          nebo náhlé ochablosti volej <strong>155</strong>; jinak reakci prober s pediatrem.
         </p>
       )}
 

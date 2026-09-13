@@ -87,7 +87,7 @@ export function GuidesScreen(): ReactNode {
                   >
                     {guide.titleCz}
                   </span>
-                  <span className="mt-1 block text-sm leading-snug text-muted">{guide.summary}</span>
+                  <span className="mt-1 block text-sm leading-snug text-ink/75">{guide.summary}</span>
                   <span className="mt-2 inline-block rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent">
                     {GUIDE_CATEGORY_LABELS[guide.category]}
                   </span>

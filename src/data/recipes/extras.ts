@@ -238,7 +238,7 @@ export const extras: Recipe[] = [
       '12m': 'Servíruj vrstvenou misku se lžící a nech dítě, ať si ovoce do tvarohu samo zamíchá.',
     },
     meatSteps: [
-      'Misky pro dospělé dosuď podle chuti a posyp zbytkem mletých lněných semínek.',
+      'Misky pro dospělé dolaď podle chuti a posyp zbytkem mletých lněných semínek.',
       'Kdo chce sytější snídani, přisype lžíci ovesných vloček nebo mletých ořechů.',
     ],
     vegetarianSteps: [

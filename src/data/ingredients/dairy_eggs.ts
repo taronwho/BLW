@@ -51,7 +51,7 @@ export const dairyEggs: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'se rozmačkaným ovocem',
+      's rozmačkaným ovocem',
       'jako dip k zeleninovým hranolkům',
       'zahuštěný mletými ovesnými vločkami',
       'vmíchaný do dušené zeleniny místo smetany',

@@ -47,7 +47,7 @@ export function GripHint({ chokingRisk }: { chokingRisk: ChokingRisk }): ReactNo
       {vybrany === undefined && (
         <>
           <p className="text-xs leading-relaxed text-muted">
-            Odhadnuto podle věku. Když úchop nastavíte, bude se rada řídit tím, co dítě opravdu
+            Odhadnuto podle věku. Když úchop nastavíš, bude se rada řídit tím, co dítě opravdu
             umí.
           </p>
           <Link

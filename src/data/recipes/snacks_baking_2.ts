@@ -34,7 +34,7 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Droždí rozdrob do vlažného mléka a nech ho deset minut vzejít, dokud se nezpění.',
-      'Do hladké mouky vlij vzešlý kvásek s rozpuštěným kokosovým olejem a zaděl vláčné těsto.',
+      'Do hladké mouky vlij vzešlý kvásek s rozpuštěným kokosovým olejem a zadělej vláčné těsto.',
       'Těsto nech hodinu kynout v teple přikryté utěrkou, dokud nezdvojnásobí objem.',
       'Z těsta váleč tenké tyčinky a obal je v mletém sezamu.',
       'Peč tyčinky dvacet minut, dokud nejsou dozlatova a uvnitř suché.',

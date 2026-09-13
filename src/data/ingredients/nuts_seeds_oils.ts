@@ -42,7 +42,7 @@ export const nutsSeedsOils: Ingredient[] = [
       '9m': {
         serving:
           'Rozředěné máslo rozetři v tenké vrstvě na prst chleba nebo ho vmíchej do ovesné kaše. Arašídové máslo patří mezi klíčové alergeny a po zavedení je potřeba ho nabízet opakovaně, ne jednorázově.',
-        caution: 'Kousky arašídů v másle s kousky pro dítě nejsou vhodné.',
+        caution: 'Máslo s kousky arašídů pro dítě vhodné není, hladké ano.',
       },
       '12m': {
         serving:

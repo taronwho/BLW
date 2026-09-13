@@ -132,7 +132,7 @@ export const EFSA_NITRATE: SourceRef = {
  * stravě se přeměňují až na karcinogenní nitrosaminy, a proto je jejich obsah
  * v zelenině limitován zákonem; řepa navíc obsahuje hodně kyseliny šťavelové
  * a puriny. Článek uzavírá, že u červené řepy platí ve zvýšené míře
- * doporučení „všeho s mírou".
+ * doporučení „všeho s mírou“.
  *
  * Doplněno při auditu: stanovisko EFSA o dusičnanech se týká listové
  * zeleniny (špenát, hlávkový salát) a řepu nejmenuje, takže samotné tvrzení
@@ -140,7 +140,7 @@ export const EFSA_NITRATE: SourceRef = {
  */
 export const BP_BEETROOT: SourceRef = {
   org: 'Informační centrum bezpečnosti potravin',
-  title: 'Červená řepa a doporučení „všeho s mírou"',
+  title: 'Červená řepa a doporučení „všeho s mírou“',
   url: 'https://bezpecnostpotravin.cz/cervena-repa-a-doporuceni-vseho-s-mirou/',
   accessedAt: FETCHED,
   tier: 1,

@@ -462,7 +462,7 @@ export const breakfast2: Recipe[] = [
     babyServing: {
       '6m': 'Podávej proužek chleba s tenkou vrstvou rozředěného mandlového másla a rozmačkaným banánem.',
       '9m': 'Nabídni kolečka kiwi rozkrojená na menší díly a proužky chleba do ruky.',
-      '12m': 'Servíruj celý tousta s ovocem navrch; batole si ho rozláme samo.',
+      '12m': 'Servíruj celý toust s ovocem navrch; batole si ho rozláme samo.',
     },
     meatSteps: [
       'Krajíce pro masitou variantu posyp skořicí a doplň lžící medu.',

@@ -662,6 +662,91 @@ describe('baby-serving-mentions-meat', () => {
   });
 });
 
+describe('czech-typography', () => {
+  it('projde text s českými uvozovkami a výpustkou', () => {
+    expectPass('czech-typography', makeRecipe(), catalog);
+  });
+
+  it('zachytí rovnou uvozovku', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku nech vychladnout, ať není "horká".'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('rovná uvozovka');
+  });
+
+  it('zachytí tři tečky místo výpustky', () => {
+    const recipe = makeRecipe({ babySteps: ['Nech vychladnout a zkontroluj prstem...'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('výpustky');
+  });
+
+  it('zachytí dvojitou mezeru', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku  nech vychladnout na vlažnou teplotu.'] });
+    expect(expectFail('czech-typography', recipe, catalog)).toContain('dvojitá mezera');
+  });
+
+  it('nevadí mu spojovník ani pomlčka uvnitř věty', () => {
+    expectPass(
+      'czech-typography',
+      makeRecipe({ babySteps: ['Placku nech vychladnout — vlažná je tak akorát.'] }),
+      catalog,
+    );
+  });
+});
+
+describe('consistent-address', () => {
+  it('projde text, který rodiči tyká', () => {
+    expectPass('consistent-address', makeRecipe(), catalog);
+  });
+
+  it('zachytí rozkaz v množném čísle', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku nechte vychladnout a podávejte vlažnou.'] });
+    expect(expectFail('consistent-address', recipe, catalog)).toContain('jiné oslovení');
+  });
+
+  it('zachytí přivlastňovací vykání', () => {
+    const ingredient = makeIngredient({
+      prepIdeas: ['v páře', 'pyré', 'postup u vašeho dítěte prober s pediatrem'],
+    });
+    expectFail('consistent-address', ingredient, catalog);
+  });
+
+  it('zachytí i „my“ tvary, kterými mluví kuchařka za sebe', () => {
+    const recipe = makeRecipe({ babySteps: ['Ze žitné mouky zaděláme těsto a upečeme bochník.'] });
+    expect(expectFail('consistent-address', recipe, catalog)).toContain('zaděláme');
+  });
+
+  it('nevadí mu tvar, který jen náhodou končí na -te', () => {
+    // „chutě“, „soustě“ apod. nejsou rozkazy — hranice slova musí umět česky.
+    expectPass(
+      'consistent-address',
+      makeRecipe({ babySteps: ['Nech dítě poznat různé chutě a soustě neposouvej.'] }),
+      catalog,
+    );
+  });
+});
+
+describe('known-typos', () => {
+  it('projde text bez známých překlepů', () => {
+    expectPass('known-typos', makeRecipe(), catalog);
+  });
+
+  it('zachytí „srolej“ místo „sroluj“', () => {
+    const recipe = makeRecipe({ babySteps: ['Placku srolej do závitku a nech vychladnout.'] });
+    expect(expectFail('known-typos', recipe, catalog)).toContain('srolej');
+  });
+
+  it('zachytí „nastroubaný“ místo „nastrouhaný“', () => {
+    const recipe = makeRecipe({ meatSteps: ['Zamíchej nastroubaný sýr a dosol.'] });
+    expectFail('known-typos', recipe, catalog);
+  });
+
+  it('nevadí mu správný tvar „sroluj“', () => {
+    expectPass(
+      'known-typos',
+      makeRecipe({ babySteps: ['Placku sroluj do závitku a nech vychladnout.'] }),
+      catalog,
+    );
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -688,6 +773,9 @@ describe('pokrytí pravidel', () => {
       'ingredient-coverage',
       'neutral-address',
       'baby-serving-mentions-meat',
+      'czech-typography',
+      'consistent-address',
+      'known-typos',
     ];
     expect(safetyRules.map((rule) => rule.id)).toEqual(expected);
   });
