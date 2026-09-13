@@ -1,4 +1,4 @@
-# Drobek — příkrmy pro celou rodinu
+# Drobek
 
 Česká webová aplikace pro Baby-Led Weaning: katalog surovin s bezpečnostními
 a přípravnými informacemi ke třem věkovým fázím, recepty vždy ve třech liniích
