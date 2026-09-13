@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
 import { recipeNutrients } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
-import { KEY_ALLERGENS, RECIPE_CATEGORIES } from '@/types';
+import { RECIPE_CATEGORIES } from '@/types';
 import type { AllergenGroup, Recipe } from '@/types';
 import { ChokingChip } from '../components/SafetyChips';
 import { FavoriteToggle } from '../components/FavoriteToggle';
@@ -24,7 +24,8 @@ import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { ageInMonths } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
-import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
 import { RECIPE_SORTS, sortRecipes } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
@@ -38,11 +39,6 @@ const SORT_OPTIONS: readonly SelectOption[] = RECIPE_SORTS.map((one) => ({
   id: one.id,
   label: one.label,
 }));
-
-const ALERGEN_OPTIONS: readonly SelectOption[] = [
-  { id: 'vse', label: 'Neomezovat' },
-  ...KEY_ALLERGENS.map((allergen) => ({ id: allergen, label: `bez ${ALLERGEN_LABELS[allergen]}` })),
-];
 
 const TIME_OPTIONS: readonly ChipOption[] = [
   { id: 'vse', label: 'jakýkoli' },
@@ -280,7 +276,7 @@ export function RecipesScreen(): ReactNode {
           </div>
           <FilterSelect
             label="Bez alergenu"
-            options={ALERGEN_OPTIONS}
+            options={ALLERGEN_FILTER_OPTIONS}
             selected={withoutAllergen === '' ? 'vse' : withoutAllergen}
             onSelect={(id) => setWithoutAllergen(id === 'vse' ? '' : (id as AllergenGroup))}
             testId="filtr-bez-alergenu"

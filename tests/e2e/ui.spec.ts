@@ -611,3 +611,24 @@ test('v seznamu se nízké riziko dušení nevypisuje', async ({ page }) => {
   await page.getByTestId('surovina-cibule').click();
   await expect(page.getByTestId('riziko-duseni')).toContainText('Nízké riziko dušení');
 });
+
+test('suroviny i recepty jdou filtrovat bez konkrétního alergenu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const surovin = page.getByTestId('pocet-surovin');
+  const vse = (await surovin.textContent()) ?? '';
+  await page.getByTestId('filtr-bez-alergenu').selectOption('mleko');
+  await expect(surovin).not.toHaveText(vse);
+  // Mléčné suroviny zmizí, ostatní zůstanou.
+  await page.getByTestId('hledat-surovinu').fill('eidam');
+  await expect(page.getByTestId('prazdny-stav')).toBeVisible();
+  await page.getByTestId('hledat-surovinu').fill('mrkev');
+  await expect(page.getByTestId('surovina-mrkev')).toBeVisible();
+
+  await navLink(page, 'Recepty').click();
+  const receptu = page.getByTestId('pocet-receptu');
+  const vsechny = (await receptu.textContent()) ?? '';
+  await page.getByTestId('filtr-bez-alergenu').selectOption('ryby');
+  await expect(receptu).not.toHaveText(vsechny);
+});
