@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
 import {
   emptyHouseholdState,
+  MAX_MEMBERS,
   mergeHouseholdState,
   newTastingId,
   SCHEMA_VERSION,
@@ -34,6 +35,7 @@ interface HouseholdStore {
   setChild(name: string, birthDate: string): Promise<void>;
   setGrip(grip: Grip | undefined): Promise<void>;
   toggleReadySign(sign: ReadySign): Promise<void>;
+  removeMember(uid: string): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
   deleteTasting(id: string): Promise<void>;
@@ -178,6 +180,26 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       await persist({ ...get().state, childName: name, childBirthDate: birthDate });
     },
 
+    /**
+     * Odebrání zařízení z domácnosti.
+     *
+     * Anonymní uid je vázané na úložiště prohlížeče, takže po smazání dat nebo
+     * přeinstalaci zůstane v seznamu mrtvé a zabírá jedno z pěti míst. Odebrat
+     * ho smí kterýkoli člen — pravidla to dovolují, protože při `jsemClen()`
+     * na podobu seznamu nekladou jinou podmínku než počet.
+     */
+    async removeMember(uid: string): Promise<void> {
+      const stav = get().state;
+      if (!stav.members.includes(uid)) return;
+      const seenAt = { ...stav.memberSeenAt };
+      delete seenAt[uid];
+      await persist({
+        ...stav,
+        members: stav.members.filter((one) => one !== uid),
+        memberSeenAt: seenAt,
+      });
+    },
+
     /** Odškrtnutí či zrušení jednoho znaku připravenosti. */
     async toggleReadySign(sign: ReadySign): Promise<void> {
       const soucasne = get().state.readySigns ?? [];
@@ -244,10 +266,18 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 });
 
 function withMember(state: HouseholdState, uid: string): HouseholdState {
-  return state.members.includes(uid) ? state : { ...state, members: [...state.members, uid] };
+  const members = state.members.includes(uid) ? state.members : [...state.members, uid];
+  return { ...state, members, memberSeenAt: { ...state.memberSeenAt, [uid]: Date.now() } };
 }
 
 function describeError(error: unknown): string {
-  if (error instanceof Error) return error.message;
+  if (error instanceof Error) {
+    // Firestore vrátí u zamítnutého zápisu jen „permission-denied“. Nejčastější
+    // příčinou je plná domácnost, což ze samotné hlášky nikdo nepozná.
+    if (/permission|insufficient/i.test(error.message)) {
+      return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení — odeber některé v Domácnosti na jiném telefonu), nebo nejsou ve Firestore nahraná pravidla z docs/FIREBASE.md.`;
+    }
+    return error.message;
+  }
   return 'Neznámá chyba synchronizace.';
 }

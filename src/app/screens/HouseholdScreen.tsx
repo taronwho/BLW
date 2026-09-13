@@ -13,6 +13,7 @@ import {
 import { hasFirebaseConfig } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
 import { GripPicker } from '../components/GripPicker';
+import { MemberList } from '../components/MemberList';
 import { ReadinessPicker } from '../components/ReadinessPicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
@@ -155,6 +156,7 @@ export function HouseholdScreen(): ReactNode {
               Kdo odkaz otevře, připojí se jedním klepnutím a uvidí stejný deník. Kdo kód zná, vidí
               do deníku — posílej ho jen lidem, kterým na dítě sáhneš. Domácnost unese pět zařízení.
             </p>
+            <MemberList />
             <button
               type="button"
               onClick={disconnect}

@@ -45,6 +45,25 @@ export function mergeTastings(
   });
 }
 
+/**
+ * Poslední přihlášení každého člena.
+ *
+ * Nejde o last-write-wins nad celou mapou: každé zařízení ví jistě jen o sobě,
+ * takže se mapy sjednotí a u každého uid vyhraje pozdější čas. Jinak by zápis
+ * z telefonu A přepsal to, co o sobě zapsal telefon B.
+ */
+function mergeSeenAt(
+  local: Record<string, number> | undefined,
+  remote: Record<string, number> | undefined,
+): Record<string, number> | undefined {
+  if (local === undefined && remote === undefined) return undefined;
+  const out: Record<string, number> = { ...remote };
+  for (const [uid, kdy] of Object.entries(local ?? {})) {
+    out[uid] = Math.max(kdy, out[uid] ?? 0);
+  }
+  return out;
+}
+
 function mergeUnique(local: readonly string[], remote: readonly string[]): string[] {
   return [...new Set([...local, ...remote])];
 }
@@ -74,6 +93,7 @@ export function mergeHouseholdState(
   // Znaky připravenosti jdou i odškrtnout, takže se nesjednocují — vyhrává
   // novější zápis, stejně jako u ostatních údajů o dítěti.
   const znaky = lastWriteWins(local.readySigns, remote.readySigns, localNewer);
+  const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
 
   return {
     childName: lastWriteWins(local.childName, remote.childName, localNewer),
@@ -83,6 +103,7 @@ export function mergeHouseholdState(
     ...(grip === undefined ? {} : { childGrip: grip }),
     ...(znaky === undefined ? {} : { readySigns: [...znaky] }),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
+    ...(videno === undefined ? {} : { memberSeenAt: videno }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),
     favorites: mergeUnique(local.favorites, remote.favorites),
