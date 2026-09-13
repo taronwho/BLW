@@ -452,6 +452,146 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M21 26c7 2 15 2 22 0M21 36c7 2 15 2 22 0M22 46c6 2 14 2 20 0" stroke={C.zlutaTmava} strokeWidth="2" fill="none" />
     </>
   ),
+
+  // ── plodová zelenina a cibuloviny ──────────────────────────────────────
+  rajce: (
+    <>
+      <circle cx="32" cy="37" r="19" fill="#D63A2F" />
+      <path d="M22 30c2-4 6-7 10-8" stroke="#EE7566" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M32 20c-3-3-8-5-12-4 1 4 4 7 8 8M32 20c3-3 8-5 12-4-1 4-4 7-8 8M32 20c-2-4-2-8 0-11 2 3 2 7 0 11Z" fill={C.zelen} />
+    </>
+  ),
+
+  paprika: (
+    <>
+      {/* Hranatá ramena a tři laloky dole — kulatý tvar by na 20 px splynul
+          s rajčetem, které leží v katalogu hned vedle. */}
+      <path d="M32 19c11 0 19 6 19 15 0 10-4 18-8 20-2 1-4-1-5-3-1 3-3 5-6 5s-5-2-6-5c-1 2-3 4-5 3-4-2-8-10-8-20 0-9 8-15 19-15Z" fill="#D63A2F" />
+      <path d="M25 31c-1 8-1 15 1 20M39 31c1 8 1 15-1 20" stroke="#9E241C" strokeWidth="2.5" fill="none" />
+      <path d="M22 29c1-4 3-7 6-9" stroke="#EE7566" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M32 19c-5 0-8-2-8-5 5-2 11-2 16 0 0 3-3 5-8 5Z" fill={C.zelen} />
+      <rect x="30" y="7" width="4" height="9" rx="2" fill={C.zelenTmava} />
+    </>
+  ),
+
+  cibule: (
+    <>
+      <path d="M29 14c1-4 2-6 3-8 1 2 2 4 3 8M26 16c-1-3-3-5-5-6 0 3 1 5 3 7" stroke={C.zelen} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 16c11 0 19 9 19 20s-8 18-19 18-19-7-19-18 8-20 19-20Z" fill="#D79B3F" />
+      <path d="M32 17c-5 6-7 14-7 20s2 12 7 17M32 17c5 6 7 14 7 20s-2 12-7 17" stroke="#EFC378" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  cesnek: (
+    <>
+      <path d="M32 12c1 3 2 6 2 9h-4c0-3 1-6 2-9Z" fill={C.kremTmavy} />
+      <path d="M32 19c-3 4-5 10-5 16 0 11 5 18 5 18s-12 0-16-6c-4-7-1-22 6-27 3-2 7-3 10-1Z" fill={C.bila} />
+      <path d="M32 19c3 4 5 10 5 16 0 11-5 18-5 18s12 0 16-6c4-7 1-22-6-27-3-2-7-3-10-1Z" fill={C.bilaStin} />
+      <path d="M32 19c-3 5-4 11-4 17s2 12 4 17c2-5 4-11 4-17s-1-12-4-17Z" fill={C.bila} />
+    </>
+  ),
+
+  // ── ovoce ──────────────────────────────────────────────────────────────
+  jablko: (
+    <>
+      <path d="M38 15c4-3 9-3 12 0-1 5-6 8-11 7l-1-7Z" fill={C.zelen} />
+      <rect x="31" y="10" width="3" height="10" rx="1.5" fill={C.hneda} />
+      <path d="M32 20c3-2 7-3 11-1 6 3 9 10 8 18-1 9-7 18-13 18-2 0-4-1-6-1s-4 1-6 1c-6 0-12-9-13-18-1-8 2-15 8-18 4-2 8-1 11 1Z" fill="#CE3B36" />
+      <path d="M23 26c-3 3-4 7-4 11" stroke="#EA7A6E" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  hruska: (
+    <>
+      <path d="M38 14c4-3 8-3 11-1-1 4-5 7-10 6l-1-5Z" fill={C.zelen} />
+      <rect x="31" y="9" width="3" height="10" rx="1.5" fill={C.hneda} />
+      <path d="M32 18c4 0 6 4 6 9 0 4-2 6-2 8 7 2 12 9 12 16 0 7-7 12-16 12s-16-5-16-12c0-7 5-14 12-16 0-2-2-4-2-8 0-5 2-9 6-9Z" fill="#B8CC4A" />
+      <path d="M26 38c-4 3-6 7-6 12" stroke="#D8E68A" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  banan: (
+    <>
+      <path d="M14 20c0 18 10 31 26 31 7 0 12-3 12-7 0-3-3-4-7-4-13 0-22-8-23-21 0-3-2-4-4-4s-4 2-4 5Z" fill={C.zluta} />
+      <path d="M22 26c3 10 11 17 21 18" stroke="#F5DC8A" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M14 17c2-2 6-2 8 1l-8 4v-5Z" fill={C.zelenTmava} />
+      <path d="M50 44c3 0 5 2 5 4l-6 2 1-6Z" fill={C.hneda} />
+    </>
+  ),
+
+  avokado: (
+    <>
+      <path d="M32 10c8 0 13 7 13 16 0 7 7 11 7 21 0 8-9 14-20 14s-20-6-20-14c0-10 7-14 7-21 0-9 5-16 13-16Z" fill="#3F6B33" />
+      <path d="M32 17c5 0 8 5 8 11 0 6 6 9 6 18 0 6-6 10-14 10s-14-4-14-10c0-9 6-12 6-18 0-6 3-11 8-11Z" fill="#CBDB86" />
+      <circle cx="32" cy="42" r="9" fill="#9C6B3A" />
+    </>
+  ),
+
+  svestka: (
+    <>
+      <path d="M40 14c4-3 9-3 12 0-2 5-7 7-12 6v-6Z" fill={C.zelen} />
+      <rect x="31" y="9" width="3" height="9" rx="1.5" fill={C.hneda} />
+      <ellipse cx="32" cy="37" rx="16" ry="19" fill="#5B3C74" />
+      <path d="M32 19c-4 6-5 12-5 18s1 12 5 17" stroke="#3F2755" strokeWidth="3" fill="none" />
+      <path d="M23 28c-2 3-3 6-3 9" stroke="#8A63A5" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  merunka: (
+    <>
+      <path d="M38 15c4-3 8-3 11-1-1 4-5 7-10 6l-1-5Z" fill={C.zelen} />
+      <circle cx="32" cy="38" r="17" fill="#E8963C" />
+      <path d="M32 22c-3 5-4 10-4 16s1 11 4 15" stroke="#C77425" strokeWidth="2.5" fill="none" />
+      <path d="M23 31c-2 3-3 5-3 8" stroke="#F5BC78" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  broskev: (
+    <>
+      <path d="M38 13c4-3 9-3 12 0-1 5-6 8-11 7l-1-7Z" fill={C.zelen} />
+      <circle cx="32" cy="38" r="19" fill="#E8A05C" />
+      <path d="M32 19c11 0 19 8 19 19 0 3-1 6-2 8-8-2-14-9-15-18-1-4-2-7-2-9Z" fill="#D9663F" />
+      <path d="M32 20c-4 5-5 11-5 18s1 13 5 18" stroke="#C4753A" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  nektarinka: (
+    <>
+      <path d="M38 13c4-3 9-3 12 0-1 5-6 8-11 7l-1-7Z" fill={C.zelen} />
+      <circle cx="32" cy="38" r="19" fill="#C4372E" />
+      <path d="M22 28c-3 3-5 7-5 11" stroke="#EF8168" strokeWidth="5" strokeLinecap="round" fill="none" />
+      <path d="M32 20c-4 5-5 11-5 18s1 13 5 18" stroke="#8E2119" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  'nektarinka-bila': (
+    <>
+      <path d="M38 13c4-3 9-3 12 0-1 5-6 8-11 7l-1-7Z" fill={C.zelen} />
+      <circle cx="32" cy="38" r="19" fill="#F0D9C4" />
+      <path d="M32 19c9 0 16 6 18 14-6 3-13 2-17-3-2-4-2-8-1-11Z" fill="#E08B84" />
+      <path d="M32 20c-4 5-5 11-5 18s1 13 5 18" stroke="#CBA893" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  tresne: (
+    <>
+      <path d="M32 12c-6 6-11 14-13 22M32 12c5 6 9 14 11 22" stroke={C.hneda} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 12c5-4 11-4 15-1-4 5-10 6-15 3Z" fill={C.zelen} />
+      <circle cx="19" cy="42" r="12" fill="#C42B31" />
+      <circle cx="45" cy="43" r="11" fill="#A81F26" />
+      <path d="M13 37c2-3 4-4 6-5" stroke="#E8666A" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  visne: (
+    <>
+      <path d="M32 12c-6 6-11 14-13 22M32 12c5 6 9 14 11 22" stroke={C.hneda} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 12c5-4 11-4 15-1-4 5-10 6-15 3Z" fill={C.zelen} />
+      <ellipse cx="19" cy="43" rx="12" ry="11" fill="#7E1B20" />
+      <ellipse cx="45" cy="44" rx="11" ry="10" fill="#5E1216" />
+      <path d="M13 39c2-3 4-4 6-5" stroke="#B0454A" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;
