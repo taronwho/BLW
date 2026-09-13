@@ -20,6 +20,7 @@ import { CATEGORY_LABELS } from '../lib/labels';
 import { matchesIngredient } from '../lib/search';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
+import { IngredientIcon } from '../components/IngredientIcon';
 
 type QuickFilter =
   | 'vse'
@@ -188,7 +189,7 @@ function IngredientRow({
         >
           <span className="flex items-center gap-2 font-medium">
             <span aria-hidden="true" className="shrink-0 text-lg">
-              {ingredient.emoji ?? '🍽️'}
+              <IngredientIcon ingredient={ingredient} className="h-6 w-6" />
             </span>
             <span className="min-w-0">{ingredient.nameCz}</span>
             {favorite && <Star aria-label="Oblíbené" className="h-4 w-4 shrink-0 text-caution" />}

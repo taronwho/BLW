@@ -1368,6 +1368,7 @@ export const fruits: Ingredient[] = [
     altNamesCz: ['sušené brusinky'],
     category: 'ovoce',
     emoji: '🫘',
+    icon: 'brusinky',
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'high',

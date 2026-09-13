@@ -17,6 +17,7 @@ import { CHOKING_PRESENTATION } from '../lib/choking';
 import { recipesWithIngredient, tastingsByIngredient } from '../lib/derive';
 import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
+import { IngredientIcon } from '../components/IngredientIcon';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
 export function IngredientDetailScreen(): ReactNode {
@@ -57,7 +58,7 @@ export function IngredientDetailScreen(): ReactNode {
       <header className="flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
           <h1 className="min-w-0 text-xl font-bold">
-            <span aria-hidden="true">{ingredient.emoji ?? '🍽️'} </span>
+            <IngredientIcon ingredient={ingredient} className="mr-1 inline-block h-7 w-7 align-[-0.15em]" />
             {ingredient.nameCz}
           </h1>
           <button

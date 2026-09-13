@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import type { NutrientLevel, NutrientProfile } from '@/data/nutrients';
 import type { Ingredient } from '@/types';
 import { IRON_FORM_LABELS, LEVEL_CHIP, LEVEL_DOTS, LEVEL_LABELS } from '../lib/nutrientLabels';
+import { IngredientIcon } from './IngredientIcon';
 
 export interface NutrientBadgeProps {
   profile: NutrientProfile;
@@ -191,7 +192,7 @@ export function NutrientBadge({
                         to={`/suroviny/${item.id}`}
                         className="flex min-h-touch items-center gap-1 rounded-full border border-line bg-paper px-3 text-sm"
                       >
-                        <span aria-hidden="true">{item.emoji ?? '🍽️'}</span>
+                        <IngredientIcon ingredient={item} className="h-4 w-4" />
                         {item.nameCz}
                       </Link>
                     </li>
@@ -213,7 +214,7 @@ export function NutrientBadge({
                         to={`/suroviny/${item.id}`}
                         className="flex min-h-touch items-center gap-1 rounded-full border border-accent/30 bg-accent-soft px-3 text-sm text-accent"
                       >
-                        <span aria-hidden="true">{item.emoji ?? '🍽️'}</span>
+                        <IngredientIcon ingredient={item} className="h-4 w-4" />
                         {item.nameCz}
                       </Link>
                     </li>

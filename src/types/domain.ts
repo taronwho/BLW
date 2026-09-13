@@ -130,7 +130,10 @@ export interface Ingredient {
   /** Synonyma pro vyhledávání ("batáty", "sladké brambory") */
   altNamesCz: string[];
   category: IngredientCategory;
+  /** Nouzová ikona, dokud surovina nemá vlastní kresbu. */
   emoji?: string;
+  /** Klíč do kreslené sady v src/app/icons/shapes.tsx; má přednost před emoji. */
+  icon?: string;
 
   allergens: AllergenGroup[];
   /** Patří mezi 9 klíčových alergenů pro plánované zavádění */

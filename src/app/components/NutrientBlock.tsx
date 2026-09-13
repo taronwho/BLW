@@ -6,6 +6,7 @@ import { nutrientProfile, vitaminCPartners, vitaminCSources } from '@/data/nutri
 import type { NutrientLevel } from '@/data/nutrients';
 import type { Ingredient } from '@/types';
 import { LEVEL_CHIP, LEVEL_LABELS } from '../lib/nutrientLabels';
+import { IngredientIcon } from './IngredientIcon';
 
 function Pill({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
   return (
@@ -92,7 +93,7 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
                       to={`/suroviny/${item.id}`}
                       className="flex min-h-touch items-center gap-1.5 rounded-full border border-accent/30 bg-accent-soft px-3 text-sm font-medium text-accent"
                     >
-                      <span aria-hidden="true">{item.emoji ?? '🍽️'}</span>
+                      <IngredientIcon ingredient={item} className="h-4 w-4" />
                       {item.nameCz}
                     </Link>
                   </li>
