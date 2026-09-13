@@ -1194,4 +1194,277 @@ export const meatFish: Ingredient[] = [
     sources: [NHS_ALLERGY, NHS_AVOID],
     reviewStatus: 'verified',
   },
+  {
+    id: 'sled',
+    nameCz: 'sleď',
+    altNamesCz: ['sleď obecný', 'herynek'],
+    category: 'maso-ryby',
+    emoji: '🐟',
+    icon: 'sled',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'high',
+    chokingReason:
+      'Sleď má hustou síť drobných vidličkovitých kostí, které jdou přehlédnout i v pečeném filetu.',
+    hazards: ['kosti', 'sul'],
+    hazardNotes: {
+      kosti:
+        'Filet projeď prsty proti směru šupin a vytahej kosti pinzetou; drobné kosti sedí i mimo páteřní linii.',
+      sul: 'Zavináče, matjesy a solený sleď jsou velmi slané, do jídla pro dítě do roka nepatří. Používej čerstvého nebo mraženého sleďa bez nálevu.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Použij čerstvého sleďa bez nálevu. Upeč ho nebo uvař v páře doměkka, maso rozeber na vlákna a projeď prsty kvůli kostem. Podávej rozmačkané se zeleninovým pyré.',
+        caution: 'Nakládaného ani uzeného sleďa v tomhle věku nenabízej, je solený.',
+      },
+      '9m': {
+        serving:
+          'Rozebrané maso bez kostí smíchej s bramborovou kaší nebo s jáhly a vytvaruj do malých placek, které dítě uchopí. Kosti kontroluj po každém kusu.',
+        caution: 'Sleď patří mezi tučné ryby; podle NHS jich holkám nabízej nejvýš dvě porce týdně.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pečeného sleďa s bramborem i rozmíchaného do pomazánky. Nakládaného sleďa nechávej dospělým, dítěti je pořád moc slaný.',
+        caution: 'Kosti vybírej i u batolete, samo je v puse nepozná.',
+      },
+    },
+    prepIdeas: [
+      'pečený s bramborem',
+      'rozebraný do bramborové placky',
+      'dušený v páře se zeleninou',
+      'rozmíchaný do pomazánky pro batole',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_AVOID, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'treska-jednoskvrnna',
+    nameCz: 'treska jednoskvrnná',
+    altNamesCz: ['haddock', 'treska skvrnitá'],
+    category: 'maso-ryby',
+    emoji: '🐟',
+    icon: 'treska-jednoskvrnna',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Maso se rozpadá na vlákna, ale v hřbetní části zůstávají pevné kosti, které se ve vločkách masa ztrácejí.',
+    hazards: ['kosti'],
+    hazardNotes: {
+      kosti: 'Filet přejeď prsty proti vláknu a kosti vytahej pinzetou dřív, než rybu podáš.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Filet upeč v alobalu nebo uvař v páře doměkka, rozeber na vločky a zkontroluj kosti. Podávej rozmačkaný s bramborem nebo s dýňovým pyré, aby se sousto drželo.',
+        caution: 'Rybu vždycky provař až do neprůhledna, syrovou ani polosyrovou nenabízej.',
+      },
+      '9m': {
+        serving:
+          'Vločky masa bez kostí spoj s kaší do malých placek nebo je nabídni na lžíci vedle měkké zeleniny. Treska je bílá ryba s nízkým obsahem tuku, hodí se i k výraznější příloze.',
+        caution: 'Kosti kontroluj u každé porce zvlášť, ne jen u prvního filetu.',
+      },
+      '12m': {
+        serving:
+          'Batole jí tresku pečenou v troubě, dušenou v koprové omáčce i rozmíchanou v bramboráku. Sůl přidávej až po odebrání dětské porce.',
+        caution: 'Obalovanou rybu z mrazáku nekupuj jako náhradu, bývá solená a sladká.',
+      },
+    },
+    prepIdeas: [
+      'pečená v alobalu',
+      'dušená v páře s bramborem',
+      'rozebraná do rybích placek',
+      'v koprové omáčce pro celou rodinu',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'treska-aljasska',
+    nameCz: 'treska aljašská',
+    altNamesCz: ['aljašská treska', 'pollock', 'treska pollock'],
+    category: 'maso-ryby',
+    emoji: '🐟',
+    icon: 'treska-aljasska',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Filet je měkký a rozpadavý, ale u páteře zůstávají tenké kosti, které mezi vločkami masa nejsou vidět.',
+    hazards: ['kosti'],
+    hazardNotes: {
+      kosti: 'I mražený filet projeď prsty; kosti se občas objeví i v porcích prodávaných jako bezkosté.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Mražený filet nech rozmrznout v lednici, upeč nebo uvař v páře doměkka a rozeber na vločky. Rozmačkej s bramborem nebo s hráškovým pyré, samotné vločky se rozsypou.',
+        caution: 'Rozmrazuj v lednici, ne na lince; rybu provař až do neprůhledna.',
+      },
+      '9m': {
+        serving:
+          'Vločky bez kostí spoj do malých placek s kaší, nebo je nabídni vedle měkké zeleniny. Chuť je jemná, takže se hodí jako první ryba.',
+        caution: 'Rybí prsty z mrazáku nejsou náhrada, bývají solené a obalované.',
+      },
+      '12m': {
+        serving:
+          'Batole jí tresku pečenou, dušenou i v polévce. Dochucuj až po odebrání dětské porce.',
+        caution: 'Kosti kontroluj i u batolete, drobné se poznají až v ústech.',
+      },
+    },
+    prepIdeas: [
+      'pečená v troubě s bramborem',
+      'dušená v páře',
+      'do rybí polévky',
+      'rozebraná do placek s jáhly',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'slavky',
+    nameCz: 'slávky',
+    altNamesCz: ['slávka jedlá', 'mušle slávky', 'midie'],
+    category: 'maso-ryby',
+    emoji: '🦐',
+    icon: 'slavky',
+    allergens: ['mekkysi'],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Maso slávky je pružné a gumovité, drží v jednom kuse a dásně ho nerozdělí; celá slávka navíc přesně vyplní dětská ústa.',
+    hazards: ['syrove'],
+    hazardNotes: {
+      syrove:
+        'NHS syrové a jen lehce tepelně upravené měkkýše dětem nedoporučuje kvůli riziku otravy z jídla. Slávky vždycky provař, dokud se ulita neotevře, a neotevřené vyhoď.',
+    },
+    minAgeMonths: 9,
+    prep: {
+      '6m': {
+        serving:
+          'V tomhle věku slávky nenabízej. Textura je pro dásně příliš pružná a měkkýši patří mezi alergeny, se kterými nemá cenu spěchat.',
+        caution: 'Syrové ani lehce povařené slávky dítěti nedávej v žádném věku.',
+      },
+      '9m': {
+        serving:
+          'Slávku provař, vyjmi z ulity a nakrájej maso na velmi drobné kousky, které vmícháš do rýže nebo do bramborové kaše. Celou slávku nikdy nepodávej.',
+        caution: 'Zavař je samostatně a ráno, poprvé jen malé množství; měkkýši jsou alergen.',
+      },
+      '12m': {
+        serving:
+          'Batole jí nadrobno nakrájené provařené slávky v rizotu nebo v těstovinách. Celé maso nechávej až na dobu, kdy dítě spolehlivě kouše.',
+        caution: 'Vývar ze slávek bývá slaný, dětskou porci odeber dřív, než ho přiliješ.',
+      },
+    },
+    prepIdeas: [
+      'provařené a nadrobno nakrájené do rýže',
+      'do rizota pro batole',
+      'nasekané do těstovin',
+      'do rybí polévky pro dospělé',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'sumec',
+    nameCz: 'sumec velký',
+    altNamesCz: ['sumec', 'sumec říční'],
+    category: 'maso-ryby',
+    emoji: '🐟',
+    icon: 'sumec',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Maso je tučné a soudržné, drží v pevných kusech a nerozpadá se na vlákna jako treska.',
+    hazards: ['kosti'],
+    hazardNotes: {
+      kosti: 'Sumec má proti kaprovi málo kostí, ale páteřní kosti jsou silné a tvrdé; z porce je vyber.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Filet bez kůže upeč nebo uvař v páře doměkka a rozeber na malé kusy. Tučnější maso se dobře mačká, podávej ho se zeleninovým pyré.',
+        caution: 'Kůži odstraň, je tuhá a nerozžvýká se.',
+      },
+      '9m': {
+        serving:
+          'Maso bez kostí nakrájej na kousky velikosti hrášku pro klešťový úchop, nebo ho spoj s kaší do placky. Sumec je tučná ryba, stačí menší porce.',
+        caution: 'Kosti kontroluj prsty, tvrdé páteřní kosti se snadno přehlédnou.',
+      },
+      '12m': {
+        serving:
+          'Batole jí sumce pečeného s bramborem i dušeného se zeleninou. Sůl a koření až po odebrání dětské porce.',
+        caution: 'Smaženého sumce v trojobalu nechávej dospělým.',
+      },
+    },
+    prepIdeas: [
+      'pečený filet s bramborem',
+      'dušený v páře se zeleninou',
+      'v jednohrnci s kořenovou zeleninou',
+      'rozebraný do rybích placek',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'tilapie',
+    nameCz: 'tilápie',
+    altNamesCz: ['tilapie', 'tilápie nilská'],
+    category: 'maso-ryby',
+    emoji: '🐟',
+    icon: 'tilapie',
+    allergens: ['ryby'],
+    isKeyAllergen: true,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Filet je libový a suchý, po upečení se drolí na kousky, které se v ústech špatně spojí do sousta.',
+    hazards: ['kosti'],
+    hazardNotes: {
+      kosti: 'Filet bývá bez kostí, ale zkontroluj ho prsty stejně jako u každé jiné ryby.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Filet uvař v páře nebo upeč v alobalu se lžící vody, aby nevyschl, a rozmačkej ho s bramborem či s dýní. Suché vločky samy o sobě dítě jen rozhází po stole.',
+        caution: 'Rybu provař až do neprůhledna a zkontroluj, že v ní nezůstala kost.',
+      },
+      '9m': {
+        serving:
+          'Vlhké maso spoj s kaší do placek, které dítě uchopí. Chuť je jemná, takže tilápie funguje jako první ryba i u dítěte, které jiné ryby odmítlo.',
+        caution: 'Bez omáčky nebo kaše se maso rozpadá; nikdy ho nepodávej suché.',
+      },
+      '12m': {
+        serving:
+          'Batole jí tilápii pečenou se zeleninou, v rybích plackách i v těstovinách. Dochuť až po odebrání dětské porce.',
+        caution: 'Pečení hlídej, přesušená tilápie je nepoživatelně suchá.',
+      },
+    },
+    prepIdeas: [
+      'pečená v alobalu se lžící vody',
+      'dušená v páře s dýní',
+      'do rybích placek s bramborem',
+      'nakrájená do těstovin',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
 ];

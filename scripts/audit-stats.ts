@@ -149,8 +149,10 @@ function collectTexts(): TextRef[] {
     const owner = `recipe/${r.id}`;
     r.baseSteps.forEach((v, n) => out.push({ owner, field: `baseSteps[${n}]`, text: v }));
     r.babySteps.forEach((v, n) => out.push({ owner, field: `babySteps[${n}]`, text: v }));
-    r.meatSteps.forEach((v, n) => out.push({ owner, field: `meatSteps[${n}]`, text: v }));
-    r.vegetarianSteps.forEach((v, n) => out.push({ owner, field: `vegetarianSteps[${n}]`, text: v }));
+    r.adultSteps.forEach((v, n) => out.push({ owner, field: `adultSteps[${n}]`, text: v }));
+    (r.vegetarianSteps ?? []).forEach((v, n) =>
+      out.push({ owner, field: `vegetarianSteps[${n}]`, text: v }),
+    );
     out.push({ owner, field: 'babySplitPoint', text: r.babySplitPoint });
     for (const stage of ['6m', '9m', '12m'] as const) {
       out.push({ owner, field: `babyServing.${stage}`, text: r.babyServing[stage] });

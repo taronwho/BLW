@@ -67,7 +67,8 @@ export const practice: Guide[] = [
       {
         heading: 'Jak to funguje v receptech',
         body: [
-          'Každý recept v aplikaci má společný základ, bod odběru dětské porce a pak tři zakončení: dětské, masité a bezmasé.',
+          'Každý recept v aplikaci má společný základ, bod odběru dětské porce, podání pro dítě a nakonec dochucení pro dospělé.',
+          'Dochucení se dělí na masité a bezmasé jen tam, kde v jídle maso opravdu je. U kaše ani ovocné misky se nedělí na nic — dětská porce je hotová a zbytek si dospělí dochutí podle svého.',
           'Bod odběru je vždy uvedený doslova — „po kroku 3 odeber…“ — není potřeba odhadovat, kdy je ještě čas.',
           'Teprve po odběru se solí, koření a dochucuje pro dospělé.',
         ],

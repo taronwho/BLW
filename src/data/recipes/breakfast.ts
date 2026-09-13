@@ -47,13 +47,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši nech hustší a hruškové kostičky do ní jen zamíchej — dítě je loví prsty a trénuje špetku.',
       '12m': 'Servíruj kaši v misce s vlastní lžící a kousky hrušky navrch; dítě už si nabírá samo a dojídá s malou pomocí.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé dochuť skořicí, případně lžičkou medu, a přisyp zbytek syrových hrušek.',
       'Navrch přidej lžíci mletých lněných semínek a dolij trochu mléka, pokud je kaše příliš hustá.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: skořice, zbylé hruškové kostičky a lžíce mletých lněných semínek.',
-      'Kdo má rád řidší kaši, dolije mléko až na talíři a promíchá.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['rychlé', 'vegetariánské', 'kaše'],
@@ -91,13 +87,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Meruňkové kousky nech v kaši celé a nabídni ji v mělké misce ke sbírání prsty.',
       '12m': 'Podávej kaši v misce se lžící a meruňky nakrájené na osminky navrch; dítě si porci míchá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Do kaše pro dospělé vmíchej zbytek mandlového másla, přidej zbývající meruňky a případně dosladˇ podle chuti.',
       'Kdo má rád řidší konzistenci, dolije horkou vodu a kaši prošlehá.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — mandlové máslo, meruňky a lžíce horké vody na rozmíchání.',
-      'Navrch přidej pár kousků syrové meruňky, aby měla kaše svěží kyselý kontrast.',
     ],
     allergens: ['orechy'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -137,13 +129,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Lívanec nalámej na kousky velikosti nehtu a rozkrojené borůvky polož vedle na talíř ke sbírání špetkou.',
       '12m': 'Nabídni celý lívanec a nech dítě, ať si ho samo láme; borůvky stále podávej rozkrojené, ne celé.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé lívance peč na másle dozlatova a navrš na ně tvaroh se zbylými borůvkami.',
       'Kdo chce sladší snídani, přelije lívance lžičkou medu nebo posype moučkovým cukrem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci připrav stejně — lívance na másle, tvaroh a borůvky navrch.',
-      'Pro svěží chuť zakápni lívance šťávou z citronu a promíchej borůvky s lžící tvarohu.',
     ],
     allergens: ['mleko', 'vejce', 'psenice-lepek'],
     tags: ['do ruky', 'vegetariánské', 'víkendové'],
@@ -182,13 +170,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Nakrájej omeletu na kostičky o hraně centimetr a cottage podávej v samostatné misce ke smáčení.',
       '12m': 'Servíruj čtvrtku omelety na talíři s lžící cottage vedle; dítě už si sousta samo láme a namáčí.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek omelety osol, rozetři po něm polovinu cottage, přelož ji napůl a nech minutu dojít pod pokličkou.',
       'Podávej s pečivem; kdo jí maso, může si přidat plátek šunky ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, přidej zbytek cottage a přelož omeletu napůl.',
-      'Navrch nasyp čerstvý špenátový list a zakápni lžičkou rozpuštěného ghí.',
     ],
     allergens: ['vejce', 'mleko'],
     tags: ['bez lepku', 'rychlé', 'vegetariánské'],
@@ -226,13 +210,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Konzistenci nech hustší jako jogurt a nabídni k ní kousek banánu velikosti prstu jako doprovod.',
       '12m': 'Podej smoothie v otevřeném hrnečku se dvěma uchy; dítě už zvládne pár loků bez pomoci.',
     },
-    meatSteps: [
+    adultSteps: [
       'Do sklenic pro dospělé přidej zbytek vloček, promíchej a podle chuti dosladˇ lžičkou medu.',
       'Kdo chce studenější nápoj, přidá pár kostek ledu a krátce prošlehá.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — zbytek vloček, promíchat a nechat pět minut nabobtnat.',
-      'Navrch nasyp celé maliny a pár rozdrcených vloček jako křupavou vrstvu.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['rychlé', 'vegetariánské', 'bez pečení'],
@@ -270,13 +250,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Nech pudink hustší a mango nakrájej na kostičky, které si dítě sbírá špetkou z okraje misky.',
       '12m': 'Servíruj vrstvený pudink ve skleničce s lžičkou; dítě už si vybírá, kolik manga si přimíchá.',
     },
-    meatSteps: [
+    adultSteps: [
       'Sklenice pro dospělé dolij jogurtem, přidej kostky manga a podle chuti dosladˇ javorovým sirupem.',
       'Navrch nasyp lžičku suchých chia semínek, které dodají křupavost.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: vrstva jogurtu, mangové kostky a lžíce pudinku navrch.',
-      'Kdo má rád řidší pudink, dolije kokosové mléko a promíchá.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'bez pečení'],
@@ -314,13 +290,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Chléb nakrájej na kostky velikosti nehtu a vejce nadrob; dítě si obojí sbírá prsty.',
       '12m': 'Nabídni malý krajíček s pomazánkou a vejcem navrch, který si dítě samo drží a odkusuje z něj.',
     },
-    meatSteps: [
+    adultSteps: [
       'Pomazánku pro dospělé osol, opepři a rozetři na opečený chléb; navrch polož vejce nakrájené na kolečka.',
       'Kdo jí maso, přidá si k topince plátek uzeného ze zásoby a pár kapek citronu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci připrav stejně — osolená avokádová pomazánka na opečeném chlebu a kolečka vejce.',
-      'Navrch zakápni olivovým olejem a přidej čerstvě nastrouhanou citronovou kůru.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
     tags: ['rychlé', 'vegetariánské', 'do ruky'],
@@ -359,13 +331,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši nech hrudkovitou s kousky jablka, které dítě loví prsty z mělké misky.',
       '12m': 'Servíruj kaši v misce se lžící a pečeným jablkem navrch; dítě si mletý mák přimíchá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a zbytkem mletého máku.',
       'Navrch narovnej pečená jablka a přelij je šťávou z plechu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: skořice, mletý mák a pečená jablka navrch.',
-      'Kdo chce řidší kaši, dolije horké mléko a promíchá ji těsně před podáváním.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -403,13 +371,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši podávej volnější a banán nakrájej na kostičky ke sbírání špetkou z mělké misky.',
       '12m': 'Servíruj kaši v misce s kolečky banánu navrch a lžičkou tahini zakápnutou přes ni.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé přelij tahini zálivkou, přidej kolečka banánu a lžíci kokosového jogurtu.',
       'Kdo má rád sladší snídani, přikápne javorový sirup a promíchá.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — tahini zálivka, banán a kokosový jogurt.',
-      'Navrch můžeš přidat lžíci rozmačkaného banánu, aby kaše zůstala vláčná i po vychladnutí.',
     ],
     allergens: ['sezam'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -448,13 +412,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Toust nakrájej na kostky a míchaná vejce nabídni vedle v mělké misce ke sbírání prsty.',
       '12m': 'Servíruj půlku toustu s vejci navrch na talíři; dítě si ho samo zvedá a odkusuje.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek vajec osol, opepři a navrš na opečené tousty; posyp zbylou pažitkou.',
       'Kdo jí maso, položí na toust plátek šunky ze zásoby a krátce ho pod grilem prohřeje.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, navrš na toust a posyp pažitkou.',
-      'Navrch přidej pár koleček ředkvičky nebo plátek avokáda, pokud ho máš zrovna doma.',
     ],
     allergens: ['vejce', 'psenice-lepek', 'mleko'],
     tags: ['rychlé', 'vegetariánské', 'do ruky'],
@@ -492,13 +452,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši podávej hrudkovitou a dýni v kostičkách navrch, ať si dítě vybírá sousta samo.',
       '12m': 'Servíruj kaši v misce se lžící a lžící tvarohu navrch, kterou si dítě zamíchá podle chuti.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a navrš na ni lžíci tvarohu.',
       'Kdo chce výraznější chuť, přidá pár kapek citronové šťávy, které zvýrazní sladkost dýně.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: tvaroh, špetka skořice a lžíce dýňového pyré navrch.',
-      'Kaše se dá připravit večer dopředu a ráno ji stačí prohřát s trochou vody.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -539,13 +495,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Lívaneček nalámej na kousky velikosti nehtu a jahody nakrájej na drobno ke sbírání špetkou.',
       '12m': 'Nabídni dva lívanečky s jogurtem v misce vedle a nech dítě, ať si je samo namáčí.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé lívanečky peč na kokosovém oleji dozlatova a navrš na ně jogurt s jahodami.',
       'Kdo má rád sladší snídani, přelije lívanečky lžičkou medu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — vrstva řeckého jogurtu a plátky jahod navrch.',
-      'Pro kyselejší chuť zamíchej do jogurtu trochu rozmačkaných jahod, až zrůžoví.',
     ],
     allergens: ['psenice-lepek', 'mleko', 'vejce'],
     tags: ['do ruky', 'vegetariánské', 'víkendové'],
@@ -583,13 +535,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši podávej řidší v mělké misce a celé maliny rozmačkej vidličkou, aby netvořily kulaté sousto.',
       '12m': 'Servíruj kaši v misce s malinami navrch; dítě už si je samo zamíchá a kaši nabírá lžící.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé osladˇ podle chuti, nalij do misek a přelij malinovým pyré.',
       'Navrch nasyp celé maliny a špetku vanilky, pokud máš lusk ještě po ruce.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: malinové pyré, celé maliny a vanilka.',
-      'Kdo má rád kyselejší kaši, přidá pár kapek citronu do malinového pyré.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['rychlé', 'vegetariánské', 'kaše'],
@@ -627,13 +575,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Podávej kaši volnější a banán v kostičkách vedle; dítě si obojí sbírá špetkou.',
       '12m': 'Servíruj kaši s kolečky banánu navrch a lžící vedle misky, aby si dítě nabíralo samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé dochuť karobem, zalij kefírem a navrš na ni kolečka banánu.',
       'Kdo chce sytější snídani, přisype lžíci celých vloček nebo mletých ořechů.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: karob, kefír a banán navrch.',
-      'Pro krémovější kaši ji rozmixuj tyčovým mixérem i s banánem.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['rychlé', 'vegetariánské', 'kaše'],
@@ -671,13 +615,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Housku nakrájej na kostky a pomazánku podávej v samostatné misce, do které si dítě kostky namáčí.',
       '12m': 'Nabídni půlku housky namazanou pomazánkou a nech dítě, ať ji samo drží a odkusuje.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylou pomazánku osol, opepři a rozetři na housky; navrch polož kolečka ředkvičky.',
       'Kdo jí maso, přidá si k pomazánce plátek šunky ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, promíchej a namaž na housky.',
-      'Navrch posyp pažitkou a přidej pár koleček ředkvičky pro křupavost.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['rychlé', 'vegetariánské', 'bez pečení'],
@@ -716,13 +656,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Nakrájej porci na kostky o hraně dva centimetry a přidej kousek pečené hrušky vedle.',
       '12m': 'Servíruj čtvereček zapečených vloček na talíři s lžící jogurtu, pokud ho máš doma, a nech dítě jíst rukou.',
     },
-    meatSteps: [
+    adultSteps: [
       'Velkou mísu dopeč do zlatova, nech deset minut odstát a nakrájej na dílky.',
       'Podávej s lžící lískooříškového másla a podle chuti přelij medem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci nakrájej stejně a přelij zbytkem rozmíchaného lískooříškového másla.',
-      'Navrch přidej kousky čerstvé hrušky, aby porce nebyla suchá.',
     ],
     allergens: ['psenice-lepek', 'orechy', 'mleko', 'vejce'],
     tags: ['vegetariánské', 'do ruky', 'mrazitelné'],
@@ -760,13 +696,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Podávej kaši měkkou v misce s rozmačkanou švestkou zamíchanou dovnitř ke sbírání prsty.',
       '12m': 'Servíruj měkkou polentu v misce se lžící a pečenou švestkou nakrájenou na kousky navrch.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé rozmíchej s lžící jogurtu, osladˇ podle chuti a posyp skořicí.',
       'Navrch narovnej pečené švestky i se šťávou z pekáčku.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: jogurt do kaše, švestky navrch a špetka skořice.',
-      'Kdo má rád tužší polentu, nechá ji na talíři pár minut odstát, než ji začne jíst.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -804,13 +736,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Kaši podávej hrudkovitou v mělké misce, ať dítě sbírá zrnka quinoy špetkou.',
       '12m': 'Servíruj kaši v misce se lžící a strouhaným jablkem navrch; dítě už zvládne jíst samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kaši pro dospělé dochuť zbytkem mletých mandlí, osladˇ podle chuti a promíchej.',
       'Navrch nastrouhej čerstvé jablko a přikápni citron, aby kaše nebyla jednotvárná.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — mleté mandle, strouhané jablko a případně lžíce mléka na rozředění.',
-      'Kaše chutná i studená, takže ji můžeš uvařit večer a ráno jen promíchat.',
     ],
     allergens: ['orechy', 'mleko'],
     tags: ['bez lepku', 'vegetariánské', 'kaše'],
@@ -848,13 +776,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Chléb nakrájej na kostky a okurku na kostičky; obojí si dítě sbírá špetkou z talíře.',
       '12m': 'Nabídni malý obložený chlebíček, který si dítě samo drží, a nech ho odkusovat vlastním tempem.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé žervé osol, opepři a namaž na krajíce; navrch narovnej plátky okurky a posyp pažitkou.',
       'Kdo jí maso, doplní chlebíček plátkem šunky nebo uzeného ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol a namaž na krajíce s okurkou a pažitkou.',
-      'Navrch zakápni olivovým olejem a přidej pár koleček ředkvičky, pokud je máš po ruce.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['rychlé', 'vegetariánské', 'bez pečení'],
@@ -893,13 +817,9 @@ export const breakfast: Recipe[] = [
       '9m': 'Podávej hmotu v mělké misce s rozkrojenými borůvkami navrch ke sbírání špetkou.',
       '12m': 'Servíruj misku se lžící a nech dítě, ať si borůvky a banán samo přimíchá; borůvky stále krájej napůl.',
     },
-    meatSteps: [
+    adultSteps: [
       'Misky pro dospělé posyp konopnými semínky a opraženými vločkami.',
       'Kdo chce sladší snídani, přelije misku lžičkou medu nebo javorového sirupu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — konopná semínka, opražené vločky a celé borůvky navrch.',
-      'Pro sytější snídani přidej lžíci jogurtu a promíchej těsně před jídlem.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['vegetariánské', 'bez pečení', 'rychlé'],

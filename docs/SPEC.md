@@ -111,10 +111,10 @@ export interface Recipe {
   babySteps: string[];
   /** Jak porci miminku podat v dané fázi */
   babyServing: Record<Stage, string>;
-  /** Dokončení masité verze (otec + dcera) */
-  meatSteps: string[];
-  /** Dokončení bezmasé verze (matka) — vždy vyplněné, i u čistě vegetariánského receptu */
-  vegetarianSteps: string[];
+  /** Dochucení pro dospělé; u receptu s masem popisuje masitou variantu */
+  adultSteps: string[];
+  /** Bezmasá varianta dochucení (matka); jen u receptu s masem nebo rybou */
+  vegetarianSteps?: string[];
   /** Čím se nahrazuje bílkovina v bezmasé verzi. Povinné, když recept obsahuje maso/rybu. */
   vegetarianProteinSwap?: string;
 
@@ -157,7 +157,7 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | id | severity | co kontroluje |
 |---|---|---|
 | `no-honey-baby` | error | slovo „med" (vč. tvarů) se neobjeví v `babySteps`, `babyServing` ani v instrukcích surovin s `minAgeMonths < 12` |
-| `no-salt-baby` | error | „sůl", „solit", „dosolit", „bujón", „vývar z kostky" v dětské linii; solení smí být až v `meatSteps`/`vegetarianSteps` |
+| `no-salt-baby` | error | „sůl", „solit", „dosolit", „bujón", „vývar z kostky" v dětské linii; solení smí být až v `adultSteps`/`vegetarianSteps` |
 | `no-sugar-baby` | error | přidaný cukr, sirup, javorový sirup, agáve v dětské linii |
 | `no-whole-nuts` | error | celé ořechy / celá semínka v dětské linii bez slova „mleté"/"máslo"/"pasta" |
 | `round-food-shape` | error | suroviny s `chokingRisk: 'high'` a kulatým tvarem musí mít v `prep['6m'].serving` i `prep['9m'].serving` explicitní pokyn k podélnému rozčtvrcení |
@@ -206,10 +206,10 @@ Karty s názvem, časem, kategorií, štítky (bez lepku, do ruky, mrazitelné),
 Filtry: kategorie, čas do 20/40 minut, „mám doma" (výběr surovin), „jen vegetariánské", „bez alergenu X".
 
 ### 4.4 Detail receptu
-- Suroviny se sloupcem, do které linie patří (společné / masité / bezmasé), každá klikací do katalogu
+- Suroviny se sloupcem, do které linie patří (společné / s masem / bez masa), každá klikací do katalogu
 - **Společný postup** číslovaný
 - Výrazně oddělený **moment odebrání porce pro miminko** — vizuálně nejsilnější prvek obrazovky, ne poznámka pod čarou
-- Tři panely dokončení: **Pro miminko** (s přepínačem fází) · **Masitá verze** · **Bezmasá verze**
+- Panel **Pro miminko** (s přepínačem fází) a pod ním **Dochucení pro dospělé**. Dochucení se dělí na **S masem** a **Bez masa** jen u receptu, který maso nebo rybu obsahuje; u bezmasého receptu je jedno.
 - Poznámka rodiny k receptu (sdílená)
 
 ### 4.5 Deník

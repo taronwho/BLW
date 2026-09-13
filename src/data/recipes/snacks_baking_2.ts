@@ -51,13 +51,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni tyčinku rozlámanou na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj celou tyčinku k pomazánce nebo k polévce; batole si ji láme samo.',
     },
-    meatSteps: [
-      'Tyčinky pro masitou variantu posyp hrubou solí a kmínem ještě před pečením.',
+    adultSteps: [
+      'Tyčinky pro dospělé posyp hrubou solí a kmínem ještě před pečením.',
       'Podávej je k šunce a nakládané zelenině.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé tyčinky posyp mletým sezamem a osol až po upečení.',
-      'Podávej je s hummusem nebo s tvarohovou pomazánkou.',
     ],
     allergens: ['psenice-lepek', 'sezam', 'mleko'],
     tags: ['vegetariánské', 'do ruky', 'pečené'],
@@ -97,13 +93,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni placku natrhanou na kousky velikosti fazole, k tomu lžíci tvarohu na namáčení.',
       '12m': 'Servíruj celou placku s pomazánkou; batole si ji rozlomí a namáčí samo.',
     },
-    meatSteps: [
-      'Placky pro masitou variantu osol a podávej je s plátkem šunky a rajčetem.',
+    adultSteps: [
+      'Placky pro dospělé osol a podávej je s plátkem šunky a rajčetem.',
       'Kdo má rád ostřejší chuť, přidá si prolisovaný česnek do těsta.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé placky osol a podávej je s tvarohovou pomazánkou a nasekanou pažitkou.',
-      'Dobře se k nim hodí i dušená zelenina jako náplň.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'rychlé', 'do ruky'],
@@ -143,13 +135,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'V devíti měsících podávej světlý váleček bez kakaa, nakrájený na kousky velikosti fazole.',
       '12m': 'Batoleti dej kakaový váleček nakrájený na sousta, spíš dopoledne — kofein může rušit usínání.',
     },
-    meatSteps: [
-      'Kuličky pro masitou variantu obal v kokosu nebo v nasekaných ořeších.',
+    adultSteps: [
+      'Kuličky pro dospělé obal v kokosu nebo v nasekaných ořeších.',
       'Skladuj je v lednici v uzavřené dóze, vydrží týden.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci obal v mletých mandlích a v dalším kakau.',
-      'Podávej kuličky vychlazené jako svačinu k ovoci.',
     ],
     allergens: ['psenice-lepek', 'orechy'],
     tags: ['vegetariánské', 'bez pečení', 'do ruky'],
@@ -189,13 +177,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni krekr rozlámaný na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj krekry s pomazánkou nebo se sýrem; batole si je láme samo.',
     },
-    meatSteps: [
-      'Krekry pro masitou variantu posyp hrubou solí a kmínem před pečením.',
+    adultSteps: [
+      'Krekry pro dospělé posyp hrubou solí a kmínem před pečením.',
       'Podávej je k pomazánce z ryby nebo k plátku šunky.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé krekry posyp mletými lněnými semínky a osol je až po upečení.',
-      'Podávej je s hummusem nebo se žervé.',
     ],
     allergens: ['psenice-lepek'],
     tags: ['vegetariánské', 'do ruky', 'pečené'],
@@ -236,13 +220,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni muffin natrhaný na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj celý muffin; batole si ho drží v ruce a okusuje po svém.',
     },
-    meatSteps: [
-      'Muffiny pro masitou variantu posyp skořicí a doplň lžící zakysané smetany.',
+    adultSteps: [
+      'Muffiny pro dospělé posyp skořicí a doplň lžící zakysané smetany.',
       'Podávej je vlažné, teplý muffin se drolí.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé muffiny podávej s tvarohem rozmíchaným s jablečným pyré.',
-      'Skořici používej nanejvýš jednou týdně, ne denně.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'pečené', 'do ruky'],
@@ -282,13 +262,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni sušenku rozlámanou na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj celou sušenku k ovoci nebo k jogurtu; batole si ji láme samo.',
     },
-    meatSteps: [
-      'Sušenky pro masitou variantu posyp nasekanými ořechy a zakápni medem.',
+    adultSteps: [
+      'Sušenky pro dospělé posyp nasekanými ořechy a zakápni medem.',
       'Skladuj je v uzavřené dóze, jinak během dne změknou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé sušenky posyp dalšími mletými lněnými semínky.',
-      'Podávej je s bílým jogurtem jako plnohodnotnou svačinu.',
     ],
     allergens: ['psenice-lepek'],
     tags: ['vegetariánské', 'pečené', 'bez slazení'],
@@ -328,13 +304,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni krekr rozlámaný na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj krekry s hummusem nebo s tvarohem; batole si je namáčí samo.',
     },
-    meatSteps: [
-      'Krekry pro masitou variantu osol před pečením a podávej je k paštice nebo k šunce.',
+    adultSteps: [
+      'Krekry pro dospělé osol před pečením a podávej je k paštice nebo k šunce.',
       'Kdo chce výraznější chuť, přidá do těsta mletou papriku.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé krekry osol po upečení a podávej je s hummusem a se zeleninou.',
-      'Posyp je dalšími mletými slunečnicovými semínky.',
     ],
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'do ruky'],
@@ -374,13 +346,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni kus chlebíčku s tenkou vrstvou másla a banánový proužek vedle.',
       '12m': 'Servíruj celý chlebíček s banánem navrch; batole si ho drží a okusuje samo.',
     },
-    meatSteps: [
-      'Chlebíčky pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Chlebíčky pro dospělé zakápni medem a posyp nasekanými ořechy.',
       'Podávej je hned, jinak chlebíček od vlhkosti změkne.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé chlebíčky doplň lžící bílého jogurtu a hrstí konopných semínek.',
-      'Skořici drž u špetky, nanejvýš jednou týdně.',
     ],
     allergens: ['orechy'],
     tags: ['vegetariánské', 'bez lepku', 'rychlé'],
@@ -420,13 +388,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni knedlíček rozkrojený na čtvrtky, které dítě sbírá klešťovým úchopem.',
       '12m': 'Servíruj celý knedlíček posypaný mletým mákem; batole si ho rozdělí samo.',
     },
-    meatSteps: [
-      'Knedlíčky pro masitou variantu posyp mákem a zakápni rozpuštěným máslem s medem.',
+    adultSteps: [
+      'Knedlíčky pro dospělé posyp mákem a zakápni rozpuštěným máslem s medem.',
       'Podávej je hned, po vychladnutí tuhnou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci posyp mletým mákem a doplň lžící tvarohu rozmíchaného s ovocem.',
-      'Podávej ji vlažnou s dušenou meruňkou po straně.',
     ],
     allergens: ['mleko', 'psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'český klasik', 'letní'],
@@ -466,13 +430,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'V devíti měsících nabídni ovesnou tyčinku bez brusinek, nakrájenou na měkké proužky.',
       '12m': 'Batoleti dej tyčinku nakrájenou na krátké proužky s nadrobno nasekanými brusinkami.',
     },
-    meatSteps: [
-      'Tyčinky pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Tyčinky pro dospělé zakápni medem a posyp nasekanými ořechy.',
       'Skladuj je v uzavřené dóze, vydrží čtyři dny.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé tyčinky posyp dalšími chia semínky a podávej je s bílým jogurtem.',
-      'Sladkost nech na jablku a brusinkách, nic dalšího přidávat nemusíš.',
     ],
     allergens: ['psenice-lepek', 'orechy'],
     tags: ['vegetariánské', 'pečené', 'do ruky'],
@@ -512,13 +472,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni vafli natrhanou na kousky velikosti fazole a jahody stále na čtvrtky.',
       '12m': 'Servíruj celou vafli s jahodami navrch; plody i teď krájej podélně na čtvrtky.',
     },
-    meatSteps: [
-      'Vafle pro masitou variantu zakápni medem a doplň lžící zakysané smetany.',
+    adultSteps: [
+      'Vafle pro dospělé zakápni medem a doplň lžící zakysané smetany.',
       'Podávej je hned, dokud jsou křupavé.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé vafle doplň tvarohem rozmíchaným s rozmačkanými jahodami.',
-      'Sladkost nechej na ovoci, těsto se nesladí.',
     ],
     allergens: ['mleko', 'psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'rychlé', 'do ruky'],
@@ -558,13 +514,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni chleba nakrájený na kostky a pomazánku v misce vedle na namáčení.',
       '12m': 'Servíruj celý krajíc s pomazánkou a proužky syrové mrkve nastrouhané najemno.',
     },
-    meatSteps: [
-      'Pomazánku pro masitou variantu osol, opepři a doplň plátkem šunky.',
+    adultSteps: [
+      'Pomazánku pro dospělé osol, opepři a doplň plátkem šunky.',
       'Podávej ji na opečeném chlebu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou pomazánku osol a doplň další lžící cottage sýra.',
-      'Posyp ji nasekanou pažitkou a zakápni citronem.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['vegetariánské', 'rychlé', 'do ruky'],
@@ -604,13 +556,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni bulku natrhanou na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj celou bulku rozkrojenou s pomazánkou; batole si ji drží samo.',
     },
-    meatSteps: [
-      'Bulky pro masitou variantu potři vajíčkem a posyp hrubou solí s celými semínky.',
+    adultSteps: [
+      'Bulky pro dospělé potři vajíčkem a posyp hrubou solí s celými semínky.',
       'Podávej je k polévce nebo s plátkem šunky.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé bulky posyp mletými dýňovými semínky a podávej je s hummusem.',
-      'Dobře se k nim hodí i tvaroh s pažitkou.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'pečené', 'do ruky'],
@@ -650,13 +598,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni hranolky nakrájené na kostky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj křupavé hranolky s rajčatovým dipem; batole si je namáčí samo.',
     },
-    meatSteps: [
-      'Hranolky pro masitou variantu osol, opepři a podávej je s rajčatovým dipem.',
+    adultSteps: [
+      'Hranolky pro dospělé osol, opepři a podávej je s rajčatovým dipem.',
       'Navrch nastrouhej další goudu a krátce zapeč.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé hranolky osol a podávej je s jogurtovým dipem s bylinkami.',
-      'Posyp je čerstvou petrželkou hned po vytažení z trouby.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'do ruky'],
@@ -697,13 +641,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni lívanec natrhaný na kousky velikosti fazole a měkké měsíčky hrušky.',
       '12m': 'Servíruj celý lívanec s hruškou navrch; batole si ho rozláme samo.',
     },
-    meatSteps: [
-      'Lívance pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Lívance pro dospělé zakápni medem a posyp nasekanými ořechy.',
       'Podávej je hned, dokud jsou nadýchané.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé lívance doplň lžící bílého jogurtu a čerstvou hruškou.',
-      'Karob je přirozeně sladký, další sladká složka není potřeba.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'rychlé', 'bez slazení'],
@@ -743,13 +683,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni proužky okurky i dušené kedlubny a dip s nastrouhanou ředkvičkou.',
       '12m': 'Servíruj syrové zeleninové proužky a dip; ředkvičku krájej na tenké plátky.',
     },
-    meatSteps: [
-      'Dip pro masitou variantu osol, opepři a doplň ho plátky šunky srolovanými do ruliček.',
+    adultSteps: [
+      'Dip pro dospělé osol, opepři a doplň ho plátky šunky srolovanými do ruliček.',
       'Podávej ho vychlazený s opečeným chlebem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasý dip osol a doplň ho nastrouhanou kedlubnou pro sytější chuť.',
-      'Posyp ho čerstvým koprem a zakápni citronem.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'studená kuchyně'],
@@ -789,13 +725,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni placičku rozlámanou na kousky velikosti fazole a měsíček manga do ruky.',
       '12m': 'Servíruj celou placičku s mangem navrch; batole si ji láme samo.',
     },
-    meatSteps: [
-      'Placičky pro masitou variantu zakápni limetkou a posyp praženými kokosovými lupínky.',
+    adultSteps: [
+      'Placičky pro dospělé zakápni limetkou a posyp praženými kokosovými lupínky.',
       'Podávej je vychlazené jako letní svačinu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé placičky doplň lžící kokosového jogurtu a čerstvým mangem.',
-      'Sladkost nese mango, nic dalšího přidávat nemusíš.',
     ],
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'exotické'],
@@ -835,13 +767,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'V devíti měsících podávej proužek mozzarelly a měkké rajče bez slupky, špejli vynech.',
       '12m': 'Batoleti dej složky volně na talíři — proužky sýra, klínky rajčete a kostky chleba.',
     },
-    meatSteps: [
-      'Špejle pro masitou variantu osol, opepři a doplň je kostkou šunky.',
+    adultSteps: [
+      'Špejle pro dospělé osol, opepři a doplň je kostkou šunky.',
       'Zakápni je dýňovým olejem a podávej s čerstvým oreganem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé špejle doplň další mozzarellou a nakládanou zeleninou.',
-      'Osol je až na talíři a posyp sušeným oreganem.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['vegetariánské', 'rychlé', 'studená kuchyně'],
@@ -881,13 +809,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni sušenku rozlámanou na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj celou sušenku k jogurtu nebo k ovoci; batole si ji láme samo.',
     },
-    meatSteps: [
-      'Sušenky pro masitou variantu posyp nasekanými ořechy a zakápni medem.',
+    adultSteps: [
+      'Sušenky pro dospělé posyp nasekanými ořechy a zakápni medem.',
       'Skladuj je v uzavřené dóze, jinak změknou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé sušenky posyp dalším karobem a podávej je s bílým jogurtem.',
-      'Datle nesou veškerou sladkost, nic dalšího přidávat nemusíš.',
     ],
     allergens: ['orechy'],
     tags: ['vegetariánské', 'bez lepku', 'pečené'],
@@ -927,13 +851,9 @@ export const snacksBaking2: Recipe[] = [
       '9m': 'Nabídni krém v misce a borůvky rozkrojené podélně na čtvrtky pro klešťový úchop.',
       '12m': 'Servíruj sklenici s krémem a borůvkami rozkrojenými podélně na čtvrtky i teď.',
     },
-    meatSteps: [
-      'Sklenice pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Sklenice pro dospělé zakápni medem a posyp nasekanými ořechy.',
       'Podávej je vychlazené jako dezert po obědě.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící ricotty a hrstí konopných semínek.',
-      'Zakápni ji citronovou šťávou, která sladkost ovoce vyváží.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['vegetariánské', 'rychlé', 'studená kuchyně'],

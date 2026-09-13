@@ -50,13 +50,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni hustší kaši v misce a k ní měkké měsíčky broskve na sbírání prsty.',
       '12m': 'Servíruj kaši s kousky broskve promíchanými dovnitř; batole jí lžící samo.',
     },
-    meatSteps: [
-      'Kaši pro masitou variantu dochuť skořicí a doplň větší porcí broskví.',
+    adultSteps: [
+      'Kaši pro dospělé dochuť skořicí a doplň větší porcí broskví.',
       'Kdo má rád křupavou vrstvu, přisype si opražené vločky.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň lžící bílého jogurtu, který kaši zjemní.',
-      'Navrch přidej další mletá lněná semínka.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'rychlé'],
@@ -96,13 +92,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Z jáhel vytvaruj kuličky do ruky a třešně nabídni rozkrojené podélně na čtvrtky.',
       '12m': 'Servíruj kaši s třešněmi rozkrojenými podélně na čtvrtky; celé plody nenabízej ani teď.',
     },
-    meatSteps: [
-      'Kaši pro masitou variantu dochuť a doplň lžící zakysané smetany.',
+    adultSteps: [
+      'Kaši pro dospělé dochuť a doplň lžící zakysané smetany.',
       'Posyp ji opraženými mletými mandlemi.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň lžící bílého jogurtu a dalšími mletými mandlemi.',
-      'Podávej ji vlažnou, jáhly po vychladnutí tuhnou.',
     ],
     allergens: ['mleko', 'orechy'],
     tags: ['vegetariánské', 'bez lepku', 'letní'],
@@ -142,13 +134,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni krém v misce a k němu višně rozkrojené podélně na čtvrtky na sbírání prsty.',
       '12m': 'Servíruj krém ve sklenici s višněmi rozkrojenými podélně na čtvrtky promíchanými dovnitř.',
     },
-    meatSteps: [
-      'Krém pro masitou variantu dochuť a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Krém pro dospělé dochuť a posyp nasekanými ořechy.',
       'Podávej vychlazený se lžící zakysané smetany.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící karobového krému.',
-      'Navrch přidej nabobtnalá chia semínka a plátky banánu.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'studená kuchyně'],
@@ -188,13 +176,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni krém v misce a ostružiny rozkrojené podélně na čtvrtky pro klešťový úchop.',
       '12m': 'Servíruj krém s ostružinami rozkrojenými podélně na čtvrtky a hrstí změklých vloček.',
     },
-    meatSteps: [
-      'Porci pro masitou variantu doplň lžící medu až na talíři a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Porci pro dospělé doplň lžící medu až na talíři a posyp nasekanými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící jablečného pyré a konopnými semínky.',
-      'Navrch přidej víc ostružin a promíchej až u stolu.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['vegetariánské', 'rychlé', 'letní'],
@@ -234,13 +218,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni hustší kaši v misce a rybíz rozkrojený podélně na čtvrtky po straně.',
       '12m': 'Servíruj kaši s rybízem rozkrojeným podélně na čtvrtky promíchaným dovnitř.',
     },
-    meatSteps: [
-      'Kaši pro masitou variantu zakápni citronovou šťávou a doplň lžící rybízového kompotu.',
+    adultSteps: [
+      'Kaši pro dospělé zakápni citronovou šťávou a doplň lžící rybízového kompotu.',
       'Kdo má rád hutnější snídani, přidá si lžíci tvarohu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň lžící bílého jogurtu a čerstvým rybízem.',
-      'Podávej ji vlažnou, aby kaše nezatuhla.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'rychlé', 'letní'],
@@ -280,13 +260,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni pohanku v hromádkách a pyré v misce vedle na namáčení prsty.',
       '12m': 'Servíruj kefír s pohankou a pyré; celé plody rozkroj podélně na čtvrtky.',
     },
-    meatSteps: [
-      'Porci pro masitou variantu dochuť a posyp opraženými mletými dýňovými semínky.',
+    adultSteps: [
+      'Porci pro dospělé dochuť a posyp opraženými mletými dýňovými semínky.',
       'Podávej vychlazenou jako letní snídani.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící mletých dýňových semínek pro bílkovinu.',
-      'Promíchej ji těsně před jídlem, jinak pohanka nasákne všechen kefír.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'studená kuchyně'],
@@ -326,13 +302,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni chleba nakrájený na kostky a hrozny stále rozkrojené podélně na čtvrtky.',
       '12m': 'Servíruj celý krajíc s ricottou; hrozny i teď krájej podélně na čtvrtky.',
     },
-    meatSteps: [
-      'Krajíce pro masitou variantu dochuť a doplň plátkem šunky.',
+    adultSteps: [
+      'Krajíce pro dospělé dochuť a doplň plátkem šunky.',
       'Zakápni je olivovým olejem a posyp čerstvě mletým pepřem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé krajíce doplň větší vrstvou ricotty a hrstí máty.',
-      'Posyp je mletými vlašskými ořechy a podávej hned.',
     ],
     allergens: ['mleko', 'psenice-lepek', 'orechy'],
     tags: ['vegetariánské', 'rychlé', 'do ruky'],
@@ -372,13 +344,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni meloun nakrájený na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj plátky melounu s cottage sýrem navrch; batole si je bere samo.',
     },
-    meatSteps: [
-      'Talíř pro masitou variantu doplň tenkými plátky šunky, které se s melounem dobře snáší.',
+    adultSteps: [
+      'Talíř pro dospělé doplň tenkými plátky šunky, které se s melounem dobře snáší.',
       'Zakápni vše limetkou a posyp mletým pepřem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasý talíř doplň větší porcí cottage sýra a hrstí máty.',
-      'Posyp ho mletým sezamem a podávej vychlazený.',
     ],
     allergens: ['mleko', 'sezam'],
     tags: ['vegetariánské', 'bez lepku', 'studená kuchyně'],
@@ -418,13 +386,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni měkké proužky dušeného ananasu do ruky a jogurt v misce vedle.',
       '12m': 'Servíruj misku s kousky ananasu a manga; batole si je nabírá lžící samo.',
     },
-    meatSteps: [
-      'Misku pro masitou variantu doplň lžící medu a posyp praženými kokosovými lupínky.',
+    adultSteps: [
+      'Misku pro dospělé doplň lžící medu a posyp praženými kokosovými lupínky.',
       'Zakápni ji limetkou a podávej vychlazenou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou misku doplň další lžící kokosového jogurtu a nabobtnalými chia semínky.',
-      'Navrch přidej víc čerstvého manga.',
     ],
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'studená kuchyně'],
@@ -464,13 +428,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni kolečka kiwi rozkrojená na menší díly a proužky chleba do ruky.',
       '12m': 'Servíruj celý toust s ovocem navrch; batole si ho rozláme samo.',
     },
-    meatSteps: [
-      'Krajíce pro masitou variantu posyp skořicí a doplň lžící medu.',
+    adultSteps: [
+      'Krajíce pro dospělé posyp skořicí a doplň lžící medu.',
       'Podávej je hned, dokud je chleba křupavý.',
-    ],
-    vegetarianSteps: [
-      'Bezmasé krajíce doplň větší vrstvou mandlového másla a plátky banánu.',
-      'Posyp je špetkou skořice, nejvýše ale jednou za týden.',
     ],
     allergens: ['psenice-lepek', 'orechy'],
     tags: ['vegetariánské', 'rychlé', 'do ruky'],
@@ -510,13 +470,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni krém v misce a dílky mandarinky bez blány na sbírání prsty.',
       '12m': 'Servíruj krém s mandarinkou a praženou pohankou promíchanou dovnitř.',
     },
-    meatSteps: [
-      'Misku pro masitou variantu doplň lžící zakysané smetany a strouhanou citronovou kůrou.',
+    adultSteps: [
+      'Misku pro dospělé doplň lžící zakysané smetany a strouhanou citronovou kůrou.',
       'Posyp ji další praženou pohankou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň dalším mletým mákem a dílky mandarinky.',
-      'Podávej ji vychlazenou.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez lepku', 'zimní'],
@@ -556,13 +512,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni oloupané měsíčky fíku do ruky a jogurt v misce vedle.',
       '12m': 'Servíruj fíky na čtvrtky i se slupkou, pokud je tenká, a jogurt s vločkami.',
     },
-    meatSteps: [
-      'Misku pro masitou variantu zakápni medem a posyp nasekanými lískovými ořechy.',
+    adultSteps: [
+      'Misku pro dospělé zakápni medem a posyp nasekanými lískovými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící lískooříškového másla vmíchanou do jogurtu.',
-      'Navrch přidej víc fíků a opražené vločky.',
     ],
     allergens: ['mleko', 'orechy', 'psenice-lepek'],
     tags: ['vegetariánské', 'rychlé', 'podzimní'],
@@ -602,13 +554,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni kuskus v malých hromádkách, které dítě nabere klešťovým úchopem.',
       '12m': 'Servíruj kuskus se švestkami nasekanými nadrobno a šťávou z pomeranče.',
     },
-    meatSteps: [
-      'Porci pro masitou variantu dochuť pomerančovou šťávou a doplň lžící zakysané smetany.',
+    adultSteps: [
+      'Porci pro dospělé dochuť pomerančovou šťávou a doplň lžící zakysané smetany.',
       'Posyp ji opraženými semínky.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň lžící bílého jogurtu a dalšími mletými semínky.',
-      'Podávej ji vlažnou, kuskus po vychladnutí tuhne.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'rychlé', 'zimní'],
@@ -648,13 +596,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'Nabídni měsíčky papáji do ruky a amarantovou kaši v misce vedle.',
       '12m': 'Servíruj kaši s kousky papáji i nektarinky promíchanými dovnitř.',
     },
-    meatSteps: [
-      'Misku pro masitou variantu zakápni limetkou a posyp praženými semínky.',
+    adultSteps: [
+      'Misku pro dospělé zakápni limetkou a posyp praženými semínky.',
       'Podávej ji vlažnou nebo vychlazenou podle chuti.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň další lžící kokosového mléka a čerstvým ovocem.',
-      'Promíchej ji těsně před jídlem, amarant rychle houstne.',
     ],
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'exotické'],
@@ -694,13 +638,9 @@ export const breakfast2: Recipe[] = [
       '9m': 'V devíti měsících nabídni jogurt se strouhaným jablkem, brusinky ještě vynech.',
       '12m': 'Batoleti dej jogurt s nadrobno nasekanými brusinkami a rozdrcenými vločkami.',
     },
-    meatSteps: [
-      'Misku pro masitou variantu zakápni medem a posyp nasekanými ořechy.',
+    adultSteps: [
+      'Misku pro dospělé zakápni medem a posyp nasekanými ořechy.',
       'Podávej ji hned, dokud jsou vločky křupavé.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci doplň lžící mletých lněných semínek a dalším strouhaným jablkem.',
-      'Nech ji deset minut odstát, vločky změknou a lépe se jedí.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'studená kuchyně', 'rychlé'],

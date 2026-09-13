@@ -59,7 +59,7 @@ Uzavírací goal fáze 2:
 Po kategoriích, vzor:
 
 ```
-/goal Kategorie receptů "obed-vecere" je hotová: src/data/recipes/lunches_dinners.ts obsahuje 30 receptů podle typu Recipe z docs/SPEC.md, každý má neprázdný babySplitPoint odkazující na konkrétní krok z baseSteps, všechny tři fáze babyServing, neprázdné meatSteps i vegetarianSteps, a každý recept obsahující surovinu z kategorie maso-ryby má vyplněný vegetarianProteinSwap, který nahrazuje bílkovinu (ne pouhé vynechání). Všechny ingredientId existují v katalogu. `npm run validate` skončí exit kódem 0 a jeho úplný výstup je v konverzaci. V konverzaci vypiš tabulku: název receptu | vegetarián ano/ne | náhrada bílkoviny | minAgeMonths. Nesmíš měnit src/safety/, tests/ ani data surovin.
+/goal Kategorie receptů "obed-vecere" je hotová: src/data/recipes/lunches_dinners.ts obsahuje 30 receptů podle typu Recipe z docs/SPEC.md, každý má neprázdný babySplitPoint odkazující na konkrétní krok z baseSteps, všechny tři fáze babyServing, neprázdné `adultSteps` (dříve `meatSteps`) i vegetarianSteps, a každý recept obsahující surovinu z kategorie maso-ryby má vyplněný vegetarianProteinSwap, který nahrazuje bílkovinu (ne pouhé vynechání). Všechny ingredientId existují v katalogu. `npm run validate` skončí exit kódem 0 a jeho úplný výstup je v konverzaci. V konverzaci vypiš tabulku: název receptu | vegetarián ano/ne | náhrada bílkoviny | minAgeMonths. Nesmíš měnit src/safety/, tests/ ani data surovin.
 ```
 
 Pak `breakfast` (20), `soups` (10), `snacks_baking` (14). Uzavírací:

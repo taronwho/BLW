@@ -52,7 +52,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Zeleninu nakrájej na kostičky velikosti hrášku a maso natrhej na krátká vlákna — v tomhle věku už dítě sbírá sousta špetkou mezi palcem a ukazovákem.',
       '12m': 'Podávej stejnou porci jako dospělí, jen nedochucenou: kostky zeleniny a kousky masa velikosti nehtu na malíčku, k tomu lžičku, se kterou už si nabírá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kuřecí stehna otři do sucha, osol z obou stran, polož je kůží nahoru na zeleninu a peč dalších 35 minut, dokud kůže nezezlátne.',
       'Před podáváním nech maso pět minut odpočinout a výpek z pekáče přelij přes zeleninu.',
     ],
@@ -104,7 +104,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Těstoviny nakrájej nůžkami na dvoucentimetrové kousky a omáčku nech hustší, aby zůstala na nich a ne na stole.',
       '12m': 'Nabídni porci v misce s lžící a nech dítě nabírat samostatně; kousky těstovin už můžou být velikosti běžné vidličkové sousto.',
     },
-    meatSteps: [
+    adultSteps: [
       'Ve druhém hrnci opeč mleté hovězí dozlatova, rozmačkej ho vidličkou na drobno a vmíchej do poloviny rajčatového základu.',
       'Ragú osol, povař ještě deset minut a smíchej s těstovinami. Navrch dej hrst natrhané bazalky.',
     ],
@@ -155,7 +155,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Placičku rozlom na kousky velikosti hrášku a kaši nech hustší — v tomhle věku už dítě zvládne nabírat prsty i lžící.',
       '12m': 'Podávej celou placičku na talíři vedle kaše a nech dítě, ať si ji samo láme; kousky zvládne ukousnout předními zuby.',
     },
-    meatSteps: [
+    adultSteps: [
       'Mleté krůtí maso smíchej s polovinou pojiva, zbylou petrželkou a solí, vytvaruj karbanátky a opeč je na pánvi po čtyřech minutách z každé strany.',
       'Karbanátky podávej s bramborovou kaší, kterou před podáváním dosolíš podle chuti.',
     ],
@@ -205,7 +205,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Smíchej dýni, bulgur a rozebranou rybu na hustou směs, ze které se dá tvarovat malá kulička držící v prstech.',
       '12m': 'Servíruj oddělené hromádky dýně, bulguru a ryby vedle sebe, aby dítě poznalo každou chuť zvlášť a nabíralo je lžící samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Filety lososa osol, polož je kůží dolů mezi měsíčky dýně a peč deset minut, dokud se maso nedá rozdělit vidličkou na plátky.',
       'Rybu pokapej citronem, posyp koprem a podávej na bulguru zakápnutém olivovým olejem.',
     ],
@@ -254,7 +254,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Brambory nakrájej na kostky do dvou centimetrů a rybí vločky promíchej přímo s pyré, aby držely na lžíci.',
       '12m': 'Rozdělené hromádky brambor, pyré a ryby polož vedle sebe a přidej lžíci — dítě už si nabírá a míchá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Filety tresky osol, polož je na pánev s lžící rozpuštěného másla a smaž po třech minutách z každé strany doztracena.',
       'Podávej na hráškovém pyré dosoleném podle chuti, s bramborami ve slupce rozmáčknutými vidličkou.',
     ],
@@ -304,7 +304,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Fenykl nakrájej na proužky po dvou centimetrech a jáhly nabídni s masem promíchané do husté směsi na lžíci.',
       '12m': 'Nabídni fenykl, jáhly i maso odděleně na talíři a nech dítě vybírat pořadí; kousky můžou být velikosti fazole.',
     },
-    meatSteps: [
+    adultSteps: [
       'Panenku zbav blan, osol, opeč na pánvi ze všech stran doruda a dopeč ji šest minut v troubě k fenyklu.',
       'Maso nakrájej na plátky napříč vlákny, pokapej zbylou pomerančovou šťávou a podávej na jáhlách.',
     ],
@@ -355,7 +355,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Zeleninu nakrájej na kostičky, maso natrhej na krátká vlákna a kroupy nech volnější — dítě si je sbírá po zrnkách.',
       '12m': 'Servíruj porci jako zmenšenou verzi talíře dospělých: hromádka krup, dušená zelenina a nadrobno nakrájené maso vedle sebe.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kousky králíka osol, opeč v kastrolu ze všech stran dozlatova a vrať je do dušené zeleniny.',
       'Duš pod pokličkou 35 minut doměkka, maso obírej od kostí přímo v kastrolu a podávej s kroupami.',
     ],
@@ -407,7 +407,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Omáčku nech hustší a rýži podávej volně sypanou; dítě trénuje sbírání jednotlivých zrnek špetkou. Telecí maso k tomu natrhej na krátká vlákna, která už zvládne uchopit dvěma prsty.',
       '12m': 'Nabídni celou porci v misce s lžící a nech dítě míchat si rýži s omáčkou samostatně. Telecí maso nakrájej napříč vlákny na kousky velikosti fazole a přidej je do misky.',
     },
-    meatSteps: [
+    adultSteps: [
       'Telecí nakrájej na kostky, osol, opeč na pánvi dozlatova a vlož do poloviny paprikového základu.',
       'Duš pod pokličkou 45 minut doměkka, podle potřeby podlij vodou a podávej s rýží.',
     ],
@@ -457,7 +457,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Dýni nakrájej na kostičky, maso na krátké proužky a pohanku nech volnější, aby ji dítě sbíralo po hrstech.',
       '12m': 'Talíř postav jako pro dospělé: měsíček dýně, lžíce pohanky a plátky masa vedle sebe, jen bez dochucení.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kachní prsa nařízni na kůži do mřížky, osol a polož na studenou pánev kůží dolů; pomalu vyškvař tuk osm minut.',
       'Prsa obrať, dopeč tři minuty, nech pět minut odpočinout a nakrájej je na plátky k pečené dýni a pohance.',
     ],
@@ -508,7 +508,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Cuketu nakrájej na kostičky, maso natrhej na krátká vlákna a kuskus podávej v hromádce na lžíci.',
       '12m': 'Nabídni kuskus v misce, cuketu a maso vedle sebe a lžíci jogurtu jako dip, do kterého si dítě sousta samo namáčí.',
     },
-    meatSteps: [
+    adultSteps: [
       'Jehněčí plec nakrájej na kostky, osol, opeč na pánvi ze všech stran a duš pod pokličkou hodinu doměkka.',
       'Maso vmíchej do opečené cukety s rajčaty a podávej na kuskusu s lžící jogurtu.',
     ],
@@ -558,7 +558,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Brambory nech v kostičkách a omáčku hustší, aby se dala nabrat prsty a přitom nestékala po bradě. Vločky candáta vmíchej do omáčky, ať se po tácku nedrolí.',
       '12m': 'Podávej kostky brambor politých omáčkou a rybu vedle nich, k tomu lžíci, kterou už dítě otáčí v ruce samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Filety candáta osol, opeč na másle po třech minutách z každé strany a přelij je koprovou omáčkou z prvního rendlíku.',
       'Omáčku pro dospělé dosol, dochuť pár kapkami citronové šťávy a podávej s bramborem.',
     ],
@@ -608,7 +608,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Cuketu nakrájej na kostičky, rybí vločky promíchej s quinoou a nabídni je v mělké misce k sebrání špetkou.',
       '12m': 'Nech balíček rozbalit u stolu a servíruj obsah na talíř: dítě už si kousky ryby, cukety i quinoy přebírá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Pstruhy osol zvenku i uvnitř, vlož do břicha plátek citronu a petrželkové máslo a zabal je do alobalu na cuketovou podložku.',
       'Peč dvacet minut, balíček rozbal až na talíři a maso obírej od páteře vidličkou; podávej s quinoou.',
     ],
@@ -658,7 +658,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Maso nastříhej na kousky velikosti hrášku a kuskus podávej promíchaný s jogurtem, aby se dal nabrat prsty.',
       '12m': 'Servíruj kuskus, maso a lžíci dipu odděleně a nech dítě si porci namáčet a míchat podle chuti.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kuřecí prsa nakrájej na široké plátky, osol, obal v jogurtové marinádě a nech je půl hodiny odpočívat v lednici.',
       'Peč patnáct minut na rozpáleném plechu, dokud okraje nezčernají do karamelova, a podávej s kuskusem a okurkovým dipem.',
     ],
@@ -709,7 +709,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Zeleninu nakrájej nadrobno, maso nastříhej na krátká vlákna a rýži podávej volně, ať dítě trénuje sbírání zrnek.',
       '12m': 'Servíruj porci jako zmenšený talíř dospělých, jen bez dochucení: rýže, dušený pórek a kousky masa vedle sebe.',
     },
-    meatSteps: [
+    adultSteps: [
       'Hovězí nakrájej na kostky, osol a opeč na rozpálené pánvi ze všech stran, aby se uzavřelo.',
       'Vlož maso do poloviny dušeného pórku, podlij vodou a duš hodinu a půl doměkka. Podávej s rýží natural.',
     ],
@@ -759,7 +759,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Řepu i brambor nakrájej na kostičky a rybí vločky rozlož vedle nich, ať si dítě bere sousta špetkou.',
       '12m': 'Servíruj řepný salát s bramborem promíchaný a rybu navrch — dítě už zvládne nabrat obojí najednou na vidličku.',
     },
-    meatSteps: [
+    adultSteps: [
       'Filety makrely osol, polož je kůží dolů na rozpálenou pánev a peč čtyři minuty, pak je jen obrať a dopeč minutu.',
       'Rybu podávej na řepném salátu zakápnutém dýňovým olejem a posypaném koprem.',
     ],
@@ -810,7 +810,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Proužky krevet nakrájej ještě na poloviny a rýži nech volnější, aby dítě trénovalo špetku.',
       '12m': 'Nabídni rýži s hráškem v misce a krevety nakrájené na sousta vedle; dítě už je nabírá samo lžící.',
     },
-    meatSteps: [
+    adultSteps: [
       'Krevety osol a opeč na pánvi po minutě z každé strany, dokud se nestočí a nezmatní.',
       'Vmíchej je do rýže s hráškem, zakápni šťávou z limetky a ihned podávej.',
     ],
@@ -860,7 +860,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Kaši nech hrudkovitější, jablka nakrájej na kostičky a jaterní hmotu podávej jako pomazánku na měkkém kousku brambory.',
       '12m': 'Servíruj kostky brambor, dušená jablka a nadrobno nakrájená játra vedle sebe, každé zvlášť, aby dítě poznalo chutě.',
     },
-    meatSteps: [
+    adultSteps: [
       'Játra osuš, osol a opeč na másle prudce dvě minuty z každé strany; uvnitř mají zůstat jen lehce růžová.',
       'Vmíchej je do dušených jablek s cibulí a podávej s bramborem. Pro dospělé platí, že játra stačí jednou týdně.',
     ],
@@ -909,7 +909,7 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Hranolky polenty nakrájej na kostičky, mangold nasekej najemno a maso podávej v krátkých vláknech.',
       '12m': 'Servíruj měkkou polentu v misce s mangoldem a masem navrch; dítě už ji zvládne nabírat lžící bez pomoci.',
     },
-    meatSteps: [
+    adultSteps: [
       'Krůtí prsa nakrájej na plátky, osol, opeč na pánvi po třech minutách z každé strany a nech je chvíli odpočinout.',
       'Podávej na měkké polentě s dušeným mangoldem, zakápni citronem a olivovým olejem.',
     ],
@@ -960,13 +960,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Kaši nech hrudkovitou, brambory v kostičkách a vejce nakrájej na kousky velikosti hrášku ke sbírání špetkou.',
       '12m': 'Podávej čočku s bramborem v misce a nakrájené vejce navrch; dítě si porci míchá lžící samo.',
     },
-    meatSteps: [
-      'Do porce pro masitou linii vmíchej ocet, osol a povař pět minut, aby se kyselost spojila s čočkou.',
+    adultSteps: [
+      'Do porce pro dospělé vmíchej ocet, osol a povař pět minut, aby se kyselost spojila s čočkou.',
       'Navrch dej vejce usmažené na řepkovém oleji a podávej s opečenou cibulkou.',
-    ],
-    vegetarianSteps: [
-      'Stejně jako u masité linie vmíchej do porce ocet, osol a povař pět minut do zhoustnutí.',
-      'Sázené vejce usmaž na řepkovém oleji tak, aby bílek byl pevný, a polož ho na čočku s bramborem.',
     ],
     allergens: ['vejce'],
     tags: ['bez lepku', 'vegetariánské', 'jednohrnec'],
@@ -1009,13 +1005,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Nech kostky batátu celé, cizrnu rozmačkanou a rýži promíchanou v omáčce, aby se dala sebrat prsty.',
       '12m': 'Servíruj rýži a curry vedle sebe v mělké misce a nech dítě, ať si je samo míchá lžící.',
     },
-    meatSteps: [
-      'Porci pro masitou linii osol, povař tři minuty a podávej s rýží; kdo chce ostřejší chuť, přidá si mletou papriku.',
+    adultSteps: [
+      'Porci pro dospělé osol, povař tři minuty a podávej s rýží; kdo chce ostřejší chuť, přidá si mletou papriku.',
       'Navrch nastrouhej kůru z limetky nebo přikápni citron, aby se prolomila sladkost batátu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, povař tři minuty a nech ji chvíli odstát, aby cizrna nasákla kokosovou omáčku.',
-      'Podávej s rýží basmati a lžící curry přelitou navrch.',
     ],
     allergens: [],
     tags: ['bez lepku', 'vegetariánské', 'jednohrnec'],
@@ -1057,13 +1049,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Brokolici nakrájej na kousky velikosti nehtu a brambory rozmačkej vidličkou do zálivky na hustou kaši.',
       '12m': 'Servíruj porci v misce, jak je, a přidej lžíci; dítě už si zapékané brambory nabírá a foukat na ně se naučilo napodobováním.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek mísy zalij zálivkou, osol, posyp sýrem a zapékej 25 minut do zlatova.',
       'Kdo jí maso, přidá si k porci plátek pečeného masa ze zásoby — zapékaná mísa samotná zůstává bezmasá.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci zalij zbylou zálivkou, osol a posyp zbytkem nastrouhaného eidamu.',
-      'Zapékej 25 minut a před podáváním posyp čerstvou pažitkou.',
     ],
     allergens: ['mleko', 'vejce'],
     tags: ['vegetariánské', 'zapékané', 'rodinné'],
@@ -1105,13 +1093,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Podávej rizoto volně v mělké misce — zrnka rýže jsou ideální trénink na sbírání špetkou mezi palcem a ukazovákem.',
       '12m': 'Nabídni porci se lžící a nech dítě nabírat samostatně; kousky dýně už nemusíš mačkat, zvládne je rozžvýkat.',
     },
-    meatSteps: [
-      'Do porce pro masitou linii zašlehej máslo, osol, vmíchej polovinu strouhané goudy a nech dvě minuty odpočinout pod pokličkou.',
+    adultSteps: [
+      'Do porce pro dospělé zašlehej máslo, osol, vmíchej polovinu strouhané goudy a nech dvě minuty odpočinout pod pokličkou.',
       'Na pánvi opeč šalvějové lístky na másle dokřupava a polož je navrch.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: zašlehej máslo, osol a vmíchej zbytek goudy, dokud se rizoto nespojí.',
-      'Navrch dej opečené šalvějové lístky a lžíci strouhané goudy, která se rozpustí teplem rizota.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'podzimní'],
@@ -1152,13 +1136,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Vlákna zkrať nůžkami na dva centimetry a mozzarellu nakrájej na kostičky velikosti hrášku.',
       '12m': 'Nabídni porci podobnou talíři dospělých: vlákna dýně s omáčkou a mozzarellou promíchaná, jen bez dochucení.',
     },
-    meatSteps: [
+    adultSteps: [
       'Vlákna dýně vmíchej do omáčky, osol, přidej mozzarellu a nech ji v horké omáčce roztéct.',
       'Posyp bazalkou a zakápni olivovým olejem; kdo má rád ostřejší chuť, přidá si víc česneku.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně — vlákna smíchej s omáčkou, osol a vmíchej mozzarellu.',
-      'Můžeš ji ještě zapéct deset minut v troubě, aby sýr navrchu zezlátl, a nakonec posypat bazalkou.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'nízkosacharidové'],
@@ -1200,13 +1180,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Tofu nakrájej na kostičky, fazolky na kousky po centimetru a rýži promíchej se zeleninou.',
       '12m': 'Servíruj rýži, zeleninu a tofu vedle sebe a nech dítě nabírat lžící; už si samo vybírá, čím začne.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zeleninu s tofu osol, vrať na pánev a prohřej dvě minuty; podávej na rýži.',
       'Kdo má rád výraznější chuť, dochutí si porci na talíři šťávou z citronu a čerstvým zázvorem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, prohřej stejně a podávej na rýži basmati.',
-      'Navrch nastrouhej trochu zázvoru a zakápni řepkovým olejem lisovaným za studena.',
     ],
     allergens: ['soja'],
     tags: ['bez lepku', 'vegetariánské', 'rychlé'],
@@ -1248,13 +1224,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Placičku nalámej na kousky velikosti nehtu a kefírový dip podávej v ploché misce, do které dítě dosáhne prsty.',
       '12m': 'Nabídni celou placku na talíři a nech dítě, ať si ji samo láme a namáčí do kefíru.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé těsto osol, tvaruj větší placky a opékej je na rozpálené pánvi dozlatova.',
       'Podávej s kefírovým dipem dochuceným pažitkou a s nastrouhanou mrkví jako salátem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci opékej stejně a navrch dej větší lžíci kefírového dipu s pažitkou.',
-      'Ke plackám přidej salát z nastrouhané mrkve zakápnuté olivovým olejem.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'do ruky'],
@@ -1296,13 +1268,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Podávej pohanku volně, houby v kostičkách a kapustu nasekanou; dítě si vybírá jednotlivé kousky prsty.',
       '12m': 'Nabídni porci v misce s lžící a nech dítě míchat si pohanku s houbami samo.',
     },
-    meatSteps: [
-      'Porci pro masitou linii osol, vmíchej lžíci žervé a prohřej, dokud se nespojí v krémovou omáčku.',
+    adultSteps: [
+      'Porci pro dospělé osol, vmíchej lžíci žervé a prohřej, dokud se nespojí v krémovou omáčku.',
       'Podávej na pohance a posyp čerstvým tymiánem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, vmíchej zbytek žervé a nech ji na mírném plameni dvě minuty prohřát.',
-      'Před podáváním přidej lžíci řepkového oleje lisovaného za studena a promíchej s pohankou.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'rychlé'],
@@ -1344,13 +1312,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Papriku nakrájej na kostičky a náplň nech hrudkovitou, aby se dala sbírat prsty i lžící.',
       '12m': 'Nabídni čtvrtku plněné papriky na talíři a nech dítě, ať si náplň samo vybírá lžící.',
     },
-    meatSteps: [
+    adultSteps: [
       'Omáčku kolem paprik osol a povař v troubě o pět minut déle, aby zhoustla.',
       'Podávej papriku přelitou omáčkou; kdo jí maso, může si přidat k porci opečený plátek masa ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou papriku podávej stejně — omáčku osol, zahusť pečením a nalij ji na talíř pod papriku.',
-      'Navrch posyp čerstvým oreganem a zakápni olivovým olejem.',
     ],
     allergens: [],
     tags: ['bez lepku', 'vegetariánské', 'mrazitelné'],
@@ -1392,13 +1356,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Nastříhej těstoviny na dvoucentimetrové kousky a omáčku nech hustou, aby na nich držela.',
       '12m': 'Servíruj zapečenou porci v misce se lžící; dítě už zvládne nabrat těstoviny i sýrovou kůrku samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé těstoviny s omáčkou osol, vmíchej polovinu ricotty, přesyp do zapékací mísy a posyp goudou.',
       'Zapékej 25 minut do zlatova a před podáváním posyp bazalkou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: osol, vmíchej zbytek ricotty a posyp strouhanou goudou.',
-      'Zapékej 25 minut, nech pět minut odstát a podávej s lístky bazalky a lžící olivového oleje.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['vegetariánské', 'zapékané', 'mrazitelné'],
@@ -1440,13 +1400,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Polentu nakrájej na kostičky a guláš nech hustý, aby se na nich udržel při cestě k puse.',
       '12m': 'Servíruj měkkou polentu v misce s gulášem navrch a lžící vedle; dítě si porci nabírá samo.',
     },
-    meatSteps: [
-      'Porci pro masitou linii osol, povař pět minut a podávej s měkkou polentou.',
+    adultSteps: [
+      'Porci pro dospělé osol, povař pět minut a podávej s měkkou polentou.',
       'Kdo má rád ostřejší guláš, dochutí si talíř mletou paprikou; kdo chce maso, přidá si plátek ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, povař pět minut a část fazolí rozmačkej o stěnu hrnce, aby guláš zhoustl.',
-      'Podávej s polentou a lžící řepkového oleje lisovaného za studena.',
     ],
     allergens: [],
     tags: ['bez lepku', 'vegetariánské', 'mrazitelné'],
@@ -1488,13 +1444,9 @@ export const lunchesDinners: Recipe[] = [
       '9m': 'Zeleninu nakrájej na kostičky a quinou podávej volně; tvarohový dip dej do samostatné mělké misky ke smáčení.',
       '12m': 'Nabídni talíř jako dospělým: hromádka quinoy, pečená zelenina a lžíce tvarohu vedle, bez dochucení.',
     },
-    meatSteps: [
-      'Porci pro masitou linii osol, promíchej quinou s pečenou zeleninou a přidej lžíci tvarohového dipu.',
+    adultSteps: [
+      'Porci pro dospělé osol, promíchej quinou s pečenou zeleninou a přidej lžíci tvarohového dipu.',
       'Zakápni olivovým olejem a posyp hrubě nasekanou petrželkou.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, quinou promíchej se zeleninou a tvarohový dip rozetři po dně talíře jako podklad.',
-      'Navrch narovnej pečenou zeleninu, zakápni olivovým olejem a posyp petrželkou.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'salát'],

@@ -371,3 +371,37 @@ test('značka v hlavičce vede domů', async ({ page }) => {
   await page.getByRole('banner').getByRole('link', { name: 'Drobek' }).click();
   await expect(page.getByTestId('uchop-v-hlavicce')).toBeVisible();
 });
+
+test('masitá varianta je jen u receptu, který maso obsahuje', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Sladká snídaně: jedno dochucení pro dospělé, žádná masitá verze.
+  await page.goto('./#/recepty/boruvkova-miska-konopna-seminka');
+  const sladke = page.getByTestId('dochuceni-pro-dospele');
+  await expect(sladke).toBeVisible();
+  await expect(sladke).not.toContainText('S masem');
+  await expect(sladke).not.toContainText('Bez masa');
+
+  // Recept s kuřecím masem: dvě varianty pod stejným nadpisem.
+  await page.goto('./#/recepty/kureci-stehno-korenova-zelenina');
+  const sMasem = page.getByTestId('dochuceni-pro-dospele');
+  await expect(sMasem).toContainText('S masem');
+  await expect(sMasem).toContainText('Bez masa');
+  await expect(sMasem).toContainText('Náhrada bílkoviny');
+});
+
+test('u surovin v receptu jsou vidět úrovně živin', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty/candat-koprova-omacka-brambory');
+
+  // Brambor je zdroj vitaminu C — štítek má stejnou podobu jako v přehledu surovin.
+  const ziviny = page.getByTestId('ziviny-suroviny-brambor');
+  await expect(ziviny).toBeVisible();
+  await expect(ziviny).toContainText('vitamin C');
+
+  // A po klepnutí se otevře stejné okénko s podrobnostmi.
+  await page.getByTestId('zeleza-recept-brambor-cecko').click();
+  const okenko = page.getByTestId('okenko-zivin');
+  await expect(okenko).toBeVisible();
+  await expect(okenko).toContainText('Vitamin C');
+});

@@ -178,8 +178,8 @@ describe('veg-track-complete', () => {
     expectPass('veg-track-complete', makeMeatRecipe(), catalog);
   });
 
-  it('zachytí prázdné vegetarianSteps', () => {
-    expectFail('veg-track-complete', makeRecipe({ vegetarianSteps: [] }), catalog);
+  it('zachytí recept s masem bez popsané bezmasé varianty', () => {
+    expectFail('veg-track-complete', makeMeatRecipe({ vegetarianSteps: [] }), catalog);
   });
 
   it('zachytí recept s masem bez vegetarianProteinSwap', () => {
@@ -190,6 +190,30 @@ describe('veg-track-complete', () => {
   it('zachytí náhradu, která maso jen vynechá', () => {
     const recipe = makeMeatRecipe({ vegetarianProteinSwap: 'Maso se jednoduše vynechá.' });
     expectFail('veg-track-complete', recipe, catalog);
+  });
+});
+
+describe('meat-track-only-with-meat', () => {
+  it('projde bezmasý recept s jedním dochucením pro dospělé', () => {
+    expectPass('meat-track-only-with-meat', makeRecipe(), catalog);
+  });
+
+  it('projde recept s masem, který dvě varianty mít má', () => {
+    expectPass('meat-track-only-with-meat', makeMeatRecipe(), catalog);
+  });
+
+  it('zachytí bezmasý recept s vlastní bezmasou variantou', () => {
+    const recipe = makeRecipe({ vegetarianSteps: ['Placky dosol a podávej s jogurtem.'] });
+    expectFail('meat-track-only-with-meat', recipe, catalog);
+  });
+
+  it('zachytí náhradu bílkoviny u receptu, kde není co nahrazovat', () => {
+    const recipe = makeRecipe({ vegetarianProteinSwap: 'Místo masa dej červenou čočku.' });
+    expectFail('meat-track-only-with-meat', recipe, catalog);
+  });
+
+  it('zachytí prázdné dochucení pro dospělé', () => {
+    expectFail('meat-track-only-with-meat', makeRecipe({ adultSteps: [] }), catalog);
   });
 });
 
@@ -354,6 +378,25 @@ describe('no-placeholder', () => {
 
   it('zachytí prázdný název v receptu', () => {
     expectFail('no-placeholder', makeRecipe({ servings: '' }), catalog);
+  });
+});
+
+describe('no-internal-references', () => {
+  it('projde běžný text bez odkazu na soubor', () => {
+    expectPass('no-internal-references', makeRecipe(), catalog);
+  });
+
+  it('zachytí odkaz na dokument v repozitáři', () => {
+    const item = makeIngredient({
+      hazardNotes: { dusicnany: 'Tuhle zeleninu vede docs/BEZPECNOST.md mezi rizikovými.' },
+      hazards: ['dusicnany'],
+    });
+    expectFail('no-internal-references', item, catalog);
+  });
+
+  it('zachytí odkaz na příkaz projektu', () => {
+    const recipe = makeRecipe({ babySplitPoint: 'Po kroku 3 odeber porci, pak spusť npm run validate.' });
+    expectFail('no-internal-references', recipe, catalog);
   });
 });
 
@@ -734,7 +777,7 @@ describe('known-typos', () => {
   });
 
   it('zachytí „nastroubaný“ místo „nastrouhaný“', () => {
-    const recipe = makeRecipe({ meatSteps: ['Zamíchej nastroubaný sýr a dosol.'] });
+    const recipe = makeRecipe({ adultSteps: ['Zamíchej nastroubaný sýr a dosol.'] });
     expectFail('known-typos', recipe, catalog);
   });
 
@@ -757,10 +800,12 @@ describe('pokrytí pravidel', () => {
       'round-food-shape',
       'baby-split-required',
       'veg-track-complete',
+      'meat-track-only-with-meat',
       'hidden-animal-ingredients',
       'source-required',
       'source-url-shape',
       'no-placeholder',
+      'no-internal-references',
       'ingredient-refs-resolve',
       'stage-prep-complete',
       'allergen-consistency',

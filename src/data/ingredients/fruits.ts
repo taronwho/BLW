@@ -1564,4 +1564,92 @@ export const fruits: Ingredient[] = [
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
     reviewStatus: 'verified',
   },
+  {
+    id: 'kaki',
+    nameCz: 'kaki',
+    altNamesCz: ['tomel', 'persimon', 'sharon'],
+    category: 'ovoce',
+    emoji: '🍊',
+    icon: 'kaki',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Nedozrálé kaki je tvrdé a svíravé, slupka je pevná a odděluje se v celých cárech, které se špatně žvýkají.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Vyber úplně měkké kaki, které povoluje pod prstem. Rozkroj ho, dužinu vyber lžící a podávej ji jako pyré, nebo nabídni měkký díl velikosti prstu bez slupky.',
+        caution: 'Tvrdé kaki nenabízej vůbec, je svíravé a dítě po něm odmítne i další ovoce.',
+      },
+      '9m': {
+        serving:
+          'Měkkou dužinu bez slupky nakrájej na kostičky do velikosti hrášku pro klešťový úchop, nebo ji vmíchej do jogurtu a do kaše.',
+        caution: 'Slupku odstraň i u zralého plodu, je pevná a nerozžvýká se.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kaki nakrájené na měsíčky, do ovocného salátu i rozmačkané na chlebu s tvarohem. Slupku pořád odstraňuj.',
+        caution: 'Zralost poznáš po hmatu, ne podle barvy; tvrdý plod nech ještě dozrát.',
+      },
+    },
+    prepIdeas: [
+      'zralá dužina jako pyré',
+      'kostičky do jogurtu',
+      'rozmačkané na chleba s tvarohem',
+      'do ovocného salátu k batoleti',
+    ],
+    seasonCz: [10, 11, 12, 1],
+    vegetarian: true,
+    sources: [NHS_PREP_SAFELY, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'fiky-susene',
+    nameCz: 'fíky sušené',
+    altNamesCz: ['sušené fíky', 'fík sušený'],
+    category: 'ovoce',
+    emoji: '🫒',
+    icon: 'fiky-susene',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Sušený fík je lepivý a houževnatý, v ústech se stáhne do jednoho pevného sousta a drobná tvrdá jadérka zůstávají celá.',
+    hazards: ['cukr'],
+    hazardNotes: {
+      cukr: 'Sušením se cukr z ovoce zahustí. NHS proto sušené ovoce doporučuje podávat k jídlu, ne mezi jídly, a nenabízet ho jako celodenní mlsání.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Fík namoč v horké vodě, nech ho pořádně nabobtnat doměkka a rozmixuj ho do kaše nebo do pyré. Celý ani nakrájený ho v tomhle věku nenabízej.',
+        caution: 'Suchý fík nedávej dítěti do ruky, lepí se na patro.',
+      },
+      '9m': {
+        serving:
+          'Namočený a změklý fík nakrájej na malé kousky a vmíchej ho do kaše, do tvarohu nebo do těsta na placky, aby se nelepil sám o sobě.',
+        caution: 'Kousky krájej menší než hrášek, lepivé ovoce se hůř uvolňuje z úst.',
+      },
+      '12m': {
+        serving:
+          'Batole jí nakrájené namočené fíky v kaši, v pečení i v ovesných tyčinkách. Celý suchý fík nechávej až na dobu, kdy dítě spolehlivě kouše.',
+        caution: 'Po fících dítěti vyčisti zuby, zbytky se drží v rýhách.',
+      },
+    },
+    prepIdeas: [
+      'namočený a rozmixovaný do kaše',
+      'nakrájený do tvarohu',
+      'do těsta na ovesné tyčinky',
+      'vařený s jablkem na kompot bez cukru',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
 ];

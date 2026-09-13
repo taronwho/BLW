@@ -128,8 +128,7 @@ export function makeRecipe(overrides: Partial<Recipe> = {}): Recipe {
       '9m': 'Placku nakrájej na kostičky do velikosti hrášku pro klešťový úchop.',
       '12m': 'Placku nabídni vcelku nebo na větší sousta, dítě už si ji rozdělí samo.',
     },
-    meatSteps: ['Placky dosol podle chuti a podávej s opečeným kuřecím masem.'],
-    vegetarianSteps: ['Placky dosol a podávej s bílým jogurtem a citronovou šťávou.'],
+    adultSteps: ['Placky dosol podle chuti a podávej s bílým jogurtem a citronovou šťávou.'],
     allergens: [],
     tags: ['do ruky', 'bez lepku'],
     sources: [
@@ -162,7 +161,7 @@ export function makeMeatRecipe(overrides: Partial<Recipe> = {}): Recipe {
     ],
     babySplitPoint: 'Po kroku 3 odeber porci mrkve pro miminko, ještě před dochucením.',
     vegetarianProteinSwap: 'Místo kuřecího masa se do bezmasé verze přidá červená čočka uvařená s bobkovým listem.',
-    meatSteps: ['Kuřecí maso oprav na pánvi, dosol a smíchej s mrkví.'],
+    adultSteps: ['Kuřecí maso oprav na pánvi, dosol a smíchej s mrkví.'],
     vegetarianSteps: ['Uvařenou červenou čočku vmíchej do mrkve, osol a dochuť citronem.'],
     ...overrides,
   });

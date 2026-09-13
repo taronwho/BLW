@@ -204,10 +204,22 @@ export interface Recipe {
   babySteps: string[];
   /** Jak porci miminku podat v dané fázi */
   babyServing: Record<Stage, string>;
-  /** Dokončení masité verze (kdo v rodině jí maso, plus dítě) */
-  meatSteps: string[];
-  /** Dokončení bezmasé verze (vegetariáni v rodině) — vždy vyplněné */
-  vegetarianSteps: string[];
+  /**
+   * Dochucení pro dospělé. Dětská porce je v tuhle chvíli hotová a odebraná,
+   * takže sem patří sůl, ostré koření i alkohol.
+   *
+   * U receptu s masem nebo rybou popisuje masitou variantu; jinak platí pro
+   * všechny dospělé u stolu.
+   */
+  adultSteps: string[];
+  /**
+   * Bezmasá varianta dochucení pro vegetariány v rodině.
+   *
+   * Povinná jen u receptu, který maso nebo rybu obsahuje. U bezmasého
+   * receptu nemá co dělat — dělit dochucení na masité a bezmasé, když
+   * v jídle žádné maso není, byla jen zdvojená a matoucí věta.
+   */
+  vegetarianSteps?: string[];
   /** Čím se nahrazuje bílkovina v bezmasé verzi. Povinné u receptu s masem/rybou. */
   vegetarianProteinSwap?: string;
 

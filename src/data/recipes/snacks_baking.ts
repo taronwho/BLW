@@ -50,13 +50,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Muffin nalámej na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
       '12m': 'Podávej celý malý muffin do ruky a nech dítě, ať si z něj samo odkusuje po kouscích.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé těsto dolaď podle chuti, rozděl do košíčků a peč 25 minut.',
       'Vychladlé muffiny můžeš přelít tenkou vrstvou tvarohové polevy nebo je podávat jen tak.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci peč stejně a před pečením posyp muffiny lžící ovesných vloček pro křupavý povrch.',
-      'Vychladlé muffiny vydrží v uzavřené dóze tři dny, nebo je zamraz po jednom.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'do ruky', 'mrazitelné'],
@@ -95,13 +91,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Sušenku nalámej na kousky velikosti nehtu ke sbírání špetkou.',
       '12m': 'Nabídni celou sušenku do ruky; dítě už ji ukousne předními zuby a rozžvýká dásněmi.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek hmoty dolaď podle chuti a peč z ní větší sušenky 18 minut.',
       'Do těsta pro dospělé se hodí i lžíce mletých ořechů nebo hořké čokolády.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci peč stejně a po vychladnutí sušenky uskladni v plechové dóze, aby zůstaly pevné.',
-      'Sušenky vydrží tři dny a dají se zamrazit proložené papírem na pečení.',
     ],
     allergens: ['psenice-lepek'],
     tags: ['vegetariánské', 'do ruky', 'bez přidaného cukru'],
@@ -140,13 +132,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej jablka na kostičky a drobenku promíchej dovnitř, aby se dala nabrat špetkou.',
       '12m': 'Servíruj porci v misce se lžící; dítě už si crumble nabírá samo a míchá si ho s jogurtem.',
     },
-    meatSteps: [
+    adultSteps: [
       'Velkou mísu dopeč a podávej teplou s kopečkem jogurtu nebo šlehačky.',
       'Kdo má rád sladší dezert, přisype si cukr do jablek ještě před pečením.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci podávej stejně, teplou s lžící řeckého jogurtu.',
-      'Zbylý crumble druhý den prohřej v troubě, aby drobenka znovu zkřupla.',
     ],
     allergens: ['psenice-lepek', 'mleko', 'orechy'],
     tags: ['vegetariánské', 'dezert', 'podzimní'],
@@ -184,13 +172,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej tyčinky na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
       '12m': 'Nabídni tyčinku do ruky a nech dítě, ať si ji samo láme a okusuje.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kuličky pro dospělé obal v karobu nebo v kokosu a nech je v lednici hodinu ztuhnout.',
       'Vydrží v uzavřené dóze týden a hodí se jako svačina do práce.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci připrav stejně; místo karobu můžeš kuličky obalit v mletých mandlích.',
-      'Pro výraznější chuť přidej do hmoty špetku skořice nebo nastrouhanou citronovou kůru.',
     ],
     allergens: ['orechy'],
     tags: ['vegetariánské', 'bez pečení', 'do ruky'],
@@ -228,13 +212,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej zeleninu na kostičky a hummus podávej v ploché misce, do které dítě dosáhne prsty.',
       '12m': 'Nabídni misku hummusu a hranolky vedle; dítě si je samo namáčí a zvládne i syrovou kedlubnu nakrájenou tenčeji.',
     },
-    meatSteps: [
+    adultSteps: [
       'Hummus pro dospělé osol, zakápni olivovým olejem a posyp mletou paprikou.',
       'K zelenině se hodí i opečený chléb nakrájený na trojúhelníky.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci hummusu osol a promíchej s lžící vody, aby byla vláčnější.',
-      'Navrch nakapej trochu tahini a posyp nasekanou petrželkou.',
     ],
     allergens: ['sezam'],
     tags: ['vegetariánské', 'bez pečení', 'do ruky'],
@@ -271,13 +251,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nech nanuk pár minut povolit a podávej ho za dřevěnou tyčku, ze které dítě olizuje měkký povrch.',
       '12m': 'Podávej nanuk rovnou z formičky a nech dítě, ať ho drží samo; kousky jsou měkké a rychle se rozpouští.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé formičky doplň jogurtem, podle chuti je dolaď a zamraz.',
       'Před podáváním namoč formičku na pár vteřin do teplé vody, nanuk pak vyklouzne sám.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci připrav stejně a navrch dej lžíci ovocného pyré, aby byl nanuk barevný.',
-      'Nanuky vydrží v mrazáku měsíc; skladuj je v uzavřené krabičce, aby nenasákly pachy.',
     ],
     allergens: ['mleko'],
     tags: ['vegetariánské', 'bez pečení', 'letní'],
@@ -315,13 +291,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Tyčinku nalámej na kousky velikosti nehtu a nabídni je s lžící tvarohu k namáčení.',
       '12m': 'Nech dítě brát si krekry z misky samu a namáčet je do hummusu nebo pomazánky.',
     },
-    meatSteps: [
+    adultSteps: [
       'Plát pro dospělé posyp solí a kmínem, zlehka je zaválej a peč 12 minut.',
       'Krekry nech vychladnout na mřížce, jinak zvlhnou a ztratí křehkost.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci posyp mletým sezamem a špetkou soli a peč stejně.',
-      'Krekry vydrží v plechové dóze dva týdny a hodí se k polévkám i k pomazánkám.',
     ],
     allergens: ['psenice-lepek', 'sezam'],
     tags: ['vegetariánské', 'do ruky', 'trvanlivé'],
@@ -359,13 +331,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej pečené jablko na kostičky a náplň podávej vedle v misce ke sbírání prsty.',
       '12m': 'Servíruj půlku pečeného jablka s náplní na talíři a nech dítě, ať si ho samo vybírá lžící.',
     },
-    meatSteps: [
+    adultSteps: [
       'Jablka pro dospělé před pečením posyp skořicí a podle chuti přelij lžičkou medu.',
       'Podávej teplá se šťávou z pekáčku a lžící tvarohu navrch.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dopeč stejně a navrch posyp mletými mandlemi opraženými na suché pánvi.',
-      'Studené pečené jablko chutná i druhý den jako svačina s lžící tvarohu.',
     ],
     allergens: ['mleko', 'orechy'],
     tags: ['bez lepku', 'vegetariánské', 'dezert'],
@@ -404,13 +372,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej chlebíček na kostky velikosti nehtu, aby si je dítě sbíralo špetkou.',
       '12m': 'Nabídni celý krajíček do ruky s lžící tvarohu nebo jogurtu k namáčení.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé těsto dolaď podle chuti a peč 45 minut; před podáváním nech chlebíček vychladnout ve formě.',
       'Do těsta pro dospělé se hodí hrst mletých ořechů nebo kousky hořké čokolády.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci peč stejně a po vychladnutí ji podávej s tenkou vrstvou tvarohu.',
-      'Chlebíček vydrží tři dny zabalený v utěrce, nebo se dá nakrájený zamrazit.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'do ruky', 'mrazitelné'],
@@ -447,13 +411,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nalam chlebíček na kousky velikosti nehtu a půlky koleček banánu polož vedle na talíř.',
       '12m': 'Nabídni celý chlebíček s banánem navrch; dítě si ho samo drží a odkusuje z okraje.',
     },
-    meatSteps: [
+    adultSteps: [
       'Chlebíčky pro dospělé potři silnější vrstvou arašídového másla a posyp skořicí.',
       'Kdo má rád sladší svačinu, přelije chlebíček lžičkou medu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci připrav stejně a navrch přidej pár plátků jablka pro křupavost.',
-      'Chlebíčky mažou až těsně před jídlem, jinak zvlhnou a ztratí tvar.',
     ],
     allergens: ['arasidy'],
     tags: ['vegetariánské', 'bez pečení', 'rychlé'],
@@ -491,13 +451,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej kedlubnu na kostičky a pomazánku podávej v ploché misce k namáčení prsty.',
       '12m': 'Nabídni misku pomazánky, hranolky kedlubny a kousek pečiva; dítě si svačinu poskládá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylou pomazánku osol, opepři a promíchej se zbytkem bylinek.',
       'Podávej s chlebem a kolečky ředkvičky; kdo jí maso, přidá si plátek šunky ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, vmíchej lžíci nastrouhané kedlubny a promíchej do hladka.',
-      'Navrch nasyp zbylé bylinky a zakápni lžičkou dýňového oleje.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'bez pečení'],
@@ -537,13 +493,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej řez na kostky velikosti nehtu, které si dítě sbírá špetkou.',
       '12m': 'Nabídni čtvereček do ruky a nech dítě, ať si ho samo láme; k tomu se hodí lžíce jogurtu.',
     },
-    meatSteps: [
+    adultSteps: [
       'Plech pro dospělé dolaď podle chuti a před pečením posyp mletými dýňovými semínky.',
       'Vychladlé řezy nakrájej na čtverečky a podávej s kávou nebo čajem.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci peč stejně a navrch rozetři tenkou vrstvu tvarohu smíchaného s dýňovým pyré.',
-      'Řezy vydrží v lednici čtyři dny a dají se zamrazit po jednotlivých kusech.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
     tags: ['vegetariánské', 'do ruky', 'podzimní'],
@@ -581,13 +533,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nakrájej ovoce na kostičky o hraně centimetr a nabídni je v mělké misce ke sbírání špetkou.',
       '12m': 'Servíruj salát v misce s vidličkou nebo lžící; dítě si kousky napichuje a jí je samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Salát pro dospělé zakápni limetkou, posyp mátou a nech deset minut odležet v chladu.',
       'Kdo má rád kontrast, přidá špetku soli, která zvýrazní sladkost melounu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: limetka, máta a chvíle odležení v lednici.',
-      'K salátu se hodí lžíce bílého jogurtu nebo kokosového jogurtu jako omáčka.',
     ],
     allergens: [],
     tags: ['bez lepku', 'vegetariánské', 'letní'],
@@ -626,13 +574,9 @@ export const snacksBaking: Recipe[] = [
       '9m': 'Nalam tyčinku na kousky velikosti nehtu, které si dítě sbírá špetkou z talíře.',
       '12m': 'Nabídni celou tyčinku do ruky jako svačinu na procházku a nech dítě, ať ji sní vlastním tempem.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek hmoty osladˇ podle chuti, upěchuj na plech a peč 20 minut.',
       'Tyčinky nech vychladnout na mřížce a skladuj je v uzavřené dóze.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci peč stejně a před pečením posyp tyčinky lžící vloček s mletým sezamem.',
-      'Tyčinky vydrží pět dní a hodí se jako svačina na výlet i do práce.',
     ],
     allergens: ['psenice-lepek', 'siricitany', 'sezam'],
     tags: ['vegetariánské', 'do ruky', 'na cesty'],
