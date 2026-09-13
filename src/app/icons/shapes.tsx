@@ -202,6 +202,42 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 4: mouky, vločky a bezlepkové základy ───────────────────────
+  'mouka-ryzova': (
+    <>
+      <path d="M6 54c0-6 6-11 12-12 4-5 9-8 14-8s10 3 14 8c6 1 12 6 12 12H6Z" fill={C.bila} stroke={C.kremTmavy} strokeWidth="2.5" strokeLinejoin="round" />
+      <ellipse cx="26" cy="46" rx="4" ry="2.4" transform="rotate(-18 26 46)" fill={C.kremTmavy} />
+      <ellipse cx="38" cy="48" rx="4" ry="2.4" transform="rotate(14 38 48)" fill={C.kremTmavy} />
+    </>
+  ),
+  'mouka-kukuricna': prasek(C.zluta, C.krem),
+  'mouka-pohankova': prasek('#9C8168', '#C0A98E'),
+  'mouka-ovesna': prasek(C.kremTmavy, C.krem),
+  'mouka-sojova': prasek('#C8B87A', '#E2D6A8'),
+  'jecne-vlocky': hromadka((x, y, u, i) => (
+    <ellipse key={i} cx={x} cy={y} rx="6" ry="3.5" transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? '#D9C79A' : '#BFA97A'} />
+  )),
+  'spaldove-vlocky': hromadka((x, y, u, i) => (
+    <ellipse key={i} cx={x} cy={y} rx="6" ry="3.5" transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? '#C9A876' : '#A98A5C'} />
+  )),
+  'ryzove-nudle': (
+    <>
+      <path d="M14 20c6 8 6 20 0 30M24 18c6 8 6 22 0 32M34 18c6 8 6 22 0 32M44 20c6 8 6 20 0 30" stroke={C.kremTmavy} strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M14 20c6 8 6 20 0 30M24 18c6 8 6 22 0 32M34 18c6 8 6 22 0 32M44 20c6 8 6 20 0 30" stroke={C.krem} strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  'tapiokovy-skrob': (
+    <>
+      <path d="M6 54c0-6 6-11 12-12 4-5 9-8 14-8s10 3 14 8c6 1 12 6 12 12H6Z" fill={C.bila} stroke={C.seda} strokeWidth="2.5" strokeLinejoin="round" />
+      <circle cx="24" cy="45" r="4" fill={C.bila} stroke={C.sedaTmava} strokeWidth="2" />
+      <circle cx="39" cy="47" r="4" fill={C.bila} stroke={C.sedaTmava} strokeWidth="2" />
+      <circle cx="32" cy="40" r="4" fill={C.bila} stroke={C.sedaTmava} strokeWidth="2" />
+    </>
+  ),
+  'kukuricne-lupinky': hromadka((x, y, u, i) => (
+    <path key={i} d={`M${x - 5} ${y}c1-4 4-5 5-5s4 1 5 5c-1 3-4 4-5 4s-4-1-5-4Z`} transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? '#E5B84A' : '#C99A34'} />
+  )),
+
   // ── dávka 3: plísňové sýry, kysané mléčné, zelenina ───────────────────
   hermelin: (
     <>

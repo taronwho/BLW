@@ -1,5 +1,7 @@
 import type { Ingredient } from '@/types';
 import {
+  NHS_CHOKING,
+  NHS_IRON,
   NHS_ALLERGY,
   BP_GLUTEN,
   EFSA_ARSENIC,
@@ -1273,6 +1275,436 @@ export const grains: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_ALLERGY, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mouka-ryzova',
+    nameCz: 'mouka rýžová',
+    altNamesCz: ['rýžová mouka'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🌾',
+    icon: 'mouka-ryzova',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: ['arsen'],
+    hazardNotes: {
+      arsen:
+        'Rýže přijímá ze svého okolí víc arsenu než ostatní obiloviny. NHS k tomu uvádí, že ve Velké Británii platí pro rýži a výrobky z ní nejvyšší povolené hodnoty a pro potraviny určené malým dětem jsou nastavené ještě přísněji. Samotnou rýži to nevylučuje — omezení se týká rýžového nápoje jako náhrady mléka.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Rýžová mouka je jemná a bez lepku, takže se hodí do placiček i na zahuštění. Sama o sobě drží špatně, proto ji míchej s pohankovou nebo s kukuřičnou moukou a s vejcem.',
+        caution: 'Rýžové výrobky nedávej dítěti každý den; stejně jako u jiných obilovin se vyplatí střídat.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících z ní upeč bezlepkové lívanečky nebo prsty z těsta. Zahustí i ovocné pyré, když je moc řídké.',
+        caution: 'Bezlepkové těsto je křehčí, proto ho peč v menších kouscích.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pečivo i placky z rýžové mouky. V bezlepkové kuchyni je základ, se kterým se pracuje nejsnáz.',
+        caution: 'Skladuj v suchu, mouka nasává vlhkost.',
+      },
+    },
+    prepIdeas: [
+      'bezlepkové lívanečky s pohankovou moukou',
+      'zahuštění ovocného pyré',
+      'prsty z bezlepkového těsta',
+      'obalení zeleniny k zapečení',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [EFSA_ARSENIC, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mouka-kukuricna',
+    nameCz: 'mouka kukuřičná',
+    altNamesCz: ['kukuřičná mouka', 'masa harina'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🌽',
+    icon: 'mouka-kukuricna',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Kukuřičná mouka je bez lepku a dává těstu sytě žlutou barvu i nasládlou chuť. Smíchaná s vodou a s trochou oleje z ní upečeš měkké placky, které se dají krájet na proužky.',
+        caution:
+          'Nepleť si ji s kukuřičným škrobem: mouka je mletá celá zrna, škrob je jen bílý zahušťovadlový prášek.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících ji přidej do zeleninových placiček, drží je pohromadě líp než samotná rýžová. Placku krátce prohřej, studená tvrdne.',
+        caution: 'Hrubší kukuřičná mouka potřebuje déle nasáknout, jinak zůstane v těstě zrnitá.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kukuřičné placky, mufinky i zahuštěné omáčky. Chuťově se hodí k dýni, k papričce i k fazolím.',
+        caution: 'Skladuj v suchu a v uzavřené nádobě.',
+      },
+    },
+    prepIdeas: [
+      'měkké placky krájené na proužky',
+      'do zeleninových placiček',
+      'bezlepkové mufinky s dýní',
+      'obalení k zapečení',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mouka-pohankova',
+    nameCz: 'mouka pohanková',
+    altNamesCz: ['pohanková mouka'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🌾',
+    icon: 'mouka-pohankova',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Pohanka není obilovina, ale semeno, a lepek neobsahuje. Mouka z ní má výraznější, zemitou chuť a v těstě drží líp než rýžová, takže se hodí jako její protějšek.',
+        caution: 'Tmavší mouka z neloupané pohanky chutná hořčeji; pro první porce vyber světlou.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících z ní upeč lívanečky nebo galetky. Pohanka je z bezlepkových mouk nejbohatší na bílkovinu, takže porci zasytí.',
+        caution: 'Těsto nech chvíli odpočinout, mouka potřebuje nasáknout.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pohankové lívanečky i placky se zeleninou. V bezlepkové kuchyni tvoří dvojici s rýžovou moukou.',
+        caution: 'Skladuj v chladu, tučnější mouky rychleji žluknou.',
+      },
+    },
+    prepIdeas: [
+      'lívanečky s rýžovou moukou',
+      'galetky se zeleninou',
+      'do bezlepkového chleba',
+      'zahuštění polévky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mouka-ovesna',
+    nameCz: 'mouka ovesná',
+    altNamesCz: ['ovesná mouka', 'mletý oves'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🌾',
+    icon: 'mouka-ovesna',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Ovesná mouka je jen jemně semleté vločky — uděláš ji doma za půl minuty v mixéru. Do kaše i do těsta přidá jemnost a zasytí líp než bílá mouka.',
+        caution:
+          'Oves sám lepek neobsahuje, ale běžně se zpracovává tam, kde se mele pšenice. Pro bezlepkovou dietu hledej na obalu označení bezlepkový oves.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících z ní upeč měkké sušenky nebo ji přidej do placiček. Váže vlhkost, takže těsto po chvíli zhoustne — počítej s tím.',
+        caution: 'Sušenky peč jen do zpevnění, přepečené jsou tvrdé a drolí se.',
+      },
+      '12m': {
+        serving:
+          'Batole jí ovesné sušenky, lívanečky i kaši zahuštěnou moukou. Ovesná mouka je z domácích mouk nejlevnější cesta k vláknině.',
+        caution: 'Skladuj v uzavřené nádobě, mletý oves rychle nasává pachy.',
+      },
+    },
+    prepIdeas: [
+      'měkké ovesné sušenky',
+      'do těsta na lívanečky',
+      'zahuštění ovocné kaše',
+      'do celozrnných placiček',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_ALLERGY, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mouka-sojova',
+    nameCz: 'mouka sójová',
+    altNamesCz: ['sójová mouka'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🌾',
+    icon: 'mouka-sojova',
+    allergens: ['soja'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'NHS jmenuje sójovou mouku mezi zdroji železa, což z ní v bezmasé kuchyni dělá cennou položku. Přidej lžíci do těsta na placičky nebo do sušenek; samostatně se nepodává.',
+        caution:
+          'Sója patří mezi klíčové alergeny, takže ji zaváděj jako ostatní — od šesti měsíců, v malém množství a s odstupem.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nahraď sójovou moukou čtvrtinu mouky v receptu. Víc už změní chuť i strukturu, těsto bude drobivé.',
+        caution: 'Železo z rostlin se vstřebá líp s vitaminem C ve stejném jídle.',
+      },
+      '12m': {
+        serving:
+          'Batole ji jí v pečivu a v sušenkách. Pro vegetariánskou domácnost je to jeden z mála způsobů, jak dostat železo do běžného pečení.',
+        caution: 'Skladuj v chladu, sójová mouka je tučná a žlukne.',
+      },
+    },
+    prepIdeas: [
+      'čtvrtina mouky v těstě na placičky',
+      'do ovesných sušenek',
+      'do celozrnného chleba',
+      'do palačinkového těsta',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_IRON, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'jecne-vlocky',
+    nameCz: 'ječné vločky',
+    altNamesCz: ['vločky z ječmene'],
+    category: 'obiloviny',
+    servingForm: 'kasovite',
+    emoji: '🌾',
+    icon: 'jecne-vlocky',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Ječné vločky se vaří o něco déle než ovesné a kaše z nich vyjde hustší. Zalij je trojnásobkem tekutiny, vař deset minut a promíchej s ovocným pyré.',
+        caution: 'Ječmen obsahuje lepek — zaváděj ho jako ostatní klíčové alergeny.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech kaši hrubší, ať má dítě co žvýkat. Ječné vločky se hodí i do polévky místo krup, uvaří se rychleji.',
+        caution: 'Hustá kaše na lžíci drží líp než řídká.',
+      },
+      '12m': {
+        serving:
+          'Batole jí ječnou kaši k snídani i vločky zapečené s ovocem. Chuť je jemně nasládlá, jinak než u ovsa.',
+        caution: 'Skladuj v suchu a v uzavřené nádobě.',
+      },
+    },
+    prepIdeas: [
+      'kaše s dušenou hruškou',
+      'do zeleninové polévky místo krup',
+      'zapečené s jablkem',
+      'do těsta na placičky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_ALLERGY, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'spaldove-vlocky',
+    nameCz: 'špaldové vločky',
+    altNamesCz: ['vločky ze špaldy'],
+    category: 'obiloviny',
+    servingForm: 'kasovite',
+    emoji: '🌾',
+    icon: 'spaldove-vlocky',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Špalda je starší příbuzná pšenice a lepek obsahuje. Vločky z ní se vaří rychle a kaše chutná jemně a plně; zalij je trojnásobkem tekutiny a vař pět minut.',
+        caution: 'Obsahují lepek, takže pro bezlepkovou dietu nejsou náhradou pšenice.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech kaši hrubší nebo z vloček upeč tyčinky, které dítě uchopí. Špaldové vločky se nerozvaří tak rychle jako ovesné.',
+        caution: 'Kaši nechávej chladnout rozprostřenou, uprostřed zůstává horká.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kaši, müsli i pečené vločkové tyčinky. Špalda se hodí všude, kde se osvědčil oves.',
+        caution: 'Skladuj v uzavřené nádobě, vločky rychle nasáknou vlhkost.',
+      },
+    },
+    prepIdeas: [
+      'kaše s jablkem',
+      'pečené tyčinky do ruky',
+      'do domácího müsli',
+      'do těsta na sušenky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_ALLERGY, BP_GLUTEN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'ryzove-nudle',
+    nameCz: 'rýžové nudle',
+    altNamesCz: ['rýžové těstoviny', 'nudle z rýžové mouky'],
+    category: 'obiloviny',
+    servingForm: 'drobne',
+    emoji: '🍜',
+    icon: 'ryzove-nudle',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: ['arsen'],
+    hazardNotes: {
+      arsen:
+        'Rýže přijímá ze svého okolí víc arsenu než ostatní obiloviny. NHS uvádí, že ve Velké Británii platí pro rýži a výrobky z ní nejvyšší povolené hodnoty a pro potraviny pro malé děti ještě přísnější. Rýži ani výrobky z ní to nevylučuje, jen se vyplatí obiloviny střídat.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Rýžové nudle jsou bez lepku a stačí je zalít vroucí vodou. Široké nudle jsou pro první sousta lepší než tenké — dítě je uchopí celou dlaní a saje z nich omáčku.',
+        caution: 'Rýžové výrobky střídej s jinými obilovinami, nedávej je každý den.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nudle nastříhej nůžkami na dvoucentimetrové kousky. Kluzké nudle drží v omáčce líp než ve vodě.',
+        caution: 'Rozvařené nudle se lepí do chuchvalce; propláchni je studenou vodou.',
+      },
+      '12m': {
+        serving:
+          'Batole jí nudle se zeleninou i v polévce. Vaří se pár minut, takže je z nich rychlá večeře.',
+        caution: 'Dlouhé nudle nakrájej, ať se dají nabrat na vidličku.',
+      },
+    },
+    prepIdeas: [
+      'široké nudle s dušenou zeleninou',
+      'do zeleninové polévky',
+      'nastříhané s rajčatovou omáčkou',
+      'studený nudlový salát',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [EFSA_ARSENIC, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'tapiokovy-skrob',
+    nameCz: 'tapiokový škrob',
+    altNamesCz: ['tapioka', 'maniokový škrob'],
+    category: 'obiloviny',
+    servingForm: 'neresi',
+    emoji: '🥄',
+    icon: 'tapiokovy-skrob',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Tapiokový škrob je bez lepku a v bezlepkovém pečení dělá to, co jinde lepek: drží těsto pohromadě a dodá mu pružnost. Lžíce do směsi mouk stačí, samostatně se nepodává.',
+        caution:
+          'Sám o sobě nemá výživovou hodnotu, je to pojivo. Nenahrazuje mouku, jen ji doplňuje.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících ho přidej do bezlepkových placiček nebo jím zahusť omáčku. Na rozdíl od kukuřičného škrobu zůstane omáčka průhledná a pružná.',
+        caution: 'Při vaření ho rozmíchej ve studené vodě, v horké se sráží do hrudek.',
+      },
+      '12m': {
+        serving:
+          'Batole jí bezlepkové pečivo a pudinky s tapiokou. Perličková tapioka je jiný výrobek — kuličky se do roka nepodávají, mají tvar, který dýchací cesty uzavře.',
+        caution: 'Perličkovou tapioku v kuličkách malému dítěti nedávej.',
+      },
+    },
+    prepIdeas: [
+      'pojivo do bezlepkového těsta',
+      'zahuštění ovocné omáčky',
+      'do bezlepkového chleba',
+      'do směsi mouk na placky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kukuricne-lupinky',
+    nameCz: 'kukuřičné lupínky bez cukru',
+    altNamesCz: ['cornflakes bez cukru', 'kukuřičné vločky'],
+    category: 'obiloviny',
+    servingForm: 'drobne',
+    emoji: '🥣',
+    icon: 'kukuricne-lupinky',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Vyber variantu bez přidaného cukru a bez soli — běžné lupínky z obchodu mají obojí a NHS obojí u kojenců odmítá. Nasypané do mléka změknou a dají se rozmačkat lžící.',
+        caution: 'Suché lupínky se v puse lepí na patro; vždycky je nech nabobtnat.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících si dítě sbírá změklé lupínky z tácku po jednom a trénuje na nich prsty. Sypat se dají i do jogurtu.',
+        caution: 'Ochucené a polevené varianty jsou sladkost, ne snídaně.',
+      },
+      '12m': {
+        serving:
+          'Batole jí lupínky s mlékem nebo s jogurtem. Čti složení: neslazené a neosolené jsou v obchodě menšina.',
+        caution: 'Skladuj v uzavřené nádobě, jinak zvlhnou a ztratí křupavost.',
+      },
+    },
+    prepIdeas: [
+      'změklé v mléce a rozmačkané',
+      'do bílého jogurtu s ovocem',
+      'rozdrcené do těsta na sušenky',
+      'na tácku ke sbírání prsty',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
 ];

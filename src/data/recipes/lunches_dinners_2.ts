@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import {
+  EFSA_ARSENIC,
   NHS_IRON,
   BP_RAW_BEANS,
   NHS_10_12M,
@@ -1988,6 +1989,98 @@ export const lunchesDinners2: Recipe[] = [
     allergens: ['vejce', 'mleko'],
     tags: ['vegetariánské', 'bez lepku'],
     sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'ryzove-nudle-s-dusenou-zeleninou',
+    titleCz: 'Rýžové nudle s dušenou zeleninou',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 25,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'ryzove-nudle', amount: '200 g', track: 'all' },
+      { ingredientId: 'mrkev', amount: '2 velké', track: 'all' },
+      { ingredientId: 'cuketa', amount: '1 menší', track: 'all' },
+      { ingredientId: 'jarni-cibulka', amount: '2 stonky', track: 'all' },
+      { ingredientId: 'olej-repkovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'limetka', amount: 'půlka', track: 'all' },
+      { ingredientId: 'kureci-prsa', amount: '300 g', track: 'meat' },
+      { ingredientId: 'tofu-natural', amount: '250 g', track: 'vegetarian' },
+    ],
+    baseSteps: [
+      'Mrkev a cuketu nakrájej na tenké proužky dlouhé jako prst, jarní cibulku nasekej nadrobno.',
+      'Zeleninu duš na oleji deset minut doměkka a na konci přidej cibulku.',
+      'Rýžové nudle zalij vroucí vodou, nech je změknout podle obalu a propláchni, ať se neslepí.',
+      'Zeleninu rozděl do dvou pánví — od tohoto místa jde každá linie vlastní cestou.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 odeber lžíci dušené zeleniny a hrst nudlí, dřív než do pánví přijde maso nebo tofu a dřív než se dochucuje pro dospělé.',
+    babySteps: [
+      'Odebranou mrkev a cuketu zkontroluj prstem — musí se dát rozmáčknout, jinak duš dál.',
+      'Nudle nech dlouhé a přelij je lžící šťávy ze zeleniny, ať kloužou.',
+      'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
+    ],
+    babyServing: {
+      '6m': 'Podávej pár dlouhých nudlí přes dlaň a vedle proužek dušené mrkve dlouhý jako dospělý prst.',
+      '9m': 'Nudle nastříhej nůžkami na dvoucentimetrové kousky a zeleninu nech v proužcích.',
+      '12m': 'Batole jí nudle se zeleninou z misky lžící nebo rukou.',
+    },
+    adultSteps: [
+      'Kuřecí prsa nakrájej na proužky, opeč je dozlatova a vmíchej do první pánve se zeleninou.',
+      'Přidej nudle, osol, opepři a zakápni limetkou.',
+    ],
+    vegetarianSteps: [
+      'Tofu osuš, nakrájej na kostky a opeč dozlatova. Vmíchej ho do druhé pánve se zeleninou.',
+      'Přidej nudle, osol a zakápni limetkou.',
+    ],
+    vegetarianProteinSwap:
+      'Kuřecí prsa nahrazuje 250 g tofu naturál opečeného dozlatova — drží tvar podobně jako maso a dodá bílkovinu.',
+    allergens: ['soja'],
+    tags: ['rodinné', 'bez lepku', 'rychlé'],
+    sources: [EFSA_ARSENIC, NHS_VEGETARIAN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kukuricne-placky-s-dyni',
+    titleCz: 'Kukuřičné placky s dýní',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 35,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'mouka-kukuricna', amount: '200 g', track: 'all' },
+      { ingredientId: 'mouka-ovesna', amount: '80 g', track: 'all' },
+      { ingredientId: 'mouka-sojova', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'dyne-hokaido', amount: 'půlka', track: 'all' },
+      { ingredientId: 'vejce-slepici', amount: '1 kus', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Dýni nakrájej na kostky, upeč ji dvacet minut doměkka a rozmačkej vidličkou.',
+      'Všechny tři mouky smíchej, přidej vejce a rozmačkanou dýni; sójová mouka tu nese železo, proto tvoří jen menší část směsi.',
+      'Papriku nakrájej na drobné kostky a vmíchej do těsta. Nech deset minut odpočinout.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se zbytek dochucuje pro dospělé.',
+    babySteps: [
+      'Z odebraného těsta vytvaruj dvě podlouhlé placky dlouhé jako dospělý prst.',
+      'Peč je na oleji na mírném plameni z obou stran, dokud uvnitř nezpevní.',
+      'Zakápni je kapkou olivového oleje a nech vychladnout na teplotu ruky; paprika v těstě nese vitamin C, který pomůže vstřebat železo ze sójové mouky.',
+    ],
+    babyServing: {
+      '6m': 'Podávej podlouhlou placku vcelku, aby konec čouhal z pěsti.',
+      '9m': 'Placku překroj podél na dva užší proužky pro uchopení dvěma prsty.',
+      '12m': 'Batole jí placky nakrájené na sousta, klidně s lžící jogurtu.',
+    },
+    adultSteps: [
+      'Do zbytku těsta přidej sůl a pepř a upeč placky obvyklé velikosti.',
+      'Podávej s lžící zakysané smetany a se zeleným salátem.',
+    ],
+    allergens: ['vejce', 'soja', 'psenice-lepek'],
+    tags: ['vegetariánské', 'rodinné'],
+    sources: [NHS_IRON, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
 ];
