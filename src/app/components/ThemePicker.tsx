@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { THEMES, THEME_LABELS } from '../lib/theme';
 import type { Theme } from '../lib/theme';
-import { useTheme } from '../lib/useTheme';
+import { useThemeStore } from '../lib/themeStore';
 
 const ICONS: Record<Theme, LucideIcon> = {
   system: Smartphone,
@@ -13,7 +13,8 @@ const ICONS: Record<Theme, LucideIcon> = {
 
 /** Přepínač motivu. Výchozí je „podle systému", aby se večer ztmavil sám. */
 export function ThemePicker(): ReactNode {
-  const { theme, setTheme } = useTheme();
+  const theme = useThemeStore((store) => store.theme);
+  const setTheme = useThemeStore((store) => store.setTheme);
 
   return (
     <fieldset className="flex flex-col gap-2" data-testid="vyber-motivu">
