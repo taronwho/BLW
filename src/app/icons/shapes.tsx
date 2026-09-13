@@ -303,6 +303,155 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M20 34c4 3 9 4 13 3" stroke={C.zelenSvetla} strokeWidth="3" strokeLinecap="round" fill="none" />
     </>
   ),
+
+  // ── košťálová a listová zelenina ───────────────────────────────────────
+  brokolice: (
+    <>
+      <path d="M27 34h10v18a5 5 0 0 1-10 0V34Z" fill={C.zelenBleda} />
+      <circle cx="20" cy="26" r="9" fill={C.zelenTmava} />
+      <circle cx="44" cy="26" r="9" fill={C.zelenTmava} />
+      <circle cx="32" cy="20" r="11" fill={C.zelen} />
+      <circle cx="25" cy="32" r="8" fill={C.zelen} />
+      <circle cx="39" cy="32" r="8" fill={C.zelenTmava} />
+      <circle cx="28" cy="18" r="3" fill={C.zelenSvetla} />
+      <circle cx="37" cy="24" r="3" fill={C.zelenSvetla} />
+    </>
+  ),
+
+  'zeli-bile': (
+    <>
+      <circle cx="32" cy="34" r="20" fill={C.zelenBleda} />
+      <path d="M32 14c-7 6-11 13-11 20s4 13 11 20" stroke="#A9CC84" strokeWidth="2.5" fill="none" />
+      <path d="M32 14c7 6 11 13 11 20s-4 13-11 20" stroke="#A9CC84" strokeWidth="2.5" fill="none" />
+      <path d="M14 30c8 3 28 3 36 0" stroke="#A9CC84" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  'kapusta-hlavkova': (
+    <>
+      <circle cx="32" cy="34" r="20" fill="#4E8C4A" />
+      <path d="M20 22c3 3 3 7 0 10s-3 7 0 10 3 7 0 9" stroke="#7CB36A" strokeWidth="2.5" fill="none" />
+      <path d="M32 15c3 4 3 8 0 12s-3 8 0 12 3 8 0 12" stroke="#7CB36A" strokeWidth="2.5" fill="none" />
+      <path d="M44 22c-3 3-3 7 0 10s3 7 0 10-3 7 0 9" stroke="#7CB36A" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  'kapusta-kaderava': (
+    <>
+      <path d="M30 38h4v16h-4Z" fill={C.zelenBleda} />
+      <path d="M32 38c-9 2-18-2-21-9 4 1 6 0 7-2-3-1-5-4-5-7 3 2 6 2 8 0-2-3-2-7 0-10 2 3 5 5 8 4-1-3 0-6 3-8Z" fill="#3F7A46" />
+      <path d="M32 38c9 2 18-2 21-9-4 1-6 0-7-2 3-1 5-4 5-7-3 2-6 2-8 0 2-3 2-7 0-10-2 3-5 5-8 4 1-3 0-6-3-8Z" fill="#55975C" />
+    </>
+  ),
+
+  'ruzickova-kapusta': (
+    <>
+      <circle cx="21" cy="40" r="11" fill="#4E8C4A" />
+      <circle cx="43" cy="40" r="11" fill="#3F7A46" />
+      <circle cx="32" cy="24" r="10" fill="#55975C" />
+      <path d="M21 30c2 4 2 8 0 11M43 30c-2 4-2 8 0 11M32 15c2 4 2 8 0 11" stroke="#89C077" strokeWidth="2.5" fill="none" />
+      <rect x="30.5" y="12" width="3" height="5" rx="1.5" fill={C.zelenBleda} />
+    </>
+  ),
+
+  spenat: (
+    <>
+      {/* Celé okrouhlé listy, ne snítky — špenát se v seznamu pozná podle
+          plochy listu, ne podle stonku. */}
+      <path d="M32 54c-1-9-1-17 0-22" stroke={C.zelenBleda} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M31 34c-9 1-17-4-19-12 9-4 18 0 19 12Z" fill="#3F7A46" />
+      <path d="M33 34c9 1 17-4 19-12-9-4-18 0-19 12Z" fill="#55975C" />
+      <path d="M32 32c-6-6-7-15-3-21 7 4 9 14 3 21Z" fill="#4E8C4A" />
+      <path d="M20 26c4 2 8 4 11 7M44 26c-4 2-8 4-11 7M32 13c1 6 1 13 0 18" stroke="#9BC98A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  mangold: (
+    <>
+      <path d="M30 56V28h5v28c0 2-5 2-5 0Z" fill={C.cervena} />
+      <path d="M32 30c-12-1-20-9-20-17 12-4 22 4 20 17Z" fill="#3F7A46" />
+      <path d="M32 30c12-1 20-9 20-17-12-4-22 4-20 17Z" fill="#55975C" />
+      <path d="M32 30c-4-8-2-16 0-19 3 4 4 12 0 19Z" fill="#4E8C4A" />
+    </>
+  ),
+
+  rukola: (
+    <>
+      {/* Hluboko laločnatý list rukoly — tím se liší od hladkého špenátu. */}
+      <path d="M32 55c0-10 1-19 3-26" stroke={C.zelenBleda} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M35 30c-5-3-7-8-6-12 3 1 5 0 6-3 2 3 4 3 6 1 1 3 3 4 6 4-2 3-2 5 0 8-4 0-8 1-12 2Z" fill="#5E9B4A" />
+      <path d="M29 38c-5-2-10-2-14 1 1-3 0-5-2-7 3-1 4-4 3-7 3 2 5 1 7-1 2 4 5 8 6 12Z" fill="#3F7A46" />
+      <path d="M44 22c-3 2-6 5-8 8M22 28c3 2 5 5 6 8" stroke="#9BC98A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'hlavkovy-salat': (
+    <>
+      {/* Volná hlávka: světlá a rozevlátá, proti pevnému zelí i kapustě. */}
+      <path d="M32 56c-14 0-24-8-24-18 0-4 2-7 5-8-1-5 2-10 7-11 2-5 7-8 12-8s10 3 12 8c5 1 8 6 7 11 3 1 5 4 5 8 0 10-10 18-24 18Z" fill="#9BC96E" />
+      <path d="M18 26c4 6 4 13 0 19M32 15c4 7 4 17 0 24M46 26c-4 6-4 13 0 19" stroke="#D2E8AE" strokeWidth="3" fill="none" />
+    </>
+  ),
+
+  porek: (
+    <>
+      <path d="M27 8c-3 6-4 12-3 18l4-1c-1-6 0-11 3-17Z" fill="#3F7A46" />
+      <path d="M37 8c3 6 4 12 3 18l-4-1c1-6 0-11-3-17Z" fill="#55975C" />
+      <path d="M32 6c-2 7-2 14-1 20h4c1-6 1-13-1-20Z" fill="#4E8C4A" />
+      <path d="M25 26h14v24c0 3-3 5-7 5s-7-2-7-5V26Z" fill={C.bila} />
+      <path d="M29 27v27M35 27v27" stroke={C.bilaStin} strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  fenykl: (
+    <>
+      <path d="M22 16c2 3 3 6 3 9M32 12c0 4 0 8-1 12M42 16c-2 3-3 6-3 9" stroke={C.zelen} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="14" r="3" fill={C.zelenSvetla} />
+      <circle cx="32" cy="10" r="3" fill={C.zelenSvetla} />
+      <circle cx="44" cy="14" r="3" fill={C.zelenSvetla} />
+      <path d="M32 25c10 0 17 7 17 15s-7 13-17 13-17-5-17-13 7-15 17-15Z" fill={C.zelenBleda} />
+      <path d="M26 27c-2 8-2 17 0 24M38 27c2 8 2 17 0 24" stroke={C.bila} strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  artycok: (
+    <>
+      <path d="M30 50h4v8h-4Z" fill={C.zelenBleda} />
+      <path d="M32 8c8 6 13 15 13 24 0 11-6 18-13 18s-13-7-13-18c0-9 5-18 13-24Z" fill="#6E9B52" />
+      <path d="M20 26c3 3 7 4 12 4s9-1 12-4M19 36c4 3 8 4 13 4s9-1 13-4M21 45c3 3 7 4 11 4s8-1 11-4" stroke="#4A7136" strokeWidth="2.5" fill="none" />
+      <path d="M32 8c-3 5-5 11-5 16h10c0-5-2-11-5-16Z" fill="#8FB56C" />
+    </>
+  ),
+
+  hrasek: (
+    <>
+      {/* Světlý lusk a tmavá zrna — obráceně splynou v jednu skvrnu. */}
+      <path d="M8 26c12-9 36-9 48 0-5 14-19 21-24 21S13 40 8 26Z" fill="#C3DF9E" />
+      <path d="M10 25c12-7 32-7 44 0" stroke="#8FBF6B" strokeWidth="3" fill="none" />
+      <circle cx="20" cy="34" r="7" fill="#3F7A46" />
+      <circle cx="32" cy="36" r="7.5" fill="#4E8C4A" />
+      <circle cx="44" cy="34" r="7" fill="#3F7A46" />
+    </>
+  ),
+
+  'fazolky-zelene': (
+    <>
+      <path d="M14 46c-2-14 6-28 16-32 3 8 1 22-5 30-3 4-9 6-11 2Z" fill="#4E8C4A" />
+      <path d="M28 50c-4-14 3-30 13-34 4 8 3 24-3 32-3 4-9 6-10 2Z" fill="#5E9B4A" />
+      <path d="M44 48c-3-12 2-26 10-30 3 7 2 21-3 28-2 4-6 5-7 2Z" fill="#3F7A46" />
+      <path d="M22 22c-3 8-4 16-3 22M36 21c-3 8-3 17-2 23" stroke="#8FC45A" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  kukurice: (
+    <>
+      <path d="M20 22c-6 8-8 20-4 30 7-2 11-9 12-18l-8-12Z" fill="#4E8C4A" />
+      <path d="M44 22c6 8 8 20 4 30-7-2-11-9-12-18l8-12Z" fill="#55975C" />
+      <path d="M32 8c8 0 13 8 13 20s-5 26-13 26-13-14-13-26S24 8 32 8Z" fill={C.zluta} />
+      <path d="M26 18c0 12 0 22 1 28M32 14c0 14 0 26 0 32M38 18c0 12 0 22-1 28" stroke={C.zlutaTmava} strokeWidth="2" fill="none" />
+      <path d="M21 26c7 2 15 2 22 0M21 36c7 2 15 2 22 0M22 46c6 2 14 2 20 0" stroke={C.zlutaTmava} strokeWidth="2" fill="none" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;
