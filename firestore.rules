@@ -1,15 +1,42 @@
 rules_version = '2';
+
+// Model přístupu: dokument domácnosti se jmenuje párovacím kódem a ten kód je
+// zároveň jediné tajemství (capability model, docs/SPEC.md kap. 7). Kdo kód
+// zná, do domácnosti patří; kdo ho nezná, dokument nenajde, protože výpis
+// kolekce je zakázaný a kód má 10 znaků Crockford Base32.
 service cloud.firestore {
   match /databases/{db}/documents {
     match /households/{householdId} {
-      // Čtení jen pro přihlášeného, který zná přesné ID (capability model).
-      allow get: if request.auth != null;
-      allow list: if false;                    // zákaz enumerace
-      allow create: if request.auth != null
-                    && request.resource.data.members == [request.auth.uid];
-      allow update: if request.auth != null
-                    && request.auth.uid in resource.data.members
-                    && request.resource.data.members.size() <= 5;
+      function prihlaseny() {
+        return request.auth != null;
+      }
+      function stavajiciClenove() {
+        return resource.data.members;
+      }
+      function noviClenove() {
+        return request.resource.data.members;
+      }
+      function jsemClen() {
+        return prihlaseny() && request.auth.uid in stavajiciClenove();
+      }
+
+      // Připojení dalšího telefonu k existující domácnosti.
+      //
+      // Bez tohohle by druhý rodič dokument přečetl, ale nikdy do něj nezapsal:
+      // `jsemClen()` se ptá na seznam, ve kterém ještě není. Povoluje se proto
+      // jediný krok — přidat sám sebe. Nikoho ubrat nejde a přidat jde jen
+      // jeden uid, takže se přes tuhle větev nedá seznam členů přepsat.
+      function pripojujiSe() {
+        return prihlaseny()
+          && request.auth.uid in noviClenove()
+          && stavajiciClenove().toSet().difference(noviClenove().toSet()).size() == 0
+          && noviClenove().size() == stavajiciClenove().size() + 1;
+      }
+
+      allow get: if prihlaseny();
+      allow list: if false; // zákaz enumerace domácností
+      allow create: if prihlaseny() && noviClenove() == [request.auth.uid];
+      allow update: if noviClenove().size() <= 5 && (jsemClen() || pripojujiSe());
       allow delete: if false;
     }
   }

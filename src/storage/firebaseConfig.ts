@@ -52,6 +52,17 @@ export function parseFirebaseConfig(input: string): FirebaseConfig | null {
   }
 }
 
+/**
+ * Je konfigurace zapečená rovnou v buildu?
+ *
+ * Když ano, nikdo nic nevyplňuje — aplikace se rovnou umí připojit a ruční
+ * pole v Domácnosti se schová, aby nemátlo. Když ne, zbývá vložit konfiguraci
+ * do prohlížeče ručně.
+ */
+export function hasBuiltInConfig(): boolean {
+  return fromEnv() !== null;
+}
+
 export function loadFirebaseConfig(): FirebaseConfig | null {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);

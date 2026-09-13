@@ -1,101 +1,173 @@
-# FIREBASE.md — nasazení Firestore pravidel a omezení API klíče
+# FIREBASE.md — nastavení sdílení krok za krokem
 
-Aplikace funguje i **bez Firebase** — v lokálním režimu nad IndexedDB. Firebase
-zapínáš jen kvůli tomu, aby oba telefony viděly tytéž ochutnávky.
+Aplikace funguje i **bez Firebase**, jen v lokálním režimu nad IndexedDB: každý
+telefon má vlastní deník a nic se nesdílí. Firebase zapínáš jen kvůli tomu, aby
+víc lidí vidělo tytéž ochutnávky.
 
-Firebase web-konfigurace (`apiKey` a spol.) **není tajemství** — je z principu
-viditelná v prohlížeči každého návštěvníka. Bezpečnost dělají Firestore
-pravidla a omezení klíče na doménu, ne jeho skrytí. Do repozitáře ji přesto
-nedáváme: zadává se v aplikaci v Nastavení a uloží se do prohlížeče, případně
-do `.env.local` pro lokální vývoj (vzor je v `.env.local.example`).
+Cíl téhle příručky: nastavit to tak, aby **nikdo z uživatelů nic nevyplňoval**.
+Konfigurace se zapeče do buildu na GitHubu, člověk dostane odkaz, klepne na něj
+a je připojený.
 
-## 1. Založení projektu
+## Co je a co není tajemství
 
-1. [console.firebase.google.com](https://console.firebase.google.com) → **Add project**.
-   Google Analytics není potřeba.
-2. V projektu **Add app → Web** (ikona `</>`). Hosting nezapínej, běžíme na GitHub Pages.
-3. Opiš si zobrazenou konfiguraci — vložíš ji v aplikaci v Nastavení.
+Firebase web-konfigurace (`apiKey`, `projectId` a spol.) **není tajemství**.
+Je z principu vidět v prohlížeči každého návštěvníka — stáhne se jako součást
+JavaScriptu. Ukrývat ji nemá smysl a Google to ani nepředpokládá.
 
-## 2. Firestore
+Bezpečnost dělá trojice:
 
-1. **Build → Firestore Database → Create database**.
-2. Region **eur3 (europe-west)**.
-3. Start v *production mode* — pravidla hned nahradíme vlastními.
+1. **Firestore pravidla** (`firestore.rules`) — kdo smí co číst a zapisovat.
+2. **Párovací kód** — 10 znaků Crockford Base32, je to název dokumentu
+   domácnosti a zároveň jediné heslo. Výpis kolekce je pravidly zakázaný,
+   takže cizí domácnost nikdo nenajde náhodou.
+3. **Omezení klíče na doménu** — API klíč funguje jen ze stránek tvého webu.
 
-## 3. Anonymní přihlášení
+Proto se konfigurace klidně smí nastavit jako **repository variables** na
+GitHubu. Kdo chce, může místo nich použít secrets; workflow zvládne obojí.
 
-**Build → Authentication → Get started → Sign-in method → Anonymous → Enable.**
+---
 
-Tohle je to, co umožní „bez hesel". Každý telefon dostane vlastní `uid`,
-který se přidá do `members` dané domácnosti.
+## 1. Založení projektu Firebase
 
-Pak **Authentication → Settings → Authorized domains → Add domain** a přidej
-`<tvuj-nick>.github.io`. Bez toho přihlášení z Pages selže.
+1. Jdi na [console.firebase.google.com](https://console.firebase.google.com)
+   a přihlas se Google účtem.
+2. **Create a project** (nebo „Přidat projekt").
+3. Název například `blw-prikrmy`. Na přesném názvu nezáleží, jen si ho pamatuj.
+4. **Google Analytics vypni** — k ničemu tu není a jen přidává souhlasy.
+5. Počkej, než se projekt vytvoří, a klikni na **Continue**.
 
-## 4. Nasazení pravidel
+## 2. Přidání webové aplikace
 
-Pravidla jsou v repozitáři v souboru [`firestore.rules`](../firestore.rules).
-Nenechávej databázi v test mode — ten po 30 dnech vyprší a do té doby je
-otevřená komukoli.
+1. Na úvodní stránce projektu klikni na ikonu **`</>`** (Web).
+2. Přezdívka aplikace: třeba `BLW web`.
+3. **„Also set up Firebase Hosting" nezaškrtávej** — běžíme na GitHub Pages.
+4. **Register app.**
+5. Ukáže se blok kódu s objektem `firebaseConfig`. **Tenhle blok si nech
+   otevřený nebo zkopíruj stranou**, budeš z něj přepisovat šest hodnot:
 
-### Varianta A — přes konzoli (bez instalace čehokoli)
-
-1. **Firestore Database → Rules**.
-2. Smaž obsah editoru a vlož celý obsah `firestore.rules`.
-3. **Publish**.
-
-### Varianta B — přes Firebase CLI
-
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init firestore     # vyber existující projekt, jako soubor pravidel zadej firestore.rules
-firebase deploy --only firestore:rules
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSy…",
+  authDomain: "blw-prikrmy.firebaseapp.com",
+  projectId: "blw-prikrmy",
+  storageBucket: "blw-prikrmy.firebasestorage.app",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abc123…",
+};
 ```
 
-### Co pravidla dělají
+Kdybys blok zavřel, najdeš ho znovu přes **ozubené kolo → Project settings →
+Your apps → SDK setup and configuration → Config**.
 
-| Operace | Pravidlo | Proč |
-|---|---|---|
-| `get` | jen přihlášený | Kdo zná přesné 10znakové ID domácnosti, smí ho číst — capability model. |
-| `list` | nikdy | Zákaz enumerace: bez zákazu by šlo projít všechny domácnosti. |
-| `create` | `members == [uid]` | Nová domácnost může vzniknout jen se zakladatelem jako jediným členem. |
-| `update` | `uid in members` a `members.size() <= 5` | Zapisovat smí jen člen a domácnost nejde nafouknout. |
-| `delete` | nikdy | Smazání celé domácnosti z aplikace nepotřebujeme; data se exportují do JSON. |
+## 3. Firestore databáze
 
-Párovací kód má 10 znaků z Crockford Base32 (bez I, L, O, U), to je
-32^10 ≈ 1,1 × 10^15 kombinací. Uhádnout cizí ID je tedy nereálné, ale
-**kdo kód zná, ten dovnitř vidí** — proto ho posílej stejně opatrně jako heslo.
+1. V levém menu **Build → Firestore Database**.
+2. **Create database.**
+3. Režim: **Start in production mode** (pravidla hned nahradíme vlastními).
+4. Region: **eur3 (europe-west)** — data zůstanou v Evropě.
+5. **Enable.**
 
-## 5. Omezení API klíče na doménu
+## 4. Anonymní přihlášení
 
-Klíč je veřejný, ale nemá smysl nechat ho použitelný odkudkoli.
+Tohle je to, co umožní „bez hesel". Bez něj se nikdo nepřipojí.
 
-1. [console.cloud.google.com](https://console.cloud.google.com) → vyber tentýž projekt.
-2. **APIs & Services → Credentials → API Keys →** klíč s názvem „Browser key (auto created by Firebase)".
-3. **Application restrictions → Websites** a přidej:
-   - `https://<tvuj-nick>.github.io/*`
-   - `http://localhost:5173/*` (pro vývoj)
-4. **API restrictions → Restrict key** a nech povolené jen:
-   Identity Toolkit API, Token Service API, Cloud Firestore API.
-5. **Save.** Změna se propíše do pár minut.
+1. **Build → Authentication → Get started.**
+2. Záložka **Sign-in method**.
+3. V seznamu **Anonymous → Enable → Save.**
 
-## 6. Ověření, že to funguje
+Každé zařízení dostane vlastní `uid`, který se zapíše do `members` domácnosti.
 
-1. Otevři aplikaci na prvním telefonu → **Domácnost → Založit domácnost**.
-   Objeví se kód po pěticích, např. `K7M2X-9QRT4`, a QR kód.
-2. Na druhém telefonu naskenuj QR (nebo kód přepiš) → **Připojit se**.
-3. Na prvním telefonu zaznamenej ochutnávku. Na druhém se musí objevit do 5 vteřin.
-4. Vypni na jednom telefonu síť, zaznamenej ochutnávku, zapni síť zpět.
-   Záznam se dosynchronizuje a **žádný z obou záznamů se neztratí** —
-   ochutnávky jsou append-only.
+## 5. Nahrání pravidel
 
-## 7. Když se něco nedaří
+Bez tohohle kroku by druhý člověk data přečetl, ale nikdy nezapsal.
 
-| Příznak | Příčina | Co s tím |
-|---|---|---|
-| `auth/unauthorized-domain` | Doména není v Authorized domains | Krok 3 |
-| `permission-denied` při zápisu | Uživatel není v `members`, nebo běží pravidla z test mode | Zkontroluj krok 4 a že jsi připojený pod správným kódem |
-| `permission-denied` hned po zadání kódu | Domácnost s tímhle kódem už existuje a ty v ní nejsi členem | Nech si poslat kód znovu, nebo založ novou domácnost |
-| Data se nepropisují mezi telefony | Druhý telefon je v lokálním režimu | V Nastavení zkontroluj stav synchronizace |
-| Aplikace po vypnutí sítě hlásí chybu | Nezapnutá offline cache | Firestore se inicializuje s `persistentLocalCache`, zkus tvrdé obnovení stránky |
+1. **Build → Firestore Database → Rules.**
+2. Smaž, co tam je, a vlož celý obsah souboru
+   [`firestore.rules`](../firestore.rules) z tohohle repozitáře.
+3. **Publish.**
+
+Co pravidla dělají:
+
+| Operace | Kdo smí |
+|---|---|
+| `get` (čtení domácnosti) | kdokoli přihlášený, kdo zná přesný kód |
+| `list` (výpis domácností) | nikdo — zákaz enumerace |
+| `create` | přihlášený, a jen se sebou jako jediným členem |
+| `update` | člen domácnosti; nebo nový člověk, který **přidá jen sám sebe** |
+| `delete` | nikdo |
+
+Větev „přidá jen sám sebe" je právě to připojení druhého telefonu: nikoho
+neubere a přidat smí nejvýš jedno `uid`. Domácnost unese pět zařízení.
+
+## 6. Omezení API klíče na doménu
+
+Nepovinné, ale doporučené — zabrání použití klíče z cizích stránek.
+
+1. [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials),
+   nahoře vyber **stejný projekt**.
+2. V sekci **API Keys** klikni na klíč, který začíná stejně jako tvůj `apiKey`
+   (jmenuje se obvykle „Browser key (auto created by Firebase)").
+3. **Application restrictions → Websites → Add.**
+4. Přidej dvě položky:
+   - `https://<tvůj-nick>.github.io/*`
+   - `http://localhost:*` (kvůli vývoji; můžeš vynechat)
+5. **Save.** Projeví se to do pěti minut.
+
+## 7. Zapečení konfigurace do buildu
+
+Aby uživatelé nic nevyplňovali, musí konfigurace vstoupit do buildu na GitHubu.
+
+1. V repozitáři na GitHubu: **Settings → Secrets and variables → Actions**.
+2. Záložka **Variables** → **New repository variable**.
+3. Založ postupně šest proměnných. Hodnoty opiš z bloku z kroku 2:
+
+| Název proměnné | Hodnota z `firebaseConfig` |
+|---|---|
+| `VITE_FIREBASE_API_KEY` | `apiKey` |
+| `VITE_FIREBASE_AUTH_DOMAIN` | `authDomain` |
+| `VITE_FIREBASE_PROJECT_ID` | `projectId` |
+| `VITE_FIREBASE_STORAGE_BUCKET` | `storageBucket` |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | `messagingSenderId` |
+| `VITE_FIREBASE_APP_ID` | `appId` |
+
+Hodnoty piš **bez uvozovek**.
+
+4. Spusť nasazení: **Actions → Deploy na GitHub Pages → Run workflow**, nebo
+   prostě pushni cokoli do `main`.
+5. V logu kroku „Kontrola konfigurace Firebase" musí být vypsané ID projektu.
+   Když tam je varování „Firebase není nastavený", některá proměnná chybí nebo
+   má překlep v názvu.
+
+## 8. Zkouška
+
+1. Otevři nasazenou aplikaci, **Domácnost**.
+2. Dole musí být napsané, že připojení je součástí aplikace a není co
+   vyplňovat. Kdyby tam místo toho bylo pole na vložení konfigurace, krok 7
+   neproběhl.
+3. Klikni na **Založit domácnost**. Objeví se kód, QR a odkaz k připojení.
+4. **Kopírovat odkaz** a pošli ho druhému člověku.
+5. Ten odkaz otevře, klepne na **Připojit tohle zařízení** — a od té chvíle
+   vidí stejný deník.
+
+## Jak to funguje bez nastavení
+
+Když proměnné nenastavíš, nic se nerozbije: aplikace poběží dál v lokálním
+režimu a v Domácnosti se ukáže pole, kam jde konfiguraci vložit ručně (uloží
+se jen do prohlížeče). Pro lokální vývoj slouží `.env.local` podle vzoru
+v `.env.local.example`.
+
+## Když se něco nedaří
+
+| Projev | Příčina |
+|---|---|
+| „Jen na tomto zařízení" i po založení domácnosti | Není zapnuté anonymní přihlášení (krok 4). |
+| Druhý telefon vidí data, ale jeho zápisy se nepropíšou | Ve Firestore jsou staré verze pravidel (krok 5). |
+| `Missing or insufficient permissions` | Pravidla nejsou publikovaná, nebo je domácnost už plná (pět zařízení). |
+| `auth/api-key-not-valid` | Překlep v `VITE_FIREBASE_API_KEY`, nebo omezení klíče nesedí s doménou. |
+| V Domácnosti je pořád pole na konfiguraci | Proměnné nejsou nastavené jako *repository* (ne *environment*) variables, nebo build po jejich přidání neproběhl znovu. |
+
+## Náklady
+
+Provoz téhle aplikace se vejde do bezplatné úrovně Firebase (Spark).
+Jeden dokument na domácnost, několik zápisů denně. Platební kartu Firebase
+pro Spark nevyžaduje.
