@@ -1,9 +1,9 @@
-import { Search, Star } from 'lucide-react';
+import { CalendarDays, Baby, RotateCcw, Search, ShieldAlert, Star } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data';
-import { isIronSource, nutrientProfile } from '@/data/nutrients';
+import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES } from '@/types';
 import type { Ingredient } from '@/types';
@@ -12,6 +12,14 @@ import { ChokingBadge } from '../components/ChokingBadge';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
+import { FilterToggles } from '../components/FilterToggles';
+import { ChipButton, FilterGroup, Upresneni } from '../components/FilterGroup';
+import {
+  DRUH_ZELEZA_OPTIONS,
+  UROVEN_OPTIONS,
+  vyhovujeZivinam,
+  ZIVINY_OPTIONS,
+} from '../lib/nutrientFilter';
 import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
@@ -22,25 +30,14 @@ import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
 import { IngredientIcon } from '../components/IngredientIcon';
 
-type QuickFilter =
-  | 'vse'
-  | 'neochutnano'
-  | 'ochutnano'
-  | 'alergeny'
-  | 'oblibene'
-  | 'vhodne'
-  | 'sezonni'
-  | 'zelezo';
-
-const QUICK_FILTERS: readonly ChipOption[] = [
-  { id: 'vse', label: 'Vše' },
-  { id: 'neochutnano', label: 'Neochutnáno' },
-  { id: 'ochutnano', label: 'Ochutnáno' },
-  { id: 'alergeny', label: 'Klíčové alergeny' },
-  { id: 'oblibene', label: 'Oblíbené' },
-  { id: 'vhodne', label: 'Vhodné teď' },
-  { id: 'sezonni', label: 'Sezónní' },
-  { id: 'zelezo', label: 'Zdroj železa' },
+/**
+ * Deník má tři stavy, které se navzájem vylučují — ochutnané a neochutnané
+ * najednou nedávají smysl, proto jsou tu jako přepínač, ne jako zaškrtávátka.
+ */
+const DENIK_OPTIONS: readonly ChipOption[] = [
+  { id: 'vse', label: 'nezáleží' },
+  { id: 'neochutnano', label: 'ještě neochutnané' },
+  { id: 'ochutnano', label: 'už ochutnané' },
 ];
 
 const SORT_OPTIONS: readonly SelectOption[] = INGREDIENT_SORTS.map((one) => ({
@@ -49,7 +46,7 @@ const SORT_OPTIONS: readonly SelectOption[] = INGREDIENT_SORTS.map((one) => ({
 }));
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
-  { id: 'vse', label: 'Všechny kategorie' },
+  { id: 'vse', label: 'Všechny' },
   ...INGREDIENT_CATEGORIES.map((category) => ({ id: category, label: CATEGORY_LABELS[category] })),
 ];
 
@@ -58,7 +55,14 @@ export function IngredientsScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('vse');
-  const [quick, setQuick] = useState<QuickFilter>('vse');
+  const [ziviny, setZiviny] = useState<readonly string[]>([]);
+  const [druhZeleza, setDruhZeleza] = useState('vse');
+  const [sila, setSila] = useState('aspon');
+  const [denik, setDenik] = useState('vse');
+  const [oblibene, setOblibene] = useState(false);
+  const [vhodneTed, setVhodneTed] = useState(false);
+  const [sezonni, setSezonni] = useState(false);
+  const [alergeny, setAlergeny] = useState(false);
   const [sort, setSort] = useState<SortKey>('abeceda');
 
   const tasted = useMemo(() => tastedIds(state), [state]);
@@ -71,29 +75,69 @@ export function IngredientsScreen(): ReactNode {
       ingredients.filter((item) => {
         if (!matchesIngredient(item, query)) return false;
         if (category !== 'vse' && item.category !== category) return false;
-        switch (quick) {
-          case 'neochutnano':
-            return !tasted.has(item.id);
-          case 'ochutnano':
-            return tasted.has(item.id);
-          case 'alergeny':
-            return item.isKeyAllergen;
-          case 'oblibene':
-            return favorites.has(item.id);
-          case 'vhodne':
-            return suitableNow(item, months);
-          case 'sezonni':
-            return item.seasonCz.length > 0 && inSeason(item, month);
-          case 'zelezo':
-            return isIronSource(item);
-          default:
-            return true;
-        }
+        // Podmínky se sčítají, takže jde hledat i „sezónní zelenina, kterou
+        // jsme ještě neochutnali". Dřív se volby vylučovaly a tohle nešlo.
+        if (denik === 'neochutnano' && tasted.has(item.id)) return false;
+        if (denik === 'ochutnano' && !tasted.has(item.id)) return false;
+        if (oblibene && !favorites.has(item.id)) return false;
+        if (vhodneTed && !suitableNow(item, months)) return false;
+        if (sezonni && !(item.seasonCz.length > 0 && inSeason(item, month))) return false;
+        if (alergeny && !item.isKeyAllergen) return false;
+        if (!vyhovujeZivinam(nutrientProfile(item), ziviny, druhZeleza, sila)) return false;
+        return true;
       }),
-    [query, category, quick, tasted, favorites, months, month],
+    [
+      query,
+      category,
+      denik,
+      oblibene,
+      vhodneTed,
+      sezonni,
+      alergeny,
+      ziviny,
+      druhZeleza,
+      sila,
+      tasted,
+      favorites,
+      months,
+      month,
+    ],
   );
 
   const serazene = useMemo(() => sortIngredients(visible, sort), [visible, sort]);
+
+  const zeleznyFiltr = ziviny.includes('zelezo');
+  const filtrujeSe =
+    query !== '' ||
+    category !== 'vse' ||
+    denik !== 'vse' ||
+    oblibene ||
+    vhodneTed ||
+    sezonni ||
+    alergeny ||
+    ziviny.length > 0;
+
+  function prepniZivinu(id: string): void {
+    setZiviny((current) =>
+      current.includes(id) ? current.filter((one) => one !== id) : [...current, id],
+    );
+    // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
+    // viset nastavený a tiše filtroval.
+    if (id === 'zelezo' && ziviny.includes('zelezo')) setDruhZeleza('vse');
+  }
+
+  function zrusFiltry(): void {
+    setQuery('');
+    setCategory('vse');
+    setZiviny([]);
+    setDruhZeleza('vse');
+    setSila('aspon');
+    setDenik('vse');
+    setOblibene(false);
+    setVhodneTed(false);
+    setSezonni(false);
+    setAlergeny(false);
+  }
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="suroviny-nadpis">
@@ -114,28 +158,118 @@ export function IngredientsScreen(): ReactNode {
         />
       </label>
 
-      <FilterSelect
-        label="Kategorie"
-        options={CATEGORY_OPTIONS}
-        selected={category}
-        onSelect={setCategory}
-        testId="filtr-kategorii"
-      />
-      <FilterChips
-        options={QUICK_FILTERS}
-        selected={quick}
-        onSelect={(id) => setQuick(id as QuickFilter)}
-        ariaLabel="Rychlé filtry"
-        testId="rychle-filtry"
-      />
-      <FilterSelect
-        neutralId="abeceda"
-        label="Řazení"
-        options={SORT_OPTIONS}
-        selected={sort}
-        onSelect={(id) => setSort(id as SortKey)}
-        testId="razeni-surovin"
-      />
+      <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface/50 p-3" data-testid="filtry-surovin">
+        <div className="grid grid-cols-2 gap-2">
+          <FilterSelect
+            compact
+            label="Kategorie"
+            options={CATEGORY_OPTIONS}
+            selected={category}
+            onSelect={setCategory}
+            testId="filtr-kategorii"
+          />
+          <FilterSelect
+            compact
+            neutralId="abeceda"
+            label="Řazení"
+            options={SORT_OPTIONS}
+            selected={sort}
+            onSelect={(id) => setSort(id as SortKey)}
+            testId="razeni-surovin"
+          />
+        </div>
+
+        <FilterGroup nadpis="Musí obsahovat" popis="Vybrané živiny se sčítají — surovina musí mít všechny.">
+          <FilterToggles
+            options={ZIVINY_OPTIONS}
+            selected={ziviny}
+            onToggle={prepniZivinu}
+            ariaLabel="Filtr živin v surovině"
+            testId="filtr-zivin"
+          />
+          {zeleznyFiltr && (
+            <Upresneni nadpis="Druh železa">
+              <FilterChips
+                compact
+                options={DRUH_ZELEZA_OPTIONS}
+                selected={druhZeleza}
+                onSelect={setDruhZeleza}
+                ariaLabel="Filtr druhu železa"
+                testId="filtr-druhu-zeleza"
+              />
+            </Upresneni>
+          )}
+          {ziviny.length > 0 && (
+            <Upresneni nadpis="Jak silný zdroj">
+              <FilterChips
+                compact
+                options={UROVEN_OPTIONS}
+                selected={sila}
+                onSelect={setSila}
+                ariaLabel="Filtr síly zdroje živiny"
+                testId="filtr-sily"
+              />
+            </Upresneni>
+          )}
+        </FilterGroup>
+
+        <FilterGroup nadpis="V deníku">
+          <FilterChips
+            compact
+            options={DENIK_OPTIONS}
+            selected={denik}
+            onSelect={setDenik}
+            ariaLabel="Filtr podle deníku ochutnávek"
+            testId="filtr-deniku"
+          />
+          <ChipButton
+            label="oblíbené"
+            Icon={Star}
+            pressed={oblibene}
+            onClick={() => setOblibene((value) => !value)}
+            testId="filtr-oblibene"
+          />
+        </FilterGroup>
+
+        <FilterGroup nadpis="Další">
+          <div className="flex flex-wrap gap-x-2">
+            <ChipButton
+              label="vhodné teď"
+              Icon={Baby}
+              pressed={vhodneTed}
+              onClick={() => setVhodneTed((value) => !value)}
+              testId="filtr-vhodne"
+            />
+            <ChipButton
+              label="sezónní"
+              Icon={CalendarDays}
+              pressed={sezonni}
+              onClick={() => setSezonni((value) => !value)}
+              testId="filtr-sezonni"
+            />
+            <ChipButton
+              label="klíčové alergeny"
+              Icon={ShieldAlert}
+              pressed={alergeny}
+              onClick={() => setAlergeny((value) => !value)}
+              testId="filtr-alergeny"
+            />
+          </div>
+        </FilterGroup>
+
+        {filtrujeSe && (
+          <span className="self-start">
+            <ChipButton
+              tlumene
+              label="zrušit filtry"
+              Icon={RotateCcw}
+              pressed={false}
+              onClick={zrusFiltry}
+              testId="zrusit-filtry"
+            />
+          </span>
+        )}
+      </div>
 
       <p className="text-xs text-muted" data-testid="pocet-surovin">
         {visible.length} z {ingredients.length} surovin
@@ -143,8 +277,8 @@ export function IngredientsScreen(): ReactNode {
 
       {visible.length === 0 ? (
         <p className="rounded-xl bg-surface p-4 text-sm text-muted" data-testid="prazdny-stav">
-          Nic neodpovídá. Zkus zrušit filtr sezóny, vybrat všechny kategorie nebo hledat kratší
-          slovo.
+          Nic neodpovídá. Nejspíš je podmínek najednou moc — zkus ubrat některou živinu, povolit
+          všechny kategorie nebo klepnout na „zrušit filtry“.
         </p>
       ) : (
         <ul className="flex flex-col gap-2" data-testid="seznam-surovin">
