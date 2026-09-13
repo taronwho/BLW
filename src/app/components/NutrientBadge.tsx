@@ -44,6 +44,24 @@ const CHIPS: readonly ChipSpec[] = [
   { key: 'vitaminC', label: 'vitamin C', aria: 'Vitamin C', Icon: Citrus, suffix: '-cecko' },
 ];
 
+/**
+ * Věta o železe. Musí dávat smysl sama o sobě — okénko se otevírá i nad
+ * surovinou, která má jen vitamin C, a tam by odkaz na „to druhé" visel ve
+ * vzduchu.
+ */
+function popisZeleza(profile: NutrientProfile): string {
+  if (profile.ironForm === 'hemove') {
+    return 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta — kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.';
+  }
+  if (profile.ironForm === 'nehemove') {
+    return 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.';
+  }
+  if (profile.zinc !== 'nevyznamny') {
+    return 'Významným zdrojem železa tahle položka není, zinek v ní ale je. Obojí se v jídelníčku většinou potkává v týchž potravinách — v mase, luštěninách, semínkách a celozrnných obilovinách.';
+  }
+  return 'Železo ani zinek tahle položka do jídelníčku nepřidá. Cenná je vitaminem C, který pomáhá vstřebat železo z ostatních surovin ve stejném jídle.';
+}
+
 function Row({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-3 py-2">
@@ -164,13 +182,7 @@ export function NutrientBadge({
             <Row label="Zinek" level={profile.zinc} />
             <Row label="Vitamin C" level={profile.vitaminC} />
 
-            <p className="text-sm leading-relaxed">
-              {profile.ironForm === 'hemove'
-                ? 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta — kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.'
-                : profile.ironForm === 'nehemove'
-                  ? 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.'
-                  : 'Tahle položka není významným zdrojem železa. Zinek a železo se v jídelníčku většinou potkávají v týchž potravinách.'}
-            </p>
+            <p className="text-sm leading-relaxed">{popisZeleza(profile)}</p>
 
             {profile.vitaminC !== 'nevyznamny' && (
               <p className="text-sm leading-relaxed" data-testid="okenko-k-cemu-cecko">
