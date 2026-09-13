@@ -338,3 +338,36 @@ test('tmavý motiv se přepne a přežije obnovení stránky', async ({ page }) 
   await expect(html).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 248, 245)');
 });
+
+test('přepínač v hlavičce překlopí vzhled a projeví se i v nastavení', async ({ page }) => {
+  await acceptDisclaimer(page);
+  const html = page.locator('html');
+  const prepinac = page.getByTestId('prepinac-motivu');
+
+  await expect(html).toHaveAttribute('data-theme', 'light');
+  await expect(prepinac).toHaveAttribute('aria-label', 'Přepnout na tmavý vzhled');
+
+  await prepinac.click();
+  await expect(html).toHaveAttribute('data-theme', 'dark');
+  await expect(prepinac).toHaveAttribute('aria-label', 'Přepnout na světlý vzhled');
+
+  // Přepínač v hlavičce a výběr v Domácnosti jsou dvě ovládání téhož; když si
+  // každé drží vlastní stav, zůstane v nastavení zaškrtnutá stará volba.
+  await householdLink(page).click();
+  await expect(page.getByTestId('motiv-tmavy')).toHaveAttribute('aria-checked', 'true');
+
+  await page.getByTestId('motiv-system').click();
+  await expect(prepinac).toHaveAttribute('aria-label', 'Přepnout na tmavý vzhled');
+
+  await prepinac.click();
+  await expect(html).toHaveAttribute('data-theme', 'dark');
+});
+
+test('značka v hlavičce vede domů', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+
+  await page.getByRole('banner').getByRole('link', { name: 'Drobek' }).click();
+  await expect(page.getByTestId('uchop-v-hlavicce')).toBeVisible();
+});

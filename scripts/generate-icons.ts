@@ -1,17 +1,31 @@
 /**
- * Vygeneruje ikony PWA do public/icons/. Spouští se ručně:
- * `npx tsx scripts/generate-icons.ts`.
+ * Z jedné předlohy značky vyrobí všechno, co aplikace potřebuje. Spouští se
+ * ručně: `npx tsx scripts/generate-icons.ts`.
  *
- * Tvar značky je jediný, popsaný v src/app/lib/logo.ts — ikona na ploše
- * telefonu se tak nemůže rozejít s tím, co je vidět v hlavičce aplikace.
- * Rastrování dělá Chromium z Playwrightu, který je v projektu stejně kvůli
- * e2e testům; jiný nástroj na SVG → PNG by byl další závislost navíc.
+ * Vstup: assets/drobek.png — ořezaná předloha v plné velikosti, jediný zdroj
+ * pravdy. Do buildu se nedostane, je mimo src/ i public/.
+ *
+ * Výstup:
+ *  - src/assets/drobek.png — zmenšenina pro hlavičku. V hlavičce je značka
+ *    vysoká 40 px, takže plná předloha by byla zbytečných několik set kB
+ *    v balíčku, který si PWA navíc celý ukládá do offline cache.
+ *  - public/icons/*.png — ikony PWA na krémovém podkladu; průhledná ikona na
+ *    ploše telefonu vypadá rozbitě.
+ *
+ * Zmenšuje a rastruje Chromium z Playwrightu, který je v projektu stejně
+ * kvůli e2e testům; jiný nástroj na obrázky by byl další závislost navíc.
  */
 import { chromium } from '@playwright/test';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import type { Page } from '@playwright/test';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { LOGO_BACKGROUND, LOGO_BBOX, LOGO_COLORS, logoSvg } from '../src/app/lib/logo';
+
+/** Podklad ikon. Teplá krémová, aby krémové manžety na rukávech nesplynuly. */
+const PODKLAD = '#EEF2E6';
+
+/** Šířka zmenšeniny pro hlavičku: zhruba pětinásobek toho, co je vidět. */
+const SIRKA_V_APLIKACI = 240;
 
 interface IconSpec {
   file: string;
@@ -27,33 +41,66 @@ const ICONS: IconSpec[] = [
   { file: 'apple-touch-icon.png', size: 180, maskable: true },
 ];
 
+const here = dirname(fileURLToPath(import.meta.url));
+const root = resolve(here, '..');
+const predloha = readFileSync(resolve(root, 'assets', 'drobek.png'));
+const dataUrl = `data:image/png;base64,${predloha.toString('base64')}`;
+
+/** Zmenšení přes canvas; vrací PNG s průhledností. */
+async function zmensit(page: Page, width: number): Promise<Buffer> {
+  const url = await page.evaluate(
+    async ({ src, width: sirka }) => {
+      const img = new Image();
+      img.src = src;
+      await img.decode();
+      const canvas = document.createElement('canvas');
+      canvas.width = sirka;
+      canvas.height = Math.round((sirka * img.height) / img.width);
+      const context = canvas.getContext('2d');
+      if (context === null) throw new Error('Canvas nedal 2D kontext.');
+      context.imageSmoothingQuality = 'high';
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/png');
+    },
+    { src: dataUrl, width },
+  );
+  return Buffer.from(url.split(',')[1] ?? '', 'base64');
+}
+
 /** Stránka o rozměru ikony: krémový podklad a značka uprostřed. */
-function page(spec: IconSpec): string {
+function stranka(spec: IconSpec): string {
   // U maskable ikony je podklad přes celou plochu a značka menší, u ostatních
   // se kreslí zaoblený čtverec, jak ikonu čekají prohlížeče na ploše.
   const radius = spec.maskable ? 0 : Math.round(spec.size * 0.22);
-  // Poměr se počítá z výšky samotného avokáda, ne z celého plátna SVG.
-  const vyskaZnacky = spec.size * (spec.maskable ? 0.54 : 0.64);
-  const platno = Math.round((vyskaZnacky * 64) / LOGO_BBOX.height);
+  const podil = spec.maskable ? 0.62 : 0.78;
   return `<!doctype html><html><body style="margin:0">
-<div style="width:${spec.size}px;height:${spec.size}px;border-radius:${radius}px;background:${LOGO_BACKGROUND};display:flex;align-items:center;justify-content:center">${logoSvg(LOGO_COLORS, platno)}</div>
-</body></html>`;
+<div style="width:${spec.size}px;height:${spec.size}px;border-radius:${radius}px;background:${PODKLAD};display:flex;align-items:center;justify-content:center">
+<img src="${dataUrl}" style="width:${Math.round(spec.size * podil)}px;height:auto">
+</div></body></html>`;
 }
-
-const here = dirname(fileURLToPath(import.meta.url));
-const outputDir = resolve(here, '..', 'public', 'icons');
-mkdirSync(outputDir, { recursive: true });
 
 const browser = await chromium.launch();
 try {
+  const tab = await browser.newPage();
+  await tab.setContent('<!doctype html><html><body></body></html>');
+
+  const zmensena = await zmensit(tab, SIRKA_V_APLIKACI);
+  const vAplikaci = resolve(root, 'src', 'assets', 'drobek.png');
+  mkdirSync(dirname(vAplikaci), { recursive: true });
+  writeFileSync(vAplikaci, zmensena);
+  console.log(`src/assets/drobek.png  ${SIRKA_V_APLIKACI} px  ${zmensena.length} B`);
+  await tab.close();
+
+  const outputDir = resolve(root, 'public', 'icons');
+  mkdirSync(outputDir, { recursive: true });
   for (const spec of ICONS) {
-    const tab = await browser.newPage({
+    const page = await browser.newPage({
       viewport: { width: spec.size, height: spec.size },
       deviceScaleFactor: 1,
     });
-    await tab.setContent(page(spec));
-    const png = await tab.screenshot({ omitBackground: true });
-    await tab.close();
+    await page.setContent(stranka(spec));
+    const png = await page.screenshot({ omitBackground: true });
+    await page.close();
     writeFileSync(resolve(outputDir, spec.file), png);
     console.log(`${spec.file}  ${spec.size}×${spec.size}  ${png.length} B`);
   }

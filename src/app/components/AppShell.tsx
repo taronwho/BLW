@@ -3,9 +3,11 @@ import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
-import { Logo } from './Logo';
+import drobek from '@/assets/drobek.png';
+import { ThemeToggle } from './ThemeToggle';
 import { ageInMonths, formatAge } from '../lib/age';
-import { useTheme } from '../lib/useTheme';
+import { watchSystem } from '../lib/theme';
+import { useThemeStore } from '../lib/themeStore';
 
 const NAV = [
   { to: '/', label: 'Domů', Icon: Home, end: true },
@@ -19,12 +21,15 @@ const NAV = [
 export function AppShell({ children }: { children: ReactNode }): ReactNode {
   const init = useHouseholdStore((store) => store.init);
   const state = useHouseholdStore((store) => store.state);
-  // Drží motiv v souladu i na obrazovkách bez přepínače.
-  useTheme();
+  const syncFromSystem = useThemeStore((store) => store.syncFromSystem);
 
   useEffect(() => {
     void init();
   }, [init]);
+
+  // Jediný posluchač systémového nastavení v celé aplikaci: když si telefon
+  // sám přepne na noc, volba „podle systému" to má následovat.
+  useEffect(() => watchSystem(syncFromSystem), [syncFromSystem]);
 
   const months = ageInMonths(state.childBirthDate);
   const childLabel =
@@ -35,18 +40,25 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
   return (
     <div className="flex min-h-full flex-col">
       <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-md items-center justify-between gap-3 px-4 py-2.5">
-          <Link to="/" className="flex min-h-touch items-center gap-2 pr-2">
-            <Logo className="h-7 w-7" />
-            <span className="text-sm font-bold tracking-tight">BLW</span>
+        <div className="mx-auto flex w-full max-w-md items-center gap-2 px-4 py-1.5">
+          <Link to="/" className="flex min-h-touch shrink-0 items-center">
+            {/* Značka nese i nápis „Drobek", takže vedle ní žádný text nestojí.
+                V tmavém motivu dostane světlou podložku — nápis je tmavě zelený
+                a na tmavém podkladu by se ztrácel. */}
+            <img
+              src={drobek}
+              alt="Drobek"
+              className="h-11 w-auto rounded-xl dark:bg-[#EEF2E6] dark:px-1.5 dark:py-1"
+            />
           </Link>
           <Link
             to="/domacnost"
-            className="flex min-h-touch items-center truncate rounded-full bg-surface px-3 text-xs text-muted shadow-soft"
+            className="flex min-h-touch min-w-0 flex-1 items-center justify-center truncate rounded-full bg-surface px-3 text-xs text-muted shadow-soft"
             data-testid="dite-v-hlavicce"
           >
-            {childLabel}
+            <span className="truncate">{childLabel}</span>
           </Link>
+          <ThemeToggle />
         </div>
       </header>
 
