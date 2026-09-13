@@ -43,13 +43,9 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
         <div className="mx-auto flex w-full max-w-md items-center gap-2 px-4 py-1.5">
           <Link to="/" className="flex min-h-touch shrink-0 items-center">
             {/* Značka nese i nápis „Drobek", takže vedle ní žádný text nestojí.
-                V tmavém motivu dostane světlou podložku — nápis je tmavě zelený
-                a na tmavém podkladu by se ztrácel. */}
-            <img
-              src={drobek}
-              alt="Drobek"
-              className="h-11 w-auto rounded-xl dark:bg-[#EEF2E6] dark:px-1.5 dark:py-1"
-            />
+                Žádné zaoblení ani podklad: rohy by ořízly samotnou kresbu —
+                nápis sedí až dole a přišel by o patky „D" a „k". */}
+            <img src={drobek} alt="Drobek" className="h-11 w-auto" />
           </Link>
           <Link
             to="/domacnost"

@@ -9,10 +9,6 @@ const token = (name) => `rgb(var(--c-${name}) / <alpha-value>)`;
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  // Barvy se překlápějí proměnnými, ne třídami `dark:`. Varianta je tu jen
-  // pro to jediné, co proměnnou vyřešit nejde: rastrová značka, která má
-  // nápis v tmavé zeleni a na tmavém podkladu potřebuje světlou podložku.
-  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
