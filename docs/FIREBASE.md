@@ -100,6 +100,17 @@ Co pravidla dělají:
 Větev „přidá jen sám sebe" je právě to připojení druhého telefonu: nikoho
 neubere a přidat smí nejvýš jedno `uid`. Domácnost unese pět zařízení.
 
+### Mrtvá zařízení
+
+Anonymní přihlášení váže `uid` na úložiště prohlížeče. Kdo smaže data nebo
+aplikaci přeinstaluje, dostane příště nové `uid` a připojí se znovu — to staré
+ale v `members` zůstane a zabírá jedno z pěti míst. Bez zásahu by se domácnost
+časem zaplnila záznamy, které už nikomu nepatří.
+
+Proto je v Domácnosti seznam **Zařízení v domácnosti** s datem posledního
+připojení a s možností cizí zařízení odebrat. Odebrat smí kterýkoli člen;
+pravidla to dovolují, protože u člena hlídají jen počet, ne podobu seznamu.
+
 ## 6. Omezení API klíče na doménu
 
 Nepovinné, ale doporučené — zabrání použití klíče z cizích stránek.
@@ -186,7 +197,7 @@ Pro lokální vývoj slouží `.env.local` podle vzoru v `.env.local.example`.
 |---|---|
 | „Jen na tomto zařízení" i po založení domácnosti | Není zapnuté anonymní přihlášení (krok 4). |
 | Druhý telefon vidí data, ale jeho zápisy se nepropíšou | Ve Firestore jsou staré verze pravidel (krok 5). |
-| `Missing or insufficient permissions` | Pravidla nejsou publikovaná, nebo je domácnost už plná (pět zařízení). |
+| `Missing or insufficient permissions` | Pravidla nejsou publikovaná, nebo je domácnost plná. Aplikace u téhle chyby sama nabídne obojí; plnou domácnost uvolníš odebráním zařízení v Domácnosti na některém z připojených telefonů. |
 | `auth/api-key-not-valid` | Překlep v `VITE_FIREBASE_API_KEY`, nebo omezení klíče nesedí s doménou. |
 | V Domácnosti pořád stojí, že sdílení není nastavené | Některá z šesti hodnot je prázdná, nebo build po jejich vyplnění neproběhl znovu. U varianty B: proměnné musí být *repository*, ne *environment*. |
 

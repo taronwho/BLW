@@ -179,3 +179,39 @@ describe('znaky připravenosti při slučování', () => {
     expect('readySigns' in merged).toBe(false);
   });
 });
+
+describe('poslední přihlášení zařízení', () => {
+  it('mapy se sjednotí a u každého uid vyhraje pozdější čas', () => {
+    // Každý telefon ví jistě jen o sobě. Kdyby se mapa brala jako celek
+    // last-write-wins, zápis z jednoho by smazal, co o sobě zapsal druhý.
+    const local: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['a', 'b'],
+      memberSeenAt: { a: 500, b: 100 },
+    };
+    const remote: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['a', 'b'],
+      memberSeenAt: { a: 200, b: 900 },
+    };
+    const merged = mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 });
+    expect(merged.memberSeenAt).toEqual({ a: 500, b: 900 });
+  });
+
+  it('zná-li čas jen jedna strana, převezme se', () => {
+    const local: HouseholdState = { ...emptyHouseholdState(), memberSeenAt: { a: 5 } };
+    const merged = mergeHouseholdState(local, emptyHouseholdState(), {
+      localUpdatedAt: 1,
+      remoteUpdatedAt: 2,
+    });
+    expect(merged.memberSeenAt).toEqual({ a: 5 });
+  });
+
+  it('bez časů nezůstane v poli prázdný klíč', () => {
+    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
+      localUpdatedAt: 1,
+      remoteUpdatedAt: 2,
+    });
+    expect('memberSeenAt' in merged).toBe(false);
+  });
+});

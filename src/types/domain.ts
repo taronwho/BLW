@@ -249,6 +249,15 @@ export interface HouseholdState {
   readySigns?: ReadySign[];
   /** uid členů domácnosti */
   members: string[];
+  /**
+   * Kdy se který člen naposled připojil (uid → čas v ms).
+   *
+   * Anonymní přihlášení váže uid na úložiště zařízení. Kdo smaže data
+   * prohlížeče nebo přeinstaluje aplikaci, dostane příště nové uid a musí se
+   * připojit znovu — to staré ale v `members` zůstane a zabírá jedno z pěti
+   * míst. Bez téhle značky by nešlo poznat, které z uid ještě někomu patří.
+   */
+  memberSeenAt?: Record<string, number>;
   tastings: TastingEvent[];
   /** ingredientId + recipeId */
   favorites: string[];
