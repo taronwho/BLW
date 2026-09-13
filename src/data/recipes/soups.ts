@@ -49,13 +49,9 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku v mělké misce s kousky vařené dýně, které si dítě loví prsty.',
       '12m': 'Servíruj polévku v hrnečku se dvěma uchy; dítě už zvládne pár loků samo a zbytek dojídá lžící.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, dochuť čerstvě nastrouhaným zázvorem a zakápni kokosovým mlékem.',
       'Kdo má rád ostřejší chuť, přidá si mletou papriku nebo pár kapek citronu.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, prošlehej metličkou s kokosovým mlékem a podávej s lžící ghí navrch.',
-      'Pro sytější oběd přisyp opražená dýňová semínka rozdrcená v hmoždíři.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'krémová'],
@@ -97,7 +93,7 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni hustou polévku s kostičkami zeleniny, krátkými nudlemi a kuřecími vlákny, které si dítě sbírá prsty z mělké misky.',
       '12m': 'Servíruj polévku v misce se lžící; dítě už si nudle i kousky kuřecího masa nabírá samo a vývar dopije z hrnečku.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kuřecí stehna vlož do vývaru po odebrání dětské porce, vař je čtyřicet minut a maso obeber od kostí.',
       'Vývar osol, vrať do něj zeleninu a maso, přidej uvařené nudle a posyp libečkem.',
     ],
@@ -146,13 +142,9 @@ export const soups: Recipe[] = [
       '9m': 'Nech v polévce kostky brambor a petržele a podávej ji v mělké misce ke sbírání prsty.',
       '12m': 'Servíruj polévku v misce se lžící; dítě už zvládne nabírat samo, jen počítej s úklidem.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, zakápni jablečným octem a povař pět minut, aby se kyselost spojila s čočkou.',
       'Navrch přidej osmaženou cibulku; kdo jí maso, přisype si kousky opečené klobásy ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, zakápni octem a promíchej; část čočky rozmačkej, aby polévka zhoustla.',
-      'Podávej s lžící řepkového oleje lisovaného za studena a čerstvou majoránkou.',
     ],
     allergens: [],
     tags: ['bez lepku', 'vegetariánské', 'mrazitelné'],
@@ -192,13 +184,9 @@ export const soups: Recipe[] = [
       '9m': 'Nech v porci kostky brambor a nadrobno nasekané houby a nabídni ji v mělké misce ke sbírání špetkou.',
       '12m': 'Servíruj polévku v misce se lžící a posyp ji petrželkou, aby vypadala stejně jako talíře dospělých.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, dochuť majoránkou a posyp nasekanou petrželkou.',
       'Kdo má rád hustší polévku, rozmačká víc brambor přímo v hrnci.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, prohřej a zjemni lžící ghí, které se v horké polévce rozpustí.',
-      'Podávej s čerstvou petrželkou a případně lžící zakysané smetany.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'podzimní'],
@@ -238,7 +226,7 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku s kostkami brambor a rybími vločkami v mělké misce ke sbírání prsty.',
       '12m': 'Servíruj polévku v misce se lžící a kousky ryby navrch; dítě si porci samo míchá.',
     },
-    meatSteps: [
+    adultSteps: [
       'Tresku nakrájej na kostky, vlož do horké polévky a nech ji pět minut táhnout, dokud maso nezbělá.',
       'Polévku osol, posyp koprem a podávej hned, aby se ryba nerozvařila.',
     ],
@@ -285,13 +273,9 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku v mělké misce s lžící celého hrášku rozmačkaného vidličkou, aby zrnka nebyla celá.',
       '12m': 'Servíruj polévku v hrnečku se dvěma uchy a lžící vedle; dítě si vybere, čím ji bude jíst.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, promíchej s lžící jogurtu a posyp nasekanou mátou.',
       'Kdo jí maso, přidá si do talíře kousky opečené slaniny nebo šunky ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, zašlehej do ní zbytek jogurtu a zakápni rozpuštěným máslem.',
-      'Navrch posyp čerstvou mátou a pár celými hráškovými zrny pro strukturu.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'krémová'],
@@ -332,13 +316,9 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku s rozmačkanou cizrnou v mělké misce, kterou si dítě sbírá prsty.',
       '12m': 'Servíruj polévku v misce se lžící a celými zrny cizrny rozmačkanými napůl.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, povař dvě minuty a podávej posypanou bazalkou.',
       'Kdo má rád výraznější chuť, přidá si prolisovaný česnek přímo do talíře.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol a část cizrny rozmačkej o stěnu hrnce, aby polévka zhoustla.',
-      'Navrch nasyp natrhanou bazalku a zakápni lžičkou rozpuštěného ghí.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'letní'],
@@ -379,7 +359,7 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku s kostičkami zeleniny, rozmačkanými kroupami a krátkými vlákny hovězího, které si dítě sbírá špetkou.',
       '12m': 'Servíruj polévku v misce se lžící a kousky masa navrch; dítě si porci nabírá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Hovězí nakrájej na kostky, vlož do polévky po odebrání dětské porce a vař hodinu doměkka.',
       'Polévku osol, posyp libečkem a podávej s čerstvým chlebem.',
     ],
@@ -426,13 +406,9 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni krém v mělké misce a růžičky nakrájené na kousky velikosti nehtu ke sbírání špetkou.',
       '12m': 'Servíruj krém v misce se lžící a opečenými růžičkami navrch, přesně jako talíř dospělých.',
     },
-    meatSteps: [
+    adultSteps: [
       'Krém pro dospělé osol, prošlehej metličkou a nalij do talířů; navrch dej opečené růžičky a snítku tymiánu.',
       'Kdo jí maso, přidá si kousky opečené šunky ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, zjemni lžičkou ghí a prošlehej, aby byla úplně hladká.',
-      'Navrch narovnej opečené květákové růžičky a posyp je čerstvým tymiánem.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'krémová'],
@@ -472,7 +448,7 @@ export const soups: Recipe[] = [
       '9m': 'Nabídni polévku s kostičkami zeleniny, jáhlami a krátkými vlákny krůtího masa, které si dítě sbírá prsty z mělké misky.',
       '12m': 'Servíruj polévku v misce se lžící a masem nakrájeným nadrobno; dítě už jí samostatně.',
     },
-    meatSteps: [
+    adultSteps: [
       'Krůtí stehno nakrájej na kostky, vlož do polévky po odebrání dětské porce a vař dvacet minut doměkka.',
       'Polévku osol, posyp petrželkou a podávej s krajícem chleba.',
     ],

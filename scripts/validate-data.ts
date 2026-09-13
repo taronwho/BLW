@@ -109,14 +109,15 @@ function main(): void {
   const verified = catalog.ingredients.filter((i) => i.reviewStatus === 'verified').length;
   const needsReview = catalog.ingredients.filter((i) => i.reviewStatus === 'needs-review').length;
   const vegetarian = catalog.recipes.filter((_, index) => isVegetarianRecipe(index)).length;
+  // Dvě varianty dochucení má jen recept, který maso opravdu obsahuje.
   const withBothTracks = catalog.recipes.filter(
-    (r) => r.meatSteps.length > 0 && r.vegetarianSteps.length > 0,
+    (r) => r.adultSteps.length > 0 && (r.vegetarianSteps ?? []).length > 0,
   ).length;
 
   console.log('');
   console.log(`SUROVIN: ${catalog.ingredients.length}  (ověřeno: ${verified}, k revizi: ${needsReview})`);
   console.log(
-    `RECEPTŮ: ${catalog.recipes.length}   (vegetariánských: ${vegetarian}, s masitou i bezmasou variantou: ${withBothTracks})`,
+    `RECEPTŮ: ${catalog.recipes.length}   (vegetariánských: ${vegetarian}, s masem a bezmasou variantou: ${withBothTracks})`,
   );
   const guideFindings = checkGuides(catalog.guides);
   if (guideFindings.length > 0) {

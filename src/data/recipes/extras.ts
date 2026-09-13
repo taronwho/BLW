@@ -50,7 +50,7 @@ export const extras: Recipe[] = [
       '9m': 'Zelí nasekej nadrobno, maso natrhej na krátká vlákna a kroupy nech volnější ke sbírání špetkou.',
       '12m': 'Servíruj porci jako zmenšený talíř dospělých: kroupy, dušené zelí a kousky masa vedle sebe, jen bez dochucení.',
     },
-    meatSteps: [
+    adultSteps: [
       'Kýtu nakrájej na plátky, osol, opeč na ghí z obou stran a vlož ji do dušeného zelí.',
       'Duš pod pokličkou dvacet minut, podle potřeby podlij vodou a podávej s kroupami.',
     ],
@@ -99,7 +99,7 @@ export const extras: Recipe[] = [
       '9m': 'Polentu nakrájej na kostičky, fenykl na proužky a rybí vločky rozlož vedle ke sbírání špetkou.',
       '12m': 'Servíruj měkkou polentu v misce s fenyklem a rybou navrch; dítě už si porci míchá a nabírá samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Filety kapra osol, polož je na pečený fenykl, pokapej máslem a peč dvanáct minut, dokud maso nezbělá.',
       'Podávej na měkké polentě, pokapej citronem a posyp fenyklovou natí.',
     ],
@@ -148,13 +148,9 @@ export const extras: Recipe[] = [
       '9m': 'Nakrájej lilek i sýr na kostičky velikosti nehtu a omáčku nech hustou, aby se dala nabrat prsty.',
       '12m': 'Servíruj porci v misce se lžící; dítě už zvládne nabrat zapečený lilek i s omáčkou samo.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbytek mísy osol, rozlož navrch polovinu mozzarelly natrhané na kousky a zapékej deset minut.',
       'Před podáváním posyp bazalkou; kdo jí maso, přidá si k porci opečený plátek masa ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol, navrstvi na ni zbytek mozzarelly a zapékej deset minut, dokud se sýr nerozteče.',
-      'Navrch dej natrhanou bazalku a nech mísu pět minut odstát, aby se vrstvy usadily.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'zapékané'],
@@ -193,13 +189,9 @@ export const extras: Recipe[] = [
       '9m': 'Nabídni polévku s nasekanou kapustou a rozmačkanými fazolemi v mělké misce ke sbírání prsty.',
       '12m': 'Servíruj polévku v misce se lžící a celými fazolemi rozmačkanými napůl; dítě už jí samostatně.',
     },
-    meatSteps: [
+    adultSteps: [
       'Polévku pro dospělé osol, dochuť majoránkou a podávej s krajícem chleba.',
       'Kdo jí maso, přidá si do talíře kousky opečené klobásy ze zásoby.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol a část fazolí rozmačkej o stěnu hrnce, aby polévka zhoustla.',
-      'Navrch zakápni lžičkou rozpuštěného ghí a posyp čerstvou majoránkou.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'jednohrnec'],
@@ -237,13 +229,9 @@ export const extras: Recipe[] = [
       '9m': 'Nakrájej nektarinku na kostičky a tvaroh nech hustší; dítě si obojí sbírá špetkou z mělké misky.',
       '12m': 'Servíruj vrstvenou misku se lžící a nech dítě, ať si ovoce do tvarohu samo zamíchá.',
     },
-    meatSteps: [
+    adultSteps: [
       'Misky pro dospělé dolaď podle chuti a posyp zbytkem mletých lněných semínek.',
       'Kdo chce sytější snídani, přisype lžíci ovesných vloček nebo mletých ořechů.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci dokonči stejně: vrstva tvarohu, ovoce a mletá lněná semínka navrch.',
-      'Pro svěží chuť zakápni misku šťávou z citronu a promíchej.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'rychlé'],
@@ -282,13 +270,9 @@ export const extras: Recipe[] = [
       '9m': 'Placku nalam na kousky velikosti nehtu a jogurtový dip podávej vedle ke smáčení prsty.',
       '12m': 'Nabídni celou placku do ruky s miskou dipu; dítě si ji samo trhá a namáčí.',
     },
-    meatSteps: [
+    adultSteps: [
       'Zbylé těsto osol, peč z něj větší placky a podávej je s jogurtovým dipem.',
       'Kdo má rád výraznější chuť, přidá do těsta prolisovaný česnek nebo mletou papriku.',
-    ],
-    vegetarianSteps: [
-      'Bezmasou porci osol stejně a placky podávej teplé s dipem posypaným zbylou pažitkou.',
-      'Placky se dají péct dopředu a druhý den je stačí prohřát na suché pánvi.',
     ],
     allergens: ['mleko'],
     tags: ['bez lepku', 'vegetariánské', 'do ruky'],

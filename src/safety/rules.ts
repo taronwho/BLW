@@ -211,14 +211,16 @@ const vegTrackComplete: SafetyRule = {
   severity: 'error',
   appliesTo: 'recipe',
   description:
-    'vegetarianSteps jsou vyplněné a recept s masem má náhradu bílkoviny, ne pouhé vynechání.',
+    'Recept s masem má popsanou bezmasou variantu i konkrétní náhradu bílkoviny, ne pouhé vynechání.',
   check(item, catalog) {
     if (!isRecipe(item)) return null;
-    if (item.vegetarianSteps.length === 0 || item.vegetarianSteps.every((s) => s.trim() === '')) {
-      return 'vegetarianSteps jsou prázdné — bezmasá varianta musí být vždy popsaná.';
-    }
     const hasMeat = ingredientsOf(item, catalog).some((i) => i.category === 'maso-ryby');
     if (!hasMeat) return null;
+
+    const veg = item.vegetarianSteps ?? [];
+    if (veg.length === 0 || veg.every((s) => s.trim() === '')) {
+      return 'Recept obsahuje maso nebo rybu, ale bezmasá varianta dochucení chybí.';
+    }
 
     const swap = item.vegetarianProteinSwap?.trim() ?? '';
     if (swap.length === 0) {
@@ -231,6 +233,35 @@ const vegTrackComplete: SafetyRule = {
   },
 };
 
+/**
+ * Dělit dochucení na masité a bezmasé dává smysl jen tam, kde v jídle maso
+ * opravdu je. U kaše nebo ovocné misky z toho vznikla „masitá verze", která
+ * jen jinými slovy opakovala tu bezmasou — a u sladkého jídla navíc působila
+ * nesmyslně.
+ */
+const meatTrackOnlyWithMeat: SafetyRule = {
+  id: 'meat-track-only-with-meat',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description: 'Bezmasý recept nemá dělit dochucení pro dospělé na masité a bezmasé.',
+  check(item, catalog) {
+    if (!isRecipe(item)) return null;
+    if (item.adultSteps.length === 0 || item.adultSteps.every((s) => s.trim() === '')) {
+      return 'adultSteps jsou prázdné — dochucení pro dospělé musí být vždy popsané.';
+    }
+    const hasMeat = ingredientsOf(item, catalog).some((i) => i.category === 'maso-ryby');
+    if (hasMeat) return null;
+
+    if ((item.vegetarianSteps ?? []).length > 0) {
+      return 'Recept neobsahuje maso ani rybu, ale má vlastní bezmasou variantu — dochucení pro dospělé má být jen jedno.';
+    }
+    if (item.vegetarianProteinSwap !== undefined) {
+      return 'Recept neobsahuje maso ani rybu, takže nemá co nahrazovat: vegetarianProteinSwap je navíc.';
+    }
+    return null;
+  },
+};
+
 const hiddenAnimalIngredients: SafetyRule = {
   id: 'hidden-animal-ingredients',
   severity: 'error',
@@ -238,7 +269,7 @@ const hiddenAnimalIngredients: SafetyRule = {
   description: 'V bezmasé variantě nesmí být želatina, sádlo, masový vývar, parmazán a spol.',
   check(item, catalog) {
     if (!isRecipe(item)) return null;
-    const hit = firstHit(item.vegetarianSteps, HIDDEN_ANIMAL_PATTERNS);
+    const hit = firstHit(item.vegetarianSteps ?? [], HIDDEN_ANIMAL_PATTERNS);
     if (hit !== null) return `Živočišná složka v bezmasé variantě: ${hit}`;
 
     const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
@@ -334,8 +365,8 @@ function collectStrings(item: Ingredient | Recipe): Array<{ field: string; value
     push('vegetarianProteinSwap', item.vegetarianProteinSwap);
     item.baseSteps.forEach((v, i) => push(`baseSteps[${i}]`, v));
     item.babySteps.forEach((v, i) => push(`babySteps[${i}]`, v));
-    item.meatSteps.forEach((v, i) => push(`meatSteps[${i}]`, v));
-    item.vegetarianSteps.forEach((v, i) => push(`vegetarianSteps[${i}]`, v));
+    item.adultSteps.forEach((v, i) => push(`adultSteps[${i}]`, v));
+    (item.vegetarianSteps ?? []).forEach((v, i) => push(`vegetarianSteps[${i}]`, v));
     item.ingredients.forEach((ref, i) => {
       push(`ingredients[${i}].amount`, ref.amount);
       push(`ingredients[${i}].note`, ref.note);
@@ -698,6 +729,7 @@ export const safetyRules: readonly SafetyRule[] = [
   roundFoodShape,
   babySplitRequired,
   vegTrackComplete,
+  meatTrackOnlyWithMeat,
   hiddenAnimalIngredients,
   sourceRequired,
   sourceUrlShape,

@@ -1,4 +1,4 @@
-import { ArrowLeft, Baby, Beef, Clock, Leaf, Scissors, Star, Users } from 'lucide-react';
+import { ArrowLeft, Baby, Beef, ChefHat, Clock, Leaf, Scissors, Star, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
@@ -17,8 +17,8 @@ import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
   all: 'Společné',
-  meat: 'Masitá verze',
-  vegetarian: 'Bezmasá verze',
+  meat: 'S masem',
+  vegetarian: 'Bez masa',
 };
 
 /** Detail receptu (docs/SPEC.md kap. 4.4). */
@@ -42,6 +42,9 @@ export function RecipeDetailScreen(): ReactNode {
 
   if (recipe === undefined) return <Navigate to="/recepty" replace />;
 
+
+  // Dvě varianty dochucení dávají smysl jen tam, kde v jídle maso opravdu je.
+  const bezmasy = recipeIsVegetarian(recipe);
   const favorite = state.favorites.includes(recipe.id);
 
   return (
@@ -85,7 +88,7 @@ export function RecipeDetailScreen(): ReactNode {
           <span className="rounded-lg bg-surface px-2 py-1 font-medium">
             vhodné od {recipe.minAgeMonths} měsíců
           </span>
-          {recipeIsVegetarian(recipe) && (
+          {bezmasy && (
             <span className="rounded-lg bg-accent/10 px-2 py-1 font-medium text-accent">bezmasý základ</span>
           )}
           {allergens.map((allergen) => (
@@ -149,36 +152,62 @@ export function RecipeDetailScreen(): ReactNode {
         <GripHint chokingRisk={recipeChokingRisk(recipe)} />
       </section>
 
-      <div className="flex flex-col gap-3">
-        <section aria-labelledby="masita-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
-          <h2 id="masita-nadpis" className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
-            <Beef aria-hidden="true" className="h-4 w-4 shrink-0" />
-            Masitá verze
-          </h2>
-          <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm leading-relaxed">
-            {recipe.meatSteps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-        </section>
+      <section
+        aria-labelledby="dospeli-nadpis"
+        className="flex flex-col gap-3 rounded-xl bg-surface p-4"
+        data-testid="dochuceni-pro-dospele"
+      >
+        <h2
+          id="dospeli-nadpis"
+          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
+        >
+          <ChefHat aria-hidden="true" className="h-4 w-4 shrink-0" />
+          Dochucení pro dospělé
+        </h2>
+        <p className="text-sm leading-relaxed text-muted">
+          Dětská porce je v tuhle chvíli hotová a stranou, takže sem už patří sůl i ostřejší
+          koření.
+        </p>
 
-        <section aria-labelledby="bezmasa-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
-          <h2 id="bezmasa-nadpis" className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
-            <Leaf aria-hidden="true" className="h-4 w-4 shrink-0" />
-            Bezmasá verze
-          </h2>
+        {bezmasy ? (
           <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm leading-relaxed">
-            {recipe.vegetarianSteps.map((step) => (
+            {recipe.adultSteps.map((step) => (
               <li key={step}>{step}</li>
             ))}
           </ol>
-          {recipe.vegetarianProteinSwap !== undefined && (
-            <p className="rounded-lg bg-accent/10 p-3 text-sm leading-relaxed text-accent">
-              Náhrada bílkoviny: {recipe.vegetarianProteinSwap}
-            </p>
-          )}
-        </section>
-      </div>
+        ) : (
+          <>
+            <div className="flex flex-col gap-2 rounded-xl border border-line bg-paper p-3">
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                <Beef aria-hidden="true" className="h-4 w-4 shrink-0" />
+                S masem
+              </h3>
+              <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm leading-relaxed">
+                {recipe.adultSteps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-xl border border-line bg-paper p-3">
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                <Leaf aria-hidden="true" className="h-4 w-4 shrink-0" />
+                Bez masa
+              </h3>
+              <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm leading-relaxed">
+                {(recipe.vegetarianSteps ?? []).map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+              {recipe.vegetarianProteinSwap !== undefined && (
+                <p className="rounded-lg bg-accent/10 p-3 text-sm leading-relaxed text-accent">
+                  Náhrada bílkoviny: {recipe.vegetarianProteinSwap}
+                </p>
+              )}
+            </div>
+          </>
+        )}
+      </section>
 
       <section aria-labelledby="poznamka-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
         <h2 id="poznamka-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">

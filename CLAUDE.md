@@ -8,7 +8,7 @@ Aplikace se jmenuje **Drobek**. Repozitář zůstává `BLW`, takže adresa je
 `https://taronwho.github.io/BLW/` — „BLW" v cestě i v textech je zkratka metody
 (baby-led weaning), ne název aplikace. Nepřejmenovávej ho.
 
-Česká webová aplikace pro Baby-Led Weaning. Používají ji dva rodiče na mobilech, sdílejí jeden účet domácnosti přes párovací kód. Obsahuje katalog ≥190 surovin dostupných v ČR s bezpečnostními a přípravnými informacemi ke třem věkovým fázím (6m+, 9m+, 12m+), ≥80 receptů vždy ve třech liniích (miminko / masitá / bezmasá) a deník ochutnávek. Běží na GitHub Pages jako statická PWA.
+Česká webová aplikace pro Baby-Led Weaning. Používají ji dva rodiče na mobilech, sdílejí jeden účet domácnosti přes párovací kód. Obsahuje katalog ≥190 surovin dostupných v ČR s bezpečnostními a přípravnými informacemi ke třem věkovým fázím (6m+, 9m+, 12m+), ≥80 receptů se společným základem, odběrem dětské porce a dochucením pro dospělé (u receptů s masem navíc v masité i bezmasé variantě) a deník ochutnávek. Běží na GitHub Pages jako statická PWA.
 
 **Rodina:** matka je vegetariánka, otec a dcera jedí i maso. Každý recept musí být pro celou rodinu použitelný v jednom vaření.
 
@@ -56,7 +56,7 @@ npm run build        # produkční build
 
 ```
 SUROVIN: 208  (ověřeno: 208, k revizi: 0)
-RECEPTŮ: 84   (vegetariánských: 41, s masitou i bezmasou variantou: 43)
+RECEPTŮ: 84   (vegetariánských: 41, s masem a bezmasou variantou: 43)
 CHYB: 0
 VAROVÁNÍ: 0
 ```
