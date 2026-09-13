@@ -27,6 +27,9 @@ import type { SourceRef } from '@/types';
 /** Datum, kdy byl zdroj skutečně stažen a přečten (curl, HTTP 200). */
 const FETCHED = '2026-09-12';
 
+/** Druhé kolo ověřování, kterým se uzavřely poslední tři položky k revizi. */
+const FETCHED_13 = '2026-09-13';
+
 function nhs(title: string, path: string, accessedAt = FETCHED): SourceRef {
   return { org: 'NHS', title, url: `https://www.nhs.uk${path}`, accessedAt, tier: 1 };
 }
@@ -367,3 +370,39 @@ export const CPS_WHO: SourceRef = {
   accessedAt: FETCHED,
   tier: 1,
 };
+
+/**
+ * Heslo o karobu. Doloží složení karobové mouky — vitaminy skupiny B,
+ * draslík, hořčík, vápník, železo a další stopové prvky, vláknina, pektin
+ * a lignin — a to, že mouka neobsahuje lepek, takže se používá v potravinách
+ * pro lidi s celiakií. Uvádí i regulaci karubinu jako přídatné látky E 410.
+ *
+ * POZOR: o theobrominu, kofeinu ani o srovnání s kakaem heslo nemluví. Že
+ * karob povzbuzující látky neobsahuje, z něj tedy vyčíst nelze — jen to, že
+ * v popisu složení nefigurují.
+ */
+export const BP_CAROB: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Karob',
+  url: 'https://bezpecnostpotravin.cz/termin/karob/',
+  accessedAt: FETCHED_13,
+  tier: 1,
+};
+
+/**
+ * Stanovisko EFSA k dusičnanům v zelenině v českém shrnutí. Uvádí rozpětí
+ * obsahu od 1 mg/kg u hrášku a růžičkové kapusty po 4 800 mg/kg u rukoly,
+ * jmenuje listovou zeleninu (hlávkový salát, špenát) jako skupinu s vyššími
+ * koncentracemi a uvádí, že příjem snižuje mytí, loupání a tepelná úprava.
+ *
+ * POZOR: hodnocení počítá s dospělým o hmotnosti 60 kg, kojence a malé děti
+ * neřeší, a fenykl se v něm nevyskytuje vůbec.
+ */
+export const BP_NITRATES_VEG: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Stanovisko EFSA k dusičnanům v zelenině',
+  url: 'https://bezpecnostpotravin.cz/stanovisko-efsa-k-dusicnanum-v-zelenine/',
+  accessedAt: FETCHED_13,
+  tier: 1,
+};
+
