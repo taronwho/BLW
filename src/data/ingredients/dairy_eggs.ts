@@ -12,7 +12,7 @@ import {
 } from './_sources';
 
 /**
- * Kategorie „mlecne-vejce" podle docs/SUROVINY-SEZNAM.md (20 položek)
+ * Kategorie „mlecne-vejce“ podle docs/SUROVINY-SEZNAM.md (20 položek)
  * plus pecorino a grana padano.
  *
  * Ty dvě položky v seznamu nejsou, ale docs/BEZPECNOST.md kapitola 7 je
@@ -1011,6 +1011,48 @@ export const dairyEggs: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mleko-kozi',
+    nameCz: 'kozí mléko',
+    altNamesCz: ['kozí mlíko'],
+    category: 'mlecne-vejce',
+    emoji: '🥛',
+    icon: 'mleko-kozi',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Jako hlavní nápoj se kojenci nedává. NHS to zdůvodňuje stejně jako u kravského mléka: nemá dost železa ani dalších látek, které dítě v tomhle věku potřebuje. Nápojem zůstává mateřské mléko nebo umělá výživa, k jídlu voda.',
+        caution:
+          'Nepasterizované kozí mléko malým dětem nepatří vůbec kvůli vyššímu riziku otravy z jídla.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících jako hlavní nápoj ne. Vyrobené kozí sýry a jogurty jsou jiná věc — u nich rozhoduje, jestli jsou z pasterizovaného mléka a jestli nejde o zrající sýr s plísní.',
+        caution: 'Zrající kozí sýr NHS mezi vhodné sýry pro kojence neřadí.',
+      },
+      '12m': {
+        serving:
+          'Po prvních narozeninách ho batole jako hlavní nápoj dostat může, pokud je pasterizované. Chuť je výraznější než u kravského, některé děti ho přijmou líp v kaši než ze skleničky.',
+        caution: 'Zkontroluj na obalu, že je pasterizované.',
+      },
+    },
+    prepIdeas: [
+      'jako nápoj po prvních narozeninách',
+      'do ovesné kaše',
+      'na domácí jogurt',
+      'do bílé omáčky',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_AVOID],
     reviewStatus: 'verified',
   },
 ];

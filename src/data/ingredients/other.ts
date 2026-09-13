@@ -6,6 +6,7 @@ import {
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
   NHS_6M,
+  NHS_ALLERGY,
   NHS_AVOID,
   NHS_AVOID_WEANING,
   NHS_DRINKS,
@@ -14,13 +15,13 @@ import {
 } from './_sources';
 
 /**
- * Kategorie „ostatni" podle docs/SUROVINY-SEZNAM.md (10 položek).
+ * Kategorie „ostatni“ podle docs/SUROVINY-SEZNAM.md (10 položek).
  *
  * Kakao a karob zůstávají needs-review: ani po přímém načtení povolených
  * zdrojů (12. 9. 2026) se nepodařilo doložit limit theobrominu pro kojence
  * ani složení karobu, a docs/BEZPECNOST.md zakazuje doplňovat taková
  * tvrzení z paměti. Dětský čaj už needs-review není — NHS i EMA se k němu
- * vyjadřují dost jasně na to, aby položka mohla říct „nedoporučuje se".
+ * vyjadřují dost jasně na to, aby položka mohla říct „nedoporučuje se“.
  */
 export const other: Ingredient[] = [
   {
@@ -438,6 +439,387 @@ export const other: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_YOUNG_CHILDREN, WHO_COMPLEMENTARY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'med',
+    nameCz: 'med',
+    altNamesCz: ['včelí med', 'medová zálivka'],
+    category: 'ostatni',
+    emoji: '🍯',
+    icon: 'med',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Do prvních narozenin se nepodává vůbec, a to ani vařený nebo zapečený. Občas obsahuje bakterie, které ve střevě kojence vytvářejí toxin — NHS tak popisuje vznik kojeneckého botulismu a označuje ho za velmi vážné onemocnění. Sladit se dá ovocným pyré nebo rozmačkaným banánem.',
+        caution:
+          'Pozor na hotové výrobky: sušenky, müsli tyčinky a marinády ho mívají v receptuře, i když to na obalu není nápadné.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících se nic nemění — hranicí je první rok, ne to, co dítě zvládne rozžvýkat. Tepelná úprava riziko neodstraňuje, protože nejde o samotnou bakterii, ale o to, co dokáže vytvořit ve střevě.',
+        caution: 'Domácí i pastovaný, květový i lesní — před prvními narozeninami platí totéž pro všechny.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce už batole med dostat může. Podle NHS ale zůstává cukrem, takže platí totéž co pro ostatní sladidla: čím míň a čím řidčeji, tím líp pro zuby. Lžička do jogurtu nebo na chleba je jiná věc než oslazené pití.',
+        caution: 'Sladká věc na zubech přes noc škodí nejvíc — po medu vyčisti zuby.',
+      },
+    },
+    prepIdeas: [
+      'lžička do jogurtu po prvních narozeninách',
+      'tenká vrstva na celozrnný chleba',
+      'do marinády pro dospělé',
+      'do dochucení pečené zeleniny pro dospělé',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    frequencyLimit: 'Do 12 měsíců vůbec; potom jen výjimečně, je to přidaný cukr.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'sul',
+    nameCz: 'sůl',
+    altNamesCz: ['kuchyňská sůl', 'mořská sůl', 'himalájská sůl'],
+    category: 'ostatni',
+    emoji: '🧂',
+    icon: 'sul',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Do jídla pro kojence se nepřidává a nedává se ani do vody, ve které se vaří. NHS to zdůvodňuje ledvinami, které na takovou zátěž ještě nestačí. Tohle je právě ten důvod, proč se dětská porce odebírá stranou dřív, než se hrnec dochutí.',
+        caution:
+          'Bujon v kostce, vývar z pytlíku a hotové omáčky patří do stejné kategorie — NHS je jmenuje přímo, protože jich obsahují hodně.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících platí totéž. Chuť se dá dodat jinak: bylinkami, česnekem, opečenou cibulí, kouskem citronové kůry nebo kmínem. Dítě, které nezná slané, si o něj neřekne.',
+        caution:
+          'Slané potraviny jako slanina, klobásy a slané krekry NHS vyjmenovává jako to, čemu se u malých dětí vyhnout.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce se drobné množství připustit dá, pořád to ale zůstává nejnižší možné. Většina soli v jídelníčku nepřichází ze slánky, ale z pečiva, sýra a uzenin.',
+        caution: 'Slánku nedávej na stůl v dosahu dítěte; dosolit si může každý dospělý sám na talíři.',
+      },
+    },
+    prepIdeas: [
+      'do dochucení pro dospělé až po odebrání dětské porce',
+      'do vody na těstoviny pro dospělé, ne pro dítě',
+      'nahrazení bylinkami v dětské porci',
+      'nahrazení česnekem a kmínem v dětské porci',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    frequencyLimit: 'Do 12 měsíců se nepřidává vůbec.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'cukr-krystal',
+    nameCz: 'cukr',
+    altNamesCz: ['krystalový cukr', 'třtinový cukr', 'moučkový cukr'],
+    category: 'ostatni',
+    emoji: '🍬',
+    icon: 'cukr',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Kojenec ho podle NHS nepotřebuje. Vyhýbání se sladkým svačinám a nápojům pomáhá předcházet zubnímu kazu — a to platí i pro ovocnou šťávu. Sladkou chuť dodá ovoce samo: rozmačkaný banán, dušená hruška, jablečné pyré.',
+        caution: 'Sladkost si dítě rychle oblíbí a méně sladké jídlo pak odmítá. Není kam spěchat.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících se nic nemění. Hlídej hotové výrobky — dětské sušenky, ochucené jogurty a müsli ho mívají v receptuře víc, než se na první pohled zdá.',
+        caution: 'Přírodní znějící sladidla (sirupy, koncentráty) jsou z hlediska zubů pořád cukr.',
+      },
+      '12m': {
+        serving:
+          'Ani po prvním roce se batole bez přidaného cukru neobejde hůř. Když v pečení použiješ ovocné pyré místo cukru, dortík zůstane sladký a dítě přitom nedostane nic navíc.',
+        caution: 'Nejvíc zubům škodí sladké popíjené po troškách během dne, ne jedna porce k jídlu.',
+      },
+    },
+    prepIdeas: [
+      'nahrazení rozmačkaným banánem v pečení',
+      'nahrazení jablečným pyré v kaši',
+      'nahrazení dušenou hruškou v tvarohu',
+      'do dochucení moučníku pro dospělé',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    frequencyLimit: 'Do 12 měsíců se nepřidává vůbec.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'javorovy-sirup',
+    nameCz: 'javorový sirup',
+    altNamesCz: ['maple sirup'],
+    category: 'ostatni',
+    emoji: '🍁',
+    icon: 'javorovy-sirup',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Do jídelníčku kojence nepatří. Že je z javoru a ne z řepy, na věci nic nemění — pro zuby i pro chuťové návyky se chová jako každý jiný přidaný cukr, kterému se podle NHS má dítě vyhýbat.',
+        caution: 'Bývá v hotových kaších a müsli směsích označených jako „bez cukru“.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících. Lívanečky a kaše se dají osladit ovocem: banánem v těstě, dušeným jablkem navrch, rozmačkanými borůvkami.',
+        caution: 'Sirup navíc teče a dítě ho snadno rozetře po celém obličeji i po sobě.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce ho batole může výjimečně dostat, třeba pár kapek na lívanečky. Pořád ale platí, že čím méně sladkého během dne, tím lépe pro zuby.',
+        caution: 'Kupovaná „javorová“ sirupová náhrada bývá jen glukózový sirup s aromatem.',
+      },
+    },
+    prepIdeas: [
+      'pár kapek na lívanečky po prvním roce',
+      'do dochucení moučníku pro dospělé',
+      'nahrazení ovocným pyré v dětské porci',
+      'nahrazení dušeným jablkem na kaši',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    frequencyLimit: 'Do 12 měsíců vůbec; potom jen výjimečně.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'bujon-kostka',
+    nameCz: 'bujón v kostce',
+    altNamesCz: ['vývar z kostky', 'instantní vývar', 'masox'],
+    category: 'ostatni',
+    emoji: '🧊',
+    icon: 'bujon-kostka',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Do dětského jídla nepatří. NHS ho jmenuje přímo vedle solení jako to, co se při vaření pro kojence nemá používat, protože bývá hodně slaný. Polévku i rizoto uvař na vodě nebo na domácím vývaru bez soli — zelenina, kost nebo kuřecí skelet dají chuť samy.',
+        caution: 'Týká se i vývaru v prášku, v pytlíku a hotových „základů“ na omáčky.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících platí totéž. Když vaříš pro celou rodinu, uvař základ bez bujónu, odeber dětskou porci a teprve pak si hrnec dochuť.',
+        caution: 'I bujóny označené jako „se sníženým obsahem soli“ jsou pro kojence pořád slané.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce se malé množství v rodinném jídle připustit dá, ale domácí vývar zůstává lepší volbou — víš, co je v něm.',
+        caution: 'Porci pro batole radši nalej dřív, než hrnec dochutíš.',
+      },
+    },
+    prepIdeas: [
+      'nahrazení domácím vývarem bez soli',
+      'nahrazení vodou a kořenovou zeleninou',
+      'do dochucení polévky pro dospělé',
+      'do dochucení omáčky pro dospělé',
+    ],
+    seasonCz: [],
+    vegetarian: false,
+    frequencyLimit: 'Do 12 měsíců se nepoužívá.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'napoj-ryzovy',
+    nameCz: 'rýžový nápoj',
+    altNamesCz: ['rýžové mléko', 'rice drink'],
+    category: 'ostatni',
+    emoji: '🥛',
+    icon: 'napoj-ryzovy',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: ['arsen'],
+    hazardNotes: {
+      arsen:
+        'NHS uvádí, že děti do pěti let nemají rýžový nápoj dostávat jako náhradu mateřského mléka, umělé výživy ani kravského mléka, protože může obsahovat příliš mnoho arsenu. Rýže ho ze svého okolí přijímá víc než ostatní obiloviny. Samotnou rýži to podle NHS nevylučuje — omezení se týká nápoje.',
+    },
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Nepodává se. Jako nápoj je pro kojence mateřské mléko nebo umělá výživa, k jídlu voda. Rýžový nápoj navíc obsahuje málo bílkovin a tuku, takže by ani jinak mléko nenahradil.',
+        caution: 'Omezení platí do pěti let, ne jen do prvních narozenin.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících. Pokud hledáš rostlinnou náhradu do vaření, sáhni po ovesném nebo sójovém neslazeném nápoji.',
+        caution: 'Stejné omezení má i rýžová smetana a rýžový nápoj v kaších z obchodu.',
+      },
+      '12m': {
+        serving:
+          'Ani po prvním roce se nedoporučuje — NHS mluví o dětech do pěti let. Jako mléčná náhrada připadá v úvahu neslazený sójový, ovesný nebo mandlový nápoj obohacený vápníkem.',
+        caution: 'Zkontroluj obal: „rýžový nápoj“ bývá složkou i v kombinovaných rostlinných nápojích.',
+      },
+    },
+    prepIdeas: [
+      'nahrazení ovesným nápojem ve vaření',
+      'nahrazení neslazeným sójovým nápojem',
+      'nahrazení kravským mlékem ve vaření od 6 měsíců',
+      'nahrazení vodou v kaši',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    frequencyLimit: 'Do pěti let se jako náhrada mléka nepodává.',
+    sources: [NHS_DRINKS, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'napoj-ovesny',
+    nameCz: 'ovesný nápoj',
+    altNamesCz: ['ovesné mléko', 'oat drink'],
+    category: 'ostatni',
+    emoji: '🥛',
+    icon: 'napoj-ovesny',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Jako nápoj se kojenci nedává. NHS uvádí neslazené rostlinné nápoje obohacené vápníkem — sójový, ovesný nebo mandlový — až od jednoho roku. Do šesti měsíců je nápojem mateřské mléko nebo umělá výživa, k jídlu voda.',
+        caution: 'Ochucené a slazené varianty (vanilkový, čokoládový) jsou sladké nápoje, ne mléko.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících jako nápoj ne. Do vaření se od šesti měsíců hodí spíš kravské mléko, které má víc bílkovin i tuku.',
+        caution: 'Ovesný nápoj obsahuje lepek, pokud není z bezlepkového ovsa.',
+      },
+      '12m': {
+        serving:
+          'Po prvních narozeninách ho batole může dostat jako součást pestrého jídelníčku. Vyber neslazený a obohacený vápníkem — na obalu bývá jako „vápník“ ve složení. Hodí se do kaše, do pečení i do kakaa.',
+        caution: 'Má méně bílkovin i tuku než kravské mléko, takže samo o sobě není rovnocennou náhradou.',
+      },
+    },
+    prepIdeas: [
+      'do ovesné kaše po prvním roce',
+      'do celozrnného pečení',
+      'do zeleninové omáčky místo smetany',
+      'do kakaa pro batole',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_YOUNG_CHILDREN],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'napoj-sojovy',
+    nameCz: 'sójový nápoj neslazený',
+    altNamesCz: ['sójové mléko', 'soya drink'],
+    category: 'ostatni',
+    emoji: '🥛',
+    icon: 'napoj-sojovy',
+    allergens: ['soja'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Jako nápoj se kojenci nedává — NHS ho spolu s ovesným a mandlovým uvádí až od jednoho roku, a to neslazený a obohacený vápníkem. Sója přitom patří mezi klíčové alergeny, takže se v jídle (tofu, tempeh) zavádí dřív a samostatně.',
+        caution: 'Zavádění sóji jako alergenu řeš v jídle, ne nápojem.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících jako nápoj ne. V jídle je sója v pořádku — tofu rozmačkané do omáčky nebo edamame jsou vhodnější cesta.',
+        caution: 'Po prvním podání sóji nech jeden až dva dny odstup, ať poznáš případnou reakci.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce je z rostlinných nápojů nejblíž kravskému mléku — má srovnatelně bílkovin. Vyber neslazený a obohacený vápníkem.',
+        caution: 'Nápoje označené „sójový dezert“ nebo „vanilkový“ jsou slazené.',
+      },
+    },
+    prepIdeas: [
+      'do kaše po prvním roce',
+      'do pečení místo kravského mléka',
+      'do bílé omáčky',
+      'do smoothie s ovocem',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'napoj-mandlovy',
+    nameCz: 'mandlový nápoj',
+    altNamesCz: ['mandlové mléko', 'almond drink'],
+    category: 'ostatni',
+    emoji: '🥛',
+    icon: 'napoj-mandlovy',
+    allergens: ['orechy'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'Jako nápoj se kojenci nedává; NHS ho uvádí až od jednoho roku, neslazený a obohacený vápníkem. Ořechy samotné se ale zavádět můžou — mleté nebo jako hladké máslo vmíchané do jídla.',
+        caution: 'Mandlový nápoj neplatí za zavedení ořechů jako alergenu, bývá velmi řídký.',
+      },
+      '9m': {
+        serving:
+          'Ani v devíti měsících jako nápoj ne. Mandle v jídelníčku řeš mletou mandlovou moučkou v kaši nebo v pečení.',
+        caution: 'Obsah mandlí bývá pod dvě procenta, zbytek je voda.',
+      },
+      '12m': {
+        serving:
+          'Po prvním roce ho batole může dostat. Z rostlinných nápojů má nejméně bílkovin, takže se hodí spíš do vaření než jako hlavní denní mléko.',
+        caution: 'Pro dítě s alergií na ořechy nepřipadá v úvahu.',
+      },
+    },
+    prepIdeas: [
+      'do kaše po prvním roce',
+      'do pečení',
+      'do ovocného smoothie',
+      'do kakaa pro batole',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_DRINKS, NHS_AVOID],
     reviewStatus: 'verified',
   },
 ];

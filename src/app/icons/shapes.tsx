@@ -188,7 +188,98 @@ function prasek(barva: string, svetlejsi: string): ReactNode {
   );
 }
 
+/** Krabice rostlinného nápoje; `znak` je surovina, ze které se vyrábí. */
+function krabice(pasek: string, znak: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M20 20h24v34a3 3 0 0 1-3 3H23a3 3 0 0 1-3-3V20Z" fill={C.bila} />
+      <path d="M20 20h24v34a3 3 0 0 1-3 3H23a3 3 0 0 1-3-3V20Z" fill="none" stroke={C.bilaStin} strokeWidth="2" />
+      <path d="M20 20l6-11h12l6 11H20Z" fill={pasek} />
+      <path d="M20 30h24v4H20Z" fill={pasek} />
+      {znak}
+    </>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
+  // ── sladidla, dochucovadla a nápoje ───────────────────────────────────
+  med: (
+    <>
+      <path d="M22 18h20l4 8v26a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V26l4-8Z" fill={C.bilaStin} />
+      <path d="M21 30h22v22a2 2 0 0 1-2 2H23a2 2 0 0 1-2-2V30Z" fill={C.zluta} />
+      <path d="M32 34l4 2v5l-4 2-4-2v-5l4-2Z" fill={C.zlutaTmava} />
+      <path d="M24 16h16v4H24Z" fill={C.hnedaSvetla} />
+    </>
+  ),
+  sul: (
+    <>
+      <path d="M21 24h22v28a5 5 0 0 1-5 5H26a5 5 0 0 1-5-5V24Z" fill={C.bila} stroke={C.bilaStin} strokeWidth="2" />
+      <path d="M19 12h26v12H19Z" fill={C.sedaTmava} />
+      <circle cx="27" cy="17" r="2.2" fill={C.bila} />
+      <circle cx="37" cy="17" r="2.2" fill={C.bila} />
+      <circle cx="32" cy="20" r="2.2" fill={C.bila} />
+      <circle cx="28" cy="38" r="3" fill={C.seda} />
+      <circle cx="37" cy="45" r="3" fill={C.seda} />
+      <circle cx="31" cy="49" r="3" fill={C.seda} />
+    </>
+  ),
+  cukr: (
+    <>
+      <path d="M10 28h20v14H10Z" fill={C.krem} stroke={C.kremTmavy} strokeWidth="3" />
+      <path d="M34 20h20v14H34Z" fill={C.krem} stroke={C.kremTmavy} strokeWidth="3" />
+      <path d="M22 44h20v14H22Z" fill={C.krem} stroke={C.kremTmavy} strokeWidth="3" />
+    </>
+  ),
+  'javorovy-sirup': (
+    <>
+      <path d="M24 20h16l3 8v24a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4V28l3-8Z" fill={C.bilaStin} />
+      <path d="M24 32h16v20a2 2 0 0 1-2 2H26a2 2 0 0 1-2-2V32Z" fill={C.hneda} />
+      <path d="M32 34l3 4h-2l2 4h-2l1 4h-4l1-4h-2l2-4h-2l3-4Z" fill={C.cervenaTmava} />
+      <path d="M26 17h12v4H26Z" fill={C.hnedaTmava} />
+    </>
+  ),
+  'bujon-kostka': (
+    <>
+      <path d="M14 24h30v26H14Z" fill={C.kremTmavy} />
+      <path d="M18 28h22v18H18Z" fill={C.zlutaTmava} />
+      <path d="M44 24l8-6v26l-8 6V24Z" fill={C.hnedaSvetla} />
+      <path d="M14 24l8-6h30l-8 6H14Z" fill={C.krem} />
+    </>
+  ),
+  'napoj-ryzovy': krabice(
+    C.bilaStin,
+    <>
+      <ellipse cx="27" cy="43" rx="4" ry="7" transform="rotate(-20 27 43)" fill={C.kremTmavy} />
+      <ellipse cx="36" cy="46" rx="4" ry="7" transform="rotate(18 36 46)" fill={C.kremTmavy} />
+    </>,
+  ),
+  'napoj-ovesny': krabice(
+    C.hnedaSvetla,
+    <>
+      <ellipse cx="32" cy="44" rx="9" ry="7" fill={C.krem} stroke={C.kremTmavy} strokeWidth="2" />
+      <path d="M23 44h18" stroke={C.kremTmavy} strokeWidth="2" />
+    </>,
+  ),
+  'napoj-sojovy': krabice(
+    C.zelenSvetla,
+    <>
+      <path d="M22 46c0-6 5-10 10-10s10 4 10 10-5 8-10 8-10-2-10-8Z" fill={C.zelenBleda} />
+      <circle cx="27" cy="45" r="3" fill={C.zelenTmava} />
+      <circle cx="36" cy="45" r="3" fill={C.zelenTmava} />
+    </>,
+  ),
+  'napoj-mandlovy': krabice(
+    C.kremTmavy,
+    <path d="M32 35c5 0 9 5 9 10s-4 9-9 9-9-4-9-9 4-10 9-10Z" fill={C.hnedaSvetla} stroke={C.hnedaTmava} strokeWidth="2" />,
+  ),
+  'mleko-kozi': krabice(
+    C.hneda,
+    <>
+      <path d="M25 44c1-5 4-7 7-7s6 2 7 7c-2 4-4 6-7 6s-5-2-7-6Z" fill={C.krem} />
+      <path d="M26 39c-3-2-4-5-3-8M38 39c3-2 4-5 3-8" stroke={C.hnedaTmava} strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>,
+  ),
+
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
     <>
