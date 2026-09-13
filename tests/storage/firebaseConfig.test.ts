@@ -1,6 +1,10 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { isCompleteConfig, parseFirebaseConfig } from '../../src/storage/firebaseConfig';
+import {
+  hasBuiltInConfig,
+  isCompleteConfig,
+  parseFirebaseConfig,
+} from '../../src/storage/firebaseConfig';
 
 const CONSOLE_SNIPPET = `
 const firebaseConfig = {
@@ -40,5 +44,18 @@ describe('Firebase konfigurace', () => {
   it('odmítne nesmysl místo JSON', () => {
     expect(parseFirebaseConfig('tohle není konfigurace')).toBeNull();
     expect(parseFirebaseConfig('')).toBeNull();
+  });
+});
+
+describe('konfigurace zapečená v buildu', () => {
+  it('bez proměnných prostředí hlásí, že vestavěná není', () => {
+    // V testovacím běhu nejsou VITE_FIREBASE_* nastavené, takže se aplikace
+    // chová jako čerstvě naklonovaný repozitář.
+    expect(hasBuiltInConfig()).toBe(false);
+  });
+
+  it('neúplná sada proměnných se nepočítá jako konfigurace', () => {
+    // Kdyby se do buildu dostala jen část hodnot, Firebase by spadl až za běhu.
+    expect(isCompleteConfig({ apiKey: 'x', projectId: 'y' })).toBe(false);
   });
 });

@@ -28,7 +28,26 @@ jobs:
       - run: npm ci
       # Deploy nikdy neproběhne, když validace selže (CLAUDE.md, Nasazení).
       - run: npm run validate
+      # Firebase web-konfigurace se zapéká do buildu, aby nikdo nic nevyplňoval.
+      # Není to tajemství — v prohlížeči je stejně vidět; bezpečnost dělají
+      # firestore.rules. Repository variables mají přednost, secrets fungují taky.
+      - name: Kontrola konfigurace Firebase
+        env:
+          PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID || secrets.VITE_FIREBASE_PROJECT_ID }}
+        run: |
+          if [ -z "$PROJECT_ID" ]; then
+            echo "::warning::Firebase není nastavený — aplikace pojede jen v lokálním režimu bez sdílení."
+          else
+            echo "Firebase projekt: $PROJECT_ID"
+          fi
       - run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY || secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN || secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID || secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET || secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID || secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID || secrets.VITE_FIREBASE_APP_ID }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

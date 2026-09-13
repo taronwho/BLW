@@ -7,6 +7,7 @@ import { useHouseholdStore } from '@/storage/householdStore';
 import type { Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { GripHint } from '../components/GripHint';
+import { ReadinessNote } from '../components/ReadinessNote';
 import { NutrientBlock } from '../components/NutrientBlock';
 import { SourceDisclosure } from '../components/SourceList';
 import { StageSwitch } from '../components/StageSwitch';
@@ -153,6 +154,7 @@ export function IngredientDetailScreen(): ReactNode {
             Pozor ve fázi {STAGE_LABELS[stage]}: {prep.caution}
           </p>
         )}
+        <ReadinessNote stage={stage} />
         <GripHint chokingRisk={ingredient.chokingRisk} />
       </section>
 

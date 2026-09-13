@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Baby, Download, KeyRound, ShieldAlert, Upload } from 'lucide-react';
+import { Baby, Copy, Download, KeyRound, ShieldAlert, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -12,12 +12,14 @@ import {
 } from '@/sync/householdCode';
 import {
   clearFirebaseConfig,
+  hasBuiltInConfig,
   loadFirebaseConfig,
   parseFirebaseConfig,
   saveFirebaseConfig,
 } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
 import { GripPicker } from '../components/GripPicker';
+import { ReadinessPicker } from '../components/ReadinessPicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
@@ -43,6 +45,8 @@ export function HouseholdScreen(): ReactNode {
     setChildName(state.childName);
     setChildBirthDate(state.childBirthDate);
   }, [state.childName, state.childBirthDate]);
+
+  const vestavenaKonfigurace = hasBuiltInConfig();
 
   const pairingUrl =
     householdCode === null
@@ -102,6 +106,10 @@ export function HouseholdScreen(): ReactNode {
       </form>
 
       <div className="rounded-xl bg-surface p-4">
+        <ReadinessPicker />
+      </div>
+
+      <div className="rounded-xl bg-surface p-4">
         <GripPicker />
       </div>
 
@@ -127,9 +135,34 @@ export function HouseholdScreen(): ReactNode {
             {pairingUrl !== null && (
               <QrCode value={pairingUrl} label="QR kód pro spárování druhého telefonu" />
             )}
+            {pairingUrl !== null && (
+              <div className="flex w-full flex-col gap-2">
+                <p className="text-xs uppercase tracking-wide text-muted">Odkaz k připojení</p>
+                <p
+                  data-testid="odkaz-k-pripojeni"
+                  className="break-all rounded-lg bg-paper px-3 py-2 text-xs"
+                >
+                  {pairingUrl}
+                </p>
+                <button
+                  type="button"
+                  data-testid="kopirovat-odkaz"
+                  onClick={() => {
+                    void navigator.clipboard
+                      .writeText(pairingUrl)
+                      .then(() => setMessage('Odkaz zkopírován. Pošli ho komukoli, kdo se má připojit.'))
+                      .catch(() => setMessage('Kopírování neprošlo — odkaz vyber a zkopíruj ručně.'));
+                  }}
+                  className="flex min-h-touch items-center justify-center gap-2 rounded-xl border border-accent bg-accent-soft px-4 text-sm font-semibold text-accent"
+                >
+                  <Copy aria-hidden="true" className="h-4 w-4" />
+                  Kopírovat odkaz
+                </button>
+              </div>
+            )}
             <p className="text-center text-xs text-muted">
-              Na druhém telefonu kód naskenuj nebo přepiš. Kdo kód zná, vidí do deníku — sdílej ho
-              jen doma.
+              Kdo odkaz otevře, připojí se jedním klepnutím a uvidí stejný deník. Kdo kód zná, vidí
+              do deníku — posílej ho jen lidem, kterým na dítě sáhneš. Domácnost unese pět zařízení.
             </p>
             <button
               type="button"
@@ -171,6 +204,15 @@ export function HouseholdScreen(): ReactNode {
         </button>
       </form>
 
+      {vestavenaKonfigurace ? (
+        <p className="flex items-start gap-2 rounded-xl bg-surface p-4 text-xs leading-relaxed text-muted">
+          <KeyRound aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <span>
+            Připojení k Firebase je součástí aplikace, není co vyplňovat. Stačí založit domácnost
+            a poslat ostatním odkaz.
+          </span>
+        </p>
+      ) : (
       <form
         className="flex flex-col gap-2 rounded-xl bg-surface p-4"
         onSubmit={(event) => {
@@ -223,6 +265,7 @@ export function HouseholdScreen(): ReactNode {
           )}
         </div>
       </form>
+      )}
 
       <div className="flex flex-wrap gap-2 rounded-xl bg-surface p-4">
         <button
