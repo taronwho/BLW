@@ -61,6 +61,12 @@
 
   --shadow-soft: 0 1px 2px rgba(22, 33, 29, 0.05), 0 1px 8px rgba(22, 33, 29, 0.04);
   --shadow-lift: 0 2px 6px rgba(22, 33, 29, 0.07), 0 12px 28px rgba(22, 33, 29, 0.07);
+
+  /* Značka (avokádo v řezu). Dužina je v obou motivech stejná, mění se slupka:
+     tmavá na světlém podkladu, svítivá na tmavém — jinak by obrys splynul. */
+  --logo-slupka: #1c5f49;
+  --logo-duzina: #d6e8a8;
+  --logo-pecka: #a9682f;
 }
 
 :root[data-theme='dark'] {
@@ -94,6 +100,10 @@
 
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 8px rgba(0, 0, 0, 0.3);
   --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.45), 0 12px 28px rgba(0, 0, 0, 0.4);
+
+  --logo-slupka: #7fd8a8;
+  --logo-duzina: #d6e8a8;
+  --logo-pecka: #c9873f;
 }
 
 @layer base {

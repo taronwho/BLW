@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
+import { Logo } from './Logo';
 import { ageInMonths, formatAge } from '../lib/age';
 import { useTheme } from '../lib/useTheme';
 
@@ -36,9 +37,7 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
       <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-md items-center justify-between gap-3 px-4 py-2.5">
           <Link to="/" className="flex min-h-touch items-center gap-2 pr-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-sheen text-[11px] font-bold text-white">
-              B
-            </span>
+            <Logo className="h-7 w-7" />
             <span className="text-sm font-bold tracking-tight">BLW</span>
           </Link>
           <Link
