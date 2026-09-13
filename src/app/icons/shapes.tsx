@@ -147,6 +147,37 @@ function kelimek(obsah: string, vicko: string, navrch?: ReactNode): ReactNode {
   );
 }
 
+/** Sklenice s máslem či pastou; `znak` je plod, podle kterého se pozná. */
+function sklenice(obsah: string, znak: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M20 22h24v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V22Z" fill={C.bilaStin} />
+      <path d="M23 28h18v24H23V28Z" fill={obsah} />
+      <path d="M18 14h28v8H18Z" fill={C.hnedaSvetla} />
+      {znak}
+    </>
+  );
+}
+
+/** Láhev oleje; `znak` je plod, ze kterého se lisuje. */
+function lahev(olej: string, znak: ReactNode): ReactNode {
+  return (
+    <>
+      <path d="M26 10h12v10l6 10v22a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V30l6-10V10Z" fill={C.bilaStin} />
+      <path d="M23 32h18v20a2 2 0 0 1-2 2H25a2 2 0 0 1-2-2V32Z" fill={olej} />
+      <path d="M25 8h14v5H25Z" fill={C.hnedaSvetla} />
+      {znak}
+    </>
+  );
+}
+
+/** Mletá surovina: nízká hromádka prášku pod celým plodem. */
+function mleto(barva: string): ReactNode {
+  return (
+    <path d="M8 54c0-5 5-9 11-10 4-4 8-6 13-6s9 2 13 6c6 1 11 5 11 10H8Z" fill={barva} />
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1708,6 +1739,217 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M15 30c2-6 6-10 10-11" stroke="#FBF2E4" strokeWidth="5" strokeLinecap="round" fill="none" />
       <ellipse cx="45" cy="44" rx="15" ry="11" fill={C.bila} />
       <circle cx="45" cy="44" r="6" fill="#EFB92E" />
+    </>
+  ),
+
+  // ── ořechy, semínka a tuky ─────────────────────────────────────────────
+  'arasidove-maslo': sklenice(
+    '#C08A46',
+    <>
+      <ellipse cx="32" cy="38" rx="9" ry="6" fill="#DCAE6E" />
+      <path d="M26 38c3-2 9-2 12 0" stroke="#A06E2E" strokeWidth="2" fill="none" />
+    </>,
+  ),
+
+  'mandlove-maslo': sklenice(
+    '#CFA77E',
+    <ellipse cx="32" cy="38" rx="6" ry="9" fill="#E8CBAE" />,
+  ),
+
+  'kesu-maslo': sklenice(
+    '#E2C89E',
+    <path d="M26 42c-2-6 2-11 8-11 5 0 8 3 8 7 0 3-2 5-5 5-2 0-3-1-3-3" stroke="#C4A472" strokeWidth="5" strokeLinecap="round" fill="none" />,
+  ),
+
+  'liskooriskove-maslo': sklenice(
+    '#8E5E34',
+    <>
+      <circle cx="32" cy="40" r="8" fill="#C08A56" />
+      <path d="M24 36c4-4 12-4 16 0Z" fill="#6E4A22" />
+    </>,
+  ),
+
+  tahini: sklenice(
+    '#DED3B4',
+    <>
+      <ellipse cx="28" cy="38" rx="3" ry="2" fill="#F2ECD8" />
+      <ellipse cx="36" cy="36" rx="3" ry="2" fill="#F2ECD8" />
+      <ellipse cx="32" cy="44" rx="3" ry="2" fill="#F2ECD8" />
+    </>,
+  ),
+
+  'seminka-lnena': (
+    <>
+      {mleto('#C4A87E')}
+      {hromadka((x, y, u, i) =>
+        y > 40 ? null : (
+          <ellipse
+            key={i}
+            cx={x}
+            cy={y - 6}
+            rx="5.4"
+            ry="2.8"
+            transform={`rotate(${u} ${x} ${y - 6})`}
+            fill={i % 2 === 0 ? '#8E6432' : '#6E4A22'}
+          />
+        ),
+      )}
+    </>
+  ),
+
+  'seminka-chia': (
+    <>
+      {mleto('#9E9488')}
+      {hromadka((x, y, u, i) =>
+        y > 40 ? null : (
+          <ellipse
+            key={i}
+            cx={x}
+            cy={y - 6}
+            rx="4"
+            ry="2.6"
+            transform={`rotate(${u} ${x} ${y - 6})`}
+            fill={i % 2 === 0 ? '#4E4640' : '#7E7468'}
+          />
+        ),
+      )}
+    </>
+  ),
+
+  'seminka-konopna': (
+    <>
+      {mleto('#D8D2B8')}
+      {hromadka((x, y, u, i) =>
+        y > 40 ? null : (
+          <ellipse
+            key={i}
+            cx={x}
+            cy={y - 6}
+            rx="4.4"
+            ry="3.4"
+            transform={`rotate(${u} ${x} ${y - 6})`}
+            fill={i % 2 === 0 ? '#E8E2C0' : '#C4BE94'}
+          />
+        ),
+      )}
+    </>
+  ),
+
+  'seminka-dynova': (
+    <>
+      {mleto('#9EB878')}
+      <path d="M20 30c0-6 4-11 8-11s8 5 8 11-4 10-8 10-8-4-8-10Z" fill="#6E9B3A" />
+      <path d="M36 24c0-6 4-11 8-11s8 5 8 11-4 10-8 10-8-4-8-10Z" fill="#8FBF5A" />
+      <path d="M24 24c0-3 2-5 4-5M40 18c0-3 2-5 4-5" stroke="#C8E0A0" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'seminka-slunecnicova': (
+    <>
+      {mleto('#BFAE94')}
+      <path d="M18 32c0-7 4-13 8-13s8 6 8 13-4 11-8 11-8-4-8-11Z" fill="#3E3A34" />
+      <path d="M34 26c0-7 4-13 8-13s8 6 8 13-4 11-8 11-8-4-8-11Z" fill="#5E5850" />
+      <path d="M26 21c-1 5-1 12 0 17M42 15c-1 5-1 12 0 17" stroke="#D8D2C4" strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  'sezam-mlety': (
+    <>
+      {mleto('#E4DCC4')}
+      {hromadka((x, y, u, i) =>
+        y > 40 ? null : (
+          <ellipse
+            key={i}
+            cx={x}
+            cy={y - 6}
+            rx="3.6"
+            ry="2.4"
+            transform={`rotate(${u} ${x} ${y - 6})`}
+            fill={i % 2 === 0 ? '#F2ECD8' : '#D2C8A8'}
+            stroke="#BFB496"
+            strokeWidth="1"
+          />
+        ),
+      )}
+    </>
+  ),
+
+  'mak-mlety': (
+    <>
+      {mleto('#6E6870')}
+      {hromadka((x, y, _u, i) =>
+        y > 40 ? null : <circle key={i} cx={x} cy={y - 6} r="3" fill={i % 2 === 0 ? '#3A3642' : '#565060'} />,
+      )}
+    </>
+  ),
+
+  'vlasske-orechy': (
+    <>
+      {mleto('#C4A47E')}
+      <circle cx="32" cy="26" r="15" fill="#D9B888" />
+      <path d="M32 12v28M32 18c-6 2-10 6-11 12M32 18c6 2 10 6 11 12M32 30c-4 1-7 3-8 7M32 30c4 1 7 3 8 7" stroke="#A8834E" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'mandle-mlete': (
+    <>
+      {mleto('#DCC8A8')}
+      <ellipse cx="24" cy="27" rx="8" ry="12" transform="rotate(-14 24 27)" fill="#C49A6E" />
+      <ellipse cx="41" cy="24" rx="8" ry="12" transform="rotate(12 41 24)" fill="#DCB88E" />
+      <path d="M24 19c-2 4-2 10 0 14M41 16c-2 4-2 10 0 14" stroke="#8E6A42" strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  'olej-olivovy': lahev(
+    '#9EB13A',
+    <>
+      <ellipse cx="46" cy="20" rx="7" ry="9" transform="rotate(20 46 20)" fill="#6E8A2A" />
+      <path d="M46 12c3-4 7-6 11-5-1 5-5 8-10 8" fill={C.zelen} />
+    </>,
+  ),
+
+  'olej-repkovy': lahev(
+    '#E8C33A',
+    <>
+      <circle cx="46" cy="18" r="4" fill="#F2DE72" />
+      <circle cx="41" cy="14" r="4" fill={C.zluta} />
+      <circle cx="51" cy="14" r="4" fill={C.zluta} />
+      <circle cx="43" cy="23" r="4" fill={C.zluta} />
+      <circle cx="49" cy="23" r="4" fill={C.zluta} />
+    </>,
+  ),
+
+  'olej-dynovy': lahev(
+    '#2E3A22',
+    <path d="M40 20c0-6 4-11 8-11s8 5 8 11-4 10-8 10-8-4-8-10Z" fill="#6E9B3A" />,
+  ),
+
+  'olej-lneny': lahev(
+    '#D9A83A',
+    <>
+      <ellipse cx="44" cy="18" rx="6" ry="3.2" transform="rotate(-18 44 18)" fill="#8E6432" />
+      <ellipse cx="51" cy="22" rx="6" ry="3.2" transform="rotate(14 51 22)" fill="#6E4A22" />
+    </>,
+  ),
+
+  'olej-kokosovy': (
+    <>
+      <path d="M20 22h24v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V22Z" fill={C.bilaStin} />
+      <path d="M23 28h18v24H23V28Z" fill={C.bila} />
+      <path d="M18 14h28v8H18Z" fill={C.hnedaSvetla} />
+      <path d="M26 36c4-3 8-3 12 0-4 4-8 4-12 0Z" fill="#EFE8D8" />
+      <path d="M48 18c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9Z" fill="#7A5230" />
+      <path d="M48 22c3 0 5 2 5 5s-2 5-5 5-5-2-5-5 2-5 5-5Z" fill={C.bila} />
+    </>
+  ),
+
+  'mleko-kokosove': (
+    <>
+      <path d="M22 18h20v34a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4V18Z" fill="#C9CFD4" />
+      <path d="M25 26h14v26H25V26Z" fill={C.bila} />
+      <path d="M20 14h24v6H20Z" fill="#9EA8AE" />
+      <path d="M48 22c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9Z" fill="#7A5230" />
+      <path d="M48 26c3 0 5 2 5 5s-2 5-5 5-5-2-5-5 2-5 5-5Z" fill={C.bila} />
     </>
   ),
 };
