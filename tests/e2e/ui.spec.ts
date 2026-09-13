@@ -163,7 +163,7 @@ test('filtry v seznamu surovin zužují výběr', async ({ page }) => {
   await expect(count).not.toHaveText(before);
   await expect(page.getByTestId('seznam-surovin')).toBeVisible();
 
-  await page.getByTestId('rychle-filtry').getByTestId('chip-ochutnano').click();
+  await page.getByTestId('filtr-deniku').getByTestId('chip-ochutnano').click();
   await expect(page.getByTestId('prazdny-stav')).toBeVisible();
 });
 
@@ -479,4 +479,46 @@ test('okénko živin nevypisuje, čeho surovina není zdrojem', async ({ page })
   await expect(okenko).toBeVisible();
   await expect(okenko).toContainText('Zinek');
   await expect(okenko).not.toContainText('není zdroj');
+});
+
+test('filtry surovin se dají kombinovat', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const count = page.getByTestId('pocet-surovin');
+  const vse = (await count.textContent()) ?? '';
+
+  // Sezónní a zároveň ještě neochutnané — dřív se volby vylučovaly a tohle nešlo.
+  await page.getByTestId('filtr-sezonni').click();
+  const sezonni = (await count.textContent()) ?? '';
+  expect(sezonni).not.toBe(vse);
+
+  await page.getByTestId('filtr-deniku').getByTestId('chip-neochutnano').click();
+  await expect(page.getByTestId('filtr-sezonni')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+
+  await page.getByTestId('zrusit-filtry').click();
+  await expect(count).toHaveText(vse);
+});
+
+test('filtr živin u surovin upřesňuje druh železa', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const count = page.getByTestId('pocet-surovin');
+  const vse = (await count.textContent()) ?? '';
+
+  await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
+  await page.getByTestId('prepinac-zelezo').click();
+  const zelezo = (await count.textContent()) ?? '';
+  expect(zelezo).not.toBe(vse);
+
+  await page.getByTestId('filtr-druhu-zeleza').getByTestId('chip-hemove').click();
+  await expect(count).not.toHaveText(zelezo);
+
+  // Významný zdroj je podmnožina toho, co železo aspoň obsahuje.
+  const hemove = (await count.textContent()) ?? '';
+  await page.getByTestId('filtr-sily').getByTestId('chip-vyznamny').click();
+  const vyznamne = (await count.textContent()) ?? '';
+  expect(Number(vyznamne.split(' ')[0])).toBeLessThanOrEqual(Number(hemove.split(' ')[0]));
 });
