@@ -32,6 +32,24 @@ function nat(posun = 0, barva: string = C.zelen): ReactNode {
   );
 }
 
+/** Rozmístění zrn v hromádce. Stejné u všech sypkých surovin, ať drží sadu
+ *  pohromadě; liší se jen tvar a barva samotného zrna. */
+const HROMADKA: readonly [number, number, number][] = [
+  [18, 43, -18],
+  [31, 45, 8],
+  [44, 43, 16],
+  [24, 34, 24],
+  [38, 34, -14],
+  [31, 25, 4],
+  [49, 34, -28],
+  [14, 33, 30],
+];
+
+/** Hromádka zrn; `zrno` dostane střed a natočení. */
+function hromadka(zrno: (x: number, y: number, uhel: number, i: number) => ReactNode): ReactNode {
+  return <>{HROMADKA.map(([x, y, u], i) => zrno(x, y, u, i))}</>;
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -917,6 +935,149 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M28 10l6 4-6 4M40 10l-6 4 6 4M28 18l6 4-6 4M40 18l-6 4 6 4" stroke="#B98A56" strokeWidth="2.5" strokeLinecap="round" fill="none" />
     </>
   ),
+
+  // ── pečivo, těstoviny a sypké obiloviny ────────────────────────────────
+  'mouka-zitna': (
+    <>
+      <path d="M6 48c0-7 6-12 12-14 4-8 10-13 16-13s12 5 16 13c6 2 12 7 12 14H6Z" fill="#B5A98E" />
+      <path d="M18 44c6-3 22-3 28 0" stroke="#8E836B" strokeWidth="2.5" fill="none" />
+      <path d="M34 21V4" stroke="#6E6450" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M34 8c-3-2-5-4-5-7 3 1 5 3 5 7ZM34 14c-3-2-5-4-5-7 3 1 5 3 5 7ZM34 20c-3-2-5-4-5-7 3 1 5 3 5 7ZM34 8c3-2 5-4 5-7-3 1-5 3-5 7ZM34 14c3-2 5-4 5-7-3 1-5 3-5 7ZM34 20c3-2 5-4 5-7-3 1-5 3-5 7Z" fill="#9E9074" />
+    </>
+  ),
+
+  'chleb-kvaskovy': (
+    <>
+      <ellipse cx="32" cy="38" rx="24" ry="18" fill="#A9702F" />
+      <ellipse cx="32" cy="35" rx="24" ry="16" fill="#C68A42" />
+      <path d="M18 30c6 4 10 9 12 15M30 26c6 4 10 9 12 15" stroke="#8A5522" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M14 32c8-5 28-5 36 0" stroke="#DEA967" strokeWidth="3" fill="none" />
+    </>
+  ),
+
+  'chleb-toustovy': (
+    <>
+      <path d="M16 26c0-8 7-13 16-13s16 5 16 13v24a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V26Z" fill="#E8C78A" />
+      <path d="M20 28c0-6 5-10 12-10s12 4 12 10v20H20V28Z" fill="#F5E2B8" />
+      <path d="M11 24c0-6 3-9 6-9v14c-3 0-6-2-6-5ZM53 24c0-6-3-9-6-9v14c3 0 6-2 6-5Z" fill="#E8C78A" />
+    </>
+  ),
+
+  rohlik: (
+    <>
+      <path d="M10 44c0-4 3-6 6-7 5-9 12-14 20-14 9 0 16 6 18 14 3 1 6 3 6 7 0 3-3 5-7 5-6 0-11-3-13-8-1-4-3-7-6-7s-5 3-6 7c-2 5-7 8-13 8-3 0-5-2-5-5Z" fill="#D9A455" />
+      <path d="M20 38c3-5 7-8 12-9M34 29c5 1 9 4 11 9" stroke="#F0CE8E" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M27 34l-2 6M32 32v7M37 34l2 6" stroke="#A9702F" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'testoviny-semolinove': (
+    <>
+      <path d="M14 22c6 4 6 10 0 14s-6 10 0 14" stroke={C.zluta} strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M32 18c6 4 6 10 0 14s-6 10 0 14 6 10 0 14" stroke="#F2D468" strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M50 22c-6 4-6 10 0 14s6 10 0 14" stroke={C.zlutaTmava} strokeWidth="7" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'testoviny-celozrnne': (
+    <>
+      <path d="M14 22c6 4 6 10 0 14s-6 10 0 14" stroke="#A9702F" strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M32 18c6 4 6 10 0 14s-6 10 0 14 6 10 0 14" stroke="#C68A42" strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M50 22c-6 4-6 10 0 14s6 10 0 14" stroke="#8A5522" strokeWidth="7" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  kuskus: hromadka((x, y, _u, i) => (
+    <circle key={i} cx={x} cy={y} r="3.2" fill={i % 2 === 0 ? '#E8CF94' : '#D4B571'} />
+  )),
+
+  bulgur: hromadka((x, y, u, i) => (
+    <rect
+      key={i}
+      x={x - 4}
+      y={y - 3}
+      width="8"
+      height="6"
+      rx="1.5"
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? '#C89A56' : '#A87C3C'}
+    />
+  )),
+
+  'ryze-basmati': hromadka((x, y, u, i) => (
+    <ellipse
+      key={i}
+      cx={x}
+      cy={y}
+      rx="8"
+      ry="3.2"
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? C.bila : C.bilaStin}
+      stroke="#BFB8A4"
+      strokeWidth="1.2"
+    />
+  )),
+
+  'ryze-kulatozrnna': hromadka((x, y, u, i) => (
+    <ellipse
+      key={i}
+      cx={x}
+      cy={y}
+      rx="5.2"
+      ry="4.4"
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? C.bila : C.bilaStin}
+      stroke="#BFB8A4"
+      strokeWidth="1.2"
+    />
+  )),
+
+  'ryze-natural': hromadka((x, y, u, i) => (
+    <ellipse
+      key={i}
+      cx={x}
+      cy={y}
+      rx="8"
+      ry="3.2"
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? '#B98A56' : '#96683A'}
+    />
+  )),
+
+  'ryzove-chlebicky': (
+    <>
+      <ellipse cx="32" cy="44" rx="23" ry="9" fill={C.kremTmavy} />
+      <ellipse cx="32" cy="34" rx="23" ry="16" fill={C.krem} />
+      <circle cx="22" cy="30" r="4" fill={C.bila} />
+      <circle cx="34" cy="27" r="4.5" fill={C.bila} />
+      <circle cx="44" cy="33" r="4" fill={C.bila} />
+      <circle cx="27" cy="40" r="4" fill={C.bila} />
+      <circle cx="40" cy="42" r="3.5" fill={C.bila} />
+      <circle cx="15" cy="36" r="3" fill={C.bila} />
+    </>
+  ),
+
+  jahly: hromadka((x, y, _u, i) => (
+    <circle key={i} cx={x} cy={y} r="3.6" fill={i % 2 === 0 ? '#E8C43F' : '#C9A522'} />
+  )),
+
+  'pohanka-lamanka': hromadka((x, y, u, i) => (
+    <path
+      key={i}
+      d={`M${x} ${y - 4.6}L${x + 5} ${y + 3.4}L${x - 5} ${y + 3.4}Z`}
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? '#BFA47A' : '#9E855C'}
+    />
+  )),
+
+  'pohanka-kroupy': hromadka((x, y, u, i) => (
+    <path
+      key={i}
+      d={`M${x} ${y - 5.4}L${x + 5.4} ${y + 3.8}L${x - 5.4} ${y + 3.8}Z`}
+      transform={`rotate(${u} ${x} ${y})`}
+      fill={i % 2 === 0 ? '#7E6440' : '#5E4A2C'}
+    />
+  )),
 };
 
 export type IconId = keyof typeof SHAPES;
