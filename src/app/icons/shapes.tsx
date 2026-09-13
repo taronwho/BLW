@@ -73,6 +73,30 @@ function fazole(
   );
 }
 
+/** Plátek masa: zaoblený tvar s okrajem tuku a žilkováním. */
+function platek(maso: string, tuk: string, zilky: string): ReactNode {
+  return (
+    <>
+      <path d="M14 26c4-8 14-12 22-11 10 1 16 7 15 15-1 9-8 17-18 18-9 1-18-4-20-11-2-4-1-8 1-11Z" fill={tuk} />
+      <path d="M19 28c3-6 11-9 17-8 8 1 12 5 11 11-1 7-6 13-14 14-7 1-14-3-15-8-2-3-1-6 1-9Z" fill={maso} />
+      <path d="M25 30c3 3 5 7 6 11M34 29c2 4 3 8 3 12M40 33c0 4-1 7-2 10" stroke={zilky} strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  );
+}
+
+/** Stehno: palička s kostí u užšího konce. */
+function palicka(maso: string, stin: string): ReactNode {
+  return (
+    <>
+      <path d="M40 12c8 0 13 7 13 16 0 11-9 20-20 20-8 0-14-5-14-12 0-9 4-15 9-19 3-3 7-5 12-5Z" fill={maso} />
+      <path d="M44 20c4 2 5 7 4 12" stroke={stin} strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M22 45l-8 8" stroke={C.krem} strokeWidth="8" strokeLinecap="round" fill="none" />
+      <circle cx="12" cy="52" r="6" fill={C.bila} />
+      <circle cx="17" cy="57" r="5" fill={C.bila} />
+    </>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1239,6 +1263,102 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M32 24c-3 4-3 7 0 10 3-3 3-6 0-10Z" fill="#6E9B3A" />
       <circle cx="24" cy="30" r="3" fill="#DCC084" />
       <circle cx="41" cy="30" r="3" fill="#DCC084" />
+    </>
+  ),
+
+  // ── maso ───────────────────────────────────────────────────────────────
+  'kureci-prsa': (
+    <>
+      <path d="M18 24c6-7 16-10 24-7 9 3 13 11 10 19-3 9-13 15-22 14-8-1-14-7-14-14 0-5 1-9 2-12Z" fill="#EFC3B0" />
+      <path d="M24 28c5-4 12-5 17-2" stroke="#F8DCD0" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M28 40c4 2 9 2 13 0" stroke="#D9A08A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'kureci-stehno': palicka('#E8B49E', '#F5D8CA'),
+
+  'kruti-prsa': (
+    <>
+      <path d="M12 28c6-9 18-13 28-10 11 4 16 13 12 22-4 10-16 16-26 15-9-1-16-8-16-15 0-5 1-9 2-12Z" fill="#E0AE9A" />
+      <path d="M20 30c6-5 14-6 20-3" stroke="#F2D0C0" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M24 42c6 3 12 3 17 0" stroke="#C4917A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'kruti-stehno': palicka('#C99A82', '#E8BCA6'),
+
+  'hovezi-zadni': platek('#9E3026', '#EFD8C8', '#C96B58'),
+
+  'hovezi-mlete': (
+    <>
+      <path d="M10 44c0-5 4-9 9-11 3-6 8-9 13-9s10 3 13 9c5 2 9 6 9 11 0 4-11 8-22 8s-22-4-22-8Z" fill="#A83A2C" />
+      <path d="M18 40c4-3 8-4 12-3M28 32c4-2 8-2 12 0M34 42c4-2 8-3 12-2M20 46c5-2 9-2 13-1" stroke="#CE6A55" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  teleci: platek('#C96A5E', '#F2E2D2', '#E09888'),
+
+  'veprova-panenka': (
+    <>
+      <path d="M8 38c0-6 6-10 14-11 8-1 22-1 30 1 6 1 8 5 8 9s-3 8-9 9c-9 2-22 2-30 1-8-1-13-4-13-9Z" fill="#E09A88" />
+      <path d="M14 34c8-2 26-2 36 0" stroke="#F2C8B8" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M16 44c8 2 26 2 34 0" stroke="#C4715E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'veprova-kyta': platek('#DE8C78', '#F5E4D4', '#F0B8A4'),
+
+  kralik: (
+    <>
+      <path d="M16 24c6-7 16-9 24-6 9 3 13 10 11 18-3 9-12 14-21 13-8-1-15-6-15-13 0-4 0-8 1-12Z" fill="#EFD2C0" />
+      <path d="M22 28c5-4 12-5 17-2" stroke="#F8E8DC" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M18 46l-6 8" stroke={C.krem} strokeWidth="7" strokeLinecap="round" fill="none" />
+      <circle cx="11" cy="54" r="5.5" fill={C.bila} />
+      <path d="M26 38c5 2 10 2 14 0" stroke="#D9AE96" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'kaci-prsa': (
+    <>
+      <path d="M12 40c0-5 5-9 12-11 9-3 24-4 32-2 6 2 8 6 8 10s-4 8-10 9c-10 2-24 2-32 0-6-1-10-3-10-6Z" fill="#8E2E28" />
+      <path d="M14 32c8-4 26-6 38-4 5 1 7 4 7 7H13c-1-1-1-2 1-3Z" fill="#F2E2CE" />
+      <path d="M20 30l-3 5M28 28l-3 5M36 28l-3 5M44 29l-3 5" stroke="#D9C4A8" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M20 45c8 2 22 2 30 0" stroke="#B4574E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  jehneci: (
+    <>
+      {/* Kotleta: medailonek masa a z něj vyčnívající žebro — bez kosti by
+          jehněčí splynulo s telecím plátkem. */}
+      <path d="M40 14c8-2 15 2 17 9" stroke={C.bila} strokeWidth="7" strokeLinecap="round" fill="none" />
+      <path d="M14 34c3-9 12-14 21-12 9 2 15 9 13 18-2 9-11 15-20 14s-16-7-16-14c0-2 1-4 2-6Z" fill="#EFD8C8" />
+      <path d="M19 35c3-6 10-9 16-8 7 2 11 7 10 14-2 7-9 11-16 10-6-1-11-5-11-11 0-2 0-4 1-5Z" fill="#A8372B" />
+      <path d="M26 38c4-2 9-2 13 0" stroke="#CE6A55" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'kureci-jatra': (
+    <>
+      <path d="M32 20c8-5 18-3 22 4 5 8 1 20-8 25-7 4-15 3-19-2-3 5-10 7-15 4-7-4-9-14-4-21 5-8 16-13 24-10Z" fill="#6E2622" />
+      <path d="M22 34c4-3 9-4 13-3" stroke="#9E4038" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'teleci-jatra': (
+    <>
+      <path d="M30 16c10-6 22-3 27 6 5 10 0 24-11 30-9 5-19 3-23-3-4 6-12 8-18 4-8-5-10-17-4-26 7-10 19-15 29-11Z" fill="#4E1A18" />
+      <path d="M20 36c5-4 11-5 16-4" stroke="#7E2C28" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'sunka-od-kosti': (
+    <>
+      <path d="M16 22c8-6 24-6 32 0 7 5 9 15 5 23-5 9-17 13-27 10-9-3-14-11-13-20 0-5 1-9 3-13Z" fill="#E8A093" />
+      <path d="M24 26c7-4 17-4 23 0" stroke="#F5CDC2" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M20 44c8 4 20 4 28-1" stroke="#C4736A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M14 48l-6 8" stroke={C.krem} strokeWidth="7" strokeLinecap="round" fill="none" />
+      <circle cx="8" cy="55" r="5.5" fill={C.bila} />
     </>
   ),
 };
