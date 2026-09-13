@@ -1,4 +1,4 @@
-# SPEC.md — funkční specifikace BLW aplikace
+# SPEC.md — funkční specifikace aplikace Drobek
 
 ## 1. Uživatelé a kontext
 

@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 // GitHub Pages běží na https://<nick>.github.io/BLW/ — název repozitáře je BLW,
 // proto base '/BLW/'. Při přejmenování repozitáře uprav i tuhle hodnotu.
+// Aplikace se jmenuje Drobek; „BLW" v cestě je zkratka metody, ne název.
 export default defineConfig({
   base: '/BLW/',
   plugins: [
@@ -13,8 +14,8 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['.nojekyll', 'icons/apple-touch-icon.png'],
       manifest: {
-        name: 'BLW — příkrmy pro celou rodinu',
-        short_name: 'BLW',
+        name: 'Drobek — příkrmy pro celou rodinu',
+        short_name: 'Drobek',
         description:
           'Katalog surovin, recepty ve třech liniích a deník ochutnávek pro zavádění příkrmů metodou BLW.',
         lang: 'cs',

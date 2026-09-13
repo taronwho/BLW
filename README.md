@@ -1,10 +1,13 @@
-# BLW — příkrmy pro celou rodinu
+# Drobek — příkrmy pro celou rodinu
 
 Česká webová aplikace pro Baby-Led Weaning: katalog surovin s bezpečnostními
 a přípravnými informacemi ke třem věkovým fázím, recepty vždy ve třech liniích
 (miminko / masitá / bezmasá) a deník ochutnávek. Statická PWA na GitHub Pages.
 
 **Aplikace nedává lékařská doporučení a nenahrazuje pediatra.**
+
+Repozitář se jmenuje `BLW` podle metody, aplikace **Drobek**. Adresa proto
+zůstává [`taronwho.github.io/BLW/`](https://taronwho.github.io/BLW/).
 
 ## Dokumentace
 
