@@ -27,6 +27,7 @@ export function makeIngredient(overrides: Partial<Ingredient> = {}): Ingredient 
     nameCz: 'Brokolice',
     altNamesCz: ['brokolica'],
     category: 'zelenina',
+    servingForm: 'kusove',
     emoji: '🥦',
     allergens: [],
     isKeyAllergen: false,

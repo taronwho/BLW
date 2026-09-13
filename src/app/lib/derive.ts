@@ -1,5 +1,12 @@
 import { ingredientById, ingredients, recipes } from '@/data';
-import type { ChokingRisk, HouseholdState, Ingredient, Recipe, TastingEvent } from '@/types';
+import type {
+  ChokingRisk,
+  HouseholdState,
+  Ingredient,
+  Recipe,
+  ServingForm,
+  TastingEvent,
+} from '@/types';
 import { highestRisk } from './choking';
 
 /** Odvozeniny nad katalogem a stavem domácnosti. Bez nich by každá obrazovka
@@ -31,6 +38,19 @@ export function recipeChokingRisk(recipe: Recipe): ChokingRisk {
 
 export function recipeAllergens(recipe: Recipe): string[] {
   return [...new Set(recipeIngredients(recipe).flatMap((item) => item.allergens))];
+}
+
+/**
+ * Podoba receptu na talíři. Bere tu nejhrubší složku, kterou jídlo obsahuje:
+ * stačí jedna věc, která se dá nakrájet na proužky, a rada o tvaru sousta
+ * dává smysl. Když v receptu není nic kusového ani drobného, je to kaše.
+ * Recept nikdy nevyjde jako „neřeší se" — jídlo vždycky něco na talíři má.
+ */
+export function recipeServingForm(recipe: Recipe): ServingForm {
+  const formy = new Set(recipeIngredients(recipe).map((item) => item.servingForm));
+  if (formy.has('kusove')) return 'kusove';
+  if (formy.has('drobne')) return 'drobne';
+  return 'kasovite';
 }
 
 export function inSeason(ingredient: Ingredient, month: number): boolean {

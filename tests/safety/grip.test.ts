@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ingredients } from '../../src/data';
-import { suitableNow } from '../../src/app/lib/derive';
+import { ingredients, recipes } from '../../src/data';
+import { recipeServingForm, suitableNow } from '../../src/app/lib/derive';
 import { stageForAge } from '../../src/app/lib/age';
 import {
   GRIP_HOW_TO_TELL,
@@ -9,13 +9,16 @@ import {
   GRIP_SHORT,
   GRIP_STAGE,
   GRIP_TYPICAL_MONTHS,
+  gripAdviceApplies,
   gripForAge,
   gripShapeAdvice,
   gripVsAge,
   smallPiecesAllowed,
 } from '../../src/app/lib/grip';
 import { GRIPS } from '../../src/types';
-import type { ChokingRisk, Grip } from '../../src/types';
+import type { ChokingRisk, Grip, ServingForm } from '../../src/types';
+
+const FORMY: readonly ServingForm[] = ['kusove', 'drobne', 'kasovite', 'neresi'];
 
 const RIZIKA: readonly ChokingRisk[] = ['low', 'medium', 'high'];
 
@@ -57,21 +60,62 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
 
   it('rada u vysokého rizika odkazuje zpět na bezpečnostní pokyn', () => {
     for (const grip of GRIPS) {
-      const rada = gripShapeAdvice(grip, 'high');
-      expect(rada.trim().length).toBeGreaterThan(0);
-      if (grip === 'pinzetovy') {
-        // Právě tady by šlo nejsnáz svést dítě k drobečkům — text to musí odmítnout.
-        expect(rada).not.toMatch(/můžeš nabízet malé kousky/);
-        expect(rada).toMatch(/bezpečnost/);
+      for (const form of FORMY) {
+        const rada = gripShapeAdvice(grip, 'high', form);
+        expect(rada.trim().length).toBeGreaterThan(0);
+        if (grip === 'pinzetovy') {
+          // Právě tady by šlo nejsnáz svést dítě k drobečkům — text to musí odmítnout.
+          expect(rada).not.toMatch(/můžeš nabízet malé kousky/);
+          expect(rada).toMatch(/bezpečnost/);
+        }
       }
     }
   });
 
-  it('žádná kombinace úchopu a rizika nezůstane bez textu', () => {
+  it('žádná kombinace úchopu, rizika a podoby nezůstane bez textu', () => {
     for (const grip of GRIPS) {
       for (const risk of RIZIKA) {
-        expect(gripShapeAdvice(grip, risk).trim().length).toBeGreaterThan(20);
+        for (const form of FORMY) {
+          expect(gripShapeAdvice(grip, risk, form).trim().length).toBeGreaterThan(20);
+        }
       }
+    }
+  });
+
+  /**
+   * Rada, která u dané suroviny nedává smysl, není neškodná: naučí rodiče
+   * panel přeskakovat i tam, kde na něm záleží.
+   */
+  it('u kaše a u drobné suroviny se neradí krájení na proužky', () => {
+    for (const grip of GRIPS) {
+      for (const risk of RIZIKA) {
+        for (const form of ['kasovite', 'drobne'] as const) {
+          const rada = gripShapeAdvice(grip, risk, form);
+          expect(rada, `${grip}/${risk}/${form}`).not.toMatch(/Krájej na proužky/);
+        }
+      }
+    }
+  });
+
+  it('panel se neukazuje tam, kde žádné sousto nevzniká', () => {
+    expect(gripAdviceApplies('neresi')).toBe(false);
+    for (const form of ['kusove', 'drobne', 'kasovite'] as const) {
+      expect(gripAdviceApplies(form)).toBe(true);
+    }
+  });
+
+  it('podobu na talíři má vyplněnou každá surovina', () => {
+    const bez = ingredients.filter((item) => !FORMY.includes(item.servingForm));
+    expect(bez.map((item) => item.nameCz)).toEqual([]);
+  });
+
+  /**
+   * Recept nikdy nevyjde jako „neřeší se" — jídlo vždycky něco na talíři má.
+   * Kdyby vyšlo, panel o tvaru sousta by z receptu zmizel úplně.
+   */
+  it('recept má vždycky podobu, u které se tvar sousta řeší', () => {
+    for (const recipe of recipes) {
+      expect(gripAdviceApplies(recipeServingForm(recipe)), recipe.id).toBe(true);
     }
   });
 

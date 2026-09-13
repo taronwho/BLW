@@ -2,12 +2,13 @@ import { Hand } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
-import type { ChokingRisk } from '@/types';
+import type { ChokingRisk, ServingForm } from '@/types';
 import { ageInMonths } from '../lib/age';
 import {
   GRIP_LABELS,
   GRIP_SHORT,
   GRIP_VS_AGE_NOTE,
+  gripAdviceApplies,
   gripForAge,
   gripShapeAdvice,
   gripVsAge,
@@ -19,13 +20,24 @@ import {
  * Když rodič úchop nevybral, ukáže se ten, který k věku orientačně patří, a
  * pobídka ho upřesnit. Riziko dušení má vždycky přednost: u vysokého rizika
  * pinzetový úchop nic nepovoluje.
+ *
+ * Podoba na talíři rozhoduje o tom, jestli se panel ukáže a jak mluví. U vody
+ * ani u skořice se žádné sousto nekrájí, tak tam panel nemá co dělat.
  */
-export function GripHint({ chokingRisk }: { chokingRisk: ChokingRisk }): ReactNode {
+export function GripHint({
+  chokingRisk,
+  servingForm,
+}: {
+  chokingRisk: ChokingRisk;
+  servingForm: ServingForm;
+}): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const months = ageInMonths(state.childBirthDate);
   const vybrany = state.childGrip;
   const grip = vybrany ?? gripForAge(months);
   const poznamka = vybrany === undefined ? null : GRIP_VS_AGE_NOTE[gripVsAge(grip, months)];
+
+  if (!gripAdviceApplies(servingForm)) return null;
 
   return (
     <div
@@ -40,7 +52,7 @@ export function GripHint({ chokingRisk }: { chokingRisk: ChokingRisk }): ReactNo
         </span>
       </p>
 
-      <p className="text-sm leading-relaxed">{gripShapeAdvice(grip, chokingRisk)}</p>
+      <p className="text-sm leading-relaxed">{gripShapeAdvice(grip, chokingRisk, servingForm)}</p>
 
       {poznamka !== null && <p className="text-xs leading-relaxed text-muted">{poznamka}</p>}
 

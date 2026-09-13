@@ -1,4 +1,4 @@
-import type { ChokingRisk, Grip, Stage } from '@/types';
+import type { ChokingRisk, Grip, ServingForm, Stage } from '@/types';
 
 /**
  * Úchop dítěte a tvar sousta.
@@ -114,10 +114,54 @@ export function smallPiecesAllowed(grip: Grip, risk: ChokingRisk): boolean {
   return grip === 'pinzetovy' && risk !== 'high';
 }
 
-/** Věta o tvaru sousta pro konkrétní surovinu a úchop. */
-export function gripShapeAdvice(grip: Grip, risk: ChokingRisk): string {
+/**
+ * Tvar sousta u drobné suroviny. Proužek z ředkvičky ani z hrášku neukrojíš,
+ * takže se neřeší délka, ale jestli to dítě vůbec zvedne — a u kulatých kusů
+ * pořád platí rozčtvrcení podle pokynu k bezpečnosti.
+ */
+const GRIP_SHAPE_DROBNE: Record<Grip, string> = {
+  dlanovy:
+    'Tahle surovina je sama o sobě menší než dětská pěst, takže se na proužky nekrájí. Dlaňový úchop si s ní zatím neporadí: nabídni ji rozmačkanou, vmíchanou do kaše nebo nalepenou na proužek něčeho většího, po čem dítě sáhne.',
+  nuzkovy:
+    'Na proužky se nekrájí — je drobná sama o sobě. Dítě, které už bere kousky mezi palec a bok ukazováku, ji z tácku sebere, ale ještě mu to nepůjde vždycky. Část nabídni volně, část vmíchanou do jídla, ať se nají tak jako tak.',
+  pinzetovy:
+    'Tohle je přesně velikost pro pinzetový úchop — dítě si ji z tácku sebere po jednom kousku. Délka proužku se tu neřeší, hlídej jen tvar podle pokynu k bezpečnosti výš.',
+};
+
+/**
+ * Tvar sousta u kaše a pomazánky. Nakrájet se nedá nic, řeší se nosič:
+ * naložená lžíce, nebo hustá vrstva na proužku, kterého se dítě chytne.
+ */
+const GRIP_SHAPE_KASOVITE: Record<Grip, string> = {
+  dlanovy:
+    'Krájet tu není co. Dej dítěti naloženou lžíci do ruky, nebo nanes hustou vrstvu na proužek dlouhý jako dospělý prst — na měkký chleba, na vařenou mrkev — aby konec čouhal z pěsti.',
+  nuzkovy:
+    'Krájet tu není co. Dítě už lžíci uchopí líp a zvládne i kratší nosiče: proužek pečiva, kousek dušené zeleniny s nanesenou vrstvou.',
+  pinzetovy:
+    'Krájet tu není co. Dítě už jí lžící samo a nosič si vezme i malý. Hustší směs drží na lžíci líp než řídká, takže jí projde kolem pusy víc.',
+};
+
+/**
+ * Věta o tvaru sousta pro konkrétní surovinu a úchop.
+ *
+ * Podoba na talíři rozhoduje dřív než úchop: u kaše ani u ředkvičky nemá
+ * délka proužku smysl a rada, která tam nesedí, učí rodiče panel přeskakovat.
+ */
+export function gripShapeAdvice(grip: Grip, risk: ChokingRisk, form: ServingForm): string {
   if (grip === 'pinzetovy' && risk === 'high') {
     return 'Dítě už drobný kousek zvedne, ale u téhle suroviny to nic nemění: velikost a tvar drž podle pokynu pro bezpečnost výš, ne podle toho, co ruka dokáže sebrat.';
   }
+  if (form === 'kasovite') return GRIP_SHAPE_KASOVITE[grip];
+  if (form === 'drobne') return GRIP_SHAPE_DROBNE[grip];
   return GRIP_SHAPE[grip];
+}
+
+/**
+ * Má se panel o tvaru sousta vůbec ukázat?
+ *
+ * U nápoje, oleje, koření nebo sladidla žádné sousto nevzniká, takže by
+ * panel jen zabíral místo a mátl.
+ */
+export function gripAdviceApplies(form: ServingForm): boolean {
+  return form !== 'neresi';
 }

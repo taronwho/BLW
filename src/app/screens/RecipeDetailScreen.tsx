@@ -14,7 +14,12 @@ import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
 import { StageSwitch } from '../components/StageSwitch';
 import { ageInMonths, stageForAge } from '../lib/age';
-import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/derive';
+import {
+  recipeAllergens,
+  recipeChokingRisk,
+  recipeIsVegetarian,
+  recipeServingForm,
+} from '../lib/derive';
 import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 
@@ -152,7 +157,7 @@ export function RecipeDetailScreen(): ReactNode {
           {recipe.babyServing[stage]}
         </p>
         <ReadinessNote stage={stage} />
-        <GripHint chokingRisk={recipeChokingRisk(recipe)} />
+        <GripHint chokingRisk={recipeChokingRisk(recipe)} servingForm={recipeServingForm(recipe)} />
       </section>
 
       <section
