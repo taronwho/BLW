@@ -19,6 +19,28 @@ function souboryVe(adresar: string): string[] {
   });
 }
 
+/** Odstraní komentáře, aby se hledalo jen v textech, které kód opravdu vypíše. */
+function bezKomentaru(zdroj: string): string {
+  return zdroj.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/[^\n]*/g, '$1 ');
+}
+
+describe('texty pro rodiče', () => {
+  /**
+   * Odkaz na soubor v repozitáři rodiči nic neřekne. Pravidlo
+   * no-internal-references hlídá katalog, tenhle test hlídá zbytek
+   * aplikace — hlášky, popisky a texty v obrazovkách. Komentáře v kódu
+   * jsou v pořádku, ty se do buildu nedostanou.
+   */
+  it('obrazovky a úložiště neodkazují na soubory projektu', () => {
+    const vzor = /\.md\b|\bdocs\/|\bnpm run\b|package\.json/;
+    const zavadne = [...souboryVe('src/app'), ...souboryVe('src/storage')]
+      .map((cesta) => ({ cesta, text: bezKomentaru(readFileSync(cesta, 'utf-8')) }))
+      .filter(({ text }) => vzor.test(text))
+      .map(({ cesta, text }) => `${cesta.replace('src/', '')}: ${vzor.exec(text)?.[0] ?? ''}`);
+    expect(zavadne).toEqual([]);
+  });
+});
+
 describe('hranice modulu safety', () => {
   it('aplikace neimportuje pravidla přes souhrnný export', () => {
     const zavadne = souboryVe('src/app')
