@@ -14,7 +14,7 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['.nojekyll', 'icons/apple-touch-icon.png'],
       manifest: {
-        name: 'Drobek — příkrmy pro celou rodinu',
+        name: 'Drobek',
         short_name: 'Drobek',
         description:
           'Katalog surovin, recepty ve třech liniích a deník ochutnávek pro zavádění příkrmů metodou BLW.',
