@@ -50,6 +50,29 @@ function hromadka(zrno: (x: number, y: number, uhel: number, i: number) => React
   return <>{HROMADKA.map(([x, y, u], i) => zrno(x, y, u, i))}</>;
 }
 
+/** Fazole: krátký tlustý oblouk. Čitelnější než přesný obrys ledviny,
+ *  protože na 20 px z obrysu stejně zbude jen zakřivená skvrna. */
+function fazole(
+  x: number,
+  y: number,
+  uhel: number,
+  barva: string,
+  klic: number,
+  /** Světlá fazole potřebuje obrys, jinak na světlém podkladu zmizí. */
+  obrys?: string,
+): ReactNode {
+  const d = `M${x - 7} ${y + 3}Q${x} ${y - 8} ${x + 7} ${y + 3}`;
+  const otoc = `rotate(${uhel} ${x} ${y})`;
+  return (
+    <g key={klic} transform={otoc}>
+      {obrys !== undefined && (
+        <path d={d} stroke={obrys} strokeWidth="10" strokeLinecap="round" fill="none" />
+      )}
+      <path d={d} stroke={barva} strokeWidth="7.5" strokeLinecap="round" fill="none" />
+    </g>
+  );
+}
+
 export const SHAPES: Record<string, ReactNode> = {
   // ── kořenová zelenina ──────────────────────────────────────────────────
   repa: (
@@ -1078,6 +1101,146 @@ export const SHAPES: Record<string, ReactNode> = {
       fill={i % 2 === 0 ? '#7E6440' : '#5E4A2C'}
     />
   )),
+
+  // ── drobná zrna a luštěniny ────────────────────────────────────────────
+  quinoa: hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="4.4" fill={i % 2 === 0 ? '#E4D6B2' : '#CDBC92' } />
+      <circle cx={x} cy={y} r="2" fill="none" stroke="#A8946A" strokeWidth="1.4" />
+    </g>
+  )),
+
+  amarant: hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x - 4} cy={y} r="2.4" fill="#E8D48A" />
+      <circle cx={x + 3} cy={y - 3} r="2.4" fill="#CFB962" />
+      <circle cx={x + 2} cy={y + 3} r="2.4" fill="#E8D48A" />
+    </g>
+  )),
+
+  polenta: (
+    <>
+      <path d="M10 46c0-6 5-11 11-13 3-6 7-10 11-10s8 4 11 10c6 2 11 7 11 13H10Z" fill={C.zluta} />
+      <circle cx="22" cy="41" r="2" fill={C.zlutaTmava} />
+      <circle cx="32" cy="36" r="2" fill={C.zlutaTmava} />
+      <circle cx="41" cy="42" r="2" fill={C.zlutaTmava} />
+      <circle cx="28" cy="44" r="2" fill={C.zlutaTmava} />
+      <circle cx="36" cy="45" r="2" fill={C.zlutaTmava} />
+    </>
+  ),
+
+  krupice: (
+    <>
+      <path d="M10 46c0-6 5-11 11-13 3-6 7-10 11-10s8 4 11 10c6 2 11 7 11 13H10Z" fill={C.bilaStin} />
+      <path d="M17 46c0-5 4-9 8-11 2-4 5-7 7-7s5 3 7 7c4 2 8 6 8 11H17Z" fill={C.bila} />
+      <circle cx="26" cy="40" r="1.4" fill={C.kremTmavy} />
+      <circle cx="35" cy="38" r="1.4" fill={C.kremTmavy} />
+      <circle cx="31" cy="44" r="1.4" fill={C.kremTmavy} />
+    </>
+  ),
+
+  'kroupy-jecne': hromadka((x, y, u, i) => (
+    <g key={i} transform={`rotate(${u} ${x} ${y})`}>
+      <ellipse cx={x} cy={y} rx="6" ry="4.6" fill={i % 2 === 0 ? '#E2D5B4' : '#C9B98F'} />
+      <path d={`M${x - 3} ${y}h6`} stroke="#A8946A" strokeWidth="1.4" strokeLinecap="round" />
+    </g>
+  )),
+
+  'cocka-cervena': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#E07A38' : '#C25E22'} />
+      <path d={`M${x - 3.4} ${y}a3.4 3.4 0 0 1 6.8 0`} fill="#F0A470" />
+    </g>
+  )),
+
+  'cocka-hneda': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#A07A4A' : '#7E5C34'} />
+      <path d={`M${x - 3.4} ${y}a3.4 3.4 0 0 1 6.8 0`} fill="#C09A68" />
+    </g>
+  )),
+
+  'cocka-beluga': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#2E2A2E' : '#1C191C'} />
+      <path d={`M${x - 3.4} ${y}a3.4 3.4 0 0 1 6.8 0`} fill="#585158" />
+    </g>
+  )),
+
+  cizrna: (
+    <>
+      <circle cx="20" cy="40" r="10" fill="#DCC084" />
+      <circle cx="42" cy="41" r="9.5" fill="#C4A465" />
+      <circle cx="31" cy="26" r="9.5" fill="#DCC084" />
+      <path d="M20 30c1-3 2-4 3-5M42 32c1-3 2-4 3-4M31 17c1-3 2-4 3-4" stroke="#A8874A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="17" cy="36" r="2.4" fill="#F0DDB0" />
+      <circle cx="28" cy="22" r="2.4" fill="#F0DDB0" />
+    </>
+  ),
+
+  'fazole-bile': (
+    <>
+      {fazole(20, 40, -12, C.bila, 1, '#BFB8A4')}
+      {fazole(42, 42, 14, C.bilaStin, 2, '#BFB8A4')}
+      {fazole(31, 26, -4, C.bila, 3, '#BFB8A4')}
+    </>
+  ),
+
+  'fazole-kidney': (
+    <>
+      {fazole(20, 40, -12, '#8E2A24', 1)}
+      {fazole(42, 42, 14, '#6E1E1A', 2)}
+      {fazole(31, 26, -4, '#A33830', 3)}
+      <path d="M17 39h7M39 41h7M28 25h7" stroke="#C97068" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'fazole-adzuki': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <ellipse cx={x} cy={y} rx="5.4" ry="4.4" fill={i % 2 === 0 ? '#7E2A22' : '#5E1C16'} />
+      <path d={`M${x - 2.6} ${y}h5.2`} stroke="#E8D8C8" strokeWidth="1.6" strokeLinecap="round" />
+    </g>
+  )),
+
+  'fazolky-mungo': hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <ellipse cx={x} cy={y} rx="5" ry="4.2" fill={i % 2 === 0 ? '#4E7A32' : '#3A5E24'} />
+      <path d={`M${x - 2.4} ${y}h4.8`} stroke="#D8E8C0" strokeWidth="1.5" strokeLinecap="round" />
+    </g>
+  )),
+
+  'soja-edamame': (
+    <>
+      <path d="M10 34c0-7 8-12 18-12s18 5 18 12-8 12-18 12-18-5-18-12Z" fill="#6E9B3A" />
+      <circle cx="19" cy="34" r="5" fill="#4E7A2A" />
+      <circle cx="31" cy="34" r="5" fill="#4E7A2A" />
+      <circle cx="42" cy="34" r="4.5" fill="#4E7A2A" />
+      <path d="M46 30c5-2 9-1 11 2-3 3-7 4-11 2v-4Z" fill="#6E9B3A" />
+      <path d="M16 26c8-3 18-3 26 0" stroke="#9EC46A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M22 48c6 6 16 7 24 3-6-6-17-7-24-3Z" fill="#5E8C30" />
+    </>
+  ),
+
+  'mouka-cizrnova': (
+    <>
+      <path d="M6 48c0-7 6-12 12-14 4-8 10-13 16-13s12 5 16 13c6 2 12 7 12 14H6Z" fill="#E4CE8C" />
+      <path d="M18 44c6-3 22-3 28 0" stroke="#C4A95E" strokeWidth="2.5" fill="none" />
+      <circle cx="34" cy="14" r="8" fill="#DCC084" />
+      <path d="M34 6c1-2 2-3 3-4" stroke="#A8874A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <circle cx="31" cy="11" r="2" fill="#F0DDB0" />
+    </>
+  ),
+
+  hummus: (
+    <>
+      <path d="M8 34h48c0 12-11 20-24 20S8 46 8 34Z" fill={C.bila} />
+      <path d="M12 34h40c0 9-9 15-20 15s-20-6-20-15Z" fill="#E4CE8C" />
+      <path d="M22 38c4-4 12-5 18-2" stroke="#C4A95E" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 24c-3 4-3 7 0 10 3-3 3-6 0-10Z" fill="#6E9B3A" />
+      <circle cx="24" cy="30" r="3" fill="#DCC084" />
+      <circle cx="41" cy="30" r="3" fill="#DCC084" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;
