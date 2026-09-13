@@ -9,6 +9,7 @@ import {
   NHS_6M,
   NHS_7_9M,
   NHS_ALLERGY,
+  NHS_FOOD_ALLERGY,
   NHS_AVOID,
   NHS_FIRST_FOODS,
   NHS_PREP_SAFELY,
@@ -1014,7 +1015,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Mangold je listová zelenina, kterou docs/BEZPECNOST.md vede mezi zdroji dusičnanů; hodnocení EFSA se týká špenátu a hlávkového salátu, mangold v něm není. Zařazuj ho proto z opatrnosti střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
+        'Mangold je listová zelenina, a listy nesou dusičnanů nejvíc. Načtené hodnocení EFSA se ale týká špenátu a hlávkového salátu, mangold v něm jmenovaný není — tahle opatrnost je proto preventivní, ne odvozená z měření. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1058,7 +1059,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Rukolu vede docs/BEZPECNOST.md mezi listovou zeleninou s vyšším obsahem dusičnanů; načtené hodnocení EFSA se týká špenátu a hlávkového salátu, rukolu nehodnotí. Podávej ji proto z opatrnosti jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
+        'Rukola má z běžné zeleniny dusičnanů nejvíc: ve stanovisku EFSA vyšla nejvýš ze všech měřených druhů, zatímco hrášek a růžičková kapusta nejníž. Stanovisko počítá s dospělým o hmotnosti 60 kg, ne s malým dítětem. Podávej ji proto jen v malém množství jako ozdobu jídla, a pokud je součástí teplého pokrmu, ten už podruhé neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1086,7 +1087,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [4, 5, 6, 9, 10],
     vegetarian: true,
-    sources: [EFSA_NITRATE, NHS_YOUNG_CHILDREN],
+    sources: [BP_NITRATES_VEG, EFSA_NITRATE, NHS_YOUNG_CHILDREN],
     reviewStatus: 'verified',
   },
   {
@@ -1404,7 +1405,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Fenyklovou hlízu vede docs/BEZPECNOST.md mezi zeleninou s dusičnany; načtené stanovisko EFSA ale hodnotí listovou zeleninu a fenykl v něm není, stejně jako není mezi komoditami s limitem v předpisech EU. Opatření je proto preventivní, ne odvozené z měření: nabízej fenykl střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď, nenechávej ho stát v teple a podruhé už ho neohřívej.',
+        'Fenyklová hlíza se u dusičnanů řadí mezi opatrné položky, ale načtené stanovisko EFSA hodnotí listovou zeleninu a fenykl v něm jmenovaný není, stejně jako není mezi komoditami s limitem v předpisech EU. Opatření je proto preventivní, ne odvozené z měření: nabízej fenykl střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď, nenechávej ho stát v teple a podruhé už ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1732,6 +1733,230 @@ export const vegetables: Ingredient[] = [
     seasonCz: [5, 6, 7],
     vegetarian: true,
     sources: [NHS_PREP_SAFELY, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'redkev-bila',
+    nameCz: 'ředkev bílá',
+    altNamesCz: ['daikon', 'ředkev', 'bílá ředkev'],
+    category: 'zelenina',
+    emoji: '🥗',
+    icon: 'redkev-bila',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Syrová ředkev je tvrdá jako mrkev a krájí se na kolečka, která dásně nerozmělní a která přesně vyplní dětský hltan.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Oloupanou ředkev nakrájej na podlouhlé hranolky po délce prstu a vař v páře doměkka, dokud se nedají rozmáčknout mezi prsty. Vařením ztratí i ostrou chuť, která bývá pro dítě první překážkou.',
+        caution: 'Syrovou ředkev v tomhle věku nenabízej v žádné podobě.',
+      },
+      '9m': {
+        serving:
+          'Vařenou ředkev nakrájej na kostičky do velikosti hrášku pro klešťový úchop, nebo ji nastrouhej najemno do bramborové kaše. Syrová zůstává příliš tvrdá.',
+        caution: 'Hrubě strouhaná ředkev je pořád křupavá, strouhej na nejjemnější straně.',
+      },
+      '12m': {
+        serving:
+          'Batole jí ředkev vařenou, pečenou s kořenovou zeleninou nebo jemně strouhanou do salátu. Syrové plátky nechávej až na dobu, kdy dítě spolehlivě rozkouše syrovou mrkev.',
+        caution: 'Ostrá chuť je u syrové ředkve výraznější než u ředkvičky, nabízej ji po troškách.',
+      },
+    },
+    prepIdeas: [
+      'hranolky vařené v páře',
+      'pečená s mrkví a pastinákem',
+      'jemně strouhaná do kaše',
+      'na kostičky do polévky',
+    ],
+    seasonCz: [6, 7, 8, 9, 10, 11],
+    vegetarian: true,
+    sources: [NHS_PREP_SAFELY, NHS_AVOID],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'celer-rapikaty',
+    nameCz: 'řapíkatý celer',
+    altNamesCz: ['celer řapíkatý', 'řapíkatý celer stonkový', 'stonkový celer'],
+    category: 'zelenina',
+    emoji: '🥬',
+    icon: 'celer-rapikaty',
+    allergens: ['celer'],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Podél řapíku vedou pevné vláknité provazce, které se ani dušením nerozpadnou a v ústech se stočí do chuchvalce.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Z řapíku stáhni škrabkou vlákna po celé délce, nakrájej ho na kousky a vař doměkka v polévce nebo v páře. Podávej rozmačkaný nebo rozmixovaný do zeleninového pyré, ne jako samostatný kus.',
+        caution:
+          'Syrový řapík ani vařený řapík s ponechanými vlákny dítěti do ruky nedávej.',
+      },
+      '9m': {
+        serving:
+          'Odvlákněný vařený celer nakrájej na krátké kousky do velikosti hrášku, nebo ho nech rozvařený v polévce. Vlákna kontroluj po každém kusu, ne jen u prvního.',
+        caution: 'Celer patří mezi alergeny; při prvním podání ho nabídni samostatně a ráno.',
+      },
+      '12m': {
+        serving:
+          'Batole jí odvlákněný celer dušený v jednohrnci, v polévce i zapečený. Syrové tyčinky nechávej až na dobu, kdy dítě spolehlivě kouše, a i tak z nich vlákna stáhni.',
+        caution: 'Vlákna stahuj i u batolete, jsou dlouhá a pevná bez ohledu na věk.',
+      },
+    },
+    prepIdeas: [
+      'odvlákněný a dušený do polévky',
+      'základ zeleninového vývaru',
+      'rozmixovaný do pyré',
+      'dušený v jednohrnci',
+    ],
+    seasonCz: [7, 8, 9, 10, 11],
+    vegetarian: true,
+    sources: [NHS_FOOD_ALLERGY, NHS_ALLERGY, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'pekingske-zeli',
+    nameCz: 'pekingské zelí',
+    altNamesCz: ['čínské zelí', 'pekingka'],
+    category: 'zelenina',
+    emoji: '🥬',
+    icon: 'pekingske-zeli',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'List je tenký a kluzký, takže se v ústech slepí do celistvého kusu; tvrdá bílá žebra se naopak nerozžvýkají.',
+    hazards: ['dusicnany'],
+    hazardNotes: {
+      dusicnany:
+        'Listová zelenina nese podle stanoviska EFSA obecně víc dusičnanů než jiné druhy; nejvyšší koncentrace jsou v listech, nejnižší v semenech a hlízách. Ber ho jako jednu složku jídla, ne jako každodenní základ, uvařený pokrm zchlaď rychle a už ho podruhé neohřívej.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Použij jen měkkou zelenou část listu, tvrdá bílá žebra vyřízni. List krátce podus doměkka a nasekej nadrobno do kaše nebo do vaječné směsi.',
+        caution: 'Celý list nikdy nedávej dítěti do ruky, slepí se do chuchvalce.',
+      },
+      '9m': {
+        serving:
+          'Dušený list nasekej najemno a promíchej s rýží, jáhly nebo s tvarohem, aby se nesmekl. Bílá žebra nakrájej zvlášť na drobno a nech je změknout déle.',
+        caution: 'Syrový list je kluzký, v tomhle věku ho nenabízej.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pekingské zelí dušené s masem i zeleninou, nasekané do závitku nebo krátce orestované. Syrové listy nabídni až tehdy, když dítě spolehlivě kouše, a nakrájej je na tenké proužky.',
+        caution: 'Proužky krájej krátké, dlouhé pásy se v ústech balí.',
+      },
+    },
+    prepIdeas: [
+      'krátce dušené s rýží',
+      'nasekané do vaječné směsi',
+      'v jednohrnci s masem',
+      'dušené s mrkví a zázvorem',
+    ],
+    seasonCz: [6, 7, 8, 9, 10, 11],
+    vegetarian: true,
+    sources: [BP_NITRATES_VEG, NHS_PREP_SAFELY, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'polnicek',
+    nameCz: 'polníček',
+    altNamesCz: ['kozlíček polníček', 'polníček obecný', 'valeriánka'],
+    category: 'zelenina',
+    emoji: '🥬',
+    icon: 'polnicek',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Drobné lístky jsou měkké, ale kluzké a drží spolu v růžici, takže se dají spolknout v celém chomáči.',
+    hazards: ['dusicnany'],
+    hazardNotes: {
+      dusicnany:
+        'Podle stanoviska EFSA má listová zelenina obecně vyšší obsah dusičnanů než ostatní druhy a nejvyšší koncentrace jsou právě v listech. Nabízej ho jako doplněk jídla, ne jako hlavní složku, a hotové jídlo s ním už podruhé neohřívej.',
+    },
+    minAgeMonths: 9,
+    prep: {
+      '6m': {
+        serving:
+          'V tomhle věku ho nenabízej samostatně. Pokud ho chceš zařadit, rozmixuj pár lístků do hustého zeleninového pyré, kde se rozptýlí.',
+        caution: 'Celou růžici ani jednotlivé lístky nedávej dítěti do ruky.',
+      },
+      '9m': {
+        serving:
+          'Lístky nasekej nadrobno a vmíchej je do tvarohu, do bramborové kaše nebo do omelety, aby se nesmekly. Růžici vždycky rozeber a prokrájej.',
+        caution: 'Před použitím ho pořádně propláchni, v listech drží písek.',
+      },
+      '12m': {
+        serving:
+          'Batole jí polníček nasekaný do salátu i celý v měkkém pečivu s pomazánkou. Pořád ho krájej, celé lístky se dají spolknout najednou.',
+        caution: 'Salát z polníčku nesol; dospělí si ho dochutí až na talíři.',
+      },
+    },
+    prepIdeas: [
+      'nasekaný do tvarohu',
+      'vmíchaný do bramborové kaše',
+      'nasekaný do omelety',
+      'do salátu k batoleti',
+    ],
+    seasonCz: [3, 4, 9, 10, 11],
+    vegetarian: true,
+    sources: [BP_NITRATES_VEG, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'zeli-kysane',
+    nameCz: 'zelí kysané',
+    altNamesCz: ['kysané zelí', 'kvašené zelí', 'kysané zelí sudové'],
+    category: 'zelenina',
+    emoji: '🥬',
+    icon: 'zeli-kysane',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Nudličky zelí jsou dlouhé a pružné, drží se pohromadě a v ústech se stáčejí do chomáče.',
+    hazards: ['sul'],
+    hazardNotes: {
+      sul: 'Kysané zelí se nakládá se solí a solené je i po vykvašení. NHS solená jídla u dětí do 12 měsíců nedoporučuje, proto ho do dětské porce nepřidávej a po roce ho propláchni a podávej po troškách.',
+    },
+    minAgeMonths: 12,
+    prep: {
+      '6m': {
+        serving:
+          'V tomhle věku ho nenabízej. Dětskou porci oddělej z hrnce dřív, než do jídla kysané zelí přijde.',
+        caution: 'Kysané zelí je solené, do jídla pro miminko nepatří v žádném množství.',
+      },
+      '9m': {
+        serving:
+          'Ani teď ho nenabízej. Zelí do jídla přidávej až po odebrání dětské porce, aby zbytek rodiny o tu chuť nepřišel.',
+        caution: 'Ani propláchnuté kysané zelí není pro tenhle věk vhodné.',
+      },
+      '12m': {
+        serving:
+          'Batoleti ho propláchni studenou vodou, nakrájej nudličky nakrátko a podávej po malé lžíci jako přílohu, ne jako hlavní složku jídla. Dušené je měkčí než syrové.',
+        caution: 'I propláchnuté zůstává slané, drž se malých porcí.',
+      },
+    },
+    prepIdeas: [
+      'propláchnuté a krátce dušené',
+      'nakrátko nakrájené k pečenému masu',
+      'dušené s kmínem pro dospělé',
+      'do jednohrnce až po odebrání dětské porce',
+    ],
+    seasonCz: [10, 11, 12, 1, 2, 3],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
 ];

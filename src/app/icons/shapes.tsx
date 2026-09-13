@@ -34,7 +34,7 @@ function nat(posun = 0, barva: string = C.zelen): ReactNode {
 
 /** Rozmístění zrn v hromádce. Stejné u všech sypkých surovin, ať drží sadu
  *  pohromadě; liší se jen tvar a barva samotného zrna. */
-const HROMADKA: readonly [number, number, number][] = [
+const mistaVHromadce: readonly [number, number, number][] = [
   [18, 43, -18],
   [31, 45, 8],
   [44, 43, 16],
@@ -47,7 +47,7 @@ const HROMADKA: readonly [number, number, number][] = [
 
 /** Hromádka zrn; `zrno` dostane střed a natočení. */
 function hromadka(zrno: (x: number, y: number, uhel: number, i: number) => ReactNode): ReactNode {
-  return <>{HROMADKA.map(([x, y, u], i) => zrno(x, y, u, i))}</>;
+  return <>{mistaVHromadce.map(([x, y, u], i) => zrno(x, y, u, i))}</>;
 }
 
 /** Fazole: krátký tlustý oblouk. Čitelnější než přesný obrys ledviny,
@@ -2242,6 +2242,153 @@ export const SHAPES: Record<string, ReactNode> = {
       {prasek(C.bilaStin, C.bila)}
       <path d="M32 16c5 0 8 5 8 12s-3 12-8 12-8-5-8-12 3-12 8-12Z" fill={C.zluta} />
       <path d="M28 22c0 8 0 12 1 15M36 22c0 8 0 12-1 15M25 27c5 1 9 1 14 0" stroke={C.zlutaTmava} strokeWidth="1.8" fill="none" />
+    </>
+  ),
+
+  // ── doplněná dávka surovin ─────────────────────────────────────────────
+  'redkev-bila': (
+    <>
+      {nat(-4)}
+      <path d="M22 22h20l-5 30c-1 5-3 8-5 8s-4-3-5-8l-5-30Z" fill={C.bila} />
+      <path d="M26 30h12M27 38h10M29 46h6" stroke={C.bilaStin} strokeWidth="2.2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  'celer-rapikaty': (
+    <>
+      <path d="M16 22c4-6 8-9 11-9-1 5-3 9-6 12l-5-3Z" fill="#4E8C3A" />
+      <path d="M48 22c-4-6-8-9-11-9 1 5 3 9 6 12l5-3Z" fill="#5E9E4A" />
+      <path d="M32 10c3 4 4 9 4 14h-8c0-5 1-10 4-14Z" fill="#3F7A2E" />
+      <path d="M20 24h8l-2 32h-6l-2-24c0-4 1-7 2-8Z" fill="#A8C46E" />
+      <path d="M30 24h8l1 32h-7l-2-32Z" fill="#C0D98E" />
+      <path d="M40 24h6c1 1 2 4 2 8l-2 24h-6l-2-32Z" fill="#A8C46E" />
+      <path d="M24 30v22M34 30v22M44 30v20" stroke="#7EA84E" strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  'pekingske-zeli': (
+    <>
+      <path d="M32 6c10 0 17 8 17 20 0 16-7 30-17 30S15 42 15 26C15 14 22 6 32 6Z" fill="#C8DC96" />
+      <path d="M32 6c5 0 9 8 9 20 0 16-4 30-9 30s-9-14-9-30c0-12 4-20 9-20Z" fill="#E4EEC2" />
+      <path d="M24 14c-2 8-2 20 0 30M40 14c2 8 2 20 0 30" stroke="#A8C46E" strokeWidth="2.5" fill="none" />
+      <path d="M32 40c-4 0-7 4-7 9 0 4 3 7 7 7s7-3 7-7c0-5-3-9-7-9Z" fill={C.bila} />
+    </>
+  ),
+
+  polnicek: (
+    <>
+      <path d="M32 54c-1-8-1-14 0-18" stroke={C.zelenBleda} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <ellipse cx="18" cy="34" rx="11" ry="7" transform="rotate(-26 18 34)" fill="#3F7A2E" />
+      <ellipse cx="46" cy="34" rx="11" ry="7" transform="rotate(26 46 34)" fill="#55975C" />
+      <ellipse cx="24" cy="22" rx="9" ry="6" transform="rotate(-48 24 22)" fill="#4E9E42" />
+      <ellipse cx="40" cy="22" rx="9" ry="6" transform="rotate(48 40 22)" fill="#3F7A2E" />
+      <ellipse cx="32" cy="30" rx="7" ry="10" fill="#5EBF6E" />
+    </>
+  ),
+
+  'zeli-kysane': (
+    <>
+      <path d="M12 30h40v18c0 5-9 8-20 8s-20-3-20-8V30Z" fill={C.krem} />
+      <ellipse cx="32" cy="30" rx="20" ry="8" fill={C.bila} />
+      <path d="M18 28c6 3 10 3 14 1M26 33c6 2 10 2 14 0M20 36c5 2 9 2 13 1M32 26c5 2 9 2 13 1" stroke={C.kremTmavy} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M20 44c6 3 12 4 20 3M22 50c6 2 12 2 18 1" stroke={C.kremTmavy} strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  kaki: (
+    <>
+      <circle cx="32" cy="38" r="18" fill="#E8712A" />
+      <path d="M22 30c2-3 5-5 8-6" stroke="#F5A466" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <path d="M32 20c-5 0-9-1-12-3 3-3 7-4 12-4s9 1 12 4c-3 2-7 3-12 3Z" fill={C.zelen} />
+      <path d="M32 20c-3-3-4-6-4-9 3 1 5 4 6 8M32 20c3-3 4-6 4-9-3 1-5 4-6 8" fill={C.zelenTmava} />
+      <rect x="30.5" y="8" width="3" height="6" rx="1.5" fill={C.hneda} />
+    </>
+  ),
+
+  'fiky-susene': (
+    <>
+      <path d="M20 24c6-3 12-1 14 5 2 7-2 15-8 18-6 2-12-1-13-7-1-7 2-13 7-16Z" fill="#8C6A3E" />
+      <path d="M42 30c6-2 11 1 12 7 1 7-3 13-9 15-5 2-10-1-11-6-1-6 3-14 8-16Z" fill="#6E5230" />
+      <path d="M24 28c3 3 4 7 3 11M46 34c3 3 3 7 2 10" stroke="#B8945E" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M24 22c1-3 3-5 5-6-1 3-2 5-2 7l-3-1ZM46 28c1-3 3-5 5-5-1 3-2 4-2 6l-3-1Z" fill={C.hnedaTmava} />
+    </>
+  ),
+
+  sled: ryba(
+    '#6E86A0',
+    '#EDF1F5',
+    <>
+      <path d="M12 27c10 3 24 2 36-3" stroke="#3E5470" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M14 34c10 2 22 1 32-3" stroke="#A8BCD0" strokeWidth="2" strokeLinecap="round" fill="none" />
+    </>,
+  ),
+
+  'treska-jednoskvrnna': ryba(
+    '#9EA6A8',
+    '#F0F2F2',
+    <>
+      <path d="M12 32c10 3 24 2 36-4" stroke="#2E3438" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="27" cy="27" r="4.4" fill="#2E3438" />
+    </>,
+  ),
+
+  'treska-aljasska': ryba(
+    '#8E9480',
+    '#EDEEE6',
+    <path
+      d="M14 26c10 2 22 1 32-3M16 33c10 2 20 1 28-2"
+      stroke="#5E6450"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      fill="none"
+    />,
+  ),
+
+  slavky: (
+    <>
+      <path d="M8 30c10-8 24-8 32 2 4 5 2 12-4 15-9 4-22 1-27-6-2-4-2-8-1-11Z" fill="#2E2A3E" />
+      <path d="M12 31c8-5 18-5 24 2" stroke="#5E5878" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M30 44c10-8 22-8 28 1 3 5 1 10-5 12-8 3-18 1-23-5-1-3-1-6 0-8Z" fill="#403A54" />
+      <path d="M34 45c7-4 15-4 20 2" stroke="#7E76A0" strokeWidth="3" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  sumec: (
+    <>
+      <path d="M52 32c4-5 8-8 10-8 1 5 1 12 0 17-2 0-6-4-10-9Z" fill="#4E4636" />
+      <path d="M6 33c0-10 11-17 24-17s22 7 22 16-9 16-22 16S6 42 6 33Z" fill="#5E5442" />
+      <path d="M10 38c5 7 14 10 22 10 8 0 15-3 19-8-4 7-11 10-19 10-10 0-18-4-22-12Z" fill="#CFC4A8" />
+      <path d="M12 28c-4-4-8-6-10-5 2 4 6 6 10 7M12 33c-4 0-8 1-10 3 3 2 7 2 10 0" stroke="#3E3828" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+      <circle cx="15" cy="28" r="2.4" fill="#20262A" />
+    </>
+  ),
+
+  tilapie: ryba(
+    '#B0A894',
+    '#F2EEE2',
+    <path
+      d="M24 20c1 8 1 16 0 22M32 19c1 9 1 18 0 25M40 21c1 8 1 15 0 21"
+      stroke="#8A8270"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      fill="none"
+    />,
+  ),
+
+  skyr: kelimek(
+    C.bila,
+    '#9FB6C4',
+    <path d="M24 34c5-5 11-5 16 0-5 4-11 4-16 0Z" fill={C.bilaStin} />,
+  ),
+
+  'zitne-vlocky': (
+    <>
+      <ellipse cx="20" cy="28" rx="10" ry="6.5" transform="rotate(-16 20 28)" fill="#9E8A62" />
+      <ellipse cx="42" cy="27" rx="10" ry="6.5" transform="rotate(14 42 27)" fill="#7E6C48" />
+      <ellipse cx="31" cy="38" rx="11" ry="7" fill="#9E8A62" />
+      <ellipse cx="46" cy="42" rx="9" ry="6" transform="rotate(-12 46 42)" fill="#7E6C48" />
+      <ellipse cx="20" cy="46" rx="10" ry="6.5" transform="rotate(10 20 46)" fill="#8E7A54" />
+      <path d="M13 27c5 2 9 2 14 0M36 26c4 2 8 2 12 0M24 37c5 2 9 2 14 0" stroke="#C4B28A" strokeWidth="1.6" strokeLinecap="round" fill="none" />
     </>
   ),
 };

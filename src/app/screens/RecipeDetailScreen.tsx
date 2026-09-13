@@ -3,10 +3,12 @@ import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
+import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Ingredient, Recipe, RecipeIngredientRef, Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { GripHint } from '../components/GripHint';
+import { NutrientBadge } from '../components/NutrientBadge';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
 import { StageSwitch } from '../components/StageSwitch';
@@ -271,6 +273,12 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
             <ul className="flex flex-col gap-1">
               {refs.map((ref) => {
                 const ingredient = ingredientById.get(ref.ingredientId);
+                const profil = ingredient === undefined ? undefined : nutrientProfile(ingredient);
+                const maZiviny =
+                  profil !== undefined &&
+                  (profil.iron !== 'nevyznamny' ||
+                    profil.zinc !== 'nevyznamny' ||
+                    profil.vitaminC !== 'nevyznamny');
                 return (
                   <li key={`${ref.ingredientId}-${ref.track}`}>
                     <Link
@@ -283,6 +291,20 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                       </span>
                       <span className="shrink-0 text-xs text-muted">{ref.amount}</span>
                     </Link>
+                    {/* Stejné štítky jako v přehledu surovin — u sporáku je vidět,
+                        která složka nese železo, zinek nebo vitamin C. */}
+                    {maZiviny && profil !== undefined && ingredient !== undefined && (
+                      <span
+                        className="flex flex-wrap items-center gap-1.5 px-2"
+                        data-testid={`ziviny-suroviny-${ref.ingredientId}`}
+                      >
+                        <NutrientBadge
+                          profile={profil}
+                          title={ingredient.nameCz}
+                          testId={`zeleza-recept-${ref.ingredientId}`}
+                        />
+                      </span>
+                    )}
                     {ref.note !== undefined && (
                       <p className="px-2 text-xs leading-relaxed text-muted">{ref.note}</p>
                     )}

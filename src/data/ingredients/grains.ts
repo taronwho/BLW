@@ -1118,4 +1118,47 @@ export const grains: Ingredient[] = [
     sources: [BP_GLUTEN, NHS_10_12M],
     reviewStatus: 'verified',
   },
+  {
+    id: 'zitne-vlocky',
+    nameCz: 'žitné vločky',
+    altNamesCz: ['vločky žitné', 'žitná vločka'],
+    category: 'obiloviny',
+    emoji: '🥣',
+    icon: 'zitne-vlocky',
+    allergens: ['psenice-lepek'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    chokingReason:
+      'Suchá vločka je tvrdá a plochá, nalepí se na patro a dítě ji těžko dostane dolů.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Vločky rozvař v mléce nebo ve vodě doměkka na hustou kaši. Žitné vločky jsou tvrdší než ovesné, počítej s delším varem i větším množstvím tekutiny.',
+        caution: 'Syrové vločky do jogurtu v tomhle věku nesypej, zůstanou tvrdé.',
+      },
+      '9m': {
+        serving:
+          'Uvařenou kaši nech hustší, aby se držela na lžíci, nebo z ní upeč placičky. Vločky můžeš přidat i do těsta na chleba.',
+        caution: 'Vločky obsahují lepek; první podání zařaď samostatně a sleduj reakci.',
+      },
+      '12m': {
+        serving:
+          'Batole jí žitné vločky v kaši, v zapečené snídani i v domácích tyčinkách. Nabobtnalé v jogurtu přes noc jsou už měkké dost.',
+        caution: 'Suché vločky nasypané do misky nechávej až na dobu, kdy dítě bezpečně žvýká.',
+      },
+    },
+    prepIdeas: [
+      'rozvařené na hustou kaši',
+      'nabobtnalé přes noc v jogurtu',
+      'do těsta na chleba',
+      'zapečené s ovocem',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [BP_GLUTEN, NHS_FIRST_FOODS, NHS_YOUNG_CHILDREN],
+    reviewStatus: 'verified',
+  },
 ];

@@ -969,4 +969,48 @@ export const dairyEggs: Ingredient[] = [
     sources: [NHS_ALLERGY, NHS_AVOID],
     reviewStatus: 'verified',
   },
+  {
+    id: 'skyr',
+    nameCz: 'skyr',
+    altNamesCz: ['islandský skyr', 'skyr bílý'],
+    category: 'mlecne-vejce',
+    emoji: '🥛',
+    icon: 'skyr',
+    allergens: ['mleko'],
+    isKeyAllergen: true,
+    chokingRisk: 'low',
+    chokingReason: 'Je hustý a lepivý, takže velká lžíce najednou dítěti zalehne ústa.',
+    hazards: ['cukr'],
+    hazardNotes: {
+      cukr: 'Ochucené skyry mají přidaný cukr. Kupuj jen bílý neochucený a chuť mu dej ovocem, ne sirupem ani medem.',
+    },
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Nabídni lžíci bílého neochuceného skyru samotného nebo smíchaného s ovocným pyré. Je hustší než jogurt, takže ho klidně rozřeď lžící mateřského mléka nebo vody.',
+        caution: 'Do roka sladi jedině ovocem, nic jiného do skyru nepatří.',
+      },
+      '9m': {
+        serving:
+          'Skyr nech dítěti na lžíci nebo v misce, ať se do něj pouští samo. Vmíchej do něj rozmačkané ovoce, mleté ořechy nebo mletá lněná semínka.',
+        caution: 'Skyr je hodně hustý, mezi sousty nabídni napít.',
+      },
+      '12m': {
+        serving:
+          'Batole jí skyr s ovocem, v kaši i jako základ dipu k zelenině. Vysoký obsah bílkovin z něj dělá dobrou svačinu, ale mléko v jídelníčku nenahrazuje.',
+        caution: 'Ochucené varianty v obchodě pořád obcházej, cukr v nich zůstává.',
+      },
+    },
+    prepIdeas: [
+      'lžíce s ovocným pyré',
+      'základ dipu k zelenině',
+      'vmíchaný do ovesné kaše',
+      's mletými lněnými semínky a ovocem',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
 ];

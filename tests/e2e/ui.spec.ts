@@ -389,3 +389,19 @@ test('masitá varianta je jen u receptu, který maso obsahuje', async ({ page })
   await expect(sMasem).toContainText('Bez masa');
   await expect(sMasem).toContainText('Náhrada bílkoviny');
 });
+
+test('u surovin v receptu jsou vidět úrovně živin', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty/candat-koprova-omacka-brambory');
+
+  // Brambor je zdroj vitaminu C — štítek má stejnou podobu jako v přehledu surovin.
+  const ziviny = page.getByTestId('ziviny-suroviny-brambor');
+  await expect(ziviny).toBeVisible();
+  await expect(ziviny).toContainText('vitamin C');
+
+  // A po klepnutí se otevře stejné okénko s podrobnostmi.
+  await page.getByTestId('zeleza-recept-brambor-cecko').click();
+  const okenko = page.getByTestId('okenko-zivin');
+  await expect(okenko).toBeVisible();
+  await expect(okenko).toContainText('Vitamin C');
+});

@@ -381,6 +381,25 @@ describe('no-placeholder', () => {
   });
 });
 
+describe('no-internal-references', () => {
+  it('projde běžný text bez odkazu na soubor', () => {
+    expectPass('no-internal-references', makeRecipe(), catalog);
+  });
+
+  it('zachytí odkaz na dokument v repozitáři', () => {
+    const item = makeIngredient({
+      hazardNotes: { dusicnany: 'Tuhle zeleninu vede docs/BEZPECNOST.md mezi rizikovými.' },
+      hazards: ['dusicnany'],
+    });
+    expectFail('no-internal-references', item, catalog);
+  });
+
+  it('zachytí odkaz na příkaz projektu', () => {
+    const recipe = makeRecipe({ babySplitPoint: 'Po kroku 3 odeber porci, pak spusť npm run validate.' });
+    expectFail('no-internal-references', recipe, catalog);
+  });
+});
+
 describe('ingredient-refs-resolve', () => {
   it('projde recept, jehož složky jsou v katalogu', () => {
     expectPass('ingredient-refs-resolve', makeRecipe(), catalog);
@@ -786,6 +805,7 @@ describe('pokrytí pravidel', () => {
       'source-required',
       'source-url-shape',
       'no-placeholder',
+      'no-internal-references',
       'ingredient-refs-resolve',
       'stage-prep-complete',
       'allergen-consistency',

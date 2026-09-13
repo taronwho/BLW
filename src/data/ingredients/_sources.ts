@@ -83,7 +83,23 @@ export const NHS_ALLERGY = nhs(
   FETCHED,
 );
 
-/** Ryby: dravé ryby s rtutí, porce tučných ryb, syroví korýši. */
+/**
+ * Obecná stránka o potravinové alergii. Jmenuje mimo jiné celer, hořčici,
+ * sezam a lupinu vedle devíti nejčastějších alergenů.
+ *
+ * OVĚŘENO 13. 9. 2026: staženo a přečteno, věta „you can be allergic to any
+ * type of food, including celery, mustard, sesame seeds and lupin flour".
+ */
+export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/', FETCHED_13);
+
+/**
+ * Ryby: dravé ryby s rtutí, porce tučných ryb, syroví korýši.
+ *
+ * OVĚŘENO 13. 9. 2026: staženo a přečteno znovu. Klíčové pro katalog:
+ * děti do 16 let nemají jíst žraloka, mečouna ani marlina kvůli rtuti;
+ * syrové korýše a měkkýše dětem nedávat vůbec; mezi tučné ryby patří sleď,
+ * sardinka, losos, pstruh a makrela, mezi bílé treska a treska aljašská.
+ */
 export const NHS_FISH = nhs(
   'Fish and shellfish',
   '/live-well/eat-well/food-types/fish-and-shellfish-nutrition/',

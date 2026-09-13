@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ingredientById } from '../../src/data';
+import { ingredientById, ingredients, recipes } from '../../src/data';
 import {
   ironSources,
   isIronSource,
@@ -59,10 +59,25 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
   });
 
   it('napřed jdou partneři, které kuchařka se surovinou opravdu kombinuje', () => {
-    // Čočka se v receptech potkává se zeleninou, ne s jahodami — pořadí to
-    // musí odrážet, jinak je rada nepoužitelná u sporáku.
-    const partners = vitaminCPartners(get('cocka-cervena-loupana'), 5);
-    expect(partners[0]?.category).toBe('zelenina');
+    // Pořadí musí odrážet, co kuchařka s luštěninou doopravdy vaří, jinak je
+    // rada nepoužitelná u sporáku. Netestuje se konkrétní surovina — ta se
+    // s každým novým receptem může posunout — ale to, že seznam jde od
+    // nejčastějšího společného výskytu k nejřidšímu.
+    const cocka = get('cocka-cervena-loupana');
+    const partners = vitaminCPartners(cocka, 5);
+
+    const spolecnyVyskyt = (id: string): number =>
+      recipes.filter((recipe) => {
+        const ids = recipe.ingredients.map((ref) => ref.ingredientId);
+        const sKategorii = ids.some(
+          (one) => ingredients.find((i) => i.id === one)?.category === cocka.category,
+        );
+        return sKategorii && ids.includes(id);
+      }).length;
+
+    const pocty = partners.map((partner) => spolecnyVyskyt(partner.id));
+    expect(pocty[0]).toBeGreaterThan(0);
+    expect([...pocty].sort((a, b) => b - a)).toEqual(pocty);
   });
 
   it('surovina sama sobě partnerem není', () => {

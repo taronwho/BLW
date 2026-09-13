@@ -380,6 +380,31 @@ function collectStrings(item: Ingredient | Recipe): Array<{ field: string; value
   return out;
 }
 
+/**
+ * Texty v aplikaci čtou rodiče, ne vývojáři.
+ *
+ * Odkaz na soubor v repozitáři („vede to docs/BEZPECNOST.md") jim nic
+ * neřekne a působí jako nedodělek. Riziko se má popsat vlastními slovy,
+ * doklad patří do pole `sources`, které aplikace ukazuje jako odkaz.
+ */
+const NO_INTERNAL_REFS = /\.md\b|\bdocs\/|\bsrc\/|\btests?\/|\bnpm run\b|CLAUDE\.md|package\.json/i;
+
+const noInternalReferences: SafetyRule = {
+  id: 'no-internal-references',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Text pro rodiče neodkazuje na soubory v repozitáři ani na příkazy projektu.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const hit = NO_INTERNAL_REFS.exec(value);
+      if (hit !== null) {
+        return `Odkaz na interní soubor v poli ${field}: „${hit[0]}" v textu „${value.slice(0, 80)}".`;
+      }
+    }
+    return null;
+  },
+};
+
 const noPlaceholder: SafetyRule = {
   id: 'no-placeholder',
   severity: 'error',
@@ -734,6 +759,7 @@ export const safetyRules: readonly SafetyRule[] = [
   sourceRequired,
   sourceUrlShape,
   noPlaceholder,
+  noInternalReferences,
   ingredientRefsResolve,
   stagePrepComplete,
   allergenConsistency,
