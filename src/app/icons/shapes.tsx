@@ -592,6 +592,180 @@ export const SHAPES: Record<string, ReactNode> = {
       <path d="M13 39c2-3 4-4 6-5" stroke="#B0454A" strokeWidth="4" strokeLinecap="round" fill="none" />
     </>
   ),
+
+  // ── bobuloviny a exotické ovoce ────────────────────────────────────────
+  jahody: (
+    <>
+      <path d="M32 20c12 0 20 7 20 15 0 11-12 21-20 21s-20-10-20-21c0-8 8-15 20-15Z" fill="#D42F33" />
+      <path d="M32 20c-6-1-11-3-14-7 5-2 10-2 14 0 4-2 9-2 14 0-3 4-8 6-14 7Z" fill={C.zelen} />
+      <rect x="30.5" y="8" width="3" height="8" rx="1.5" fill={C.zelenTmava} />
+      <circle cx="24" cy="32" r="2" fill={C.zluta} />
+      <circle cx="38" cy="31" r="2" fill={C.zluta} />
+      <circle cx="31" cy="39" r="2" fill={C.zluta} />
+      <circle cx="41" cy="41" r="2" fill={C.zluta} />
+      <circle cx="23" cy="43" r="2" fill={C.zluta} />
+    </>
+  ),
+
+  boruvky: (
+    <>
+      <circle cx="21" cy="40" r="12" fill="#3D4C89" />
+      <circle cx="44" cy="41" r="11" fill="#2E3A6B" />
+      <circle cx="33" cy="24" r="11" fill="#4A5CA3" />
+      <path d="M33 19l3 4-3 2-3-2 3-4ZM21 35l3 4-3 2-3-2 3-4ZM44 36l3 4-3 2-3-2 3-4Z" fill="#8090C7" />
+    </>
+  ),
+
+  maliny: (
+    <>
+      <path d="M32 12c-4-2-9-1-11 2 3 1 5 3 6 5" fill={C.zelen} />
+      <circle cx="24" cy="26" r="6.5" fill="#D94A6B" />
+      <circle cx="40" cy="26" r="6.5" fill="#C13A5A" />
+      <circle cx="32" cy="24" r="6.5" fill="#E05C7C" />
+      <circle cx="20" cy="37" r="6.5" fill="#C13A5A" />
+      <circle cx="32" cy="36" r="7" fill="#D94A6B" />
+      <circle cx="44" cy="37" r="6.5" fill="#C13A5A" />
+      <circle cx="26" cy="47" r="6" fill="#D94A6B" />
+      <circle cx="38" cy="47" r="6" fill="#C13A5A" />
+    </>
+  ),
+
+  ostruziny: (
+    <>
+      <path d="M32 12c-4-2-9-1-11 2 3 1 5 3 6 5" fill={C.zelen} />
+      <circle cx="24" cy="26" r="6.5" fill="#2E2340" />
+      <circle cx="40" cy="26" r="6.5" fill="#1E1730" />
+      <circle cx="32" cy="24" r="6.5" fill="#413055" />
+      <circle cx="20" cy="37" r="6.5" fill="#1E1730" />
+      <circle cx="32" cy="36" r="7" fill="#2E2340" />
+      <circle cx="44" cy="37" r="6.5" fill="#1E1730" />
+      <circle cx="26" cy="47" r="6" fill="#413055" />
+      <circle cx="38" cy="47" r="6" fill="#2E2340" />
+    </>
+  ),
+
+  'rybiz-cerveny': (
+    <>
+      <path d="M32 8v14M32 14l-10 8M32 16l10 8M32 20l-4 10M32 20l6 12" stroke={C.hnedaSvetla} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="28" r="7" fill="#D8302E" />
+      <circle cx="44" cy="30" r="7" fill="#B8211F" />
+      <circle cx="26" cy="38" r="7.5" fill="#E04745" />
+      <circle cx="39" cy="42" r="7.5" fill="#D8302E" />
+      <circle cx="30" cy="51" r="6.5" fill="#B8211F" />
+      <circle cx="23" cy="35" r="2" fill="#F58E8A" />
+    </>
+  ),
+
+  'rybiz-cerny': (
+    <>
+      <path d="M32 8v14M32 14l-10 8M32 16l10 8M32 20l-4 10M32 20l6 12" stroke={C.hnedaSvetla} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="28" r="7" fill="#2A1F33" />
+      <circle cx="44" cy="30" r="7" fill="#1A1224" />
+      <circle cx="26" cy="38" r="7.5" fill="#3A2B47" />
+      <circle cx="39" cy="42" r="7.5" fill="#2A1F33" />
+      <circle cx="30" cy="51" r="6.5" fill="#1A1224" />
+      <circle cx="23" cy="35" r="2" fill="#6E5C80" />
+    </>
+  ),
+
+  angrest: (
+    <>
+      <path d="M24 16c-2-3-5-5-8-5 0 4 2 7 5 8M42 17c2-3 5-5 8-5 0 4-2 7-5 8" stroke={C.zelen} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <ellipse cx="22" cy="36" rx="12" ry="13" fill="#B9CF63" />
+      <ellipse cx="43" cy="38" rx="11" ry="12" fill="#9DB84E" />
+      <path d="M22 24c-3 7-3 17 0 24M43 27c-3 6-3 15 0 21" stroke="#D9E8A0" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+
+  hrozny: (
+    <>
+      <path d="M32 6v10" stroke={C.hneda} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M32 12c5-4 11-4 15-1-4 5-10 6-15 3Z" fill={C.zelen} />
+      <circle cx="22" cy="26" r="7" fill="#6B3A7A" />
+      <circle cx="42" cy="26" r="7" fill="#5A2E68" />
+      <circle cx="32" cy="30" r="7.5" fill="#7C4A8C" />
+      <circle cx="18" cy="38" r="7" fill="#5A2E68" />
+      <circle cx="46" cy="38" r="7" fill="#6B3A7A" />
+      <circle cx="32" cy="44" r="7.5" fill="#6B3A7A" />
+      <circle cx="24" cy="50" r="6.5" fill="#5A2E68" />
+      <circle cx="40" cy="50" r="6.5" fill="#7C4A8C" />
+    </>
+  ),
+
+  'meloun-vodni': (
+    <>
+      <path d="M6 46c0-16 12-28 26-28s26 12 26 28H6Z" fill="#2E7A38" />
+      <path d="M11 46c0-13 9-23 21-23s21 10 21 23H11Z" fill="#C3DF9E" />
+      <path d="M16 46c0-10 7-18 16-18s16 8 16 18H16Z" fill="#D93A3F" />
+      <ellipse cx="26" cy="38" rx="2" ry="3" fill="#2A1A1A" />
+      <ellipse cx="37" cy="37" rx="2" ry="3" fill="#2A1A1A" />
+      <ellipse cx="32" cy="43" rx="2" ry="3" fill="#2A1A1A" />
+    </>
+  ),
+
+  'meloun-cantaloupe': (
+    <>
+      {/* Stejná stavba jako u vodního melounu, jen jiné barvy a síťka na
+          kůře — jinak by z toho na 20 px byla béžová kupole bez významu. */}
+      <path d="M6 46c0-16 12-28 26-28s26 12 26 28H6Z" fill="#BFC98A" />
+      <path d="M12 46c0-13 9-23 20-23s20 10 20 23H12Z" fill="#EDE7C0" />
+      <path d="M16 46c0-10 7-18 16-18s16 8 16 18H16Z" fill="#E8944A" />
+      <path d="M28 46c0-5 2-9 4-9s4 4 4 9" fill="#F6D2A0" />
+      <path d="M13 30c6-3 13-5 19-5s13 2 19 5M8 38c8-2 16-3 24-3s16 1 24 3" stroke="#8E9A5E" strokeWidth="1.6" fill="none" />
+    </>
+  ),
+
+  papaja: (
+    <>
+      <path d="M32 8c12 0 20 12 20 26s-8 22-20 22-20-8-20-22S20 8 32 8Z" fill="#E8A04A" />
+      <path d="M32 16c8 0 13 8 13 18s-5 14-13 14-13-4-13-14 5-18 13-18Z" fill="#E86A3A" />
+      <circle cx="32" cy="34" r="9" fill="#3A2A22" />
+      <circle cx="29" cy="31" r="2" fill="#6E5A4A" />
+      <circle cx="35" cy="36" r="2" fill="#6E5A4A" />
+    </>
+  ),
+
+  mango: (
+    <>
+      <path d="M40 12c4-2 8-2 10 0-2 4-6 6-10 5v-5Z" fill={C.zelen} />
+      <path d="M18 26c8-10 22-12 30-6 7 6 5 20-4 28s-22 8-27 1c-4-6-4-16 1-23Z" fill="#E8A02A" />
+      <path d="M24 24c8-6 17-6 22-2" stroke="#D9532A" strokeWidth="6" strokeLinecap="round" fill="none" />
+      <path d="M22 38c2 6 6 10 11 12" stroke="#F5CE72" strokeWidth="4" strokeLinecap="round" fill="none" />
+    </>
+  ),
+
+  ananas: (
+    <>
+      <path d="M32 6c-2 5-4 9-4 14h8c0-5-2-9-4-14ZM24 10c-2 4-3 8-3 11l5 1c0-4 0-8-2-12ZM40 10c2 4 3 8 3 11l-5 1c0-4 0-8 2-12Z" fill={C.zelen} />
+      <path d="M32 20c10 0 17 7 17 18s-7 19-17 19-17-8-17-19 7-18 17-18Z" fill={C.zluta} />
+      <path d="M18 28l28 18M46 28L18 46M15 38h34" stroke={C.zlutaTmava} strokeWidth="2" fill="none" />
+    </>
+  ),
+
+  kiwi: (
+    <>
+      <circle cx="32" cy="35" r="22" fill="#7A5A36" />
+      <circle cx="32" cy="35" r="18" fill="#8CB84A" />
+      <ellipse cx="32" cy="35" rx="7" ry="8" fill="#EDF2D8" />
+      <circle cx="32" cy="22" r="1.8" fill="#2A2418" />
+      <circle cx="42" cy="28" r="1.8" fill="#2A2418" />
+      <circle cx="44" cy="40" r="1.8" fill="#2A2418" />
+      <circle cx="36" cy="48" r="1.8" fill="#2A2418" />
+      <circle cx="26" cy="47" r="1.8" fill="#2A2418" />
+      <circle cx="20" cy="38" r="1.8" fill="#2A2418" />
+      <circle cx="22" cy="27" r="1.8" fill="#2A2418" />
+    </>
+  ),
+
+  pomeranc: (
+    <>
+      <path d="M38 14c4-4 10-4 13-1-2 5-8 8-13 6v-5Z" fill={C.zelen} />
+      <rect x="31" y="9" width="3" height="9" rx="1.5" fill={C.hneda} />
+      <circle cx="32" cy="38" r="19" fill="#E87A22" />
+      <path d="M22 29c2-3 5-5 8-6" stroke="#F5AF66" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+      <circle cx="32" cy="38" r="19" fill="none" stroke="#C25E10" strokeWidth="2" strokeDasharray="2 5" />
+    </>
+  ),
 };
 
 export type IconId = keyof typeof SHAPES;
