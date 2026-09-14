@@ -328,6 +328,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'petrzelka-hladkolista', amount: '1 svazek', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'citron', amount: 'půlka', track: 'all' },
+      { ingredientId: 'cizrna', amount: '200 g uvařené', track: 'all' },
     ],
     baseSteps: [
       'Papriky rozpul, zbav je jadřince a peč je v troubě dvacet minut, dokud slupka nezčerná.',
@@ -340,7 +341,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce bulguru s paprikou, dřív než se do mísy přidá opečené uzené tofu.',
     babySteps: [
       'Bulgur s paprikou nasekej nakrátko a zakápni lžičkou olivového oleje.',
-      'Uzené tofu do dětské porce nepatří, je solené; místo něj přidej lžíci rozmačkané cizrny, pokud ji máš.',
+      'Uzené tofu do dětské porce nepatří, je solené; místo něj vmíchej lžíci rozmačkané uvařené cizrny.',
       'Porci nech vychladnout na vlažnou teplotu a podávej.',
     ],
     babyServing: {
@@ -372,6 +373,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'citron', amount: '1 kus', track: 'all' },
       { ingredientId: 'grana-padano', amount: '60 g', track: 'meat' },
       { ingredientId: 'ricotta', amount: '150 g', track: 'vegetarian' },
+      { ingredientId: 'eidam', amount: '80 g', track: 'vegetarian' },
     ],
     baseSteps: [
       'Chřestu odlom dřevnaté konce, stonky nakrájej na kolečka a špičky si nech stranou.',
@@ -684,6 +686,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cesnek', amount: '4 stroužky', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'cizrna', amount: '300 g uvařené', track: 'vegetarian' },
+      { ingredientId: 'citron', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Brambory omyj, nakrájej na klínky a promíchej je s olivovým olejem a neloupanými stroužky česneku.',
@@ -733,6 +736,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'olej-olivovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'pecorino', amount: '60 g', track: 'meat' },
       { ingredientId: 'mozzarella', amount: '150 g', track: 'vegetarian' },
+      { ingredientId: 'emental', amount: '80 g', track: 'vegetarian' },
     ],
     baseSteps: [
       'Cukety nastrouhej nahrubo a nech je deset minut odležet, ať pustí vodu.',
@@ -1072,7 +1076,7 @@ export const lunchesDinners2: Recipe[] = [
       'Z odebrané směsi vytvaruj podlouhlý váleček velikosti prstu, který dítě sevře v pěsti.',
       'Opeč ho pomaleji a zkontroluj rozlomením, že je propečený skrz naskrz.',
       'Dip pro dítě řeď jogurtem víc než pro dospělé, husté tahini se lepí na patro.',
-      'Citron z dipu nevynechávej: vitamin C z něj pomáhá vstřebat železo z cizrny i ze sezamu v tahini.',
+      'Citron z dipu nevynechávej: vitamin C z něj pomáhá vstřebat železo z cizrny i z tahini.',
     ],
     babyServing: {
       '6m': 'Podávej váleček velikosti prstu a k němu řídký jogurtový dip na namáčení.',
@@ -1336,6 +1340,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'brambor', amount: '700 g', track: 'all' },
       { ingredientId: 'ghi', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'fazole-bile', amount: '300 g uvařených', track: 'vegetarian' },
+      { ingredientId: 'petrzelka-hladkolista', amount: 'hrst', track: 'all' },
     ],
     baseSteps: [
       'Švestky rozpul, vypeckuj je a dus na ghí, dokud se nerozpadnou na omáčku.',
@@ -1385,6 +1390,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'majoranka', amount: '1 lžička', track: 'all' },
       { ingredientId: 'olej-repkovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'hrach-zluty-puleny', amount: '250 g', track: 'vegetarian' },
+      { ingredientId: 'petrzelka-hladkolista', amount: 'hrst', track: 'all' },
     ],
     baseSteps: [
       'Celer i pastinák oloupej a nakrájej je na velké kusy, aby se v troubě nerozpadly.',
@@ -1396,7 +1402,7 @@ export const lunchesDinners2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber pár kusů pečené zeleniny stranou, dřív než se pekáč dochucuje pro dospělé.',
     babySteps: [
-      'Pečený celer i pastinák rozmačkej vidličkou; kořenová zelenina zůstává pevnější než brambor.',
+      'Pečený celer i pastinák rozmačkej vidličkou; kořenová zelenina zůstává pevnější než dušená mrkev.',
       'Z propečeného stehna odeber kousek bez kůže, zkontroluj, že v něm není růžová část, a rozvlákni ho.',
       'Maso vmíchej do zeleninového pyré a nech porci zvlažnět.',
     ],
@@ -1634,7 +1640,7 @@ export const lunchesDinners2: Recipe[] = [
       'Rybu i fazole dodělej podle linií a pečený česnek vymáčkni ze slupek.',
     ],
     babySplitPoint:
-      'Po kroku 2 odeber dva pečené bramborové klínky z batátu stranou, dřív než se cokoli dochucuje.',
+      'Po kroku 2 odeber dva pečené klínky batátu stranou, dřív než se cokoli dochucuje.',
     babySteps: [
       'Z upečeného pstruha odeber kousek hřbetu a projeď ho mezi prsty i nehtem po délce.',
       'Pstruh má drobné kůstky podél páteře; každou tvrdou nitku odstraň a raději kontroluj dvakrát.',

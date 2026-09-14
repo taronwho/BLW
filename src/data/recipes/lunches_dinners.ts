@@ -539,6 +539,7 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'skrob-kukuricny', amount: '1 lžička', track: 'all' },
       { ingredientId: 'kvetak', amount: '1 menší', track: 'vegetarian' },
       { ingredientId: 'tvaroh-polotucny', amount: '200 g', track: 'vegetarian' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Brambory oloupej, nakrájej na kostky velikosti kostky cukroví a uvař je v nesolené vodě patnáct minut doměkka.',

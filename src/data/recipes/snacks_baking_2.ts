@@ -326,7 +326,7 @@ export const snacksBaking2: Recipe[] = [
     babyServing: {
       '6m': 'Podávej proužek krekru velikosti prstu, který dítě okusuje a rozměkčuje slinami.',
       '9m': 'Nabídni krekr rozlámaný na kousky velikosti fazole pro klešťový úchop.',
-      '12m': 'Servíruj krekry s hummusem nebo s tvarohem; batole si je namáčí samo.',
+      '12m': 'Servíruj krekry s tvarohem nebo s bylinkovou pomazánkou; batole si je namáčí samo.',
     },
     adultSteps: [
       'Krekry pro dospělé osol před pečením a podávej je k paštice nebo k šunce.',

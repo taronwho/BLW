@@ -294,7 +294,7 @@ export const snacksBaking: Recipe[] = [
       'Sladkou papriku nakrájej na proužky silné jako prst, které se namáčejí líp než samotný krekr.',
     ],
     babySplitPoint:
-      'Po kroku 3 odkroj třetinu plátu stranou, dřív než se zbytek pro dospělé posype solí a kmínem.',
+      'Po kroku 3 odkroj třetinu plátu stranou, dřív než se zbytek pro dospělé posype solí a kořením.',
     babySteps: [
       'Dětskou třetinu nakrájej na podlouhlé tyčinky, které se v ruce nelámou tak snadno jako čtverečky.',
       'Peč je o dvě minuty kratší dobu, aby byly křehké, ale ne tvrdé jako suchar.',
@@ -304,7 +304,7 @@ export const snacksBaking: Recipe[] = [
     babyServing: {
       '6m': 'Podávej tyčinku dlouhou jako prst, kterou dítě sevře v pěsti; krekr ve slinách rychle měkne.',
       '9m': 'Tyčinku nalámej na kousky velikosti nehtu a nabídni je s lžící tvarohu k namáčení.',
-      '12m': 'Nech dítě brát si krekry z misky samo a namáčet je do hummusu nebo pomazánky.',
+      '12m': 'Nech dítě brát si krekry z misky samo a namáčet je do tvarohu nebo pomazánky.',
     },
     adultSteps: [
       'Plát pro dospělé posyp solí a kmínem, zlehka je zaválej a peč 12 minut.',

@@ -586,10 +586,18 @@ const nitrateNote: SafetyRule = {
 const duplicateDetection: SafetyRule = {
   id: 'duplicate-detection',
   severity: 'warning',
-  appliesTo: 'ingredient',
-  description: 'Žádné dvě suroviny nemají shodný nameCz ani překrývající se altNamesCz.',
+  appliesTo: 'both',
+  description:
+    'Žádné dvě suroviny nemají shodný nameCz ani překrývající se altNamesCz a žádné dva recepty nemají shodný titleCz.',
   check(item, catalog) {
-    if (!isIngredient(item)) return null;
+    if (!isIngredient(item)) {
+      // Dva recepty se stejným nadpisem rodič v seznamu nerozliší; přesně to
+      // se stalo dvěma rajčatovým polévkám s cizrnou a bazalkou.
+      const dvojnik = catalog.recipes.find(
+        (other) => other.id !== item.id && normalize(other.titleCz) === normalize(item.titleCz),
+      );
+      return dvojnik === undefined ? null : `Shodný titleCz s receptem „${dvojnik.id}".`;
+    }
     const selfNames = new Set([item.nameCz, ...item.altNamesCz].map(normalize));
     for (const other of catalog.ingredients) {
       if (other.id === item.id) continue;
@@ -787,6 +795,108 @@ const consistentAddress: SafetyRule = {
   },
 };
 
+/**
+ * Neslabičná předložka se před stejnou nebo blízkou hláskou vokalizuje:
+ * „se šťávou", „ze zelí", „ve vodě", „ke kmínu". Bez toho se věta u sporáku
+ * čte o vteřinu déle a vypadá jako překlep.
+ *
+ * Hranice slova se nehlídá přes `\b` — to v JavaScriptu počítá jen ASCII
+ * písmena, takže by „Směs zvlhči" vydávalo za předložku „s".
+ */
+const PREPOSITION_NOT_VOCALIZED = /(?<!\p{L})(?:s [sšzž]|z [sšzž]|v [vf]|k [kg])\p{L}*/iu;
+
+const prepositionVocalization: SafetyRule = {
+  id: 'preposition-vocalization',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Neslabičná předložka se před stejnou hláskou vokalizuje — „se šťávou", ne „s šťávou".',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const hit = PREPOSITION_NOT_VOCALIZED.exec(value);
+      if (hit !== null) {
+        return `Nevokalizovaná předložka v poli ${field}: „${hit[0]}".`;
+      }
+    }
+    return null;
+  },
+};
+
+/**
+ * Složky, které pokyny jmenují jinak než seznam: voda se „zalije", olej je
+ * „na pánev", prášek do pečiva se schová do „těsta". Hlásit je by utopilo
+ * skutečné nálezy, tedy suroviny, které rodič koupí a pak neví, kam s nimi.
+ */
+const IMPLICIT_INGREDIENTS = new Set([
+  'voda',
+  'olej-olivovy',
+  'olej-repkovy',
+  'olej-slunecnicovy',
+  'olej-kokosovy',
+  'olej-dynovy',
+  'maslo',
+  'ghi',
+  'prasek-do-peceni',
+  'jedla-soda',
+  'skrob-kukuricny',
+]);
+
+/**
+ * Pádové tvary jednoho slova.
+ *
+ * Porovnávat zkrácený kmen podřetězcem nejde: kmen „prs" od „prsa" sedí i na
+ * „prstu" a pravidlo by hlásilo nesmysl. Proto se z názvu odvodí základ (bez
+ * koncové samohlásky) a k němu se přilepí české koncovky; shoda se hledá jen
+ * na celé slovo. „Máta" tak najde „mátou", ale „prsa" nenajde „prstem".
+ */
+const PADOVE_KONCOVKY = [
+  '', 'a', 'u', 'e', 'y', 'i', 'o', 'ou', 'em', 'im', 'am', 'ami', 'ach', 'um',
+  'ovi', 'ove', 'mi', 'ech', 'ku', 'ce', 'ek', 'ym', 'ymi', 'ych', 'eho', 'emu',
+];
+
+function padoveTvary(slovo: string): string[] {
+  if (slovo.length < 3) return [slovo];
+  const zaklad = /[aeiouy]$/.test(slovo) ? slovo.slice(0, -1) : slovo;
+  if (zaklad.length < 3) return [slovo];
+  // Vypadavé -e-: „ocet" má v ostatních pádech „oct-", „sumec" má „sumc-".
+  const zaklady = new Set([zaklad, zaklad.replace(/e([a-z])$/, '$1')]);
+  return [...zaklady].flatMap((z) => PADOVE_KONCOVKY.map((koncovka) => z + koncovka));
+}
+
+const recipeIngredientsUsed: SafetyRule = {
+  id: 'recipe-ingredients-used',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description: 'Každá složka receptu se objeví aspoň v jednom pokynu, ne jen v nákupním seznamu.',
+  check(item, catalog) {
+    if (isIngredient(item)) return null;
+    const text = normalize(
+      [
+        ...item.baseSteps,
+        ...item.babySteps,
+        ...item.adultSteps,
+        ...(item.vegetarianSteps ?? []),
+        ...Object.values(item.babyServing),
+        item.babySplitPoint,
+      ].join(' '),
+    );
+    const slova = new Set(text.split(/[^a-z0-9]+/));
+    for (const ref of item.ingredients) {
+      if (IMPLICIT_INGREDIENTS.has(ref.ingredientId)) continue;
+      const ingredient = catalog.ingredients.find((one) => one.id === ref.ingredientId);
+      if (ingredient === undefined) continue;
+      const najde = [ingredient.nameCz, ...ingredient.altNamesCz].some((jmeno) =>
+        normalize(jmeno)
+          .split(/[^a-z0-9]+/)
+          .some((slovo) => padoveTvary(slovo).some((tvar) => slova.has(tvar))),
+      );
+      if (!najde) {
+        return `Složka „${ingredient.nameCz}" je v seznamu, ale žádný pokyn ji nezmiňuje.`;
+      }
+    }
+    return null;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -803,6 +913,8 @@ export const safetyRules: readonly SafetyRule[] = [
   noPlaceholder,
   noInternalReferences,
   noStrayMarks,
+  prepositionVocalization,
+  recipeIngredientsUsed,
   ingredientRefsResolve,
   stagePrepComplete,
   allergenConsistency,
