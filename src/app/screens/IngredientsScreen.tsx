@@ -5,51 +5,51 @@ import {
   Search,
   ShieldAlert,
   Star,
-} from "lucide-react";
-import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { ingredients } from "@/data";
-import { nutrientProfile } from "@/data/nutrients";
-import { useHouseholdStore } from "@/storage/householdStore";
-import { INGREDIENT_CATEGORIES } from "@/types";
-import type { AllergenGroup, Ingredient } from "@/types";
-import { ageInMonths } from "../lib/age";
-import { usePostupneZobrazeni } from "../lib/postupneZobrazeni";
-import { FilterChips } from "../components/FilterChips";
-import { RozbalovaciFiltry } from "../components/RozbalovaciFiltry";
-import { KonecSeznamu } from "../components/KonecSeznamu";
-import type { ChipOption } from "../components/FilterChips";
-import { FilterSelect } from "../components/FilterSelect";
-import { FilterToggles } from "../components/FilterToggles";
-import { AllergenChip, ChokingChip } from "../components/SafetyChips";
-import { FavoriteToggle } from "../components/FavoriteToggle";
-import { ChipButton, FilterGroup, Upresneni } from "../components/FilterGroup";
+} from 'lucide-react';
+import type { ReactNode } from 'react';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ingredients } from '@/data';
+import { nutrientProfile } from '@/data/nutrients';
+import { useHouseholdStore } from '@/storage/householdStore';
+import { INGREDIENT_CATEGORIES } from '@/types';
+import type { AllergenGroup, Ingredient } from '@/types';
+import { ageInMonths } from '../lib/age';
+import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
+import { FilterChips } from '../components/FilterChips';
+import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
+import { KonecSeznamu } from '../components/KonecSeznamu';
+import type { ChipOption } from '../components/FilterChips';
+import { FilterSelect } from '../components/FilterSelect';
+import { FilterToggles } from '../components/FilterToggles';
+import { AllergenChip, ChokingChip } from '../components/SafetyChips';
+import { FavoriteToggle } from '../components/FavoriteToggle';
+import { ChipButton, FilterGroup, Upresneni } from '../components/FilterGroup';
 import {
   DRUH_ZELEZA_OPTIONS,
   UROVEN_OPTIONS,
   vyhovujeZivinam,
   ZIVINY_OPTIONS,
-} from "../lib/nutrientFilter";
-import { NutrientBadge } from "../components/NutrientBadge";
-import type { SelectOption } from "../components/FilterSelect";
-import { TastedToggle } from "../components/TastedToggle";
-import { inSeason, suitableNow, tastedIds } from "../lib/derive";
-import { CATEGORY_LABELS } from "../lib/labels";
-import { ALLERGEN_FILTER_OPTIONS } from "../lib/allergenOptions";
-import { matchesIngredient } from "../lib/search";
-import { INGREDIENT_SORTS, sortIngredients } from "../lib/sorting";
-import type { SortKey } from "../lib/sorting";
-import { IngredientIcon } from "../components/IngredientIcon";
+} from '../lib/nutrientFilter';
+import { NutrientBadge } from '../components/NutrientBadge';
+import type { SelectOption } from '../components/FilterSelect';
+import { TastedToggle } from '../components/TastedToggle';
+import { inSeason, suitableNow, tastedIds } from '../lib/derive';
+import { CATEGORY_LABELS } from '../lib/labels';
+import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
+import { matchesIngredient } from '../lib/search';
+import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
+import type { SortKey } from '../lib/sorting';
+import { IngredientIcon } from '../components/IngredientIcon';
 
 /**
  * Deník má tři stavy, které se navzájem vylučují — ochutnané a neochutnané
  * najednou nedávají smysl, proto jsou tu jako přepínač, ne jako zaškrtávátka.
  */
 const DENIK_OPTIONS: readonly ChipOption[] = [
-  { id: "vse", label: "nezáleží" },
-  { id: "neochutnano", label: "ještě neochutnané" },
-  { id: "ochutnano", label: "už ochutnané" },
+  { id: 'vse', label: 'nezáleží' },
+  { id: 'neochutnano', label: 'ještě neochutnané' },
+  { id: 'ochutnano', label: 'už ochutnané' },
 ];
 
 const SORT_OPTIONS: readonly SelectOption[] = INGREDIENT_SORTS.map((one) => ({
@@ -58,7 +58,7 @@ const SORT_OPTIONS: readonly SelectOption[] = INGREDIENT_SORTS.map((one) => ({
 }));
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
-  { id: "vse", label: "Všechny" },
+  { id: 'vse', label: 'Všechny' },
   ...INGREDIENT_CATEGORIES.map((category) => ({
     id: category,
     label: CATEGORY_LABELS[category],
@@ -68,18 +68,18 @@ const CATEGORY_OPTIONS: readonly SelectOption[] = [
 /** Seznam surovin (docs/SPEC.md kap. 4.1). */
 export function IngredientsScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("vse");
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('vse');
   const [ziviny, setZiviny] = useState<readonly string[]>([]);
-  const [druhZeleza, setDruhZeleza] = useState("vse");
-  const [sila, setSila] = useState("aspon");
-  const [denik, setDenik] = useState("vse");
+  const [druhZeleza, setDruhZeleza] = useState('vse');
+  const [sila, setSila] = useState('aspon');
+  const [denik, setDenik] = useState('vse');
   const [oblibene, setOblibene] = useState(false);
   const [vhodneTed, setVhodneTed] = useState(false);
   const [sezonni, setSezonni] = useState(false);
   const [alergeny, setAlergeny] = useState(false);
-  const [bezAlergenu, setBezAlergenu] = useState<AllergenGroup | "">("");
-  const [sort, setSort] = useState<SortKey>("abeceda");
+  const [bezAlergenu, setBezAlergenu] = useState<AllergenGroup | ''>('');
+  const [sort, setSort] = useState<SortKey>('abeceda');
 
   const tasted = useMemo(() => tastedIds(state), [state]);
   const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
@@ -90,17 +90,17 @@ export function IngredientsScreen(): ReactNode {
     () =>
       ingredients.filter((item) => {
         if (!matchesIngredient(item, query)) return false;
-        if (category !== "vse" && item.category !== category) return false;
+        if (category !== 'vse' && item.category !== category) return false;
         // Podmínky se sčítají, takže jde hledat i „sezónní zelenina, kterou
         // jsme ještě neochutnali". Dřív se volby vylučovaly a tohle nešlo.
-        if (denik === "neochutnano" && tasted.has(item.id)) return false;
-        if (denik === "ochutnano" && !tasted.has(item.id)) return false;
+        if (denik === 'neochutnano' && tasted.has(item.id)) return false;
+        if (denik === 'ochutnano' && !tasted.has(item.id)) return false;
         if (oblibene && !favorites.has(item.id)) return false;
         if (vhodneTed && !suitableNow(item, months)) return false;
         if (sezonni && !(item.seasonCz.length > 0 && inSeason(item, month)))
           return false;
         if (alergeny && !item.isKeyAllergen) return false;
-        if (bezAlergenu !== "" && item.allergens.includes(bezAlergenu))
+        if (bezAlergenu !== '' && item.allergens.includes(bezAlergenu))
           return false;
         if (!vyhovujeZivinam(nutrientProfile(item), ziviny, druhZeleza, sila))
           return false;
@@ -132,29 +132,29 @@ export function IngredientsScreen(): ReactNode {
   const { zobrazene, zbyva, nacistDalsi, konecSeznamu } =
     usePostupneZobrazeni(serazene);
 
-  const zeleznyFiltr = ziviny.includes("zelezo");
+  const zeleznyFiltr = ziviny.includes('zelezo');
   // Počet zapnutých filtrů na tlačítku; kategorie a řazení se nepočítají,
   // ty jsou vidět pořád.
   const podrobnychFiltru =
     ziviny.length +
-    (druhZeleza === "vse" ? 0 : 1) +
-    (sila === "aspon" ? 0 : 1) +
-    (denik === "vse" ? 0 : 1) +
+    (druhZeleza === 'vse' ? 0 : 1) +
+    (sila === 'aspon' ? 0 : 1) +
+    (denik === 'vse' ? 0 : 1) +
     (oblibene ? 1 : 0) +
     (vhodneTed ? 1 : 0) +
     (sezonni ? 1 : 0) +
     (alergeny ? 1 : 0) +
-    (bezAlergenu === "" ? 0 : 1);
+    (bezAlergenu === '' ? 0 : 1);
 
   const filtrujeSe =
-    query !== "" ||
-    category !== "vse" ||
-    denik !== "vse" ||
+    query !== '' ||
+    category !== 'vse' ||
+    denik !== 'vse' ||
     oblibene ||
     vhodneTed ||
     sezonni ||
     alergeny ||
-    bezAlergenu !== "" ||
+    bezAlergenu !== '' ||
     ziviny.length > 0;
 
   function prepniZivinu(id: string): void {
@@ -165,21 +165,21 @@ export function IngredientsScreen(): ReactNode {
     );
     // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
     // viset nastavený a tiše filtroval.
-    if (id === "zelezo" && ziviny.includes("zelezo")) setDruhZeleza("vse");
+    if (id === 'zelezo' && ziviny.includes('zelezo')) setDruhZeleza('vse');
   }
 
   function zrusFiltry(): void {
-    setQuery("");
-    setCategory("vse");
+    setQuery('');
+    setCategory('vse');
     setZiviny([]);
-    setDruhZeleza("vse");
-    setSila("aspon");
-    setDenik("vse");
+    setDruhZeleza('vse');
+    setSila('aspon');
+    setDenik('vse');
     setOblibene(false);
     setVhodneTed(false);
     setSezonni(false);
     setAlergeny(false);
-    setBezAlergenu("");
+    setBezAlergenu('');
   }
 
   return (
@@ -311,9 +311,9 @@ export function IngredientsScreen(): ReactNode {
               <FilterSelect
                 label="Bez alergenu"
                 options={ALLERGEN_FILTER_OPTIONS}
-                selected={bezAlergenu === "" ? "vse" : bezAlergenu}
+                selected={bezAlergenu === '' ? 'vse' : bezAlergenu}
                 onSelect={(id) =>
-                  setBezAlergenu(id === "vse" ? "" : (id as AllergenGroup))
+                  setBezAlergenu(id === 'vse' ? '' : (id as AllergenGroup))
                 }
                 testId="filtr-bez-alergenu"
               />
@@ -382,9 +382,9 @@ function IngredientRow({
   // Řádka živin se nevykreslí, když položka není zdrojem žádné ze tří —
   // prázdná mezera by jen rozhodila seznam.
   const maZiviny =
-    profile.iron !== "nevyznamny" ||
-    profile.zinc !== "nevyznamny" ||
-    profile.vitaminC !== "nevyznamny";
+    profile.iron !== 'nevyznamny' ||
+    profile.zinc !== 'nevyznamny' ||
+    profile.vitaminC !== 'nevyznamny';
   const alergen = ingredient.allergens[0];
 
   return (

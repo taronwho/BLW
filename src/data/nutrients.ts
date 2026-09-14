@@ -1,4 +1,14 @@
-import type { Ingredient, Recipe } from '@/types';
+import type { Ingredient, Recipe, SourceRef } from '@/types';
+import {
+  BP_IRON,
+  BP_TOMATO,
+  BP_VITAMIN_C,
+  BP_ZINC,
+  NHS_IRON,
+  NHS_TRACE_MINERALS,
+  NHS_VITAMIN_C,
+  SZU_VITAMIN_C,
+} from './ingredients/_sources';
 import { ingredientById, ingredients } from './ingredients';
 import { recipes } from './recipes';
 
@@ -6,22 +16,65 @@ import { recipes } from './recipes';
  * Zařazení surovin podle železa, zinku a vitaminu C.
  *
  * POZOR NA ROZSAH: tohle NEJSOU měřené hodnoty v miligramech. Je to zařazení
- * do skupin potravin, které jako zdroj jmenují načtené stránky NHS a odborná
- * kniha. Číselné obsahy živin by se musely vzít z potravinové tabulky, kterou
- * docs/BEZPECNOST.md mezi povolenými zdroji nemá — a vymýšlet je z hlavy
- * zakazuje CLAUDE.md pravidlo 1. UI to takhle i popisuje.
+ * do skupin potravin, které jako zdroj jmenují načtené stránky. Číselné
+ * obsahy živin v katalogu nejsou a nebudou: potravinová databáze, ze které by
+ * se braly, není mezi povolenými zdroji v docs/BEZPECNOST.md, a vymýšlet je
+ * z hlavy zakazuje CLAUDE.md pravidlo 1. UI to takhle i popisuje.
  *
- * Doložené seznamy, ze kterých zařazení vychází:
+ * Zařazuje se po skupinách, ne po jménech. Politika je v docs/BEZPECNOST.md
+ * kapitola 8.
+ *
+ * Dřív tu stál ruční seznam jmen a platilo, že co v něm není, to podle
+ * aplikace živinu nemá. U tří set surovin to nešlo udržet: rakytník, rajče,
+ * maliny, mango ani špenát v něm nebyly, takže je aplikace tvrdošíjně
+ * ukazovala jako nezdroj vitaminu C. Skupina se dá odvodit od kategorie a
+ * zdroje ji popisují jako skupinu — „hlavním zdrojem vitaminu C je ovoce,
+ * zvlášť tropické, a zelenina", „zelená listová zelenina", „semena a ořechy".
+ *
+ * Nejvyšší stupeň dostane jen to, co zdroj vyjmenuje adresně; zbytek skupiny
+ * dostane stupeň nižší. Rozdíl mezi „●●●" a „●●○" je tedy rozdíl mezi
+ * „zdroj to jmenuje mezi nejbohatšími" a „patří do skupiny, kterou zdroj
+ * označuje za zdroj".
+ *
+ * Doložené podklady:
  *  - železo (NHS Iron): játra, červené maso, luštěniny (fazole kidney,
  *    edamame, cizrna), ořechy, sušené ovoce (sušené meruňky), obohacené
  *    cereálie, sójová mouka;
- *  - zinek (NHS Vitamins and minerals – others): maso, korýši, mléčné výrobky
- *    jako sýr, chléb a obilné výrobky jako pšeničné klíčky;
+ *  - železo (ICBP Železo): hemové z masa a ryb se vstřebá kolem 15 %,
+ *    nehemové z rostlin hůř; z rostlinných zdrojů jmenuje zelenou listovou
+ *    zeleninu, obiloviny a luštěniny;
+ *  - zinek (ICBP Zinek v potravinách) s čísly: semena a ořechy 2,9–7,8 mg na
+ *    100 g, játra 4,2–6,1, hovězí a vepřové 2,9–4,7, drůbež 1,8–3,0, ryby a
+ *    mořské produkty 0,5–5,2, vejce 1,1–1,4, mléko a sýry 0,4–3,1, luštěniny
+ *    1,0–2,0, chléb 0,9;
+ *  - zinek (NHS Vitamins and minerals – others): maso, korýši, sýr, chléb a
+ *    obilné výrobky;
  *  - vitamin C (NHS Vitamin C): citrusy, papriky, jahody, černý rybíz,
  *    brokolice, růžičková kapusta, brambory;
- *  - kniha: zdroje zinku se kryjí se zdroji železa — maso, vnitřnosti,
- *    luštěniny, semena a celozrnné obiloviny.
+ *  - vitamin C (ICBP Vitamin C): černý rybíz až 300 mg/100 g, kiwi 130,
+ *    papája 100, citrusy až 70, papriky až 300, květák, brokolice a kapusta
+ *    až 130, kysané zelí a brambory až 40; hlavním zdrojem je ovoce a
+ *    zelenina a pro příjem jsou důležitější druhy, kterých se sní hodně;
+ *  - vitamin C (SZÚ, informační karta): červená paprika, pomeranč, citron,
+ *    černý rybíz, kiwi, jahody, brokolice, květák, kedlubna;
+ *  - vitamin C (ICBP Rajčata): jedno střední rajče pokryje skoro 40 %
+ *    doporučené denní dávky.
  */
+
+/**
+ * Zdroje, ze kterých zařazení vychází. Okénko živin je ukazuje rodiči, aby
+ * u tvrzení o živinách stál doklad stejně jako u tvrzení o bezpečnosti.
+ */
+export const NUTRIENT_SOURCES: readonly SourceRef[] = [
+  NHS_IRON,
+  NHS_TRACE_MINERALS,
+  NHS_VITAMIN_C,
+  BP_IRON,
+  BP_ZINC,
+  BP_VITAMIN_C,
+  SZU_VITAMIN_C,
+  BP_TOMATO,
+];
 
 export type NutrientLevel = 'vyznamny' | 'obsahuje' | 'nevyznamny';
 
@@ -50,8 +103,8 @@ const CERVENE_MASO = new Set([
   'kaci-prsa',
 ]);
 
-/** Korýši — NHS je jmenuje u zinku. */
-const KORYSI = new Set(['krevety']);
+/** Korýši a měkkýši — ICBP i NHS je jmenují u zinku. */
+const KORYSI = new Set(['krevety', 'slavky', 'hrebenatky', 'kalamary']);
 
 /** Sušené ovoce; sušené meruňky NHS jmenuje přímo. */
 const SUSENE_OVOCE = new Set([
@@ -60,6 +113,7 @@ const SUSENE_OVOCE = new Set([
   'rozinky',
   'datle',
   'brusinky-susene',
+  'fiky-susene',
 ]);
 
 /** Celozrnné a pseudoobiloviny — kniha je uvádí u zinku i železa. */
@@ -82,46 +136,65 @@ const CELOZRNNE = new Set([
 ]);
 
 /**
- * Vitamin C — jen skupiny, které jmenuje načtená stránka.
+ * Zelená listová zelenina, kterou ICBP jmenuje jako rostlinný zdroj železa.
  *
- * NHS (Vitamin C) jmenuje citrusy, papriky, jahody, černý rybíz, brokolici,
- * růžičkovou kapustu a brambory. Informační centrum bezpečnosti potravin
- * (Ministerstvo zemědělství) k nim přidává kiwi (130 mg/100 g), papáju
- * (100 mg/100 g), květák a kapustu (obojí až 130 mg/100 g, tedy stejné pásmo
- * jako brokolice) a kysané zelí, které jmenuje jako dřívější významný zdroj
- * v české stravě. Kapustu uvádí jako skupinu jedním slovem, proto do ní patří
- * hlávková i kadeřavá.
+ * Vybrané jsou tmavé listy, u kterých je označení „zelená listová" nesporné.
+ * Hlávkový salát, polníček ani pekingské zelí tu nejsou: jsou světlé a
+ * vodnaté a heslo je nejmenuje, takže by to bylo dopsané z hlavy.
+ */
+const LISTOVA_ZELENINA = new Set(['spenat', 'mangold', 'kapusta-kaderava', 'rukola']);
+
+/**
+ * Vitamin C — suroviny, které zdroje jmenují adresně mezi nejbohatšími.
  *
- * Ovoce, které v žádném z obou seznamů není — mango, ananas, kaki, maliny,
- * rakytník, granátové jablko — se sem nedoplňuje z hlavy (CLAUDE.md pravidlo 1),
- * i když se o něm běžně píše jako o zdroji vitaminu C.
- *
- * Zdroj: Informační centrum bezpečnosti potravin, „Vitamin C",
- * https://bezpecnostpotravin.cz/termin/vitamin-c/, ověřeno 14. 9. 2026.
+ * Brambory a kysané zelí zdroje jmenují taky, ale v nejnižším pásmu (do
+ * 40 mg/100 g), takže patří o stupeň níž, viz `VITAMIN_C_OBSAHUJE`.
  */
 const VITAMIN_C_VYZNAMNY = new Set([
   'pomeranc',
   'mandarinka',
   'citron',
   'limetka',
+  'grapefruit',
+  'pomelo',
   'paprika-sladka',
   'jahody',
   'rybiz-cerny',
   'brokolice',
   'ruzickova-kapusta',
-  'kiwi',
-  'papaja',
   'kvetak',
   'kapusta-hlavkova',
   'kapusta-kaderava',
+  'kedlubna',
+  'kiwi',
+  'papaja',
+  'rajce',
 ]);
 
-const VITAMIN_C_OBSAHUJE = new Set([
-  'brambor',
-  'batat',
-  'rybiz-cerveny',
-  'zeli-bile',
-  'zeli-kysane',
+/** Jmenované adresně, ale v nejnižším pásmu obsahu. */
+const VITAMIN_C_OBSAHUJE = new Set(['brambor', 'batat', 'zeli-bile', 'zeli-kysane']);
+
+/**
+ * Ovoce a zelenina, kde se vitamin C počítat nedá.
+ *
+ * Sušením, zavařováním i dlouhým skladováním se ztrácí — obě hesla ho řadí
+ * mezi nejméně stálé vitaminy a SZÚ dodává, že ho ničí teplo a kyslík. Houby
+ * nejsou ani ovoce, ani listová zelenina; do skupiny, kterou zdroje jako
+ * zdroj vitaminu C popisují, prostě nepatří.
+ */
+const BEZ_VITAMINU_C = new Set([
+  'datle',
+  'rozinky',
+  'susene-merunky',
+  'susene-svestky',
+  'brusinky-susene',
+  'fiky-susene',
+  'jablecne-pyre-bez-cukru',
+  'kokos-strouhany',
+  'rajcatovy-protlak',
+  'rajcata-loupana-konzerva',
+  'zampiony',
+  'hliva-ustricna',
 ]);
 
 function ironOf(item: Ingredient): { level: NutrientLevel; form: IronForm } {
@@ -138,6 +211,7 @@ function ironOf(item: Ingredient): { level: NutrientLevel; form: IronForm } {
   }
   if (SUSENE_OVOCE.has(item.id)) return { level: 'vyznamny', form: 'nehemove' };
   if (CELOZRNNE.has(item.id)) return { level: 'obsahuje', form: 'nehemove' };
+  if (LISTOVA_ZELENINA.has(item.id)) return { level: 'obsahuje', form: 'nehemove' };
   return { level: 'nevyznamny', form: 'zadne' };
 }
 
@@ -145,11 +219,13 @@ function zincOf(item: Ingredient): NutrientLevel {
   if (VNITRNOSTI.has(item.id)) return 'vyznamny';
   if (KORYSI.has(item.id)) return 'vyznamny';
   if (item.category === 'maso-ryby') return 'vyznamny';
-  if (item.category === 'lusteniny') return 'obsahuje';
   if (item.category === 'orechy-seminka-tuky') {
+    // Semena a ořechy mají v načtené tabulce nejvyšší rozpětí ze všech
+    // jmenovaných skupin, 2,9–7,8 mg na 100 g. Oleje ne, tuk zinek nenese.
     const jeTuk = item.id.startsWith('olej-') || item.id === 'mleko-kokosove';
-    return jeTuk ? 'nevyznamny' : 'obsahuje';
+    return jeTuk ? 'nevyznamny' : 'vyznamny';
   }
+  if (item.category === 'lusteniny') return 'obsahuje';
   if (CELOZRNNE.has(item.id)) return 'obsahuje';
   if (item.category === 'mlecne-vejce') return 'obsahuje';
   if (item.category === 'obiloviny') return 'obsahuje';
@@ -159,6 +235,11 @@ function zincOf(item: Ingredient): NutrientLevel {
 function vitaminCOf(item: Ingredient): NutrientLevel {
   if (VITAMIN_C_VYZNAMNY.has(item.id)) return 'vyznamny';
   if (VITAMIN_C_OBSAHUJE.has(item.id)) return 'obsahuje';
+  if (BEZ_VITAMINU_C.has(item.id)) return 'nevyznamny';
+  // Zbytek čerstvého ovoce a zeleniny. Zdroje mluví o ovoci a zelenině jako
+  // o skupině a doporučují pět porcí denně právě kvůli vitaminu C; tvrdit
+  // o čerstvé malině nebo o rakytníku, že vitamin C nemá, by bylo proti nim.
+  if (item.category === 'ovoce' || item.category === 'zelenina') return 'obsahuje';
   return 'nevyznamny';
 }
 

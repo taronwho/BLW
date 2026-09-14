@@ -3,10 +3,11 @@ import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { NutrientLevel, NutrientProfile } from '@/data/nutrients';
+import { NUTRIENT_SOURCES, type NutrientLevel, type NutrientProfile } from '@/data/nutrients';
 import type { Ingredient } from '@/types';
 import { IRON_FORM_LABELS, LEVEL_CHIP, LEVEL_DOTS, LEVEL_LABELS } from '../lib/nutrientLabels';
 import { IngredientIcon } from './IngredientIcon';
+import { SourceDisclosure } from './SourceList';
 
 export interface NutrientBadgeProps {
   profile: NutrientProfile;
@@ -194,6 +195,8 @@ export function NutrientBadge({
                 s paprikou, brokolicí či ovocem.
               </p>
             )}
+
+            <SourceDisclosure sources={NUTRIENT_SOURCES} label="Zdroje zařazení" testId="zdroje-zivin" />
 
             {ironFrom.length > 0 && (
               <div>

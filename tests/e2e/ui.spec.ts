@@ -261,17 +261,24 @@ test('filtr železa a řazení přerovnají seznam receptů', async ({ page }) =
   const vse = (await count.textContent()) ?? '';
 
   // Živiny se zaškrtávají nezávisle a podmínky se sčítají.
+  //
+  // Druhá živina sama o sobě seznam zúžit nemusí: zinek chodí ve stejných
+  // potravinách jako železo a vitamin C nese každé čerstvé ovoce i zelenina,
+  // takže „železo a zinek" i „železo a vitamin C" vyberou stejné recepty jako
+  // „železo". Zúžení se proto zkouší přísností zdroje a druhem železa, kde
+  // se množiny opravdu liší.
   await page.getByTestId('prepinac-zelezo').click();
   const jenZelezo = (await count.textContent()) ?? '';
   expect(jenZelezo).not.toBe(vse);
 
   await page.getByTestId('prepinac-cecko').click();
-  const zelezoACecko = (await count.textContent()) ?? '';
-  expect(zelezoACecko).not.toBe(jenZelezo);
+  await page.getByTestId('filtr-sily').getByTestId('chip-vyznamny').click();
+  const jenVyznamne = (await count.textContent()) ?? '';
+  expect(jenVyznamne).not.toBe(jenZelezo);
 
   // Druh železa se nabídne, až když je železo vybrané.
   await page.getByTestId('filtr-druhu-zeleza').getByTestId('chip-hemove').click();
-  await expect(count).not.toHaveText(zelezoACecko);
+  await expect(count).not.toHaveText(jenVyznamne);
 
   await page.getByTestId('zrusit-filtry').click();
   await expect(count).toHaveText(vse);

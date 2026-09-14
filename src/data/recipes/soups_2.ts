@@ -873,7 +873,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce krému do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Do odebrané porce vmíchej lžičku mleté mandlové moučky, která dodá tuk i rostlinné železo.',
-      'Zakápni kapkou citronu a posyp špetkou nasekané petrželky; vitamin C z obojího zlepší vstřebání železa z mleté mandlové moučky.',
+      'Zakápni kapkou citronu a posyp špetkou nasekané petrželky; vitamin C z citronu zlepší vstřebání železa z mleté mandlové moučky.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -916,7 +916,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Odebranou polévku rozmixuj nadobro, ať v ní nezůstane celý kousek hrachu.',
-      'Vymačkej do misky kapku citronu a vmíchej špetku nasekané petrželky; vitamin C z obojího zlepší vstřebání železa, které hrách nese.',
+      'Vymačkej do misky kapku citronu a vmíchej špetku nasekané petrželky; vitamin C z citronu zlepší vstřebání železa, které hrách nese.',
       'Nech vychladnout na teplotu ruky a rozprostři polévku v misce.',
     ],
     babyServing: {
@@ -1043,7 +1043,7 @@ export const soups2: Recipe[] = [
     babySteps: [
       'Zeleninu v odebrané porci zkus rozmáčknout prstem; když to nejde, vrať ji do hrnce a vař dál.',
       'Jáhly rozmačkej vidličkou, ať porce drží pohromadě a nerozjede se po tácku.',
-      'Kápni citronovou šťávu a posyp špetkou nasekané petrželky; vitamin C z obojího pomůže vstřebat železo z jáhel.',
+      'Kápni citronovou šťávu a posyp špetkou nasekané petrželky; vitamin C z citronu pomůže vstřebat železo z jáhel.',
     ],
     babyServing: {
       '6m': 'Podávej hustou část polévky na naložené lžíci a vedle proužek vařené mrkve dlouhý jako dospělý prst.',
