@@ -263,13 +263,13 @@ export function nutrientProfile(item: Ingredient): NutrientProfile {
   const iron = ironOf(item);
   const zmerene = COMPOSITION[item.id];
   return {
-    iron: zmerene?.iron === undefined ? iron.level : urovenZObsahu('iron', zmerene.iron),
+    iron: zmerene?.iron === undefined ? iron.level : urovenZObsahu('iron', zmerene.iron.mg),
     ironForm: iron.form,
-    zinc: zmerene?.zinc === undefined ? zincOf(item) : urovenZObsahu('zinc', zmerene.zinc),
+    zinc: zmerene?.zinc === undefined ? zincOf(item) : urovenZObsahu('zinc', zmerene.zinc.mg),
     vitaminC:
       zmerene?.vitaminC === undefined
         ? vitaminCOf(item)
-        : urovenZObsahu('vitaminC', zmerene.vitaminC),
+        : urovenZObsahu('vitaminC', zmerene.vitaminC.mg),
   };
 }
 

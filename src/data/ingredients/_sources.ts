@@ -527,3 +527,82 @@ export const BP_NITRATES_VEG: SourceRef = {
   tier: 1,
 };
 
+
+/* ------------------------------------------------------------------ */
+/* Potravinové tabulky — jen pro obsah živin v miligramech             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Odkazy na konkrétní potraviny v národních databázích složení potravin.
+ *
+ * Politika je v docs/BEZPECNOST.md kapitola 1: tyhle domény se smí použít
+ * **jen** na obsah živin, ne na bezpečnostní tvrzení. O dušení, alergiích ani
+ * o věku zavádění tabulky neříkají nic.
+ *
+ * OVĚŘENO 14. 9. 2026: každý řádek, ze kterého se v src/data/composition.ts
+ * bere číslo, byl v téhle session skutečně stažen a hodnota porovnána se
+ * zdrojem. U české databáze šlo o stránku potraviny, u USDA o oficiální
+ * exportní dataset FoodData Central a navíc o datové rozhraní téže domény
+ * (webový výpis někdy zaokrouhluje poslední číslici jinak než export),
+ * u norské tabulky o její veřejný export.
+ */
+
+/** Česká databáze složení potravin, ÚZEI — heslo jedné potraviny. */
+export function czfcdb(nazev: string, id: number): SourceRef {
+  return {
+    org: 'ÚZEI, Česká databáze složení potravin',
+    title: `${nazev} — Česká databáze složení potravin`,
+    url: `https://www.nutridatabaze.cz/potraviny/?id=${id}`,
+    accessedAt: FETCHED_14,
+    tier: 1,
+  };
+}
+
+/** USDA FoodData Central — heslo jedné potraviny. */
+export function usdaFdc(nazev: string, fdcId: number): SourceRef {
+  return {
+    org: 'USDA FoodData Central',
+    title: `${nazev} — USDA FoodData Central`,
+    url: `https://fdc.nal.usda.gov/food-details/${fdcId}/nutrients`,
+    accessedAt: FETCHED_14,
+    tier: 1,
+  };
+}
+
+/** Matvaretabellen — norská tabulka složení potravin. */
+export function matvaretabellen(nazev: string, cesta: string): SourceRef {
+  return {
+    org: 'Matvaretabellen (Mattilsynet)',
+    title: `${nazev} — Matvaretabellen`,
+    url: `https://www.matvaretabellen.no/${cesta}/`,
+    accessedAt: FETCHED_14,
+    tier: 1,
+  };
+}
+
+/** Úvodní stránka české databáze — pro obecné uvedení zdroje v UI. */
+export const CZFCDB: SourceRef = {
+  org: 'ÚZEI, Česká databáze složení potravin',
+  title: 'Česká databáze složení potravin',
+  url: 'https://www.nutridatabaze.cz/potraviny/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/** Úvodní stránka USDA FoodData Central. */
+export const USDA_FDC: SourceRef = {
+  org: 'USDA FoodData Central',
+  title: 'FoodData Central',
+  url: 'https://fdc.nal.usda.gov/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/** Úvodní stránka norské tabulky. */
+export const MATVARETABELLEN: SourceRef = {
+  org: 'Matvaretabellen (Mattilsynet)',
+  title: 'Matvaretabellen',
+  url: 'https://www.matvaretabellen.no/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
