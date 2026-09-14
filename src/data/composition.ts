@@ -39,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 240 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 169 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -257,6 +257,172 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
     ...z({ iron: 0.96, zinc: 0.57 }, usdaFdc('Bulgur, cooked', 170287)),
     poznamka: 'Měřeno uvařený ve vodě, tak se podává. Suchý má živin víc, ale ten se nejí.',
   },
+  'ryze-basmati': {
+    ...z({ iron: 0.1, zinc: 0.62 }, czfcdb('Rýže loupaná, dušená v nesolené vodě', 504)),
+    poznamka: 'Tabulka vede bílou loupanou rýži dušenou v nesolené vodě, odrůdy nerozlišuje.',
+  },
+  'ryze-kulatozrnna': {
+    ...z({ iron: 0.1, zinc: 0.62 }, czfcdb('Rýže loupaná, dušená v nesolené vodě', 504)),
+    poznamka: 'Měřeno dušená v nesolené vodě, tak se podává.',
+  },
+  'ryze-natural': {
+    ...z({ iron: 0.3, zinc: 1 }, czfcdb('Rýže neloupaná (natural), dušená v nesolené vodě', 505)),
+    poznamka: 'Měřeno dušená v nesolené vodě, tak se podává.',
+  },
+  'ryzove-chlebicky': {
+    ...z({ iron: 1.17, zinc: 2.22 }, usdaFdc('Snacks, rice cakes, brown rice, corn', 169679)),
+    poznamka: 'Měřeno chlebíčky z natural rýže s kukuřicí.',
+  },
+  'jahly': {
+    ...z({ iron: 0.63, zinc: 0.91 }, usdaFdc('Millet, cooked', 168871)),
+    poznamka: 'Měřeno uvařené ve vodě, tak se podávají. Suché jáhly mají živin víc.',
+  },
+  'pohanka-lamanka': {
+    ...z({ iron: 0.8, zinc: 0.61 }, usdaFdc('Buckwheat groats, roasted, cooked', 170686)),
+    poznamka: 'Měřeno vařená ve vodě. Tabulka lámanku a kroupy nerozlišuje.',
+  },
+  'pohanka-kroupy': {
+    ...z({ iron: 0.8, zinc: 0.61 }, usdaFdc('Buckwheat groats, roasted, cooked', 170686)),
+    poznamka: 'Měřeno vařená ve vodě. Tabulka lámanku a kroupy nerozlišuje.',
+  },
+  'quinoa': {
+    ...z({ iron: 1.49, zinc: 1.09 }, usdaFdc('Quinoa, cooked', 168917)),
+    poznamka: 'Měřeno uvařená ve vodě, tak se podává. Suchá quinoa má živin víc.',
+  },
+  'amarant': {
+    ...z({ iron: 2.1, zinc: 0.86 }, usdaFdc('Amaranth grain, cooked', 170683)),
+    poznamka: 'Měřeno uvařený ve vodě, tak se podává. Suchý amarant má živin víc.',
+  },
+  'polenta': {
+    ...z({ iron: 1.7 }, czfcdb('Krupice kukuřičná, T600', 187)),
+    poznamka: 'Tabulka vede kukuřičnou krupici T600, ze které se polenta vaří.',
+  },
+  'krupice-psenicna': z({ iron: 0.5, zinc: 0.56 }, czfcdb('Krupice, pšeničná, hrubá, T 480, obsah popele max. 0,5 % v suš.', 149)),
+  'kroupy-jecne': {
+    ...z({ iron: 1.33, zinc: 0.82 }, usdaFdc('Barley, pearled, cooked', 170285)),
+    poznamka: 'Měřeno uvařené ve vodě, tak se podávají. Suché kroupy mají živin víc.',
+  },
+  'strouhanka': {
+    ...z({ iron: 1.2 }, czfcdb('Strouhanka', 189)),
+    ...z({ zinc: 0.74 }, usdaFdc('Bread, white, commercially prepared (includes soft bread crumbs)', 174924)),
+    poznamka: 'Železo z české tabulky, zinek z USDA (bílé pečivo).',
+  },
+  'tortilla-psenicna': z({ iron: 3.3, zinc: 0.71 }, usdaFdc('Tortillas, ready-to-bake or -fry, flour, without added calcium', 173242)),
+  'mouka-ryzova': z({ iron: 0.35, zinc: 0.8 }, usdaFdc('Rice flour, white, unenriched', 169714)),
+  'mouka-kukuricna': {
+    ...z({ iron: 2.99, zinc: 3.1 }, usdaFdc('Cornmeal, yellow (Navajo)', 168039)),
+    poznamka: 'Tabulka vede kukuřičnou mouku pod názvem Cornmeal, yellow.',
+  },
+  'mouka-pohankova': z({ iron: 4.06, zinc: 3.12 }, usdaFdc('Buckwheat flour, whole-groat', 170687)),
+  'mouka-ovesna': {
+    ...z({ iron: 5.5 }, czfcdb('Mouka ovesná', 343)),
+    ...z({ zinc: 2.7 }, matvaretabellen('Havremel', 'havremel')),
+    poznamka: 'Železo je z české tabulky, zinek z norské — česká ho u ovesné mouky neuvádí.',
+  },
+  'mouka-sojova': {
+    ...z({ iron: 6.37, zinc: 3.92 }, usdaFdc('Soy flour, full-fat, raw', 174273)),
+    poznamka: 'Tabulka vede plnotučnou sójovou mouku.',
+  },
+  'ryzove-nudle': {
+    ...z({ iron: 0.14, zinc: 0.25 }, usdaFdc('Rice noodles, cooked', 168914)),
+    poznamka: 'Měřeno uvařené ve vodě, tak se podávají.',
+  },
+  'tapiokovy-skrob': {
+    ...z({ iron: 1.58, zinc: 0.12 }, usdaFdc('Tapioca, pearl, dry', 169717)),
+    poznamka: 'Tabulka vede tapiokové perly v suchém stavu.',
+  },
+
+  /* Zelenina */
+  'mrkev': z({ vitaminC: 4.5, iron: 1.1 }, czfcdb('Mrkev', 62)),
+  'pastinak': z({ vitaminC: 17, iron: 0.59, zinc: 0.59 }, usdaFdc('Parsnips, raw', 170417)),
+  'petrzel-koren': z({ vitaminC: 45, iron: 1.5 }, czfcdb('Petržel, kořen', 67)),
+  'celer-bulva': z({ vitaminC: 11, iron: 0.6 }, czfcdb('Celer bulvový', 50)),
+  'cervena-repa': z({ vitaminC: 10, iron: 0.7 }, czfcdb('Řepa červená', 72)),
+  'batat': {
+    ...z({ vitaminC: 19.6, iron: 0.69, zinc: 0.32 }, usdaFdc('Sweet potato, cooked, baked in skin, flesh, without salt', 168483)),
+    poznamka: 'Měřeno pečený ve slupce a bez soli, tak se podává.',
+  },
+  'brambor': {
+    ...z({ vitaminC: 7.4, iron: 0.31, zinc: 0.27 }, usdaFdc('Potatoes, boiled, cooked without skin, flesh, without salt', 170440)),
+    poznamka: 'Měřeno vařené bez slupky a bez soli, tak se podávají.',
+  },
+  'dyne-hokaido': {
+    ...z({ vitaminC: 9.6, iron: 0.44, zinc: 0.22 }, usdaFdc('Squash, winter, all varieties, cooked, baked, without salt', 170490)),
+    poznamka: 'Tabulka hokkaido zvlášť nevede; hodnota je za pečenou zimní dýni bez rozlišení odrůdy.',
+  },
+  'dyne-maslova': {
+    ...z({ vitaminC: 15.1, iron: 0.6, zinc: 0.13 }, usdaFdc('Squash, winter, butternut, cooked, baked, without salt', 169296)),
+    poznamka: 'Měřeno pečená bez soli, tak se dětem podává.',
+  },
+  'cuketa': z({ vitaminC: 12.8, iron: 1 }, czfcdb('Cuketa', 52)),
+  'patizon': z({ vitaminC: 18, iron: 0.4, zinc: 0.29 }, usdaFdc('Squash, summer, scallop, raw', 169289)),
+  'lilek': z({ vitaminC: 2.2, iron: 0.23, zinc: 0.16 }, usdaFdc('Eggplant, raw', 169228)),
+  'brokolice': {
+    ...z({ vitaminC: 121, iron: 1.1 }, czfcdb('Brokolice', 49)),
+    ...z({ zinc: 0.41 }, usdaFdc('Broccoli, raw', 170379)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'kvetak': z({ vitaminC: 76.8, iron: 0.6 }, czfcdb('Květák', 61)),
+  'kedlubna': z({ vitaminC: 48.1, iron: 1.3 }, czfcdb('Kedlubna', 58)),
+  'zeli-bile': z({ vitaminC: 44, iron: 0.5 }, czfcdb('Zelí hlávkové, bílé', 76)),
+  'kapusta-hlavkova': z({ vitaminC: 94.8, iron: 1.7 }, czfcdb('Kapusta hlávková', 56)),
+  'kapusta-kaderava': z({ vitaminC: 93.4, iron: 1.6, zinc: 0.39 }, usdaFdc('Kale, raw', 168421)),
+  'ruzickova-kapusta': z({ vitaminC: 95.2, iron: 1.1 }, czfcdb('Kapusta růžičková', 57)),
+  'hrasek-zeleny': {
+    ...z({ vitaminC: 14.2, iron: 1.54, zinc: 1.19 }, usdaFdc('Peas, green, cooked, boiled, drained, without salt', 170420)),
+    poznamka: 'Měřeno vařený a scezený, bez soli.',
+  },
+  'fazolky-zelene': {
+    ...z({ vitaminC: 9.7, iron: 0.65, zinc: 0.25 }, usdaFdc('Beans, snap, green, cooked, boiled, drained, without salt', 169141)),
+    poznamka: 'Měřeno vařené a scezené, bez soli.',
+  },
+  'kukurice-cukrova': {
+    ...z({ vitaminC: 5.5, iron: 0.45, zinc: 0.62 }, usdaFdc('Corn, sweet, yellow, cooked, boiled, drained, without salt', 169999)),
+    poznamka: 'Měřeno vařená a scezená, bez soli.',
+  },
+  'spenat': z({ vitaminC: 60, iron: 3.3 }, czfcdb('Špenát', 74)),
+  'mangold': z({ vitaminC: 30, iron: 1.8, zinc: 0.36 }, usdaFdc('Chard, swiss, raw', 169991)),
+  'rukola': z({ vitaminC: 15, iron: 1.46, zinc: 0.47 }, usdaFdc('Arugula, raw', 169387)),
+  'hlavkovy-salat': z({ vitaminC: 3.7, iron: 1.24, zinc: 0.2 }, usdaFdc('Lettuce, butterhead (includes boston and bibb types), raw', 168429)),
+  'okurka-salatova': z({ vitaminC: 2.8, iron: 0.28, zinc: 0.2 }, usdaFdc('Cucumber, with peel, raw', 168409)),
+  'rajce': z({ vitaminC: 18.7, iron: 0.7 }, czfcdb('Rajčata', 70)),
+  'paprika-sladka': z({ vitaminC: 191, iron: 0.5 }, czfcdb('Paprika zeleninová, červená', 65)),
+  'porek': z({ vitaminC: 25, iron: 2.2 }, czfcdb('Pórek', 69)),
+  'cibule': z({ vitaminC: 8.2, iron: 0.5 }, czfcdb('Cibule', 51)),
+  'cesnek': z({ vitaminC: 17, iron: 1.3 }, czfcdb('Česnek', 53)),
+  'fenykl-hliza': z({ vitaminC: 12, iron: 0.73, zinc: 0.2 }, usdaFdc('Fennel, bulb, raw', 169385)),
+  'chrest': {
+    ...z({ vitaminC: 7.7, iron: 0.91, zinc: 0.6 }, usdaFdc('Asparagus, cooked, boiled, drained', 168390)),
+    poznamka: 'Měřeno vařený a scezený, bez soli.',
+  },
+  'zampiony': z({ vitaminC: 3.2, iron: 1.3 }, czfcdb('Žampiony', 246)),
+  'hliva-ustricna': z({ iron: 1.33, zinc: 0.77 }, usdaFdc('Mushrooms, oyster, raw', 168580)),
+  'redkvicka': z({ vitaminC: 23.2, iron: 1 }, czfcdb('Ředkvička', 71)),
+  'turin': z({ vitaminC: 25, iron: 0.44, zinc: 0.24 }, usdaFdc('Rutabagas, raw', 168454)),
+  'dyne-spagetova': {
+    ...z({ vitaminC: 3.5, iron: 0.34, zinc: 0.2 }, usdaFdc('Squash, winter, spaghetti, cooked, boiled, drained, or baked, without salt', 169299)),
+    poznamka: 'Měřeno vařená nebo pečená, bez soli.',
+  },
+  'artycok': {
+    ...z({ vitaminC: 7.4, iron: 0.61, zinc: 0.4 }, usdaFdc('Artichokes, (globe or french), cooked, boiled, drained, without salt', 168386)),
+    poznamka: 'Měřeno vařený a scezený, bez soli.',
+  },
+  'redkev-bila': z({ vitaminC: 24.8, iron: 1.1 }, czfcdb('Ředkev bílá', 491)),
+  'celer-rapikaty': z({ vitaminC: 3.1, iron: 0.2, zinc: 0.13 }, usdaFdc('Celery, raw', 169988)),
+  'pekingske-zeli': z({ vitaminC: 27, iron: 0.5 }, czfcdb('Zelí čínské', 75)),
+  'polnicek': z({ vitaminC: 38.2, iron: 2.18, zinc: 0.59 }, usdaFdc('Cornsalad, raw', 169219)),
+  'zeli-kysane': {
+    ...z({ vitaminC: 14.7, iron: 1.47, zinc: 0.19 }, usdaFdc('Sauerkraut, canned, solids and liquids', 169279)),
+    poznamka: 'Měřeno kysané zelí i s nálevem.',
+  },
+  'rajcatovy-protlak': z({ vitaminC: 54.4, iron: 2 }, czfcdb('Protlak rajčatový', 396)),
+  'rajcata-loupana-konzerva': {
+    ...z({ vitaminC: 12.6, iron: 0.57, zinc: 0.12 }, usdaFdc('Tomatoes, red, ripe, canned, packed in tomato juice', 170051)),
+    poznamka: 'Měřeno loupaná rajčata v rajčatové šťávě.',
+  },
+  'zeli-cervene': z({ vitaminC: 52, iron: 0.6 }, czfcdb('Zelí hlávkové, červené', 77)),
+  'jarni-cibulka': z({ vitaminC: 18.8, iron: 1.48, zinc: 0.39 }, usdaFdc('Onions, spring or scallions (includes tops and bulb), raw', 170005)),
+  'salotka': z({ vitaminC: 8, iron: 1.2, zinc: 0.4 }, usdaFdc('Shallots, raw', 170499)),
 };
 
 /**
