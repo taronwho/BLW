@@ -860,3 +860,23 @@ test('zkrácený štítek na dlaždici čte odečítač obrazovky celý', async 
   await expect(duseni).toContainText('vysoké riziko dušení');
   await expect(duseni.locator('span.sr-only')).toHaveText(/riziko dušení/);
 });
+
+test('úvodní obrazovka se vejde bez dlouhého rolování', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Karta o dávení musí být celá v první obrazovce, nad spodní navigací —
+  // je to informace, ke které se sahá bez času hledat.
+  const okno = page.viewportSize()?.height ?? 0;
+  const navigace = 64;
+  const daveni = await page.getByTestId('dlazdice-daveni').boundingBox();
+  if (daveni === null) throw new Error('karta o dávení není vidět');
+  expect(daveni.y + daveni.height).toBeLessThan(okno - navigace);
+
+  // Celá obrazovka se vejde do jedné a půl výšky displeje. Dřív měla přes
+  // dvě, protože hlavička nesla tři odstavce a čísla katalogu tři rámečky.
+  const vyska = await page.evaluate(() => document.querySelector('main')?.scrollHeight ?? 0);
+  expect(vyska).toBeLessThan(1000);
+
+  await expect(page.getByTestId('hlavni-menu')).toBeVisible();
+  await expect(page.getByTestId('obsah-katalogu')).toContainText('surovin');
+});
