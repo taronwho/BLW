@@ -2324,4 +2324,46 @@ export const lunchesDinners2: Recipe[] = [
     sources: [NHS_FISH, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
+  {
+    id: 'arasidova-omacka-k-zelenine',
+    titleCz: 'Arašídová omáčka k dušené zelenině',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 30,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'arasidy', amount: '80 g', track: 'all' },
+      { ingredientId: 'kesu-orechy', amount: '40 g', track: 'all' },
+      { ingredientId: 'mrkev', amount: '2 velké', track: 'all' },
+      { ingredientId: 'cuketa', amount: '1 menší', track: 'all' },
+      { ingredientId: 'ryzove-nudle', amount: '200 g', track: 'all' },
+      { ingredientId: 'limetka', amount: 'půlka', track: 'all' },
+      { ingredientId: 'olej-slunecnicovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Arašídy i kešu umel na jemnou moučku a rozmixuj je s vodou na hladkou omáčku bez kousků.',
+      'Mrkev a cuketu nakrájej na proužky dlouhé jako prst a duste je na oleji deset minut doměkka.',
+      'Rýžové nudle zalij vroucí vodou a nech změknout podle obalu.',
+    ],
+    babySplitPoint:
+      'Po kroku 2 odeber lžíci hladké ořechové omáčky a pár proužků zeleniny, dřív než se pánev dochucuje pro dospělé.',
+    babySteps: [
+      'Zkontroluj, že je odebraná omáčka opravdu hladká; kousek mletého ořechu v ní zůstat nesmí.',
+      'Proužky zeleniny zkus rozmáčknout prstem — když to nejde, duste dál.',
+      'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
+    ],
+    babyServing: {
+      '6m': 'Podávej proužek dušené mrkve dlouhý jako dospělý prst přelitý lžící hladké ořechové omáčky.',
+      '9m': 'Přidej pár dlouhých nudlí a zeleninu nech v proužcích, dítě si je bere z tácku samo.',
+      '12m': 'Batole jí nudle se zeleninou a omáčkou z misky lžící.',
+    },
+    adultSteps: [
+      'Zbylou omáčku osol, opepři a zakápni limetkou.',
+      'Spoj ji s nudlemi a zeleninou a podávej.',
+    ],
+    allergens: ['arasidy', 'orechy'],
+    tags: ['vegetariánské', 'bez lepku'],
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
 ];

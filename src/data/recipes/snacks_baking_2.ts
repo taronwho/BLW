@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import {
+  NHS_TRACE_MINERALS,
   NHS_CHOKING,
   NHS_10_12M,
   NHS_7_9M,
@@ -980,6 +981,89 @@ export const snacksBaking2: Recipe[] = [
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'mrazitelné'],
     sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'orechove-susenky-z-mlete-smesi',
+    titleCz: 'Ořechové sušenky z mleté směsi',
+    category: 'svaciny-peceni',
+    minAgeMonths: 6,
+    timeMinutes: 35,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'liskove-orechy', amount: '60 g', track: 'all' },
+      { ingredientId: 'pekanove-orechy', amount: '40 g', track: 'all' },
+      { ingredientId: 'makadamove-orechy', amount: '30 g', track: 'all' },
+      { ingredientId: 'mouka-ovesna', amount: '150 g', track: 'all' },
+      { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
+      { ingredientId: 'olej-slunecnicovy', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+    ],
+    baseSteps: [
+      'Všechny tři druhy ořechů umel v mlýnku na jemnou moučku — v těstě pro dítě nesmí zůstat ani kousek celého ořechu.',
+      'Banány rozmačkej vidličkou, přidej ovesnou mouku, mletou ořechovou moučku, olej a špetku skořice.',
+      'Těsto nech deset minut odpočinout, ovesná mouka mezitím nasákne a zhoustne.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
+    babySteps: [
+      'Z odebraného těsta vytvaruj dvě podlouhlé tyčinky dlouhé jako dospělý prst, ne kolečka.',
+      'Peč je na 170 °C patnáct minut, jen dokud nezpevní — přepečené sušenky tvrdnou a drolí se.',
+      'Nech vychladnout na teplotu ruky a zkontroluj, že v tyčince nezůstal tvrdý kousek.',
+    ],
+    babyServing: {
+      '6m': 'Podávej podlouhlou tyčinku vcelku, aby konec čouhal z pěsti.',
+      '9m': 'Tyčinku překroj podél na dva užší proužky pro uchopení dvěma prsty.',
+      '12m': 'Batole si bere sušenky nakrájené na sousta a namáčí si je do jogurtu.',
+    },
+    adultSteps: [
+      'Do zbytku těsta přidej nasekané ořechy a špetku soli a upeč sušenky obvyklé velikosti.',
+      'Kdo chce, dosladí si těsto sám ještě před pečením.',
+    ],
+    allergens: ['orechy', 'psenice-lepek'],
+    tags: ['vegetariánské', 'do ruky'],
+    sources: [NHS_AVOID, NHS_ALLERGY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'jogurt-s-pistaciemi-a-para-orechy',
+    titleCz: 'Jogurt s mletými pistáciemi a para ořechy',
+    category: 'svaciny-peceni',
+    minAgeMonths: 6,
+    timeMinutes: 10,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'pistacie', amount: '40 g', track: 'all' },
+      { ingredientId: 'para-orechy', amount: '20 g', track: 'all' },
+      { ingredientId: 'piniove-orisky', amount: '20 g', track: 'all' },
+      { ingredientId: 'jogurt-recky', amount: '400 g', track: 'all' },
+      { ingredientId: 'hruska', amount: '2 zralé', track: 'all' },
+      { ingredientId: 'slunecnicove-maslo', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Pistácie, para ořechy i piniové oříšky umel odděleně na jemnou moučku.',
+      'Hrušky oloupej, zbav jádřinců a nakrájej na podélné proužky.',
+      'Jogurt rozdělej lžící do hladka a rozděl do misek.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
+    babySteps: [
+      'Vmíchej do odebraného jogurtu lžičku mleté pistáciové moučky a jen špetku mleté moučky z para ořechů — ta je kvůli selenu položkou na občas, ne na každý den.',
+      'Přidej lžičku slunečnicového másla a rozmíchej ho, ať nezůstane v hrudce.',
+      'Vedle nabídni podélný proužek hrušky, který dítě uchopí.',
+    ],
+    babyServing: {
+      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek hrušky dlouhý jako dospělý prst.',
+      '9m': 'Hrušku nech v kratších proužcích na dva prsty, jogurt dítě nabírá lžící samo.',
+      '12m': 'Batole jí misku lžící a hrušku nakrájenou na sousta.',
+    },
+    adultSteps: [
+      'Zbylý jogurt posyp mletými pistáciemi a piniovými oříšky.',
+      'Přidej proužky hrušky a lžíci slunečnicového másla; kdo chce, dosladí si na talíři sám.',
+    ],
+    allergens: ['orechy', 'mleko'],
+    tags: ['vegetariánské', 'rychlé', 'bez lepku'],
+    sources: [NHS_TRACE_MINERALS, NHS_AVOID],
     reviewStatus: 'verified',
   },
 ];
