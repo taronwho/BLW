@@ -1,4 +1,4 @@
-import type { HouseholdState, ReadySign } from '@/types';
+import type { Child, ReadySign } from '@/types';
 import { READY_SIGNS } from '@/types';
 
 /**
@@ -41,22 +41,22 @@ export const READY_HOW_TO_TELL: Record<ReadySign, string> = {
     'Co skončí v ústech, jazyk už automaticky nevytlačuje ven. Dokud reflex trvá, dítě vypudí i to, co by rádo snědlo.',
 };
 
-export function readySigns(state: HouseholdState): ReadySign[] {
-  return state.readySigns ?? [];
+export function readySigns(dite: Child | null): ReadySign[] {
+  return dite?.readySigns ?? [];
 }
 
-export function hasSign(state: HouseholdState, sign: ReadySign): boolean {
-  return readySigns(state).includes(sign);
+export function hasSign(dite: Child | null, sign: ReadySign): boolean {
+  return readySigns(dite).includes(sign);
 }
 
 /** Jsou všechny tři znaky odškrtnuté? */
-export function isReady(state: HouseholdState): boolean {
-  return READY_SIGNS.every((sign) => hasSign(state, sign));
+export function isReady(dite: Child | null): boolean {
+  return READY_SIGNS.every((sign) => hasSign(dite, sign));
 }
 
 /** Znaky, které rodič zatím neodškrtl. */
-export function missingSigns(state: HouseholdState): ReadySign[] {
-  return READY_SIGNS.filter((sign) => !hasSign(state, sign));
+export function missingSigns(dite: Child | null): ReadySign[] {
+  return READY_SIGNS.filter((sign) => !hasSign(dite, sign));
 }
 
 /**
@@ -66,6 +66,6 @@ export function missingSigns(state: HouseholdState): ReadySign[] {
  * rodič zatím neodškrtl nic. Právě to je nejčastější stav u někoho, kdo si
  * aplikaci otevřel před začátkem příkrmu.
  */
-export function shouldWarnAboutReadiness(state: HouseholdState): boolean {
-  return !isReady(state);
+export function shouldWarnAboutReadiness(dite: Child | null): boolean {
+  return !isReady(dite);
 }

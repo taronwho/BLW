@@ -41,6 +41,17 @@ export function householdLink(page: Page): ReturnType<Page['getByTestId']> {
   return page.getByTestId('dite-v-hlavicce');
 }
 
+/**
+ * Přejde do Domácnosti a otevře daný okruh.
+ *
+ * Obrazovka je rozdělená na Děti / Sdílení / Aplikace, aby se na ní nemuselo
+ * scrollovat přes celé nastavení kvůli párovacímu kódu.
+ */
+export async function otevriDomacnost(page: Page, sekce: 'deti' | 'sdileni' | 'aplikace'): Promise<void> {
+  await page.goto(`./#/domacnost?sekce=${sekce}`);
+  await expect(page.getByTestId(`sekce-${sekce}`)).toHaveAttribute('aria-current', 'page');
+}
+
 export const SCREENS: readonly ScreenDef[] = [
   {
     id: 'suroviny',
@@ -86,14 +97,46 @@ export const SCREENS: readonly ScreenDef[] = [
     },
   },
   {
-    id: 'domacnost',
-    name: 'Domácnost',
+    id: 'domacnost-deti',
+    // Domácnost je rozdělená na tři okruhy a každý se kontroluje zvlášť —
+    // jinak by přetečení nebo malý dotykový cíl v jednom z nich prošel.
+    name: 'Domácnost — děti',
     open: async (page) => {
-      await householdLink(page).click();
+      await otevriDomacnost(page, 'deti');
+      await expect(page.getByTestId('jmeno-ditete')).toBeVisible();
+    },
+  },
+  {
+    id: 'domacnost-sdileni',
+    name: 'Domácnost — sdílení',
+    open: async (page) => {
+      await otevriDomacnost(page, 'sdileni');
       await expect(page.getByTestId('stav-synchronizace')).toBeVisible();
     },
   },
+  {
+    id: 'domacnost-aplikace',
+    name: 'Domácnost — aplikace',
+    open: async (page) => {
+      await otevriDomacnost(page, 'aplikace');
+      await expect(page.getByTestId('pocet-k-revizi')).toBeVisible();
+    },
+  },
 ];
+
+/**
+ * Založí dítě, aby šlo nastavovat, co k němu patří.
+ *
+ * Připravenost, úchop ani alergie nejdou zadat, dokud žádné dítě není —
+ * a to je správně, patří dítěti, ne domácnosti.
+ */
+export async function zalozDite(page: Page, jmeno: string, narozeni: string): Promise<void> {
+  await otevriDomacnost(page, 'deti');
+  await page.getByTestId('jmeno-ditete').fill(jmeno);
+  await page.getByTestId('datum-narozeni').fill(narozeni);
+  await page.getByTestId('ulozit-dite').first().click();
+  await expect(page.getByTestId('seznam-deti')).toContainText(jmeno);
+}
 
 export interface TooSmallTarget {
   tag: string;

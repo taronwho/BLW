@@ -1,10 +1,12 @@
 import { create } from 'zustand';
-import type { AllergenGroup, Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
+import type { AllergenGroup, Child, Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
 import {
+  activeChildren,
   emptyHouseholdState,
   MAX_MEMBERS,
   mergeHouseholdState,
   migrateHouseholdState,
+  newChildId,
   newTastingId,
   SCHEMA_VERSION,
 } from '@/sync/merge';
@@ -20,6 +22,8 @@ import type { StorageAdapter, StoredHousehold, SyncStatus } from './types';
  */
 
 const CODE_STORAGE_KEY = 'blw.household.code.v1';
+/** Vybrané dítě je pohled tohohle zařízení, ne údaj domácnosti. */
+const CHILD_STORAGE_KEY = 'blw.household.child.v1';
 
 interface HouseholdStore {
   ready: boolean;
@@ -27,15 +31,20 @@ interface HouseholdStore {
   updatedAt: number;
   status: SyncStatus;
   householdCode: string | null;
+  /** Které dítě aplikace ukazuje. Jen v tomhle zařízení, nesdílí se. */
+  activeChildId: string | null;
 
   init(): Promise<void>;
   connect(code?: string): Promise<void>;
   disconnect(): void;
   createHousehold(): Promise<string>;
-  setChild(name: string, birthDate: string): Promise<void>;
-  setGrip(grip: Grip | undefined): Promise<void>;
-  toggleReadySign(sign: ReadySign): Promise<void>;
-  toggleChildAllergen(allergen: AllergenGroup): Promise<void>;
+  addChild(name: string, birthDate: string): Promise<string>;
+  updateChild(id: string, patch: Partial<Omit<Child, 'id'>>): Promise<void>;
+  removeChild(id: string): Promise<void>;
+  setActiveChild(id: string | null): void;
+  setGrip(id: string, grip: Grip | undefined): Promise<void>;
+  toggleReadySign(id: string, sign: ReadySign): Promise<void>;
+  toggleChildAllergen(id: string, allergen: AllergenGroup): Promise<void>;
   removeMember(uid: string): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
@@ -72,6 +81,24 @@ function readStoredCode(): string | null {
   }
 }
 
+function readStoredChild(): string | null {
+  try {
+    return window.localStorage.getItem(CHILD_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeStoredChild(id: string | null): void {
+  try {
+    if (id === null) window.localStorage.removeItem(CHILD_STORAGE_KEY);
+    else window.localStorage.setItem(CHILD_STORAGE_KEY, id);
+  } catch {
+    // Bez localStorage se výběr po zavření aplikace zapomene a vezme se
+    // první dítě. Vada na kráse, ne důvod k pádu.
+  }
+}
+
 function writeStoredCode(code: string | null): void {
   try {
     if (code === null) window.localStorage.removeItem(CODE_STORAGE_KEY);
@@ -102,13 +129,24 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
   async function spustStart(): Promise<void> {
     const stored = await local().load();
     const code = readStoredCode();
+    // Data uložená starší verzí mají jiný tvar `favorites`, `recipeNotes`
+    // i dítěte; bez převodu by na nich aplikace spadla a rodič by přišel
+    // o deník.
+    const stav = stored === null ? emptyHouseholdState() : migrateHouseholdState(stored.state);
+    // Vybrané dítě si pamatuje zařízení. Když v něm žádné není nebo bylo
+    // mezitím smazané, bere se první v domácnosti.
+    const ulozeneDite = readStoredChild();
+    const deti = activeChildren(stav);
+    const aktivni =
+      ulozeneDite !== null && deti.some((dite) => dite.id === ulozeneDite)
+        ? ulozeneDite
+        : (deti[0]?.id ?? null);
     set({
       ready: true,
-      // Data uložená starší verzí mají jiný tvar `favorites` i `recipeNotes`;
-      // bez převodu by na nich aplikace spadla a rodič by přišel o deník.
-      state: stored === null ? emptyHouseholdState() : migrateHouseholdState(stored.state),
+      state: stav,
       updatedAt: stored?.updatedAt ?? 0,
       householdCode: code,
+      activeChildId: aktivni,
     });
 
     if (code !== null && loadFirebaseConfig() !== null) {
@@ -138,10 +176,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       const remote = await adapter.load();
       const localState = get().state;
       if (remote !== null) {
-        const merged = mergeHouseholdState(localState, migrateHouseholdState(remote.state), {
-          localUpdatedAt: get().updatedAt,
-          remoteUpdatedAt: remote.updatedAt,
-        });
+        const merged = mergeHouseholdState(localState, migrateHouseholdState(remote.state));
         await persist(withMember(merged, session.uid));
       } else {
         await persist(withMember(localState, session.uid));
@@ -151,10 +186,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       // nezpracují dvakrát.
       remoteUnsubscribe?.();
       remoteUnsubscribe = adapter.subscribe((incoming) => {
-        const merged = mergeHouseholdState(get().state, migrateHouseholdState(incoming.state), {
-          localUpdatedAt: get().updatedAt,
-          remoteUpdatedAt: incoming.updatedAt,
-        });
+        const merged = mergeHouseholdState(get().state, migrateHouseholdState(incoming.state));
         // Čas zápisu musí sedět v paměti i na disku. Dřív se do paměti
         // neukládal vůbec, takže se po přenačtení stránky lišil od toho na
         // disku a další slučování počítalo s jiným časem, než jaký platil.
@@ -179,6 +211,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     updatedAt: 0,
     status: { kind: 'local-only' },
     householdCode: null,
+    activeChildId: null,
 
     async init(): Promise<void> {
       rozjednanyStart ??= spustStart();
@@ -216,29 +249,83 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       return code;
     },
 
-    async setChild(name: string, birthDate: string): Promise<void> {
-      await persist({ ...get().state, childName: name, childBirthDate: birthDate });
+    /**
+     * Založení dítěte. Vrací jeho id, ať ho volající může rovnou zaktivnit.
+     *
+     * Domácnost jich unese víc — sourozenci se v příkrmu potkávají běžně
+     * a každý je jinde.
+     */
+    async addChild(name: string, birthDate: string): Promise<string> {
+      const id = newChildId();
+      const stav = get().state;
+      await persist({
+        ...stav,
+        children: {
+          ...stav.children,
+          [id]: { hodnota: { id, name, birthDate }, kdy: Date.now() },
+        },
+      });
+      get().setActiveChild(id);
+      return id;
+    },
+
+    /** Změna údajů jednoho dítěte. Čím se nezabývá, to zůstává. */
+    async updateChild(id: string, patch: Partial<Omit<Child, 'id'>>): Promise<void> {
+      const stav = get().state;
+      const soucasne = stav.children[id]?.hodnota;
+      if (soucasne === undefined || soucasne === null) return;
+      await persist({
+        ...stav,
+        children: {
+          ...stav.children,
+          [id]: { hodnota: { ...soucasne, ...patch, id }, kdy: Date.now() },
+        },
+      });
     },
 
     /**
-     * Odebrání zařízení z domácnosti.
+     * Smazání dítěte.
      *
-     * Anonymní uid je vázané na úložiště prohlížeče, takže po smazání dat nebo
-     * přeinstalaci zůstane v seznamu mrtvé a zabírá jedno z pěti míst. Odebrat
-     * ho smí kterýkoli člen — pravidla to dovolují, protože při `jsemClen()`
-     * na podobu seznamu nekladou jinou podmínku než počet.
+     * Zůstává po něm náhrobek `null`, jinak by se při slučování z druhého
+     * telefonu vrátilo. Ochutnávky se nemažou: patří k datu, ne k seznamu,
+     * a rodič si je může chtít přečíst i potom.
      */
+    async removeChild(id: string): Promise<void> {
+      const stav = get().state;
+      if (stav.children[id] === undefined) return;
+      await persist({
+        ...stav,
+        children: { ...stav.children, [id]: { hodnota: null, kdy: Date.now() } },
+      });
+      if (get().activeChildId === id) {
+        const zbyle = activeChildren(get().state);
+        get().setActiveChild(zbyle[0]?.id ?? null);
+      }
+    },
+
+    /**
+     * Které dítě aplikace právě ukazuje.
+     *
+     * Drží se jen v tomhle zařízení, ne v domácnosti: je to pohled, ne údaj.
+     * Kdyby se sdílel, přepnutí u jednoho rodiče by přehodilo obrazovku
+     * druhému uprostřed vaření.
+     */
+    setActiveChild(id: string | null): void {
+      writeStoredChild(id);
+      set({ activeChildId: id });
+    },
+
     /**
      * Alergen, na který dítě reaguje. Podle toho se předvyplňuje filtr
      * „bez alergenu" na obou seznamech.
      */
-    async toggleChildAllergen(allergen: AllergenGroup): Promise<void> {
-      const stav = get().state;
-      const soucasne = stav.childAllergens ?? [];
-      const dalsi = soucasne.includes(allergen)
-        ? soucasne.filter((one) => one !== allergen)
-        : [...soucasne, allergen];
-      await persist({ ...stav, childAllergens: dalsi });
+    async toggleChildAllergen(id: string, allergen: AllergenGroup): Promise<void> {
+      const soucasne = get().state.children[id]?.hodnota?.allergens ?? [];
+      await get().updateChild(id, {
+        allergens: soucasne.includes(allergen)
+          ? soucasne.filter((one) => one !== allergen)
+          : [...soucasne, allergen],
+      });
     },
 
     async removeMember(uid: string): Promise<void> {
@@ -254,21 +341,18 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     },
 
     /** Odškrtnutí či zrušení jednoho znaku připravenosti. */
-    async toggleReadySign(sign: ReadySign): Promise<void> {
-      const soucasne = get().state.readySigns ?? [];
-      const dalsi = soucasne.includes(sign)
-        ? soucasne.filter((one) => one !== sign)
-        : [...soucasne, sign];
-      const zbytek = { ...get().state };
-      delete zbytek.readySigns;
-      await persist(dalsi.length === 0 ? zbytek : { ...zbytek, readySigns: dalsi });
+    async toggleReadySign(id: string, sign: ReadySign): Promise<void> {
+      const soucasne = get().state.children[id]?.hodnota?.readySigns ?? [];
+      await get().updateChild(id, {
+        readySigns: soucasne.includes(sign)
+          ? soucasne.filter((one) => one !== sign)
+          : [...soucasne, sign],
+      });
     },
 
     /** Úchop mění tvar sousta, ne výběr surovin — ten se dál řídí věkem. */
-    async setGrip(grip: Grip | undefined): Promise<void> {
-      const zbytek = { ...get().state };
-      delete zbytek.childGrip;
-      await persist(grip === undefined ? zbytek : { ...zbytek, childGrip: grip });
+    async setGrip(id: string, grip: Grip | undefined): Promise<void> {
+      await get().updateChild(id, { grip });
     },
 
     async recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void> {
@@ -328,10 +412,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
      */
     async importState(raw: unknown): Promise<void> {
       const vstup = migrateHouseholdState(raw);
-      const merged = mergeHouseholdState(get().state, vstup, {
-        localUpdatedAt: get().updatedAt,
-        remoteUpdatedAt: Date.now(),
-      });
+      const merged = mergeHouseholdState(get().state, vstup);
       await persist({ ...merged, schemaVersion: SCHEMA_VERSION });
     },
   };

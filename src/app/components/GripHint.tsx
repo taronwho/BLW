@@ -1,9 +1,9 @@
 import { Hand } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { useHouseholdStore } from '@/storage/householdStore';
 import type { ChokingRisk, ServingForm } from '@/types';
 import { ageInMonths } from '../lib/age';
+import { useAktivniDite } from '../lib/dite';
 import {
   GRIP_LABELS,
   GRIP_SHORT,
@@ -31,9 +31,9 @@ export function GripHint({
   chokingRisk: ChokingRisk;
   servingForm: ServingForm;
 }): ReactNode {
-  const state = useHouseholdStore((store) => store.state);
-  const months = ageInMonths(state.childBirthDate);
-  const vybrany = state.childGrip;
+  const dite = useAktivniDite();
+  const months = ageInMonths(dite?.birthDate ?? '');
+  const vybrany = dite?.grip;
   const grip = vybrany ?? gripForAge(months);
   const poznamka = vybrany === undefined ? null : GRIP_VS_AGE_NOTE[gripVsAge(grip, months)];
 

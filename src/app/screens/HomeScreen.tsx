@@ -16,6 +16,7 @@ import { useHouseholdStore } from '@/storage/householdStore';
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from '../lib/age';
 import { GRIP_LABELS, GRIP_SHORT, gripForAge } from '../lib/grip';
 import { tastedIds } from '../lib/tastings';
+import { useAktivniDite } from '../lib/dite';
 
 const TILES = [
   {
@@ -52,11 +53,13 @@ const TILES = [
  */
 export function HomeScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
-  const months = ageInMonths(state.childBirthDate);
+  const dite = useAktivniDite();
+  const months = ageInMonths(dite?.birthDate ?? '');
   const tasted = useMemo(() => tastedIds(state), [state]);
-  const hasChild = state.childName.trim().length > 0 || state.childBirthDate.length > 0;
+  const hasChild = dite !== null;
   const stage = STAGE_LABELS[stageForAge(months)];
-  const grip = state.childGrip;
+  const grip = dite?.grip;
+  const jmeno = dite?.name.trim() ?? '';
 
   return (
     <div className="flex flex-col gap-5">
@@ -65,7 +68,7 @@ export function HomeScreen(): ReactNode {
           Příkrmy metodou BLW
         </p>
         <h1 className="mt-1 text-2xl font-bold leading-tight">
-          {state.childName.trim().length > 0 ? state.childName.trim() : 'Příkrmy krok za krokem'}
+          {jmeno.length > 0 ? jmeno : 'Příkrmy krok za krokem'}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-white">
           {hasChild

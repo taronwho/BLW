@@ -1,4 +1,4 @@
-import type { CasovanaHodnota, HouseholdState, TastingEvent } from '@/types';
+import type { CasovanaHodnota, Child, HouseholdState, TastingEvent } from '@/types';
 
 /**
  * Slučování stavu domácnosti podle docs/SPEC.md kapitola 7.
@@ -17,14 +17,15 @@ import type { CasovanaHodnota, HouseholdState, TastingEvent } from '@/types';
 /**
  * 1 → 2: `favorites` bylo pole id, `recipeNotes` mapa id → text. Obojí je
  * teď mapa id → hodnota se značkou času.
+ * 2 → 3: jedno dítě (`childName`, `childBirthDate`, `childGrip`, `readySigns`,
+ * `childAllergens`) se změnilo na mapu dětí; ochutnávky nesou `childId`.
  */
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 export function emptyHouseholdState(): HouseholdState {
   return {
-    childName: '',
-    childBirthDate: '',
     members: [],
+    children: {},
     tastings: [],
     favorites: {},
     recipeNotes: {},
@@ -137,25 +138,54 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     }
   }
 
+  // Děti. Tvar 2 a starší uměl jedno dítě rozepsané do pěti polí stavu;
+  // udělá se z něj první dítě a ochutnávky se mu přiřadí.
+  const children: Record<string, CasovanaHodnota<Child | null>> = {};
+  if (jeCasovanaMapa(vstup['children'])) {
+    Object.assign(children, vstup['children']);
+  }
+  let prvniId: string | undefined = Object.entries(children).find(
+    ([, zaznam]) => zaznam.hodnota !== null,
+  )?.[0];
+
+  const jmeno = typeof vstup['childName'] === 'string' ? vstup['childName'] : '';
+  const narozeni = typeof vstup['childBirthDate'] === 'string' ? vstup['childBirthDate'] : '';
+  if (prvniId === undefined && (jmeno.length > 0 || narozeni.length > 0)) {
+    const id = PRVNI_DITE;
+    children[id] = {
+      hodnota: {
+        id,
+        name: jmeno,
+        birthDate: narozeni,
+        ...(typeof vstup['childGrip'] === 'string'
+          ? { grip: vstup['childGrip'] as Child['grip'] }
+          : {}),
+        ...(Array.isArray(vstup['readySigns'])
+          ? { readySigns: vstup['readySigns'] as Child['readySigns'] }
+          : {}),
+        ...(Array.isArray(vstup['childAllergens'])
+          ? { allergens: vstup['childAllergens'] as Child['allergens'] }
+          : {}),
+      },
+      kdy: 0,
+    };
+    prvniId = id;
+  }
+
   const tastings = Array.isArray(vstup['tastings'])
-    ? (vstup['tastings'] as TastingEvent[]).filter(
-        (event) => typeof event?.id === 'string' && typeof event?.ingredientId === 'string',
-      )
+    ? (vstup['tastings'] as TastingEvent[])
+        .filter((event) => typeof event?.id === 'string' && typeof event?.ingredientId === 'string')
+        // Záznamy z doby jednoho dítěte patří tomu prvnímu.
+        .map((event) =>
+          event.childId === undefined && prvniId !== undefined
+            ? { ...event, childId: prvniId }
+            : event,
+        )
     : [];
 
   return {
     ...zaklad,
-    childName: typeof vstup['childName'] === 'string' ? vstup['childName'] : '',
-    childBirthDate: typeof vstup['childBirthDate'] === 'string' ? vstup['childBirthDate'] : '',
-    ...(typeof vstup['childGrip'] === 'string'
-      ? { childGrip: vstup['childGrip'] as HouseholdState['childGrip'] }
-      : {}),
-    ...(Array.isArray(vstup['readySigns'])
-      ? { readySigns: vstup['readySigns'] as HouseholdState['readySigns'] }
-      : {}),
-    ...(Array.isArray(vstup['childAllergens'])
-      ? { childAllergens: vstup['childAllergens'] as HouseholdState['childAllergens'] }
-      : {}),
+    children,
     members: Array.isArray(vstup['members'])
       ? (vstup['members'] as unknown[]).filter((uid): uid is string => typeof uid === 'string')
       : [],
@@ -171,44 +201,32 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
   };
 }
 
-/** Poslední zápis vyhrává; při shodě zůstává vzdálená hodnota (autorita serveru). */
-function lastWriteWins<T>(local: T, remote: T, localNewer: boolean): T {
-  return localNewer ? local : remote;
-}
+/** Id, pod kterým se uloží dítě převzaté ze starší verze s jedním dítětem. */
+export const PRVNI_DITE = 'dite-1';
 
-export interface MergeMeta {
-  /** Kdy byl naposled zapsán lokální stav. */
-  localUpdatedAt: number;
-  /** Kdy byl naposled zapsán vzdálený stav. */
-  remoteUpdatedAt: number;
-}
+
 
 /** Maximální počet členů domácnosti (docs/SPEC.md kap. 7 i firestore.rules). */
 export const MAX_MEMBERS = 5;
 
+/**
+ * Sloučení dvou stavů domácnosti.
+ *
+ * Nebere čas zápisu celého dokumentu, protože ho už nepotřebuje: každá
+ * hodnota, u které může vzniknout konflikt, si nese vlastní značku času.
+ * Dokud rozhodoval čas celého dokumentu, mohla jedna změna přebít úplně
+ * nesouvisející změnu z druhého telefonu jen proto, že přišla později.
+ */
 export function mergeHouseholdState(
   local: HouseholdState,
   remote: HouseholdState,
-  meta: MergeMeta,
 ): HouseholdState {
-  const localNewer = meta.localUpdatedAt > meta.remoteUpdatedAt;
-  const grip = lastWriteWins(local.childGrip, remote.childGrip, localNewer);
-  // Znaky připravenosti jdou i odškrtnout, takže se nesjednocují — vyhrává
-  // novější zápis, stejně jako u ostatních údajů o dítěti.
-  const znaky = lastWriteWins(local.readySigns, remote.readySigns, localNewer);
-  // Alergie dítěte se taky dají odebrat, takže se nesjednocují — vyhrává
-  // novější zápis, stejně jako u ostatních údajů o dítěti.
-  const alergie = lastWriteWins(local.childAllergens, remote.childAllergens, localNewer);
   const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
 
   return {
-    childName: lastWriteWins(local.childName, remote.childName, localNewer),
-    childBirthDate: lastWriteWins(local.childBirthDate, remote.childBirthDate, localNewer),
-    // Nevyplněný úchop se do stavu nepropisuje jako `undefined` klíč — v poli
-    // by pak ležel prázdný záznam, který nic neznamená.
-    ...(grip === undefined ? {} : { childGrip: grip }),
-    ...(znaky === undefined ? {} : { readySigns: [...znaky] }),
-    ...(alergie === undefined ? {} : { childAllergens: [...alergie] }),
+    // Děti mají u každé položky vlastní čas, takže dvě zařízení můžou offline
+    // přidat každé své a obojí zůstane. Smazané dítě je náhrobek `null`.
+    children: mergeCasovane(local.children, remote.children),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
     ...(videno === undefined ? {} : { memberSeenAt: videno }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
@@ -217,6 +235,19 @@ export function mergeHouseholdState(
     recipeNotes: mergeCasovane(local.recipeNotes, remote.recipeNotes),
     schemaVersion: Math.max(local.schemaVersion, remote.schemaVersion),
   };
+}
+
+/** Děti, které v domácnosti opravdu jsou — bez náhrobků, v pořadí zadání. */
+export function activeChildren(state: HouseholdState): Child[] {
+  return Object.values(state.children)
+    .map((zaznam) => zaznam.hodnota)
+    .filter((dite): dite is Child => dite !== null)
+    .sort((a, b) => a.birthDate.localeCompare(b.birthDate) || a.name.localeCompare(b.name, 'cs'));
+}
+
+/** Nové id dítěte. Náhodné, aby dva telefony offline nevyrobily totéž. */
+export function newChildId(random: Crypto = globalThis.crypto): string {
+  return random.randomUUID();
 }
 
 /** Nové id ochutnávky. Náhodné, aby dva telefony offline nevyrobily totéž. */

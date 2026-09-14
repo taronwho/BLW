@@ -1,7 +1,8 @@
-import { useHouseholdStore } from '@/storage/householdStore';
 import type { AllergenGroup } from '@/types';
 import { ALLERGENS_IN_CATALOGUE } from './allergenOptions';
+import { useAktivniDite } from './dite';
 import { useUrlText } from './urlState';
+import { useCallback, useMemo } from 'react';
 
 /**
  * Filtr „bez alergenu" — víc alergenů naráz a předvyplněno podle dítěte.
@@ -31,24 +32,30 @@ export interface FiltrAlergenu {
 }
 
 export function useFiltrAlergenu(): FiltrAlergenu {
-  const zDitete = useHouseholdStore((store) => store.state.childAllergens) ?? PRAZDNO;
+  const zDitete = useAktivniDite()?.allergens ?? PRAZDNO;
   const [syrove, nastav] = useUrlText('bez', '');
 
   const automaticky = syrove.length === 0;
-  const vybrane: readonly AllergenGroup[] = automaticky
-    ? zDitete.filter((one) => ALLERGENS_IN_CATALOGUE.includes(one))
-    : syrove === ZADNY
-      ? PRAZDNO
-      : (syrove.split(',').filter((one) =>
-          ALLERGENS_IN_CATALOGUE.includes(one as AllergenGroup),
-        ) as AllergenGroup[]);
+  // Stabilní odkaz: seznam jde do `useMemo` filtrů a nové pole při každém
+  // vykreslení by je přepočítalo pořád dokola — dlouhý seznam by se při
+  // rolování vracel na první dávku.
+  const vybrane: readonly AllergenGroup[] = useMemo(() => {
+    if (automaticky) return zDitete.filter((one) => ALLERGENS_IN_CATALOGUE.includes(one));
+    if (syrove === ZADNY) return PRAZDNO;
+    return syrove
+      .split(',')
+      .filter((one) => ALLERGENS_IN_CATALOGUE.includes(one as AllergenGroup)) as AllergenGroup[];
+  }, [automaticky, syrove, zDitete]);
 
-  function prepni(allergen: AllergenGroup): void {
-    const dalsi = vybrane.includes(allergen)
-      ? vybrane.filter((one) => one !== allergen)
-      : [...vybrane, allergen];
-    nastav(dalsi.length === 0 ? ZADNY : dalsi.join(','));
-  }
+  const prepni = useCallback(
+    (allergen: AllergenGroup): void => {
+      const dalsi = vybrane.includes(allergen)
+        ? vybrane.filter((one) => one !== allergen)
+        : [...vybrane, allergen];
+      nastav(dalsi.length === 0 ? ZADNY : dalsi.join(','));
+    },
+    [nastav, vybrane],
+  );
 
   return { vybrane, prepni, zDitete, automaticky };
 }

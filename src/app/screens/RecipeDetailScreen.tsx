@@ -20,6 +20,7 @@ import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { favoriteIds, recipeNote } from '../lib/tastings';
 import { NotFoundScreen } from './NotFoundScreen';
+import { useNarozeniAktivniho } from '../lib/dite';
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
   all: 'Společné',
@@ -35,7 +36,7 @@ export function RecipeDetailScreen(): ReactNode {
   const setRecipeNote = useHouseholdStore((store) => store.setRecipeNote);
   const toggleFavorite = useHouseholdStore((store) => store.toggleFavorite);
 
-  const months = ageInMonths(state.childBirthDate);
+  const months = ageInMonths(useNarozeniAktivniho());
   const currentStage = stageForAge(months);
   const [stage, setStage] = useState<Stage>(currentStage);
   const [note, setNote] = useState('');

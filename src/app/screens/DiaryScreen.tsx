@@ -8,11 +8,11 @@ import { INGREDIENT_CATEGORIES, KEY_ALLERGENS } from '@/types';
 import type { TastingEvent } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
-import { ageInMonths } from '../lib/age';
 import type { DuvodNavrhu } from '../lib/derive';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
 import { favoriteIds } from '../lib/tastings';
+import { useAktivniDite } from '../lib/dite';
 
 /**
  * Proč se surovina nabízí. Pořadí důvodů i jejich význam je v `suggestions`.
@@ -29,7 +29,7 @@ const DUVOD_NAVRHU: Record<DuvodNavrhu, string> = {
 /** Deník ochutnávek (docs/SPEC.md kap. 4.5). */
 export function DiaryScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
-  const months = ageInMonths(state.childBirthDate);
+  const dite = useAktivniDite();
   const month = new Date().getMonth() + 1;
 
   const byDay = useMemo(() => {
@@ -43,7 +43,7 @@ export function DiaryScreen(): ReactNode {
   }, [state]);
 
   const tasted = useMemo(() => tastedIds(state), [state]);
-  const tips = useMemo(() => suggestions(state, months, month), [state, months, month]);
+  const tips = useMemo(() => suggestions(state, dite, month), [state, dite, month]);
 
   const refused = useMemo(
     () =>

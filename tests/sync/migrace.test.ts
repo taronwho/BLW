@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { migrateHouseholdState, SCHEMA_VERSION } from '../../src/sync/merge';
+import { activeChildren, migrateHouseholdState, SCHEMA_VERSION } from '../../src/sync/merge';
 
 describe('převod staršího stavu', () => {
   it('z pole oblíbených udělá mapu se značkou času', () => {
@@ -16,7 +16,10 @@ describe('převod staršího stavu', () => {
     const novy = migrateHouseholdState(stary);
 
     expect(novy.schemaVersion).toBe(SCHEMA_VERSION);
-    expect(novy.childName).toBe('Anna');
+    // Jedno dítě ze staré verze se stane prvním dítětem domácnosti.
+    expect(activeChildren(novy)).toHaveLength(1);
+    expect(activeChildren(novy)[0]?.name).toBe('Anna');
+    expect(activeChildren(novy)[0]?.birthDate).toBe('2026-01-10');
     expect(novy.favorites['brokolice']).toEqual({ hodnota: true, kdy: 0 });
     expect(novy.recipeNotes['placky']).toEqual({ hodnota: 'moc jich neudělá', kdy: 0 });
     // Čas 0 znamená „od nepaměti", takže jakékoli pozdější přepnutí vyhraje.
@@ -43,6 +46,19 @@ describe('převod staršího stavu', () => {
       expect(vysledek.tastings).toEqual([]);
       expect(vysledek.schemaVersion).toBe(SCHEMA_VERSION);
     }
+  });
+
+  it('ochutnávky z doby jednoho dítěte dostanou jeho id', () => {
+    const novy = migrateHouseholdState({
+      childName: 'Anna',
+      childBirthDate: '2026-01-10',
+      tastings: [
+        { id: 'a', ingredientId: 'mrkev', date: '2026-09-01', amount: 'ochutnala', reaction: 'zadna', createdBy: 'u', createdAt: 1 },
+      ],
+    });
+    const dite = activeChildren(novy)[0];
+    expect(dite).toBeDefined();
+    expect(novy.tastings[0]?.childId).toBe(dite?.id);
   });
 
   it('zachová ochutnávky, ale zahodí záznamy bez id', () => {

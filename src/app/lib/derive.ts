@@ -1,6 +1,7 @@
 import { ingredientById, ingredients } from '@/data/ingredients';
 import { nutrientProfile } from '@/data/nutrients';
-import type { HouseholdState, Ingredient } from '@/types';
+import type { Child, HouseholdState, Ingredient } from '@/types';
+import { ageInMonths } from './age';
 import { activeTastings, tastedIds } from './tastings';
 
 // Odvozeniny nad deníkem si nesahají na katalog, proto bydlí zvlášť; tady se
@@ -56,10 +57,11 @@ const EXPOZIC_PRO_ZAVEDENI = 3;
 
 export function suggestions(
   state: HouseholdState,
-  ageMonths: number | null,
+  dite: Child | null,
   month: number,
   count = 3,
 ): Navrh[] {
+  const ageMonths = dite === null ? null : ageInMonths(dite.birthDate);
   const tasted = tastedIds(state);
 
   // Kolik expozic má které alergenové skupiny dítě za sebou.
@@ -70,7 +72,7 @@ export function suggestions(
     }
   }
   // Na co dítě reaguje, se nenabízí vůbec — rodič to zadal v Domácnosti.
-  const vyloucene = new Set(state.childAllergens ?? []);
+  const vyloucene = new Set(dite?.allergens ?? []);
 
   const vhodne = ingredients.filter(
     (item) =>

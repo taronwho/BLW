@@ -45,6 +45,7 @@ import { RECIPE_SORTS } from '../lib/sorting';
 import { sortRecipes } from '../lib/sortingRecipes';
 import type { SortKey } from '../lib/sorting';
 import { favoriteIds } from '../lib/tastings';
+import { useNarozeniAktivniho } from '../lib/dite';
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny' },
@@ -88,7 +89,7 @@ export function RecipesScreen(): ReactNode {
   // Víc voleb naráz musí do adresy jedním zápisem, jinak se přepíšou.
   const nastavFiltry = useUrlBatch();
 
-  const months = ageInMonths(state.childBirthDate);
+  const months = ageInMonths(useNarozeniAktivniho());
   const pantrySet = useMemo(() => new Set(pantry), [pantry]);
 
   const zeleznyFiltr = ziviny.includes('zelezo');

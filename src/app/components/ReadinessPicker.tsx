@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { READY_SIGNS } from '@/types';
 import { READY_HOW_TO_TELL, READY_LABELS, hasSign, isReady } from '../lib/readiness';
+import type { Child } from '@/types';
 
 /**
  * Tři znaky připravenosti k odškrtnutí.
@@ -12,10 +13,9 @@ import { READY_HOW_TO_TELL, READY_LABELS, hasSign, isReady } from '../lib/readin
  * podle věku. Dokud nejsou všechny tři, ukazuje se u fáze 6m+ upozornění, že
  * šest měsíců není pevné datum.
  */
-export function ReadinessPicker(): ReactNode {
-  const state = useHouseholdStore((store) => store.state);
+export function ReadinessPicker({ dite }: { dite: Child }): ReactNode {
   const toggleReadySign = useHouseholdStore((store) => store.toggleReadySign);
-  const hotovo = isReady(state);
+  const hotovo = isReady(dite);
 
   return (
     <fieldset className="flex flex-col gap-2" data-testid="vyber-pripravenosti">
@@ -30,7 +30,7 @@ export function ReadinessPicker(): ReactNode {
 
       <ul className="flex flex-col gap-2">
         {READY_SIGNS.map((sign) => {
-          const active = hasSign(state, sign);
+          const active = hasSign(dite, sign);
           return (
             <li key={sign}>
               <button
@@ -38,7 +38,7 @@ export function ReadinessPicker(): ReactNode {
                 role="switch"
                 aria-checked={active}
                 data-testid={`znak-${sign}`}
-                onClick={() => void toggleReadySign(sign)}
+                onClick={() => void toggleReadySign(dite.id, sign)}
                 className={`flex w-full items-start gap-3 rounded-xl border px-3 py-3 text-left transition ${
                   active ? 'border-safe bg-safe-soft' : 'border-line bg-surface'
                 }`}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Baby, Copy, Download, KeyRound, ShieldAlert, Upload } from 'lucide-react';
+import { Baby, Copy, Download, KeyRound, Settings2, ShieldAlert, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data/ingredients';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -12,33 +12,39 @@ import {
 } from '@/sync/householdCode';
 import { hasFirebaseConfig } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
-import { AllergyPicker } from '../components/AllergyPicker';
-import { GripPicker } from '../components/GripPicker';
+import { ChildrenSection } from '../components/ChildrenSection';
 import { MemberList } from '../components/MemberList';
-import { ReadinessPicker } from '../components/ReadinessPicker';
 import { ThemePicker } from '../components/ThemePicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
-import { ageInMonths, formatAge } from '../lib/age';
+import { useUrlText } from '../lib/urlState';
+
+/**
+ * Okruhy nastavení. Dítě je první, protože kvůli němu sem rodič chodí
+ * nejčastěji; sdílení a nastavení aplikace se řeší jednou za čas.
+ */
+const SEKCE = [
+  { id: 'deti', label: 'Děti', Icon: Baby },
+  { id: 'sdileni', label: 'Sdílení', Icon: KeyRound },
+  { id: 'aplikace', label: 'Aplikace', Icon: Settings2 },
+] as const;
+
+type Sekce = (typeof SEKCE)[number]['id'];
+const SEKCE_IDS = SEKCE.map((jedna) => jedna.id);
 
 /** Domácnost a nastavení (docs/SPEC.md kap. 4.6). */
 export function HouseholdScreen(): ReactNode {
-  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState, setChild } =
+  const { state, status, householdCode, init, connect, disconnect, createHousehold, importState } =
     useHouseholdStore();
   const [codeInput, setCodeInput] = useState('');
   const [message, setMessage] = useState<string | null>(null);
-  const [childName, setChildName] = useState('');
-  const [childBirthDate, setChildBirthDate] = useState('');
+  // Sekce drží adresa, aby se dala poslat odkazem a přežila tlačítko Zpět.
+  const [sekce, setSekce] = useUrlText<Sekce>('sekce', 'deti', SEKCE_IDS);
 
   useEffect(() => {
     void init();
   }, [init]);
-
-  useEffect(() => {
-    setChildName(state.childName);
-    setChildBirthDate(state.childBirthDate);
-  }, [state.childName, state.childBirthDate]);
 
   const sdileniNastavene = hasFirebaseConfig();
 
@@ -57,64 +63,35 @@ export function HouseholdScreen(): ReactNode {
         Domácnost
       </h1>
 
-      <form
-        className="flex flex-col gap-2 rounded-xl bg-surface p-4"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void setChild(childName.trim(), childBirthDate);
-          setMessage('Údaje o dítěti uloženy.');
-        }}
-      >
-        <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
-          <Baby aria-hidden="true" className="h-4 w-4 shrink-0" />
-          Dítě
-        </h2>
-        <label htmlFor="jmeno" className="text-sm font-medium">
-          Jméno
-        </label>
-        <input
-          id="jmeno"
-          value={childName}
-          data-testid="jmeno-ditete"
-          onChange={(event) => setChildName(event.target.value)}
-          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
-        />
-        <label htmlFor="narozeni" className="text-sm font-medium">
-          Datum narození
-        </label>
-        <input
-          id="narozeni"
-          type="date"
-          value={childBirthDate}
-          data-testid="datum-narozeni"
-          onChange={(event) => setChildBirthDate(event.target.value)}
-          className="min-h-touch rounded-lg border border-muted/40 px-3 py-2"
-        />
-        <p className="text-xs text-muted">
-          Podle data narození se předvybírá fáze 6m+ / 9m+ / 12m+ a filtr „Vhodné teď“.
-          {state.childBirthDate.length > 0 && ` Teď: ${formatAge(ageInMonths(state.childBirthDate))}.`}
-        </p>
-        <button type="submit" className="min-h-touch rounded-xl bg-accent px-4 py-3 font-semibold text-on-accent">
-          Uložit
-        </button>
-      </form>
+      {/* Tři okruhy místo jedné dlouhé roury. Dřív se sem vešlo dítě,
+          připravenost, úchop, motiv, párování, záloha, seznam k revizi
+          i disclaimer pod sebe a rodič scrolloval přes celou obrazovku,
+          aby našel párovací kód. */}
+      <nav aria-label="Okruhy nastavení">
+        <ul className="flex gap-1 rounded-xl bg-surface p-1" data-testid="sekce-domacnosti">
+          {SEKCE.map(({ id, label, Icon }) => (
+            <li key={id} className="flex-1">
+              <button
+                type="button"
+                aria-current={sekce === id ? 'page' : undefined}
+                data-testid={`sekce-${id}`}
+                onClick={() => setSekce(id)}
+                className={`flex min-h-touch w-full items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-semibold transition ${
+                  sekce === id ? 'bg-accent text-on-accent shadow-soft' : 'text-muted'
+                }`}
+              >
+                <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
+                {label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-      <div className="rounded-xl bg-surface p-4">
-        <ReadinessPicker />
-      </div>
+      {sekce === 'deti' && <ChildrenSection />}
 
-      <div className="rounded-xl bg-surface p-4">
-        <GripPicker />
-      </div>
-
-      <div className="rounded-xl bg-surface p-4">
-        <AllergyPicker />
-      </div>
-
-      <div className="rounded-xl bg-surface p-4">
-        <ThemePicker />
-      </div>
-
+      {sekce === 'sdileni' && (
+        <>
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />
 
@@ -217,6 +194,15 @@ export function HouseholdScreen(): ReactNode {
         </p>
       )}
 
+        </>
+      )}
+
+      {sekce === 'aplikace' && (
+        <>
+      <div className="rounded-xl bg-surface p-4">
+        <ThemePicker />
+      </div>
+
       <div className="flex flex-wrap gap-2 rounded-xl bg-surface p-4">
         <button
           type="button"
@@ -300,6 +286,8 @@ export function HouseholdScreen(): ReactNode {
       </section>
 
       <ChokingLegend />
+        </>
+      )}
 
       {message !== null && (
         <p role="status" className="text-sm text-accent">

@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  MAX_MEMBERS,
+  activeChildren,
   emptyHouseholdState,
   mergeHouseholdState,
   mergeTastings,
-  MAX_MEMBERS,
 } from '../../src/sync/merge';
 import type { HouseholdState, TastingEvent } from '../../src/types';
 
@@ -83,41 +84,64 @@ describe('mergeHouseholdState', () => {
     const local = state({ tastings: [tasting({ id: 'lokalni' })] });
     const remote = state({ tastings: [tasting({ id: 'vzdaleny' })] });
 
-    const merged = mergeHouseholdState(local, remote, {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 100,
-    });
+    const merged = mergeHouseholdState(local, remote);
 
     expect(merged.tastings.map((e) => e.id).sort()).toEqual(['lokalni', 'vzdaleny']);
   });
 
-  it('u ostatních polí platí last-write-wins', () => {
-    const local = state({ childName: 'Lokální jméno' });
-    const remote = state({ childName: 'Vzdálené jméno' });
+  it('u dítěte vyhraje pozdější zápis, ne pozdější dokument', () => {
+    // Dřív rozhodoval čas celého dokumentu, takže nesouvisející změna
+    // z druhého telefonu mohla přebít úpravu jména. Teď má značku času
+    // každé dítě zvlášť.
+    const dite = { id: 'dite-1', birthDate: '2026-03-01' };
+    const local = state({
+      children: { 'dite-1': { hodnota: { ...dite, name: 'Lokální jméno' }, kdy: 20 } },
+    });
+    const remote = state({
+      children: { 'dite-1': { hodnota: { ...dite, name: 'Vzdálené jméno' }, kdy: 10 } },
+    });
 
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 200, remoteUpdatedAt: 100 }).childName,
-    ).toBe('Lokální jméno');
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 100, remoteUpdatedAt: 200 }).childName,
-    ).toBe('Vzdálené jméno');
+    expect(mergeHouseholdState(local, remote).children['dite-1']?.hodnota?.name).toBe(
+      'Lokální jméno',
+    );
+    expect(mergeHouseholdState(remote, local).children['dite-1']?.hodnota?.name).toBe(
+      'Lokální jméno',
+    );
+  });
+
+  it('smazané dítě se z druhého telefonu nevrátí', () => {
+    const dite = { id: 'dite-1', name: 'Anna', birthDate: '2026-03-01' };
+    const smazal = state({ children: { 'dite-1': { hodnota: null, kdy: 20 } } });
+    const stary = state({ children: { 'dite-1': { hodnota: dite, kdy: 10 } } });
+
+    expect(mergeHouseholdState(smazal, stary).children['dite-1']?.hodnota).toBeNull();
+    expect(mergeHouseholdState(stary, smazal).children['dite-1']?.hodnota).toBeNull();
+  });
+
+  it('dvě děti přidané offline na různých telefonech zůstanou obě', () => {
+    const a = state({
+      children: { a: { hodnota: { id: 'a', name: 'Anna', birthDate: '2026-01-01' }, kdy: 10 } },
+    });
+    const b = state({
+      children: { b: { hodnota: { id: 'b', name: 'Bruno', birthDate: '2024-05-05' }, kdy: 10 } },
+    });
+    expect(activeChildren(mergeHouseholdState(a, b)).map((dite) => dite.name)).toEqual([
+      'Bruno',
+      'Anna',
+    ]);
   });
 
   it('členy sjednotí bez duplicit', () => {
     const merged = mergeHouseholdState(
       state({ members: ['uid-matka'] }),
       state({ members: ['uid-matka', 'uid-otec'] }),
-      { localUpdatedAt: 1, remoteUpdatedAt: 2 },
     );
     expect(merged.members).toEqual(['uid-matka', 'uid-otec']);
   });
 
   it('nikdy nepřekročí maximální počet členů domácnosti', () => {
     const many = Array.from({ length: 8 }, (_, i) => `uid-${i}`);
-    const merged = mergeHouseholdState(state({ members: many }), state(), {
-      localUpdatedAt: 2,
-      remoteUpdatedAt: 1,
-    });
+    const merged = mergeHouseholdState(state({ members: many }), state());
     expect(merged.members).toHaveLength(MAX_MEMBERS);
   });
 
@@ -130,10 +154,7 @@ describe('mergeHouseholdState', () => {
     });
     const remote = state({ recipeNotes: { placky: { hodnota: 'vzdálená', kdy: 20 } } });
 
-    const merged = mergeHouseholdState(local, remote, {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 2,
-    });
+    const merged = mergeHouseholdState(local, remote);
 
     expect(merged.recipeNotes['placky']?.hodnota).toBe('vzdálená');
     expect(merged.recipeNotes['kase']?.hodnota).toBe('jen lokální');
@@ -145,14 +166,8 @@ describe('mergeHouseholdState', () => {
     const smazal = state({ recipeNotes: { placky: { hodnota: '', kdy: 20 } } });
     const stary = state({ recipeNotes: { placky: { hodnota: 'stará poznámka', kdy: 10 } } });
 
-    const zPohleduMazajiciho = mergeHouseholdState(smazal, stary, {
-      localUpdatedAt: 2,
-      remoteUpdatedAt: 1,
-    });
-    const zPohleduDruheho = mergeHouseholdState(stary, smazal, {
-      localUpdatedAt: 3,
-      remoteUpdatedAt: 2,
-    });
+    const zPohleduMazajiciho = mergeHouseholdState(smazal, stary);
+    const zPohleduDruheho = mergeHouseholdState(stary, smazal);
 
     expect(zPohleduMazajiciho.recipeNotes['placky']?.hodnota).toBe('');
     expect(zPohleduDruheho.recipeNotes['placky']?.hodnota).toBe('');
@@ -165,12 +180,12 @@ describe('mergeHouseholdState', () => {
     const stary = state({ favorites: { brokolice: { hodnota: true, kdy: 10 } } });
 
     expect(
-      mergeHouseholdState(odebral, stary, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).favorites[
+      mergeHouseholdState(odebral, stary).favorites[
         'brokolice'
       ]?.hodnota,
     ).toBe(false);
     expect(
-      mergeHouseholdState(stary, odebral, { localUpdatedAt: 3, remoteUpdatedAt: 2 }).favorites[
+      mergeHouseholdState(stary, odebral).favorites[
         'brokolice'
       ]?.hodnota,
     ).toBe(false);
@@ -180,54 +195,49 @@ describe('mergeHouseholdState', () => {
     const znovuPridal = state({ favorites: { brokolice: { hodnota: true, kdy: 30 } } });
     const odebral = state({ favorites: { brokolice: { hodnota: false, kdy: 20 } } });
     expect(
-      mergeHouseholdState(znovuPridal, odebral, { localUpdatedAt: 3, remoteUpdatedAt: 2 })
+      mergeHouseholdState(znovuPridal, odebral)
         .favorites['brokolice']?.hodnota,
     ).toBe(true);
   });
 });
 
-describe('úchop dítěte při slučování', () => {
-  it('vyhrává novější zápis, stejně jako ostatní údaje o dítěti', () => {
-    const local: HouseholdState = { ...emptyHouseholdState(), childGrip: 'pinzetovy' };
-    const remote: HouseholdState = { ...emptyHouseholdState(), childGrip: 'dlanovy' };
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).childGrip,
-    ).toBe('pinzetovy');
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 }).childGrip,
-    ).toBe('dlanovy');
-  });
+describe('úchop a znaky připravenosti při slučování', () => {
+  const zaklad = { id: 'dite-1', name: 'Anna', birthDate: '2026-03-01' };
 
-  it('nevyplněný úchop v poli nenechá prázdný klíč', () => {
-    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 2,
+  it('u úchopu vyhrává pozdější zápis, protože jde i zrušit', () => {
+    const local = state({
+      children: { 'dite-1': { hodnota: { ...zaklad, grip: 'pinzetovy' }, kdy: 20 } },
     });
-    expect('childGrip' in merged).toBe(false);
-  });
-});
-
-describe('znaky připravenosti při slučování', () => {
-  it('vyhrává novější zápis, aby šlo znak i odškrtnout zpět', () => {
-    const local: HouseholdState = { ...emptyHouseholdState(), readySigns: ['sed'] };
-    const remote: HouseholdState = {
-      ...emptyHouseholdState(),
-      readySigns: ['sed', 'koordinace', 'reflex'],
-    };
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).readySigns,
-    ).toEqual(['sed']);
-    expect(
-      mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 }).readySigns,
-    ).toEqual(['sed', 'koordinace', 'reflex']);
-  });
-
-  it('nevyplněné znaky v poli nenechají prázdný klíč', () => {
-    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 2,
+    const remote = state({
+      children: { 'dite-1': { hodnota: { ...zaklad, grip: 'dlanovy' }, kdy: 10 } },
     });
-    expect('readySigns' in merged).toBe(false);
+    expect(mergeHouseholdState(local, remote).children['dite-1']?.hodnota?.grip).toBe('pinzetovy');
+    expect(mergeHouseholdState(remote, local).children['dite-1']?.hodnota?.grip).toBe('pinzetovy');
+  });
+
+  it('u znaků připravenosti vyhrává pozdější zápis, aby šel znak i odškrtnout zpět', () => {
+    const local = state({
+      children: {
+        'dite-1': { hodnota: { ...zaklad, readySigns: ['sed' as const] }, kdy: 20 },
+      },
+    });
+    const remote = state({
+      children: {
+        'dite-1': {
+          hodnota: { ...zaklad, readySigns: ['sed' as const, 'koordinace' as const] },
+          kdy: 10,
+        },
+      },
+    });
+    expect(mergeHouseholdState(local, remote).children['dite-1']?.hodnota?.readySigns).toEqual([
+      'sed',
+    ]);
+  });
+
+  it('prázdná domácnost zůstane prázdná, žádné prázdné klíče', () => {
+    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState());
+    expect(merged.children).toEqual({});
+    expect(activeChildren(merged)).toEqual([]);
   });
 });
 
@@ -245,24 +255,18 @@ describe('poslední přihlášení zařízení', () => {
       members: ['a', 'b'],
       memberSeenAt: { a: 200, b: 900 },
     };
-    const merged = mergeHouseholdState(local, remote, { localUpdatedAt: 1, remoteUpdatedAt: 2 });
+    const merged = mergeHouseholdState(local, remote);
     expect(merged.memberSeenAt).toEqual({ a: 500, b: 900 });
   });
 
   it('zná-li čas jen jedna strana, převezme se', () => {
     const local: HouseholdState = { ...emptyHouseholdState(), memberSeenAt: { a: 5 } };
-    const merged = mergeHouseholdState(local, emptyHouseholdState(), {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 2,
-    });
+    const merged = mergeHouseholdState(local, emptyHouseholdState());
     expect(merged.memberSeenAt).toEqual({ a: 5 });
   });
 
   it('bez časů nezůstane v poli prázdný klíč', () => {
-    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState(), {
-      localUpdatedAt: 1,
-      remoteUpdatedAt: 2,
-    });
+    const merged = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState());
     expect('memberSeenAt' in merged).toBe(false);
   });
 });
@@ -284,10 +288,7 @@ describe('předpoklad, na kterém stojí pravidla Firestore', () => {
       [a, b],
       [b, a],
     ] as const) {
-      const merged = mergeHouseholdState(local, remote, {
-        localUpdatedAt: 2,
-        remoteUpdatedAt: 1,
-      });
+      const merged = mergeHouseholdState(local, remote);
       expect(merged.tastings.length).toBeGreaterThanOrEqual(local.tastings.length);
       expect(merged.tastings.length).toBeGreaterThanOrEqual(remote.tastings.length);
     }

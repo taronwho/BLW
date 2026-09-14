@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 /**
@@ -97,8 +97,16 @@ type ZmenaSeznamu = readonly string[] | ((predchozi: readonly string[]) => reado
 export function useUrlList(klic: string): [readonly string[], (hodnota: ZmenaSeznamu) => void] {
   const [params, setParams] = useSearchParams();
   const syrova = params.get(klic);
-  const hodnota =
-    syrova === null || syrova.length === 0 ? EMPTY : syrova.split(',').filter((x) => x.length > 0);
+  // Musí to být stabilní odkaz: seznam jde dál do `useMemo` filtrů a nové
+  // pole při každém vykreslení by je přepočítalo pořád dokola. Dlouhý seznam
+  // se kvůli tomu při rolování vracel na první dávku.
+  const hodnota = useMemo(
+    () =>
+      syrova === null || syrova.length === 0
+        ? EMPTY
+        : syrova.split(',').filter((x) => x.length > 0),
+    [syrova],
+  );
   const nastav = useCallback(
     (dalsi: ZmenaSeznamu) => {
       setParams((stare) => {

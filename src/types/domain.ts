@@ -257,6 +257,13 @@ export type TastingReaction = 'zadna' | 'chutnalo' | 'nelibilo' | 'kozni' | 'tra
 export interface TastingEvent {
   id: string;
   ingredientId: string;
+  /**
+   * Které dítě ochutnávalo.
+   *
+   * Nepovinné kvůli záznamům z doby, kdy aplikace uměla jen jedno dítě —
+   * ty se při načtení přiřadí prvnímu dítěti v domácnosti.
+   */
+  childId?: string;
   /** ISO datum */
   date: string;
   amount: TastingAmount;
@@ -273,22 +280,40 @@ export interface TastingEvent {
   deleted?: boolean;
 }
 
-export interface HouseholdState {
-  childName: string;
+/**
+ * Jedno dítě v domácnosti.
+ *
+ * Sourozenci se v příkrmu potkávají běžně a každý je jinde — jiný věk, jiný
+ * úchop, jiné alergie. Dřív aplikace uměla jen jedno dítě a rodina se dvěma
+ * si musela vybrat, kterému bude odpovídat.
+ */
+export interface Child {
+  id: string;
+  name: string;
   /** ISO datum */
-  childBirthDate: string;
+  birthDate: string;
   /** Úchop, který rodič u dítěte pozoruje. Nevyplněný = řídíme se jen věkem. */
-  childGrip?: Grip;
+  grip?: Grip;
   /** Odškrtnuté znaky připravenosti. Nevyplněné = ještě se nezačalo. */
   readySigns?: ReadySign[];
   /**
    * Alergeny, na které dítě reaguje.
    *
-   * Nastavuje je rodič v Domácnosti a filtr „bez alergenu" se podle nich
-   * předvyplňuje na obou seznamech. Aplikace tím nic nediagnostikuje — jen
-   * si pamatuje, co rodič sám zadal, aby to nemusel klikat u každého hledání.
+   * Zadává je rodič a filtr „bez alergenu" se podle nich předvyplňuje.
+   * Aplikace tím nic nediagnostikuje — jen si pamatuje, co rodič sám zadal.
    */
-  childAllergens?: AllergenGroup[];
+  allergens?: AllergenGroup[];
+}
+
+export interface HouseholdState {
+  /**
+   * Děti v domácnosti podle `id`.
+   *
+   * Mapa se značkou času, ne pole: dvě zařízení můžou offline přidat každé
+   * své dítě a obojí musí zůstat. `null` je náhrobek po smazaném dítěti —
+   * bez něj by se smazané dítě při slučování vrátilo.
+   */
+  children: Record<string, CasovanaHodnota<Child | null>>;
   /** uid členů domácnosti */
   members: string[];
   /**
@@ -307,7 +332,8 @@ export interface HouseholdState {
    * Není to seznam, ale mapa se značkou času, protože seznamy se při
    * slučování dvou telefonů sjednocují a odebrání by se tím vždycky vrátilo
    * zpátky. Takhle rozhoduje u každé položky poslední přepnutí — a to může
-   * být i „odebráno".
+   * být i „odebráno". Oblíbené jsou společné celé domácnosti, ne dítěti:
+   * recept, který doma funguje, funguje pro rodinu.
    */
   favorites: Record<string, CasovanaHodnota<boolean>>;
   /** Poznámky rodiče k receptům, klíčem je `recipeId`. Se značkou času ze
@@ -315,6 +341,7 @@ export interface HouseholdState {
   recipeNotes: Record<string, CasovanaHodnota<string>>;
   schemaVersion: number;
 }
+
 
 /**
  * Hodnota, u které rozhoduje čas poslední změny.

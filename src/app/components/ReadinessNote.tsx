@@ -1,9 +1,9 @@
 import { Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { useHouseholdStore } from '@/storage/householdStore';
 import type { Stage } from '@/types';
 import { READY_MISSING_LABELS, missingSigns, shouldWarnAboutReadiness } from '../lib/readiness';
+import { useAktivniDite } from '../lib/dite';
 
 /**
  * Upozornění u fáze 6m+, že šest měsíců není pevné datum.
@@ -12,10 +12,10 @@ import { READY_MISSING_LABELS, missingSigns, shouldWarnAboutReadiness } from '..
  * fází mlčí — tam už dítě dávno jí a připomínka by byla jen šum.
  */
 export function ReadinessNote({ stage }: { stage: Stage }): ReactNode {
-  const state = useHouseholdStore((store) => store.state);
-  if (stage !== '6m' || !shouldWarnAboutReadiness(state)) return null;
+  const dite = useAktivniDite();
+  if (stage !== '6m' || !shouldWarnAboutReadiness(dite)) return null;
 
-  const chybi = missingSigns(state);
+  const chybi = missingSigns(dite);
   const vseChybi = chybi.length === 3;
 
   return (

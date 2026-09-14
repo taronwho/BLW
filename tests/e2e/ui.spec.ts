@@ -2,13 +2,14 @@ import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { ingredients, recipes } from '@/data';
 import {
+  SCREENS,
   acceptDisclaimer,
   horizontalOverflow,
-  householdLink,
   navLink,
+  otevriDomacnost,
   otevriFiltry,
-  SCREENS,
   tooSmallTargets,
+  zalozDite,
 } from './helpers';
 
 /**
@@ -71,7 +72,12 @@ for (const screen of SCREENS) {
     // proto se hledá podle `data-risk`, ne podle testId jedné z nich.
     const stitky = page.locator('[data-risk]');
     const pocet = await stitky.count();
-    expect(pocet, `${screen.name}: na obrazovce není žádný štítek rizika dušení`).toBeGreaterThan(0);
+    // Na obrazovkách, kde se o jídle nemluví (nastavení dítěte, párování
+    // telefonů), žádný štítek být nemusí. Kde ale je, musí splňovat pravidlo.
+    if (pocet === 0) {
+      expect(screen.id.startsWith('domacnost'), `${screen.name}: chybí štítek rizika`).toBe(true);
+      return;
+    }
 
     // docs/SPEC.md kap. 5: barva nikdy nesmí být jediným nositelem informace,
     // proto musí každý štítek nést i slovo a ikonu.
@@ -340,7 +346,7 @@ test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', as
   await page.getByTestId('faze-12m').click();
   await expect(upozorneni).toBeHidden();
 
-  await householdLink(page).click();
+  await zalozDite(page, 'Ema', '2026-03-01');
   await page.getByTestId('znak-sed').click();
   await page.getByTestId('znak-koordinace').click();
   await expect(page.getByTestId('znak-sed')).toHaveAttribute('aria-checked', 'true');
@@ -349,7 +355,7 @@ test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', as
   await page.goto('./#/suroviny/brokolice');
   await expect(upozorneni).toContainText('vyhasnutí vypuzovacího reflexu');
 
-  await householdLink(page).click();
+  await otevriDomacnost(page, 'deti');
   await page.getByTestId('znak-reflex').click();
   await expect(page.getByTestId('stav-pripravenosti')).toContainText('pohromadě');
 
@@ -363,7 +369,7 @@ test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', as
 
 test('tmavý motiv se přepne a přežije obnovení stránky', async ({ page }) => {
   await acceptDisclaimer(page);
-  await householdLink(page).click();
+  await otevriDomacnost(page, 'aplikace');
 
   const html = page.locator('html');
   await expect(html).toHaveAttribute('data-theme', 'light');
@@ -396,7 +402,7 @@ test('přepínač v hlavičce překlopí vzhled a projeví se i v nastavení', a
 
   // Přepínač v hlavičce a výběr v Domácnosti jsou dvě ovládání téhož; když si
   // každé drží vlastní stav, zůstane v nastavení zaškrtnutá stará volba.
-  await householdLink(page).click();
+  await otevriDomacnost(page, 'aplikace');
   await expect(page.getByTestId('motiv-tmavy')).toHaveAttribute('aria-checked', 'true');
 
   await page.getByTestId('motiv-system').click();
@@ -763,7 +769,7 @@ test('filtr bez alergenu bere víc alergenů a předvyplní se podle dítěte', 
   expect(dva).not.toBe(jeden);
 
   // 2. Alergie zadaná u dítěte filtr předvyplní.
-  await page.goto('./#/domacnost');
+  await zalozDite(page, 'Ema', '2026-03-01');
   await page.getByTestId('alergie-mleko').click();
   await expect(page.getByTestId('alergie-mleko')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByTestId('alergie-shrnuti')).toContainText('mléko');
@@ -775,4 +781,45 @@ test('filtr bez alergenu bere víc alergenů a předvyplní se podle dítěte', 
   await otevriFiltry(page, 'surovin');
   await page.getByTestId('filtr-bez-alergenu').getByRole('button', { name: 'mléko' }).click();
   await expect(page.getByTestId('pocet-surovin')).toContainText('301 z 301');
+});
+
+test('domácnost unese víc dětí a přepnutí promění celou aplikaci', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Kojenec a batole — každý je v příkrmu jinde.
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.getByTestId('pridat-dite').click();
+  // Formulář pro nové dítě je nahoře u seznamu; ten dole upravuje vybrané.
+  await page.getByTestId('jmeno-ditete').first().fill('Tobiáš');
+  await page.getByTestId('datum-narozeni').first().fill('2024-01-15');
+  await page.getByTestId('ulozit-dite').first().click();
+  await expect(page.getByTestId('seznam-deti')).toContainText('Tobiáš');
+
+  // Přidané dítě se rovnou stane vybraným a je vidět v hlavičce.
+  await expect(page.getByTestId('dite-v-hlavicce')).toContainText('Tobiáš');
+
+  // Podle vybraného dítěte se řídí fáze u suroviny.
+  await page.goto('./#/suroviny/brokolice');
+  await expect(page.getByTestId('faze-12m')).toHaveAttribute('aria-pressed', 'true');
+
+  // Přepnutí zpátky na kojence přehodí fázi na 6m+.
+  await page.getByTestId('dite-v-hlavicce').click();
+  await expect(page.getByTestId('prepinac-deti')).toBeVisible();
+  await page.locator('[data-testid^="vybrat-dite-"][aria-pressed="false"]').click();
+  await expect(page.getByTestId('faze-6m')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('dlouhý seznam se donačítá sám při rolování, bez tlačítka', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const polozky = page.getByTestId('seznam-surovin').getByRole('listitem');
+  const prvni = await polozky.count();
+  expect(prvni).toBeLessThan(301);
+
+  // Žádné tlačítko — jen značka konce seznamu, na kterou se doroluje.
+  await expect(page.getByRole('button', { name: 'Načíst další' })).toHaveCount(0);
+
+  await page.getByTestId('nacist-dalsi-suroviny').scrollIntoViewIfNeeded();
+  await expect.poll(() => polozky.count()).toBeGreaterThan(prvni);
 });

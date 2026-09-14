@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import drobek from '@/assets/drobek.png';
+import { ChildSwitcher } from './ChildSwitcher';
 import { ThemeToggle } from './ThemeToggle';
-import { ageInMonths, formatAge } from '../lib/age';
 import { watchSystem } from '../lib/theme';
 import { useThemeStore } from '../lib/themeStore';
 
@@ -20,7 +20,6 @@ const NAV = [
 /** Spodní navigace s pěti položkami a jediný landmark `main` na stránku. */
 export function AppShell({ children }: { children: ReactNode }): ReactNode {
   const init = useHouseholdStore((store) => store.init);
-  const state = useHouseholdStore((store) => store.state);
   const syncFromSystem = useThemeStore((store) => store.syncFromSystem);
 
   useEffect(() => {
@@ -30,12 +29,6 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
   // Jediný posluchač systémového nastavení v celé aplikaci: když si telefon
   // sám přepne na noc, volba „podle systému" to má následovat.
   useEffect(() => watchSystem(syncFromSystem), [syncFromSystem]);
-
-  const months = ageInMonths(state.childBirthDate);
-  const childLabel =
-    state.childName.trim().length === 0
-      ? 'Nastav dítě v Domácnosti'
-      : `${state.childName} · ${formatAge(months)}`;
 
   return (
     <div className="flex min-h-full flex-col">
@@ -47,13 +40,8 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
                 nápis sedí až dole a přišel by o patky „D" a „k". */}
             <img src={drobek} alt="Drobek" className="h-11 w-auto" />
           </Link>
-          <Link
-            to="/domacnost"
-            className="flex min-h-touch min-w-0 flex-1 items-center justify-center truncate rounded-full bg-surface px-3 text-xs text-muted shadow-soft"
-            data-testid="dite-v-hlavicce"
-          >
-            <span className="truncate">{childLabel}</span>
-          </Link>
+          {/* Jmenovka s věkem; u dvou a víc dětí je z ní přepínač. */}
+          <ChildSwitcher />
           <ThemeToggle />
         </div>
       </header>

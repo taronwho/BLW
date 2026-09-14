@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { GRIPS } from '@/types';
 import { GRIP_HOW_TO_TELL, GRIP_LABELS, GRIP_TYPICAL_MONTHS } from '../lib/grip';
+import type { Child } from '@/types';
 
 /**
  * Výběr úchopu, který rodič u dítěte pozoruje.
@@ -11,10 +12,9 @@ import { GRIP_HOW_TO_TELL, GRIP_LABELS, GRIP_TYPICAL_MONTHS } from '../lib/grip'
  * celý smysl. Věk u každé možnosti je uvedený jako orientace, aby nevypadal
  * jako podmínka.
  */
-export function GripPicker(): ReactNode {
-  const state = useHouseholdStore((store) => store.state);
+export function GripPicker({ dite }: { dite: Child }): ReactNode {
   const setGrip = useHouseholdStore((store) => store.setGrip);
-  const vybrany = state.childGrip;
+  const vybrany = dite.grip;
 
   return (
     <fieldset className="flex flex-col gap-2" data-testid="vyber-uchopu">
@@ -36,7 +36,7 @@ export function GripPicker(): ReactNode {
                 type="button"
                 aria-pressed={active}
                 data-testid={`uchop-${grip}`}
-                onClick={() => void setGrip(active ? undefined : grip)}
+                onClick={() => void setGrip(dite.id, active ? undefined : grip)}
                 className={`flex w-full flex-col gap-1 rounded-xl border px-3 py-3 text-left transition ${
                   active ? 'border-accent bg-accent-soft' : 'border-line bg-surface'
                 }`}
@@ -63,7 +63,7 @@ export function GripPicker(): ReactNode {
         <button
           type="button"
           data-testid="uchop-zrusit"
-          onClick={() => void setGrip(undefined)}
+          onClick={() => void setGrip(dite.id, undefined)}
           className="min-h-touch self-start text-xs font-medium text-muted underline"
         >
           Zrušit výběr úchopu

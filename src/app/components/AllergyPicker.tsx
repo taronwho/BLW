@@ -1,7 +1,7 @@
 import { ShieldAlert } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
-import type { AllergenGroup } from '@/types';
+import type { AllergenGroup, Child } from '@/types';
 import { ALLERGENS_IN_CATALOGUE } from '../lib/allergenOptions';
 import { ALLERGEN_LABELS } from '../lib/labels';
 
@@ -15,8 +15,8 @@ import { ALLERGEN_LABELS } from '../lib/labels';
  * Text pod tím musí zůstat: potvrzená alergie patří pediatrovi a vyloučení
  * potraviny z jídelníčku není něco, co si rodina nastaví podle aplikace.
  */
-export function AllergyPicker(): ReactNode {
-  const vybrane = useHouseholdStore((store) => store.state.childAllergens) ?? [];
+export function AllergyPicker({ dite }: { dite: Child }): ReactNode {
+  const vybrane = dite.allergens ?? [];
   const prepni = useHouseholdStore((store) => store.toggleChildAllergen);
 
   return (
@@ -26,7 +26,7 @@ export function AllergyPicker(): ReactNode {
         className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
       >
         <ShieldAlert aria-hidden="true" className="h-4 w-4 text-accent" />
-        Alergie dítěte
+        Alergie — {dite.name.trim().length > 0 ? dite.name : 'dítě'}
       </h2>
 
       <p className="text-sm leading-relaxed">
@@ -48,7 +48,7 @@ export function AllergyPicker(): ReactNode {
               type="button"
               aria-pressed={active}
               data-testid={`alergie-${allergen}`}
-              onClick={() => void prepni(allergen)}
+              onClick={() => void prepni(dite.id, allergen)}
               className="flex min-h-touch items-center"
             >
               <span

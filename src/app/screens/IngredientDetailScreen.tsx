@@ -21,6 +21,7 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '.
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { NotFoundScreen } from './NotFoundScreen';
+import { useNarozeniAktivniho } from '../lib/dite';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
 export function IngredientDetailScreen(): ReactNode {
@@ -29,7 +30,7 @@ export function IngredientDetailScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const toggleFavorite = useHouseholdStore((store) => store.toggleFavorite);
 
-  const months = ageInMonths(state.childBirthDate);
+  const months = ageInMonths(useNarozeniAktivniho());
   const currentStage = stageForAge(months);
   const [stage, setStage] = useState<Stage>(currentStage);
   const [acks, setAcks] = useState<Set<string>>(() => new Set<string>());

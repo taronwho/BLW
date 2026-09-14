@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { householdLink, navLink } from './helpers';
+import { navLink, otevriDomacnost } from './helpers';
 
 /**
  * Vstup do aplikace: disclaimer při prvním spuštění a obrazovka Domácnost
@@ -45,7 +45,7 @@ test.describe('domácnost', () => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
-    await householdLink(page).click();
+    await otevriDomacnost(page, 'sdileni');
     await expect(page.getByTestId('stav-synchronizace')).toContainText('Jen na tomto zařízení');
 
     await page.getByRole('button', { name: 'Založit domácnost' }).click();
@@ -61,7 +61,7 @@ test.describe('domácnost', () => {
     await page.goto('./');
     await page.getByTestId('disclaimer-accept').click();
 
-    await householdLink(page).click();
+    await otevriDomacnost(page, 'deti');
     await page.getByTestId('jmeno-ditete').fill('Ema');
     // Dítě starší 12 měsíců → předvybraná fáze 12m+.
     await page.getByTestId('datum-narozeni').fill('2024-01-15');

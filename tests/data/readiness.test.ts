@@ -9,13 +9,13 @@ import {
   readySigns,
   shouldWarnAboutReadiness,
 } from '../../src/app/lib/readiness';
-import { emptyHouseholdState } from '../../src/sync/merge';
 import { READY_SIGNS } from '../../src/types';
-import type { HouseholdState, ReadySign } from '../../src/types';
+import type { Child, ReadySign } from '../../src/types';
 
-function stav(znaky?: ReadySign[]): HouseholdState {
-  const zaklad = emptyHouseholdState();
-  return znaky === undefined ? zaklad : { ...zaklad, readySigns: znaky };
+/** Znaky připravenosti patří dítěti, ne domácnosti — v ní jich může být víc. */
+function stav(znaky?: ReadySign[]): Child {
+  const dite: Child = { id: 'dite-1', name: 'Anna', birthDate: '2026-03-01' };
+  return znaky === undefined ? dite : { ...dite, readySigns: znaky };
 }
 
 describe('připravenost na příkrm', () => {
