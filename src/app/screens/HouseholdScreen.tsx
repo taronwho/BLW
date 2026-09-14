@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Baby, Copy, Download, KeyRound, ShieldAlert, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ingredients } from '@/data';
+import { ingredients } from '@/data/ingredients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import {
   formatHouseholdCode,

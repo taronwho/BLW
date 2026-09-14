@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ingredients, recipes } from '../../src/data';
-import { recipeServingForm, suitableNow } from '../../src/app/lib/derive';
+import { suitableNow } from '../../src/app/lib/derive';
+import { recipeServingForm } from '../../src/app/lib/deriveRecipes';
 import { stageForAge } from '../../src/app/lib/age';
 import {
   GRIP_HOW_TO_TELL,

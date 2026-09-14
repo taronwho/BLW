@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { ingredients, recipes, ingredientById } from '../../src/data';
-import { levelRank, nutrientProfile, recipeNutrients } from '../../src/data/nutrients';
-import { sortIngredients, sortRecipes } from '../../src/app/lib/sorting';
+import { levelRank, nutrientProfile } from '../../src/data/nutrients';
+import { recipeNutrients } from '../../src/data/recipeNutrients';
+import { sortIngredients } from '../../src/app/lib/sorting';
+import { sortRecipes } from '../../src/app/lib/sortingRecipes';
 
 describe('řazení surovin', () => {
   it('abecedně řadí česky — „č" patří hned za „c"', () => {

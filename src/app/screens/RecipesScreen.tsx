@@ -12,7 +12,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
-import { recipeNutrients } from '@/data/nutrients';
+import { recipeNutrients } from '@/data/recipeNutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { RECIPE_CATEGORIES } from '@/types';
 import type { AllergenGroup, Recipe } from '@/types';
@@ -35,16 +35,13 @@ import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { ageInMonths } from '../lib/age';
 import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
-import {
-  recipeAllergens,
-  recipeChokingRisk,
-  recipeIsVegetarian,
-} from '../lib/derive';
+import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/deriveRecipes';
 import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
-import { RECIPE_SORTS, sortRecipes } from '../lib/sorting';
+import { RECIPE_SORTS } from '../lib/sorting';
+import { sortRecipes } from '../lib/sortingRecipes';
 import type { SortKey } from '../lib/sorting';
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [

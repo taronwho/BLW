@@ -2,7 +2,7 @@ import { AlertTriangle, ChevronRight, Search } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { guidesByUrgency } from '@/data';
+import { guidesByUrgency } from '@/data/guides';
 import { GUIDE_CATEGORIES } from '@/types';
 import { FilterSelect } from '../components/FilterSelect';
 import type { SelectOption } from '../components/FilterSelect';

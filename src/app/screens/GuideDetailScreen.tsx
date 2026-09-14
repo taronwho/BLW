@@ -1,7 +1,7 @@
 import { AlertTriangle, ArrowLeft, BookMarked, ExternalLink, Phone } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { guideById } from '@/data';
+import { guideById } from '@/data/guides';
 import { GUIDE_CATEGORY_LABELS } from '../lib/labels';
 
 /** Detail rady. Naléhavé rady mají červený rám a tísňové číslo nahoře. */

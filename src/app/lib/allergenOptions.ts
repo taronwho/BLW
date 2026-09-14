@@ -1,4 +1,4 @@
-import { ingredients } from '@/data';
+import { ingredients } from '@/data/ingredients';
 import type { AllergenGroup } from '@/types';
 import type { SelectOption } from '../components/FilterSelect';
 import { ALLERGEN_LABELS } from './labels';

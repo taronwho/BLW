@@ -9,7 +9,7 @@ import {
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ingredients } from '@/data';
+import { ingredients } from '@/data/ingredients';
 import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES } from '@/types';

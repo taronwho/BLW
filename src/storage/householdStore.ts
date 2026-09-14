@@ -9,7 +9,6 @@ import {
 } from '@/sync/merge';
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
 import { IndexedDbAdapter } from './indexedDb';
-import { connectFirebase, FirestoreAdapter } from './firebase';
 import { loadFirebaseConfig } from './firebaseConfig';
 import type { StorageAdapter, StoredHousehold, SyncStatus } from './types';
 
@@ -123,6 +122,10 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 
     set({ status: { kind: 'connecting' } });
     try {
+      // Firebase se stahuje až tady, ne při startu aplikace. Knihovna váží
+      // víc než celý zbytek kódu a rodič, který sdílení nepoužívá, ji nikdy
+      // nepotřebuje — dřív ji stahoval každý při prvním otevření.
+      const { connectFirebase, FirestoreAdapter } = await import('./firebase');
       const session = await connectFirebase(config);
       const adapter = new FirestoreAdapter(session, householdId);
       remoteAdapter = adapter;

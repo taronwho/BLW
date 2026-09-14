@@ -730,3 +730,24 @@ test('hledání odpustí překlep a nevrací maso na dotaz ryby', async ({ page 
   await page.getByTestId('hledat-surovinu').fill('ryby');
   await expect(page.getByTestId('seznam-surovin')).not.toContainText('hovězí zadní');
 });
+
+test('první načtení nestahuje katalog ani knihovnu pro sdílení', async ({ page }) => {
+  // Úvodní obrazovka musí být vidět dřív, než se stáhne tři sta surovin,
+  // tři sta receptů a Firebase. Dřív se stahovalo všechno naráz.
+  await page.goto('./');
+  await expect(page.getByTestId('disclaimer')).toBeVisible();
+
+  const stazeno = await page.evaluate(() =>
+    performance.getEntriesByType('resource').map((r) => r.name),
+  );
+  expect(stazeno.some((url) => url.includes('firebase'))).toBe(false);
+
+  const kb = await page.evaluate(() =>
+    performance
+      .getEntriesByType('resource')
+      .filter((r) => r.name.endsWith('.js'))
+      .reduce((soucet, r) => soucet + (r as PerformanceResourceTiming).encodedBodySize, 0) / 1024,
+  );
+  // Před rozdělením to bylo přes 570 kB v jediném souboru.
+  expect(kb).toBeLessThan(200);
+});

@@ -11,11 +11,11 @@ import {
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { guides, ingredients, recipes } from '@/data';
+import { CATALOG_COUNTS } from '@/data/counts';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from '../lib/age';
 import { GRIP_LABELS, GRIP_SHORT, gripForAge } from '../lib/grip';
-import { tastedIds } from '../lib/derive';
+import { tastedIds } from '../lib/tastings';
 
 const TILES = [
   {
@@ -151,9 +151,9 @@ export function HomeScreen(): ReactNode {
         </h2>
         <dl className="grid grid-cols-3 gap-3">
           {[
-            { term: 'surovin', value: ingredients.length },
-            { term: 'receptů', value: recipes.length },
-            { term: 'rad', value: guides.length },
+            { term: 'surovin', value: CATALOG_COUNTS.ingredients },
+            { term: 'receptů', value: CATALOG_COUNTS.recipes },
+            { term: 'rad', value: CATALOG_COUNTS.guides },
           ].map(({ term, value }) => (
             <div
               key={term}
@@ -175,7 +175,7 @@ export function HomeScreen(): ReactNode {
             <Sparkles aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
             <span className="min-w-0 flex-1">
               <span className="block text-sm font-semibold">
-                Ochutnáno {tasted.size} z {ingredients.length} surovin
+                Ochutnáno {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
               </span>
               <span className="block text-xs text-muted">Deník ochutnávek a statistiky</span>
             </span>

@@ -4,8 +4,8 @@ import {
   ironSources,
   isIronSource,
   nutrientProfile,
-  vitaminCPartners,
 } from '../../src/data/nutrients';
+import { vitaminCPartners } from '../../src/data/recipeNutrients';
 import type { Ingredient } from '../../src/types';
 
 function get(id: string): Ingredient {
