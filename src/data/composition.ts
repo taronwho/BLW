@@ -2,11 +2,13 @@ import type { SourceRef } from '@/types';
 import {
   BP_VITAMIN_C,
   CZFCDB,
+  MATVARETABELLEN,
   NHS_IRON,
   NHS_TRACE_MINERALS,
   NHS_VITAMIN_C,
   USDA_FDC,
   czfcdb,
+  matvaretabellen,
   usdaFdc,
 } from './ingredients/_sources';
 import type { NutrientLevel } from './nutrients';
@@ -37,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 267 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 240 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -179,6 +181,82 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
     poznamka: 'Sušené brusinky se slazené; tabulka měří právě takové, jaké jsou v obchodě.',
   },
   'papaja': z({ vitaminC: 60.9, iron: 0.25, zinc: 0.08 }, usdaFdc('Papayas, raw', 169926)),
+  'jablecne-pyre-bez-cukru': {
+    ...z({ vitaminC: 1, iron: 0.23, zinc: 0.03 }, usdaFdc('Applesauce, canned, unsweetened, without added ascorbic acid (Includes foods for USDA\'s Food Distribution Program)', 171695)),
+    poznamka: 'Měřeno pyré bez cukru a bez přidané kyseliny askorbové; ta by hodnotu vitaminu C uměle zvedla.',
+  },
+  'kaki': z({ vitaminC: 7.5, iron: 0.15, zinc: 0.11 }, usdaFdc('Persimmons, japanese, raw', 169941)),
+  'fiky-susene': z({ vitaminC: 1.2, iron: 2 }, czfcdb('Fíky, sušené', 363)),
+  'grapefruit': z({ vitaminC: 42.8, iron: 0.3 }, czfcdb('Grapefruit', 361)),
+  'pomelo': z({ vitaminC: 61, iron: 0.11, zinc: 0.08 }, usdaFdc('Pummelo, raw', 167754)),
+  'meloun-zluty': z({ vitaminC: 18, iron: 0.17, zinc: 0.09 }, usdaFdc('Melons, honeydew, raw', 169911)),
+  'lici': z({ vitaminC: 71.5, iron: 0.31, zinc: 0.07 }, usdaFdc('Litchis, raw', 169086)),
+  'granatove-jablko': z({ vitaminC: 10.2, iron: 0.3, zinc: 0.35 }, usdaFdc('Pomegranates, raw', 169134)),
+  'mucenka': z({ vitaminC: 30, iron: 1.6, zinc: 0.1 }, usdaFdc('Passion-fruit, (granadilla), purple, raw', 169108)),
+  'kokos-strouhany': {
+    ...z({ vitaminC: 1.5, zinc: 2.01 }, usdaFdc('Nuts, coconut meat, dried (desiccated), not sweetened', 170170)),
+    ...z({ iron: 3.6 }, czfcdb('Kokos mletý', 89)),
+    poznamka: 'Vitamin C a zinek česká tabulka u kokosu neuvádí, jsou proto z USDA; železo je české.',
+  },
+  'brusinky-cerstve': z({ vitaminC: 14, iron: 0.23, zinc: 0.09 }, usdaFdc('Cranberries, raw', 171722)),
+  'aronie': {
+    ...z({ vitaminC: 28, iron: 0.9, zinc: 0.3 }, matvaretabellen('Aronia, svartsurbær, rå', 'aronia-svartsurbaer-ra')),
+    poznamka: 'Česká ani americká tabulka aronii nemají; hodnota je z norské tabulky, poslední z povolených, která ji uvádí.',
+  },
+  'rakytnik': {
+    ...z({ vitaminC: 131, iron: 0.7, zinc: 0.3 }, matvaretabellen('Tindved, havtorn, rå', 'tindved-havtorn-ra')),
+    poznamka: 'Česká ani americká tabulka rakytník nemají; hodnota je z norské tabulky. Vysoké hodnoty z článků o rakytníku bývají horní meze — tohle je naměřený obsah.',
+  },
+
+  /* Obiloviny */
+  'ovesne-vlocky-jemne': {
+    ...z({ iron: 4.4 }, czfcdb('Vločky ovesné', 188)),
+    ...z({ zinc: 3.64 }, usdaFdc('Cereals, oats, regular and quick, not fortified, dry', 173904)),
+    poznamka: 'Měřeno v suchých vločkách, jak se prodávají. V hotové kaši je obsah ve 100 g nižší, protože se přidá voda nebo mléko.',
+  },
+  'ovesne-vlocky-velke': {
+    ...z({ iron: 4.4 }, czfcdb('Vločky ovesné', 188)),
+    ...z({ zinc: 3.64 }, usdaFdc('Cereals, oats, regular and quick, not fortified, dry', 173904)),
+    poznamka: 'Měřeno v suchých vločkách, jak se prodávají. V hotové kaši je obsah ve 100 g nižší.',
+  },
+  'oves-bezlepkovy': z({ iron: 4.1, zinc: 2.5 }, czfcdb('Oves nahý', 163)),
+  'mouka-psenicna-hladka': z({ iron: 1, zinc: 0.73 }, czfcdb('Mouka pšeničná, hladká, světlá, T 530, obsah popela max. 0,6 % v suš.', 146)),
+  'mouka-psenicna-celozrnna': z({ iron: 3.7, zinc: 2.7 }, czfcdb('Mouka, pšeničná, celozrnná, T 1700, obsah popela max. 1,9 % v suš.', 150)),
+  'mouka-spaldova': {
+    ...z({ iron: 3.769, zinc: 3.591 }, usdaFdc('Flour, spelt, whole grain', 2003587)),
+    poznamka: 'Tabulka vede celozrnnou špaldovou mouku.',
+  },
+  'mouka-zitna': {
+    ...z({ iron: 2.3 }, czfcdb('Mouka žitná', 339)),
+    ...z({ zinc: 2.17 }, usdaFdc('Rye flour, medium', 168886)),
+    poznamka: 'Železo z české tabulky, zinek z USDA.',
+  },
+  'chleb-kvaskovy': {
+    ...z({ iron: 1.5, zinc: 1.2 }, czfcdb('Chléb pšenično-žitný, Šumava', 195)),
+    poznamka: 'Tabulka vede pšenično-žitný chléb typu Šumava.',
+  },
+  'chleb-toustovy': {
+    ...z({ iron: 1.5 }, czfcdb('Chléb pšeničný bílý', 198)),
+    ...z({ zinc: 0.74 }, usdaFdc('Bread, white, commercially prepared (includes soft bread crumbs)', 174924)),
+    poznamka: 'Železo z české tabulky (bílý pšeničný chléb), zinek z USDA.',
+  },
+  'rohlik-houska': z({ iron: 0.9, zinc: 0.7 }, czfcdb('Rohlík bílý', 196)),
+  'testoviny-semolinove': {
+    ...z({ iron: 0.5, zinc: 0.51 }, usdaFdc('Pasta, cooked, unenriched, without added salt', 168928)),
+    poznamka: 'Měřeno vařené, neobohacené, bez přidané soli.',
+  },
+  'testoviny-celozrnne': {
+    ...z({ iron: 0.6, zinc: 0.73 }, czfcdb('Těstoviny, bezvaječné, celozrnné, vařené v nesolené vodě', 503)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají.',
+  },
+  'kuskus': {
+    ...z({ iron: 0.38, zinc: 0.26 }, usdaFdc('Couscous, cooked', 169700)),
+    poznamka: 'Měřeno uvařený ve vodě, tak se podává. Suchý má živin víc, ale ten se nejí.',
+  },
+  'bulgur': {
+    ...z({ iron: 0.96, zinc: 0.57 }, usdaFdc('Bulgur, cooked', 170287)),
+    poznamka: 'Měřeno uvařený ve vodě, tak se podává. Suchý má živin víc, ale ten se nejí.',
+  },
 };
 
 /**
@@ -190,6 +268,7 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
 export const COMPOSITION_SOURCES: readonly SourceRef[] = [
   CZFCDB,
   USDA_FDC,
+  MATVARETABELLEN,
   NHS_VITAMIN_C,
   NHS_IRON,
   NHS_TRACE_MINERALS,
