@@ -77,7 +77,7 @@ export const soups: Recipe[] = [
     baseSteps: [
       'Zeleninu oškrábej a nakrájej na kostky; celer krájej menší, protože se vaří déle než mrkev.',
       'Zeleninu zalij dvěma litry studené vody, přidej libeček a přiveď pomalu k varu bez soli.',
-      'Vařː na mírném plameni čtyřicet minut, aby se vývar nezakalil, a pěnu průběžně sbírej.',
+      'Vař na mírném plameni čtyřicet minut, aby se vývar nezakalil, a pěnu průběžně sbírej.',
       'Zeleninu vyjmi děrovanou lžící a vývar přeceď přes jemné sítko.',
       'Nudle uvař zvlášť v nesolené vodě, aby vývar nezhoustl škrobem.',
     ],
@@ -284,7 +284,7 @@ export const soups: Recipe[] = [
   },
   {
     id: 'rajcatova-polevka-cizrna',
-    titleCz: 'Rajčatová polévka s cizrnou a bazalkou',
+    titleCz: 'Rajčatová polévka z čerstvých rajčat s cizrnou',
     category: 'polevky',
     minAgeMonths: 6,
     timeMinutes: 35,
@@ -296,10 +296,11 @@ export const soups: Recipe[] = [
       { ingredientId: 'cesnek', amount: '2 stroužky', track: 'all' },
       { ingredientId: 'ghi', amount: '1 lžíce', track: 'all' },
       { ingredientId: 'polenta', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Rajčata spař, oloupej a nakrájej na kostky i se šťávou, která se uvolní na prkénku.',
-      'Na ghí krátce prohřej plátky česneku, přidej rajčata a vař patnáct minut, dokud se nerozpadnou.',
+      'Na ghí krátce prohřej plátky česneku, přidej rajčata a sladkou papriku nakrájenou na kostky a vař patnáct minut, dokud se nerozpadnou.',
       'Vsyp polentu tenkým proudem a za míchání vař pět minut; polenta polévku přirozeně zahustí.',
       'Přidej uvařenou cizrnu a nech ji v polévce pět minut prohřát.',
       'Bazalku natrhej na lístky a rozděl polévku na tři porce.',
@@ -310,6 +311,7 @@ export const soups: Recipe[] = [
       'Dětskou porci rozmixuj, aby v ní nezůstaly slupky z rajčat ani celá zrna cizrny.',
       'Přidej lístek bazalky rozetřený mezi prsty — stačí vůně, celý list je pro dítě zbytečně velký.',
       'Kyselost rajčat vyrovnej lžičkou ghí; polévka tím zjemní a lépe se snáší.',
+      'Papriku z polévky nevynechávej: vitamin C z ní pomáhá vstřebat železo z cizrny.',
     ],
     babyServing: {
       '6m': 'Podávej polévku hustou jako pyré na lžíci nebo namoč do ní pásek chleba, ze kterého bude dítě sát.',

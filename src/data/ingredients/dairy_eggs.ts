@@ -122,7 +122,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kefír je kysaný mléčný nápoj s živou kulturou a jeho kyselejší chuť dítě překvapí. Do prvního roku ho nenabízej jako nápoj, ale vmíchej ho do kaše nebo do zeleninového pyré.',
+          'Kefír je kysaný mléčný nápoj se živou kulturou a jeho kyselejší chuť dítě překvapí. Do prvního roku ho nenabízej jako nápoj, ale vmíchej ho do kaše nebo do zeleninového pyré.',
         caution: 'Kefír nesmí nahradit mateřské ani umělé mléko.',
       },
       '9m': {

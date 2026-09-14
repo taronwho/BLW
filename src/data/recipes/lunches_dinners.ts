@@ -315,7 +315,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Vepřovou panenku nahrazuje 250 g tempehu opečeného na plátky — po zakápnutí pomerančem chutná stejně slavnostně a dodá plnou bílkovinu.',
     allergens: ['soja'],
-    tags: ['bez lepku', 'nedělní'],
+    tags: ['bez lepku', 'nedělní oběd'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
     reviewStatus: 'verified',
   },
@@ -539,6 +539,7 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'skrob-kukuricny', amount: '1 lžička', track: 'all' },
       { ingredientId: 'kvetak', amount: '1 menší', track: 'vegetarian' },
       { ingredientId: 'tvaroh-polotucny', amount: '200 g', track: 'vegetarian' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Brambory oloupej, nakrájej na kostky velikosti kostky cukroví a uvař je v nesolené vodě patnáct minut doměkka.',
@@ -619,7 +620,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Místo pstruha se opéká hlíva ústřičná a bílkovinu dodá porce quinoy, která má plné spektrum aminokyselin a zastane rybu.',
     allergens: ['ryby', 'mleko'],
-    tags: ['bez lepku', 'ryba', 'jednoduché'],
+    tags: ['bez lepku', 'ryba', 'rychlé'],
     sources: [NHS_FISH, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -871,7 +872,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Kuřecí játra nahrazuje 200 g bílých fazolí opečených se žampiony — houby dodají hloubku chuti a fazole bílkovinu.',
     allergens: ['mleko'],
-    tags: ['bez lepku', 'železo'],
+    tags: ['bez lepku'],
     sources: [NHS_VITAMIN_A, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -920,7 +921,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Krůtí prsa nahrazuje 250 g ricotty vmíchané do polenty — dodá porci mléčnou bílkovinu a udělá z polenty krémové hlavní jídlo.',
     allergens: ['mleko'],
-    tags: ['bez lepku', 'rychlé', 'železo'],
+    tags: ['bez lepku', 'rychlé'],
     sources: [NHS_FIRST_FOODS, NHS_7_9M],
     reviewStatus: 'verified',
   },
@@ -1141,7 +1142,7 @@ export const lunchesDinners: Recipe[] = [
       'Posyp bazalkou a zakápni olivovým olejem; kdo má rád ostřejší chuť, přidá si víc česneku.',
     ],
     allergens: ['mleko'],
-    tags: ['bez lepku', 'vegetariánské', 'nízkosacharidové'],
+    tags: ['bez lepku', 'vegetariánské'],
     sources: [NHS_PREP_SAFELY, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -1204,10 +1205,11 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'pazitka', amount: 'hrst', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'mrkev', amount: '1 kus', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Červenou čočku propláchni a vař patnáct minut, dokud se úplně nerozpadne na kaši; pak ji nech vychladnout.',
-      'Mrkev nastrouhej najemno, vymačkej z ní přebytečnou šťávu a vmíchej do čočky spolu s cizrnovou moukou a kmínem.',
+      'Mrkev a sladkou papriku nastrouhej najemno, vymačkej z nich přebytečnou šťávu a vmíchej je do čočky spolu s cizrnovou moukou a kmínem.',
       'Těsto nech deset minut odpočinout, aby mouka nasákla, a pak z něj tvaruj placky velikosti dlaně.',
       'Kefír smíchej s nasekanou pažitkou na dip a rozděl ho do tří misek.',
       'Placky opékej na olivovém oleji po třech minutách z každé strany a rovnej je na papír.',
@@ -1218,6 +1220,7 @@ export const lunchesDinners: Recipe[] = [
       'Z odebraného těsta tvaruj podlouhlé placičky, které se lépe drží v dětské pěsti než kulaté.',
       'Opékej je na pánvi vytřené olejem po čtyřech minutách z každé strany a rozlom jednu, ať víš, že je propečená.',
       'Do misky s kefírem pro miminko nepřidávej nic dalšího — samotný kefír je dostatečně chutný dip.',
+      'Papriku z placiček nevynechávej: vitamin C z ní pomáhá tělu vstřebat železo z čočky, které se samo o sobě vstřebává hůř než železo z masa.',
     ],
     babyServing: {
       '6m': 'Podávej placičku ve tvaru prstu, kterou dítě sevře v dlani, a kefír v mělké misce ke smáčení.',
@@ -1336,11 +1339,12 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'gouda', amount: '100 g', track: 'all' },
       { ingredientId: 'bazalka', amount: 'hrst', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'brokolice', amount: '1 menší růžice', track: 'all' },
     ],
     baseSteps: [
       'Těstoviny uvař v nesolené vodě o dvě minuty kratší dobu, než uvádí obal, a sceď je.',
       'Cuketu nastrouhej nahrubo, osmahni na olivovém oleji, dokud se nevypaří voda, a přidej rajčata nakrájená na kostky.',
-      'Omáčku duš deset minut, dokud nezhoustne, a vmíchej do ní natrhanou bazalku.',
+      'Brokolici rozeber na malé růžičky, povař je tři minuty v páře a vmíchej je do omáčky spolu s natrhanou bazalkou; omáčku pak duš deset minut, dokud nezhoustne.',
       'Ricottu rozmíchej vidličkou do hladka a goudu nastrouhej.',
       'Těstoviny promíchej s omáčkou a rozděl je na tři porce podle linií.',
     ],
@@ -1348,7 +1352,7 @@ export const lunchesDinners: Recipe[] = [
       'Po kroku 5 odeber dvě lžíce těstovin s omáčkou do malé zapékací misky, ještě před tím, než se zbytek dochutí pro dospělé.',
     babySteps: [
       'Těstoviny pro miminko nastříhej nůžkami na délku palce, aby se nedaly nasát příliš dlouhé.',
-      'Promíchej je s lžící ricotty, která omáčku zjemní, a posyp lžičkou strouhané goudy.',
+      'Promíchej je s lžící ricotty, která omáčku zjemní, s pár růžičkami brokolice pro vitamin C k železu z celozrnných těstovin, a posyp lžičkou strouhané goudy.',
       'Zapékej dvacet minut při 190 °C a před podáváním porci rozhrň lžící a nech ji vychladnout.',
     ],
     babyServing: {
@@ -1380,11 +1384,12 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'rajce', amount: '400 g', track: 'all' },
       { ingredientId: 'olej-repkovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'kmin-cely', amount: 'půl lžičky', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '2 kusy', track: 'all' },
     ],
     baseSteps: [
       'Cibuli nakrájej najemno a smaž ji na řepkovém oleji dvacet minut na mírném plameni, dokud nezhnědne a nezesládne.',
       'Hrnec stáhni z plotny, vmíchej mletou papriku a kmín a okamžitě zalij vodou, aby paprika nezhořkla.',
-      'Přidej rajčata nakrájená na kostky a vař patnáct minut, dokud omáčka nezhoustne.',
+      'Přidej rajčata a čerstvou sladkou papriku nakrájené na kostky a vař patnáct minut, dokud omáčka nezhoustne.',
       'Vmíchej uvařené fazole a nech je pět minut prohřát, ať nasáknou chuť paprikového základu.',
       'Polentu zamíchej do trojnásobku vroucí vody a vař ji deset minut za stálého míchání; guláš rozděl na tři porce.',
     ],
@@ -1394,6 +1399,7 @@ export const lunchesDinners: Recipe[] = [
       'Fazole v odebrané porci rozmačkej vidličkou, aby v ní nezůstaly celé kusy s pevnou slupkou.',
       'Rozetři polentu na talíř v tenké vrstvě, nech ji ztuhnout a nakrájej ji na hranolky do ruky.',
       'Guláš nabídni jako dip k hranolkům z polenty, nebo ho s polentou promíchej na hustou kaši.',
+      'Nech v porci i kousky čerstvé papriky: vitamin C z ní pomáhá vstřebat železo z fazolí.',
     ],
     babyServing: {
       '6m': 'Podávej hranolek polenty velikosti prstu a guláš rozetřený v misce, do které dítě bez problémů zaboří ruku.',
@@ -1424,10 +1430,11 @@ export const lunchesDinners: Recipe[] = [
       { ingredientId: 'tvaroh-mekky', amount: '250 g', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'petrzelka-hladkolista', amount: 'hrst', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Mrkev, petržel a tuřín oškrábej a nakrájej na hranolky silné jako prst; tuřín potřebuje o něco tenčí plátky, protože tvrdne.',
-      'Zeleninu rozlož na plech, pokapej dvěma lžícemi olivového oleje a peč 30 minut při 200 °C, dokud okraje nezkaramelizují.',
+      'Zeleninu rozlož na plech, pokapej dvěma lžícemi olivového oleje a peč 30 minut při 200 °C, dokud okraje nezkaramelizují; sladkou papriku nakrájenou na proužky přidej na posledních deset minut, ať zůstane šťavnatá.',
       'Quinou propláchni a vař dvanáct minut, pak ji nech pod pokličkou pět minut dojít a načechrej vidličkou.',
       'Tvaroh rozmíchej s lžící vody a nasekanou petrželkou na hladký dip.',
       'Zeleninu, quinou i dip rozděl na tři porce podle linií.',
@@ -1436,7 +1443,7 @@ export const lunchesDinners: Recipe[] = [
       'Po kroku 3 odeber tři hranolky pečené zeleniny a dvě lžíce quinoy, dřív než se porce pro dospělé dochucuje.',
     babySteps: [
       'Hranolky pro miminko zkontroluj palcem: musí jít rozmáčknout, jinak je vrať do trouby ještě na pět minut.',
-      'Quinou promíchej se lžící tvarohu bez dochucení, aby zrnka držela pohromadě.',
+      'Quinou promíchej se lžící tvarohu bez dochucení, aby zrnka držela pohromadě, a přidej proužek pečené papriky — vitamin C z ní pomáhá vstřebat železo z quinoy.',
       'Tuřín nabídni opatrně jako novou chuť; je nasládlý, ale výraznější než mrkev a děti ho někdy odmítnou napoprvé.',
     ],
     babyServing: {

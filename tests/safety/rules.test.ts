@@ -381,6 +381,71 @@ describe('no-placeholder', () => {
   });
 });
 
+describe('no-stray-marks', () => {
+  it('projde text se složenými českými písmeny', () => {
+    expectPass('no-stray-marks', makeRecipe(), catalog);
+  });
+
+  it('spadne na osamocené háčkové čárce místo písmene ď', () => {
+    // „osladˇ" vypadá na první pohled jako „oslaď", ale je to „oslad" plus
+    // samostatný modifikátor U+02C7. Kontrola přes \p{L} ho nechytí, protože
+    // Unicode ho řadí mezi písmena.
+    const recipe = makeRecipe({ adultSteps: ['Kaši pro dospělé oslad\u02c7 podle chuti.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+
+  it('spadne na neviditelném měkkém spojovníku uvnitř slova', () => {
+    const recipe = makeRecipe({ adultSteps: ['Podávej s paprikov\u00adými proužky vedle.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+
+  it('spadne na cyrilském písmenu zaměněném za latinku', () => {
+    const recipe = makeRecipe({ adultSteps: ['Porci podávej n\u0430 talíři.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+});
+
+describe('preposition-vocalization', () => {
+  it('projde text se správně vokalizovanou předložkou', () => {
+    expectPass(
+      'preposition-vocalization',
+      makeRecipe({ baseSteps: ['Přilij rajčata i se šťávou a povař pět minut.'] }),
+      catalog,
+    );
+  });
+
+  it('zachytí „s šťávou" místo „se šťávou"', () => {
+    const recipe = makeRecipe({ baseSteps: ['Přilij rajčata i s šťávou a povař pět minut.'] });
+    expectFail('preposition-vocalization', recipe, catalog);
+  });
+
+  it('nepovažuje konec slova za předložku', () => {
+    // `\b` v JavaScriptu počítá jen ASCII písmena, takže „Směs zvlhči" by
+    // bez ošetření vypadala jako předložka „s" před „z".
+    expectPass(
+      'preposition-vocalization',
+      makeRecipe({ baseSteps: ['Směs zvlhči lžící vody a nech ji odpočinout.'] }),
+      catalog,
+    );
+  });
+});
+
+describe('recipe-ingredients-used', () => {
+  it('projde recept, jehož složky pokyny jmenují', () => {
+    expectPass('recipe-ingredients-used', makeRecipe(), catalog);
+  });
+
+  it('zachytí složku, kterou žádný pokyn nezmiňuje', () => {
+    const recipe = makeRecipe({
+      ingredients: [
+        ...makeRecipe().ingredients,
+        { ingredientId: 'kureci-prsa', amount: '300 g', track: 'all' },
+      ],
+    });
+    expect(expectFail('recipe-ingredients-used', recipe, catalog)).toContain('Kuřecí');
+  });
+});
+
 describe('no-internal-references', () => {
   it('projde běžný text bez odkazu na soubor', () => {
     expectPass('no-internal-references', makeRecipe(), catalog);
@@ -806,6 +871,9 @@ describe('pokrytí pravidel', () => {
       'source-url-shape',
       'no-placeholder',
       'no-internal-references',
+      'no-stray-marks',
+      'preposition-vocalization',
+      'recipe-ingredients-used',
       'ingredient-refs-resolve',
       'stage-prep-complete',
       'allergen-consistency',

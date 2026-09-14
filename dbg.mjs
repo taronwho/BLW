@@ -1,0 +1,21 @@
+import { chromium } from '@playwright/test';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 414, height: 896 } });
+p.on('pageerror', (e) => console.log('CHYBA', String(e).slice(0, 400)));
+await p.goto('http://127.0.0.1:4173/BLW/#/');
+await p.getByTestId('disclaimer-accept').click();
+await p.waitForTimeout(300);
+await p.getByRole('navigation').getByRole('link', { name: 'Recepty' }).click();
+await p.waitForTimeout(900);
+const first = p.getByTestId('seznam-receptu').getByRole('link').first();
+const box = await first.boundingBox();
+console.log('box:', JSON.stringify(box));
+const stred = await p.evaluate(([x, y]) => {
+  const el = document.elementFromPoint(x, y);
+  return el ? `${el.tagName} | ${String(el.className).slice(0, 120)}` : 'nic';
+}, [box.x + box.width / 2, box.y + box.height / 2]);
+console.log('na středu:', stred);
+await first.click();
+await p.waitForTimeout(1200);
+console.log('URL:', p.url(), '| moment:', await p.getByTestId('moment-odebrani').count());
+await b.close();

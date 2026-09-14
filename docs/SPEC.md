@@ -173,9 +173,20 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | `min-age-consistency` | error | `minAgeMonths` receptu ≥ maximum z jeho složek |
 | `mercury-limit` | warning | ryby s `hazards: ['rtut']` mají vyplněný `frequencyLimit` |
 | `nitrate-note` | warning | suroviny s `hazards: ['dusicnany']` mají pokyn neohřívat opakovaně |
-| `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz` |
+| `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz`; žádné dva recepty se stejným `titleCz` |
 | `text-uniqueness` | warning | žádné dva popisy `serving` nejsou shodné na >85 % (odhalí generování šablonou) |
 | `length-sanity` | warning | `serving` má 80–400 znaků; `chokingReason` není obecná fráze ze zakázaného seznamu („dbejte opatrnosti", „konzultujte s lékařem") |
+| `meat-track-only-with-meat` | error | bezmasý recept nemá vlastní `vegetarianSteps` ani `vegetarianProteinSwap` — není co nahrazovat |
+| `baby-serving-mentions-meat` | error | recept s masem nebo rybou je pojmenuje v každé fázi `babyServing`, ne jen v `babySteps` |
+| `ingredient-coverage` | error | každá surovina katalogu je složkou aspoň jednoho receptu, nebo má důvod v `src/safety/coverage-exceptions.ts` |
+| `recipe-ingredients-used` | error | každá složka receptu se objeví aspoň v jednom pokynu, ne jen v nákupním seznamu |
+| `no-internal-references` | error | text pro rodiče neodkazuje na soubory v repozitáři ani na příkazy projektu |
+| `no-stray-marks` | error | text neobsahuje osamocený modifikátor („osladˇ" místo „oslaď"), kombinující znaménko ani cyrilici zaměněnou za latinku |
+| `neutral-address` | error | text neoslovuje rodiče jako ženu a u slova „dítě" drží střední rod |
+| `consistent-address` | error | text rodiči tyká, vykání se mezi to nemíchá |
+| `czech-typography` | error | české uvozovky, výpustka … a jednoduché mezery |
+| `preposition-vocalization` | error | neslabičná předložka se před stejnou hláskou vokalizuje — „se šťávou", ne „s šťávou" |
+| `known-typos` | error | tvary, které jednorázový audit proti českému slovníku označil za neexistující, se nevrací |
 
 Validátor `scripts/validate-data.ts` projde všechna pravidla, vypíše **tabulku po kategoriích** a souhrn ve tvaru z `CLAUDE.md`, a skončí s exit kódem 1 při jakékoli chybě.
 

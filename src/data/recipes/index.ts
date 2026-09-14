@@ -1,6 +1,7 @@
 import type { Recipe } from '@/types';
 import { breakfast } from './breakfast';
 import { breakfast2 } from './breakfast_2';
+import { bezMleka } from './bez_mleka';
 import { extras } from './extras';
 import { lunchesDinners } from './lunches_dinners';
 import { lunchesDinners2 } from './lunches_dinners_2';
@@ -22,6 +23,7 @@ export const recipes: Recipe[] = [
   ...snacksBaking,
   ...snacksBaking2,
   ...extras,
+  ...bezMleka,
 ];
 
 export const recipeById: ReadonlyMap<string, Recipe> = new Map(

@@ -61,23 +61,39 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
   it('napřed jdou partneři, které kuchařka se surovinou opravdu kombinuje', () => {
     // Pořadí musí odrážet, co kuchařka s luštěninou doopravdy vaří, jinak je
     // rada nepoužitelná u sporáku. Netestuje se konkrétní surovina — ta se
-    // s každým novým receptem může posunout — ale to, že seznam jde od
-    // nejčastějšího společného výskytu k nejřidšímu.
+    // s každým novým receptem může posunout — ale pořadí podle obou klíčů:
+    // nejdřív počet receptů přímo s touhle surovinou, teprve při shodě počet
+    // receptů s její kategorií.
     const cocka = get('cocka-cervena-loupana');
     const partners = vitaminCPartners(cocka, 5);
 
-    const spolecnyVyskyt = (id: string): number =>
+    const slozky = (recipe: (typeof recipes)[number]): string[] =>
+      recipe.ingredients.map((ref) => ref.ingredientId);
+
+    const sPrimo = (id: string): number =>
       recipes.filter((recipe) => {
-        const ids = recipe.ingredients.map((ref) => ref.ingredientId);
-        const sKategorii = ids.some(
-          (one) => ingredients.find((i) => i.id === one)?.category === cocka.category,
-        );
-        return sKategorii && ids.includes(id);
+        const ids = slozky(recipe);
+        return ids.includes(cocka.id) && ids.includes(id);
       }).length;
 
-    const pocty = partners.map((partner) => spolecnyVyskyt(partner.id));
-    expect(pocty[0]).toBeGreaterThan(0);
-    expect([...pocty].sort((a, b) => b - a)).toEqual(pocty);
+    const sKategorii = (id: string): number =>
+      recipes.filter((recipe) => {
+        const ids = slozky(recipe);
+        const maKategorii = ids.some(
+          (one) => ingredients.find((i) => i.id === one)?.category === cocka.category,
+        );
+        return maKategorii && ids.includes(id);
+      }).length;
+
+    const klice = partners.map((partner): [number, number] => [
+      sPrimo(partner.id),
+      sKategorii(partner.id),
+    ]);
+    const prvni = klice[0];
+    if (prvni === undefined) throw new Error('Čočka nemá žádného partnera na vitamin C.');
+    expect(prvni[1]).toBeGreaterThan(0);
+    const serazene = [...klice].sort((a, b) => b[0] - a[0] || b[1] - a[1]);
+    expect(serazene).toEqual(klice);
   });
 
   it('surovina sama sobě partnerem není', () => {

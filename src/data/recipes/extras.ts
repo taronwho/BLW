@@ -113,7 +113,7 @@ export const extras: Recipe[] = [
     vegetarianProteinSwap:
       'Kapra nahrazuje 250 g uvařených bílých fazolí zapečených ve výpeku z fenyklu — dodají porci bílkovinu a stejně sytou konzistenci.',
     allergens: ['ryby', 'mleko'],
-    tags: ['bez lepku', 'ryba', 'sváteční'],
+    tags: ['bez lepku', 'ryba', 'nedělní oběd'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
@@ -213,12 +213,14 @@ export const extras: Recipe[] = [
       { ingredientId: 'nektarinka', amount: '2 zralé', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'boruvky', amount: '100 g', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Nektarinky rozpul, vyjmi pecky a jednu nakrájej na měsíčky, druhou rozmačkej vidličkou na pyré.',
       'Tvaroh rozmíchej s lžící vody, aby byl krémový a dal se nabírat lžící.',
       'Borůvky rozkroj každou napůl; celá bobule má kulatý tvar, který malým dětem nesvědčí.',
       'Do misek navrstvi tvaroh, nektarinkové pyré a navrch měsíčky s rozkrojenými borůvkami.',
+      'Jahody zbav stopek, velké rozřež podélně na čtvrtky a menší rozmačkej vidličkou.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě lžíce tvarohu a lžíci nektarinkového pyré, dřív než se misky pro dospělé dosladí.',
@@ -226,6 +228,7 @@ export const extras: Recipe[] = [
       'Do dětské misky vmíchej lžičku mletých lněných semínek a nech je pět minut nabobtnat.',
       'Tvaroh zřeď lžící vody nebo mléka, aby nebyl hutný a dítě ho snadno polykalo.',
       'Nektarinku pro miminko oloupej, pokud má pevnou slupku, a borůvky vždy rozkroj.',
+      'Rozmačkané jahody vmíchej do tvarohu; vitamin C z nich pomáhá vstřebat železo z mletých lněných semínek.',
     ],
     babyServing: {
       '6m': 'Podávej krémový tvaroh s pyré na lžíci a k němu měsíček zralé nektarinky velikosti prstu do ruky.',
@@ -254,12 +257,14 @@ export const extras: Recipe[] = [
       { ingredientId: 'pazitka', amount: 'hrst', track: 'all' },
       { ingredientId: 'kmin-mlety', amount: 'půl lžičky', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Cizrnovou mouku smíchej s mletým kmínem a postupně přilévej vodu, dokud nevznikne těsto hustoty smetany.',
       'Nech těsto dvacet minut odpočinout; mouka nasákne a placky pak drží tvar.',
       'Jogurt rozmíchej s polovinou nastříhané pažitky na dip a rozděl ho do misek.',
       'Pánev potři kokosovým olejem a peč tenké placky po dvou minutách z každé strany.',
+      'Sladkou papriku nakrájej na proužky, které se k plackám namáčejí do dipu stejně dobře jako placka sama.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber tři lžíce těsta stranou a upeč z nich dítětiny placky, dřív než se zbytek těsta pro dospělé dochucuje.',
@@ -267,6 +272,7 @@ export const extras: Recipe[] = [
       'Dětské placky peč o něco menší a silnější, aby se v ruce nelámaly, a jednu rozlom na kontrolu propečení.',
       'Placku nakrájej na pásky široké jako dva prsty a nech ji zchladnout.',
       'Jogurt pro miminko nabídni samostatně bez dochucení, jen s nastříhanou pažitkou.',
+      'K dětské placce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej pásek placky dlouhý přes dlaň a jogurt v ploché misce, do které dítě zaboří konec pásku.',
@@ -301,7 +307,7 @@ export const extras: Recipe[] = [
       'Z řapíků stáhni škrabkou vlákna po celé délce a nakrájej je na kousky široké jako palec.',
       'Brambory oloupej, nakrájej na díly a rozlož je s celerem na plech vyložený papírem.',
       'Zakápni lžící olivového oleje, zamíchej a peč 25 minut na 200 °C, dokud celer nezměkne.',
-      'Filety osuš, polož je na zeleninu a peč dalších 12 minut, dokud maso neztratí průhlednost.',
+      'Filety tresky aljašské osuš, polož je na zeleninu a peč dalších 12 minut, dokud maso neztratí průhlednost.',
       'Plech vytáhni, rybu rozděl podle linií a dokonči každou zvlášť.',
     ],
     babySplitPoint:
@@ -327,7 +333,7 @@ export const extras: Recipe[] = [
     vegetarianProteinSwap:
       'Tresku nahrazuje 250 g uvařených bílých fazolí zapečených se stejnou zeleninou — drží tvar a dodají srovnatelné množství bílkovin.',
     allergens: ['ryby', 'celer'],
-    tags: ['bez lepku', 'ryba', 'plech'],
+    tags: ['bez lepku', 'ryba', 'pečené'],
     sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
@@ -376,7 +382,7 @@ export const extras: Recipe[] = [
     vegetarianProteinSwap:
       'Sleďa nahrazuje 200 g uvařené čočky beluga — drží tvar jako rybí vlákna a je to sytý zdroj rostlinné bílkoviny i železa.',
     allergens: ['ryby'],
-    tags: ['bez lepku', 'ryba', 'plech'],
+    tags: ['bez lepku', 'ryba', 'pečené'],
     sources: [NHS_FISH, NHS_AVOID, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
@@ -400,7 +406,7 @@ export const extras: Recipe[] = [
       'Z pekingského zelí odřízni tvrdá bílá žebra a nakrájej je zvlášť nadrobno; zelené listy nakrájej na proužky.',
       'Na pánvi rozehřej lžíci oleje, vlož žebra se strouhaným zázvorem a dus pět minut doměkka.',
       'Přidej zelené proužky, podlij dvěma lžícemi vody a dus další tři minuty.',
-      'Filety polož na zelí, přiklop a dus osm minut, dokud maso neztratí průhlednost.',
+      'Filety tresky jednoskvrnné polož na zelí, přiklop a dus osm minut, dokud maso neztratí průhlednost.',
     ],
     babySplitPoint:
       'Po kroku 5 odeber lžíci zelí, lžíci rýže a kus ryby, ještě než se cokoli dochucuje.',
@@ -425,7 +431,7 @@ export const extras: Recipe[] = [
     vegetarianProteinSwap:
       'Tresku nahrazuje 200 g tofu natural opečeného dozlatova — má srovnatelný obsah bílkovin a v dušeném zelí drží tvar.',
     allergens: ['ryby', 'soja'],
-    tags: ['bez lepku', 'ryba', 'jedna pánev'],
+    tags: ['bez lepku', 'ryba', 'jednohrnec'],
     sources: [NHS_FISH, BP_NITRATES_VEG, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
@@ -572,7 +578,7 @@ export const extras: Recipe[] = [
     vegetarianProteinSwap:
       'Slávky nahrazuje 150 g uvařených fazolek mungo vmíchaných do rizota — drží tvar a dodají rostlinnou bílkovinu.',
     allergens: ['mekkysi'],
-    tags: ['bez lepku', 'jedna pánev'],
+    tags: ['bez lepku', 'jednohrnec'],
     sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
@@ -588,6 +594,7 @@ export const extras: Recipe[] = [
       { ingredientId: 'kaki', amount: '2 zralé kusy', track: 'all' },
       { ingredientId: 'zitne-vlocky', amount: '80 g', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'mandarinka', amount: '2 kusy', track: 'all' },
     ],
     baseSteps: [
       'Žitné vločky zalij horkou vodou tak, aby byly ponořené, a nech je deset minut nabobtnat doměkka.',
@@ -595,6 +602,7 @@ export const extras: Recipe[] = [
       'Polovinu dužiny rozmačkej vidličkou na pyré, druhou nakrájej na kousky.',
       'Nabobtnalé vločky sceď a promíchej je se skyrem do hladkého krému.',
       'Krém rozděl do misek a doplň ho kaki.',
+      'Mandarinky oloupej, dílky zbav blány a prohmatej je proti světlu kvůli jadérkům.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce krému ze skyru s vločkami, ještě než se do misek přidá cokoli dalšího.',
@@ -602,6 +610,7 @@ export const extras: Recipe[] = [
       'Krém zřeď lžící vody nebo mléka, skyr je hustší než jogurt a v puse se lepí.',
       'Vmíchej do něj lžíci kaki pyré a lžičku mletých lněných semínek.',
       'Nech krém vychladnout na vlažnou teplotu a promíchej ho těsně před podáním.',
+      'Přidej do misky dílek mandarinky bez blány; vitamin C z něj pomáhá vstřebat železo ze žitných vloček.',
     ],
     babyServing: {
       '6m': 'Nanes krém jako silnou vrstvu na okraj misky, ať se dítě má o co opřít dlaní, a přidej měkký díl kaki na délku prstu bez slupky. Krém raději zřeď, hustý skyr zalehne ústa.',
@@ -613,7 +622,7 @@ export const extras: Recipe[] = [
       'Kdo má rád řidší snídani, dolije mléko až na talíři a promíchá.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
-    tags: ['rychlé', 'bez vaření'],
+    tags: ['vegetariánské', 'rychlé', 'studená kuchyně'],
     sources: [NHS_FIRST_FOODS, NHS_YOUNG_CHILDREN],
     reviewStatus: 'verified',
   },
@@ -630,6 +639,7 @@ export const extras: Recipe[] = [
       { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
       { ingredientId: 'seminka-dynova-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Fíky zalij horkou vodou a nech je 15 minut nabobtnat doměkka, pak je sceď.',
@@ -637,6 +647,7 @@ export const extras: Recipe[] = [
       'Banány rozmačkej vidličkou a smíchej je s vločkami, rozpuštěným kokosovým olejem a mletými dýňovými semínky.',
       'Vmíchej nakrájené fíky, těsto rozprostři na plech do vrstvy vysoké dva centimetry a uhlaď ho.',
       'Peč 25 minut na 180 °C, nech vychladnout a teprve pak krájej na tyčinky.',
+      'Z pomeranče vymačkej šťávu a zalij jí sušené fíky, ať před mixováním nabobtnají.',
     ],
     babySplitPoint:
       'Po kroku 5 odděl jednu tyčinku pro miminko, ještě než se zbytek posype nebo dochutí.',
@@ -644,6 +655,7 @@ export const extras: Recipe[] = [
       'Tyčinku pro dítě nakrájej podélně na proužky široké jako prst dospělého.',
       'Zkontroluj, že v proužku nezůstal celý kus fíku; lepivé sousto vždycky rozdrob.',
       'Nech proužky vychladnout úplně, teplé se drolí a lepí.',
+      'K dětské tyčince polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo ze sušených fíků.',
     ],
     babyServing: {
       '6m': 'Podej proužek na délku prstu, který dítě sevře v pěsti a okusuje z konce. Drobné kousky v tomhle věku nenabízej, sevřená pěst je nedostane k puse.',
@@ -655,7 +667,7 @@ export const extras: Recipe[] = [
       'Skladuj je v plechové dóze, v igelitu změknou a rozpadnou se.',
     ],
     allergens: ['psenice-lepek'],
-    tags: ['do ruky', 'na cesty', 'pečení'],
+    tags: ['vegetariánské', 'do ruky', 'pečené'],
     sources: [NHS_FIRST_FOODS, NHS_AVOID, NHS_YOUNG_CHILDREN],
     reviewStatus: 'verified',
   },
@@ -697,7 +709,7 @@ export const extras: Recipe[] = [
       'Podávej vlažný; polníček se v teple rychle zavadá a hotový salát s ním už podruhé neohřívej.',
     ],
     allergens: ['vejce', 'mleko'],
-    tags: ['bez lepku', 'rychlé'],
+    tags: ['vegetariánské', 'bez lepku', 'rychlé'],
     sources: [BP_NITRATES_VEG, NHS_ALLERGY, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -740,7 +752,7 @@ export const extras: Recipe[] = [
       'Kdo má rád výraznější chuť, přidá si na talíř lžíci zelí navíc a zakápne ho olejem.',
     ],
     allergens: ['psenice-lepek', 'vejce'],
-    tags: ['do ruky', 'pro batolata'],
+    tags: ['vegetariánské', 'do ruky'],
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },

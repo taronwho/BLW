@@ -763,7 +763,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['kosti'],
     hazardNotes: {
       kosti:
-        'Pstruha pro dítě vždy nejdřív rozeber: po upečení odděl filety od páteře, vytáhni celou páteř i s žebry vcelku, pak maso rozmělni na talíři vidličkou a projeď ho po vrstvách. Z hlavy a ocasní části dítěti maso neber vůbec.',
+        'Pstruha pro dítě vždy nejdřív rozeber: po upečení odděl filety od páteře, vytáhni celou páteř i se žebry vcelku, pak maso rozmělni na talíři vidličkou a projeď ho po vrstvách. Z hlavy a ocasní části dítěti maso neber vůbec.',
     },
     minAgeMonths: 6,
     frequencyLimit: 'Jako tučná ryba nejvýše dvě porce týdně.',

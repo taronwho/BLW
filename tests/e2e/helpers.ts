@@ -17,6 +17,18 @@ export async function acceptDisclaimer(page: Page): Promise<void> {
 }
 
 /**
+ * Rozbalí panel s podrobnými filtry.
+ *
+ * Kategorie a řazení jsou na obrazovce pořád, zbytek filtrů je schovaný pod
+ * tlačítkem, aby rodič viděl na první obrazovce i karty, ne jen ovládání.
+ * Opakované volání panel nezavírá.
+ */
+export async function otevriFiltry(page: Page, seznam: 'receptu' | 'surovin'): Promise<void> {
+  const prepinac = page.getByTestId(`filtry-${seznam}-prepinac`);
+  if ((await prepinac.getAttribute('aria-expanded')) !== 'true') await prepinac.click();
+}
+
+/**
  * Odkaz ve spodní navigaci. Rozcestník na úvodní obrazovce nabízí stejné
  * názvy, takže samotné `getByRole('link')` trefí dva prvky naráz.
  */
