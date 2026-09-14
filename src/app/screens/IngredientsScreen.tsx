@@ -339,7 +339,9 @@ export function IngredientsScreen(): ReactNode {
         }
       />
 
-      <p className="text-xs text-muted" data-testid="pocet-surovin">
+      {/* Změna počtu se musí ohlásit; filtrování je jinak pro odečítač
+          obrazovky neviditelné — seznam se tiše přeskládá. */}
+      <p aria-live="polite" className="text-xs text-muted" data-testid="pocet-surovin">
         {visible.length} z {ingredients.length} surovin
       </p>
 

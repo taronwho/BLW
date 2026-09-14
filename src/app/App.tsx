@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { lazy, Suspense } from 'react';
 import { AppShell } from './components/AppShell';
@@ -42,6 +42,9 @@ const DiaryScreen = lazy(() =>
 const HouseholdScreen = lazy(() =>
   import('./screens/HouseholdScreen').then((m) => ({ default: m.HouseholdScreen })),
 );
+const NotFoundScreen = lazy(() =>
+  import('./screens/NotFoundScreen').then((m) => ({ default: m.NotFoundScreen })),
+);
 
 /**
  * Co je vidět, než se obrazovka stáhne.
@@ -76,7 +79,9 @@ export function App(): ReactNode {
               <Route path="/denik" element={<DiaryScreen />} />
               <Route path="/domacnost" element={<HouseholdScreen />} />
               <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              {/* Ne tiché přesměrování na úvod — stará záložka si zaslouží
+                  vysvětlení, ne zdánlivě rozbitou aplikaci. */}
+              <Route path="*" element={<NotFoundScreen />} />
             </Routes>
           </Suspense>
         </AppShell>

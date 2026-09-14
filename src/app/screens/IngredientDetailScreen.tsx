@@ -1,7 +1,7 @@
 import { ArrowLeft, BookOpen, Star } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ingredientById } from '@/data/ingredients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Stage } from '@/types';
@@ -20,6 +20,7 @@ import { recipesWithIngredient } from '../lib/deriveRecipes';
 import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
+import { NotFoundScreen } from './NotFoundScreen';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
 export function IngredientDetailScreen(): ReactNode {
@@ -39,7 +40,9 @@ export function IngredientDetailScreen(): ReactNode {
   const history = useMemo(() => tastingsByIngredient(state).get(id) ?? [], [state, id]);
   const linkedRecipes = useMemo(() => recipesWithIngredient(id), [id]);
 
-  if (ingredient === undefined) return <Navigate to="/suroviny" replace />;
+  // Přejmenovaná surovina ze staré záložky nesmí skončit tichým skokem na
+  // seznam — vypadá to jako rozbitá aplikace.
+  if (ingredient === undefined) return <NotFoundScreen />;
 
   const prep = ingredient.prep[stage];
   const presentation = CHOKING_PRESENTATION[ingredient.chokingRisk];

@@ -2,11 +2,20 @@ import { CloudOff, Cloud, Loader2, TriangleAlert, Smartphone } from 'lucide-reac
 import type { ReactNode } from 'react';
 import type { SyncStatus } from '@/storage/types';
 
-/** Stav se sděluje slovem i ikonou, nikdy jen barvou (docs/SPEC.md kap. 5). */
+/**
+ * Stav se sděluje slovem i ikonou, nikdy jen barvou (docs/SPEC.md kap. 5).
+ *
+ * A taky nahlas: `role="status"` změnu ohlásí odečítači obrazovky. Bez toho
+ * se „Připojuji…" přepnulo na „Chyba synchronizace" úplně potichu.
+ */
 export function SyncStatusBadge({ status }: { status: SyncStatus }): ReactNode {
   const { Icon, text, tone } = describe(status);
   return (
-    <p className={`flex items-center gap-2 text-sm ${tone}`} data-testid="stav-synchronizace">
+    <p
+      role="status"
+      className={`flex items-center gap-2 text-sm ${tone}`}
+      data-testid="stav-synchronizace"
+    >
       <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
       <span>{text}</span>
     </p>

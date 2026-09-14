@@ -1,7 +1,7 @@
 import { ArrowLeft, Baby, Beef, ChefHat, Clock, Leaf, Scissors, Star, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
 import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -19,6 +19,7 @@ import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian, recipeServingFo
 import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { favoriteIds, recipeNote } from '../lib/tastings';
+import { NotFoundScreen } from './NotFoundScreen';
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
   all: 'Společné',
@@ -45,7 +46,9 @@ export function RecipeDetailScreen(): ReactNode {
 
   const allergens = useMemo(() => (recipe === undefined ? [] : recipeAllergens(recipe)), [recipe]);
 
-  if (recipe === undefined) return <Navigate to="/recepty" replace />;
+  // Přejmenovaný recept ze staré záložky nesmí skončit tichým skokem na
+  // seznam — vypadá to jako rozbitá aplikace.
+  if (recipe === undefined) return <NotFoundScreen />;
 
 
   // Dvě varianty dochucení dávají smysl jen tam, kde v jídle maso opravdu je.

@@ -63,7 +63,9 @@ export function GuidesScreen(): ReactNode {
         testId="filtr-okruhu"
       />
 
-      <p className="text-xs text-muted" data-testid="pocet-rad">
+      {/* Změna počtu se musí ohlásit; filtrování je jinak pro odečítač
+          obrazovky neviditelné — seznam se tiše přeskládá. */}
+      <p aria-live="polite" className="text-xs text-muted" data-testid="pocet-rad">
         {visible.length} rad
       </p>
 

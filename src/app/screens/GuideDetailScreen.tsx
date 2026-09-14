@@ -1,14 +1,17 @@
 import { AlertTriangle, ArrowLeft, BookMarked, ExternalLink, Phone } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { guideById } from '@/data/guides';
 import { GUIDE_CATEGORY_LABELS } from '../lib/labels';
+import { NotFoundScreen } from './NotFoundScreen';
 
 /** Detail rady. Naléhavé rady mají červený rám a tísňové číslo nahoře. */
 export function GuideDetailScreen(): ReactNode {
   const { id } = useParams();
   const guide = id === undefined ? undefined : guideById.get(id);
-  if (guide === undefined) return <Navigate to="/rady" replace />;
+  // Přejmenovaná rada ze staré záložky nesmí skončit tichým skokem na
+  // seznam — vypadá to jako rozbitá aplikace.
+  if (guide === undefined) return <NotFoundScreen />;
   const urgent = guide.urgent === true;
 
   return (

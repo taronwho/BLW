@@ -2,6 +2,7 @@ import { Citrus, Droplet, Info, ShieldCheck, Sparkles, X } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
+import { useModalFokus } from '../lib/modalFokus';
 import { Link } from 'react-router-dom';
 import { NUTRIENT_SOURCES, type NutrientLevel, type NutrientProfile } from '@/data/nutrients';
 import type { Slozeni, Zivina } from '@/data/composition';
@@ -124,6 +125,8 @@ export function NutrientBadge({
   testId,
 }: NutrientBadgeProps): ReactNode {
   const [open, setOpen] = useState(false);
+  // Fokus do okénka, Tab uvnitř a po zavření zpátky na značku.
+  const okenko = useModalFokus<HTMLDivElement>(open);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -199,6 +202,7 @@ export function NutrientBadge({
           }}
         >
           <div
+            ref={okenko}
             className="flex max-h-[80vh] w-full max-w-md flex-col gap-3 overflow-y-auto rounded-2xl bg-surface p-4 shadow-lift"
             onClick={(event) => {
               event.preventDefault();

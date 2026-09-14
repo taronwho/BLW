@@ -428,7 +428,9 @@ export function RecipesScreen(): ReactNode {
         </div>
       )}
 
-      <p className="text-xs text-muted" data-testid="pocet-receptu">
+      {/* Změna počtu se musí ohlásit; filtrování je jinak pro odečítač
+          obrazovky neviditelné — seznam se tiše přeskládá. */}
+      <p aria-live="polite" className="text-xs text-muted" data-testid="pocet-receptu">
         {visible.length} z {recipes.length} receptů
       </p>
 

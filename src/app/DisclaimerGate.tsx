@@ -1,6 +1,7 @@
 import { ShieldAlert } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { DISCLAIMER_PARAGRAPHS, DISCLAIMER_TITLE } from './disclaimer';
+import { useModalFokus } from './lib/modalFokus';
 import { useDisclaimer } from './useDisclaimer';
 
 interface Props {
@@ -10,11 +11,15 @@ interface Props {
 /** Disclaimer při prvním spuštění (docs/SPEC.md akceptační kritérium 10). */
 export function DisclaimerGate({ children }: Props): ReactNode {
   const { accepted, accept } = useDisclaimer();
+  // Fokus rovnou na potvrzovací tlačítko. Bez toho začíná odečítač na
+  // začátku dokumentu a rodič se k jedinému tlačítku musí protabovat.
+  const okenko = useModalFokus<HTMLDivElement>(!accepted);
 
   if (accepted) return children;
 
   return (
     <div
+      ref={okenko}
       className="min-h-full px-4 py-8"
       role="dialog"
       aria-modal="true"

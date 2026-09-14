@@ -85,3 +85,46 @@ test('disclaimer je přístupný i v tmavém motivu', async ({ page }) => {
   const porusení = await auditovat(page);
   expect(porusení, JSON.stringify(porusení, null, 2)).toEqual([]);
 });
+
+test('okénko živin se dá ovládat klávesnicí', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/suroviny');
+  await expect(page.getByTestId('pocet-surovin')).toBeVisible();
+
+  const znacka = page.locator('[data-testid^="zeleza-"]').first();
+  await znacka.click();
+  await expect(page.getByTestId('okenko-zivin')).toBeVisible();
+
+  // 1. Fokus je uvnitř okénka, ne na značce pod ním.
+  const uvnitr = await page.evaluate(() =>
+    document.querySelector('[data-testid="okenko-zivin"]')?.contains(document.activeElement),
+  );
+  expect(uvnitr).toBe(true);
+
+  // 2. Tab se z okénka nedostane ven.
+  for (let i = 0; i < 12; i += 1) await page.keyboard.press('Tab');
+  const porad = await page.evaluate(() =>
+    document.querySelector('[data-testid="okenko-zivin"]')?.contains(document.activeElement),
+  );
+  expect(porad).toBe(true);
+
+  // 3. Po zavření se fokus vrátí na značku, ne na začátek seznamu.
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('okenko-zivin')).toBeHidden();
+  const zpatky = await page.evaluate(() => document.activeElement?.getAttribute('data-testid'));
+  expect(zpatky).toMatch(/^zeleza-/);
+});
+
+test('počet výsledků se ohlásí odečítači obrazovky', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/suroviny');
+  await expect(page.getByTestId('pocet-surovin')).toHaveAttribute('aria-live', 'polite');
+});
+
+test('neexistující adresa vysvětlí, co se stalo', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/stara-zalozka-na-neco');
+  // Dřív to tiše přesměrovalo na úvod a vypadalo to jako rozbitá aplikace.
+  await expect(page.getByTestId('nenalezena-adresa')).toBeVisible();
+  await expect(page.getByTestId('nenalezena-adresa')).toContainText('neexistuje');
+});

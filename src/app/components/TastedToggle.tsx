@@ -1,6 +1,7 @@
 import { Check, Plus, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+import { useModalFokus } from '../lib/modalFokus';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { activeTastings } from '../lib/derive';
@@ -23,6 +24,8 @@ interface Props {
 export function TastedToggle({ ingredientId, ingredientName, tasted }: Props): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const [open, setOpen] = useState(false);
+  // Fokus do okénka, Tab uvnitř a po zavření zpátky na tlačítko.
+  const okenko = useModalFokus<HTMLDivElement>(open);
 
   const history = useMemo(
     () =>
@@ -83,6 +86,7 @@ export function TastedToggle({ ingredientId, ingredientName, tasted }: Props): R
           onClick={() => setOpen(false)}
         >
           <div
+            ref={okenko}
             className="flex max-h-[85vh] w-full max-w-md flex-col gap-3 overflow-y-auto rounded-2xl bg-surface p-4 shadow-lift"
             onClick={(event) => event.stopPropagation()}
           >
