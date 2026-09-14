@@ -315,7 +315,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Vepřovou panenku nahrazuje 250 g tempehu opečeného na plátky — po zakápnutí pomerančem chutná stejně slavnostně a dodá plnou bílkovinu.',
     allergens: ['soja'],
-    tags: ['bez lepku', 'nedělní'],
+    tags: ['bez lepku', 'nedělní oběd'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
     reviewStatus: 'verified',
   },
@@ -620,7 +620,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Místo pstruha se opéká hlíva ústřičná a bílkovinu dodá porce quinoy, která má plné spektrum aminokyselin a zastane rybu.',
     allergens: ['ryby', 'mleko'],
-    tags: ['bez lepku', 'ryba', 'jednoduché'],
+    tags: ['bez lepku', 'ryba', 'rychlé'],
     sources: [NHS_FISH, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -872,7 +872,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Kuřecí játra nahrazuje 200 g bílých fazolí opečených se žampiony — houby dodají hloubku chuti a fazole bílkovinu.',
     allergens: ['mleko'],
-    tags: ['bez lepku', 'železo'],
+    tags: ['bez lepku'],
     sources: [NHS_VITAMIN_A, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
@@ -921,7 +921,7 @@ export const lunchesDinners: Recipe[] = [
     vegetarianProteinSwap:
       'Krůtí prsa nahrazuje 250 g ricotty vmíchané do polenty — dodá porci mléčnou bílkovinu a udělá z polenty krémové hlavní jídlo.',
     allergens: ['mleko'],
-    tags: ['bez lepku', 'rychlé', 'železo'],
+    tags: ['bez lepku', 'rychlé'],
     sources: [NHS_FIRST_FOODS, NHS_7_9M],
     reviewStatus: 'verified',
   },
@@ -1142,7 +1142,7 @@ export const lunchesDinners: Recipe[] = [
       'Posyp bazalkou a zakápni olivovým olejem; kdo má rád ostřejší chuť, přidá si víc česneku.',
     ],
     allergens: ['mleko'],
-    tags: ['bez lepku', 'vegetariánské', 'nízkosacharidové'],
+    tags: ['bez lepku', 'vegetariánské'],
     sources: [NHS_PREP_SAFELY, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
