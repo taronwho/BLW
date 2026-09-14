@@ -46,7 +46,13 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-28 pt-4">{children}</main>
+      {/* Spodní odsazení kopíruje skutečnou výšku navigace (5 rem) plus
+          bezpečnou zónu telefonu. Napevno daných 7 rem bylo o půldruhé
+          řádky víc, než navigace potřebuje, a na nízkém displeji kvůli tomu
+          musela rolovat i obrazovka, která se jinak vejde celá. */}
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+5rem)] pt-4">
+        {children}
+      </main>
 
       <nav
         aria-label="Hlavní navigace"

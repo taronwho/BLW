@@ -881,12 +881,51 @@ test('úvodní obrazovka se nemusí rolovat', async ({ page }) => {
   const roluje = await page.evaluate(
     () => document.documentElement.scrollHeight > window.innerHeight + 1,
   );
-  // Zkratky rozcestníku se kreslí jen tam, kde na ně zbývá místo; míří
-  // stejně tam, kam vede spodní navigace. Na displeji od 667 px výš se
-  // úvodní obrazovka nesmí rolovat ani s nimi.
-  await expect(page.getByTestId('hlavni-menu')).toBeVisible({ visible: okno >= 800 });
-  if (okno >= 667) expect(roluje).toBe(false);
+  // Rozcestník je vidět vždycky a celý nad spodní navigací, i na tom
+  // nejmenším displeji. Od 640 px výšky se obrazovka nesmí rolovat vůbec.
+  const menu = await page.getByTestId('hlavni-menu').boundingBox();
+  if (menu === null) throw new Error('rozcestník není vidět');
+  expect(menu.y + menu.height).toBeLessThanOrEqual(okno - navigace);
+  if (okno >= 640) expect(roluje).toBe(false);
 
   await page.getByTestId('odkaz-domacnost').click();
   await expect(page.getByTestId('sekce-domacnosti')).toBeVisible();
+});
+
+test('deník se přepnutím dítěte vymění, sourozencovy ochutnávky nezůstanou', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+
+  // Ema ochutná brokolici.
+  await page.goto('./#/suroviny/brokolice');
+  await page.getByTestId('ochutnano-brokolice').click();
+  await page.getByRole('button', { name: 'Uložit ochutnávku' }).click();
+  await navLink(page, 'Deník').click();
+  await expect(page.getByTestId('casova-osa')).toContainText('brokolice');
+  await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 1 z');
+
+  // Druhé dítě začíná s prázdným deníkem.
+  await otevriDomacnost(page, 'deti');
+  await page.getByTestId('pridat-dite').click();
+  await page.getByTestId('jmeno-ditete').first().fill('Tobiáš');
+  await page.getByTestId('datum-narozeni').first().fill('2024-01-15');
+  await page.getByTestId('ulozit-dite').first().click();
+  await expect(page.getByTestId('dite-v-hlavicce')).toContainText('Tobiáš');
+
+  await navLink(page, 'Deník').click();
+  await expect(page.getByTestId('prazdny-denik')).toBeVisible();
+  await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 0 z');
+
+  // Ani v katalogu se surovina netváří jako ochutnaná.
+  await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
+  await page.getByTestId('filtr-deniku').getByRole('button', { name: 'už ochutnané' }).click();
+  await expect(page.getByTestId('pocet-surovin')).toContainText('0 z 301');
+
+  // Přepnutí zpátky na Emu deník vrátí.
+  await page.getByTestId('dite-v-hlavicce').click();
+  await page.locator('[data-testid^="vybrat-dite-"][aria-pressed="false"]').click();
+  await navLink(page, 'Deník').click();
+  await expect(page.getByTestId('casova-osa')).toContainText('brokolice');
+  await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 1 z');
 });

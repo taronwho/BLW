@@ -30,6 +30,16 @@ export function useAktivniDite(): Child | null {
   );
 }
 
+/**
+ * Id dítěte, kterému patří deník na obrazovce.
+ *
+ * Deník, statistiky i expozice alergenů se filtrují podle něj. Vrací
+ * `null`, dokud není žádné dítě — pak není čí ochutnávky ukazovat.
+ */
+export function useAktivniDiteId(): string | null {
+  return useAktivniDite()?.id ?? null;
+}
+
 /** Datum narození aktivního dítěte, nebo prázdno. Zkratka pro výpočet věku. */
 export function useNarozeniAktivniho(): string {
   return useAktivniDite()?.birthDate ?? '';

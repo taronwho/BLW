@@ -5,6 +5,7 @@ import { useModalFokus } from '../lib/modalFokus';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { activeTastings } from '../lib/derive';
+import { useAktivniDiteId } from '../lib/dite';
 import { TastingLog } from './TastingLog';
 
 interface Props {
@@ -23,18 +24,19 @@ interface Props {
  */
 export function TastedToggle({ ingredientId, ingredientName, tasted }: Props): ReactNode {
   const state = useHouseholdStore((store) => store.state);
+  const diteId = useAktivniDiteId();
   const [open, setOpen] = useState(false);
   // Fokus do okénka, Tab uvnitř a po zavření zpátky na tlačítko.
   const okenko = useModalFokus<HTMLDivElement>(open);
 
   const history = useMemo(
     () =>
-      activeTastings(state)
+      activeTastings(state, diteId)
         .filter((event) => event.ingredientId === ingredientId)
         .sort((a, b) =>
           a.date < b.date ? 1 : a.date > b.date ? -1 : b.createdAt - a.createdAt,
         ),
-    [state, ingredientId],
+    [state, diteId, ingredientId],
   );
 
   useEffect(() => {

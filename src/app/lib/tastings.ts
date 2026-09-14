@@ -10,13 +10,46 @@ import type { HouseholdState, TastingEvent } from '@/types';
  * se stavem domácnosti.
  */
 
-export function activeTastings(state: HouseholdState): TastingEvent[] {
-  return state.tastings.filter((event) => event.deleted !== true);
+/**
+ * Ochutnávky jednoho dítěte.
+ *
+ * `childId` je povinné schválně. Deník patří dítěti, ne domácnosti — se
+ * dvěma dětmi by sourozencova ochutnávka počítala cizí expozice alergenu
+ * a nabízela jídlo, které tohle dítě nikdy nedostalo. Když je parametr
+ * povinný, překladač najde každé místo, které na dítě zapomnělo.
+ *
+ * Záznam bez `childId` je z doby, kdy aplikace uměla jediné dítě; při
+ * načtení se přiřadí prvnímu dítěti (`migrateHouseholdState`). Kdyby přesto
+ * nějaký propadl — třeba ze staršího telefonu v téže domácnosti — počítá se
+ * prvnímu dítěti, ať nezmizí z deníku úplně.
+ */
+export function activeTastings(
+  state: HouseholdState,
+  childId: string | null,
+): TastingEvent[] {
+  // Dokud v domácnosti žádné dítě není, drží se deník pohromadě pod `null`:
+  // rodič může zapisovat dřív, než dítě vyplní, a záznam mu nesmí zmizet.
+  // Jakmile dítě přibude, patří mu — přiřazuje se tomu prvnímu.
+  const prvni = prvniDite(state) ?? null;
+  return state.tastings.filter(
+    (event) => event.deleted !== true && (event.childId ?? prvni) === childId,
+  );
 }
 
-export function tastingsByIngredient(state: HouseholdState): Map<string, TastingEvent[]> {
+/** Id prvního dítěte v domácnosti, nebo `undefined`, když žádné není. */
+function prvniDite(state: HouseholdState): string | undefined {
+  for (const [id, zaznam] of Object.entries(state.children)) {
+    if (zaznam.hodnota !== null) return id;
+  }
+  return undefined;
+}
+
+export function tastingsByIngredient(
+  state: HouseholdState,
+  childId: string | null,
+): Map<string, TastingEvent[]> {
   const map = new Map<string, TastingEvent[]>();
-  for (const event of activeTastings(state)) {
+  for (const event of activeTastings(state, childId)) {
     const list = map.get(event.ingredientId) ?? [];
     list.push(event);
     map.set(event.ingredientId, list);
@@ -27,8 +60,8 @@ export function tastingsByIngredient(state: HouseholdState): Map<string, Tasting
   return map;
 }
 
-export function tastedIds(state: HouseholdState): Set<string> {
-  return new Set(activeTastings(state).map((event) => event.ingredientId));
+export function tastedIds(state: HouseholdState, childId: string | null): Set<string> {
+  return new Set(activeTastings(state, childId).map((event) => event.ingredientId));
 }
 
 /** Reakce, které rodič hlásí pediatrovi — kvůli nim se alergen nepočítá jako zavedený. */

@@ -45,7 +45,7 @@ import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { favoriteIds } from '../lib/tastings';
-import { useNarozeniAktivniho } from '../lib/dite';
+import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
 
 /**
  * Deník má tři stavy, které se navzájem vylučují — ochutnané a neochutnané
@@ -89,7 +89,8 @@ export function IngredientsScreen(): ReactNode {
   // Víc voleb naráz musí do adresy jedním zápisem, jinak se přepíšou.
   const nastavFiltry = useUrlBatch();
 
-  const tasted = useMemo(() => tastedIds(state), [state]);
+  const diteId = useAktivniDiteId();
+  const tasted = useMemo(() => tastedIds(state, diteId), [state, diteId]);
   const favorites = useMemo(() => favoriteIds(state), [state]);
   const months = ageInMonths(useNarozeniAktivniho());
   const month = new Date().getMonth() + 1;

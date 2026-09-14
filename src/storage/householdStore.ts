@@ -356,7 +356,17 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     },
 
     async recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void> {
-      const full: TastingEvent = { ...event, id: newTastingId(), createdAt: Date.now() };
+      // Dítě se doplňuje tady, ne ve formuláři. Deník patří dítěti a jediný
+      // zápis bez `childId` by se v seznamu objevil u všech sourozenců —
+      // proto to rozhoduje jedno místo, které vidí, kdo je právě vybraný.
+      const aktivni =
+        get().activeChildId ?? activeChildren(get().state)[0]?.id;
+      const full: TastingEvent = {
+        ...event,
+        ...(aktivni === undefined ? {} : { childId: aktivni }),
+        id: newTastingId(),
+        createdAt: Date.now(),
+      };
       // Append-only: nikdy nepřepisujeme, jen přidáváme (docs/SPEC.md kap. 7).
       await persist({ ...get().state, tastings: [...get().state.tastings, full] });
     },

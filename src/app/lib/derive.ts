@@ -62,11 +62,11 @@ export function suggestions(
   count = 3,
 ): Navrh[] {
   const ageMonths = dite === null ? null : ageInMonths(dite.birthDate);
-  const tasted = tastedIds(state);
+  const tasted = tastedIds(state, dite?.id ?? null);
 
   // Kolik expozic má které alergenové skupiny dítě za sebou.
   const expozice = new Map<string, number>();
-  for (const event of activeTastings(state)) {
+  for (const event of activeTastings(state, dite?.id ?? null)) {
     for (const skupina of ingredientById.get(event.ingredientId)?.allergens ?? []) {
       expozice.set(skupina, (expozice.get(skupina) ?? 0) + 1);
     }

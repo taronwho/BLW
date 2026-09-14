@@ -55,14 +55,17 @@ export function HomeScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const dite = useAktivniDite();
   const months = ageInMonths(dite?.birthDate ?? "");
-  const tasted = useMemo(() => tastedIds(state), [state]);
+  const tasted = useMemo(
+    () => tastedIds(state, dite?.id ?? null),
+    [state, dite],
+  );
   const hasChild = dite !== null;
   const stage = STAGE_LABELS[stageForAge(months)];
   const grip = dite?.grip;
   const jmeno = dite?.name.trim() ?? "";
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-2">
       {/* Hlavička říká jen to, co se jinde v aplikaci nedozvíš: komu je
           nastavená a podle čeho se řídí. Dřív tu byly tři odstavce a zabraly
           třetinu obrazovky — vysvětlení úchopu patří k surovině a receptu,
@@ -70,10 +73,9 @@ export function HomeScreen(): ReactNode {
       <header className="rounded-2xl bg-accent-sheen p-4 text-white shadow-lift">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-              Příkrmy metodou BLW
-            </p>
-            <h1 className="mt-0.5 text-xl font-bold leading-tight">
+            {/* Název aplikace je v horní liště; nadpis hlavičky nese jméno
+                dítěte, kvůli kterému sem rodič kouká. */}
+            <h1 className="text-xl font-bold leading-tight">
               {jmeno.length > 0 ? jmeno : "Příkrmy krok za krokem"}
             </h1>
           </div>
@@ -122,20 +124,15 @@ export function HomeScreen(): ReactNode {
             </li>
           </ul>
         ) : (
-          <p
-            className="mt-1.5 text-sm leading-snug text-white"
-            data-testid="uchop-v-hlavicce"
-          >
-            Nastav věk dítěte, ať sedí fáze.
-          </p>
-        )}
-
-        {!hasChild && (
+          /* Bez dítěte nemá hlavička co ukazovat. Věta „nastav věk dítěte"
+             a pod ní tlačítko braly dvě řádky a říkaly totéž — zůstalo
+             tlačítko. */
           <Link
             to="/domacnost"
+            data-testid="uchop-v-hlavicce"
             className="mt-2.5 inline-flex min-h-touch items-center gap-1.5 rounded-full bg-white px-4 text-sm font-semibold text-accent-deep"
           >
-            Nastavit dítě
+            Nastavit dítě a fázi
             <ChevronRight aria-hidden="true" className="h-4 w-4" />
           </Link>
         )}
@@ -186,31 +183,25 @@ export function HomeScreen(): ReactNode {
         </Link>
       </section>
 
-      {/* Rozcestník bez nadpisu: čtyři názvy s ikonou se vysvětlí samy
-          a řádka navíc znamenala rolování.
-
-          Na nízkém displeji se zkratky vůbec nevykreslí. Míří přesně tam,
-          kam vede spodní navigace na každé obrazovce, takže se jimi nic
-          neztrácí — a úvodní obrazovka se díky tomu nemusí rolovat ani na
-          nejmenších telefonech. Kde je místo, vyplní ho. */}
+      {/* Rozcestník bez nadpisu a bez popisků: čtyři ikony s názvem na jednu
+          řádku. Velké dlaždice s popiskem braly dvě řádky a kvůli nim se
+          úvodní obrazovka musela rolovat — a to je to jediné, co od
+          rozcestníku nikdo nechce. */}
       <section
         aria-label="Kam dál"
-        className="hidden grid-cols-2 gap-2 [@media(min-height:800px)]:grid"
+        className="grid grid-cols-4 gap-2"
         data-testid="hlavni-menu"
       >
-        {TILES.map(({ to, label, desc, Icon }) => (
+        {TILES.map(({ to, label, Icon }) => (
           <Link
             key={to}
             to={to}
-            className="flex flex-col gap-1 rounded-xl border border-line bg-surface p-3 shadow-soft transition hover:border-accent/40 hover:shadow-lift"
+            className="flex min-h-touch flex-col items-center justify-center gap-1 rounded-xl border border-line bg-surface px-1 py-2 shadow-soft transition hover:border-accent/40"
           >
-            <span className="flex items-center gap-2">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-soft">
-                <Icon aria-hidden="true" className="h-4 w-4 text-accent" />
-              </span>
-              <span className="min-w-0 text-sm font-semibold">{label}</span>
+            <Icon aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
+            <span className="text-[11px] font-semibold leading-none">
+              {label}
             </span>
-            <span className="text-[11px] leading-snug text-muted">{desc}</span>
           </Link>
         ))}
       </section>
@@ -236,12 +227,6 @@ export function HomeScreen(): ReactNode {
           />
         </Link>
       )}
-
-      {/* Celý disclaimer je v okně při prvním spuštění i v Domácnosti
-          (docs/SPEC.md kap. 3). Tady stačí připomínka. */}
-      <p className="px-1 text-[11px] leading-snug text-muted">
-        Aplikace shrnuje doporučení odborných institucí. Nenahrazuje pediatra.
-      </p>
     </div>
   );
 }

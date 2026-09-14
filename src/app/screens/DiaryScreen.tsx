@@ -12,7 +12,7 @@ import type { DuvodNavrhu } from '../lib/derive';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
 import { favoriteIds } from '../lib/tastings';
-import { useAktivniDite } from '../lib/dite';
+import { useAktivniDite, useAktivniDiteId } from '../lib/dite';
 
 /**
  * Proč se surovina nabízí. Pořadí důvodů i jejich význam je v `suggestions`.
@@ -30,25 +30,32 @@ const DUVOD_NAVRHU: Record<DuvodNavrhu, string> = {
 export function DiaryScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const dite = useAktivniDite();
+  const diteId = useAktivniDiteId();
   const month = new Date().getMonth() + 1;
 
   const byDay = useMemo(() => {
     const map = new Map<string, TastingEvent[]>();
-    for (const event of activeTastings(state)) {
+    for (const event of activeTastings(state, diteId)) {
       const list = map.get(event.date) ?? [];
       list.push(event);
       map.set(event.date, list);
     }
     return [...map.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
-  }, [state]);
+  }, [state, diteId]);
 
-  const tasted = useMemo(() => tastedIds(state), [state]);
+  const tasted = useMemo(() => tastedIds(state, diteId), [state, diteId]);
   const tips = useMemo(() => suggestions(state, dite, month), [state, dite, month]);
 
   const refused = useMemo(
     () =>
-      [...new Set(activeTastings(state).filter((event) => event.amount === 'odmitla').map((e) => e.ingredientId))],
-    [state],
+      [
+        ...new Set(
+          activeTastings(state, diteId)
+            .filter((event) => event.amount === 'odmitla')
+            .map((e) => e.ingredientId),
+        ),
+      ],
+    [state, diteId],
   );
   // Oblíbit se dá surovina i recept; dřív se sem dostaly jen suroviny
   // a označený recept tu zmizel beze stopy.
@@ -107,7 +114,7 @@ export function DiaryScreen(): ReactNode {
         </h2>
         <ul className="flex flex-col gap-2" data-testid="karta-alergenu">
           {KEY_ALLERGENS.map((allergen) => {
-            const events = activeTastings(state).filter((event) =>
+            const events = activeTastings(state, diteId).filter((event) =>
               ingredientById.get(event.ingredientId)?.allergens.includes(allergen),
             );
             const clean = events.filter((event) => !isAdverse(event));

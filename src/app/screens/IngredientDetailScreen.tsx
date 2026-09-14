@@ -21,7 +21,7 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '.
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { NotFoundScreen } from './NotFoundScreen';
-import { useNarozeniAktivniho } from '../lib/dite';
+import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
 export function IngredientDetailScreen(): ReactNode {
@@ -38,7 +38,11 @@ export function IngredientDetailScreen(): ReactNode {
   useEffect(() => setStage(currentStage), [currentStage]);
   useEffect(() => setAcks(readReviewAcks()), []);
 
-  const history = useMemo(() => tastingsByIngredient(state).get(id) ?? [], [state, id]);
+  const diteId = useAktivniDiteId();
+  const history = useMemo(
+    () => tastingsByIngredient(state, diteId).get(id) ?? [],
+    [state, diteId, id],
+  );
   const linkedRecipes = useMemo(() => recipesWithIngredient(id), [id]);
 
   // Přejmenovaná surovina ze staré záložky nesmí skončit tichým skokem na
