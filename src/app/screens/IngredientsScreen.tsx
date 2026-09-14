@@ -355,9 +355,16 @@ export function IngredientsScreen(): ReactNode {
           živinu, povolit všechny kategorie nebo klepnout na „zrušit filtry“.
         </p>
       ) : (
-        <ul className="flex flex-col gap-2" data-testid="seznam-surovin">
+        // Dlaždice po dvou, ne řádky přes celou šířku. Řádek u krátkého
+        // názvu nechával polovinu obrazovky prázdnou a přitom se na jednu
+        // obrazovku vešlo jen pár surovin. Dvě dlaždice vedle sebe pobírají
+        // dvojnásobek a štítky se pod název vejdou i na 320 px.
+        <ul
+          className="grid grid-cols-2 items-stretch gap-2 sm:grid-cols-3"
+          data-testid="seznam-surovin"
+        >
           {zobrazene.map((item) => (
-            <IngredientRow
+            <IngredientTile
               key={item.id}
               ingredient={item}
               tasted={tasted.has(item.id)}
@@ -376,7 +383,7 @@ export function IngredientsScreen(): ReactNode {
   );
 }
 
-function IngredientRow({
+function IngredientTile({
   ingredient,
   tasted,
   favorite,
@@ -387,7 +394,7 @@ function IngredientRow({
 }): ReactNode {
   const profile = nutrientProfile(ingredient);
   // Řádka živin se nevykreslí, když položka není zdrojem žádné ze tří —
-  // prázdná mezera by jen rozhodila seznam.
+  // prázdná mezera by jen rozhodila mřížku.
   const maZiviny =
     profile.iron !== 'nevyznamny' ||
     profile.zinc !== 'nevyznamny' ||
@@ -395,44 +402,16 @@ function IngredientRow({
   const alergen = ingredient.allergens[0];
 
   return (
-    // Tlačítko živin stojí vedle odkazu, ne v něm: tlačítko uvnitř odkazu je
-    // neplatné HTML a klepnutí doprostřed řádky netrefí odkaz.
-    <li className="flex flex-col gap-1 rounded-xl bg-surface p-2">
-      <div className="flex items-stretch gap-2">
-        <Link
-          to={`/suroviny/${ingredient.id}`}
-          data-testid={`surovina-${ingredient.id}`}
-          className="flex min-h-touch min-w-0 flex-1 flex-col gap-1.5 rounded-lg p-2"
-        >
-          <span className="flex items-center gap-2 font-medium">
-            <span aria-hidden="true" className="shrink-0 text-lg">
-              <IngredientIcon ingredient={ingredient} className="h-7 w-7" />
-            </span>
-            <span className="min-w-0">{ingredient.nameCz}</span>
-          </span>
-
-          {/* Nejdřív „na co pozor", pak „co to přináší". Dvě řádky, protože
-            na jednu se to nevejde ani na 320 px. */}
-          <span className="flex flex-wrap items-center gap-1.5">
-            <span className="rounded-lg bg-paper px-2 py-0.5 text-[11px] font-medium text-muted">
-              od {ingredient.minAgeMonths} měsíců
-            </span>
-            <ChokingChip
-              risk={ingredient.chokingRisk}
-              testId={`duseni-${ingredient.id}`}
-            />
-            {alergen !== undefined && (
-              <AllergenChip
-                allergen={alergen}
-                testId={`alergen-${ingredient.id}`}
-              />
-            )}
-          </span>
-        </Link>
-
-        {/* Zápis ochutnávky a oblíbená položka pod sebou — obojí jedním palcem
-          přímo ze seznamu, bez prokliku do detailu. */}
-        <span className="flex shrink-0 flex-col gap-1.5">
+    <li className="flex flex-col gap-1.5 rounded-xl bg-surface p-2.5">
+      {/* Ikona a obě tlačítka sdílejí horní řádku. Samostatná řádka tlačítek
+          pod dlaždicí zabírala celých 44 px výšky navíc a na obrazovku se
+          pak vešly sotva dvě řádky dlaždic. */}
+      <div className="flex items-center justify-between gap-1">
+        <IngredientIcon ingredient={ingredient} className="h-8 w-8" />
+        {/* Zápis ochutnávky a oblíbená položka jedním palcem přímo ze
+            seznamu, bez prokliku do detailu. Tlačítka stojí vedle odkazu,
+            ne v něm: tlačítko uvnitř odkazu je neplatné HTML. */}
+        <span className="flex shrink-0 gap-1">
           <TastedToggle
             ingredientId={ingredient.id}
             ingredientName={ingredient.nameCz}
@@ -445,9 +424,39 @@ function IngredientRow({
           />
         </span>
       </div>
+
+      <Link
+        to={`/suroviny/${ingredient.id}`}
+        data-testid={`surovina-${ingredient.id}`}
+        className="flex min-w-0 flex-col gap-1.5 rounded-lg"
+      >
+        <span className="min-w-0 break-words text-sm font-semibold leading-snug">
+          {ingredient.nameCz}
+        </span>
+
+        <span className="flex flex-wrap items-center gap-1">
+          <span className="rounded-lg bg-paper px-2 py-0.5 text-[11px] font-medium text-muted">
+            <span aria-hidden="true">{ingredient.minAgeMonths} m+</span>
+            <span className="sr-only">vhodné od {ingredient.minAgeMonths} měsíců</span>
+          </span>
+          <ChokingChip
+            risk={ingredient.chokingRisk}
+            testId={`duseni-${ingredient.id}`}
+            compact
+          />
+          {alergen !== undefined && (
+            <AllergenChip
+              allergen={alergen}
+              testId={`alergen-${ingredient.id}`}
+              compact
+            />
+          )}
+        </span>
+      </Link>
+
       {maZiviny && (
         <span
-          className="flex flex-wrap items-center gap-x-1.5 px-2"
+          className="flex flex-wrap items-center gap-x-1.5"
           data-testid={`ziviny-${ingredient.id}`}
         >
           <NutrientBadge

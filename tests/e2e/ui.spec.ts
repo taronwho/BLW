@@ -823,3 +823,40 @@ test('dlouhý seznam se donačítá sám při rolování, bez tlačítka', async
   await page.getByTestId('nacist-dalsi-suroviny').scrollIntoViewIfNeeded();
   await expect.poll(() => polozky.count()).toBeGreaterThan(prvni);
 });
+
+test('suroviny stojí ve dvou sloupcích a nic z dlaždice nepřetéká', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const polozky = page.getByTestId('seznam-surovin').getByRole('listitem');
+  const prvni = await polozky.nth(0).boundingBox();
+  const druha = await polozky.nth(1).boundingBox();
+  const treti = await polozky.nth(2).boundingBox();
+  if (prvni === null || druha === null || treti === null) throw new Error('dlaždice nejsou vidět');
+
+  // Druhá dlaždice vedle první, třetí až pod nimi — tedy dva sloupce.
+  expect(druha.y).toBeCloseTo(prvni.y, 0);
+  expect(druha.x).toBeGreaterThan(prvni.x);
+  expect(treti.y).toBeGreaterThan(prvni.y);
+
+  // Dlaždice zabírá zhruba půl šířky, ne celou.
+  const sirkaOkna = page.viewportSize()?.width ?? 0;
+  expect(prvni.width).toBeLessThan(sirkaOkna * 0.6);
+
+  // Obsah se do dlaždice vejde — stránka nikde nejede do stran.
+  const preteka = await page.evaluate(
+    () => document.documentElement.scrollWidth > window.innerWidth + 1,
+  );
+  expect(preteka).toBe(false);
+});
+
+test('zkrácený štítek na dlaždici čte odečítač obrazovky celý', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await page.getByTestId('hledat-surovinu').fill('mrkev');
+
+  // Vidět je jen „vysoké", ale význam zůstává dostupný celý.
+  const duseni = page.getByTestId('duseni-mrkev');
+  await expect(duseni).toContainText('vysoké riziko dušení');
+  await expect(duseni.locator('span.sr-only')).toHaveText(/riziko dušení/);
+});
