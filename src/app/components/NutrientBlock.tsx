@@ -4,15 +4,35 @@ import { Link } from 'react-router-dom';
 import { recipes } from '@/data';
 import { nutrientProfile, vitaminCPartners, vitaminCSources } from '@/data/nutrients';
 import type { NutrientLevel } from '@/data/nutrients';
-import type { Ingredient } from '@/types';
+import { COMPOSITION } from '@/data/composition';
+import type { Ingredient, SourceRef } from '@/types';
 import { LEVEL_CHIP, LEVEL_LABELS } from '../lib/nutrientLabels';
 import { IngredientIcon } from './IngredientIcon';
+import { SourceDisclosure } from './SourceList';
 
-function Pill({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
+/** Miligramy česky: desetinná čárka, nejvýš dvě místa, bez zbytečných nul. */
+function mg(hodnota: number): string {
+  const zaokrouhleno = Math.round(hodnota * 100) / 100;
+  return `${zaokrouhleno.toString().replace('.', ',')} mg`;
+}
+
+function Pill({
+  label,
+  level,
+  obsah,
+}: {
+  label: string;
+  level: NutrientLevel;
+  /** Naměřený obsah ve 100 g jedlého podílu, když ho pro surovinu máme. */
+  obsah?: number;
+}): ReactNode {
   return (
     <div className={`flex-1 rounded-xl border px-3 py-2 ${LEVEL_CHIP[level]}`}>
       <p className="text-[11px] font-semibold uppercase tracking-wide">{label}</p>
       <p className="text-sm font-semibold">{LEVEL_LABELS[level]}</p>
+      {/* Bez ztlumení průhledností — na barevném štítku by kontrast spadl
+          pod přístupnostní minimum, což hlídá test v tests/e2e/a11y.spec.ts. */}
+      {obsah !== undefined && <p className="text-[11px] font-medium">{mg(obsah)} ve 100 g</p>}
     </div>
   );
 }
@@ -20,15 +40,32 @@ function Pill({ label, level }: { label: string; level: NutrientLevel }): ReactN
 /**
  * Živiny u konkrétní suroviny: železo, zinek a vitamin C.
  *
- * Ukazuje zařazení do skupiny potravin, ne miligramy — měřené hodnoty by se
- * musely vzít z potravinové tabulky, kterou politika zdrojů nemá mezi
- * povolenými. Text to říká nahlas, ať si to nikdo neplete s tabulkou.
+ * Kde máme naměřený obsah z potravinové tabulky, ukazuje se vedle stupnice
+ * i v miligramech na 100 g a pod blokem stojí odkaz na řádek tabulky, ze
+ * kterého je. Kde číslo nemáme, zůstává jen zařazení podle skupiny potravin
+ * a text to říká nahlas, ať si to nikdo neplete s měřením.
+ *
+ * Blok se ukazuje i tehdy, když žádná ze tří živin prahu nedosáhne, ale číslo
+ * pro ni máme: „železo 1,04 mg, není zdroj" je u kuřecího prsa poctivější
+ * odpověď než nezobrazit nic.
  */
 export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): ReactNode {
   const profile = nutrientProfile(ingredient);
+  const slozeni = COMPOSITION[ingredient.id];
   const zajimave =
-    profile.iron !== 'nevyznamny' || profile.zinc !== 'nevyznamny' || profile.vitaminC !== 'nevyznamny';
+    profile.iron !== 'nevyznamny' ||
+    profile.zinc !== 'nevyznamny' ||
+    profile.vitaminC !== 'nevyznamny' ||
+    slozeni !== undefined;
   if (!zajimave) return null;
+
+  const zdrojeObsahu: SourceRef[] = [];
+  for (const zivina of ['iron', 'zinc', 'vitaminC'] as const) {
+    const zdroj = slozeni?.[zivina]?.zdroj;
+    if (zdroj !== undefined && !zdrojeObsahu.some((one) => one.url === zdroj.url)) {
+      zdrojeObsahu.push(zdroj);
+    }
+  }
 
   const nehemove = profile.ironForm === 'nehemove' && profile.iron !== 'nevyznamny';
   const partners = nehemove ? vitaminCPartners(ingredient, 5) : [];
@@ -60,12 +97,18 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
         Živiny
       </h2>
 
-      {/* Vypisuje se jen to, co surovina opravdu nese. Trojice řádků
-          „není zdroj" nikomu u sporáku nepomůže. */}
+      {/* Vypisuje se to, co surovina nese, a navíc to, u čeho máme číslo —
+          „železo 1,04 mg, není zdroj" je informace, prázdná řádka ne. */}
       <div className="flex flex-wrap gap-2">
-        {profile.iron !== 'nevyznamny' && <Pill label="Železo" level={profile.iron} />}
-        {profile.zinc !== 'nevyznamny' && <Pill label="Zinek" level={profile.zinc} />}
-        {profile.vitaminC !== 'nevyznamny' && <Pill label="Vitamin C" level={profile.vitaminC} />}
+        {(profile.iron !== 'nevyznamny' || slozeni?.iron !== undefined) && (
+          <Pill label="Železo" level={profile.iron} obsah={slozeni?.iron?.mg} />
+        )}
+        {(profile.zinc !== 'nevyznamny' || slozeni?.zinc !== undefined) && (
+          <Pill label="Zinek" level={profile.zinc} obsah={slozeni?.zinc?.mg} />
+        )}
+        {(profile.vitaminC !== 'nevyznamny' || slozeni?.vitaminC !== undefined) && (
+          <Pill label="Vitamin C" level={profile.vitaminC} obsah={slozeni?.vitaminC?.mg} />
+        )}
       </div>
 
       {profile.ironForm === 'hemove' && profile.iron !== 'nevyznamny' && (
@@ -143,11 +186,31 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
 
       <p className="flex items-start gap-2 rounded-xl bg-paper px-3 py-2 text-xs leading-relaxed text-muted">
         <Info aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-        <span>
-          Zařazení podle skupin potravin, které jako zdroj jmenují NHS a odborná literatura — ne
-          měřená hodnota v miligramech. Potravinové tabulky aplikace nepoužívá.
+        <span data-testid="poznamka-k-zivinam">
+          {slozeni === undefined ? (
+            <>
+              Pro tuhle surovinu žádná z použitých potravinových tabulek obsah neuvádí, takže
+              zařazení stojí na skupině potravin, kterou jako zdroj jmenují NHS a odborná
+              literatura. Je to hrubší odhad než miligramy.
+            </>
+          ) : (
+            <>
+              Obsah je naměřený a platí pro 100 g jedlého podílu.
+              {slozeni.poznamka !== undefined && ` ${slozeni.poznamka}`} Stupnice „obsahuje"
+              a „významný zdroj" odpovídá 15 % a 30 % denní potřeby dospělého, tedy hranicím,
+              které platí i pro etiketu potraviny. Aplikace nedávkuje dítě.
+            </>
+          )}
         </span>
       </p>
+
+      {zdrojeObsahu.length > 0 && (
+        <SourceDisclosure
+          sources={zdrojeObsahu}
+          label="Zdroje naměřených hodnot"
+          testId="zdroje-obsahu-suroviny"
+        />
+      )}
     </section>
   );
 }

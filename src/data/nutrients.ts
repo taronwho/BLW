@@ -17,11 +17,11 @@ import { recipes } from './recipes';
 /**
  * Zařazení surovin podle železa, zinku a vitaminu C.
  *
- * POZOR NA ROZSAH: tohle NEJSOU měřené hodnoty v miligramech. Je to zařazení
- * do skupin potravin, které jako zdroj jmenují načtené stránky. Číselné
- * obsahy živin v katalogu nejsou a nebudou: potravinová databáze, ze které by
- * se braly, není mezi povolenými zdroji v docs/BEZPECNOST.md, a vymýšlet je
- * z hlavy zakazuje CLAUDE.md pravidlo 1. UI to takhle i popisuje.
+ * POZOR NA ROZSAH: tenhle soubor NEJSOU měřené hodnoty. Je to záloha pro
+ * suroviny, u kterých žádná povolená potravinová tabulka obsah neuvádí —
+ * zařazení do skupin potravin, které jako zdroj jmenují načtené stránky.
+ * Naměřené miligramy jsou v src/data/composition.ts a mají přednost; dnes
+ * je má 258 z 301 surovin katalogu. UI obojí rozlišuje.
  *
  * Zařazuje se po skupinách, ne po jménech. Politika je v docs/BEZPECNOST.md
  * kapitola 8.

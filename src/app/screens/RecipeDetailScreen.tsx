@@ -9,6 +9,7 @@ import type { Ingredient, Recipe, RecipeIngredientRef, Stage } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { AllergenChip, ChokingChip } from '../components/SafetyChips';
 import { GripHint } from '../components/GripHint';
+import { COMPOSITION } from '@/data/composition';
 import { NutrientBadge } from '../components/NutrientBadge';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
@@ -321,6 +322,7 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                           <NutrientBadge
                             profile={profil}
                             title={ingredient.nameCz}
+                            slozeni={COMPOSITION[ref.ingredientId]}
                             testId={`zeleza-recept-${ref.ingredientId}`}
                           />
                         )}

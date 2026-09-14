@@ -102,9 +102,9 @@ Matka je vegetariánka, dcera bude jíst i maso. Aplikace kvůli tomu:
 
 ## 8. Zařazení surovin podle živin
 
-Aplikace u každé suroviny ukazuje železo, zinek a vitamin C na tříbodové stupnici. **Nejsou to měřené hodnoty.** Potravinová databáze, ze které by se braly miligramy, mezi povolenými doménami v kapitole 1 není, a vymýšlet čísla z hlavy zakazuje `CLAUDE.md` pravidlo 1.
+Aplikace u každé suroviny ukazuje železo, zinek a vitamin C na tříbodové stupnici. U **258 z 301 surovin** stojí stupnice na naměřeném obsahu z národní potravinové tabulky a aplikace ten obsah ukazuje i v miligramech na 100 g. U zbylých 43 žádná z povolených tabulek číslo neuvádí; tam se zařazuje podle skupiny potravin, což je hrubší odhad.
 
-Zařazuje se proto po **skupinách potravin**, ne po jménech jednotlivých surovin:
+Zařazení podle skupiny se **nepoužívá po jménech jednotlivých surovin**, ale po skupinách:
 
 - **„významný zdroj" (●●●)** dostane jen surovina, kterou načtený zdroj jmenuje adresně mezi nejbohatšími.
 - **„obsahuje" (●●○)** dostane surovina, která patří do skupiny, kterou zdroj jako zdroj označuje — například čerstvé ovoce a zelenina u vitaminu C, zelená listová zelenina u nehemového železa.
@@ -112,7 +112,7 @@ Zařazuje se proto po **skupinách potravin**, ne po jménech jednotlivých suro
 
 Ruční seznam jmen se neosvědčil: u tří set surovin v něm vždycky někdo chybí a aplikace pak o rakytníku, malinách nebo špenátu tvrdí, že živinu nemají, i když zdroj mluví o celé skupině, do které patří. Když chceš přidat surovinu do nejvyššího stupně, musíš mít zdroj, který ji **jmenuje**, ne jen její skupinu.
 
-Ztráty se počítají: sušené, zavařené a protlačené ovoce se za zdroj vitaminu C nevydává, protože vitamin C patří k nejméně stálým a ničí ho teplo i kyslík. Koření a bylinky se nepočítají vůbec — špetka příjem neposune.
+Ztráty se počítají: sušené, zavařené a protlačené ovoce se za zdroj vitaminu C nevydává, protože vitamin C patří k nejméně stálým a ničí ho teplo i kyslík. Naměřená hodnota to ale může vyvrátit a má přednost — u rajčatového protlaku obě evropské tabulky shodně uvádějí přes 45 mg na 100 g, protože zahuštění ztráty převáží. Koření a bylinky se nepočítají vůbec — špetka příjem neposune, a proto pro ně čísla nedohledáváme.
 
 ### Naměřené hodnoty mají přednost
 
@@ -122,6 +122,9 @@ Pravidla zápisu:
 
 - hodnota je v **miligramech na 100 g jedlého podílu**;
 - bere se z národní potravinové tabulky, ne z článku, letáku ani z blogu;
+- pořadí tabulek: Česká databáze složení potravin (ÚZEI), pak USDA FoodData Central, pak Ciqual, Fineli, Frida, Matvaretabellen a Livsmedelsverket;
+- **v jakém stavu:** syrový, pokud se surovina syrová jí, jinak ve stavu, ve kterém se podává. Luštěniny, obiloviny, brambory, maso a ryby se proto zapisují uvařené nebo upečené bez soli. U čočky je to rozdíl mezi 5,0 mg železa (suchá) a 2,3 mg (uvařená) na 100 g. Mouky, vločky a krupice se zapisují suché, jak se prodávají, a poznámka to u nich říká;
+- když tabulka pro živinu hodnotu nemá nebo uvádí nulu, nezapisuje se nic a ta jedna živina se řídí dál skupinou;
 - zapisuje se jen číslo, které zdroj uvádí jako obsah — **horní mez se nepočítá**. „Až 300 mg/100 g" je maximum odrůdy za ideálních podmínek, ne obsah běžné porce;
 - ke každé položce patří zdroj a datum, kdy byl načten;
 - hodnoty pro jednu živinu se nemíchají z různých tabulek bez poznámky, která říká odkud je která.
@@ -130,7 +133,11 @@ Prahy jsou stejné, jaké platí pro etiketu potraviny: **15 % denní potřeby v
 
 Rozlišení hemového a nehemového železa z miligramů vyčíst nejde; je to vlastnost potraviny, ne množství, a řídí se dál skupinou.
 
-Zdroje zařazení jsou vyjmenované v hlavičce `src/data/nutrients.ts` a aplikace je ukazuje rodiči v okénku živin, aby u tvrzení o živinách stál doklad stejně jako u tvrzení o bezpečnosti.
+Zdroje zařazení jsou vyjmenované v hlavičce `src/data/nutrients.ts` a aplikace je ukazuje rodiči v okénku živin, aby u tvrzení o živinách stál doklad stejně jako u tvrzení o bezpečnosti. U naměřených hodnot nese odkaz na konkrétní řádek tabulky každá hodnota zvlášť, protože se u jedné suroviny mohou mísit dvě tabulky — česká databáze u rostlinných potravin zpravidla zinek neuvádí, takže bývá z USDA.
+
+### Co práh znamená a co ne
+
+Práh 30 % denní potřeby dospělého (4,44 mg železa na 100 g) je přísný. Naměřená čísla proto u většiny mas a ryb stupeň snižují: kuřecí prso má 1,04 mg železa, treska 0,49 mg. **Neznamená to, že maso není dobrý zdroj železa** — hemové železo z masa se vstřebává násobně líp než nehemové z rostlin, a to nese pole `ironForm`, ne stupnice teček. Texty u surovin to musí říkat právě takhle: mluvit o vstřebatelnosti, ne o množství.
 
 ## 9. Disclaimer v aplikaci
 
