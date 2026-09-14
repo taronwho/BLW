@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NUTRIENT_SOURCES, type NutrientLevel, type NutrientProfile } from '@/data/nutrients';
-import type { Ingredient } from '@/types';
+import type { Slozeni, Zivina } from '@/data/composition';
+import type { Ingredient, SourceRef } from '@/types';
 import { IRON_FORM_LABELS, LEVEL_CHIP, LEVEL_DOTS, LEVEL_LABELS } from '../lib/nutrientLabels';
 import { IngredientIcon } from './IngredientIcon';
 import { SourceDisclosure } from './SourceList';
@@ -17,6 +18,13 @@ export interface NutrientBadgeProps {
   ironFrom?: readonly Ingredient[];
   /** Zdroje vitaminu C ve stejném receptu. */
   vitaminCFrom?: readonly Ingredient[];
+  /**
+   * Naměřený obsah z potravinové tabulky, pokud ho pro surovinu máme.
+   *
+   * U receptu se nepředává: sčítat miligramy přes suroviny by předstíralo
+   * přesnost, kterou složení hotového jídla nemá.
+   */
+  slozeni?: Slozeni;
   testId?: string;
 }
 
@@ -45,6 +53,12 @@ const CHIPS: readonly ChipSpec[] = [
   { key: 'vitaminC', label: 'vitamin C', aria: 'Vitamin C', Icon: Citrus, suffix: '-cecko' },
 ];
 
+/** Miligramy česky: desetinná čárka, nejvýš dvě místa, bez zbytečných nul. */
+function mg(hodnota: number): string {
+  const zaokrouhleno = Math.round(hodnota * 100) / 100;
+  return `${zaokrouhleno.toString().replace('.', ',')} mg`;
+}
+
 /**
  * Věta o tom, co položka obsahuje. Čím není, se nevypisuje — rodič v kuchyni
  * hledá, co použít, ne seznam toho, co v surovině chybí. Věta musí dávat
@@ -65,10 +79,24 @@ function popisZivin(profile: NutrientProfile): string | null {
   return null;
 }
 
-function Row({ label, level }: { label: string; level: NutrientLevel }): ReactNode {
+function Row({
+  label,
+  level,
+  obsah,
+}: {
+  label: string;
+  level: NutrientLevel;
+  /** Naměřený obsah ve 100 g, když ho pro surovinu máme. */
+  obsah?: number;
+}): ReactNode {
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-3 py-2">
-      <span className="text-sm font-medium">{label}</span>
+      <span className="flex min-w-0 flex-col">
+        <span className="text-sm font-medium">{label}</span>
+        {obsah !== undefined && (
+          <span className="text-xs text-muted">{mg(obsah)} ve 100 g</span>
+        )}
+      </span>
       <span className="flex items-center gap-2">
         <span aria-hidden="true" className="font-mono text-[11px] tracking-tight">
           {LEVEL_DOTS[level]}
@@ -92,6 +120,7 @@ export function NutrientBadge({
   title,
   ironFrom = [],
   vitaminCFrom = [],
+  slozeni,
   testId,
 }: NutrientBadgeProps): ReactNode {
   const [open, setOpen] = useState(false);
@@ -109,6 +138,17 @@ export function NutrientBadge({
   const videt = CHIPS.filter((chip) => profile[chip.key] !== 'nevyznamny');
   if (videt.length === 0) return null;
   const popis = popisZivin(profile);
+
+  // Okénko vypisuje jen to, co surovina nese; „není zdroj" patří na detail
+  // suroviny, kde je na to místo. Ke každé vypsané živině se ale přidá
+  // naměřený obsah, pokud ho máme — tečky samy neřeknou, o kolik jde.
+  const zmereneZdroje: SourceRef[] = [];
+  for (const chip of videt) {
+    const zdroj = slozeni?.[chip.key as Zivina]?.zdroj;
+    if (zdroj !== undefined && !zmereneZdroje.some((one) => one.url === zdroj.url)) {
+      zmereneZdroje.push(zdroj);
+    }
+  }
 
   return (
     <>
@@ -183,8 +223,16 @@ export function NutrientBadge({
             </div>
 
             {videt.map(({ key, aria }) => (
-              <Row key={key} label={aria} level={profile[key]} />
+              <Row key={key} label={aria} level={profile[key]} obsah={slozeni?.[key]?.mg} />
             ))}
+
+            {slozeni !== undefined && (
+              <p className="text-xs leading-relaxed text-muted" data-testid="okenko-obsah">
+                Obsah je naměřený, ne odhadnutý: hodnoty jsou z národní potravinové tabulky
+                a platí pro 100 g jedlého podílu.
+                {slozeni.poznamka !== undefined && ` ${slozeni.poznamka}`}
+              </p>
+            )}
 
             {popis !== null && <p className="text-sm leading-relaxed">{popis}</p>}
 
@@ -194,6 +242,14 @@ export function NutrientBadge({
                 vstřebávání toho rostlinného. Proto se vyplatí dát luštěninu nebo obilninu dohromady
                 s paprikou, brokolicí či ovocem.
               </p>
+            )}
+
+            {zmereneZdroje.length > 0 && (
+              <SourceDisclosure
+                sources={zmereneZdroje}
+                label="Zdroje naměřených hodnot"
+                testId="zdroje-obsahu"
+              />
             )}
 
             <SourceDisclosure sources={NUTRIENT_SOURCES} label="Zdroje zařazení" testId="zdroje-zivin" />
@@ -244,8 +300,9 @@ export function NutrientBadge({
             <p className="flex items-start gap-2 rounded-xl bg-paper px-3 py-2 text-xs leading-relaxed text-muted">
               <Info aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0" />
               <span>
-                Zařazení podle skupin potravin, které jako zdroj jmenují NHS a odborná literatura —
-                ne měřená hodnota v miligramech. Potravinové tabulky aplikace nepoužívá.
+                Kde má aplikace naměřený obsah z potravinové tabulky, počítá stupnici z něj.
+                Jinde stojí zařazení na skupině potravin, kterou jako zdroj jmenují NHS a odborná
+                literatura — a to je hrubší odhad než miligramy.
               </span>
             </p>
 

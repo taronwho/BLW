@@ -356,7 +356,7 @@ export const fruits: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí nektarinku v měsíčcích jako součást svačiny. Hodí se i do salátu s tvarohem, kde nahradí jakoukoli sladkou přísadu a přidá vitamin C.',
+          'Batole jí nektarinku v měsíčcích jako součást svačiny. Hodí se i do salátu s tvarohem, kde nahradí jakoukoli sladkou přísadu. Vitaminu C má 5,4 mg na 100 g, tedy o dost méně než citrusy nebo jahody.',
         caution: 'Sleduj, jestli si dítě nestrká do pusy víc kousků najednou.',
       },
     },
@@ -1402,7 +1402,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Sušené švestky rozvař v malém množství vody a rozmixuj je na hladké pyré. Lžička takového pyré v kaši pomáhá při tuhé stolici a zároveň dodá železo i vlákninu.',
+          'Sušené švestky rozvař v malém množství vody a rozmixuj je na hladké pyré. Lžička takového pyré v kaši pomáhá při tuhé stolici a dodá vlákninu. Železa má ale podle tabulky málo (0,93 mg na 100 g), na to spoléhat nelze.',
         caution: 'Každou švestku zkontroluj na pecku, i když je balení označené jako vypeckované.',
       },
       '9m': {

@@ -239,12 +239,18 @@ test('značka železa otevře okénko místo detailu receptu', async ({ page }) 
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
 
-  await page.locator('[data-testid^="zeleza-"]').first().click();
+  // První značka železa, ne první značka živiny — štítek zinku a vitaminu C
+  // má v testId příponu, takže se dají odlišit. Dřív se klikalo na první
+  // značku v pořadí a po doplnění naměřených hodnot to byl vitamin C.
+  await page
+    .locator('[data-testid^="zeleza-"]:not([data-testid$="-zinek"]):not([data-testid$="-cecko"])')
+    .first()
+    .click();
 
   const okenko = page.getByTestId('okenko-zivin');
   await expect(okenko).toBeVisible();
   await expect(okenko).toContainText('Železo');
-  await expect(okenko).toContainText('ne měřená hodnota v miligramech');
+  await expect(okenko).toContainText('naměřený obsah z potravinové tabulky');
   // Značka je uvnitř odkazu na detail — proklik se nesmí spustit.
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();
 
@@ -501,12 +507,15 @@ test('u surovin v receptu je vidět střední a vysoké riziko dušení', async 
 
 test('okénko živin nevypisuje, čeho surovina není zdrojem', async ({ page }) => {
   await acceptDisclaimer(page);
-  await page.goto('./#/recepty/hovezi-ragu-testoviny');
+  await page.goto('./#/recepty/candat-koprova-omacka-brambory');
 
-  await page.getByTestId('zeleza-recept-testoviny-semolinove-zinek').click();
+  // Brambor je zdroj vitaminu C, ale železa ani zinku ne — v okénku proto
+  // stojí jen vitamin C. „Není zdroj" patří na detail suroviny, kde je na
+  // celý obrázek místo.
+  await page.getByTestId('zeleza-recept-brambor-cecko').click();
   const okenko = page.getByTestId('okenko-zivin');
   await expect(okenko).toBeVisible();
-  await expect(okenko).toContainText('Zinek');
+  await expect(okenko).toContainText('Vitamin C');
   await expect(okenko).not.toContainText('není zdroj');
 });
 

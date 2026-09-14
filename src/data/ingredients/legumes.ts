@@ -221,7 +221,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařené fazole rozmačkej vidličkou i se slupkou, pokud je dobře změklá. Bílé fazole jsou výborným zdrojem bílkovin, vlákniny a železa pro bezmasou část jídelníčku.',
+          'Uvařené fazole rozmačkej vidličkou i se slupkou, pokud je dobře změklá. Bílé fazole jsou výborným zdrojem bílkovin a vlákniny pro bezmasou část jídelníčku. Železa mají uvařené 1,9 mg na 100 g, takže je k němu potřeba přidat i jiné zdroje.',
         caution: 'Začni malým množstvím, střevo si na luštěniny zvyká.',
       },
       '12m': {
@@ -744,7 +744,7 @@ export const legumes: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí fazole celé, když jsou uvařené doměkka. Spolu s obilovinou a s vitaminem C v jednom jídle jsou dobrým zdrojem rostlinného železa.',
+          'Batole jí fazole celé, když jsou uvařené doměkka. Spolu s obilovinou a s vitaminem C v jednom jídle přispívají k rostlinnému železu; uvařené ho mají 2,1 mg na 100 g.',
         caution: 'Z konzervy je propláchni, nálev bývá solený.',
       },
     },

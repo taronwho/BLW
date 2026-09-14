@@ -742,7 +742,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozvařená natural rýže má zemitou chuť a víc vlákniny než bílá. Smíchej ji s dušenou zeleninou a kouskem tofu, dítě tak dostane rostlinné železo i vitamin C ze zeleniny.',
+          'Rozvařená natural rýže má zemitou chuť a víc vlákniny než bílá. Smíchej ji s dušenou zeleninou a kouskem tofu; rostlinné železo přinese tofu a vitamin C ze zeleniny jeho vstřebání zlepší. Samotná uvařená rýže železa skoro nemá.',
         caution: 'Vzhledem k obalu zrna ji střídej s jinými obilovinami častěji.',
       },
       '12m': {
@@ -831,7 +831,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Z uvařených jáhel vytvaruj kuličky nebo placičky, které dítě uchopí prsty. Jsou bez lepku a nesou železo i hořčík, takže jsou dobrou náhradou za rýži.',
+          'Z uvařených jáhel vytvaruj kuličky nebo placičky, které dítě uchopí prsty. Jsou bez lepku a mají jemnou chuť, takže jsou dobrou náhradou za rýži. Uvařené jáhly ale železa moc nemají, to musí do jídla přijít odjinud.',
         caution: 'Jáhly rychle tuhnou, podávej je vlažné a čerstvě uvařené.',
       },
       '12m': {
@@ -999,7 +999,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařený amarant se dobře váže, takže z něj vytvaruješ kuličky do ruky. Je bez lepku a nese hodně železa i vápníku, což se hodí v bezmasé domácnosti.',
+          'Uvařený amarant se dobře váže, takže z něj vytvaruješ kuličky do ruky. Je bez lepku a z bezlepkových obilovin patří k těm s nejvyšším obsahem železa — 2,1 mg na 100 g uvařeného, tedy o něco víc než rýže nebo jáhly, ale pořád těsně pod hranicí „zdroj železa“.',
         caution: 'Pufovaný amarant je velmi lehký a snadno se vdechne nasucho.',
       },
       '12m': {

@@ -31,6 +31,7 @@ import {
   vyhovujeZivinam,
   ZIVINY_OPTIONS,
 } from '../lib/nutrientFilter';
+import { COMPOSITION } from '@/data/composition';
 import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
@@ -446,6 +447,7 @@ function IngredientRow({
           <NutrientBadge
             profile={profile}
             title={ingredient.nameCz}
+            slozeni={COMPOSITION[ingredient.id]}
             testId={`zeleza-${ingredient.id}`}
           />
         </span>
