@@ -39,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 152 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 108 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -331,6 +331,70 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
     ...z({ iron: 1.58, zinc: 0.12 }, usdaFdc('Tapioca, pearl, dry', 169717)),
     poznamka: 'Tabulka vede tapiokové perly v suchém stavu.',
   },
+
+  /* Maso a ryby */
+  'kureci-prsa': z({ iron: 1.04, zinc: 1 }, usdaFdc('Chicken, broilers or fryers, breast, meat only, cooked, roasted', 171477)),
+  'kureci-stehno': z({ iron: 1.13, zinc: 1.92 }, usdaFdc('Chicken, broilers or fryers, thigh, meat only, cooked, roasted', 172388)),
+  'kruti-prsa': z({ iron: 0.71, zinc: 1.72 }, usdaFdc('Turkey, whole, breast, meat only, cooked, roasted', 171496)),
+  'kruti-stehno': {
+    ...z({ iron: 2.3, zinc: 4.27 }, usdaFdc('Turkey, all classes, leg, meat and skin, cooked, roasted', 171494)),
+    poznamka: 'Tabulka měří krůtí stehno i s kůží.',
+  },
+  'hovezi-zadni': z({ iron: 2.5, zinc: 7.3 }, czfcdb('Maso hovězí, kýta, libová, pečená', 406)),
+  'hovezi-mlete': {
+    ...z({ iron: 2.2, zinc: 4.7 }, czfcdb('Maso hovězí, výrobní, H2', 423)),
+    poznamka: 'Tabulka vede mleté hovězí jako výrobní maso H2.',
+  },
+  'teleci': z({ iron: 1.32, zinc: 4.03 }, usdaFdc('Veal, leg (top round), separable lean only, cooked, braised', 175270)),
+  'veprova-panenka': {
+    ...z({ iron: 1.15, zinc: 2.42 }, usdaFdc('Pork, fresh, loin, tenderloin, separable lean only, cooked, roasted', 168250)),
+    poznamka: 'Měřeno pečená, libové maso bez okrajového tuku.',
+  },
+  'veprova-kyta': z({ iron: 1.2, zinc: 3.67 }, czfcdb('Maso vepřové, kýta bez kosti, libová, pečená', 286)),
+  'kralik': z({ iron: 2.27, zinc: 2.27 }, usdaFdc('Game meat, rabbit, domesticated, composite of cuts, cooked, roasted', 172522)),
+  'kaci-prsa': z({ iron: 2.7, zinc: 2.6 }, usdaFdc('Duck, domesticated, meat only, cooked, roasted', 172411)),
+  'jehneci': z({ iron: 2.06, zinc: 5.02 }, usdaFdc('Lamb, leg, shank half, separable lean only, trimmed to 1/4" fat, choice, cooked, roasted', 172487)),
+  'kureci-jatra': z({ vitaminC: 27.9, iron: 11.63, zinc: 3.98 }, usdaFdc('Chicken, liver, all classes, cooked, simmered', 171061)),
+  'teleci-jatra': z({ vitaminC: 1.1, iron: 5.11, zinc: 11.23 }, usdaFdc('Veal, variety meats and by-products, liver, cooked, braised', 172535)),
+  'sunka-od-kosti': {
+    ...z({ iron: 0.59, zinc: 1.51 }, usdaFdc('Ham, sliced, pre-packaged, deli meat (96%fat free, water added)', 173863)),
+    poznamka: 'Tabulka měří libovou balenou šunku. Uzeniny dětem do roka nepatří kvůli soli, ne kvůli živinám.',
+  },
+  'losos': z({ vitaminC: 3.7, iron: 0.34, zinc: 0.43 }, usdaFdc('Fish, salmon, Atlantic, farmed, cooked, dry heat', 175168)),
+  'pstruh-duhovy': z({ vitaminC: 2.9, iron: 0.36, zinc: 0.54 }, usdaFdc('Fish, trout, rainbow, farmed, cooked, dry heat', 173718)),
+  'treska-obecna': z({ vitaminC: 1, iron: 0.49, zinc: 0.58 }, usdaFdc('Fish, cod, Atlantic, cooked, dry heat', 171956)),
+  'treska-tmava': z({ iron: 0.59, zinc: 0.6 }, usdaFdc('Fish, pollock, Atlantic, cooked, dry heat', 174237)),
+  'candat': z({ iron: 1.67, zinc: 0.79 }, usdaFdc('Fish, pike, walleye, cooked, dry heat', 171997)),
+  'stika': z({ vitaminC: 3.8, iron: 0.71, zinc: 0.86 }, usdaFdc('Fish, pike, northern, cooked, dry heat', 175127)),
+  'kapr': z({ vitaminC: 1.6, iron: 1.59, zinc: 1.9 }, usdaFdc('Fish, carp, cooked, dry heat', 174185)),
+  'sardinky-v-oleji': z({ iron: 2.92, zinc: 1.31 }, usdaFdc('Fish, sardine, Atlantic, canned in oil, drained solids with bone', 175139)),
+  'makrela': z({ vitaminC: 0.4, iron: 1.57, zinc: 0.94 }, usdaFdc('Fish, mackerel, Atlantic, cooked, dry heat', 175120)),
+  'tunak': z({ iron: 1.31, zinc: 0.77 }, usdaFdc('Fish, tuna, fresh, bluefin, cooked, dry heat', 173707)),
+  'krevety': z({ iron: 0.32, zinc: 1.63 }, usdaFdc('Crustaceans, shrimp, mixed species, cooked, moist heat (may contain additives to retain moisture)', 171971)),
+  'sled': z({ vitaminC: 0.7, iron: 1.41, zinc: 1.27 }, usdaFdc('Fish, herring, Atlantic, cooked, dry heat', 175117)),
+  'treska-jednoskvrnna': z({ iron: 0.21, zinc: 0.4 }, usdaFdc('Fish, haddock, cooked, dry heat', 174198)),
+  'treska-aljasska': z({ iron: 0.56, zinc: 0.57 }, usdaFdc('Fish, pollock, Alaska, cooked, dry heat (may contain additives to retain moisture)', 173681)),
+  'slavky': z({ vitaminC: 13.6, iron: 6.72, zinc: 2.67 }, usdaFdc('Mollusks, mussel, blue, cooked, moist heat', 174217)),
+  'sumec': z({ iron: 0.28, zinc: 0.58 }, usdaFdc('Fish, catfish, channel, farmed, cooked, dry heat', 175166)),
+  'tilapie': z({ iron: 0.69, zinc: 0.41 }, usdaFdc('Fish, tilapia, cooked, dry heat', 175177)),
+  'kureci-mlete': z({ iron: 0.93, zinc: 1.92 }, usdaFdc('Chicken, ground, crumbles, cooked, pan-browned', 171117)),
+  'kruti-mlete': z({ iron: 1.52, zinc: 3.11 }, usdaFdc('Turkey, Ground, cooked', 171506)),
+  'veprove-mlete': z({ vitaminC: 0.7, iron: 1.29, zinc: 3.21 }, usdaFdc('Pork, fresh, ground, cooked', 167903)),
+  'platys': z({ iron: 0.23, zinc: 0.39 }, usdaFdc('Fish, flatfish (flounder and sole species), cooked, dry heat', 174197)),
+  'kambala': z({ vitaminC: 1.7, iron: 0.46, zinc: 0.28 }, usdaFdc('Fish, turbot, european, cooked, dry heat', 174245)),
+  'morsky-vlk': z({ iron: 0.37, zinc: 0.52 }, usdaFdc('Fish, sea bass, mixed species, cooked, dry heat', 173694)),
+  'okoun-ricni': z({ vitaminC: 1.7, iron: 1.16, zinc: 1.43 }, usdaFdc('Fish, perch, mixed species, cooked, dry heat', 173679)),
+  'kalamary': {
+    ...z({ vitaminC: 4.7, iron: 0.68, zinc: 1.53 }, usdaFdc('Mollusks, squid, mixed species, raw', 174223)),
+    poznamka: 'Tabulka má jen syrové kalamáry; vařením se obsah těchhle tří živin podstatně nemění, smažením ano.',
+  },
+  'hrebenatky': z({ iron: 0.58, zinc: 1.55 }, usdaFdc('Mollusks, scallop, (bay and sea), cooked, steamed', 167742)),
+  'krabi-maso-bile': z({ vitaminC: 3.3, iron: 0.5, zinc: 3.81 }, usdaFdc('Crustaceans, crab, blue, cooked, moist heat', 174205)),
+  'tunak-v-konzerve': {
+    ...z({ iron: 1.53, zinc: 0.77 }, usdaFdc('Fish, tuna, light, canned in water, without salt, drained solids', 171986)),
+    poznamka: 'Měřeno ve vlastní šťávě bez přidané soli a scezené.',
+  },
+  'ancovicky': z({ iron: 4.63, zinc: 2.44 }, usdaFdc('Fish, anchovy, european, canned in oil, drained solids', 174183)),
 
   /* Luštěniny */
   'cocka-cervena-loupana': {
