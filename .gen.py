@@ -67,8 +67,10 @@ def zapis(cesta, recepty, zdroje_navic=()):
     s = io.open(cesta, encoding='utf-8').read()
     i = s.rstrip().rfind('];')
     s = s[:i] + ''.join(recept(r) for r in recepty) + '];\n'
+    # Každý použitý zdroj musí být v importu, jinak build spadne až za běhu.
+    pouzite = {z for r in recepty for z in r.get('zdroje', ['NHS_FIRST_FOODS', 'NHS_VEGETARIAN'])}
     hl = s[:s.index("_sources';")]
-    for n in zdroje_navic:
+    for n in sorted(pouzite) + list(zdroje_navic):
         if ('\n  ' + n + ',') not in hl:
             s = s.replace('import {\n', 'import {\n  ' + n + ',\n', 1)
     io.open(cesta, 'w', encoding='utf-8').write(s)
