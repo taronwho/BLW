@@ -39,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 169 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 152 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -330,6 +330,73 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
   'tapiokovy-skrob': {
     ...z({ iron: 1.58, zinc: 0.12 }, usdaFdc('Tapioca, pearl, dry', 169717)),
     poznamka: 'Tabulka vede tapiokové perly v suchém stavu.',
+  },
+
+  /* Luštěniny */
+  'cocka-cervena-loupana': {
+    ...z({ iron: 2.3, zinc: 1.2 }, czfcdb('Čočka, vařená v nesolené vodě', 495)),
+    poznamka: 'Měřeno vařená v nesolené vodě. Suchá čočka má železa dvakrát tolik, ale takhle se nejí.',
+  },
+  'cocka-hneda': {
+    ...z({ iron: 2.3, zinc: 1.2 }, czfcdb('Čočka, vařená v nesolené vodě', 495)),
+    poznamka: 'Měřeno vařená v nesolené vodě, tak se podává. Suchá čočka má železa dvakrát tolik.',
+  },
+  'cocka-beluga': {
+    ...z({ iron: 2.3, zinc: 1.2 }, czfcdb('Čočka, vařená v nesolené vodě', 495)),
+    poznamka: 'Měřeno vařená v nesolené vodě. Tabulka druhy čočky nerozlišuje.',
+  },
+  'cizrna': {
+    ...z({ vitaminC: 1.3, iron: 2.89, zinc: 1.53 }, usdaFdc('Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt', 173757)),
+    poznamka: 'Měřeno vařená v nesolené vodě, tak se podává. Suchá cizrna má železa o polovinu víc.',
+  },
+  'fazole-bile': {
+    ...z({ iron: 1.9, zinc: 1.02 }, czfcdb('Fazole bílé, vařené v nesolené vodě', 496)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají. Suché mají železa dvakrát tolik.',
+  },
+  'fazole-cervene-kidney': {
+    ...z({ vitaminC: 1.2, iron: 2.94, zinc: 1.07 }, usdaFdc('Beans, kidney, red, mature seeds, cooked, boiled, without salt', 175194)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají.',
+  },
+  'fazole-adzuki': {
+    ...z({ iron: 2, zinc: 1.77 }, usdaFdc('Beans, adzuki, mature seeds, cooked, boiled, without salt', 173728)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají.',
+  },
+  'fazolky-mungo': {
+    ...z({ vitaminC: 1, iron: 1.4, zinc: 0.84 }, usdaFdc('Mung beans, mature seeds, cooked, boiled, without salt', 174257)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají.',
+  },
+  'hrach-zluty-puleny': {
+    ...z({ vitaminC: 0.4, iron: 1.29, zinc: 1 }, usdaFdc('Peas, split, mature seeds, cooked, boiled, without salt', 172429)),
+    poznamka: 'Měřeno vařený v nesolené vodě, tak se podává.',
+  },
+  'hrach-zeleny-suseny': {
+    ...z({ iron: 1.6, zinc: 1.06 }, czfcdb('Hrách, vařený v nesolené vodě', 497)),
+    poznamka: 'Měřeno vařený v nesolené vodě, tak se podává.',
+  },
+  'soja-edamame': {
+    ...z({ vitaminC: 6.1, iron: 2.27, zinc: 1.37 }, usdaFdc('Edamame, frozen, prepared', 168411)),
+    poznamka: 'Měřeno mražené edamame po tepelné úpravě.',
+  },
+  'tofu-natural': {
+    ...z({ vitaminC: 0.2, iron: 2.66, zinc: 1.57 }, usdaFdc('Tofu, raw, firm, prepared with calcium sulfate', 172475)),
+    poznamka: 'Měřeno tofu srážené síranem vápenatým, jak se běžně vyrábí.',
+  },
+  'tempeh': {
+    ...z({ iron: 2.13, zinc: 1.57 }, usdaFdc('Tempeh, cooked', 172467)),
+    poznamka: 'Měřeno tepelně upravený tempeh, tak se podává.',
+  },
+  'mouka-cizrnova': z({ iron: 4.86, zinc: 2.81 }, usdaFdc('Chickpea flour (besan)', 174288)),
+  'hummus-domaci-bez-soli': {
+    ...z({ vitaminC: 7.9, iron: 1.56, zinc: 1.09 }, usdaFdc('Hummus, home prepared', 172454)),
+    poznamka: 'Měřeno domácí hummus; kupovaný bývá slanější, na obsah těchhle živin to ale nemá vliv.',
+  },
+  'fazole-cerne': {
+    ...z({ iron: 2.1, zinc: 1.12 }, usdaFdc('Beans, black, mature seeds, cooked, boiled, without salt', 173735)),
+    poznamka: 'Měřeno vařené v nesolené vodě, tak se podávají.',
+  },
+  'cocka-zelena': {
+    ...z({ iron: 2.3, zinc: 1.2 }, czfcdb('Čočka, vařená v nesolené vodě', 495)),
+    poznamka: 'Měřeno vařená v nesolené vodě. Tabulka druhy čočky nerozlišuje.',
   },
 
   /* Zelenina */

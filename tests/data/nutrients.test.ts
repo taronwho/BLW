@@ -23,7 +23,11 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
 
   it('luštěniny nesou nehemové železo', () => {
     const profile = nutrientProfile(get('cocka-cervena-loupana'));
-    expect(profile.iron).toBe('vyznamny');
+    // Uvařená čočka má 2,3 mg železa na 100 g. Suchá jich má 5,0, ale suchou
+    // nikdo nejí — a zrovna u luštěnin je ten rozdíl tak velký, že se podle
+    // něj mění i stupeň. Nehemové železo je tu i tak to hlavní sdělení: bez
+    // vitaminu C ve stejném jídle se z něj vstřebá málo.
+    expect(profile.iron).toBe('obsahuje');
     expect(profile.ironForm).toBe('nehemove');
   });
 
