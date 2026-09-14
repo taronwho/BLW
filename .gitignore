@@ -19,3 +19,4 @@ tests/e2e/screenshots
 .kat.json
 .audit*.ts
 .dump.ts
+dbg.mjs
