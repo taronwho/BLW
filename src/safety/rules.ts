@@ -421,9 +421,12 @@ const noInternalReferences: SafetyRule = {
  * „osladˇ" místo „oslaď" projde očima i kontrolou `\p{L}`, protože samostatná
  * háčková čárka U+02C7 je v Unicode písmeno (kategorie Lm). V českých datech
  * se píšou složená písmena, takže každý modifikátor i kombinující znaménko je
- * chyba přepisu. Do stejné skupiny patří i cyrilice zaměněná za latinku.
+ * chyba přepisu. Stejně tak neviditelné znaky: měkký spojovník U+00AD nebo
+ * nezlomitelná mezera nulové šířky se do textu dostanou kopírováním a rodič
+ * je nevidí, ale hledání i dělení slov se po nich chová divně. Do stejné
+ * skupiny patří i cyrilice zaměněná za latinku.
  */
-const STRAY_MARK = /[\p{Lm}\p{M}]/u;
+const STRAY_MARK = /[\p{Lm}\p{M}\p{Cf}\p{Cc}]/u;
 const CYRILLIC = /\p{Script=Cyrillic}/u;
 
 const noStrayMarks: SafetyRule = {

@@ -394,6 +394,11 @@ describe('no-stray-marks', () => {
     expectFail('no-stray-marks', recipe, catalog);
   });
 
+  it('spadne na neviditelném měkkém spojovníku uvnitř slova', () => {
+    const recipe = makeRecipe({ adultSteps: ['Podávej s paprikov\u00adými proužky vedle.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+
   it('spadne na cyrilském písmenu zaměněném za latinku', () => {
     const recipe = makeRecipe({ adultSteps: ['Porci podávej n\u0430 talíři.'] });
     expectFail('no-stray-marks', recipe, catalog);
