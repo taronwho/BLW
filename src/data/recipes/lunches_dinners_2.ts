@@ -282,20 +282,23 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'majoranka', amount: '1 lžička', track: 'all' },
       { ingredientId: 'ghi', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'kmin-mlety', amount: '1 lžička', track: 'all' },
+      { ingredientId: 'brokolice', amount: '1 menší růžice', track: 'all' },
     ],
     baseSteps: [
       'Zelený sušený hrách propláchni a namoč ho přes noc do studené vody.',
       'Namáčecí vodu slij, hrách zalij čerstvou vodou a vař ho asi čtyřicet minut, dokud se nerozpadá.',
       'Uvařený hrách rozšlehej metličkou na hustou kaši a vmíchej mletý kmín s majoránkou.',
       'Pórek rozkroj podélně, propláchni mezi vrstvami a nakrájej ho nadrobno přes vlákna.',
-      'Pórek osmahni na ghí dozlatova a nasyp ho na kaši až při podávání.',
+      'Brokolici rozeber na růžičky a povař je v páře pět minut doměkka.',
+      'Pórek osmahni na ghí dozlatova a nasyp ho na kaši až při podávání; brokolici podávej vedle.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce hrachové kaše do misky, dřív než se na ni sype pražený pórek.',
     babySteps: [
       'Kaši rozřeď lžící vody z vaření, aby nebyla tak hutná a dala se olizovat ze lžíce.',
       'Vmíchej lžičku ghí, tuk pomáhá vstřebat vitaminy rozpustné v tucích.',
-      'Přidej lžíci dušeného pórku nasekaného opravdu najemno a nech porci zvlažnět.',
+      'Přidej lžíci dušeného pórku nasekaného opravdu najemno a vedle polož měkkou růžičku brokolice — vitamin C z ní pomáhá vstřebat železo z hrachu a stonek je zároveň dobré držátko.',
+      'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
       '6m': 'Podávej řidší kaši na předložené lžíci; dítě ji olízne samo, když jí lžíci vložíš do dlaně.',
@@ -381,6 +384,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 5 odeber naběračku rizota do misky, dřív než se do hrnce zamíchá jakýkoli sýr.',
     babySteps: [
       'Rizoto rozmačkej vidličkou, aby zrna držela pohromadě a netvořila sypkou hromádku.',
+      'Vmíchej lžíci ricotty; je jemná, nemá přidanou sůl a rizoto po ní lépe drží na lžíci.',
       'Chřestovou špičku rozkroj podélně, ať se v puse snáz rozpadne.',
       'Porci nech zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
@@ -418,6 +422,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cesnek', amount: '2 stroužky', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'bobkovy-list', amount: '1 list', track: 'all' },
+      { ingredientId: 'citron', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Namočené bílé fazole slij, zalij čerstvou vodou s bobkovým listem a vař je aspoň třicet minut doměkka.',
@@ -431,7 +436,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Fazole i artyčoky v odebrané porci rozmačkej vidličkou, aby v puse nezůstaly pevné kusy.',
       'Bobkový list z dětské porce vylov, do jídla nepatří.',
-      'Ragú zahusti lžící rozmačkané fazole a nech ho zvlažnět.',
+      'Ragú zahusti lžící rozmačkané fazole, zakápni ho pár kapkami citronové šťávy a nech ho zvlažnět; vitamin C z citronu pomáhá vstřebat železo z fazolí.',
     ],
     babyServing: {
       '6m': 'Podávej husté rozmačkané ragú na lžíci nebo namoč do něj proužek chleba, který dítě saje.',
@@ -485,7 +490,7 @@ export const lunchesDinners2: Recipe[] = [
       'Kdo chce sytější oběd, přidá si opečený kus kuřecího masa.',
     ],
     allergens: [],
-    tags: ['bez lepku', 'podzimní'],
+    tags: ['vegetariánské', 'bez lepku', 'podzimní'],
     sources: [NHS_PREP_SAFELY, NHS_VEGETARIAN],
     reviewStatus: 'verified',
   },
@@ -546,11 +551,13 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'vlasske-orechy-mlete', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'olej-dynovy', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'ocet-jablecny', amount: '1 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Rukolu propláchni ve studené vodě a nech ji okapat na utěrce.',
       'Hrušky oloupej, zbav je jádřince a nakrájej na tenké měsíčky.',
       'Ementál nakrájej na tenké plátky, ne na kostky, které se hůř kousají.',
+      'Pomeranč oloupej ostrým nožem i s bílou kůrou a vykroj z něj dužinu mezi blanami.',
       'Dýňový olej promíchej s jablečným octem na jednoduchou zálivku.',
       'Rukolu, hrušku i sýr navrstvi na talíře a zalij zálivkou až před podáváním.',
     ],
@@ -560,6 +567,7 @@ export const lunchesDinners2: Recipe[] = [
       'Plátek hrušky krátce podus, aby změkl skrz naskrz a dal se rozmáčknout mezi prsty.',
       'Ementál nakrájej na tenké proužky, které batole udrží mezi prsty.',
       'Rukolu pro dítě nasekej nadrobno a vmíchej ji do rozmačkané hrušky, samotné listy se v puse motají.',
+      'Přidej kousek pomerančové dužiny bez blan a bez jadérek; vitamin C z něj pomáhá vstřebat železo z rukoly i z mletých vlašských ořechů v salátu.',
     ],
     babyServing: {
       '6m': 'Salát z listové zeleniny je na tuhle fázi brzy; nabídni jen dušenou hrušku rozmačkanou vidličkou.',
@@ -588,11 +596,12 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'okurka-salatova', amount: '1 kus', track: 'all' },
       { ingredientId: 'kopr', amount: '1 hrst', track: 'all' },
       { ingredientId: 'quinoa', amount: '150 g uvařené', track: 'all' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Hlávkový salát rozeber na jednotlivé listy a opatrně je propláchni, ať se neroztrhají.',
       'Listy krátce spař vroucí vodou, aby zvláčněly a daly se srolovat.',
-      'Tvaroh promíchej s uvařenou quinoou a nasekaným koprem do hutné náplně.',
+      'Tvaroh promíchej s uvařenou quinoou, nasekaným koprem a šťávou z půlky citronu do hutné náplně.',
       'Okurku nastrouhej nahrubo, vymačkej z ní vodu a vmíchej ji do náplně.',
       'Na každý list dej lžíci náplně a sroluj ho do závitku.',
     ],
@@ -601,7 +610,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Náplň podávej samostatně, celý salátový list se v puse svine do pevného svitku.',
       'Kdo chce dát batoleti i list, nasekej ho na krátké proužky a vmíchej do náplně.',
-      'Porci nech vlažnou a podávej ji na lžíci nebo na proužku chleba.',
+      'Porci nech vlažnou a podávej ji na lžíci nebo na proužku chleba; citron v náplni není jen na chuť, vitamin C z něj pomáhá vstřebat železo z quinoy.',
     ],
     babyServing: {
       '6m': 'Listová zelenina v závitku se do šesti měsíců nehodí; nabídni jen tvaroh rozmíchaný s mlékem.',
@@ -631,19 +640,20 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'majoranka', amount: '1 lžička', track: 'all' },
       { ingredientId: 'ghi', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'gouda', amount: '100 g', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Patizonům odkroj vršek, vydlabej vnitřek a dužinu si nech nasekanou stranou.',
       'Pohanku vař patnáct minut a nech ji pod pokličkou dojít doměkka.',
       'Žampiony nakrájej na tenké plátky a dus je na ghí, dokud nepustí vodu a nezměknou.',
-      'Do hub vmíchej pohanku, nasekanou dužinu z patizonu a majoránku.',
+      'Do hub vmíchej pohanku, nasekanou dužinu z patizonu, sladkou papriku nakrájenou na kostičky a majoránku.',
       'Patizony naplň směsí, posyp nastrouhanou goudou a peč je třicet minut doměkka.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce náplně do misky, dřív než se patizony plní a sypou sýrem.',
     babySteps: [
       'Náplň rozmačkej vidličkou, houby jsou pružné a ukousnutý kus si drží tvar.',
-      'Vmíchej lžíci měkké vařené dužiny z patizonu, aby porce lépe držela pohromadě.',
+      'Vmíchej lžíci měkké vařené dužiny z patizonu, aby porce lépe držela pohromadě, a nech v ní i kostičky papriky — vitamin C z nich pomáhá vstřebat železo z pohanky.',
       'Nech ji zvlažnět a podávej hned, houby se nehodí ohřívat podruhé.',
     ],
     babyServing: {
@@ -744,11 +754,11 @@ export const lunchesDinners2: Recipe[] = [
       '12m': 'Servíruj celé těstoviny s cuketovou omáčkou; batole si je navine na vidličku samo.',
     },
     adultSteps: [
-      'Do porce pro dospělé nastrouhej pecorino, osol a zakápni olivovým olejem.',
+      'Do porce pro dospělé nastrouhej pecorino, natrhej k němu mozzarellu, osol a zakápni olivovým olejem.',
       'Podávej hned, dokud je omáčka krémová.',
     ],
     vegetarianSteps: [
-      'Do druhé porce nastrouhej ementál místo pecorina, osol a zakápni olivovým olejem.',
+      'Do druhé porce nastrouhej ementál místo pecorina, natrhej k němu mozzarellu, osol a zakápni olivovým olejem.',
       'Podávej hned, dokud je omáčka krémová.',
     ],
     vegetarianProteinSwap:
@@ -797,7 +807,7 @@ export const lunchesDinners2: Recipe[] = [
       'Navrch polož krátce osmažený lístek šalvěje.',
     ],
     vegetarianSteps: [
-      'Do druhé porce zamíchej strouhanou goudu místo parmazánu, osol a opepři.',
+      'Do druhé porce zamíchej strouhaný eidam místo parmazánu, osol a opepři.',
       'Navrch polož krátce osmažený lístek šalvěje.',
     ],
     vegetarianProteinSwap:
@@ -825,13 +835,13 @@ export const lunchesDinners2: Recipe[] = [
       'Kedlubny oloupej a nakrájej je na tenké plátky mandolínou nebo ostrým nožem.',
       'Plátky krátce povař v páře, aby v troubě dozrály doměkka.',
       'Zakysanou smetanu rozmíchej s kukuřičným škrobem, ať se v troubě nesrazí.',
-      'Plátky kedlubny vrstvi do zapékací mísy a každou vrstvu přelij smetanou.',
+      'Plátky kedlubny vrstvi do zapékací mísy a každou vrstvu přelij smetanou s nasekanou hladkolistou petrželkou.',
       'Gratin posyp nastrouhanou goudou a peč třicet minut dozlatova.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber pár povařených plátků kedlubny stranou, dřív než se zalévají smetanou.',
     babySteps: [
-      'Plátek kedlubny rozmačkej vidličkou a promíchej ho s lžící zakysané smetany.',
+      'Plátek kedlubny rozmačkej vidličkou a promíchej ho s lžící zakysané smetany a špetkou nasekané petrželky.',
       'Pokud je porce hutná, zřeď ji lžící vody z vaření.',
       'Nech ji zvlažnět a podávej na lžíci.',
     ],
@@ -1047,13 +1057,14 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'kmin-mlety', amount: '1 lžička', track: 'all' },
       { ingredientId: 'petrzelka-hladkolista', amount: '1 svazek', track: 'all' },
       { ingredientId: 'jogurt-bily-plnotucny', amount: '200 g', track: 'all' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Uvařenou cizrnu rozmačkej vidličkou nebo krátce rozmixuj, ale ne úplně dohladka.',
       'Do cizrny vmíchej cizrnovou mouku, mletý kmín a hodně nasekané petrželky.',
       'Směs nech čtvrt hodiny odležet, mouka nasákne a karbanátky pak drží tvar.',
       'Tvaruj placičky a opékej je na pánvi po čtyřech minutách z každé strany.',
-      'Tahini rozmíchej s bílým jogurtem a vodou na hladký dip.',
+      'Tahini rozmíchej s bílým jogurtem, šťávou z půlky citronu a vodou na hladký dip.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce směsi stranou, dřív než se z ní tvarují porce pro dospělé.',
@@ -1061,6 +1072,7 @@ export const lunchesDinners2: Recipe[] = [
       'Z odebrané směsi vytvaruj podlouhlý váleček velikosti prstu, který dítě sevře v pěsti.',
       'Opeč ho pomaleji a zkontroluj rozlomením, že je propečený skrz naskrz.',
       'Dip pro dítě řeď jogurtem víc než pro dospělé, husté tahini se lepí na patro.',
+      'Citron z dipu nevynechávej: vitamin C z něj pomáhá vstřebat železo z cizrny i ze sezamu v tahini.',
     ],
     babyServing: {
       '6m': 'Podávej váleček velikosti prstu a k němu řídký jogurtový dip na namáčení.',
@@ -1280,12 +1292,13 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'olej-dynovy', amount: '5 lžic', track: 'all' },
       { ingredientId: 'pazitka', amount: '1 svazek', track: 'all' },
       { ingredientId: 'tvaroh-polotucny', amount: '200 g', track: 'all' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Špagetovou dýni rozkroj podélně, vyber semena a polož ji řezem dolů na plech.',
       'Peč ji čtyřicet minut, dokud vidlička nejde snadno zabořit do dužiny.',
       'Upečenou dužinu vidličkou rozeber na vlákna připomínající špagety.',
-      'Bazalku rozmixuj s mletými dýňovými semínky, dýňovým olejem a pažitkou na pesto.',
+      'Bazalku rozmixuj s mletými dýňovými semínky, dýňovým olejem, pažitkou a šťávou z půlky citronu na pesto.',
       'Vlákna dýně promíchej s pestem a rozmíchaným polotučným tvarohem.',
     ],
     babySplitPoint:
@@ -1293,7 +1306,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Vlákna nasekej nakrátko, dlouhé pruhy se v puse motají stejně jako nudle.',
       'Přidej jen malou lžičku pesta; mletá semínka jsou v pořádku, celá do téhle fáze nepatří.',
-      'Vmíchej lžíci rozmíchaného tvarohu a nech porci zvlažnět.',
+      'Vmíchej lžíci rozmíchaného tvarohu a nech porci zvlažnět; citron v pestu tam není jen na chuť, vitamin C z něj pomáhá vstřebat železo z mletých dýňových semínek.',
     ],
     babyServing: {
       '6m': 'Podávej nasekaná vlákna promíchaná s trochou pesta jako hustou hmotu na lžíci.',
@@ -1507,7 +1520,7 @@ export const lunchesDinners2: Recipe[] = [
   },
   {
     id: 'cocka-beluga-s-pecenou-mrkvi',
-    titleCz: 'Čočka beluga s pečenou mrkví a fetou',
+    titleCz: 'Čočka beluga s pečenou mrkví a tvarohem',
     category: 'obed-vecere',
     minAgeMonths: 6,
     timeMinutes: 45,
@@ -1519,12 +1532,13 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'tvaroh-mekky', amount: '150 g', track: 'all' },
       { ingredientId: 'olej-dynovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'mata', amount: '1 hrst', track: 'all' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Mrkev oloupej, nakrájej ji podélně na klínky a promíchej s dýňovým olejem a celým kmínem.',
       'Peč mrkev pětadvacet minut, dokud nejde rozmáčknout mezi prsty.',
       'Čočku beluga vař dvacet minut, drží tvar a nerozvaří se na kaši.',
-      'Scezenou čočku promíchej s pečenou mrkví a nasekanou mátou.',
+      'Scezenou čočku promíchej s pečenou mrkví, nasekanou mátou a šťávou z půlky citronu.',
       'Na talíř navrš směs a doplň ji lžícemi měkkého tvarohu.',
     ],
     babySplitPoint:
@@ -1532,7 +1546,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Čočku rozmačkej vidličkou, celé zrno projde trávením beze změny.',
       'Celý kmín z dětské porce vyber, tvrdé zrnko se špatně rozkousává.',
-      'Vmíchej lžíci měkkého tvarohu a nech porci zvlažnět.',
+      'Vmíchej lžíci měkkého tvarohu, zakápni porci citronem a nech ji zvlažnět; vitamin C z citronu pomáhá vstřebat železo z čočky.',
     ],
     babyServing: {
       '6m': 'Podávej rozmačkanou čočku s mrkví jako hustou kaši, kterou dítě olizuje ze lžíce.',
@@ -2168,7 +2182,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     baseSteps: [
       'Fenykl a cuketu nakrájej na plátky, rozlož je na plech a pokap olejem.',
-      'Obě ryby ulož navrch, do břicha vlož kolečka citronu a přikryj alobalem.',
+      'Mořského vlka i pražmu ulož navrch, do břicha vlož kolečka citronu a přikryj alobalem.',
       'Peč třicet minut, dokud maso u páteře není neprůhledné.',
     ],
     babySplitPoint:
@@ -3563,7 +3577,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cocka-beluga', amount: '200 g suché', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Kořenovou zeleninu a brambory nakrájej na proužky silné jako prst, pokap olejem a posyp tymiánem.',
+      'Mrkev, pastinák a brambory nakrájej na proužky silné jako prst, pokap olejem a posyp tymiánem.',
       'Kuřecí stehna polož navrch a peč na 190 °C čtyřicet minut, dokud z masa nevytéká čirá šťáva.',
       'Papriku nakrájej na proužky a přidej ji na posledních deset minut.',
     ],

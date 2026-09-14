@@ -250,11 +250,12 @@ export const soups2: Recipe[] = [
       { ingredientId: 'cibule', amount: '1 kus', track: 'all' },
       { ingredientId: 'olej-repkovy', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'kmin-mlety', amount: '1 lžička', track: 'all' },
+      { ingredientId: 'brambor', amount: '2 kusy', track: 'all' },
     ],
     baseSteps: [
       'Zelený sušený hrách propláchni a namoč ho přes noc do studené vody.',
       'Namáčecí vodu slij, hrách zalij čerstvou vodou a vař ho čtyřicet minut doměkka.',
-      'Na řepkovém oleji osmahni nakrájenou cibuli s mrkví a přidej je do hrnce.',
+      'Na řepkovém oleji osmahni nakrájenou cibuli s mrkví, přidej je do hrnce a spolu s nimi i brambory nakrájené na kostky.',
       'Vař polévku ještě patnáct minut, pak ji částečně rozmixuj a nech v ní kousky.',
       'Do hotové polévky vmíchej majoránku s mletým kmínem.',
     ],
@@ -262,7 +263,7 @@ export const soups2: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky do misky, dřív než se do hrnce přidává koření pro dospělé.',
     babySteps: [
       'Polévku v dětské porci rozmačkej vidličkou úplně, celý hrách projde trávením beze změny.',
-      'Přidej špetku majoránky, která je pro miminko v pořádku a chuť zaokrouhlí.',
+      'Přidej špetku majoránky, která je pro miminko v pořádku a chuť zaokrouhlí, a nech v porci kostky brambor — vitamin C z nich pomáhá vstřebat železo z hrachu.',
       'Nech porci zvlažnět a podávej ji v mělké misce.',
     ],
     babyServing: {
@@ -384,20 +385,21 @@ export const soups2: Recipe[] = [
       { ingredientId: 'rozmaryn', amount: '2 snítky', track: 'all' },
       { ingredientId: 'ghi', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'bobkovy-list', amount: '1 list', track: 'all' },
+      { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Namočené bílé fazole slij, zalij čerstvou vodou s bobkovým listem a vař je aspoň třicet minut doměkka.',
       'Celer oloupej, nakrájej na kostky a osmahni ho na ghí se snítkou rozmarýnu.',
       'Celer přidej k fazolím a vař polévku ještě patnáct minut.',
       'Polovinu polévky rozmixuj, aby zhoustla, a vrať ji zpět do hrnce.',
-      'Rukolu nasekej a vmíchej ji do polévky až po odstavení z plotny.',
+      'Rukolu nasekej a vmíchej ji do polévky až po odstavení z plotny a zakápni ji šťávou z půlky citronu.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber naběračku polévky, dřív než se do hrnce přidává nasekaná rukola.',
     babySteps: [
       'Fazole v dětské porci rozmačkej vidličkou, celý bob je pro tenhle věk moc pevný.',
       'Rukolu pro dítě nasekej opravdu nadrobno a vmíchej ji do porce zvlášť.',
-      'Bobkový list i tvrdé jehličky rozmarýnu z porce vylov a podávej ji hned.',
+      'Bobkový list i tvrdé jehličky rozmarýnu z porce vylov, kápni do ní citronovou šťávu kvůli vitaminu C, který pomáhá vstřebat železo z fazolí, a podávej ji hned.',
     ],
     babyServing: {
       '6m': 'Podávej hustou rozmačkanou polévku na lžíci nebo do ní namoč proužek chleba.',
@@ -1032,7 +1034,7 @@ export const soups2: Recipe[] = [
       { ingredientId: 'citron', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
-      'Kořenovou zeleninu nakrájej na kostky a pórek na kolečka, která rozděl na proužky.',
+      'Mrkev, petržel a celer nakrájej na kostky a pórek na kolečka, která rozděl na proužky.',
       'Zeleninu nech na oleji pět minut zesklovatět, zalij vodou a vař dvacet minut doměkka.',
       'Jáhly spař vroucí vodou, slij ji a přidej je do vývaru na posledních patnáct minut.',
     ],

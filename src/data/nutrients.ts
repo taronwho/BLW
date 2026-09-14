@@ -81,7 +81,24 @@ const CELOZRNNE = new Set([
   'mouka-zitna',
 ]);
 
-/** Vitamin C — přesně ty skupiny, které NHS jmenuje. */
+/**
+ * Vitamin C — jen skupiny, které jmenuje načtená stránka.
+ *
+ * NHS (Vitamin C) jmenuje citrusy, papriky, jahody, černý rybíz, brokolici,
+ * růžičkovou kapustu a brambory. Informační centrum bezpečnosti potravin
+ * (Ministerstvo zemědělství) k nim přidává kiwi (130 mg/100 g), papáju
+ * (100 mg/100 g), květák a kapustu (obojí až 130 mg/100 g, tedy stejné pásmo
+ * jako brokolice) a kysané zelí, které jmenuje jako dřívější významný zdroj
+ * v české stravě. Kapustu uvádí jako skupinu jedním slovem, proto do ní patří
+ * hlávková i kadeřavá.
+ *
+ * Ovoce, které v žádném z obou seznamů není — mango, ananas, kaki, maliny,
+ * rakytník, granátové jablko — se sem nedoplňuje z hlavy (CLAUDE.md pravidlo 1),
+ * i když se o něm běžně píše jako o zdroji vitaminu C.
+ *
+ * Zdroj: Informační centrum bezpečnosti potravin, „Vitamin C",
+ * https://bezpecnostpotravin.cz/termin/vitamin-c/, ověřeno 14. 9. 2026.
+ */
 const VITAMIN_C_VYZNAMNY = new Set([
   'pomeranc',
   'mandarinka',
@@ -92,9 +109,20 @@ const VITAMIN_C_VYZNAMNY = new Set([
   'rybiz-cerny',
   'brokolice',
   'ruzickova-kapusta',
+  'kiwi',
+  'papaja',
+  'kvetak',
+  'kapusta-hlavkova',
+  'kapusta-kaderava',
 ]);
 
-const VITAMIN_C_OBSAHUJE = new Set(['brambor', 'batat', 'rybiz-cerveny', 'kvetak', 'zeli-bile']);
+const VITAMIN_C_OBSAHUJE = new Set([
+  'brambor',
+  'batat',
+  'rybiz-cerveny',
+  'zeli-bile',
+  'zeli-kysane',
+]);
 
 function ironOf(item: Ingredient): { level: NutrientLevel; form: IronForm } {
   if (VNITRNOSTI.has(item.id)) return { level: 'vyznamny', form: 'hemove' };

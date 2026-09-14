@@ -855,7 +855,7 @@ export const snacksBaking2: Recipe[] = [
       '12m': 'Servíruj sklenici s krémem a borůvkami rozkrojenými podélně na čtvrtky i teď.',
     },
     adultSteps: [
-      'Sklenice pro dospělé zakápni medem a posyp nasekanými ořechy.',
+      'Sklenice pro dospělé posyp loupanými konopnými semínky, které jim dodají křupnutí.',
       'Podávej je vychlazené jako dezert po obědě.',
     ],
     allergens: ['mleko', 'psenice-lepek'],

@@ -462,7 +462,7 @@ export const grains: Ingredient[] = [
   {
     id: 'testoviny-semolinove',
     nameCz: 'těstoviny semolinové',
-    altNamesCz: ['semolinové těstoviny', 'klasické těstoviny'],
+    altNamesCz: ['semolinové těstoviny', 'klasické těstoviny', 'nudle'],
     category: 'obiloviny',
     servingForm: 'drobne',
     emoji: '🍝',

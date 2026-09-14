@@ -89,7 +89,7 @@ export const breakfast2: Recipe[] = [
     babySteps: [
       'Každou třešeň v dětské porci rozkroj podélně na čtvrtky; celý plod je kulatý a uzavře dýchací cesty.',
       'Třešně rozmačkej vidličkou a promíchej s jáhlami do souvislé kaše.',
-      'Přidej lžičku mletých mandlí a nech porci zvlažnět.',
+      'Vmíchej lžíci bílého jogurtu a lžičku mletých mandlí a nech porci zvlažnět.',
     ],
     babyServing: {
       '6m': 'Podávej jáhly s rozmačkanými třešněmi jako hustou kaši na lžíci, kterou dítě olizuje.',
@@ -97,7 +97,7 @@ export const breakfast2: Recipe[] = [
       '12m': 'Servíruj kaši s třešněmi rozkrojenými podélně na čtvrtky; celé plody nenabízej ani teď.',
     },
     adultSteps: [
-      'Kaši pro dospělé dochuť a doplň lžící zakysané smetany.',
+      'Kaši pro dospělé dochuť a doplň lžící bílého jogurtu.',
       'Posyp ji opraženými mletými mandlemi.',
     ],
     allergens: ['mleko', 'orechy'],
