@@ -487,6 +487,18 @@ export const BP_ZINC: SourceRef = {
 };
 
 /**
+ * Heslo Maliny Informačního centra bezpečnosti potravin. Jmenuje maliny mezi
+ * bohatými zdroji vitaminu C; číselný obsah neuvádí.
+ */
+export const BP_RASPBERRY: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Maliny',
+  url: 'https://bezpecnostpotravin.cz/termin/maliny/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/**
  * Heslo Rajčata Informačního centra bezpečnosti potravin. Jedno střední rajče
  * (123 g) podle něj pokryje skoro 40 % doporučené denní dávky vitaminu C.
  */

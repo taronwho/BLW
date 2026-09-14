@@ -19,6 +19,24 @@ export const TIER1_DOMAINS: readonly string[] = [
   'bezpecnostpotravin.cz',
   'nhs.uk',
   'eaaci.org',
+  // Potravinové tabulky — národní databáze složení potravin vedené státními
+  // ústavy a úřady. Jsou to jediné zdroje, ze kterých se smí brát obsah živin
+  // v miligramech; viz docs/BEZPECNOST.md kap. 1 a 8. Vlastní tabulky a
+  // přepočty z blogů sem nepatří ani omylem.
+  'nutridatabaze.cz',
+  'uzei.cz',
+  'fdc.nal.usda.gov',
+  'api.nal.usda.gov',
+  'ciqual.anses.fr',
+  'anses.fr',
+  'fineli.fi',
+  'thl.fi',
+  'frida.fooddata.dk',
+  'fooddata.dk',
+  'matvaretabellen.no',
+  'livsmedelsverket.se',
+  // Právní prahy pro „zdroj" a „vysoký obsah" živiny.
+  'eur-lex.europa.eu',
 ];
 
 export const TIER2_DOMAINS: readonly string[] = [
