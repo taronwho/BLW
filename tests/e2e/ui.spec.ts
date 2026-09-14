@@ -861,22 +861,32 @@ test('zkrácený štítek na dlaždici čte odečítač obrazovky celý', async 
   await expect(duseni.locator('span.sr-only')).toHaveText(/riziko dušení/);
 });
 
-test('úvodní obrazovka se vejde bez dlouhého rolování', async ({ page }) => {
+test('úvodní obrazovka se nemusí rolovat', async ({ page }) => {
   await acceptDisclaimer(page);
 
-  // Karta o dávení musí být celá v první obrazovce, nad spodní navigací —
-  // je to informace, ke které se sahá bez času hledat.
   const okno = page.viewportSize()?.height ?? 0;
   const navigace = 64;
+
+  // Karta o dávení je celá v první obrazovce, nad spodní navigací — je to
+  // informace, ke které se sahá bez času hledat.
   const daveni = await page.getByTestId('dlazdice-daveni').boundingBox();
   if (daveni === null) throw new Error('karta o dávení není vidět');
   expect(daveni.y + daveni.height).toBeLessThan(okno - navigace);
 
-  // Celá obrazovka se vejde do jedné a půl výšky displeje. Dřív měla přes
-  // dvě, protože hlavička nesla tři odstavce a čísla katalogu tři rámečky.
-  const vyska = await page.evaluate(() => document.querySelector('main')?.scrollHeight ?? 0);
-  expect(vyska).toBeLessThan(1000);
+  // Domácnost sedí v zelené hlavičce, ne až pod rozcestníkem.
+  const odkaz = await page.getByTestId('odkaz-domacnost').boundingBox();
+  if (odkaz === null) throw new Error('odkaz na Domácnost není vidět');
+  expect(odkaz.y + odkaz.height).toBeLessThan(daveni.y);
 
-  await expect(page.getByTestId('hlavni-menu')).toBeVisible();
-  await expect(page.getByTestId('obsah-katalogu')).toContainText('surovin');
+  const roluje = await page.evaluate(
+    () => document.documentElement.scrollHeight > window.innerHeight + 1,
+  );
+  // Zkratky rozcestníku se kreslí jen tam, kde na ně zbývá místo; míří
+  // stejně tam, kam vede spodní navigace. Na displeji od 667 px výš se
+  // úvodní obrazovka nesmí rolovat ani s nimi.
+  await expect(page.getByTestId('hlavni-menu')).toBeVisible({ visible: okno >= 800 });
+  if (okno >= 667) expect(roluje).toBe(false);
+
+  await page.getByTestId('odkaz-domacnost').click();
+  await expect(page.getByTestId('sekce-domacnosti')).toBeVisible();
 });
