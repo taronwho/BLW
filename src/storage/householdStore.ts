@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
+import type { AllergenGroup, Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
 import {
   emptyHouseholdState,
   MAX_MEMBERS,
@@ -35,6 +35,7 @@ interface HouseholdStore {
   setChild(name: string, birthDate: string): Promise<void>;
   setGrip(grip: Grip | undefined): Promise<void>;
   toggleReadySign(sign: ReadySign): Promise<void>;
+  toggleChildAllergen(allergen: AllergenGroup): Promise<void>;
   removeMember(uid: string): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
@@ -227,6 +228,19 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
      * ho smí kterýkoli člen — pravidla to dovolují, protože při `jsemClen()`
      * na podobu seznamu nekladou jinou podmínku než počet.
      */
+    /**
+     * Alergen, na který dítě reaguje. Podle toho se předvyplňuje filtr
+     * „bez alergenu" na obou seznamech.
+     */
+    async toggleChildAllergen(allergen: AllergenGroup): Promise<void> {
+      const stav = get().state;
+      const soucasne = stav.childAllergens ?? [];
+      const dalsi = soucasne.includes(allergen)
+        ? soucasne.filter((one) => one !== allergen)
+        : [...soucasne, allergen];
+      await persist({ ...stav, childAllergens: dalsi });
+    },
+
     async removeMember(uid: string): Promise<void> {
       const stav = get().state;
       if (!stav.members.includes(uid)) return;

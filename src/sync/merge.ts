@@ -153,6 +153,9 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     ...(Array.isArray(vstup['readySigns'])
       ? { readySigns: vstup['readySigns'] as HouseholdState['readySigns'] }
       : {}),
+    ...(Array.isArray(vstup['childAllergens'])
+      ? { childAllergens: vstup['childAllergens'] as HouseholdState['childAllergens'] }
+      : {}),
     members: Array.isArray(vstup['members'])
       ? (vstup['members'] as unknown[]).filter((uid): uid is string => typeof uid === 'string')
       : [],
@@ -193,6 +196,9 @@ export function mergeHouseholdState(
   // Znaky připravenosti jdou i odškrtnout, takže se nesjednocují — vyhrává
   // novější zápis, stejně jako u ostatních údajů o dítěti.
   const znaky = lastWriteWins(local.readySigns, remote.readySigns, localNewer);
+  // Alergie dítěte se taky dají odebrat, takže se nesjednocují — vyhrává
+  // novější zápis, stejně jako u ostatních údajů o dítěti.
+  const alergie = lastWriteWins(local.childAllergens, remote.childAllergens, localNewer);
   const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
 
   return {
@@ -202,6 +208,7 @@ export function mergeHouseholdState(
     // by pak ležel prázdný záznam, který nic neznamená.
     ...(grip === undefined ? {} : { childGrip: grip }),
     ...(znaky === undefined ? {} : { readySigns: [...znaky] }),
+    ...(alergie === undefined ? {} : { childAllergens: [...alergie] }),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
     ...(videno === undefined ? {} : { memberSeenAt: videno }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.

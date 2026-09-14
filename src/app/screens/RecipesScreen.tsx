@@ -37,7 +37,8 @@ import { ageInMonths } from '../lib/age';
 import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/deriveRecipes';
 import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
-import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
+import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
+import { useFiltrAlergenu } from '../lib/allergenFilter';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { RECIPE_SORTS } from '../lib/sorting';
@@ -78,7 +79,7 @@ export function RecipesScreen(): ReactNode {
   const [sort, setSort] = useUrlText<SortKey>('razeni', 'abeceda');
   const [vegetarianOnly, setVegetarianOnly] = useUrlFlag('vege');
   const [oblibene, setOblibene] = useUrlFlag('oblibene');
-  const [withoutAllergen, setWithoutAllergen] = useUrlText<AllergenGroup | ''>('bez', '');
+  const bezAlergenu = useFiltrAlergenu();
   const [pantry, setPantry] = useUrlList('spiz');
   // Rozbalení spíže a její vlastní hledání jsou stav okna, ne filtr — do
   // adresy nepatří a po návratu z receptu nikomu nechybí.
@@ -109,7 +110,7 @@ export function RecipesScreen(): ReactNode {
     (oblibene ? 1 : 0) +
     (vegetarianOnly ? 1 : 0) +
     (pantrySet.size > 0 ? 1 : 0) +
-    (withoutAllergen === '' ? 0 : 1);
+    (bezAlergenu.vybrane.length > 0 ? 1 : 0);
 
   const filtrujeSe =
     query !== '' ||
@@ -118,7 +119,7 @@ export function RecipesScreen(): ReactNode {
     ziviny.length > 0 ||
     vegetarianOnly ||
     oblibene ||
-    withoutAllergen !== '' ||
+    bezAlergenu.vybrane.length > 0 ||
     pantry.length > 0;
 
   function prepniZivinu(id: string): void {
@@ -160,10 +161,7 @@ export function RecipesScreen(): ReactNode {
         if (oblibene && !favorites.has(recipe.id)) return false;
         if (!vyhovujeZivinam(recipeNutrients(recipe), ziviny, druhZeleza, sila))
           return false;
-        if (
-          withoutAllergen !== '' &&
-          recipeAllergens(recipe).includes(withoutAllergen)
-        )
+        if (bezAlergenu.vybrane.some((skupina) => recipeAllergens(recipe).includes(skupina)))
           return false;
         if (
           pantrySet.size > 0 &&
@@ -183,7 +181,7 @@ export function RecipesScreen(): ReactNode {
       vegetarianOnly,
       oblibene,
       favorites,
-      withoutAllergen,
+      bezAlergenu.vybrane,
       pantrySet,
     ],
   );
@@ -329,15 +327,22 @@ export function RecipesScreen(): ReactNode {
                   testId="filtr-mam-doma"
                 />
               </div>
-              <FilterSelect
-                label="Bez alergenu"
-                options={ALLERGEN_FILTER_OPTIONS}
-                selected={withoutAllergen === '' ? 'vse' : withoutAllergen}
-                onSelect={(id) =>
-                  setWithoutAllergen(id === 'vse' ? '' : (id as AllergenGroup))
+              <FilterGroup
+                nadpis="Bez alergenu"
+                popis={
+                  bezAlergenu.zDitete.length > 0 && bezAlergenu.automaticky
+                    ? 'Předvyplněno podle alergií dítěte z Domácnosti. Dá se odškrtnout.'
+                    : 'Vybrané alergeny se z výpisu vynechají; zaškrtnout jde víc naráz.'
                 }
-                testId="filtr-bez-alergenu"
-              />
+              >
+                <FilterToggles
+                  options={ALLERGEN_TOGGLE_OPTIONS}
+                  selected={bezAlergenu.vybrane}
+                  onToggle={(id) => bezAlergenu.prepni(id as AllergenGroup)}
+                  ariaLabel="Vynechat alergeny"
+                  testId="filtr-bez-alergenu"
+                />
+              </FilterGroup>
             </FilterGroup>
 
             {filtrujeSe && (

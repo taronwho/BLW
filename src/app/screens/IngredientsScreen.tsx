@@ -37,7 +37,8 @@ import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
 import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
-import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
+import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
+import { useFiltrAlergenu } from '../lib/allergenFilter';
 import { matchesIngredient } from '../lib/search';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
@@ -82,7 +83,7 @@ export function IngredientsScreen(): ReactNode {
   const [vhodneTed, setVhodneTed] = useUrlFlag('ted');
   const [sezonni, setSezonni] = useUrlFlag('sezona');
   const [alergeny, setAlergeny] = useUrlFlag('alergeny');
-  const [bezAlergenu, setBezAlergenu] = useUrlText<AllergenGroup | ''>('bez', '');
+  const bezAlergenu = useFiltrAlergenu();
   const [sort, setSort] = useUrlText<SortKey>('razeni', 'abeceda');
   // Víc voleb naráz musí do adresy jedním zápisem, jinak se přepíšou.
   const nastavFiltry = useUrlBatch();
@@ -106,7 +107,7 @@ export function IngredientsScreen(): ReactNode {
         if (sezonni && !(item.seasonCz.length > 0 && inSeason(item, month)))
           return false;
         if (alergeny && !item.isKeyAllergen) return false;
-        if (bezAlergenu !== '' && item.allergens.includes(bezAlergenu))
+        if (bezAlergenu.vybrane.some((skupina) => item.allergens.includes(skupina)))
           return false;
         if (!vyhovujeZivinam(nutrientProfile(item), ziviny, druhZeleza, sila))
           return false;
@@ -120,7 +121,7 @@ export function IngredientsScreen(): ReactNode {
       vhodneTed,
       sezonni,
       alergeny,
-      bezAlergenu,
+      bezAlergenu.vybrane,
       ziviny,
       druhZeleza,
       sila,
@@ -150,7 +151,7 @@ export function IngredientsScreen(): ReactNode {
     (vhodneTed ? 1 : 0) +
     (sezonni ? 1 : 0) +
     (alergeny ? 1 : 0) +
-    (bezAlergenu === '' ? 0 : 1);
+    (bezAlergenu.vybrane.length > 0 ? 1 : 0);
 
   const filtrujeSe =
     query !== '' ||
@@ -160,7 +161,7 @@ export function IngredientsScreen(): ReactNode {
     vhodneTed ||
     sezonni ||
     alergeny ||
-    bezAlergenu !== '' ||
+    bezAlergenu.vybrane.length > 0 ||
     ziviny.length > 0;
 
   function prepniZivinu(id: string): void {
@@ -304,15 +305,22 @@ export function IngredientsScreen(): ReactNode {
                   testId="filtr-alergeny"
                 />
               </div>
-              <FilterSelect
-                label="Bez alergenu"
-                options={ALLERGEN_FILTER_OPTIONS}
-                selected={bezAlergenu === '' ? 'vse' : bezAlergenu}
-                onSelect={(id) =>
-                  setBezAlergenu(id === 'vse' ? '' : (id as AllergenGroup))
+              <FilterGroup
+                nadpis="Bez alergenu"
+                popis={
+                  bezAlergenu.zDitete.length > 0 && bezAlergenu.automaticky
+                    ? 'Předvyplněno podle alergií dítěte z Domácnosti. Dá se odškrtnout.'
+                    : 'Vybrané alergeny se z výpisu vynechají; zaškrtnout jde víc naráz.'
                 }
-                testId="filtr-bez-alergenu"
-              />
+              >
+                <FilterToggles
+                  options={ALLERGEN_TOGGLE_OPTIONS}
+                  selected={bezAlergenu.vybrane}
+                  onToggle={(id) => bezAlergenu.prepni(id as AllergenGroup)}
+                  ariaLabel="Vynechat alergeny"
+                  testId="filtr-bez-alergenu"
+                />
+              </FilterGroup>
             </FilterGroup>
 
             {filtrujeSe && (

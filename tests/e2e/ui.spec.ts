@@ -645,7 +645,7 @@ test('suroviny i recepty jdou filtrovat bez konkrétního alergenu', async ({ pa
 
   const surovin = page.getByTestId('pocet-surovin');
   const vse = (await surovin.textContent()) ?? '';
-  await page.getByTestId('filtr-bez-alergenu').selectOption('mleko');
+  await page.getByTestId('filtr-bez-alergenu').getByRole('button', { name: 'mléko' }).click();
   await expect(surovin).not.toHaveText(vse);
   // Mléčné suroviny zmizí, ostatní zůstanou.
   await page.getByTestId('hledat-surovinu').fill('eidam');
@@ -657,7 +657,7 @@ test('suroviny i recepty jdou filtrovat bez konkrétního alergenu', async ({ pa
   await otevriFiltry(page, 'receptu');
   const receptu = page.getByTestId('pocet-receptu');
   const vsechny = (await receptu.textContent()) ?? '';
-  await page.getByTestId('filtr-bez-alergenu').selectOption('ryby');
+  await page.getByTestId('filtr-bez-alergenu').getByRole('button', { name: 'ryby' }).click();
   await expect(receptu).not.toHaveText(vsechny);
 });
 
@@ -750,4 +750,29 @@ test('první načtení nestahuje katalog ani knihovnu pro sdílení', async ({ p
   );
   // Před rozdělením to bylo přes 570 kB v jediném souboru.
   expect(kb).toBeLessThan(200);
+});
+
+test('filtr bez alergenu bere víc alergenů a předvyplní se podle dítěte', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // 1. Dva alergeny naráz — dřív se dal vybrat jediný.
+  await page.goto('./#/suroviny?bez=mleko,vejce');
+  const dva = (await page.getByTestId('pocet-surovin').textContent()) ?? '';
+  await page.goto('./#/suroviny?bez=mleko');
+  const jeden = (await page.getByTestId('pocet-surovin').textContent()) ?? '';
+  expect(dva).not.toBe(jeden);
+
+  // 2. Alergie zadaná u dítěte filtr předvyplní.
+  await page.goto('./#/domacnost');
+  await page.getByTestId('alergie-mleko').click();
+  await expect(page.getByTestId('alergie-mleko')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('alergie-shrnuti')).toContainText('mléko');
+
+  await navLink(page, 'Suroviny').click();
+  await expect(page.getByTestId('pocet-surovin')).toHaveText(jeden);
+
+  // 3. A dá se odškrtnout, aniž by se to samo vrátilo.
+  await otevriFiltry(page, 'surovin');
+  await page.getByTestId('filtr-bez-alergenu').getByRole('button', { name: 'mléko' }).click();
+  await expect(page.getByTestId('pocet-surovin')).toContainText('301 z 301');
 });

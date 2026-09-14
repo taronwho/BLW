@@ -12,6 +12,7 @@ import {
 } from '@/sync/householdCode';
 import { hasFirebaseConfig } from '@/storage/firebaseConfig';
 import { QrCode } from '../QrCode';
+import { AllergyPicker } from '../components/AllergyPicker';
 import { GripPicker } from '../components/GripPicker';
 import { MemberList } from '../components/MemberList';
 import { ReadinessPicker } from '../components/ReadinessPicker';
@@ -104,6 +105,10 @@ export function HouseholdScreen(): ReactNode {
 
       <div className="rounded-xl bg-surface p-4">
         <GripPicker />
+      </div>
+
+      <div className="rounded-xl bg-surface p-4">
+        <AllergyPicker />
       </div>
 
       <div className="rounded-xl bg-surface p-4">

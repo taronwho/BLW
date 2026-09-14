@@ -281,6 +281,14 @@ export interface HouseholdState {
   childGrip?: Grip;
   /** Odškrtnuté znaky připravenosti. Nevyplněné = ještě se nezačalo. */
   readySigns?: ReadySign[];
+  /**
+   * Alergeny, na které dítě reaguje.
+   *
+   * Nastavuje je rodič v Domácnosti a filtr „bez alergenu" se podle nich
+   * předvyplňuje na obou seznamech. Aplikace tím nic nediagnostikuje — jen
+   * si pamatuje, co rodič sám zadal, aby to nemusel klikat u každého hledání.
+   */
+  childAllergens?: AllergenGroup[];
   /** uid členů domácnosti */
   members: string[];
   /**
