@@ -13,6 +13,11 @@ Aplikace nedává lékařská doporučení. Shromažďuje obecně dostupná dopo
 
 SZÚ i Ministerstvo zdravotnictví přešly na domény pod `gov.cz`. Jde o tytéž instituce, proto jsou nové domény v tier 1 stejně jako staré; staré zůstávají v seznamu, aby prošly dříve ověřené odkazy, které ještě nebyly přesměrovány.
 
+**Tier 1 — potravinové tabulky (jen pro obsah živin):**
+`nutridatabaze.cz` a `uzei.cz` (Česká databáze složení potravin, Ústav zemědělské ekonomiky a informací), `fdc.nal.usda.gov` a `api.nal.usda.gov` (USDA FoodData Central), `ciqual.anses.fr` a `anses.fr` (Francie), `fineli.fi` a `thl.fi` (Finsko), `frida.fooddata.dk` a `fooddata.dk` (Dánsko), `matvaretabellen.no` (Norsko), `livsmedelsverket.se` (Švédsko), `eur-lex.europa.eu` (právní prahy pro „zdroj" a „vysoký obsah" živiny).
+
+Tyhle domény se smí použít **jen na obsah živin v miligramech**, ne na bezpečnostní tvrzení — o dušení, alergiích ani o věku zavádění nic neříkají. Pravidla pro zápis jsou v kapitole 8.
+
 **Tier 2 — důvěryhodné odborné publikace a projekty:**
 `kojeni.cz` (Laktační liga), `vyzivadeti.cz`, `solidstarts.com` (jen pro tvary porcí a rizika dušení), `healthychildren.org` (AAP), `nutricia.cz` a `hipp.cz` **nejsou** přípustné (výrobci).
 
@@ -108,6 +113,22 @@ Zařazuje se proto po **skupinách potravin**, ne po jménech jednotlivých suro
 Ruční seznam jmen se neosvědčil: u tří set surovin v něm vždycky někdo chybí a aplikace pak o rakytníku, malinách nebo špenátu tvrdí, že živinu nemají, i když zdroj mluví o celé skupině, do které patří. Když chceš přidat surovinu do nejvyššího stupně, musíš mít zdroj, který ji **jmenuje**, ne jen její skupinu.
 
 Ztráty se počítají: sušené, zavařené a protlačené ovoce se za zdroj vitaminu C nevydává, protože vitamin C patří k nejméně stálým a ničí ho teplo i kyslík. Koření a bylinky se nepočítají vůbec — špetka příjem neposune.
+
+### Naměřené hodnoty mají přednost
+
+Skupina je odhad, číslo je měření. Kde je obsah živiny znám z **potravinové tabulky** (povolené domény jsou v kapitole 1), zapíše se do `src/data/composition.ts` a zařazení se spočítá z něj, ne ze skupiny.
+
+Pravidla zápisu:
+
+- hodnota je v **miligramech na 100 g jedlého podílu**;
+- bere se z národní potravinové tabulky, ne z článku, letáku ani z blogu;
+- zapisuje se jen číslo, které zdroj uvádí jako obsah — **horní mez se nepočítá**. „Až 300 mg/100 g" je maximum odrůdy za ideálních podmínek, ne obsah běžné porce;
+- ke každé položce patří zdroj a datum, kdy byl načten;
+- hodnoty pro jednu živinu se nemíchají z různých tabulek bez poznámky, která říká odkud je která.
+
+Prahy jsou stejné, jaké platí pro etiketu potraviny: **15 % denní potřeby ve 100 g** je hranice, od které se živina vůbec smí uvést („obsahuje"), a dvojnásobek, tedy 30 %, znamená „významný zdroj". Denní potřeba se bere z NHS a z každé živiny ta vyšší z hodnot pro dospělé, aby byl práh přísnější. Slouží jen k porovnání potravin mezi sebou — **aplikace nedávkuje dítě a dávkovat nebude**.
+
+Rozlišení hemového a nehemového železa z miligramů vyčíst nejde; je to vlastnost potraviny, ne množství, a řídí se dál skupinou.
 
 Zdroje zařazení jsou vyjmenované v hlavičce `src/data/nutrients.ts` a aplikace je ukazuje rodiči v okénku živin, aby u tvrzení o živinách stál doklad stejně jako u tvrzení o bezpečnosti.
 

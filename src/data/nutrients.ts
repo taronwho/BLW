@@ -1,6 +1,7 @@
 import type { Ingredient, Recipe, SourceRef } from '@/types';
 import {
   BP_IRON,
+  BP_RASPBERRY,
   BP_TOMATO,
   BP_VITAMIN_C,
   BP_ZINC,
@@ -10,6 +11,7 @@ import {
   SZU_VITAMIN_C,
 } from './ingredients/_sources';
 import { ingredientById, ingredients } from './ingredients';
+import { COMPOSITION, urovenZObsahu } from './composition';
 import { recipes } from './recipes';
 
 /**
@@ -58,7 +60,11 @@ import { recipes } from './recipes';
  *  - vitamin C (SZÚ, informační karta): červená paprika, pomeranč, citron,
  *    černý rybíz, kiwi, jahody, brokolice, květák, kedlubna;
  *  - vitamin C (ICBP Rajčata): jedno střední rajče pokryje skoro 40 %
- *    doporučené denní dávky.
+ *    doporučené denní dávky;
+ *  - vitamin C (ICBP Maliny): maliny jmenuje mezi bohatými zdroji.
+ *
+ * Kde je k dispozici naměřený obsah v miligramech, má přednost před skupinou;
+ * čísla i prahy jsou v src/data/composition.ts.
  */
 
 /**
@@ -74,6 +80,7 @@ export const NUTRIENT_SOURCES: readonly SourceRef[] = [
   BP_VITAMIN_C,
   SZU_VITAMIN_C,
   BP_TOMATO,
+  BP_RASPBERRY,
 ];
 
 export type NutrientLevel = 'vyznamny' | 'obsahuje' | 'nevyznamny';
@@ -169,6 +176,7 @@ const VITAMIN_C_VYZNAMNY = new Set([
   'kiwi',
   'papaja',
   'rajce',
+  'maliny',
 ]);
 
 /** Jmenované adresně, ale v nejnižším pásmu obsahu. */
@@ -243,13 +251,25 @@ function vitaminCOf(item: Ingredient): NutrientLevel {
   return 'nevyznamny';
 }
 
+/**
+ * Profil suroviny.
+ *
+ * Naměřená hodnota z potravinové tabulky má přednost před zařazením podle
+ * skupiny: skupina je odhad, číslo je měření. Zdroj železa si ale i tak drží
+ * rozlišení hemové/nehemové, protože to z miligramů vyčíst nejde — je to
+ * vlastnost potraviny, ne množství.
+ */
 export function nutrientProfile(item: Ingredient): NutrientProfile {
   const iron = ironOf(item);
+  const zmerene = COMPOSITION[item.id];
   return {
-    iron: iron.level,
+    iron: zmerene?.iron === undefined ? iron.level : urovenZObsahu('iron', zmerene.iron),
     ironForm: iron.form,
-    zinc: zincOf(item),
-    vitaminC: vitaminCOf(item),
+    zinc: zmerene?.zinc === undefined ? zincOf(item) : urovenZObsahu('zinc', zmerene.zinc),
+    vitaminC:
+      zmerene?.vitaminC === undefined
+        ? vitaminCOf(item)
+        : urovenZObsahu('vitaminC', zmerene.vitaminC),
   };
 }
 
