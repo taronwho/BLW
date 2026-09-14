@@ -39,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 108 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 80 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -462,6 +462,52 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
     ...z({ iron: 2.3, zinc: 1.2 }, czfcdb('Čočka, vařená v nesolené vodě', 495)),
     poznamka: 'Měřeno vařená v nesolené vodě. Tabulka druhy čočky nerozlišuje.',
   },
+
+  /* Mléčné výrobky a vejce */
+  'jogurt-bily-plnotucny': z({ iron: 0.1, zinc: 0.46 }, czfcdb('Jogurt bílý, 3,5 % tuku', 126)),
+  'jogurt-recky': z({ zinc: 0.52 }, usdaFdc('Yogurt, Greek, plain, whole milk', 171304)),
+  'kefir': {
+    ...z({ iron: 0.1, zinc: 0.4 }, matvaretabellen('Syrnet melk, økologisk, Kefir, Tine', 'syrnet-melk-okologisk-kefir-tine')),
+    poznamka: 'Česká ani americká tabulka kefír nemají; hodnota je z norské tabulky a platí pro konkrétní měřený výrobek.',
+  },
+  'tvaroh-mekky': z({ iron: 0.2, zinc: 0.56 }, czfcdb('Tvaroh odtučněný (měkký)', 130)),
+  'tvaroh-polotucny': z({ iron: 0.2, zinc: 0.44 }, czfcdb('Tvaroh polotučný', 132)),
+  'ricotta': z({ iron: 0.13, zinc: 0.53 }, usdaFdc('Cheese, ricotta, whole milk', 170851)),
+  'cottage': z({ iron: 0.07, zinc: 0.4 }, usdaFdc('Cheese, cottage, creamed, large or small curd', 172179)),
+  'mozzarella': z({ iron: 0.44, zinc: 2.92 }, usdaFdc('Cheese, mozzarella, whole milk', 170845)),
+  'eidam': z({ iron: 0.2, zinc: 2.8 }, czfcdb('Sýr, Eidam, 50 %, t. v s.', 137)),
+  'gouda': z({ iron: 0.24, zinc: 3.9 }, usdaFdc('Cheese, gouda', 171241)),
+  'emental': z({ iron: 0.13, zinc: 4.37 }, usdaFdc('Cheese, swiss', 171251)),
+  'parmazan': z({ iron: 0.82, zinc: 2.75 }, usdaFdc('Cheese, parmesan, hard', 170848)),
+  'pecorino': {
+    ...z({ iron: 0.77, zinc: 2.58 }, usdaFdc('Cheese, romano', 171249)),
+    poznamka: 'USDA vede pecorino pod anglickým názvem Romano.',
+  },
+  'zerve': z({ iron: 0.2, zinc: 0.43 }, czfcdb('Sýr, Žervé, 50 % t. v s.', 110)),
+  'maslo': z({ iron: 0.02, zinc: 0.09 }, usdaFdc('Butter, without salt', 173430)),
+  'ghi': z({ zinc: 0.01 }, usdaFdc('Butter oil, anhydrous', 173412)),
+  'smetana-ke-slehani': z({ zinc: 0.21 }, czfcdb('Smetana ke šlehání, 33 % tuku', 119)),
+  'zakysana-smetana': z({ zinc: 0.28 }, czfcdb('Smetana kysaná, min. 18 % tuku', 124)),
+  'kravske-mleko': z({ vitaminC: 1.2, zinc: 0.32 }, czfcdb('Mléko plnotučné', 112)),
+  'vejce-slepici': {
+    ...z({ iron: 1.7 }, czfcdb('Vejce slepičí', 78)),
+    ...z({ zinc: 1.29 }, usdaFdc('Egg, whole, raw, fresh', 171287)),
+    poznamka: 'Železo z české tabulky, zinek z USDA; česká tabulka zinek u vajec neuvádí.',
+  },
+  'mleko-kozi': z({ vitaminC: 1.3, iron: 0.05, zinc: 0.3 }, usdaFdc('Milk, goat, fluid, with added vitamin D', 171278)),
+  'cedar': z({ iron: 0.14, zinc: 3.64 }, usdaFdc('Cheese, cheddar (Includes foods for USDA\'s Food Distribution Program)', 173414)),
+  'hermelin': {
+    ...z({ iron: 0.2, zinc: 1.9 }, czfcdb('Sýr, Hermelín, 50 % t. v s.', 99)),
+    poznamka: 'Hodnota je z hesla „Sýr, Hermelín, 50 % t. v s.“.',
+  },
+  'niva': z({ iron: 0.2, zinc: 2.3 }, czfcdb('Sýr, Niva, 50 % t. v s.', 104)),
+  'kozi-syr-zrajici': z({ iron: 1.88, zinc: 1.59 }, usdaFdc('Cheese, goat, hard type', 172197)),
+  'podmasli': {
+    ...z({ iron: 0.0132, zinc: 0.4263 }, usdaFdc('Buttermilk, low fat', 2259792)),
+    poznamka: 'Tabulka vede nízkotučné podmáslí.',
+  },
+  'vejce-kreplci': z({ iron: 3.65, zinc: 1.47 }, usdaFdc('Egg, quail, whole, fresh, raw', 172191)),
+  'creme-fraiche': z({ vitaminC: 0.9, zinc: 0.33 }, usdaFdc('Cream, sour, cultured', 171257)),
 
   /* Zelenina */
   'mrkev': z({ vitaminC: 4.5, iron: 1.1 }, czfcdb('Mrkev', 62)),
