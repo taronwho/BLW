@@ -6,6 +6,7 @@ import {
   horizontalOverflow,
   householdLink,
   navLink,
+  otevriFiltry,
   SCREENS,
   tooSmallTargets,
 } from './helpers';
@@ -171,6 +172,7 @@ test('vyhledávání funguje bez diakritiky i s ní', async ({ page }) => {
 test('filtry v seznamu surovin zužují výběr', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
 
   const count = page.getByTestId('pocet-surovin');
   const before = ((await count.textContent()) ?? '').trim();
@@ -202,6 +204,7 @@ test('přepínač fází mění pokyn ke krájení', async ({ page }) => {
 test('filtry receptů: jen vegetariánské a čas do 20 minut', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
 
   // Počet se bere z katalogu, ne z natvrdo psaného čísla — jinak test
   // zastará při každé další dávce receptů. Tvrzení zůstává stejné:
@@ -252,6 +255,7 @@ test('značka železa otevře okénko místo detailu receptu', async ({ page }) 
 test('filtr železa a řazení přerovnají seznam receptů', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
 
   const count = page.getByTestId('pocet-receptu');
   const vse = (await count.textContent()) ?? '';
@@ -435,6 +439,7 @@ test('u surovin v receptu jsou vidět úrovně živin', async ({ page }) => {
 test('dvojice rostlinné železo + vitamin C se zapne jedním klepnutím', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
 
   const count = page.getByTestId('pocet-receptu');
   const vse = (await count.textContent()) ?? '';
@@ -459,6 +464,7 @@ test('dvojice rostlinné železo + vitamin C se zapne jedním klepnutím', async
 test('druh železa a síla zdroje se nabídnou, až když jsou k čemu', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
 
   await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
   await expect(page.getByTestId('filtr-sily')).toBeHidden();
@@ -500,6 +506,7 @@ test('okénko živin nevypisuje, čeho surovina není zdrojem', async ({ page })
 test('filtry surovin se dají kombinovat', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
 
   const count = page.getByTestId('pocet-surovin');
   const vse = (await count.textContent()) ?? '';
@@ -520,6 +527,7 @@ test('filtry surovin se dají kombinovat', async ({ page }) => {
 test('filtr živin u surovin upřesňuje druh železa', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
 
   const count = page.getByTestId('pocet-surovin');
   const vse = (await count.textContent()) ?? '';
@@ -542,6 +550,7 @@ test('filtr živin u surovin upřesňuje druh železa', async ({ page }) => {
 test('oblíbenou surovinu jde označit rovnou ze seznamu', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
   await page.getByTestId('hledat-surovinu').fill('brokolice');
 
   const hvezda = page.getByTestId('oblibene-brokolice');
@@ -565,6 +574,7 @@ test('oblíbenou surovinu jde označit rovnou ze seznamu', async ({ page }) => {
 test('oblíbený recept jde označit rovnou ze seznamu', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
 
   const count = page.getByTestId('pocet-receptu');
   const vse = (await count.textContent()) ?? '';
@@ -615,6 +625,7 @@ test('v seznamu se nízké riziko dušení nevypisuje', async ({ page }) => {
 test('suroviny i recepty jdou filtrovat bez konkrétního alergenu', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
 
   const surovin = page.getByTestId('pocet-surovin');
   const vse = (await surovin.textContent()) ?? '';
@@ -627,8 +638,39 @@ test('suroviny i recepty jdou filtrovat bez konkrétního alergenu', async ({ pa
   await expect(page.getByTestId('surovina-mrkev')).toBeVisible();
 
   await navLink(page, 'Recepty').click();
+  await otevriFiltry(page, 'receptu');
   const receptu = page.getByTestId('pocet-receptu');
   const vsechny = (await receptu.textContent()) ?? '';
   await page.getByTestId('filtr-bez-alergenu').selectOption('ryby');
   await expect(receptu).not.toHaveText(vsechny);
+});
+
+test('v kartě seznamu nesedí tlačítko uvnitř odkazu', async ({ page }) => {
+  // Tlačítko uvnitř odkazu je neplatné HTML: čtečka obrazovky hlásí vnořený
+  // ovládací prvek a klepnutí doprostřed karty netrefí odkaz, ale tlačítko.
+  await acceptDisclaimer(page);
+  const vnorene = async (): Promise<number> =>
+    page.locator('a button, a a, button button').count();
+
+  await navLink(page, 'Recepty').click();
+  await expect(page.getByTestId('seznam-receptu')).toBeVisible();
+  expect(await vnorene()).toBe(0);
+
+  await navLink(page, 'Suroviny').click();
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+  expect(await vnorene()).toBe(0);
+});
+
+test('dlouhý seznam se plní po dávkách', async ({ page }) => {
+  // Tři sta karet naráz znamená na mobilu dlouhé první vykreslení. Seznam
+  // proto začíná první dávkou a další se načte tlačítkem nebo dorolováním.
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  const karty = page.getByTestId('seznam-receptu').locator('> li');
+  const prvni = await karty.count();
+  expect(prvni).toBeLessThan(recipes.length);
+
+  await page.getByTestId('nacist-dalsi-recepty').click();
+  await expect.poll(() => karty.count()).toBeGreaterThan(prvni);
 });
