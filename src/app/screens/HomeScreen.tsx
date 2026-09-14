@@ -157,13 +157,12 @@ export function HomeScreen(): ReactNode {
           ].map(({ term, value }) => (
             <div
               key={term}
-              className="rounded-2xl border border-line bg-surface px-3 py-3 text-center shadow-soft"
+              className="flex flex-col rounded-2xl border border-line bg-surface px-3 py-3 text-center shadow-soft"
             >
-              <dt className="sr-only">{term}</dt>
-              <dd>
-                <span className="block text-xl font-bold tabular-nums text-accent">{value}</span>
-                <span className="block text-[11px] text-muted">{term}</span>
-              </dd>
+              {/* Popisek je jen jeden. Dřív byl navíc skrytý `dt`, takže
+                  odečítač obrazovky četl „surovin 301 surovin". */}
+              <dt className="order-2 block text-[11px] font-normal text-muted">{term}</dt>
+              <dd className="order-1 text-xl font-bold tabular-nums text-accent">{value}</dd>
             </div>
           ))}
         </dl>

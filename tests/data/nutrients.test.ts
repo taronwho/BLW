@@ -7,6 +7,8 @@ import {
 } from '../../src/data/nutrients';
 import { vitaminCPartners } from '../../src/data/recipeNutrients';
 import type { Ingredient } from '../../src/types';
+import { suggestions } from '../../src/app/lib/derive';
+import { emptyHouseholdState } from '../../src/sync/merge';
 
 function get(id: string): Ingredient {
   const item = ingredientById.get(id);
@@ -174,6 +176,27 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
     expect(nutrientProfile(sources[0] as Ingredient).ironForm).toBe('hemove');
     for (const item of sources) {
       expect(isIronSource(item)).toBe(true);
+    }
+  });
+});
+
+describe('návrh „Co dnes zkusit?"', () => {
+  it('nabídne napřed klíčový alergen bez tří expozic, ne první písmeno abecedy', () => {
+    const stav = { ...emptyHouseholdState(), childBirthDate: '' };
+    const navrhy = suggestions(stav, null, 6);
+
+    expect(navrhy.length).toBeGreaterThan(0);
+    // Dřív to byly první tři neochutnané položky v abecedě — hruška, banán,
+    // avokádo — a nabízely se pořád dokola.
+    expect(navrhy[0]?.duvod).toBe('alergen');
+    expect(navrhy[0]?.ingredient.isKeyAllergen).toBe(true);
+  });
+
+  it('nikdy nenabídne vysoké riziko dušení ani to, na co dítě reaguje', () => {
+    const stav = { ...emptyHouseholdState(), childAllergens: ['mleko' as const] };
+    for (const { ingredient } of suggestions(stav, null, 6, 30)) {
+      expect(ingredient.chokingRisk).not.toBe('high');
+      expect(ingredient.allergens).not.toContain('mleko');
     }
   });
 });

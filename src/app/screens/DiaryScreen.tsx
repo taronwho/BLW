@@ -9,9 +9,22 @@ import type { TastingEvent } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { ageInMonths } from '../lib/age';
+import type { DuvodNavrhu } from '../lib/derive';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
 import { favoriteIds } from '../lib/tastings';
+
+/**
+ * Proč se surovina nabízí. Pořadí důvodů i jejich význam je v `suggestions`.
+ */
+const DUVOD_NAVRHU: Record<DuvodNavrhu, string> = {
+  alergen: 'Klíčový alergen, který ještě nemá tři expozice',
+  zelezo: 'Zdroj železa — kvůli němu se příkrm zavádí',
+  zinek: 'Zdroj zinku',
+  sezona: 'Teď je sezóna',
+  dalsi: 'Ještě neochutnáno',
+};
+
 
 /** Deník ochutnávek (docs/SPEC.md kap. 4.5). */
 export function DiaryScreen(): ReactNode {
@@ -126,14 +139,16 @@ export function DiaryScreen(): ReactNode {
           <p className="text-sm text-muted">Pro tenhle věk a sezónu už je všechno ochutnané.</p>
         ) : (
           <ul className="flex flex-col gap-2" data-testid="tipy-dne">
-            {tips.map((item) => (
-              <li key={item.id}>
+            {tips.map(({ ingredient, duvod }) => (
+              <li key={ingredient.id}>
                 <Link
-                  to={`/suroviny/${item.id}`}
+                  to={`/suroviny/${ingredient.id}`}
                   className="flex min-h-touch flex-col gap-1 rounded-xl bg-paper p-3 text-sm"
                 >
-                  <span className="font-medium">{item.nameCz}</span>
-                  <ChokingBadge risk={item.chokingRisk} />
+                  <span className="font-medium">{ingredient.nameCz}</span>
+                  {/* Proč zrovna tahle. Bez toho je návrh náhodné jméno. */}
+                  <span className="text-xs text-muted">{DUVOD_NAVRHU[duvod]}</span>
+                  <ChokingBadge risk={ingredient.chokingRisk} />
                 </Link>
               </li>
             ))}
