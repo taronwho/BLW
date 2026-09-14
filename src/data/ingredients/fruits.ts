@@ -1,5 +1,6 @@
 import type { Ingredient } from '@/types';
 import {
+  NHS_CHOKING,
   MZCR_COMPLEMENTARY,
   NHS_10_12M,
   NHS_6M,
@@ -1688,6 +1689,444 @@ export const fruits: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'grapefruit',
+    nameCz: 'grapefruit',
+    altNamesCz: ['grep', 'citrusový grapefruit'],
+    category: 'ovoce',
+    servingForm: 'kusove',
+    emoji: '🍊',
+    icon: 'grapefruit',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Blána kolem dužniny je pevná a v puse se svine do celistvého kusu, který dásně nerozdělí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Oloupej a každý díl zbav i vnitřní blány — právě ta je u citrusů to, co dítě nerozžvýká. Dužninu rozděl na kousky a nabídni je jako měkké sousto, nebo vymačkej pár kapek šťávy do jídla s luštěninami; vitamin C zlepší vstřebání jejich železa.',
+        caution: 'Grapefruit je kyselejší než pomeranč a může podráždit kůži kolem pusy. Potři ji předem tenkou vrstvou tuku.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících podávej dužninu bez blan v kouscích, které dítě zvedne dvěma prsty. Kyselost se dá srovnat lžící jogurtu.',
+        caution: 'Bílá dřeň pod kůrou je hořká; sloupni ji celou.',
+      },
+      '12m': {
+        serving:
+          'Batole jí grapefruit v kouscích i vymačkaný do zálivky. Růžové odrůdy jsou sladší než žluté, takže je děti přijímají snáz.',
+        caution: 'Kyselé ovoce podávej k jídlu, ne samotné mezi jídly — je to šetrnější k zubní sklovině.',
+      },
+    },
+    prepIdeas: [
+      'dužnina bez blan v kouscích',
+      'pár kapek šťávy k luštěninám',
+      'do jogurtu s banánem',
+      'do zálivky na salát',
+    ],
+    seasonCz: [11, 12, 1, 2, 3],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'pomelo',
+    nameCz: 'pomelo',
+    altNamesCz: ['pomela', 'šedok'],
+    category: 'ovoce',
+    servingForm: 'kusove',
+    emoji: '🍊',
+    icon: 'pomelo',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Blána kolem dužniny je u pomela obzvlášť tuhá a v puse drží tvar celistvého kusu.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Pomelo má silnou kůru a velmi tuhé blány, takže příprava zabere víc času než u pomeranče. Oloupej, každý díl rozdělej a blány odstraň úplně; zbylé šťavnaté váčky dužniny nabídni v kouscích.',
+        caution: 'Blána je tady tužší než u jiných citrusů — když ji necháš, dítě ji vyplivne, nebo se s ní dusí.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nabídni váčky dužniny, které dítě zvedne dvěma prsty. Pomelo je méně kyselé než grapefruit, takže projde i u dětí, které citrusy odmítají.',
+        caution: 'Bílou dřeň sloupni celou, je hořká a tuhá.',
+      },
+      '12m': {
+        serving:
+          'Batole jí pomelo v kouscích i v ovocném salátu. Dužnina se nerozpadá, takže drží tvar i po smíchání s jiným ovocem.',
+        caution: 'Kyselé ovoce podávej spíš k jídlu než samotné mezi jídly.',
+      },
+    },
+    prepIdeas: [
+      'váčky dužniny bez blan',
+      'do ovocného salátu',
+      'do jogurtu',
+      's kouskem avokáda',
+    ],
+    seasonCz: [11, 12, 1, 2],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'meloun-zluty',
+    nameCz: 'meloun žlutý',
+    altNamesCz: ['honeydew', 'medový meloun', 'meloun medový'],
+    category: 'ovoce',
+    servingForm: 'kusove',
+    emoji: '🍈',
+    icon: 'meloun-zluty',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Kostka melounu je kluzká a pevná zároveň, takže dítěti sklouzne do hrdla dřív, než ji stačí rozžvýkat.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Žlutý meloun je sladší a pevnější než vodní. Nakrájej ho na proužky dlouhé jako dospělý prst, ne na kostky — proužek se dá uchopit a kostka sklouzne.',
+        caution: 'Vyber zralý, tvrdý meloun je pro dítě moc pevný na rozžvýkání.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících nech proužky kratší, na uchopení dvěma prsty. Meloun je z velké části voda, takže se hodí v horkých dnech.',
+        caution: 'Kluzké kousky dítěti vyklouzávají; osuš je kouskem utěrky, líp je udrží.',
+      },
+      '12m': {
+        serving:
+          'Batole jí meloun nakrájený na sousta i v ovocném salátu. Dužnina u kůry je méně sladká, tu odkroj.',
+        caution: 'Nakrojený meloun skladuj v lednici zabalený, rychle nasává pachy.',
+      },
+    },
+    prepIdeas: [
+      'proužky dlouhé jako prst',
+      'do ovocného salátu',
+      'rozmixovaný do jogurtu',
+      's mátou pro dospělé',
+    ],
+    seasonCz: [7, 8, 9],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'lici',
+    nameCz: 'liči',
+    altNamesCz: ['lychee', 'liči čínské'],
+    category: 'ovoce',
+    servingForm: 'drobne',
+    emoji: '🍒',
+    icon: 'lici',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Oloupané liči je kulaté, kluzké a má průměr odpovídající dýchacím cestám malého dítěte. Uvnitř je navíc tvrdá pecka.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Oloupej slupku, vyndej pecku a dužninu rozřež podélně na čtvrtky — celé ani přepůlené liči se nepodává nikdy, kulatý tvar dýchací cesty uzavře. Čtvrtky můžeš ještě rozmačkat vidličkou.',
+        caution: 'Pecku hledej pohledem i prstem, u zralého plodu drží jen volně.',
+      },
+      '9m': {
+        serving:
+          'Pravidlo krájet podélně na čtvrtky platí beze změny. Zručná ruka na věci nic nemění: dítě kousek zvedne, ale tvar zůstává stejně rizikový.',
+        caution: 'Konzervovaná liči bývají ve sladkém nálevu; sceď je a propláchni.',
+      },
+      '12m': {
+        serving:
+          'Batole jí liči nakrájené na čtvrtky. Celý plod nech až na dobu, kdy dítě spolehlivě žvýká — u kulatého ovoce se s tím nespěchá.',
+        caution: 'Slupka je nepoživatelná, sloupni ji celou.',
+      },
+    },
+    prepIdeas: [
+      'podélné čtvrtky bez pecky',
+      'rozmačkané do jogurtu',
+      'do ovocného salátu',
+      'rozmixované do pyré',
+    ],
+    seasonCz: [6, 7, 8],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'granatove-jablko',
+    nameCz: 'granátové jablko',
+    altNamesCz: ['granátovník', 'granátová jádra'],
+    category: 'ovoce',
+    servingForm: 'drobne',
+    emoji: '🍎',
+    icon: 'granatove-jablko',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Uvnitř každého šťavnatého jádra je tvrdé jadérko, které dásně nerozdrtí. Jádro je kluzké a spolkne se celé.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Volná jádra se malému dítěti nepodávají. Vymačkej z nich šťávu a pár kapek přidej do jogurtu nebo do jídla s luštěninami, nebo jádra rozmačkej v sítu a protlač; tvrdá jadérka tím zůstanou v sítu.',
+        caution: 'Vylouskaná jádra vypadají jako drobné ovoce, ale tvrdé semínko uvnitř z nich dělá něco jiného.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících dál jen protlačená šťáva nebo rozmačkaná dužnina bez jadérek. Pár kapek šťávy zlepší vstřebání železa z čočky nebo z cizrny ve stejném jídle.',
+        caution: 'Šťáva silně barví, počítej s tím u oblečení i u prkénka.',
+      },
+      '12m': {
+        serving:
+          'I po prvním roce podávej spíš protlačenou šťávu než volná jádra. Celá jádra nech na dobu, kdy dítě spolehlivě žvýká a jí vsedě bez pobíhání.',
+        caution: 'Jádra nikdy nedávej do misky, ze které si dítě samo nabírá hrstí.',
+      },
+    },
+    prepIdeas: [
+      'protlačená šťáva do jogurtu',
+      'pár kapek k čočce nebo cizrně',
+      'rozmačkaná dužnina bez jadérek',
+      'do ovocného pyré',
+    ],
+    seasonCz: [10, 11, 12, 1],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'mucenka',
+    nameCz: 'mučenka',
+    altNamesCz: ['maracuja', 'passion fruit', 'marakuja'],
+    category: 'ovoce',
+    servingForm: 'kasovite',
+    emoji: '🥭',
+    icon: 'mucenka',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'low',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Mučenka je uvnitř rosolovitá dužnina s drobnými jadérky. Vylžičkuj ji a protlač sítem, ať v porci zůstane jen šťáva a dužnina; jadérka jsou tvrdá a pro první porce se nehodí.',
+        caution: 'Plod je zralý, když je slupka svraštělá — hladká a lesklá mučenka je ještě kyselá.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících můžeš nechat část jadérek, pokud je dítě zvyklé na hrubší strukturu. Lžíce protlačené dužniny dodá jogurtu chuť bez přidávání čehokoli dalšího.',
+        caution: 'Mučenka je výrazně kyselá; míchej ji s banánem nebo s jogurtem.',
+      },
+      '12m': {
+        serving:
+          'Batole jí mučenku vylžičkovanou přímo z plodu i vmíchanou do kaše. Jadérka jsou poživatelná a křupou, což děti často baví.',
+        caution: 'Kyselé ovoce podávej spíš k jídlu než samotné mezi jídly.',
+      },
+    },
+    prepIdeas: [
+      'protlačená dužnina do jogurtu',
+      'lžíce do ovesné kaše',
+      'do ovocného pyré',
+      'na lívanečky místo sirupu',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_FIRST_FOODS, NHS_CHOKING],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kokos-strouhany',
+    nameCz: 'kokos strouhaný',
+    altNamesCz: ['strouhaný kokos', 'kokosová moučka'],
+    category: 'ovoce',
+    servingForm: 'kasovite',
+    emoji: '🥥',
+    icon: 'kokos-strouhany',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Suché nitky se v puse spečou do chuchvalce a nasáknou sliny, místo aby změkly. Navlhčené tuhle vlastnost ztrácejí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Suchý kokos nikdy nesyp nasucho. Vmíchej ho do jogurtu, do kaše nebo do vlhkého těsta a nech ho několik minut nasáknout — teprve pak se dá podat.',
+        caution: 'Kokosové chipsy a hrubé vločky do dětské porce nepatří, jsou tvrdé a ostré.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících ho přidej do těsta na placičky nebo do kaše. Jemná kokosová moučka nasákne rychleji než hrubé strouhání.',
+        caution: 'Slazený kokos na pečení je cukrovinka, ne surovina.',
+      },
+      '12m': {
+        serving:
+          'Batole jí kokos v pečení, v kaši i v ovocném pyré. Dodá jídlu tuk, který malé dítě potřebuje víc než dospělý.',
+        caution: 'Skladuj v chladu, kokos je tučný a žlukne.',
+      },
+    },
+    prepIdeas: [
+      'vmíchaný do jogurtu s ovocem',
+      'do ovesné kaše',
+      'do těsta na placičky',
+      'do ovocného pyré',
+    ],
+    seasonCz: [],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'brusinky-cerstve',
+    nameCz: 'brusinky čerstvé',
+    altNamesCz: ['klikva', 'čerstvé brusinky'],
+    category: 'ovoce',
+    servingForm: 'drobne',
+    emoji: '🔴',
+    icon: 'brusinky-cerstve',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Brusinka je kulatá, pevná a má průměr, který dýchací cesty malého dítěte uzavře celé.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Syrovou brusinku nikdy nepodávej celou — rozřež ji podélně na čtvrtky, nebo ji radši uvař na kompot a rozmačkej. Vařená brusinka se rozpadne sama a kulatý tvar tím ztratí.',
+        caution: 'Brusinky jsou velmi trpké; bez osladění je většina dětí odmítne, a sladit se do roka nemá čím.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících platí totéž: uvařit a rozmačkat, nebo každou syrovou bobuli rozřezat podélně na čtvrtky. Trpkost srovnej rozvařeným jablkem nebo hruškou ve stejném hrnci.',
+        caution: 'Trpkost srovnávej ovocem, ne ničím jiným — do roka se porce nepřislazuje.',
+      },
+      '12m': {
+        serving:
+          'Batole jí brusinkovou omáčku k masu i rozvařené brusinky v kaši. Celé syrové bobule nech na později, trpkost i tvar jsou proti nim.',
+        caution: 'Kupovaná brusinková omáčka i sušené brusinky bývají silně doslazované; čti složení.',
+      },
+    },
+    prepIdeas: [
+      'rozvařené s jablkem na omáčku',
+      'podélné čtvrtky do jogurtu',
+      'rozmačkané do ovesné kaše',
+      'omáčka k pečenému masu pro dospělé',
+    ],
+    seasonCz: [9, 10, 11],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'aronie',
+    nameCz: 'aronie',
+    altNamesCz: ['černý jeřáb', 'temnoplodec'],
+    category: 'ovoce',
+    servingForm: 'drobne',
+    emoji: '🫐',
+    icon: 'aronie',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'high',
+    chokingReason:
+      'Aronie je kulatá bobule velikosti borůvky, která se do dýchacích cest vejde celá.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Syrovou bobuli rozřež podélně na čtvrtky, nebo ji rozvař a protlač — vařením se trpkost zmírní a kulatý tvar zmizí. Samotná aronie je pro dítě příliš svíravá, míchej ji s jablkem nebo s hruškou.',
+        caution: 'Šťáva barví tmavě fialově a z textilu jde ven špatně.',
+      },
+      '9m': {
+        serving:
+          'Každou syrovou bobuli dál řež podélně na čtvrtky, nebo ji podávej rozvařenou. Aronie je natolik trpká, že se v čisté podobě do dětské porce nehodí.',
+        caution: 'Svíravá chuť pochází z tříslovin, které mohou zhoršit vstřebání železa ve stejném jídle.',
+      },
+      '12m': {
+        serving:
+          'Batole jí aronii rozvařenou v kaši nebo v ovocné omáčce. Čerstvé bobule zůstávají spíš surovinou na zpracování než na zobání.',
+        caution: 'Aroniové šťávy z obchodu bývají doslazované.',
+      },
+    },
+    prepIdeas: [
+      'rozvařená s jablkem do pyré',
+      'podélné čtvrtky do jogurtu',
+      'protlačená do ovesné kaše',
+      'do ovocné omáčky',
+    ],
+    seasonCz: [8, 9, 10],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'rakytnik',
+    nameCz: 'rakytník',
+    altNamesCz: ['rakytníkové bobule', 'sea buckthorn'],
+    category: 'ovoce',
+    servingForm: 'kasovite',
+    emoji: '🟠',
+    icon: 'rakytnik',
+    allergens: [],
+    isKeyAllergen: false,
+    chokingRisk: 'medium',
+    chokingReason:
+      'Bobule je drobná a měkká, ale uvnitř má tvrdé jadérko, které dásně nerozdrtí.',
+    hazards: [],
+    hazardNotes: {},
+    minAgeMonths: 6,
+    prep: {
+      '6m': {
+        serving:
+          'Rakytník se pro dítě zpracovává, ne zobe. Bobule rozmačkej a protlač sítem, aby v porci zůstala jen dužnina bez tvrdých jadérek, a lžičku vmíchej do jogurtu nebo do kaše.',
+        caution: 'Chuť je velmi kyselá a svíravá; samotný rakytník dítě nepřijme.',
+      },
+      '9m': {
+        serving:
+          'V devíti měsících dál jen protlačená dužnina. Kyselost srovnej banánem nebo dušenou hruškou ve stejné misce.',
+        caution: 'Šťáva je natolik kyselá, že dráždí kůži kolem pusy; potři ji předem tenkou vrstvou tuku.',
+      },
+      '12m': {
+        serving:
+          'Batole jí rakytník v kaši i v ovocné omáčce. Pořád ho protlačuj, jadérka se v puse nerozdrtí.',
+        caution: 'Rakytníkové nápoje z obchodu bývají silně doslazované.',
+      },
+    },
+    prepIdeas: [
+      'protlačená dužnina do jogurtu',
+      'lžička do ovesné kaše',
+      'smíchaný s banánovým pyré',
+      'do ovocné omáčky',
+    ],
+    seasonCz: [9, 10, 11],
+    vegetarian: true,
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
 ];

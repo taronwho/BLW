@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import {
+  NHS_CHOKING,
   EFSA_ARSENIC,
   NHS_DRINKS,
   NHS_10_12M,
@@ -851,6 +852,46 @@ export const breakfast2: Recipe[] = [
     allergens: ['mleko', 'orechy'],
     tags: ['vegetariánské', 'rychlé', 'bez lepku'],
     sources: [NHS_AVOID, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kase-s-mucenkou-a-kokosem',
+    titleCz: 'Ovesná kaše s mučenkou a kokosem',
+    category: 'snidane',
+    minAgeMonths: 6,
+    timeMinutes: 15,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'ovesne-vlocky-jemne', amount: '150 g', track: 'all' },
+      { ingredientId: 'kravske-mleko', amount: '500 ml', track: 'all' },
+      { ingredientId: 'mucenka', amount: '2 kusy', track: 'all' },
+      { ingredientId: 'kokos-strouhany', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'banan', amount: '1 zralý', track: 'all' },
+    ],
+    baseSteps: [
+      'Vločky zalij mlékem a vař na mírném plameni pět minut, dokud kaše nezhoustne.',
+      'Mučenky rozkroj a dužninu vylžičkuj do misky.',
+      'Strouhaný kokos vmíchej do horké kaše a nech ho pár minut nasáknout — suchý kokos se nikdy nesype nasucho, v puse by se spekl do chuchvalce.',
+    ],
+    babySplitPoint:
+      'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
+    babySteps: [
+      'Dužninu mučenky protlač sítem, ať v porci zůstane jen šťáva a dužnina; jadérka jsou tvrdá a pro první porce se nehodí.',
+      'Vmíchej lžičku protlačené dužniny a rozmačkaný banán do odebrané kaše.',
+      'Nech vychladnout na teplotu ruky a rozprostři kaši v misce, uprostřed zůstává horká nejdéle.',
+    ],
+    babyServing: {
+      '6m': 'Podávej kaši na naložené lžíci, nebo ji nanes v husté vrstvě na proužek měkkého pečiva.',
+      '9m': 'Nech kaši hrubší a přidej podélné proužky banánu, dítě si je bere z tácku samo.',
+      '12m': 'Batole jí kaši lžící z misky.',
+    },
+    adultSteps: [
+      'Zbytek kaše rozděl do misek a navrch dej celou vylžičkovanou mučenku i s jadérky.',
+      'Posyp kokosem; kdo chce, dosladí si na talíři sám.',
+    ],
+    allergens: ['psenice-lepek', 'mleko'],
+    tags: ['vegetariánské', 'rychlé'],
+    sources: [NHS_CHOKING, NHS_FIRST_FOODS],
     reviewStatus: 'verified',
   },
 ];

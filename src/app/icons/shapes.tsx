@@ -202,6 +202,84 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 6: ovoce ────────────────────────────────────────────────────
+  grapefruit: (
+    <>
+      <circle cx="32" cy="34" r="21" fill="#E8A07A" />
+      <circle cx="32" cy="34" r="16" fill="#E8687A" />
+      <path d="M32 18v32M18 34h28M21 23l22 22M43 23L21 45" stroke="#F6D8D0" strokeWidth="2.5" />
+      <circle cx="32" cy="34" r="3" fill="#F6D8D0" />
+    </>
+  ),
+  pomelo: (
+    <>
+      <circle cx="32" cy="34" r="22" fill="#D7DC9E" />
+      <circle cx="32" cy="34" r="15" fill="#F0E9C0" />
+      <path d="M32 19v30M17 34h30M22 24l20 20M42 24L22 44" stroke="#C3C982" strokeWidth="2.5" />
+    </>
+  ),
+  'meloun-zluty': (
+    <>
+      <path d="M8 42c0-13 11-22 24-22s24 9 24 22H8Z" fill="#E8DF9C" />
+      <path d="M12 42c0-11 9-18 20-18s20 7 20 18H12Z" fill="#F2E9B8" />
+      <path d="M8 42h48v4a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3v-4Z" fill="#BFC77E" />
+    </>
+  ),
+  lici: (
+    <>
+      <circle cx="32" cy="36" r="18" fill="#CE4B52" />
+      <circle cx="24" cy="30" r="2.5" fill="#A93238" />
+      <circle cx="33" cy="26" r="2.5" fill="#A93238" />
+      <circle cx="41" cy="33" r="2.5" fill="#A93238" />
+      <circle cx="29" cy="42" r="2.5" fill="#A93238" />
+      <circle cx="39" cy="44" r="2.5" fill="#A93238" />
+      <path d="M32 18c-1-5-3-8-6-10 5 1 8 4 9 9" fill={C.zelenTmava} />
+    </>
+  ),
+  'granatove-jablko': (
+    <>
+      <circle cx="32" cy="36" r="19" fill="#B93A46" />
+      <path d="M32 17l-4-8h8l-4 8Z" fill={C.zelenTmava} />
+      <circle cx="26" cy="33" r="3.5" fill="#E2606A" />
+      <circle cx="36" cy="31" r="3.5" fill="#E2606A" />
+      <circle cx="31" cy="41" r="3.5" fill="#E2606A" />
+      <circle cx="40" cy="40" r="3" fill="#E2606A" />
+      <circle cx="23" cy="42" r="3" fill="#E2606A" />
+    </>
+  ),
+  mucenka: (
+    <>
+      <circle cx="32" cy="34" r="20" fill="#6E4A63" />
+      <circle cx="32" cy="34" r="14" fill="#E8B04A" />
+      <circle cx="27" cy="31" r="2.2" fill="#4A3140" />
+      <circle cx="36" cy="32" r="2.2" fill="#4A3140" />
+      <circle cx="31" cy="39" r="2.2" fill="#4A3140" />
+      <circle cx="38" cy="39" r="2" fill="#4A3140" />
+    </>
+  ),
+  'kokos-strouhany': hromadka((x, y, u, i) => (
+    <rect key={i} x={x - 5} y={y - 1.6} width="10" height="3.2" rx="1.6" transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? C.bila : C.bilaStin} stroke={C.kremTmavy} strokeWidth="1.2" />
+  )),
+  'brusinky-cerstve': (
+    <>
+      {fazole(21, 40, 0, '#C0303A', 1, '#8E2028')}
+      {fazole(42, 41, 0, '#D44A52', 2, '#8E2028')}
+      {fazole(32, 26, 0, '#C0303A', 3, '#8E2028')}
+    </>
+  ),
+  aronie: hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="6" fill={i % 2 === 0 ? '#3F2A46' : '#553A5C'} />
+      <circle cx={x - 1.6} cy={y - 1.8} r="1.8" fill="#7A5A82" />
+    </g>
+  )),
+  rakytnik: hromadka((x, y, _u, i) => (
+    <g key={i}>
+      <circle cx={x} cy={y} r="6" fill={i % 2 === 0 ? '#E8912A' : '#CE7418'} />
+      <circle cx={x - 1.6} cy={y - 1.8} r="1.8" fill="#F6C06A" />
+    </g>
+  )),
+
   // ── dávka 5: ryby a mořské plody ──────────────────────────────────────
   platys: (
     <>
