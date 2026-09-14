@@ -202,6 +202,71 @@ function krabice(pasek: string, znak: ReactNode): ReactNode {
 }
 
 export const SHAPES: Record<string, ReactNode> = {
+  // ── dávka 7: ořechy, semínková pasta a olej ───────────────────────────
+  'liskove-orechy': (
+    <>
+      <circle cx="32" cy="36" r="18" fill="#A9793F" />
+      <path d="M32 18c9 0 15 6 16 13-4-5-9-7-16-7s-12 2-16 7c1-7 7-13 16-13Z" fill="#6E4A22" />
+      <path d="M32 18v-7" stroke="#4E3416" strokeWidth="4" strokeLinecap="round" />
+      <path d="M24 40c3 4 11 4 15 0" stroke="#8A5F2E" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  'kesu-orechy': (
+    <>
+      <path d="M14 26c10-10 26-9 33 1 5 8 1 18-9 18-7 0-10-6-15-6s-8 4-12 1c-5-4-3-10 3-14Z" fill="#E0C193" stroke="#B2915F" strokeWidth="2.5" strokeLinejoin="round" />
+      <path d="M22 30c8-5 17-4 21 3" stroke="#B2915F" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  arasidy: (
+    <>
+      <path d="M32 8c7 0 11 5 11 10 0 4-3 6-3 9s3 5 3 9c0 6-4 12-11 12s-11-6-11-12c0-4 3-6 3-9s-3-5-3-9c0-5 4-10 11-10Z" fill="#D3A76C" stroke="#A87E45" strokeWidth="2.5" />
+      <path d="M23 18c6-2 12-2 18 0M23 30c6-2 12-2 18 0M23 42c6-2 12-2 18 0" stroke="#A87E45" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  pistacie: (
+    <>
+      <path d="M12 30c8-9 32-9 40 0 3 4 1 9-4 10-8 2-24 2-32 0-5-1-7-6-4-10Z" fill="#E0D2B0" stroke="#B8A87E" strokeWidth="2.5" strokeLinejoin="round" />
+      <ellipse cx="32" cy="38" rx="13" ry="9" fill="#8FAE55" />
+      <path d="M24 36c5-3 11-3 16 0" stroke="#6E8C3A" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </>
+  ),
+  'para-orechy': (
+    <>
+      <path d="M18 14h28l-8 38a5 5 0 0 1-5 4h-2a5 5 0 0 1-5-4L18 14Z" fill="#6E4A22" />
+      <path d="M24 20h16l-6 28h-4l-6-28Z" fill="#A8794A" />
+      <path d="M18 14h28l-4 6H22l-4-6Z" fill="#4E3416" />
+    </>
+  ),
+  'pekanove-orechy': (
+    <>
+      <ellipse cx="32" cy="32" rx="13" ry="22" fill="#9E6836" />
+      <path d="M32 10v44" stroke="#6E4522" strokeWidth="3" />
+      <path d="M26 16c-3 8-3 24 0 32M38 16c3 8 3 24 0 32" stroke="#C08F5A" strokeWidth="2.5" fill="none" />
+    </>
+  ),
+  'makadamove-orechy': (
+    <>
+      <circle cx="32" cy="34" r="19" fill="#EDE2CC" stroke="#B8A784" strokeWidth="3" />
+      <path d="M32 15v38" stroke="#B8A784" strokeWidth="3" />
+      <path d="M22 24c-3 6-3 14 0 20" stroke="#D6C8A8" strokeWidth="3" fill="none" />
+    </>
+  ),
+  'piniove-orisky': hromadka((x, y, u, i) => (
+    <ellipse key={i} cx={x} cy={y} rx="3" ry="6" transform={`rotate(${u} ${x} ${y})`} fill={i % 2 === 0 ? '#E2D2AE' : '#C9B58C'} stroke="#A8946C" strokeWidth="1.2" />
+  )),
+  'slunecnicove-maslo': sklenice('#C9A552', (
+    <>
+      <circle cx="32" cy="20" r="5" fill={C.zlutaTmava} />
+      <path d="M32 12v4M32 24v4M24 20h4M36 20h4M26 14l3 3M38 14l-3 3M26 26l3-3M38 26l-3-3" stroke={C.zluta} strokeWidth="2.5" strokeLinecap="round" />
+    </>
+  )),
+  'olej-slunecnicovy': lahev(C.zluta, (
+    <>
+      <circle cx="32" cy="16" r="4" fill={C.zlutaTmava} />
+      <path d="M32 9v4M32 19v4M25 16h4M35 16h4" stroke={C.zluta} strokeWidth="2.5" strokeLinecap="round" />
+    </>
+  )),
+
   // ── dávka 6: ovoce ────────────────────────────────────────────────────
   grapefruit: (
     <>
