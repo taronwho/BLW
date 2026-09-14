@@ -266,3 +266,30 @@ describe('poslední přihlášení zařízení', () => {
     expect('memberSeenAt' in merged).toBe(false);
   });
 });
+
+describe('předpoklad, na kterém stojí pravidla Firestore', () => {
+  it('sloučení nikdy nezkrátí seznam ochutnávek', () => {
+    // Pravidlo `nemazeDenik()` ve firestore.rules zakazuje připojujícímu se
+    // telefonu zkrátit pole ochutnávek. Drží to jen proto, že sloučení umí
+    // záznamy výhradně přidávat — mazání je náhrobek, ne odstranění.
+    const a = state({
+      tastings: [
+        tasting({ id: 'ev-1' }),
+        tasting({ id: 'ev-2', deleted: true }),
+      ],
+    });
+    const b = state({ tastings: [tasting({ id: 'ev-3' })] });
+
+    for (const [local, remote] of [
+      [a, b],
+      [b, a],
+    ] as const) {
+      const merged = mergeHouseholdState(local, remote, {
+        localUpdatedAt: 2,
+        remoteUpdatedAt: 1,
+      });
+      expect(merged.tastings.length).toBeGreaterThanOrEqual(local.tastings.length);
+      expect(merged.tastings.length).toBeGreaterThanOrEqual(remote.tastings.length);
+    }
+  });
+});

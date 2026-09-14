@@ -94,11 +94,22 @@ Co pravidla dělají:
 | `get` (čtení domácnosti) | kdokoli přihlášený, kdo zná přesný kód |
 | `list` (výpis domácností) | nikdo — zákaz enumerace |
 | `create` | přihlášený, a jen se sebou jako jediným členem |
-| `update` | člen domácnosti; nebo nový člověk, který **přidá jen sám sebe** |
+| `update` | člen domácnosti; nebo nový člověk, který **přidá jen sám sebe a nezkrátí deník** |
 | `delete` | nikdo |
 
 Větev „přidá jen sám sebe" je právě to připojení druhého telefonu: nikoho
 neubere a přidat smí nejvýš jedno `uid`. Domácnost unese pět zařízení.
+
+Připojující se člověk navíc nesmí týmž zápisem zkrátit seznam ochutnávek.
+Smazaná ochutnávka zůstává v poli jako náhrobek, takže poctivé sloučení počet
+záznamů nikdy nesníží — kdo zná kód, se smí připojit, ale nesmí přitom smazat,
+co rodiče za měsíce nasbírali. Každý zápis taky musí mít správný tvar
+(`state`, `updatedAt`, `members`), aby dokument nešlo přepsat čímkoli.
+
+> **Pravidla se mění ručně.** Když se `firestore.rules` v repozitáři změní,
+> nasazená verze se tím sama neaktualizuje — je potřeba projít kroky výš
+> znovu. Poslední změna: připojení nesmí zkrátit deník a kontrola tvaru
+> dokumentu.
 
 ### Mrtvá zařízení
 

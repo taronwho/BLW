@@ -20,6 +20,26 @@ service cloud.firestore {
         return prihlaseny() && request.auth.uid in stavajiciClenove();
       }
 
+      // Tvar dokumentu. Bez téhle kontroly by šlo dokument přepsat čímkoli
+      // a aplikace by na tom spadla ještě dřív, než by rodič něco viděl.
+      function maTvar() {
+        return request.resource.data.keys().hasAll(['state', 'updatedAt', 'members'])
+          && request.resource.data.state is map
+          && request.resource.data.updatedAt is number
+          && request.resource.data.members is list;
+      }
+
+      // Deník se jen doplňuje, nikdy nezkracuje.
+      //
+      // Smazaná ochutnávka zůstává v poli jako náhrobek (`deleted: true`),
+      // takže poctivé sloučení počet záznamů nikdy nesníží. Kdo zná párovací
+      // kód, se sice smí k domácnosti připojit, ale nesmí týmž zápisem
+      // vymazat, co rodiče za měsíce nasbírali.
+      function nemazeDenik() {
+        return request.resource.data.state.tastings.size()
+          >= resource.data.state.tastings.size();
+      }
+
       // Připojení dalšího telefonu k existující domácnosti.
       //
       // Bez tohohle by druhý rodič dokument přečetl, ale nikdy do něj nezapsal:
@@ -30,13 +50,16 @@ service cloud.firestore {
         return prihlaseny()
           && request.auth.uid in noviClenove()
           && stavajiciClenove().toSet().difference(noviClenove().toSet()).size() == 0
-          && noviClenove().size() == stavajiciClenove().size() + 1;
+          && noviClenove().size() == stavajiciClenove().size() + 1
+          && nemazeDenik();
       }
 
       allow get: if prihlaseny();
       allow list: if false; // zákaz enumerace domácností
-      allow create: if prihlaseny() && noviClenove() == [request.auth.uid];
-      allow update: if noviClenove().size() <= 5 && (jsemClen() || pripojujiSe());
+      allow create: if prihlaseny() && maTvar() && noviClenove() == [request.auth.uid];
+      allow update: if maTvar()
+        && noviClenove().size() <= 5
+        && (jsemClen() || pripojujiSe());
       allow delete: if false;
     }
   }
