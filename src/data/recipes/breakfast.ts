@@ -28,12 +28,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'kravske-mleko', amount: '400 ml', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Hrušky oloupej, zbav jádřinců a nakrájej na kostičky; jednu polovinu nech syrovou, druhou dej do hrnce.',
       'Vlož vločky do hrnce s mlékem a hruškovými kostkami a přiveď k varu za stálého míchání.',
       'Vař na mírném plameni pět minut, dokud kaše nezhoustne a hrušky se nerozpadnou do ní.',
       'Stáhni z plotny a nech kaši dvě minuty odstát pod pokličkou, aby dobrala.',
+      'Jahody zbav stopek, velké rozřež podélně na čtvrtky a menší rozmačkej vidličkou.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce kaše do misky, ještě před tím, než se kaše dospělým dochutí skořicí a dosladí na talíři.',
@@ -41,6 +43,7 @@ export const breakfast: Recipe[] = [
       'Do odebrané kaše vmíchej lžičku mletých lněných semínek a nech je pět minut nabobtnat.',
       'Kaši zřeď lžící mléka nebo vody, aby netvořila tuhý chuchvalec, který se špatně polyká.',
       'Před podáváním promíchej a zkus teplotu na vnitřní straně zápěstí — kaše drží horko uprostřed.',
+      'Přidej k porci rozmačkané jahody; vitamin C z nich pomáhá vstřebat železo z ovesných vloček, které se z rostlin vstřebává hůř než z masa.',
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši na lžíci, kterou dáš dítěti do ruky, a k tomu plátek syrové hrušky velikosti prstu na okusování.',
@@ -68,12 +71,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'merunka', amount: '4 zralé', track: 'all' },
       { ingredientId: 'mandlove-maslo', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'voda', amount: '450 ml', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Jáhly propláchni horkou vodou, aby ztratily nahořklou chuť po slupce, a sceď je v sítku.',
       'Zalij je vodou a vař patnáct minut pod pokličkou, dokud nenasáknou všechnu tekutinu.',
       'Meruňky zbav pecek, nakrájej je na kousky a polovinu vmíchej do horké kaše, aby se rozpadly.',
       'Kaši rozmačkej vařečkou o stěnu hrnce, ať je krémová, a nech ji pět minut odstát.',
+      'Pomeranč oloupej, rozeber ho na dílky a z každého sundej bílou blánu, ať zůstane jen měkká dužina.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce kaše s meruňkami, dřív než se do hrnce zamíchá mandlové máslo pro dospělé a než se kaše dosladí.',
@@ -81,6 +86,7 @@ export const breakfast: Recipe[] = [
       'Do odebrané porce vmíchej půl lžičky mandlového másla a rozmíchej ho dohladka; do dětské porce patří mandle jedině v podobě hladkého másla.',
       'Přidej lžíci teplé vody, aby kaše nebyla lepivá a dala se snadno polknout.',
       'Meruňky rozmačkej vidličkou; slupka je pevná a dítě by ji vyplivlo.',
+      'Vmíchej do kaše pár kousků pomerančové dužiny bez blan; vitamin C z nich pomáhá vstřebat železo z jáhel a z mandlového másla.',
     ],
     babyServing: {
       '6m': 'Kaši nabídni hustou, slepenou do hrudky na okraji misky, aby ji šlo sebrat celou dlaní, a meruňku podej jako rozmačkané pyré.',
@@ -109,6 +115,7 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'mouka-spaldova', amount: '120 g', track: 'all' },
       { ingredientId: 'boruvky', amount: '150 g', track: 'all' },
       { ingredientId: 'maslo', amount: '20 g na pánev', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Tvaroh rozmíchej s vejci do hladka, aby v těstě nezůstaly hrudky.',
@@ -116,6 +123,7 @@ export const breakfast: Recipe[] = [
       'Borůvky rozkroj každou zvlášť napůl — celá bobule je pro malé děti nebezpečně kulatá.',
       'Polovinu rozkrojených borůvek vmíchej do těsta a druhou si nech na dozdobení.',
       'Pánev potři máslem a peč lívance na mírném plameni po třech minutách z každé strany.',
+      'Jahody zbav stopek a rozmačkej je vidličkou na dřeň, kterou lívance přeliješ místo sirupu.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce těsta stranou a upeč z nich menší lívanečky pro miminko, dřív než se zbytek těsta dosladí.',
@@ -123,6 +131,7 @@ export const breakfast: Recipe[] = [
       'Z odebraného těsta tvaruj podlouhlé lívanečky — v dětské ruce drží lépe než kulaté.',
       'Peč je na mírném plameni o minutu déle, aby byly propečené i uprostřed; jeden rozlom a zkontroluj.',
       'Nech je vychladnout na mřížce, aby nezvlhly, a podávej vlažné.',
+      'Dětský lívanec přelij jahodovou dření; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej lívanec ve tvaru prstu, který dítě sevře v pěsti, a borůvky jen rozkrojené a rozmačkané vidličkou.',
@@ -191,12 +200,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'maliny', amount: '200 g', track: 'all' },
       { ingredientId: 'ovesne-vlocky-velke', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'banan', amount: '1 zralý', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Vločky nasyp do mixéru a rozdrť je nasucho na hrubou mouku, aby ve smoothie nezůstaly celé.',
       'Přidej banán nakrájený na kolečka a maliny propláchnuté studenou vodou.',
       'Zalij kefírem a mixuj minutu, dokud se maliny úplně nerozpadnou.',
       'Smoothie přelij přes hrubé sítko, jestli chceš odstranit malinová jadérka, a rozděl do sklenic.',
+      'Jahody zbav stopek a rozmixuj je do smoothie spolu s malinami.',
     ],
     babySplitPoint:
       'Po kroku 4 odlij tři lžíce hotového smoothie do misky, ještě před tím, než se zbytek dospělým dosladí.',
@@ -204,6 +215,7 @@ export const breakfast: Recipe[] = [
       'Odebrané smoothie pro miminko zahusti lžičkou rozdrcených vloček a nech pět minut nabobtnat.',
       'Podávej ho v misce jako hustou kaši na lžíci, ne v lahvi — nápoje s ovocem se u malých dětí nedoporučují popíjet po celý den.',
       'Zbytek nech v lednici nejdéle do večera a znovu ho nemixuj.',
+      'Do dětské porce nech i jahodovou dužinu; vitamin C z ní pomáhá vstřebat železo z ovesných vloček.',
     ],
     babyServing: {
       '6m': 'Nabídni husté smoothie na lžíci nebo rozetřené po okraji misky, aby ho dítě sbíralo dlaní a olizovalo z prstů.',
@@ -231,12 +243,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'mango', amount: '1 zralé', track: 'all' },
       { ingredientId: 'mleko-kokosove', amount: '400 ml', track: 'all' },
       { ingredientId: 'jogurt-bily-plnotucny', amount: '200 g', track: 'all' },
+      { ingredientId: 'limetka', amount: 'půlka', track: 'all' },
     ],
     baseSteps: [
       'Chia semínka zalij kokosovým mlékem, důkladně rozmíchej a po pěti minutách zamíchej ještě jednou, aby se nespekla na dně.',
       'Nech pudink v lednici alespoň čtyři hodiny, nejlépe přes noc, dokud semínka úplně nenabobtnají do rosolu.',
       'Mango oloupej, odkroj dužinu od pecky a polovinu rozmixuj na pyré, druhou nakrájej na kostky.',
       'Do sklenic vrstvi pudink, mangové pyré a jogurt; kostky manga nech navrch.',
+      'Nakrájené mango zakápni šťávou z půlky limetky, sladká dužina po ní chutná svěžeji.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce pudinku a lžíci mangového pyré, ještě před tím, než se sklenice pro dospělé dochucují.',
@@ -244,6 +258,7 @@ export const breakfast: Recipe[] = [
       'Pudink pro miminko prožeň tyčovým mixérem, aby byla nabobtnalá chia semínka rozdrcená a hmota úplně hladká.',
       'Vmíchej mangové pyré a lžíci jogurtu, aby pudink zjemnil a nebyl lepkavý.',
       'Nabídni ho čerstvý, vydrží v lednici do druhého dne a pak už ho nepodávej.',
+      'Do dětské porce limetku jen kápni, pár kapek stačí; vitamin C z ní pomáhá vstřebat rostlinné železo z pudinku.',
     ],
     babyServing: {
       '6m': 'Podávej hladký pudink na lžíci předané do ruky a k němu pruh manga velikosti prstu, po kterém dítě saje.',
@@ -312,12 +327,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'kravske-mleko', amount: '600 ml', track: 'all' },
       { ingredientId: 'mak-mlety', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Jablka zbav jádřinců, nakrájej je na osminky a peč patnáct minut při 190 °C, dokud nezměknou a nezačnou pouštět šťávu.',
       'Rýži propláchni, zalij mlékem a vař na mírném plameni 25 minut; často míchej, aby se nepřipálila na dně.',
       'Když je rýže měkká a kaše zhoustne, stáhni hrnec z plotny a nech ji pět minut odstát.',
       'Pečená jablka rozmačkej vidličkou nahrubo a připrav mletý mák do misky.',
+      'Z pomeranče nastrouhej kůru na jablka do trouby a šťávu si nech na dochucení kaše.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce rýžové kaše, dřív než se do hrnce zamíchá skořice a než se kaše pro dospělé dosladí.',
@@ -325,6 +342,7 @@ export const breakfast: Recipe[] = [
       'Do odebrané kaše vmíchej lžíci rozmačkaného pečeného jablka; kaše tím dostane přirozenou sladkost ovoce.',
       'Přidej půl lžičky mletého máku a promíchej; mletý mák je pro miminko bezpečný, celá zrnka ne.',
       'Kaši zřeď mlékem, aby nebyla tuhá, a nech vychladnout na teplotu ruky.',
+      'Do dětské porce vmíchej lžíci pomerančové šťávy; vitamin C z ní pomáhá vstřebat železo z mletého máku i z rýže.',
     ],
     babyServing: {
       '6m': 'Podávej hustou kaši na lžíci a osminku pečeného jablka bez slupky jako měkké držadlo do dlaně.',
@@ -352,12 +370,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
       { ingredientId: 'tahini', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'kokosovy-jogurt', amount: '200 g', track: 'all' },
+      { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Pohanku propláchni pod studenou vodou a zalij dvojnásobným objemem vody.',
       'Vař ji dvanáct minut pod pokličkou, pak plotnu vypni a nech pohanku deset minut dojít v páře.',
       'Jeden banán rozmačkej vidličkou na pyré a vmíchej ho do horké kaše; kaše tím zesládne.',
       'Druhý banán nakrájej na kolečka a tahini rozmíchej se dvěma lžícemi vody na řidší zálivku.',
+      'Kiwi oloupej a nakrájej na měsíčky, nebo dužinu vyber lžičkou přímo z rozkrojené půlky.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce kaše s banánovým pyré, dřív než se do hrnce přidá tahini a než se kaše pro dospělé dochutí.',
@@ -365,6 +385,7 @@ export const breakfast: Recipe[] = [
       'Do dětské porce vmíchej půl lžičky tahini rozmíchaného ve vodě; sezamová pasta je vhodná forma, celá semínka ne.',
       'Kaši rozmačkej vidličkou, aby nezůstala zrnka pohanky v celku, a zřeď ji lžící vody.',
       'Kolečka banánu pro miminko podávej podélně rozkrojená, aby se nekutálela a lépe se držela.',
+      'Přidej k porci kousky kiwi; vitamin C z nich pomáhá vstřebat železo z pohanky i z tahini.',
     ],
     babyServing: {
       '6m': 'Nabídni kaši slepenou do hrudky a proužek banánu dlouhý jako prst, který dítě uchopí a saje z něj.',
@@ -433,12 +454,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'dyne-hokaido', amount: '300 g', track: 'all' },
       { ingredientId: 'tvaroh-polotucny', amount: '200 g', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Dýni hokaido nakrájej i se slupkou na kostky a uvař ji v páře dvanáct minut doměkka.',
       'Amarant propláchni v hustém sítku, zalij trojnásobkem vody a vař dvacet minut, dokud zrnka nezprůsvitní.',
       'Dýni rozmačkej vidličkou na pyré a vmíchej ji do uvařeného amarantu.',
       'Kaši nech pět minut odstát pod pokličkou, aby zhoustla, a připrav si tvaroh rozmíchaný do hladka.',
+      'Z pomeranče nastrouhej kůru do hotové kaše a dužinu bez blan nakrájej na kousky.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce kaše s dýňovým pyré, dřív než se zbytek dochutí skořicí a dosladí pro dospělé.',
@@ -446,6 +469,7 @@ export const breakfast: Recipe[] = [
       'Do dětské porce vmíchej lžíci tvarohu, aby kaše měla plnou bílkovinu a jemnější chuť.',
       'Zřeď ji lžící teplé vody; amarant po vychladnutí houstne a tuhá kaše se špatně polyká.',
       'Slupku z dýně v dětské porci rozmačkej úplně, nebo ji raději vyber ven.',
+      'Vmíchej do porce kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z amarantu.',
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši rozetřenou po dně misky a kousek dušené dýně bez slupky velikosti prstu jako doprovod.',
@@ -556,12 +580,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'karob', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
       { ingredientId: 'kefir', amount: '200 ml', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Vločky zalij dvojnásobkem vody a vař čtyři minuty, dokud kaše nezhoustne.',
       'Jeden banán rozmačkej vidličkou a vmíchej ho do horké kaše, aby ji přirozeně ochutil.',
       'Kaši rozděl do misek; do jedné z nich zatím nic dalšího nepřidávej.',
       'Do zbylých misek vsyp karob, promíchej a druhý banán nakrájej na kolečka.',
+      'Pomeranč oloupej, rozeber ho na dílky bez bílých blan a dužinu nakrájej na kousky.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber porci v misce bez karobu, dřív než se do zbytku kaše přimíchá karob a než se kaše pro dospělé dochutí.',
@@ -569,6 +595,7 @@ export const breakfast: Recipe[] = [
       'Do dětské porce vmíchej lžičku karobu; má přirozeně nasládlou chuť a na rozdíl od kakaa neobsahuje kofein.',
       'Kaši zřeď lžící kefíru, aby byla vláčná a snadno se nabírala.',
       'Kolečka banánu pro miminko rozkroj podélně, ať se po talíři nekutálejí.',
+      'Přidej k porci kousky pomeranče; vitamin C z nich pomáhá vstřebat železo z ovesných vloček.',
     ],
     babyServing: {
       '6m': 'Kaši nabídni slepenou do hrudky na okraji misky a k ní proužek banánu delší než dětská dlaň.',
@@ -637,12 +664,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'liskoorisove-maslo', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'kravske-mleko', amount: '400 ml', track: 'all' },
       { ingredientId: 'vejce-slepici', amount: '1 kus', track: 'all' },
+      { ingredientId: 'mandarinka', amount: '2 kusy', track: 'all' },
     ],
     baseSteps: [
       'Vločky smíchej s mlékem a rozšlehaným vejcem a nech je deset minut nabobtnat.',
       'Hrušky zbav jádřinců a nakrájej je na kostky; dvě třetiny vmíchej do vloček, zbytek nech na povrch.',
       'Lískooříškové máslo rozmíchej se dvěma lžícemi horké vody, aby vzniklo řidší máslo na vmíchání.',
       'Do zapékací mísy nalij směs, navrch rozlož zbylé hrušky a peč 30 minut při 180 °C.',
+      'Mandarinky oloupej, dílky zbav blány, prohmatej je proti světlu kvůli jadérkům a rozlož je na vločky před pečením.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce směsi do malé zapékací misky, ještě před tím, než se zbytek dosladí pro dospělé.',
@@ -650,6 +679,7 @@ export const breakfast: Recipe[] = [
       'Do dětské misky vmíchej půl lžičky rozmíchaného lískooříškového másla; právě v podobě hladkého másla jsou oříšky pro miminko bezpečné.',
       'Zapékej misku spolu s velkou mísou asi 25 minut, dokud směs nepevní a navrchu nezezlátne.',
       'Porci nech vychladnout a nakrájej ji podle věku dítěte na pásky nebo kostičky.',
+      'Dej do dětské porce i dílek mandarinky bez blány; vitamin C z něj pomáhá vstřebat železo z ovesných vloček.',
     ],
     babyServing: {
       '6m': 'Podávej pásek zapečených vloček velikosti prstu, který drží tvar a dá se sevřít v pěsti.',
@@ -717,12 +747,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'jablko', amount: '2 kusy', track: 'all' },
       { ingredientId: 'mandle-mlete', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'kravske-mleko', amount: '400 ml', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Quinou propláchni v sítku, aby zmizela nahořklá slupka, a sceď ji.',
       'Zalij ji mlékem a vař patnáct minut na mírném plameni, dokud zrnka nevypustí bílé klíčky.',
       'Jablka nastrouhej nahrubo i se šťávou a vmíchej je do horké kaše.',
       'Kaši nech pět minut odstát pod pokličkou, aby jablko změklo a chutě se spojily.',
+      'Jahody zbav stopek a nakrájej je na tenké plátky, kterými kaši doplníš až na talíři.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce kaše se strouhaným jablkem, dřív než se do hrnce přimíchají mleté mandle a než se kaše pro dospělé dosladí.',
@@ -730,6 +762,7 @@ export const breakfast: Recipe[] = [
       'Do dětské porce vmíchej půl lžičky mletých mandlí — v mleté podobě jsou bezpečné, celé ořechy do jednoho roku nepatří.',
       'Kaši zřeď mlékem a promíchej, aby se mleté mandle nespekly do hrudky.',
       'Nech porci vychladnout a před podáváním ještě jednou promíchej.',
+      'K porci přidej rozmačkané jahody; vitamin C z nich pomáhá vstřebat železo z quinoy i z mletých mandlí.',
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši na lžíci předané do ruky a k ní plátek syrového jablka velikosti prstu na okusování.',
@@ -798,12 +831,14 @@ export const breakfast: Recipe[] = [
       { ingredientId: 'seminka-konopna-loupana', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'jogurt-bily-plnotucny', amount: '300 g', track: 'all' },
       { ingredientId: 'ovesne-vlocky-jemne', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Banány nakrájej na kolečka a polovinu rozmixuj s dvěma třetinami borůvek a jogurtem na hustou hmotu.',
       'Zbylé borůvky rozkroj napůl — celá bobule je přesně toho kulatého tvaru, který malým dětem hrozí zapadnutím do dýchacích cest.',
       'Vločky krátce opraž na suché pánvi, dokud nezavoní, a nech je vychladnout.',
       'Hmotu rozděl do misek a navrch rozlož rozkrojené borůvky a kolečka banánu.',
+      'Jahody zbav stopek, velké rozřež podélně na čtvrtky a menší rozmačkej vidličkou.',
     ],
     babySplitPoint:
       'Po kroku 1 odeber dvě lžíce rozmixované hmoty, ještě před tím, než se do misek pro dospělé přidají celé borůvky a opražené vločky.',
@@ -811,6 +846,7 @@ export const breakfast: Recipe[] = [
       'Do dětské porce vmíchej lžičku konopných semínek rozdrcených v hmoždíři, aby zůstala hmota hladká.',
       'Přimíchej lžičku vloček rozdrcených na mouku, které porci zahustí.',
       'Borůvky pro miminko vždy rozkroj a zlehka rozmačkej, nikdy je nenabízej celé.',
+      'Rozmačkané jahody vmíchej do misky; vitamin C z nich pomáhá vstřebat rostlinné železo z ovesných vloček.',
     ],
     babyServing: {
       '6m': 'Nabídni hustou hmotu na lžíci a k ní proužek banánu dlouhý jako prst, který dítě sevře v dlani.',

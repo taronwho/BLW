@@ -34,6 +34,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'olej-kokosovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'sezam-mlety', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'kravske-mleko', amount: '200 ml', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Droždí rozdrob do vlažného mléka a nech ho deset minut vzejít, dokud se nezpění.',
@@ -41,6 +42,7 @@ export const snacksBaking2: Recipe[] = [
       'Těsto nech hodinu kynout v teple přikryté utěrkou, dokud nezdvojnásobí objem.',
       'Z těsta váleč tenké tyčinky a obal je v mletém sezamu.',
       'Peč tyčinky dvacet minut, dokud nejsou dozlatova a uvnitř suché.',
+      'Sladkou papriku nakrájej na proužky, které se k tyčinkám hodí místo slaného dipu.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber tři tyčinky stranou, dřív než se zbytek sype hrubou solí pro dospělé.',
@@ -48,6 +50,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětské tyčinky váleč silnější a kratší, aby se daly sevřít v pěsti a kus čouhal ven.',
       'Peč je o pár minut déle, uvnitř nesmí zůstat vlhké těsto.',
       'Nech je úplně vychladnout, horká tyčinka se v puse rozpadá na lepivé sousto.',
+      'K dětské tyčince polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z mletého sezamu.',
     ],
     babyServing: {
       '6m': 'Podávej silnější tyčinku velikosti prstu, kterou dítě sevře v pěsti a okusuje konec.',
@@ -76,6 +79,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'mouka-spaldova', amount: '300 g', track: 'all' },
       { ingredientId: 'pazitka', amount: '1 svazek', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Jedlou sodu rozmíchej přímo v kefíru; kyselina v něm sodu zneutralizuje a těsto nadzvedne.',
@@ -83,6 +87,7 @@ export const snacksBaking2: Recipe[] = [
       'Těsto krátce prohněť, delší hnětení špaldový lepek naruší a placky se drolí.',
       'Z těsta tvaruj placky silné jako prst a opékej je na suché pánvi.',
       'Placky otoč, jakmile se na povrchu objeví bublinky, a dopeč z druhé strany.',
+      'Sladkou papriku nakrájej na proužky, které se k plackám podávají místo slaného namáčení.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber kousek těsta velikosti vejce stranou, dřív než se zbytek dochucuje.',
@@ -90,6 +95,7 @@ export const snacksBaking2: Recipe[] = [
       'Z odebraného těsta vytvaruj menší placku a opékej ji pomaleji, ať je propečená skrz.',
       'Placku rozlom a zkontroluj, že uvnitř není syrové těsto ani hořká sodová pachuť.',
       'Nakrájej ji na podlouhlé proužky a nech vychladnout na vlažnou teplotu.',
+      'K dětské placce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej placku nakrájenou na proužky velikosti prstu, které dítěti čouhají z pěsti.',
@@ -118,6 +124,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'ovesne-vlocky-jemne', amount: '150 g', track: 'all' },
       { ingredientId: 'mandle-mlete', amount: '100 g', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Datle vypeckuj a zalij je horkou vodou, aby za deset minut změkly.',
@@ -125,6 +132,7 @@ export const snacksBaking2: Recipe[] = [
       'Do pasty vmíchej jemné vločky a mleté mandle, vznikne tvárná hmota.',
       'Polovinu hmoty nech světlou, do druhé zamíchej stoprocentní kakao.',
       'Z obou hmot tvaruj kuličky a nech je hodinu ztuhnout v lednici.',
+      'Z pomeranče nastrouhej kůru do směsi; s kakaem chutná výrazně a nepotřebuje nic sladkého navíc.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce světlé hmoty stranou, dřív než se do zbytku míchá kakao.',
@@ -132,6 +140,7 @@ export const snacksBaking2: Recipe[] = [
       'Ze světlé hmoty vytvaruj podlouhlý váleček, ne kuličku; kulatý tvar je pro malé děti riziko.',
       'Kakao do porce mladší než dvanáct měsíců nepatří, kakaové boby jsou zdrojem kofeinu.',
       'Váleček nech ztuhnout a podávej ho vychlazený, teplý se drolí.',
+      'K dětské kuličce polož kousky pomerančové dužiny bez blan; vitamin C z nich pomáhá vstřebat železo z datlí i z ovesných vloček.',
     ],
     babyServing: {
       '6m': 'Recept je stavěný na batole; v šesti měsících nabídni jen rozmačkanou datlovou pastu na lžíci.',
@@ -160,6 +169,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'olej-kokosovy', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'voda', amount: '120 ml', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Mletá lněná semínka zamíchej do vody a nech je deset minut nabobtnat na sliz.',
@@ -167,6 +177,7 @@ export const snacksBaking2: Recipe[] = [
       'Těsto rozválej mezi dvěma archy papíru na tloušťku dvou milimetrů.',
       'Plát nakrájej rádýlkem na obdélníky a posyp celým kmínem.',
       'Peč krekry patnáct minut, dokud okraje nezhnědnou a plát nezkřupne.',
+      'Sladkou papriku nakrájej na proužky, které se ke krekrům podávají místo namáčení do slaného.',
     ],
     babySplitPoint:
       'Po kroku 3 odkroj z rozváleného plátu čtvrtinu stranou, dřív než se sype kmín a sůl.',
@@ -174,6 +185,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětskou část nakrájej na podlouhlé proužky velikosti prstu, ne na malé obdélníky.',
       'Celý kmín na ně nesyp, tvrdé zrnko se špatně rozkousává; použij mletý, pokud chceš chuť.',
       'Peč je o dvě minuty kratší dobu, tenké proužky se rychleji připálí.',
+      'K dětské porci polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze žitné mouky a z mletých lněných semínek.',
     ],
     babyServing: {
       '6m': 'Podávej proužek krekru velikosti prstu; dítě ho okusuje a slinami rozměkčuje.',
@@ -203,6 +215,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'prasek-do-peceni', amount: '1 lžička', track: 'all' },
       { ingredientId: 'vejce-slepici', amount: '2 kusy', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Mrkev nastrouhej najemno, hrubé strouhání by v muffinu zůstalo tvrdé.',
@@ -210,6 +223,7 @@ export const snacksBaking2: Recipe[] = [
       'Do mokré směsi vmíchej mouku s práškem do pečení a nastrouhanou mrkev.',
       'Těsto rozděl do formiček naplněných do dvou třetin.',
       'Peč muffiny pětadvacet minut, špejle vpíchnutá doprostřed musí vyjít suchá.',
+      'Z pomeranče nastrouhej kůru do těsta a šťávu vmíchej do jablečného pyré.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se do zbytku přidává skořice.',
@@ -217,6 +231,7 @@ export const snacksBaking2: Recipe[] = [
       'Odebrané těsto rozetři do ploché formičky, tenčí muffin se líp propeče.',
       'Ověř špejlí, že uvnitř nezůstalo tekuté vejce, a nech muffin úplně vychladnout.',
       'Nakrájej ho na podlouhlé proužky, které dítě sevře v pěsti.',
+      'K dětskému muffinu polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z celozrnné mouky.',
     ],
     babyServing: {
       '6m': 'Podávej muffin nakrájený na proužky velikosti prstu, měkký střed se dobře rozmačká.',
@@ -245,6 +260,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'seminka-lnena-mleta', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'banan', amount: '2 kusy', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Dýni hokaido nakrájej i se slupkou na kostky a upeč ji doměkka.',
@@ -252,6 +268,7 @@ export const snacksBaking2: Recipe[] = [
       'Do pyré vmíchej vločky, mletá lněná semínka a rozpuštěný kokosový olej.',
       'Hmotu nech čtvrt hodiny odležet, vločky nasáknou a těsto se zpevní.',
       'Lžící tvaruj placičky na plech a peč je dvacet minut dozlatova.',
+      'Z pomeranče nastrouhej kůru do těsta a dužinu bez blan si nech na podávání.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce hmoty stranou, dřív než se z ní tvarují sušenky pro dospělé.',
@@ -259,6 +276,7 @@ export const snacksBaking2: Recipe[] = [
       'Z odebrané hmoty vytvaruj podlouhlý váleček, který dítě sevře v pěsti.',
       'Peč ho o pár minut déle, aby byl propečený a nedrolil se na vlhké kusy.',
       'Nech ho úplně vychladnout, teprve pak drží tvar.',
+      'K dětské sušence polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z mletých lněných semínek.',
     ],
     babyServing: {
       '6m': 'Podávej váleček velikosti prstu; dítě ho okusuje a měkký střed rozmačkává dásněmi.',
@@ -287,6 +305,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'olej-kokosovy', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'seminka-slunecnicova-mleta', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'voda', amount: '100 ml', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Rozmarýnové jehličky obeber ze stonku a nasekej je co nejjemněji.',
@@ -294,6 +313,7 @@ export const snacksBaking2: Recipe[] = [
       'Těsto prohněť do hladka a nech ho čtvrt hodiny odpočinout pod utěrkou.',
       'Rozválej ho tenko, nakrájej na obdélníky a posyp nasekaným rozmarýnem.',
       'Peč krekry osmnáct minut, dokud okraje nezhnědnou a plát nezkřupne.',
+      'Sladkou papriku nakrájej na proužky, které se ke krekrům podávají jako čerstvá složka.',
     ],
     babySplitPoint:
       'Po kroku 4 odkroj čtvrtinu plátu stranou, dřív než se zbytek sype solí pro dospělé.',
@@ -301,6 +321,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětskou část nakrájej na podlouhlé proužky, ne na malé obdélníky, které se špatně drží.',
       'Rozmarýn pro dítě nasekej opravdu najemno, celá jehlička je tvrdá a píchá.',
       'Nech krekry úplně vychladnout, teprve pak jsou dost pevné na uchopení.',
+      'K dětské porci polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej proužek krekru velikosti prstu, který dítě okusuje a rozměkčuje slinami.',
@@ -329,6 +350,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'ryzove-chlebicky', amount: '4 kusy', track: 'all' },
       { ingredientId: 'seminka-konopna-loupana', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Kešu máslo rozředěj dvěma lžícemi horké vody na hladkou roztíratelnou hmotu.',
@@ -336,6 +358,7 @@ export const snacksBaking2: Recipe[] = [
       'Banány oloupej a nakrájej je podélně na plátky, ne na kolečka.',
       'Na chlebíčky rozetři tenkou vrstvu rozředěného kešu másla.',
       'Navrch rozlož banánové plátky a posyp konopnými semínky a špetkou skořice.',
+      'Jahody zbav stopek a nakrájej je na tenké plátky, které rozložíš mezi kolečka banánu.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber jeden namazaný chlebíček stranou, dřív než se sypou mletá semínka a skořice.',
@@ -343,6 +366,7 @@ export const snacksBaking2: Recipe[] = [
       'Zkontroluj, že je kešu máslo opravdu rozředěné; hustá vrstva ořechového másla se lepí na patro.',
       'Banán nakrájej podélně na proužky velikosti prstu, kolečko je kulaté a klouže.',
       'Rýžový chlebíček pro dítě rozlom na velký kus, ne na drobky, které se snadno vdechnou.',
+      'Na dětský chlebíček polož plátky jahod; vitamin C z nich pomáhá vstřebat železo z kešu másla.',
     ],
     babyServing: {
       '6m': 'Podávej podélný proužek banánu obalený v rozředěném kešu másle, chlebíček zatím vynech.',
@@ -371,6 +395,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'krupice-psenicna', amount: '120 g', track: 'all' },
       { ingredientId: 'vejce-slepici', amount: '1 kus', track: 'all' },
       { ingredientId: 'mak-mlety', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Tvaroh promíchej s vejcem a krupicí a nech těsto půl hodiny odležet v chladu.',
@@ -378,6 +403,7 @@ export const snacksBaking2: Recipe[] = [
       'Z těsta tvaruj placičky, do každé vlož půlku meruňky a uzavři ji.',
       'Knedlíčky vař v mírně vroucí vodě osm minut, dokud nevyplavou.',
       'Uvařené knedlíčky obal v mletém máku a podávej vlažné.',
+      'Jahody zbav stopek a rozmačkej je vidličkou na dřeň, kterou knedlíčky přeliješ místo cukru.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dva uvařené knedlíčky stranou, dřív než se obalují v mletém máku pro dospělé.',
@@ -385,6 +411,7 @@ export const snacksBaking2: Recipe[] = [
       'Knedlíček rozkroj na čtvrtky a zkontroluj, že v něm nezůstala pecka ani její úlomek.',
       'Rozmačkej ho vidličkou, celý knedlík je pružný a drží pod dásněmi tvar.',
       'Posyp porci lžičkou mletého máku; celé makové zrnko projde trávením beze změny.',
+      'Dětské knedlíčky přelij jahodovou dření; vitamin C z ní pomáhá vstřebat železo z mletého máku.',
     ],
     babyServing: {
       '6m': 'Podávej knedlíček rozmačkaný s meruňkou do husté hmoty na lžíci.',
@@ -413,6 +440,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'jablko', amount: '3 kusy', track: 'all' },
       { ingredientId: 'mandlove-maslo', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'seminka-chia', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Jablka nastrouhej nahrubo a krátce poduš, dokud nepustí šťávu a nezměknou.',
@@ -420,6 +448,7 @@ export const snacksBaking2: Recipe[] = [
       'Mandlové máslo rozředěj dvěma lžícemi horké vody na roztíratelnou hmotu.',
       'Vločky, chia semínka, dušené jablko, brusinky i mandlové máslo smíchej v míse.',
       'Hmotu rozetři do vymazaného plechu a peč ji pětadvacet minut, pak nakrájej na tyčinky.',
+      'Z pomeranče vymačkej šťávu a zalij jí sušené brusinky, ať před pečením změknou.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce hmoty stranou, dřív než se rozetře do plechu pro dospělé.',
@@ -427,6 +456,7 @@ export const snacksBaking2: Recipe[] = [
       'Brusinky v dětské porci nasekej ještě jednou nadrobno, i změklé se lepí na patro.',
       'Ověř, že je mandlové máslo rozředěné; hustá ořechová vrstva je pro dítě riziko.',
       'Hmotu upeč zvlášť v malé formičce a nech ji úplně vychladnout, než ji nakrájíš.',
+      'K dětské tyčince polož kousky pomerančové dužiny bez blan; vitamin C z nich pomáhá vstřebat železo ze sušených brusinek.',
     ],
     babyServing: {
       '6m': 'Sušené ovoce se do šesti měsíců nenabízí; v téhle fázi podávej jen dušené strouhané jablko.',
@@ -539,6 +569,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'seminka-dynova-mleta', amount: '4 lžíce', track: 'all' },
       { ingredientId: 'jogurt-bily-plnotucny', amount: '150 g', track: 'all' },
       { ingredientId: 'voda', amount: '100 ml', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Droždí rozdrob do vlažné vody a nech ho deset minut vzejít do pěny.',
@@ -546,6 +577,7 @@ export const snacksBaking2: Recipe[] = [
       'Těsto krátce prohněť a nech ho hodinu kynout pod utěrkou v teple.',
       'Z těsta tvaruj menší bulky a nech je ještě dvacet minut nakynout na plechu.',
       'Peč bulky dvacet minut, dokud nezní po poklepání na spodek dutě.',
+      'Sladkou papriku nakrájej na proužky, které se k bulce podávají místo pomazánky se solí.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě menší bulky stranou, dřív než se zbytek potírá a sype pro dospělé.',
@@ -553,6 +585,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětské bulky tvaruj podlouhlé, ne kulaté, aby se daly sevřít v pěsti.',
       'Semínka používej jen mletá zapracovaná v těstě, celá se na povrchu snadno uvolní.',
       'Nech bulky úplně vychladnout, horké těsto je uvnitř lepivé.',
+      'K dětské bulce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky a z mletých dýňových semínek.',
     ],
     babyServing: {
       '6m': 'Podávej podlouhlou bulku rozkrojenou na proužky velikosti prstu bez tvrdé kůrky.',
@@ -624,6 +657,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'jogurt-bily-plnotucny', amount: '250 g', track: 'all' },
       { ingredientId: 'jedla-soda', amount: 'čtvrt lžičky', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Jedlou sodu rozmíchej v bílém jogurtu, kyselina v něm ji zneutralizuje a těsto nadzvedne.',
@@ -631,6 +665,7 @@ export const snacksBaking2: Recipe[] = [
       'Přisyp celozrnnou mouku s karobem a vyšlehej hladké těsto.',
       'Lívance opékej na kokosovém oleji po dvou minutách z každé strany.',
       'Zbylé hrušky nakrájej na měsíčky a podávej je k lívancům.',
+      'Jahody zbav stopek a rozmačkej je vidličkou na dřeň, kterou lívance přeliješ.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se ze zbytku opékají porce pro dospělé.',
@@ -638,6 +673,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětský lívanec peč pomaleji a menší, uvnitř nesmí zůstat syrové těsto.',
       'Zkontroluj rozlomením, že není cítit hořká sodová pachuť; soda musí být zneutralizovaná.',
       'Hruškový měsíček krátce poduš, syrová tvrdá hruška je pro tuhle fázi nevhodná.',
+      'Dětský lívanec přelij jahodovou dření; vitamin C z ní pomáhá vstřebat železo z celozrnné mouky.',
     ],
     babyServing: {
       '6m': 'Podávej lívanec nakrájený na proužky velikosti prstu a k němu dušenou hrušku.',
@@ -792,6 +828,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'karob', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'vlasske-orechy-mlete', amount: '80 g', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '3 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Pohankovou lámanku uvař doměkka a nech ji vychladnout.',
@@ -799,6 +836,7 @@ export const snacksBaking2: Recipe[] = [
       'Do datlové pasty vmíchej vychladlou pohanku, mleté vlašské ořechy a kokosový olej.',
       'Polovinu hmoty nech světlou, do druhé zamíchej karob.',
       'Lžící tvaruj placičky na plech a peč je dvacet minut, dokud nezpevní.',
+      'Z pomeranče nastrouhej kůru do těsta a dužinu bez blan si nech na podávání.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce hmoty stranou, dřív než se do části zamíchá karob.',
@@ -806,6 +844,7 @@ export const snacksBaking2: Recipe[] = [
       'Z odebrané hmoty vytvaruj podlouhlý váleček, který dítě sevře v pěsti.',
       'Ořechy používej jen mleté, celé ani nasekané do téhle fáze nepatří.',
       'Peč váleček o pár minut déle a nech ho úplně vychladnout, jinak se drolí.',
+      'K dětské sušence polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z pohanky i z datlí.',
     ],
     babyServing: {
       '6m': 'Podávej váleček velikosti prstu, který dítě okusuje a rozměkčuje slinami.',
@@ -916,11 +955,13 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'jogurt-bily-plnotucny', amount: '400 g', track: 'all' },
       { ingredientId: 'banan', amount: '1 zralý', track: 'all' },
       { ingredientId: 'seminka-chia', amount: '1 lžíce', track: 'all' },
+      { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Liči oloupej a z každého vyndej pecku; zkontroluj to prstem, u zralého plodu drží jen volně.',
       'Granátové jablko rozlouskej a jádra vylouskej do misky.',
       'Jogurt rozdělej lžící do hladka a rozděl do misek.',
+      'Kiwi oloupej a nakrájej na kostky, kterými misku doplníš vedle liči.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
@@ -928,6 +969,7 @@ export const snacksBaking2: Recipe[] = [
       'Dužninu liči rozřež podélně na čtvrtky — celé ani přepůlené se nepodává nikdy, kulatý tvar dýchací cesty uzavře.',
       'Granátová jádra rozmačkej v sítu a protlač; do porce patří jen šťáva, tvrdá jadérka zůstanou v sítu.',
       'Banán nakrájej podélně na proužky a všechno vmíchej do odebraného jogurtu spolu se lžičkou mletých semínek chia, která necháš deset minut nabobtnat.',
+      'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat rostlinné železo z jogurtové misky.',
     ],
     babyServing: {
       '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek banánu, který dítě uchopí.',
@@ -999,11 +1041,13 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
       { ingredientId: 'olej-slunecnicovy', amount: '3 lžíce', track: 'all' },
       { ingredientId: 'skorice-cejlonska', amount: 'špetka', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Všechny tři druhy ořechů umel v mlýnku na jemnou moučku — v těstě pro dítě nesmí zůstat ani kousek celého ořechu.',
       'Banány rozmačkej vidličkou, přidej ovesnou mouku, mletou ořechovou moučku, olej a špetku skořice.',
       'Těsto nech deset minut odpočinout, ovesná mouka mezitím nasákne a zhoustne.',
+      'Z pomeranče nastrouhej kůru do těsta a dužinu bez blan nakrájej na kousky k podávání.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
@@ -1011,6 +1055,7 @@ export const snacksBaking2: Recipe[] = [
       'Z odebraného těsta vytvaruj dvě podlouhlé tyčinky dlouhé jako dospělý prst, ne kolečka.',
       'Peč je na 170 °C patnáct minut, jen dokud nezpevní — přepečené sušenky tvrdnou a drolí se.',
       'Nech vychladnout na teplotu ruky a zkontroluj, že v tyčince nezůstal tvrdý kousek.',
+      'K dětské sušence polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z mleté ořechové směsi.',
     ],
     babyServing: {
       '6m': 'Podávej podlouhlou tyčinku vcelku, aby konec čouhal z pěsti.',
@@ -1040,11 +1085,13 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'jogurt-recky', amount: '400 g', track: 'all' },
       { ingredientId: 'hruska', amount: '2 zralé', track: 'all' },
       { ingredientId: 'slunecnicove-maslo', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Pistácie, para ořechy i piniové oříšky umel odděleně na jemnou moučku.',
       'Hrušky oloupej, zbav jádřinců a nakrájej na podélné proužky.',
       'Jogurt rozdělej lžící do hladka a rozděl do misek.',
+      'Kiwi oloupej a nakrájej na kostky, které rozložíš po jogurtu.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
@@ -1052,6 +1099,7 @@ export const snacksBaking2: Recipe[] = [
       'Vmíchej do odebraného jogurtu lžičku mleté pistáciové moučky a jen špetku mleté moučky z para ořechů — ta je kvůli selenu položkou na občas, ne na každý den.',
       'Přidej lžičku slunečnicového másla a rozmíchej ho, ať nezůstane v hrudce.',
       'Vedle nabídni podélný proužek hrušky, který dítě uchopí.',
+      'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat železo z mleté ořechové směsi.',
     ],
     babyServing: {
       '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek hrušky dlouhý jako dospělý prst.',
@@ -1206,11 +1254,13 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'chleb-kvaskovy', amount: '4 krajíce', track: 'all' },
       { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
       { ingredientId: 'seminka-slunecnicova-mleta', amount: '1 lžíce', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Rajčata spař, oloupej a zbav jadérek; slupka se v puse svine do proužku.',
       'Dužninu nakrájej nadrobno a nech ji chvíli okapat, ať pomazánka není vodová.',
       'Tvaroh rozdělej vidličkou s olivovým olejem a vmíchej nasekanou pažitku.',
+      'Sladkou papriku nakrájej na kostičky a část z nich vmíchej do pomazánky, zbytek nech na proužky.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce pomazánky, dřív než se mísa dochucuje pro dospělé.',
@@ -1218,6 +1268,7 @@ export const snacksBaking2: Recipe[] = [
       'Do odebrané porce vmíchej lžíci nakrájených rajčat a lžičku mletých slunečnicových semínek.',
       'Rajče nese vitamin C, který pomůže vstřebat železo z mletých semínek ve stejné porci.',
       'Krajíc chleba nakrájej na proužky široké jako dospělý prst a pomazánku na ně nanes v husté vrstvě.',
+      'Do dětské porce vmíchej kostičky papriky; vitamin C z nich pomáhá vstřebat železo z kváskového chleba.',
     ],
     babyServing: {
       '6m': 'Podávej potřený proužek chleba dlouhý jako dospělý prst, aby konec čouhal z pěsti.',
@@ -1700,11 +1751,13 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'seminka-slunecnicova-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'banan', amount: '1 zralý', track: 'all' },
       { ingredientId: 'mata', amount: 'pár lístků', track: 'all' },
+      { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Ananas oloupej, vyřízni tvrdý střed a dužninu nakrájej na podélné proužky.',
       'Tvaroh rozdělej vidličkou do hladka.',
       'Banán nakrájej podélně na proužky.',
+      'Kiwi oloupej a nakrájej na kostky, které smícháš s ananasem.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě lžíce tvarohu, dřív než se mísa dochucuje pro dospělé.',
@@ -1712,6 +1765,7 @@ export const snacksBaking2: Recipe[] = [
       'Proužek ananasu pro dětskou porci nakrájej ještě jednou nadrobno; vlákna jsou pevná a dítě je nerozžvýká.',
       'Vmíchej ho do odebraného tvarohu spolu se lžičkou mletých slunečnicových semínek.',
       'Ananas je dobrý zdroj vitaminu C a ten zlepší vstřebání železa z mletých semínek.',
+      'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat železo z mletých slunečnicových semínek.',
     ],
     babyServing: {
       '6m': 'Podávej tvaroh s nadrobno nakrájeným ananasem na naložené lžíci a vedle podélný proužek banánu.',

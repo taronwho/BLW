@@ -213,12 +213,14 @@ export const extras: Recipe[] = [
       { ingredientId: 'nektarinka', amount: '2 zralé', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'boruvky', amount: '100 g', track: 'all' },
+      { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
       'Nektarinky rozpul, vyjmi pecky a jednu nakrájej na měsíčky, druhou rozmačkej vidličkou na pyré.',
       'Tvaroh rozmíchej s lžící vody, aby byl krémový a dal se nabírat lžící.',
       'Borůvky rozkroj každou napůl; celá bobule má kulatý tvar, který malým dětem nesvědčí.',
       'Do misek navrstvi tvaroh, nektarinkové pyré a navrch měsíčky s rozkrojenými borůvkami.',
+      'Jahody zbav stopek, velké rozřež podélně na čtvrtky a menší rozmačkej vidličkou.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě lžíce tvarohu a lžíci nektarinkového pyré, dřív než se misky pro dospělé dosladí.',
@@ -226,6 +228,7 @@ export const extras: Recipe[] = [
       'Do dětské misky vmíchej lžičku mletých lněných semínek a nech je pět minut nabobtnat.',
       'Tvaroh zřeď lžící vody nebo mléka, aby nebyl hutný a dítě ho snadno polykalo.',
       'Nektarinku pro miminko oloupej, pokud má pevnou slupku, a borůvky vždy rozkroj.',
+      'Rozmačkané jahody vmíchej do tvarohu; vitamin C z nich pomáhá vstřebat železo z mletých lněných semínek.',
     ],
     babyServing: {
       '6m': 'Podávej krémový tvaroh s pyré na lžíci a k němu měsíček zralé nektarinky velikosti prstu do ruky.',
@@ -254,12 +257,14 @@ export const extras: Recipe[] = [
       { ingredientId: 'pazitka', amount: 'hrst', track: 'all' },
       { ingredientId: 'kmin-mlety', amount: 'půl lžičky', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'paprika-sladka', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Cizrnovou mouku smíchej s mletým kmínem a postupně přilévej vodu, dokud nevznikne těsto hustoty smetany.',
       'Nech těsto dvacet minut odpočinout; mouka nasákne a placky pak drží tvar.',
       'Jogurt rozmíchej s polovinou nastříhané pažitky na dip a rozděl ho do misek.',
       'Pánev potři kokosovým olejem a peč tenké placky po dvou minutách z každé strany.',
+      'Sladkou papriku nakrájej na proužky, které se k plackám namáčejí do dipu stejně dobře jako placka sama.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber tři lžíce těsta stranou a upeč z nich dítětiny placky, dřív než se zbytek těsta pro dospělé dochucuje.',
@@ -267,6 +272,7 @@ export const extras: Recipe[] = [
       'Dětské placky peč o něco menší a silnější, aby se v ruce nelámaly, a jednu rozlom na kontrolu propečení.',
       'Placku nakrájej na pásky široké jako dva prsty a nech ji zchladnout.',
       'Jogurt pro miminko nabídni samostatně bez dochucení, jen s nastříhanou pažitkou.',
+      'K dětské placce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej pásek placky dlouhý přes dlaň a jogurt v ploché misce, do které dítě zaboří konec pásku.',
@@ -588,6 +594,7 @@ export const extras: Recipe[] = [
       { ingredientId: 'kaki', amount: '2 zralé kusy', track: 'all' },
       { ingredientId: 'zitne-vlocky', amount: '80 g', track: 'all' },
       { ingredientId: 'seminka-lnena-mleta', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'mandarinka', amount: '2 kusy', track: 'all' },
     ],
     baseSteps: [
       'Žitné vločky zalij horkou vodou tak, aby byly ponořené, a nech je deset minut nabobtnat doměkka.',
@@ -595,6 +602,7 @@ export const extras: Recipe[] = [
       'Polovinu dužiny rozmačkej vidličkou na pyré, druhou nakrájej na kousky.',
       'Nabobtnalé vločky sceď a promíchej je se skyrem do hladkého krému.',
       'Krém rozděl do misek a doplň ho kaki.',
+      'Mandarinky oloupej, dílky zbav blány a prohmatej je proti světlu kvůli jadérkům.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce krému ze skyru s vločkami, ještě než se do misek přidá cokoli dalšího.',
@@ -602,6 +610,7 @@ export const extras: Recipe[] = [
       'Krém zřeď lžící vody nebo mléka, skyr je hustší než jogurt a v puse se lepí.',
       'Vmíchej do něj lžíci kaki pyré a lžičku mletých lněných semínek.',
       'Nech krém vychladnout na vlažnou teplotu a promíchej ho těsně před podáním.',
+      'Přidej do misky dílek mandarinky bez blány; vitamin C z něj pomáhá vstřebat železo ze žitných vloček.',
     ],
     babyServing: {
       '6m': 'Nanes krém jako silnou vrstvu na okraj misky, ať se dítě má o co opřít dlaní, a přidej měkký díl kaki na délku prstu bez slupky. Krém raději zřeď, hustý skyr zalehne ústa.',
@@ -630,6 +639,7 @@ export const extras: Recipe[] = [
       { ingredientId: 'banan', amount: '2 zralé', track: 'all' },
       { ingredientId: 'seminka-dynova-mleta', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'olej-kokosovy', amount: '2 lžíce', track: 'all' },
+      { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
       'Fíky zalij horkou vodou a nech je 15 minut nabobtnat doměkka, pak je sceď.',
@@ -637,6 +647,7 @@ export const extras: Recipe[] = [
       'Banány rozmačkej vidličkou a smíchej je s vločkami, rozpuštěným kokosovým olejem a mletými dýňovými semínky.',
       'Vmíchej nakrájené fíky, těsto rozprostři na plech do vrstvy vysoké dva centimetry a uhlaď ho.',
       'Peč 25 minut na 180 °C, nech vychladnout a teprve pak krájej na tyčinky.',
+      'Z pomeranče vymačkej šťávu a zalij jí sušené fíky, ať před mixováním nabobtnají.',
     ],
     babySplitPoint:
       'Po kroku 5 odděl jednu tyčinku pro miminko, ještě než se zbytek posype nebo dochutí.',
@@ -644,6 +655,7 @@ export const extras: Recipe[] = [
       'Tyčinku pro dítě nakrájej podélně na proužky široké jako prst dospělého.',
       'Zkontroluj, že v proužku nezůstal celý kus fíku; lepivé sousto vždycky rozdrob.',
       'Nech proužky vychladnout úplně, teplé se drolí a lepí.',
+      'K dětské tyčince polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo ze sušených fíků.',
     ],
     babyServing: {
       '6m': 'Podej proužek na délku prstu, který dítě sevře v pěsti a okusuje z konce. Drobné kousky v tomhle věku nenabízej, sevřená pěst je nedostane k puse.',
