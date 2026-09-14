@@ -37,3 +37,23 @@ const ADVERSE: ReadonlySet<string> = new Set(['kozni', 'travici', 'jina']);
 export function isAdverse(event: TastingEvent): boolean {
   return ADVERSE.has(event.reaction);
 }
+
+/**
+ * Které položky jsou právě teď oblíbené.
+ *
+ * Stav drží u každé položky i čas posledního přepnutí, aby se odebrání
+ * přeneslo mezi telefony. Obrazovkám stačí seznam id, takže se sem schovává
+ * ten převod — jinak by ho každá dělala po svém.
+ */
+export function favoriteIds(state: HouseholdState): Set<string> {
+  const out = new Set<string>();
+  for (const [id, zaznam] of Object.entries(state.favorites)) {
+    if (zaznam.hodnota) out.add(id);
+  }
+  return out;
+}
+
+/** Text poznámky k receptu, nebo prázdný řetězec, když žádná není. */
+export function recipeNote(state: HouseholdState, recipeId: string): string {
+  return state.recipeNotes[recipeId]?.hodnota ?? '';
+}

@@ -15,6 +15,7 @@ import { TastingLog } from '../components/TastingLog';
 import { ageInMonths, stageForAge, STAGE_LABELS } from '../lib/age';
 import { CHOKING_PRESENTATION } from '../lib/choking';
 import { tastingsByIngredient } from '../lib/derive';
+import { favoriteIds } from '../lib/tastings';
 import { recipesWithIngredient } from '../lib/deriveRecipes';
 import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
@@ -42,7 +43,7 @@ export function IngredientDetailScreen(): ReactNode {
 
   const prep = ingredient.prep[stage];
   const presentation = CHOKING_PRESENTATION[ingredient.chokingRisk];
-  const favorite = state.favorites.includes(ingredient.id);
+  const favorite = favoriteIds(state).has(ingredient.id);
   const acknowledged = acks.has(ingredient.id);
 
   return (

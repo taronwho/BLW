@@ -293,10 +293,32 @@ export interface HouseholdState {
    */
   memberSeenAt?: Record<string, number>;
   tastings: TastingEvent[];
-  /** ingredientId + recipeId */
-  favorites: string[];
-  recipeNotes: Record<string, string>;
+  /**
+   * Oblíbené suroviny a recepty, klíčem je `ingredientId` nebo `recipeId`.
+   *
+   * Není to seznam, ale mapa se značkou času, protože seznamy se při
+   * slučování dvou telefonů sjednocují a odebrání by se tím vždycky vrátilo
+   * zpátky. Takhle rozhoduje u každé položky poslední přepnutí — a to může
+   * být i „odebráno".
+   */
+  favorites: Record<string, CasovanaHodnota<boolean>>;
+  /** Poznámky rodiče k receptům, klíčem je `recipeId`. Se značkou času ze
+   *  stejného důvodu jako oblíbené: smazání poznámky musí přežít sloučení. */
+  recipeNotes: Record<string, CasovanaHodnota<string>>;
   schemaVersion: number;
+}
+
+/**
+ * Hodnota, u které rozhoduje čas poslední změny.
+ *
+ * Dva telefony můžou být offline a upravit totéž; vyhrává pozdější zápis,
+ * ať už něco přidává, mění, nebo maže. Bez značky času se nedá poznat, jestli
+ * je „prázdno" nová informace, nebo jen starý stav, který ještě nedošel.
+ */
+export interface CasovanaHodnota<T> {
+  hodnota: T;
+  /** Kdy se hodnota naposled změnila, v milisekundách. */
+  kdy: number;
 }
 
 /** Katalog, proti kterému běží validační pravidla */

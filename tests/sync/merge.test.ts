@@ -121,17 +121,68 @@ describe('mergeHouseholdState', () => {
     expect(merged.members).toHaveLength(MAX_MEMBERS);
   });
 
-  it('poznámky k receptům slučuje, kolizní klíč bere z novějšího stavu', () => {
-    const local = state({ recipeNotes: { placky: 'lokální', kase: 'jen lokální' } });
-    const remote = state({ recipeNotes: { placky: 'vzdálená' } });
+  it('poznámky k receptům slučuje, kolizní klíč bere z pozdějšího zápisu', () => {
+    const local = state({
+      recipeNotes: {
+        placky: { hodnota: 'lokální', kdy: 10 },
+        kase: { hodnota: 'jen lokální', kdy: 10 },
+      },
+    });
+    const remote = state({ recipeNotes: { placky: { hodnota: 'vzdálená', kdy: 20 } } });
 
     const merged = mergeHouseholdState(local, remote, {
       localUpdatedAt: 1,
       remoteUpdatedAt: 2,
     });
 
-    expect(merged.recipeNotes['placky']).toBe('vzdálená');
-    expect(merged.recipeNotes['kase']).toBe('jen lokální');
+    expect(merged.recipeNotes['placky']?.hodnota).toBe('vzdálená');
+    expect(merged.recipeNotes['kase']?.hodnota).toBe('jen lokální');
+  });
+
+  it('smazaná poznámka se z druhého telefonu nevrátí', () => {
+    // Rodič poznámku smaže (uloží prázdný text), druhý telefon o tom ještě
+    // neví a drží starou. Dřív se stará vracela, protože se mapy jen slévaly.
+    const smazal = state({ recipeNotes: { placky: { hodnota: '', kdy: 20 } } });
+    const stary = state({ recipeNotes: { placky: { hodnota: 'stará poznámka', kdy: 10 } } });
+
+    const zPohleduMazajiciho = mergeHouseholdState(smazal, stary, {
+      localUpdatedAt: 2,
+      remoteUpdatedAt: 1,
+    });
+    const zPohleduDruheho = mergeHouseholdState(stary, smazal, {
+      localUpdatedAt: 3,
+      remoteUpdatedAt: 2,
+    });
+
+    expect(zPohleduMazajiciho.recipeNotes['placky']?.hodnota).toBe('');
+    expect(zPohleduDruheho.recipeNotes['placky']?.hodnota).toBe('');
+  });
+
+  it('odebraná oblíbená položka se z druhého telefonu nevrátí', () => {
+    // Nejvíc viditelná vada starého slučování: hvězdička se po odebrání
+    // sama rozsvítila zpátky, jakmile druhý telefon cokoli uložil.
+    const odebral = state({ favorites: { brokolice: { hodnota: false, kdy: 20 } } });
+    const stary = state({ favorites: { brokolice: { hodnota: true, kdy: 10 } } });
+
+    expect(
+      mergeHouseholdState(odebral, stary, { localUpdatedAt: 2, remoteUpdatedAt: 1 }).favorites[
+        'brokolice'
+      ]?.hodnota,
+    ).toBe(false);
+    expect(
+      mergeHouseholdState(stary, odebral, { localUpdatedAt: 3, remoteUpdatedAt: 2 }).favorites[
+        'brokolice'
+      ]?.hodnota,
+    ).toBe(false);
+  });
+
+  it('novější přidání zpátky nad odebráním vyhraje', () => {
+    const znovuPridal = state({ favorites: { brokolice: { hodnota: true, kdy: 30 } } });
+    const odebral = state({ favorites: { brokolice: { hodnota: false, kdy: 20 } } });
+    expect(
+      mergeHouseholdState(znovuPridal, odebral, { localUpdatedAt: 3, remoteUpdatedAt: 2 })
+        .favorites['brokolice']?.hodnota,
+    ).toBe(true);
   });
 });
 

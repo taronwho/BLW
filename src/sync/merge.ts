@@ -1,4 +1,4 @@
-import type { HouseholdState, TastingEvent } from '@/types';
+import type { CasovanaHodnota, HouseholdState, TastingEvent } from '@/types';
 
 /**
  * Slučování stavu domácnosti podle docs/SPEC.md kapitola 7.
@@ -6,10 +6,19 @@ import type { HouseholdState, TastingEvent } from '@/types';
  *  - `TastingEvent` je append-only: záznam se nikdy nepřepisuje, jen přidává.
  *    Když dva telefony zapíšou offline každý svou ochutnávku, po připojení
  *    musí zůstat obě. Proto má každý záznam vlastní `id`.
+ *  - Oblíbené a poznámky k receptům nesou u každé položky čas poslední změny
+ *    a slučují se po klíčích. Sjednocení seznamů, které tu bylo dřív, mělo
+ *    tichou vadu: odebrání oblíbené položky se při sloučení vždycky vrátilo
+ *    zpátky, protože sjednocení umí jen přidávat. Totéž platilo pro smazanou
+ *    poznámku.
  *  - Ostatní pole jsou last-write-wins podle `createdAt` domácnosti.
  */
 
-export const SCHEMA_VERSION = 1;
+/**
+ * 1 → 2: `favorites` bylo pole id, `recipeNotes` mapa id → text. Obojí je
+ * teď mapa id → hodnota se značkou času.
+ */
+export const SCHEMA_VERSION = 2;
 
 export function emptyHouseholdState(): HouseholdState {
   return {
@@ -17,7 +26,7 @@ export function emptyHouseholdState(): HouseholdState {
     childBirthDate: '',
     members: [],
     tastings: [],
-    favorites: [],
+    favorites: {},
     recipeNotes: {},
     schemaVersion: SCHEMA_VERSION,
   };
@@ -68,6 +77,97 @@ function mergeUnique(local: readonly string[], remote: readonly string[]): strin
   return [...new Set([...local, ...remote])];
 }
 
+/**
+ * Sloučí dvě mapy se značkou času. U každého klíče vyhraje pozdější zápis,
+ * takže projde i mazání — na rozdíl od sjednocení seznamů.
+ *
+ * Při shodném čase zůstává vzdálená hodnota, stejně jako u ostatních polí:
+ * server je autorita, ať se dva telefony nepřetahují donekonečna.
+ */
+function mergeCasovane<T>(
+  local: Readonly<Record<string, CasovanaHodnota<T>>>,
+  remote: Readonly<Record<string, CasovanaHodnota<T>>>,
+): Record<string, CasovanaHodnota<T>> {
+  const out: Record<string, CasovanaHodnota<T>> = { ...remote };
+  for (const [klic, hodnota] of Object.entries(local)) {
+    const protejsek = out[klic];
+    if (protejsek === undefined || hodnota.kdy > protejsek.kdy) out[klic] = hodnota;
+  }
+  return out;
+}
+
+/** Jsou hodnoty ve tvaru, který umí tahle verze? Starší zálohy mají tvar 1. */
+function jeCasovanaMapa(value: unknown): boolean {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
+  return Object.values(value as Record<string, unknown>).every(
+    (item) => typeof item === 'object' && item !== null && 'kdy' in item,
+  );
+}
+
+/**
+ * Převod staršího stavu na dnešní tvar.
+ *
+ * Pouští se na všechno, co přijde zvenčí — z prohlížeče, z Firestore
+ * i z ručně nahrané zálohy. Bez něj by aplikace spadla na tom, že `favorites`
+ * je pole a ne mapa, a rodič by přišel o celý deník.
+ */
+export function migrateHouseholdState(raw: unknown): HouseholdState {
+  const zaklad = emptyHouseholdState();
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return zaklad;
+  const vstup = raw as Record<string, unknown>;
+
+  const favorites: Record<string, CasovanaHodnota<boolean>> = {};
+  if (Array.isArray(vstup['favorites'])) {
+    // Tvar 1: prosté pole id. Čas 0 znamená „od nepaměti", takže jakékoli
+    // pozdější přepnutí na kterémkoli telefonu nad ním vyhraje.
+    for (const id of vstup['favorites'] as unknown[]) {
+      if (typeof id === 'string') favorites[id] = { hodnota: true, kdy: 0 };
+    }
+  } else if (jeCasovanaMapa(vstup['favorites'])) {
+    Object.assign(favorites, vstup['favorites']);
+  }
+
+  const recipeNotes: Record<string, CasovanaHodnota<string>> = {};
+  const syroveNotes = vstup['recipeNotes'];
+  if (jeCasovanaMapa(syroveNotes)) {
+    Object.assign(recipeNotes, syroveNotes);
+  } else if (syroveNotes !== null && typeof syroveNotes === 'object' && !Array.isArray(syroveNotes)) {
+    for (const [id, text] of Object.entries(syroveNotes as Record<string, unknown>)) {
+      if (typeof text === 'string') recipeNotes[id] = { hodnota: text, kdy: 0 };
+    }
+  }
+
+  const tastings = Array.isArray(vstup['tastings'])
+    ? (vstup['tastings'] as TastingEvent[]).filter(
+        (event) => typeof event?.id === 'string' && typeof event?.ingredientId === 'string',
+      )
+    : [];
+
+  return {
+    ...zaklad,
+    childName: typeof vstup['childName'] === 'string' ? vstup['childName'] : '',
+    childBirthDate: typeof vstup['childBirthDate'] === 'string' ? vstup['childBirthDate'] : '',
+    ...(typeof vstup['childGrip'] === 'string'
+      ? { childGrip: vstup['childGrip'] as HouseholdState['childGrip'] }
+      : {}),
+    ...(Array.isArray(vstup['readySigns'])
+      ? { readySigns: vstup['readySigns'] as HouseholdState['readySigns'] }
+      : {}),
+    members: Array.isArray(vstup['members'])
+      ? (vstup['members'] as unknown[]).filter((uid): uid is string => typeof uid === 'string')
+      : [],
+    ...(vstup['memberSeenAt'] !== null &&
+    typeof vstup['memberSeenAt'] === 'object' &&
+    !Array.isArray(vstup['memberSeenAt'])
+      ? { memberSeenAt: vstup['memberSeenAt'] as Record<string, number> }
+      : {}),
+    tastings,
+    favorites,
+    recipeNotes,
+    schemaVersion: SCHEMA_VERSION,
+  };
+}
+
 /** Poslední zápis vyhrává; při shodě zůstává vzdálená hodnota (autorita serveru). */
 function lastWriteWins<T>(local: T, remote: T, localNewer: boolean): T {
   return localNewer ? local : remote;
@@ -106,10 +206,8 @@ export function mergeHouseholdState(
     ...(videno === undefined ? {} : { memberSeenAt: videno }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),
-    favorites: mergeUnique(local.favorites, remote.favorites),
-    recipeNotes: localNewer
-      ? { ...remote.recipeNotes, ...local.recipeNotes }
-      : { ...local.recipeNotes, ...remote.recipeNotes },
+    favorites: mergeCasovane(local.favorites, remote.favorites),
+    recipeNotes: mergeCasovane(local.recipeNotes, remote.recipeNotes),
     schemaVersion: Math.max(local.schemaVersion, remote.schemaVersion),
   };
 }

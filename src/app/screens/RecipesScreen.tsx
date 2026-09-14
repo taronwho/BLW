@@ -43,6 +43,7 @@ import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState
 import { RECIPE_SORTS } from '../lib/sorting';
 import { sortRecipes } from '../lib/sortingRecipes';
 import type { SortKey } from '../lib/sorting';
+import { favoriteIds } from '../lib/tastings';
 
 const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny' },
@@ -66,7 +67,7 @@ const TIME_OPTIONS: readonly ChipOption[] = [
 /** Seznam receptů s filtry (docs/SPEC.md kap. 4.3). */
 export function RecipesScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
-  const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
+  const favorites = useMemo(() => favoriteIds(state), [state]);
   // Filtry drží adresa, ne komponenta — viz src/app/lib/urlState.ts.
   const [query, setQuery] = useUrlText('q', '');
   const [category, setCategory] = useUrlText('kat', 'vse');

@@ -43,6 +43,7 @@ import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
 import { IngredientIcon } from '../components/IngredientIcon';
+import { favoriteIds } from '../lib/tastings';
 
 /**
  * Deník má tři stavy, které se navzájem vylučují — ochutnané a neochutnané
@@ -87,7 +88,7 @@ export function IngredientsScreen(): ReactNode {
   const nastavFiltry = useUrlBatch();
 
   const tasted = useMemo(() => tastedIds(state), [state]);
-  const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
+  const favorites = useMemo(() => favoriteIds(state), [state]);
   const months = ageInMonths(state.childBirthDate);
   const month = new Date().getMonth() + 1;
 

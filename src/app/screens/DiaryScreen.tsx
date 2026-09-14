@@ -11,6 +11,7 @@ import { ChokingLegend } from '../components/ChokingLegend';
 import { ageInMonths } from '../lib/age';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
+import { favoriteIds } from '../lib/tastings';
 
 /** Deník ochutnávek (docs/SPEC.md kap. 4.5). */
 export function DiaryScreen(): ReactNode {
@@ -38,7 +39,7 @@ export function DiaryScreen(): ReactNode {
   );
   // Oblíbit se dá surovina i recept; dřív se sem dostaly jen suroviny
   // a označený recept tu zmizel beze stopy.
-  const favorites = state.favorites
+  const favorites = [...favoriteIds(state)]
     .map((id) => ingredientById.get(id)?.nameCz ?? recipeById.get(id)?.titleCz)
     .filter((name): name is string => name !== undefined);
 

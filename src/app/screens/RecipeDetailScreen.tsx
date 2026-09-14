@@ -18,6 +18,7 @@ import { ageInMonths, stageForAge } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian, recipeServingForm } from '../lib/deriveRecipes';
 import { dedupeSources } from '../lib/sources';
 import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { favoriteIds, recipeNote } from '../lib/tastings';
 
 const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
   all: 'Společné',
@@ -40,7 +41,7 @@ export function RecipeDetailScreen(): ReactNode {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => setStage(currentStage), [currentStage]);
-  useEffect(() => setNote(state.recipeNotes[id] ?? ''), [state.recipeNotes, id]);
+  useEffect(() => setNote(recipeNote(state, id)), [state, id]);
 
   const allergens = useMemo(() => (recipe === undefined ? [] : recipeAllergens(recipe)), [recipe]);
 
@@ -49,7 +50,7 @@ export function RecipeDetailScreen(): ReactNode {
 
   // Dvě varianty dochucení dávají smysl jen tam, kde v jídle maso opravdu je.
   const bezmasy = recipeIsVegetarian(recipe);
-  const favorite = state.favorites.includes(recipe.id);
+  const favorite = favoriteIds(state).has(recipe.id);
 
   return (
     <article className="flex flex-col gap-5">

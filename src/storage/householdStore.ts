@@ -4,6 +4,7 @@ import {
   emptyHouseholdState,
   MAX_MEMBERS,
   mergeHouseholdState,
+  migrateHouseholdState,
   newTastingId,
   SCHEMA_VERSION,
 } from '@/sync/merge';
@@ -40,7 +41,7 @@ interface HouseholdStore {
   deleteTasting(id: string): Promise<void>;
   toggleFavorite(id: string): Promise<void>;
   setRecipeNote(recipeId: string, note: string): Promise<void>;
-  importState(state: HouseholdState): Promise<void>;
+  importState(raw: unknown): Promise<void>;
 }
 
 let localAdapter: StorageAdapter | null = null;
@@ -102,7 +103,9 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     const code = readStoredCode();
     set({
       ready: true,
-      state: stored?.state ?? emptyHouseholdState(),
+      // Data uložená starší verzí mají jiný tvar `favorites` i `recipeNotes`;
+      // bez převodu by na nich aplikace spadla a rodič by přišel o deník.
+      state: stored === null ? emptyHouseholdState() : migrateHouseholdState(stored.state),
       updatedAt: stored?.updatedAt ?? 0,
       householdCode: code,
     });
@@ -134,7 +137,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       const remote = await adapter.load();
       const localState = get().state;
       if (remote !== null) {
-        const merged = mergeHouseholdState(localState, remote.state, {
+        const merged = mergeHouseholdState(localState, migrateHouseholdState(remote.state), {
           localUpdatedAt: get().updatedAt,
           remoteUpdatedAt: remote.updatedAt,
         });
@@ -147,12 +150,16 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       // nezpracují dvakrát.
       remoteUnsubscribe?.();
       remoteUnsubscribe = adapter.subscribe((incoming) => {
-        const merged = mergeHouseholdState(get().state, incoming.state, {
+        const merged = mergeHouseholdState(get().state, migrateHouseholdState(incoming.state), {
           localUpdatedAt: get().updatedAt,
           remoteUpdatedAt: incoming.updatedAt,
         });
-        set({ state: merged });
-        void local().save({ state: merged, updatedAt: Date.now() });
+        // Čas zápisu musí sedět v paměti i na disku. Dřív se do paměti
+        // neukládal vůbec, takže se po přenačtení stránky lišil od toho na
+        // disku a další slučování počítalo s jiným časem, než jaký platil.
+        const kdy = Date.now();
+        set({ state: merged, updatedAt: kdy });
+        void local().save({ state: merged, updatedAt: kdy });
       });
 
       set({
@@ -272,23 +279,42 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       await get().updateTasting(id, { deleted: true });
     },
 
+    /**
+     * Přepnutí oblíbené položky se ukládá i s časem.
+     *
+     * Bez času by se odebrání při slučování dvou telefonů vždycky vrátilo —
+     * sjednocení seznamů umí jen přidávat. Takhle je „odebráno" plnohodnotný
+     * zápis, který na druhém telefonu přebije starší „přidáno".
+     */
     async toggleFavorite(id: string): Promise<void> {
-      const current = get().state.favorites;
-      const next = current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id];
-      await persist({ ...get().state, favorites: next });
-    },
-
-    async setRecipeNote(recipeId: string, note: string): Promise<void> {
+      const stav = get().state;
+      const zapnuto = stav.favorites[id]?.hodnota === true;
       await persist({
-        ...get().state,
-        recipeNotes: { ...get().state.recipeNotes, [recipeId]: note },
+        ...stav,
+        favorites: { ...stav.favorites, [id]: { hodnota: !zapnuto, kdy: Date.now() } },
       });
     },
 
-    async importState(state: HouseholdState): Promise<void> {
-      const merged = mergeHouseholdState(get().state, state, {
+    /** Poznámka k receptu, také s časem — smazaná poznámka musí přežít sloučení. */
+    async setRecipeNote(recipeId: string, note: string): Promise<void> {
+      const stav = get().state;
+      await persist({
+        ...stav,
+        recipeNotes: { ...stav.recipeNotes, [recipeId]: { hodnota: note, kdy: Date.now() } },
+      });
+    },
+
+    /**
+     * Sloučení nahrané zálohy se současným stavem.
+     *
+     * Bere `unknown`, protože obsah souboru nikdo nekontroluje — rodič může
+     * vybrat jiný soubor a dřív se na tom slučování rozbilo tak, že se chyba
+     * nedostala ven a aplikace hlásila úspěch, i když se nic neuložilo.
+     * Převod na dnešní tvar zároveň otevře i staré zálohy.
+     */
+    async importState(raw: unknown): Promise<void> {
+      const vstup = migrateHouseholdState(raw);
+      const merged = mergeHouseholdState(get().state, vstup, {
         localUpdatedAt: get().updatedAt,
         remoteUpdatedAt: Date.now(),
       });

@@ -239,14 +239,17 @@ export function HouseholdScreen(): ReactNode {
             onChange={(event) => {
               const file = event.target.files?.[0];
               if (file === undefined) return;
-              void file.text().then((text) => {
+              // Výsledek se musí počkat, jinak se chyba ze slučování objeví až
+              // po `catch` a rodič uvidí „naimportováno", i když se nic
+              // neuložilo. Přesně to se dřív stávalo u jiného souboru.
+              void (async () => {
                 try {
-                  void importState(JSON.parse(text));
+                  await importState(JSON.parse(await file.text()));
                   setMessage('Data naimportována a sloučena.');
                 } catch {
-                  setMessage('Soubor se nepodařilo přečíst.');
+                  setMessage('Tohle není záloha Drobka — soubor se nenačetl.');
                 }
-              });
+              })();
             }}
           />
         </label>
