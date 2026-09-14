@@ -17,8 +17,23 @@ function get(id: string): Ingredient {
 describe('zařazení podle železa, zinku a vitaminu C', () => {
   it('maso nese hemové železo', () => {
     const profile = nutrientProfile(get('hovezi-zadni'));
-    expect(profile.iron).not.toBe('nevyznamny');
+    // Pečené hovězí zadní má podle tabulky 2,5 mg železa na 100 g. To je nad
+    // prahem „obsahuje" (2,22 mg), ale pod prahem „významný zdroj" (4,44 mg).
+    // Hovězí není dobrý zdroj železa kvůli množství, ale proto, že hemové
+    // železo se vstřebává násobně líp než rostlinné — a to nese `ironForm`,
+    // ne stupnice teček. Dokud tu stálo zařazení podle skupiny, tvrdila
+    // aplikace „významný zdroj"; číslo z tabulky to opravilo.
+    expect(profile.iron).toBe('obsahuje');
     expect(profile.ironForm).toBe('hemove');
+  });
+
+  it('játra zůstávají významným zdrojem i podle naměřených hodnot', () => {
+    // Kuřecí játra mají 11,63 mg železa a 3,98 mg zinku na 100 g — jediné
+    // maso katalogu, které u železa prahu 4,44 mg dosáhne s velkou rezervou.
+    const profile = nutrientProfile(get('kureci-jatra'));
+    expect(profile.iron).toBe('vyznamny');
+    expect(profile.ironForm).toBe('hemove');
+    expect(profile.zinc).toBe('vyznamny');
   });
 
   it('luštěniny nesou nehemové železo', () => {
@@ -52,6 +67,16 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
     for (const id of ['rakytnik', 'maliny', 'mango', 'ananas', 'kaki', 'aronie']) {
       expect(nutrientProfile(get(id)).vitaminC).not.toBe('nevyznamny');
     }
+  });
+
+  it('rajčatový protlak je podle tabulky zdroj vitaminu C, i když je zavařený', () => {
+    // Skupinové pravidlo říká, že protlačené a zavařené ovoce se za zdroj
+    // vitaminu C nevydává. U protlaku to ale číslo vyvrací: je zahuštěný
+    // zhruba pětinásobně, takže i po ztrátách zbude 54,4 mg na 100 g podle
+    // české tabulky — a norská tabulka u téhož výrobku uvádí 45 mg, takže
+    // nejde o ojedinělý údaj. Naměřená hodnota má podle docs/BEZPECNOST.md
+    // kap. 8 přednost před skupinou.
+    expect(nutrientProfile(get('rajcatovy-protlak')).vitaminC).toBe('vyznamny');
   });
 
   it('sušené ovoce se za zdroj vitaminu C nevydává', () => {

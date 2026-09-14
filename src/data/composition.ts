@@ -39,7 +39,7 @@ import type { NutrientLevel } from './nutrients';
  *
  * PROČ NĚKDE ČÍSLO CHYBÍ. Když tabulka pro živinu hodnotu nemá nebo uvádí
  * nulu, řádek ji prostě neobsahuje a zařazení té živiny se řídí dál skupinou.
- * Bez čísla zůstalo 80 z 301 surovin katalogu: dvacet z nich jsou
+ * Bez čísla zůstalo 43 z 301 surovin katalogu: dvacet z nich jsou
  * bylinky a koření, které se podle docs/BEZPECNOST.md kap. 8 do živin
  * nepočítají vůbec (špetka příjem neposune), zbytek jsou položky, které žádná
  * z povolených tabulek nevede — žitné, ječné a špaldové vločky, kukuřičné
@@ -508,6 +508,102 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
   },
   'vejce-kreplci': z({ iron: 3.65, zinc: 1.47 }, usdaFdc('Egg, quail, whole, fresh, raw', 172191)),
   'creme-fraiche': z({ vitaminC: 0.9, zinc: 0.33 }, usdaFdc('Cream, sour, cultured', 171257)),
+
+  /* Ořechy, semínka a tuky */
+  'arasidove-maslo': z({ iron: 1.74, zinc: 2.51 }, usdaFdc('Peanut butter, smooth style, without salt', 172470)),
+  'mandlove-maslo': z({ iron: 3.49, zinc: 3.29 }, usdaFdc('Nuts, almond butter, plain, without salt added', 168588)),
+  'kesu-maslo': z({ iron: 5.03, zinc: 5.16 }, usdaFdc('Nuts, cashew butter, plain, without salt added', 170163)),
+  'tahini': z({ iron: 2.51, zinc: 4.64 }, usdaFdc('Seeds, sesame butter, tahini, from raw and stone ground kernels', 169410)),
+  'seminka-lnena-mleta': z({ vitaminC: 0.6, iron: 5.73, zinc: 4.34 }, usdaFdc('Seeds, flaxseed', 169414)),
+  'seminka-chia': z({ vitaminC: 1.6, iron: 7.72, zinc: 4.58 }, usdaFdc('Seeds, chia seeds, dried', 170554)),
+  'seminka-konopna-loupana': z({ vitaminC: 0.5, iron: 7.95, zinc: 9.9 }, usdaFdc('Seeds, hemp seed, hulled', 170148)),
+  'seminka-dynova-mleta': {
+    ...z({ vitaminC: 1.9, iron: 15 }, czfcdb('Semena tykvová (dýňová), sušená', 369)),
+    ...z({ zinc: 7.81 }, usdaFdc('Seeds, pumpkin and squash seed kernels, dried', 170556)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA; česká tabulka zinek u semen neuvádí.',
+  },
+  'seminka-slunecnicova-mleta': {
+    ...z({ vitaminC: 1.4, iron: 12.3 }, czfcdb('Semena slunečnicová', 371)),
+    ...z({ zinc: 5 }, usdaFdc('Seeds, sunflower seed kernels, dried', 170562)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'sezam-mlety': {
+    ...z({ iron: 9.9 }, czfcdb('Semena sezamová', 372)),
+    ...z({ zinc: 7.75 }, usdaFdc('Seeds, sesame seeds, whole, dried', 170150)),
+    poznamka: 'Železo z české tabulky, zinek z USDA.',
+  },
+  'mak-mlety': {
+    ...z({ vitaminC: 1, zinc: 7.9 }, usdaFdc('Spices, poppy seed', 171330)),
+    ...z({ iron: 8.8 }, czfcdb('Mák', 83)),
+    poznamka: 'USDA vede mák mezi kořením, je to ale tentýž mák, co se v Česku mele na náplně.',
+  },
+  'vlasske-orechy-mlete': {
+    ...z({ vitaminC: 5.5, iron: 2.7 }, czfcdb('Ořechy vlašské', 88)),
+    ...z({ zinc: 3.09 }, usdaFdc('Nuts, walnuts, english', 170187)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'mandle-mlete': {
+    ...z({ vitaminC: 5, iron: 3.4 }, czfcdb('Mandle', 87)),
+    ...z({ zinc: 3.12 }, usdaFdc('Nuts, almonds', 170567)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'olej-olivovy': z({ iron: 0.6 }, czfcdb('Olej olivový', 382)),
+  'olej-lneny': z({ zinc: 0.07 }, usdaFdc('Oil, flaxseed, cold pressed', 167702)),
+  'olej-kokosovy': z({ iron: 0.05, zinc: 0.02 }, usdaFdc('Oil, coconut', 171412)),
+  'mleko-kokosove': {
+    ...z({ vitaminC: 1, iron: 3.3, zinc: 0.56 }, usdaFdc('Nuts, coconut milk, canned (liquid expressed from grated meat and water)', 170173)),
+    poznamka: 'Měřeno konzervované kokosové mléko, ne kokosový nápoj v krabici.',
+  },
+  'liskove-orechy': {
+    ...z({ vitaminC: 4.1, iron: 5.8 }, czfcdb('Ořechy lískové', 335)),
+    ...z({ zinc: 2.45 }, usdaFdc('Nuts, hazelnuts or filberts', 170581)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'kesu-orechy': {
+    ...z({ vitaminC: 0.5, zinc: 5.78 }, usdaFdc('Nuts, cashew nuts, raw', 170162)),
+    ...z({ iron: 4.2 }, czfcdb('Ořechy kešu', 370)),
+    poznamka: 'Železo z české tabulky, vitamin C a zinek z USDA.',
+  },
+  'arasidy': {
+    ...z({ iron: 3 }, czfcdb('Arašídy', 367)),
+    ...z({ zinc: 3.27 }, usdaFdc('Peanuts, all types, raw', 172430)),
+    poznamka: 'Železo z české tabulky, zinek z USDA.',
+  },
+  'pistacie': {
+    ...z({ vitaminC: 5.6, iron: 3.9 }, czfcdb('Ořechy pistáciové', 368)),
+    ...z({ zinc: 2.2 }, usdaFdc('Nuts, pistachio nuts, raw', 170184)),
+    poznamka: 'Vitamin C a železo z české tabulky, zinek z USDA.',
+  },
+  'para-orechy': z({ vitaminC: 0.7, iron: 2.43, zinc: 4.06 }, usdaFdc('Nuts, brazilnuts, dried, unblanched', 170569)),
+  'pekanove-orechy': z({ vitaminC: 1.1, iron: 2.53, zinc: 4.53 }, usdaFdc('Nuts, pecans', 170182)),
+  'makadamove-orechy': z({ vitaminC: 1.2, iron: 3.69, zinc: 1.3 }, usdaFdc('Nuts, macadamia nuts, raw', 170178)),
+  'piniove-orisky': z({ vitaminC: 0.8, iron: 5.53, zinc: 6.45 }, usdaFdc('Nuts, pine nuts, dried', 170591)),
+  'slunecnicove-maslo': z({ vitaminC: 2.7, iron: 4.12, zinc: 4.89 }, usdaFdc('Seeds, sunflower seed butter, without salt', 170155)),
+  'olej-slunecnicovy': z({ iron: 0.03 }, usdaFdc('Oil, sunflower, linoleic (less than 60%)', 171017)),
+
+  /* Ostatní */
+  'kvasnice-drozdi': {
+    ...z({ vitaminC: 0.1, iron: 3.25, zinc: 9.97 }, usdaFdc('Leavening agents, yeast, baker\'s, compressed', 175042)),
+    poznamka: 'Měřeno čerstvé lisované droždí.',
+  },
+  'kakao-100': z({ iron: 13.86, zinc: 6.81 }, usdaFdc('Cocoa, dry powder, unsweetened', 169593)),
+  'karob': z({ vitaminC: 0.2, iron: 2.94, zinc: 0.92 }, usdaFdc('Carob flour', 173755)),
+  'ocet-jablecny': z({ iron: 0.2, zinc: 0.04 }, usdaFdc('Vinegar, cider', 173469)),
+  'skrob-kukuricny': z({ iron: 0.47, zinc: 0.06 }, usdaFdc('Cornstarch', 169698)),
+  'sul': z({ iron: 0.02 }, czfcdb('Sůl jedlá', 249)),
+  'cukr-krystal': z({ iron: 0.3 }, czfcdb('Cukr řepný, bílý', 190)),
+  'napoj-ryzovy': {
+    ...z({ iron: 0.2, zinc: 0.13 }, usdaFdc('Beverages, rice milk, unsweetened', 171942)),
+    poznamka: 'Rýžové nápoje nejsou pro děti do pěti let vhodné kvůli arsenu; číslo tu stojí jen pro úplnost.',
+  },
+  'napoj-ovesny': {
+    ...z({ iron: 0.1, zinc: 0.1 }, matvaretabellen('Havrebasert drikke', 'havrebasert-drikke')),
+    poznamka: 'Hodnota je z norské tabulky; česká ani americká ovesný nápoj nevedou. Obohacované nápoje mohou mít víc.',
+  },
+  'napoj-mandlovy': {
+    ...z({ iron: 0.28, zinc: 0.06 }, usdaFdc('Beverages, almond milk, unsweetened, shelf stable', 174832)),
+    poznamka: 'Měřeno neslazený mandlový nápoj bez obohacení.',
+  },
 
   /* Zelenina */
   'mrkev': z({ vitaminC: 4.5, iron: 1.1 }, czfcdb('Mrkev', 62)),

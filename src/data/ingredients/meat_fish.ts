@@ -52,7 +52,7 @@ export const meatFish: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole zvládne kuřecí prso nakrájené na kostky velikosti sousta. Maso je dobrým zdrojem dobře vstřebatelného železa, které dítě po půl roce života potřebuje doplňovat z jídla.',
+          'Batole zvládne kuřecí prso nakrájené na kostky velikosti sousta. Železa má kuřecí prso jen 1,04 mg na 100 g, zato hemového, které se vstřebává násobně líp než rostlinné. Na doplnění železa po půl roce se ale hodí spíš tmavé maso, játra nebo luštěniny s vitaminem C.',
         caution: 'Grilované maso s tvrdou kůrkou nakrájej obzvlášť malé.',
       },
     },
@@ -540,7 +540,7 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nasekané jehněčí promíchej s cuketou a s kuskusem. Maso je bohaté na železo a zinek a jeho výrazná chuť rozšiřuje dítěti chuťový rejstřík mimo jemné kuřecí.',
+          'Nasekané jehněčí promíchej s cuketou a s kuskusem. Maso je bohaté na zinek (5,0 mg na 100 g pečeného) a jeho výrazná chuť rozšiřuje dítěti chuťový rejstřík mimo jemné kuřecí. Železa má 2,06 mg, tedy podobně jako uvařená čočka, ale v hemové podobě.',
         caution: 'Pokud dítě jehněčí odmítá, zkus ho nabídnout znovu za týden.',
       },
       '12m': {
@@ -1531,7 +1531,7 @@ export const meatFish: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí kuličky i karbanátky nakrájené na kousky, směs v omáčce na těstovinách i v plněné zelenině. Mleté maso je zároveň nejsnazší cesta, jak do jídla dostat železo.',
+          'Batole jí kuličky i karbanátky nakrájené na kousky, směs v omáčce na těstovinách i v plněné zelenině. Mleté maso je zároveň nejsnazší cesta, jak do jídla dostat hemové železo a zinek — u mletého kuřecího je ho ale málo, 0,93 mg na 100 g, takže krůtí nebo hovězí poslouží líp.',
         caution: 'Mleté maso se kazí rychleji než celý kus — zpracuj ho v den nákupu, nebo zamraz.',
       },
     },
