@@ -42,6 +42,11 @@ export default defineConfig({
         // Data jsou statická a jdou cachovat natvrdo — aplikace pak funguje
         // i po vypnutí sítě (akceptační kritérium 9).
         globPatterns: ['**/*.{js,css,html,woff,woff2,png,svg,webmanifest}'],
+        // Katalog roste a s ním i balík; výchozí strop 2 MiB ho od února 2026
+        // přestal brát a build kvůli tomu padal. Offline režim je u téhle
+        // aplikace celý smysl — rodič stojí u sporáku, ne u routeru — takže
+        // se zvedá strop, ne že by se data z předběžné cache vyřadila.
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         navigateFallback: '/BLW/index.html',
         cleanupOutdatedCaches: true,
       },

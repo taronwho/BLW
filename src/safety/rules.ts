@@ -86,6 +86,18 @@ function firstHit(texts: string[], patterns: readonly string[], honorNegation = 
   return null;
 }
 
+/**
+ * Sní tenhle recept vegetarián?
+ *
+ * Ptá se na `vegetarian` u složek, ne jen na kategorii maso-ryby. Tvrdé sýry
+ * se živočišným syřidlem (parmazán, pecorino, grana padano) maso nejsou, ale
+ * vegetariánce u stolu je jedno, proč to nesmí — potřebuje variantu. Rodina
+ * v docs/SPEC.md má vegetariánku, takže tohle není detail.
+ */
+function recipeSuitsVegetarians(recipe: Recipe, catalog: Catalog): boolean {
+  return ingredientsOf(recipe, catalog).every((i) => i.vegetarian);
+}
+
 function ingredientsOf(recipe: Recipe, catalog: Catalog): Ingredient[] {
   const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
   return recipe.ingredients
@@ -211,20 +223,19 @@ const vegTrackComplete: SafetyRule = {
   severity: 'error',
   appliesTo: 'recipe',
   description:
-    'Recept s masem má popsanou bezmasou variantu i konkrétní náhradu bílkoviny, ne pouhé vynechání.',
+    'Recept se složkou, kterou vegetarián nejí, má popsanou bezmasou variantu i konkrétní náhradu bílkoviny.',
   check(item, catalog) {
     if (!isRecipe(item)) return null;
-    const hasMeat = ingredientsOf(item, catalog).some((i) => i.category === 'maso-ryby');
-    if (!hasMeat) return null;
+    if (recipeSuitsVegetarians(item, catalog)) return null;
 
     const veg = item.vegetarianSteps ?? [];
     if (veg.length === 0 || veg.every((s) => s.trim() === '')) {
-      return 'Recept obsahuje maso nebo rybu, ale bezmasá varianta dochucení chybí.';
+      return 'Recept obsahuje složku, kterou vegetarián nejí, ale bezmasá varianta dochucení chybí.';
     }
 
     const swap = item.vegetarianProteinSwap?.trim() ?? '';
     if (swap.length === 0) {
-      return 'Recept obsahuje maso nebo rybu, ale vegetarianProteinSwap je prázdný.';
+      return 'Recept obsahuje složku, kterou vegetarián nejí, ale vegetarianProteinSwap je prázdný.';
     }
     if (!containsPattern(swap, PROTEIN_SWAP_SOURCES)) {
       return `vegetarianProteinSwap neuvádí konkrétní zdroj bílkoviny (jen „${swap.slice(0, 80)}").`;
@@ -249,14 +260,13 @@ const meatTrackOnlyWithMeat: SafetyRule = {
     if (item.adultSteps.length === 0 || item.adultSteps.every((s) => s.trim() === '')) {
       return 'adultSteps jsou prázdné — dochucení pro dospělé musí být vždy popsané.';
     }
-    const hasMeat = ingredientsOf(item, catalog).some((i) => i.category === 'maso-ryby');
-    if (hasMeat) return null;
+    if (!recipeSuitsVegetarians(item, catalog)) return null;
 
     if ((item.vegetarianSteps ?? []).length > 0) {
-      return 'Recept neobsahuje maso ani rybu, ale má vlastní bezmasou variantu — dochucení pro dospělé má být jen jedno.';
+      return 'Recept je celý bezmasý, ale má vlastní bezmasou variantu — dochucení pro dospělé má být jen jedno.';
     }
     if (item.vegetarianProteinSwap !== undefined) {
-      return 'Recept neobsahuje maso ani rybu, takže nemá co nahrazovat: vegetarianProteinSwap je navíc.';
+      return 'Recept je celý bezmasý, takže nemá co nahrazovat: vegetarianProteinSwap je navíc.';
     }
     return null;
   },

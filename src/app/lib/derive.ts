@@ -28,8 +28,16 @@ export function recipeIngredients(recipe: Recipe): Ingredient[] {
 }
 
 /** Recept je vegetariánský, když neobsahuje nic z kategorie maso-ryby. */
+/**
+ * Bezmasý recept je ten, který sní vegetarián — ne jen ten bez masa a ryby.
+ *
+ * Tvrdé sýry typu parmazánu, pecorina a grana padana se vyrábějí se
+ * živočišným syřidlem, takže recept s nimi vegetariánce u stolu nepomůže,
+ * i když v něm žádné maso není. Dřív se tu ptalo jen na kategorii
+ * maso-ryby a tři recepty se kvůli tomu tvářily jako bezmasé.
+ */
 export function recipeIsVegetarian(recipe: Recipe): boolean {
-  return !recipeIngredients(recipe).some((item) => item.category === 'maso-ryby');
+  return recipeIngredients(recipe).every((item) => item.vegetarian);
 }
 
 export function recipeChokingRisk(recipe: Recipe): ChokingRisk {
