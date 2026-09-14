@@ -13,3 +13,9 @@ coverage
 
 # screenshoty z Playwrightu
 tests/e2e/screenshots
+
+# pracovní nástroje mimo repozitář (generátor receptů, cache katalogu, audit)
+.gen.py
+.kat.json
+.audit*.ts
+.dump.ts
