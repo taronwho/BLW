@@ -94,7 +94,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Podávej kaši v misce se lžící a meruňky nakrájené na osminky navrch; dítě si porci míchá samo.',
     },
     adultSteps: [
-      'Do kaše pro dospělé vmíchej zbytek mandlového másla, přidej zbývající meruňky a případně dosladˇ podle chuti.',
+      'Do kaše pro dospělé vmíchej zbytek mandlového másla, přidej zbývající meruňky a případně doslaď podle chuti.',
       'Kdo má rád řidší konzistenci, dolije horkou vodu a kaši prošlehá.',
     ],
     allergens: ['orechy'],
@@ -223,7 +223,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Podej smoothie v otevřeném hrnečku se dvěma uchy; dítě už zvládne pár loků bez pomoci.',
     },
     adultSteps: [
-      'Do sklenic pro dospělé přidej zbytek vloček, promíchej a podle chuti dosladˇ lžičkou medu.',
+      'Do sklenic pro dospělé přidej zbytek vloček, promíchej a podle chuti doslaď lžičkou medu.',
       'Kdo chce studenější nápoj, přidá pár kostek ledu a krátce prošlehá.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
@@ -266,7 +266,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj vrstvený pudink ve skleničce s lžičkou; dítě už si vybírá, kolik manga si přimíchá.',
     },
     adultSteps: [
-      'Sklenice pro dospělé dolij jogurtem, přidej kostky manga a podle chuti dosladˇ javorovým sirupem.',
+      'Sklenice pro dospělé dolij jogurtem, přidej kostky manga a podle chuti doslaď javorovým sirupem.',
       'Navrch nasyp lžičku suchých chia semínek, které dodají křupavost.',
     ],
     allergens: ['mleko'],
@@ -350,7 +350,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj kaši v misce se lžící a pečeným jablkem navrch; dítě si mletý mák přimíchá samo.',
     },
     adultSteps: [
-      'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a zbytkem mletého máku.',
+      'Kaši pro dospělé oslaď podle chuti, posyp skořicí a zbytkem mletého máku.',
       'Navrch narovnej pečená jablka a přelij je šťávou z plechu.',
     ],
     allergens: ['mleko'],
@@ -477,7 +477,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj kaši v misce se lžící a lžící tvarohu navrch, kterou si dítě zamíchá podle chuti.',
     },
     adultSteps: [
-      'Kaši pro dospělé osladˇ podle chuti, posyp skořicí a navrš na ni lžíci tvarohu.',
+      'Kaši pro dospělé oslaď podle chuti, posyp skořicí a navrš na ni lžíci tvarohu.',
       'Kdo chce výraznější chuť, přidá pár kapek citronové šťávy, které zvýrazní sladkost dýně.',
     ],
     allergens: ['mleko'],
@@ -560,7 +560,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj kaši v misce s malinami navrch; dítě už si je samo zamíchá a kaši nabírá lžící.',
     },
     adultSteps: [
-      'Kaši pro dospělé osladˇ podle chuti, nalij do misek a přelij malinovým pyré.',
+      'Kaši pro dospělé oslaď podle chuti, nalij do misek a přelij malinovým pyré.',
       'Navrch nasyp celé maliny a špetku vanilky, pokud máš lusk ještě po ruce.',
     ],
     allergens: ['psenice-lepek', 'mleko'],
@@ -727,7 +727,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj měkkou polentu v misce se lžící a pečenou švestkou nakrájenou na kousky navrch.',
     },
     adultSteps: [
-      'Kaši pro dospělé rozmíchej s lžící jogurtu, osladˇ podle chuti a posyp skořicí.',
+      'Kaši pro dospělé rozmíchej s lžící jogurtu, oslaď podle chuti a posyp skořicí.',
       'Navrch narovnej pečené švestky i se šťávou z pekáčku.',
     ],
     allergens: ['mleko'],
@@ -770,7 +770,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Servíruj kaši v misce se lžící a strouhaným jablkem navrch; dítě už zvládne jíst samo.',
     },
     adultSteps: [
-      'Kaši pro dospělé dochuť zbytkem mletých mandlí, osladˇ podle chuti a promíchej.',
+      'Kaši pro dospělé dochuť zbytkem mletých mandlí, oslaď podle chuti a promíchej.',
       'Navrch nastrouhej čerstvé jablko a přikápni citron, aby kaše nebyla jednotvárná.',
     ],
     allergens: ['orechy', 'mleko'],
@@ -805,7 +805,7 @@ export const breakfast: Recipe[] = [
       'Pokud dítě chleba zatím nezvládá, nabídni žervé na lžíci a okurku samostatně jako držadlo.',
     ],
     babyServing: {
-      '6m': 'Podávej pásek chleba s žervé přes celou dlaň a k tomu delší plátek okurky, ze kterého dítě saje šťávu.',
+      '6m': 'Podávej pásek chleba se žervé přes celou dlaň a k tomu delší plátek okurky, ze kterého dítě saje šťávu.',
       '9m': 'Chléb nakrájej na kostky a okurku na kostičky; obojí si dítě sbírá špetkou z talíře.',
       '12m': 'Nabídni malý obložený chlebíček, který si dítě samo drží, a nech ho odkusovat vlastním tempem.',
     },

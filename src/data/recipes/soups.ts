@@ -284,7 +284,7 @@ export const soups: Recipe[] = [
   },
   {
     id: 'rajcatova-polevka-cizrna',
-    titleCz: 'Rajčatová polévka s cizrnou a bazalkou',
+    titleCz: 'Rajčatová polévka z čerstvých rajčat s cizrnou',
     category: 'polevky',
     minAgeMonths: 6,
     timeMinutes: 35,

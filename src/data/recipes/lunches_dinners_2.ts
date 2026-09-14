@@ -1139,7 +1139,7 @@ export const lunchesDinners2: Recipe[] = [
   },
   {
     id: 'zapekany-fenykl-s-bramborem',
-    titleCz: 'Zapékaný fenykl s novými brambory',
+    titleCz: 'Zapékaný fenykl s batátem',
     category: 'obed-vecere',
     minAgeMonths: 6,
     timeMinutes: 55,

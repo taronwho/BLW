@@ -381,6 +381,25 @@ describe('no-placeholder', () => {
   });
 });
 
+describe('no-stray-marks', () => {
+  it('projde text se složenými českými písmeny', () => {
+    expectPass('no-stray-marks', makeRecipe(), catalog);
+  });
+
+  it('spadne na osamocené háčkové čárce místo písmene ď', () => {
+    // „osladˇ" vypadá na první pohled jako „oslaď", ale je to „oslad" plus
+    // samostatný modifikátor U+02C7. Kontrola přes \p{L} ho nechytí, protože
+    // Unicode ho řadí mezi písmena.
+    const recipe = makeRecipe({ adultSteps: ['Kaši pro dospělé oslad\u02c7 podle chuti.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+
+  it('spadne na cyrilském písmenu zaměněném za latinku', () => {
+    const recipe = makeRecipe({ adultSteps: ['Porci podávej n\u0430 talíři.'] });
+    expectFail('no-stray-marks', recipe, catalog);
+  });
+});
+
 describe('no-internal-references', () => {
   it('projde běžný text bez odkazu na soubor', () => {
     expectPass('no-internal-references', makeRecipe(), catalog);
@@ -806,6 +825,7 @@ describe('pokrytí pravidel', () => {
       'source-url-shape',
       'no-placeholder',
       'no-internal-references',
+      'no-stray-marks',
       'ingredient-refs-resolve',
       'stage-prep-complete',
       'allergen-consistency',

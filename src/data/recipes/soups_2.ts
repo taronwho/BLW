@@ -1145,7 +1145,7 @@ export const soups2: Recipe[] = [
   },
   {
     id: 'rajcatova-polevka-s-cizrnou-a-bazalkou',
-    titleCz: 'Rajčatová polévka s cizrnou a bazalkou',
+    titleCz: 'Rychlá rajčatová polévka s cizrnou z konzervy',
     category: 'polevky',
     minAgeMonths: 6,
     timeMinutes: 30,
@@ -1161,7 +1161,7 @@ export const soups2: Recipe[] = [
     ],
     baseSteps: [
       'Šalotku, mrkev a papriku nakrájej nadrobno a nech je na oleji deset minut zesklovatět.',
-      'Přilij loupaná rajčata i s šťávou a přidej vařenou cizrnu.',
+      'Přilij loupaná rajčata i se šťávou a přidej vařenou cizrnu.',
       'Vař patnáct minut a na konci vmíchej natrhané lístky bazalky.',
     ],
     babySplitPoint:

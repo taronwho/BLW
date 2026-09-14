@@ -304,7 +304,7 @@ export const snacksBaking: Recipe[] = [
     babyServing: {
       '6m': 'Podávej tyčinku dlouhou jako prst, kterou dítě sevře v pěsti; krekr ve slinách rychle měkne.',
       '9m': 'Tyčinku nalámej na kousky velikosti nehtu a nabídni je s lžící tvarohu k namáčení.',
-      '12m': 'Nech dítě brát si krekry z misky samu a namáčet je do hummusu nebo pomazánky.',
+      '12m': 'Nech dítě brát si krekry z misky samo a namáčet je do hummusu nebo pomazánky.',
     },
     adultSteps: [
       'Plát pro dospělé posyp solí a kmínem, zlehka je zaválej a peč 12 minut.',
@@ -605,7 +605,7 @@ export const snacksBaking: Recipe[] = [
       '12m': 'Nabídni celou tyčinku do ruky jako svačinu na procházku a nech dítě, ať ji sní vlastním tempem.',
     },
     adultSteps: [
-      'Zbytek hmoty osladˇ podle chuti, upěchuj na plech a peč 20 minut.',
+      'Zbytek hmoty oslaď podle chuti, upěchuj na plech a peč 20 minut.',
       'Tyčinky nech vychladnout na mřížce a skladuj je v uzavřené dóze.',
     ],
     allergens: ['psenice-lepek', 'siricitany', 'sezam'],

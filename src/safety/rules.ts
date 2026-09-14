@@ -415,6 +415,38 @@ const noInternalReferences: SafetyRule = {
   },
 };
 
+/**
+ * Osamocený modifikátor nebo kombinující znaménko v textu.
+ *
+ * „osladˇ" místo „oslaď" projde očima i kontrolou `\p{L}`, protože samostatná
+ * háčková čárka U+02C7 je v Unicode písmeno (kategorie Lm). V českých datech
+ * se píšou složená písmena, takže každý modifikátor i kombinující znaménko je
+ * chyba přepisu. Do stejné skupiny patří i cyrilice zaměněná za latinku.
+ */
+const STRAY_MARK = /[\p{Lm}\p{M}]/u;
+const CYRILLIC = /\p{Script=Cyrillic}/u;
+
+const noStrayMarks: SafetyRule = {
+  id: 'no-stray-marks',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Text neobsahuje osamocený modifikátor, kombinující znaménko ani cyrilici.',
+  check(item) {
+    for (const { field, value } of collectStrings(item)) {
+      const mark = STRAY_MARK.exec(value);
+      if (mark !== null) {
+        const kod = mark[0].codePointAt(0) ?? 0;
+        return `Osamocené znaménko U+${kod.toString(16).toUpperCase().padStart(4, '0')} v poli ${field}: „${value.slice(0, 80)}".`;
+      }
+      const azbuka = CYRILLIC.exec(value);
+      if (azbuka !== null) {
+        return `Cyrilské písmeno „${azbuka[0]}" v poli ${field}: „${value.slice(0, 80)}".`;
+      }
+    }
+    return null;
+  },
+};
+
 const noPlaceholder: SafetyRule = {
   id: 'no-placeholder',
   severity: 'error',
@@ -770,6 +802,7 @@ export const safetyRules: readonly SafetyRule[] = [
   sourceUrlShape,
   noPlaceholder,
   noInternalReferences,
+  noStrayMarks,
   ingredientRefsResolve,
   stagePrepComplete,
   allergenConsistency,
