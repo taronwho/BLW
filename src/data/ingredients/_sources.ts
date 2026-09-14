@@ -405,6 +405,99 @@ export const BP_CAROB: SourceRef = {
   tier: 1,
 };
 
+/** Třetí kolo ověřování — podklady k zařazení surovin podle živin. */
+const FETCHED_14 = '2026-09-14';
+
+/**
+ * NHS o vitaminu C. Jako dobré zdroje jmenuje citrusy a pomerančovou šťávu,
+ * papriky, jahody, černý rybíz, brokolici, růžičkovou kapustu a brambory.
+ * Dospělý potřebuje 40 mg denně a tělo si vitamin C neukládá do zásoby.
+ */
+export const NHS_VITAMIN_C = nhs(
+  'Vitamin C',
+  '/conditions/vitamins-and-minerals/vitamin-c/',
+  FETCHED_14,
+);
+
+/**
+ * Heslo Vitamin C Informačního centra bezpečnosti potravin.
+ *
+ * Uvádí, že hlavním zdrojem je ovoce, zvlášť tropické, a zelenina, a čísluje
+ * nejbohatší: černý rybíz až 300 mg/100 g, kiwi 130, papája 100, citrusy až
+ * 70; ze zeleniny papriky až 300, květák, brokolice a kapusta až 130, kysané
+ * zelí a brambory až 40. Dodává, že vitamin C patří k nejméně stálým
+ * vitaminům — ztrácí se výluhem a oxidací — a že pro celkový příjem jsou
+ * důležitější druhy, kterých se sní hodně (zelí, brambory), než ty
+ * nejbohatší.
+ */
+export const BP_VITAMIN_C: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Vitamin C',
+  url: 'https://bezpecnostpotravin.cz/termin/vitamin-c/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/**
+ * Informační karta SZÚ o vitaminu C.
+ *
+ * Jako bohaté zdroje jmenuje červenou papriku, pomeranč, citron, černý rybíz,
+ * kiwi, jahody, brokolici, květák a kedlubnu a doporučuje pět porcí zeleniny
+ * nebo ovoce denně. Popisuje i ztráty: vitamin C ničí vysoká teplota a kyslík,
+ * nejvíc ho je pod slupkou.
+ */
+export const SZU_VITAMIN_C: SourceRef = {
+  org: 'Státní zdravotní ústav',
+  title: 'Vitamin C (informační karta)',
+  url: 'https://szu.gov.cz/wp-content/uploads/2023/02/Vitamin_C.pdf',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/**
+ * Heslo Železo Informačního centra bezpečnosti potravin.
+ *
+ * Rozlišuje hemové železo z masa a ryb, kterého se vstřebá kolem 15 %, a
+ * nehemové z rostlin. Z rostlinných zdrojů jmenuje zelenou listovou zeleninu,
+ * obiloviny a luštěniny a upozorňuje, že fytáty, vláknina a třísloviny
+ * vstřebávání snižují, zatímco vitamin C a živočišná bílkovina ho zvyšují.
+ */
+export const BP_IRON: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Železo',
+  url: 'https://bezpecnostpotravin.cz/termin/zelezo/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/**
+ * Zinek v potravinách, Informační centrum bezpečnosti potravin.
+ *
+ * S čísly: semena a ořechy 2,9–7,8 mg/100 g, játra a ledviny 4,2–6,1, hovězí
+ * a vepřové 2,9–4,7, drůbež 1,8–3,0, ryby a mořské produkty 0,5–5,2, vejce
+ * 1,1–1,4, mléko a sýry 0,4–3,1, luštěniny 1,0–2,0, chléb 0,9. Ústřice uvádí
+ * jako nejbohatší zdroj vůbec.
+ */
+export const BP_ZINC: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Zinek v potravinách',
+  url: 'https://bezpecnostpotravin.cz/zinek-v-potravinach/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
+/**
+ * Heslo Rajčata Informačního centra bezpečnosti potravin. Jedno střední rajče
+ * (123 g) podle něj pokryje skoro 40 % doporučené denní dávky vitaminu C.
+ */
+export const BP_TOMATO: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Rajčata',
+  url: 'https://bezpecnostpotravin.cz/termin/rajcata/',
+  accessedAt: FETCHED_14,
+  tier: 1,
+};
+
 /**
  * Stanovisko EFSA k dusičnanům v zelenině v českém shrnutí. Uvádí rozpětí
  * obsahu od 1 mg/kg u hrášku a růžičkové kapusty po 4 800 mg/kg u rukoly,

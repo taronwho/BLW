@@ -95,7 +95,23 @@ Matka je vegetariánka, dcera bude jíst i maso. Aplikace kvůli tomu:
 - u rostlinných zdrojů železa uvádí, že se vstřebávání zlepšuje v kombinaci s vitaminem C (a tuto informaci opatří zdrojem)
 - neřeší doplňky stravy a neurčuje dávkování ničeho, včetně vitaminu D a železa — to patří pediatrovi
 
-## 8. Disclaimer v aplikaci
+## 8. Zařazení surovin podle živin
+
+Aplikace u každé suroviny ukazuje železo, zinek a vitamin C na tříbodové stupnici. **Nejsou to měřené hodnoty.** Potravinová databáze, ze které by se braly miligramy, mezi povolenými doménami v kapitole 1 není, a vymýšlet čísla z hlavy zakazuje `CLAUDE.md` pravidlo 1.
+
+Zařazuje se proto po **skupinách potravin**, ne po jménech jednotlivých surovin:
+
+- **„významný zdroj" (●●●)** dostane jen surovina, kterou načtený zdroj jmenuje adresně mezi nejbohatšími.
+- **„obsahuje" (●●○)** dostane surovina, která patří do skupiny, kterou zdroj jako zdroj označuje — například čerstvé ovoce a zelenina u vitaminu C, zelená listová zelenina u nehemového železa.
+- **„není zdroj"** je všechno ostatní.
+
+Ruční seznam jmen se neosvědčil: u tří set surovin v něm vždycky někdo chybí a aplikace pak o rakytníku, malinách nebo špenátu tvrdí, že živinu nemají, i když zdroj mluví o celé skupině, do které patří. Když chceš přidat surovinu do nejvyššího stupně, musíš mít zdroj, který ji **jmenuje**, ne jen její skupinu.
+
+Ztráty se počítají: sušené, zavařené a protlačené ovoce se za zdroj vitaminu C nevydává, protože vitamin C patří k nejméně stálým a ničí ho teplo i kyslík. Koření a bylinky se nepočítají vůbec — špetka příjem neposune.
+
+Zdroje zařazení jsou vyjmenované v hlavičce `src/data/nutrients.ts` a aplikace je ukazuje rodiči v okénku živin, aby u tvrzení o živinách stál doklad stejně jako u tvrzení o bezpečnosti.
+
+## 9. Disclaimer v aplikaci
 
 Zobrazí se při prvním spuštění, potvrzuje se jedním tlačítkem, je trvale dostupný v nastavení. Text vlastními slovy v tomto smyslu:
 

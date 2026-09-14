@@ -1,5 +1,5 @@
 /**
- * Text disclaimeru podle docs/BEZPECNOST.md kapitola 8.
+ * Text disclaimeru podle docs/BEZPECNOST.md kapitola 9.
  * Vlastní formulace — zdrojové texty se nekopírují.
  */
 export const DISCLAIMER_TITLE = 'Než začneš';

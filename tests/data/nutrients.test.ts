@@ -34,11 +34,47 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
     expect(profile.ironForm).toBe('zadne');
   });
 
-  it('jablko není zdroj žádné ze tří živin', () => {
+  it('jablko nenese železo ani zinek, vitamin C jako každé čerstvé ovoce ano', () => {
     const profile = nutrientProfile(get('jablko'));
     expect(profile.iron).toBe('nevyznamny');
     expect(profile.zinc).toBe('nevyznamny');
-    expect(profile.vitaminC).toBe('nevyznamny');
+    expect(profile.vitaminC).toBe('obsahuje');
+  });
+
+  it('čerstvé ovoce mimo jmenovaný seznam vitamin C nese', () => {
+    // Dřív tu stál ruční seznam jmen a co v něm nebylo, o tom aplikace
+    // tvrdila, že vitamin C nemá — u rakytníku, malin nebo manga to bylo
+    // rovnou proti načteným zdrojům, které mluví o ovoci jako o skupině.
+    for (const id of ['rakytnik', 'maliny', 'mango', 'ananas', 'kaki', 'aronie']) {
+      expect(nutrientProfile(get(id)).vitaminC).not.toBe('nevyznamny');
+    }
+  });
+
+  it('sušené a zavařené ovoce se za zdroj vitaminu C nevydává', () => {
+    // Vitamin C patří k nejméně stálým, ztrácí se teplem i kyslíkem.
+    for (const id of ['rozinky', 'susene-merunky', 'rajcatovy-protlak']) {
+      expect(nutrientProfile(get(id)).vitaminC).toBe('nevyznamny');
+    }
+  });
+
+  it('houby do skupiny ovoce a zelenina kvůli vitaminu C nepatří', () => {
+    expect(nutrientProfile(get('zampiony')).vitaminC).toBe('nevyznamny');
+  });
+
+  it('tmavá listová zelenina nese rostlinné železo', () => {
+    const profile = nutrientProfile(get('spenat'));
+    expect(profile.iron).toBe('obsahuje');
+    expect(profile.ironForm).toBe('nehemove');
+  });
+
+  it('semena a ořechy jsou významný zdroj zinku, olej ne', () => {
+    // Načtená tabulka jim dává 2,9–7,8 mg na 100 g, tedy víc než masu.
+    expect(nutrientProfile(get('seminka-dynova-mleta')).zinc).toBe('vyznamny');
+    expect(nutrientProfile(get('olej-dynovy')).zinc).toBe('nevyznamny');
+  });
+
+  it('rajče je významný zdroj vitaminu C', () => {
+    expect(nutrientProfile(get('rajce')).vitaminC).toBe('vyznamny');
   });
 
   it('brokolice je významný zdroj vitaminu C', () => {
