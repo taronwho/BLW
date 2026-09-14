@@ -690,3 +690,43 @@ test('dlouhý seznam se plní po dávkách', async ({ page }) => {
   await page.getByTestId('nacist-dalsi-recepty').click();
   await expect.poll(() => karty.count()).toBeGreaterThan(prvni);
 });
+
+test('filtry přežijí návrat z detailu a dají se poslat odkazem', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  await page.getByTestId('hledat-surovinu').fill('brokolice');
+  await expect(page.getByTestId('pocet-surovin')).toContainText('1 z');
+  // Filtr je v adrese, takže se dá odkaz poslat druhému rodiči.
+  expect(page.url()).toContain('q=brokolice');
+
+  await page.getByTestId('seznam-surovin').getByRole('link').first().click();
+  await expect(page.getByTestId('blok-zelezo-zinek')).toBeVisible();
+
+  await page.goBack();
+  // Dřív se seznam vrátil celý a rodič filtroval znovu.
+  await expect(page.getByTestId('hledat-surovinu')).toHaveValue('brokolice');
+  await expect(page.getByTestId('pocet-surovin')).toContainText('1 z');
+});
+
+test('filtry receptů se drží v adrese a dají se otevřít přímo', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty?kat=polevky&cas=40&vege=1');
+
+  await expect(page.getByTestId('pocet-receptu')).toBeVisible();
+  const filtrovane = (await page.getByTestId('pocet-receptu').textContent()) ?? '';
+
+  await navLink(page, 'Recepty').click();
+  await expect(page.getByTestId('pocet-receptu')).not.toHaveText(filtrovane);
+});
+
+test('hledání odpustí překlep a nevrací maso na dotaz ryby', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  await page.getByTestId('hledat-surovinu').fill('brambury');
+  await expect(page.getByTestId('seznam-surovin')).toContainText('brambor');
+
+  await page.getByTestId('hledat-surovinu').fill('ryby');
+  await expect(page.getByTestId('seznam-surovin')).not.toContainText('hovězí zadní');
+});

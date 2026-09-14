@@ -7,7 +7,7 @@ import {
   Star,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data';
 import { nutrientProfile } from '@/data/nutrients';
@@ -39,6 +39,7 @@ import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
 import { matchesIngredient } from '../lib/search';
+import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
 import { IngredientIcon } from '../components/IngredientIcon';
@@ -69,18 +70,21 @@ const CATEGORY_OPTIONS: readonly SelectOption[] = [
 /** Seznam surovin (docs/SPEC.md kap. 4.1). */
 export function IngredientsScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('vse');
-  const [ziviny, setZiviny] = useState<readonly string[]>([]);
-  const [druhZeleza, setDruhZeleza] = useState('vse');
-  const [sila, setSila] = useState('aspon');
-  const [denik, setDenik] = useState('vse');
-  const [oblibene, setOblibene] = useState(false);
-  const [vhodneTed, setVhodneTed] = useState(false);
-  const [sezonni, setSezonni] = useState(false);
-  const [alergeny, setAlergeny] = useState(false);
-  const [bezAlergenu, setBezAlergenu] = useState<AllergenGroup | ''>('');
-  const [sort, setSort] = useState<SortKey>('abeceda');
+  // Filtry drží adresa, ne komponenta — viz src/app/lib/urlState.ts.
+  const [query, setQuery] = useUrlText('q', '');
+  const [category, setCategory] = useUrlText('kat', 'vse');
+  const [ziviny] = useUrlList('ziv');
+  const [druhZeleza, setDruhZeleza] = useUrlText('fe', 'vse');
+  const [sila, setSila] = useUrlText('sila', 'aspon');
+  const [denik, setDenik] = useUrlText('denik', 'vse');
+  const [oblibene, setOblibene] = useUrlFlag('oblibene');
+  const [vhodneTed, setVhodneTed] = useUrlFlag('ted');
+  const [sezonni, setSezonni] = useUrlFlag('sezona');
+  const [alergeny, setAlergeny] = useUrlFlag('alergeny');
+  const [bezAlergenu, setBezAlergenu] = useUrlText<AllergenGroup | ''>('bez', '');
+  const [sort, setSort] = useUrlText<SortKey>('razeni', 'abeceda');
+  // Víc voleb naráz musí do adresy jedním zápisem, jinak se přepíšou.
+  const nastavFiltry = useUrlBatch();
 
   const tasted = useMemo(() => tastedIds(state), [state]);
   const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
@@ -159,28 +163,18 @@ export function IngredientsScreen(): ReactNode {
     ziviny.length > 0;
 
   function prepniZivinu(id: string): void {
-    setZiviny((current) =>
-      current.includes(id)
-        ? current.filter((one) => one !== id)
-        : [...current, id],
-    );
+    const dalsi = ziviny.includes(id) ? ziviny.filter((one) => one !== id) : [...ziviny, id];
     // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
     // viset nastavený a tiše filtroval.
-    if (id === 'zelezo' && ziviny.includes('zelezo')) setDruhZeleza('vse');
+    const odebiramZelezo = id === 'zelezo' && ziviny.includes('zelezo');
+    nastavFiltry({ ziv: dalsi, ...(odebiramZelezo ? { fe: null } : {}) });
   }
 
   function zrusFiltry(): void {
-    setQuery('');
-    setCategory('vse');
-    setZiviny([]);
-    setDruhZeleza('vse');
-    setSila('aspon');
-    setDenik('vse');
-    setOblibene(false);
-    setVhodneTed(false);
-    setSezonni(false);
-    setAlergeny(false);
-    setBezAlergenu('');
+    nastavFiltry({
+      q: null, kat: null, ziv: null, fe: null, sila: null, denik: null,
+      oblibene: null, ted: null, sezona: null, alergeny: null, bez: null,
+    });
   }
 
   return (

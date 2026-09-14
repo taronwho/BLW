@@ -1,6 +1,6 @@
 import { AlertTriangle, ChevronRight, Search } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { guidesByUrgency } from '@/data';
 import { GUIDE_CATEGORIES } from '@/types';
@@ -13,11 +13,12 @@ const CATEGORY_OPTIONS: readonly SelectOption[] = [
   { id: 'vse', label: 'Všechny okruhy' },
   ...GUIDE_CATEGORIES.map((category) => ({ id: category, label: GUIDE_CATEGORY_LABELS[category] })),
 ];
+import { useUrlText } from '../lib/urlState';
 
 /** Seznam rad. Naléhavé jsou vždy nahoře a odlišené barvou. */
 export function GuidesScreen(): ReactNode {
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('vse');
+  const [query, setQuery] = useUrlText('q', '');
+  const [category, setCategory] = useUrlText('okruh', 'vse');
 
   const visible = useMemo(() => {
     const needle = normalize(query);

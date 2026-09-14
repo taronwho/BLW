@@ -43,6 +43,7 @@ import {
 import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { ALLERGEN_FILTER_OPTIONS } from '../lib/allergenOptions';
 import { matchesIngredient, matchesRecipe } from '../lib/search';
+import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { RECIPE_SORTS, sortRecipes } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
 
@@ -69,21 +70,24 @@ const TIME_OPTIONS: readonly ChipOption[] = [
 export function RecipesScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const favorites = useMemo(() => new Set(state.favorites), [state.favorites]);
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('vse');
-  const [time, setTime] = useState('vse');
-  const [ziviny, setZiviny] = useState<readonly string[]>([]);
-  const [druhZeleza, setDruhZeleza] = useState('vse');
-  const [sila, setSila] = useState('aspon');
-  const [sort, setSort] = useState<SortKey>('abeceda');
-  const [vegetarianOnly, setVegetarianOnly] = useState(false);
-  const [oblibene, setOblibene] = useState(false);
-  const [withoutAllergen, setWithoutAllergen] = useState<AllergenGroup | ''>(
-    '',
-  );
+  // Filtry drží adresa, ne komponenta — viz src/app/lib/urlState.ts.
+  const [query, setQuery] = useUrlText('q', '');
+  const [category, setCategory] = useUrlText('kat', 'vse');
+  const [time, setTime] = useUrlText('cas', 'vse');
+  const [ziviny] = useUrlList('ziv');
+  const [druhZeleza, setDruhZeleza] = useUrlText('fe', 'vse');
+  const [sila, setSila] = useUrlText('sila', 'aspon');
+  const [sort, setSort] = useUrlText<SortKey>('razeni', 'abeceda');
+  const [vegetarianOnly, setVegetarianOnly] = useUrlFlag('vege');
+  const [oblibene, setOblibene] = useUrlFlag('oblibene');
+  const [withoutAllergen, setWithoutAllergen] = useUrlText<AllergenGroup | ''>('bez', '');
+  const [pantry, setPantry] = useUrlList('spiz');
+  // Rozbalení spíže a její vlastní hledání jsou stav okna, ne filtr — do
+  // adresy nepatří a po návratu z receptu nikomu nechybí.
   const [pantryOpen, setPantryOpen] = useState(false);
-  const [pantry, setPantry] = useState<string[]>([]);
   const [pantryQuery, setPantryQuery] = useState('');
+  // Víc voleb naráz musí do adresy jedním zápisem, jinak se přepíšou.
+  const nastavFiltry = useUrlBatch();
 
   const months = ageInMonths(state.childBirthDate);
   const pantrySet = useMemo(() => new Set(pantry), [pantry]);
@@ -120,45 +124,37 @@ export function RecipesScreen(): ReactNode {
     pantry.length > 0;
 
   function prepniZivinu(id: string): void {
-    setZiviny((current) =>
-      current.includes(id)
-        ? current.filter((one) => one !== id)
-        : [...current, id],
-    );
+    const dalsi = ziviny.includes(id) ? ziviny.filter((one) => one !== id) : [...ziviny, id];
     // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
     // viset nastavený a tiše filtroval.
-    if (id === 'zelezo' && ziviny.includes('zelezo')) setDruhZeleza('vse');
+    const odebiramZelezo = id === 'zelezo' && ziviny.includes('zelezo');
+    nastavFiltry({ ziv: dalsi, ...(odebiramZelezo ? { fe: null } : {}) });
   }
 
   function prepniDvojici(): void {
     if (dvojiceAktivni) {
-      setZiviny([]);
-      setDruhZeleza('vse');
+      nastavFiltry({ ziv: null, fe: null });
       return;
     }
-    setZiviny(['zelezo', 'cecko']);
-    setDruhZeleza('nehemove');
+    nastavFiltry({ ziv: ['zelezo', 'cecko'], fe: 'nehemove' });
   }
 
   function zrusFiltry(): void {
-    setQuery('');
-    setCategory('vse');
-    setTime('vse');
-    setZiviny([]);
-    setDruhZeleza('vse');
-    setSila('aspon');
-    setVegetarianOnly(false);
-    setOblibene(false);
-    setWithoutAllergen('');
-    setPantry([]);
+    nastavFiltry({
+      q: null, kat: null, cas: null, ziv: null, fe: null, sila: null,
+      vege: null, oblibene: null, bez: null, spiz: null,
+    });
   }
 
   const visible = useMemo(
     () =>
       recipes.filter((recipe) => {
-        const names = recipe.ingredients.map(
-          (ref) => ingredientById.get(ref.ingredientId)?.nameCz ?? '',
-        );
+        // I synonyma — „jablka" musí najít recepty s jablkem, ne jen ten,
+        // který to slovo má v názvu.
+        const names = recipe.ingredients.flatMap((ref) => {
+          const item = ingredientById.get(ref.ingredientId);
+          return item === undefined ? [] : [item.nameCz, ...item.altNamesCz];
+        });
         if (!matchesRecipe(recipe, query, names)) return false;
         if (category !== 'vse' && recipe.category !== category) return false;
         if (time !== 'vse' && recipe.timeMinutes > Number(time)) return false;
