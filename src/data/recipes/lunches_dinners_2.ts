@@ -544,6 +544,8 @@ export const lunchesDinners2: Recipe[] = [
     titleCz: 'Rukolový salát s hruškou a ementálem',
     category: 'obed-vecere',
     minAgeMonths: 12,
+    minAgeReason:
+      'Syrové listy rukoly se v puse motají a nedají se rozmačkat dásněmi. Mladšímu dítěti nabídni z receptu jen dušenou hrušku a proužek sýra.',
     timeMinutes: 15,
     servings: '2 dospělí + 1 batole',
     ingredients: [
@@ -590,6 +592,8 @@ export const lunchesDinners2: Recipe[] = [
     titleCz: 'Závitky z hlávkového salátu s tvarohem',
     category: 'obed-vecere',
     minAgeMonths: 12,
+    minAgeReason:
+      'Celý syrový list se v puse slepí do chuchvalce a nedá se rozkousat dásněmi. Mladšímu dítěti nabídni samotnou tvarohovou náplň.',
     timeMinutes: 20,
     servings: '2 dospělí + 1 batole',
     ingredients: [
@@ -3262,7 +3266,7 @@ export const lunchesDinners2: Recipe[] = [
     id: 'veprova-panenka-s-dusenym-zelim',
     titleCz: 'Vepřová panenka s dušeným červeným zelím',
     category: 'obed-vecere',
-    minAgeMonths: 12,
+    minAgeMonths: 6,
     timeMinutes: 50,
     servings: '2 dospělí + 1 miminko',
     ingredients: [
@@ -3273,7 +3277,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cibule', amount: '1 menší', track: 'all' },
       { ingredientId: 'olej-repkovy', amount: '2 lžíce', track: 'all' },
       { ingredientId: 'ocet-jablecny', amount: '1 lžíce', track: 'all' },
-      { ingredientId: 'tofu-uzene', amount: '250 g', track: 'vegetarian' },
+      { ingredientId: 'tofu-uzene', amount: '250 g', track: 'vegetarian', adultOnly: true },
     ],
     baseSteps: [
       'Zelí zbav košťálu, nakrájej najemno a duste ho s cibulí a nastrouhaným jablkem třicet minut doměkka.',

@@ -106,6 +106,18 @@ export function RecipeDetailScreen(): ReactNode {
             </span>
           ))}
         </div>
+        {/* Proč až od téhle fáze. Píše se jen tam, kde věk nevychází ze
+            surovin, ale z podoby jídla — jinak by rodič hádal, co v receptu
+            mladšímu dítěti vadí. */}
+        {recipe.minAgeReason !== undefined && (
+          <p
+            data-testid="duvod-veku"
+            className="rounded-lg border border-caution/30 bg-caution/10 px-3 py-2 text-xs leading-relaxed text-ink/80"
+          >
+            <strong className="font-semibold">Proč až od {recipe.minAgeMonths} měsíců: </strong>
+            {recipe.minAgeReason}
+          </p>
+        )}
         <ChokingBadge risk={recipeChokingRisk(recipe)} />
         <p className="text-xs text-muted">
           Štítek ukazuje nejvyšší riziko ze surovin receptu. Krájení řeš u konkrétní suroviny.

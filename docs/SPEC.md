@@ -92,6 +92,8 @@ export interface RecipeIngredientRef {
   amount: string;             // "150 g", "1 lžíce"
   /** Do které linie složka patří. 'all' = společný základ. */
   track: 'all' | DietTrack;
+  /** Složka, kterou dětská porce nikdy nedostane — do věku receptu se nepočítá. */
+  adultOnly?: true;
   note?: string;              // "pro miminko odeber před přidáním"
 }
 
@@ -100,6 +102,8 @@ export interface Recipe {
   titleCz: string;
   category: RecipeCategory;
   minAgeMonths: number;
+  /** Proč je věk vyšší, než vyžadují suroviny. Povinné právě v tom případě. */
+  minAgeReason?: string;
   timeMinutes: number;
   servings: string;           // "2 dospělí + 1 miminko"
 
@@ -170,7 +174,10 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | `ingredient-refs-resolve` | error | každý `ingredientId` v receptu existuje v katalogu |
 | `stage-prep-complete` | error | všechny tři fáze vyplněné, každá ≥ 80 znaků, nejsou navzájem identické |
 | `allergen-consistency` | error | `allergens` receptu odpovídá sjednocení alergenů složek |
-| `min-age-consistency` | error | `minAgeMonths` receptu ≥ maximum z jeho složek |
+| `min-age-consistency` | error | `minAgeMonths` receptu ≥ maximum ze složek, které jí i miminko (bez `adultOnly`) |
+| `min-age-not-inflated` | error | vyšší věk, než složky dětské porce vyžadují, musí mít vysvětlení v `minAgeReason` |
+| `adult-only-not-in-base` | error | `adultOnly` nestojí u složky ze společného základu (`track: 'all'`) |
+| `adult-only-not-in-baby-steps` | error | složka označená `adultOnly` se neobjeví v `babySplitPoint`, `babySteps` ani `babyServing` |
 | `mercury-limit` | warning | ryby s `hazards: ['rtut']` mají vyplněný `frequencyLimit` |
 | `nitrate-note` | warning | suroviny s `hazards: ['dusicnany']` mají pokyn neohřívat opakovaně |
 | `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz`; žádné dva recepty se stejným `titleCz` |

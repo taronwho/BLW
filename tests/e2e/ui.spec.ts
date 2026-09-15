@@ -1013,3 +1013,40 @@ test('pozvánka do domácnosti, ve které zařízení už je, nenabízí připoj
   await expect(page.getByTestId('jina-domacnost')).toContainText('přepne');
   await expect(page.getByTestId('pripojit-z-odkazu')).toBeEnabled();
 });
+
+test('recepty jdou filtrovat podle věku dítěte', async ({ page }) => {
+  await acceptDisclaimer(page);
+  // Kojenec na začátku příkrmu: recepty pro batolata se mu nemají nabízet.
+  await zalozDite(page, 'Ema', '2026-03-15');
+  await navLink(page, 'Recepty').click();
+
+  const pocet = page.getByTestId('pocet-receptu');
+  await expect(pocet).toContainText('299 z 299');
+
+  await otevriFiltry(page, 'receptu');
+  await page.getByTestId('filtr-vhodne').click();
+  await expect(pocet).not.toContainText('299 z 299');
+  await expect(page.getByTestId('seznam-receptu')).not.toContainText('na špejli');
+
+  // Filtr přežije odkaz, stejně jako ostatní.
+  const filtrovano = await pocet.textContent();
+  await page.reload();
+  await expect(pocet).toHaveText(filtrovano ?? '');
+  await otevriFiltry(page, 'receptu');
+  await expect(page.getByTestId('filtr-vhodne')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('recept starší, než vyžadují jeho suroviny, řekne proč', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Špejle a syrový list — věk nevychází ze složení, ale z podoby jídla.
+  await page.goto('./#/recepty/mozzarella-a-rajce-na-spejli');
+  await expect(page.getByTestId('duvod-veku')).toContainText('Proč až od 12 měsíců');
+  await expect(page.getByTestId('duvod-veku')).toContainText('špejli');
+
+  // Vepřová panenka věk zvedala kvůli uzenému tofu, které je v receptu jen
+  // jako bezmasá náhrada pro dospělé. Dětská porce je z masa, zelí a brambor.
+  await page.goto('./#/recepty/veprova-panenka-s-dusenym-zelim');
+  await expect(page.getByTestId('duvod-veku')).toHaveCount(0);
+  await expect(page.getByText('vhodné od 6 měsíců')).toBeVisible();
+});

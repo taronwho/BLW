@@ -1,4 +1,5 @@
 import {
+  Baby,
   Clock,
   Leaf,
   RotateCcw,
@@ -80,6 +81,7 @@ export function RecipesScreen(): ReactNode {
   const [sort, setSort] = useUrlText<SortKey>('razeni', 'abeceda');
   const [vegetarianOnly, setVegetarianOnly] = useUrlFlag('vege');
   const [oblibene, setOblibene] = useUrlFlag('oblibene');
+  const [vhodneTed, setVhodneTed] = useUrlFlag('vhodne');
   const bezAlergenu = useFiltrAlergenu();
   const [pantry, setPantry] = useUrlList('spiz');
   // Rozbalení spíže a její vlastní hledání jsou stav okna, ne filtr — do
@@ -110,6 +112,7 @@ export function RecipesScreen(): ReactNode {
     (sila === 'aspon' ? 0 : 1) +
     (oblibene ? 1 : 0) +
     (vegetarianOnly ? 1 : 0) +
+    (vhodneTed ? 1 : 0) +
     (pantrySet.size > 0 ? 1 : 0) +
     (bezAlergenu.vybrane.length > 0 ? 1 : 0);
 
@@ -120,6 +123,7 @@ export function RecipesScreen(): ReactNode {
     ziviny.length > 0 ||
     vegetarianOnly ||
     oblibene ||
+    vhodneTed ||
     bezAlergenu.vybrane.length > 0 ||
     pantry.length > 0;
 
@@ -142,7 +146,7 @@ export function RecipesScreen(): ReactNode {
   function zrusFiltry(): void {
     nastavFiltry({
       q: null, kat: null, cas: null, ziv: null, fe: null, sila: null,
-      vege: null, oblibene: null, bez: null, spiz: null,
+      vege: null, oblibene: null, vhodne: null, bez: null, spiz: null,
     });
   }
 
@@ -159,6 +163,9 @@ export function RecipesScreen(): ReactNode {
         if (category !== 'vse' && recipe.category !== category) return false;
         if (time !== 'vse' && recipe.timeMinutes > Number(time)) return false;
         if (vegetarianOnly && !recipeIsVegetarian(recipe)) return false;
+        // Věk se řídí vybraným dítětem v hlavičce. Bez data narození se
+        // bere šest měsíců — tedy začátek příkrmu, ne „všechno projde".
+        if (vhodneTed && recipe.minAgeMonths > (months ?? 6)) return false;
         if (oblibene && !favorites.has(recipe.id)) return false;
         if (!vyhovujeZivinam(recipeNutrients(recipe), ziviny, druhZeleza, sila))
           return false;
@@ -181,6 +188,8 @@ export function RecipesScreen(): ReactNode {
       sila,
       vegetarianOnly,
       oblibene,
+      vhodneTed,
+      months,
       favorites,
       bezAlergenu.vybrane,
       pantrySet,
@@ -306,6 +315,15 @@ export function RecipesScreen(): ReactNode {
 
             <FilterGroup nadpis="Další">
               <div className="flex flex-wrap gap-x-2">
+                {/* Stejná volba jako v katalogu surovin, aby „vhodné teď"
+                    znamenalo na obou obrazovkách totéž. */}
+                <ChipButton
+                  label="vhodné teď"
+                  Icon={Baby}
+                  pressed={vhodneTed}
+                  onClick={() => setVhodneTed((value) => !value)}
+                  testId="filtr-vhodne"
+                />
                 <ChipButton
                   label="oblíbené"
                   Icon={Star}

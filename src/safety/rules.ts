@@ -105,6 +105,28 @@ function ingredientsOf(recipe: Recipe, catalog: Catalog): Ingredient[] {
     .filter((i): i is Ingredient => i !== undefined);
 }
 
+/**
+ * Suroviny, které se dostanou i do dětské porce.
+ *
+ * Bezmasá náhrada masa je v receptu kvůli dospělým vegetariánům a miminko
+ * ji nedostane; recept se přesto tvářil jako vhodný až od jejího věku.
+ * Proto se složky označené `adultOnly` do dětského výpočtu nepočítají.
+ */
+function babyIngredientsOf(recipe: Recipe, catalog: Catalog): Ingredient[] {
+  const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
+  return recipe.ingredients
+    .filter((ref) => ref.adultOnly !== true)
+    .map((ref) => byId.get(ref.ingredientId))
+    .filter((i): i is Ingredient => i !== undefined);
+}
+
+/** Všechen text, který popisuje dětskou porci. */
+function babyText(recipe: Recipe): string {
+  return [recipe.babySplitPoint, ...recipe.babySteps, ...Object.values(recipe.babyServing)]
+    .join(' ')
+    .toLowerCase();
+}
+
 /* ------------------------------------------------------------------ */
 /* Zákazy pro dětskou linii                                            */
 /* ------------------------------------------------------------------ */
@@ -533,15 +555,94 @@ const minAgeConsistency: SafetyRule = {
   id: 'min-age-consistency',
   severity: 'error',
   appliesTo: 'recipe',
-  description: 'minAgeMonths receptu je ≥ maximum z jeho složek.',
+  description: 'minAgeMonths receptu je ≥ maximum ze složek, které jí i miminko.',
   check(item, catalog) {
     if (!isRecipe(item)) return null;
-    const used = ingredientsOf(item, catalog);
+    const used = babyIngredientsOf(item, catalog);
     if (used.length === 0) return null;
     const max = Math.max(...used.map((i) => i.minAgeMonths));
     if (item.minAgeMonths >= max) return null;
     const blocking = used.filter((i) => i.minAgeMonths === max).map((i) => i.nameCz);
     return `minAgeMonths receptu je ${item.minAgeMonths}, ale složka vyžaduje ${max} (${blocking.join(', ')}).`;
+  },
+};
+
+/**
+ * Věk receptu nesmí být vyšší, než co dětská porce opravdu potřebuje.
+ *
+ * Bez tohohle pravidla by šlo věk kdykoli zvednout „pro jistotu" a rodiči by
+ * se recept schoval před fází, do které patří. Kdo ho chce mít vyšší, musí
+ * říct proč — a to se dělá u konkrétní suroviny, ne u celého receptu.
+ */
+const minAgeNotInflated: SafetyRule = {
+  id: 'min-age-not-inflated',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description: 'Vyšší věk, než vyžadují složky dětské porce, musí mít napsaný důvod.',
+  check(item, catalog) {
+    if (!isRecipe(item)) return null;
+    const used = babyIngredientsOf(item, catalog);
+    if (used.length === 0) return null;
+    const max = Math.max(...used.map((i) => i.minAgeMonths));
+    if (item.minAgeMonths <= max) {
+      return item.minAgeReason === undefined
+        ? null
+        : `minAgeReason je vyplněný, ale věk receptu (${item.minAgeMonths}) nepřevyšuje složky (${max}) — důvod nemá co vysvětlovat.`;
+    }
+    if ((item.minAgeReason ?? '').trim().length >= 20) return null;
+    return `minAgeMonths receptu je ${item.minAgeMonths}, ale dětská porce vystačí s ${max}. Buď věk sniž, nebo do minAgeReason napiš, co konkrétně brání mladší fázi.`;
+  },
+};
+
+/**
+ * Složka označená jako „jen pro dospělé" nesmí být ve společném základu.
+ *
+ * Základ je definičně to, co se vaří pro celou rodinu a z čeho se odebírá
+ * dětská porce. Kdyby z něj šlo vyjmout jednu surovinu, přestal by věk
+ * receptu cokoli znamenat.
+ */
+const adultOnlyNotInBase: SafetyRule = {
+  id: 'adult-only-not-in-base',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description: 'adultOnly nestojí u složky ze společného základu.',
+  check(item) {
+    if (!isRecipe(item)) return null;
+    const spatne = item.ingredients.filter((ref) => ref.adultOnly === true && ref.track === 'all');
+    if (spatne.length === 0) return null;
+    return `Složka ve společném základu nemůže být jen pro dospělé: ${spatne
+      .map((ref) => ref.ingredientId)
+      .join(', ')}.`;
+  },
+};
+
+/**
+ * Co dětské kroky jmenují, to miminko dostane — a nesmí být „jen pro dospělé".
+ *
+ * Tohle je pojistka proti tomu, aby se příznakem srazil věk receptu
+ * u suroviny, kterou dítě podle vlastního postupu opravdu jí.
+ */
+const adultOnlyNotInBabySteps: SafetyRule = {
+  id: 'adult-only-not-in-baby-steps',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description: 'Složka označená adultOnly se nesmí objevit v dětských krocích.',
+  check(item, catalog) {
+    if (!isRecipe(item)) return null;
+    const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
+    const text = babyText(item);
+    const spatne: string[] = [];
+    for (const ref of item.ingredients) {
+      if (ref.adultOnly !== true) continue;
+      const ing = byId.get(ref.ingredientId);
+      if (ing === undefined) continue;
+      // Porovnává se první slovo názvu — „tofu uzené" i „tofu natural"
+      // se v textu píšou různě, ale rod suroviny je vždycky v prvním slově.
+      const slovo = ing.nameCz.toLowerCase().split(' ')[0] ?? '';
+      if (slovo.length > 3 && text.includes(slovo)) spatne.push(ing.nameCz);
+    }
+    if (spatne.length === 0) return null;
+    return `Dětské kroky jmenují složku označenou jen pro dospělé: ${spatne.join(', ')}.`;
   },
 };
 
@@ -922,6 +1023,9 @@ export const safetyRules: readonly SafetyRule[] = [
   stagePrepComplete,
   allergenConsistency,
   minAgeConsistency,
+  minAgeNotInflated,
+  adultOnlyNotInBase,
+  adultOnlyNotInBabySteps,
   mercuryLimit,
   nitrateNote,
   duplicateDetection,

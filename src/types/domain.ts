@@ -202,6 +202,19 @@ export interface RecipeIngredientRef {
   amount: string;
   /** Do které linie složka patří. 'all' = společný základ. */
   track: 'all' | DietTrack;
+  /**
+   * Složka, kterou dětská porce nikdy nedostane.
+   *
+   * Věk receptu se počítá z toho, co miminko opravdu sní. Bez tohohle
+   * příznaku ho zvedla i surovina, která je v jídle jen kvůli dospělým —
+   * třeba uzené tofu jako bezmasá náhrada masa. Recept se pak tvářil jako
+   * „vhodné od 12 měsíců", i když dětská porce byla odebraná z masa,
+   * zelí a brambory a šla podat od šesti.
+   *
+   * Nesmí stát u společného základu (`track: 'all'`) ani u suroviny, kterou
+   * dětské kroky jmenují — obojí hlídají pravidla v `src/safety/rules.ts`.
+   */
+  adultOnly?: true;
   /** "pro miminko odeber před přidáním" */
   note?: string;
 }
@@ -211,6 +224,15 @@ export interface Recipe {
   titleCz: string;
   category: RecipeCategory;
   minAgeMonths: number;
+  /**
+   * Proč je věk vyšší, než vyžadují samotné suroviny.
+   *
+   * Povinné právě v tom případě — jinak by šlo věk kdykoli zvednout „pro
+   * jistotu" a recept by se rodiči schoval před fází, do které patří.
+   * Důvod bývá v podobě jídla, ne ve složení: syrový list v závitku,
+   * špejle, salát, který se nedá rozmačkat. Ukazuje se u štítku s věkem.
+   */
+  minAgeReason?: string;
   timeMinutes: number;
   /** "2 dospělí + 1 miminko" */
   servings: string;

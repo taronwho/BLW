@@ -538,6 +538,81 @@ describe('min-age-consistency', () => {
   });
 });
 
+describe('min-age-not-inflated', () => {
+  it('projde recept, jehož věk vychází ze složek', () => {
+    expectPass('min-age-not-inflated', makeRecipe(), catalog);
+  });
+
+  it('zachytí věk zvednutý bez vysvětlení', () => {
+    const recipe = makeRecipe({ minAgeMonths: 12 });
+    expect(expectFail('min-age-not-inflated', recipe, catalog)).toContain('vystačí s 6');
+  });
+
+  it('s napsaným důvodem vyšší věk projde — brání mu podoba jídla, ne složení', () => {
+    const recipe = makeRecipe({
+      minAgeMonths: 12,
+      minAgeReason: 'Jídlo se podává napíchané na špejli a ta do dětské ruky nepatří.',
+    });
+    expectPass('min-age-not-inflated', recipe, catalog);
+  });
+
+  it('zachytí důvod u receptu, kterému věk vychází ze složek — nemá co vysvětlovat', () => {
+    const recipe = makeRecipe({
+      minAgeReason: 'Tenhle důvod tu nemá co dělat, protože věk nikdo nezvedl.',
+    });
+    expect(expectFail('min-age-not-inflated', recipe, catalog)).toContain('nepřevyšuje');
+  });
+});
+
+describe('adult-only-not-in-base', () => {
+  it('projde recept, kde je příznak u bezmasé linie', () => {
+    const recipe = makeMeatRecipe({
+      ingredients: [
+        { ingredientId: 'mrkev', amount: '200 g', track: 'all' },
+        { ingredientId: 'kureci-prsa', amount: '300 g', track: 'meat' },
+        { ingredientId: 'cocka-cervena', amount: '150 g', track: 'vegetarian', adultOnly: true },
+      ],
+    });
+    expectPass('adult-only-not-in-base', recipe, catalog);
+  });
+
+  it('zachytí příznak u složky ze společného základu', () => {
+    const recipe = makeRecipe({
+      ingredients: [{ ingredientId: 'mrkev', amount: '100 g', track: 'all', adultOnly: true }],
+    });
+    expect(expectFail('adult-only-not-in-base', recipe, catalog)).toContain('mrkev');
+  });
+});
+
+describe('adult-only-not-in-baby-steps', () => {
+  it('projde recept, jehož dětské kroky o složce pro dospělé mlčí', () => {
+    const recipe = makeMeatRecipe({
+      ingredients: [
+        { ingredientId: 'mrkev', amount: '200 g', track: 'all' },
+        { ingredientId: 'kureci-prsa', amount: '300 g', track: 'meat', adultOnly: true },
+      ],
+      babySteps: ['Mrkev rozmačkej vidličkou a nech vychladnout.'],
+      babyServing: {
+        '6m': 'Podávej hranolek mrkve dlouhý jako dospělý prst, aby konec čouhal z pěsti.',
+        '9m': 'Mrkev nabídni v kostkách na uchopení dvěma prsty.',
+        '12m': 'Batole jí mrkev nakrájenou na sousta.',
+      },
+    });
+    expectPass('adult-only-not-in-baby-steps', recipe, catalog);
+  });
+
+  it('zachytí složku pro dospělé, kterou dětské kroky jmenují', () => {
+    const recipe = makeMeatRecipe({
+      ingredients: [
+        { ingredientId: 'mrkev', amount: '200 g', track: 'all' },
+        { ingredientId: 'kureci-prsa', amount: '300 g', track: 'meat', adultOnly: true },
+      ],
+      babySteps: ['Kuřecí maso rozeber podél vláken a nabídni proužek vedle mrkve.'],
+    });
+    expect(expectFail('adult-only-not-in-baby-steps', recipe, catalog)).toContain('Kuřecí');
+  });
+});
+
 describe('mercury-limit', () => {
   const tuna = makeChicken({
     id: 'tunak',
@@ -878,6 +953,9 @@ describe('pokrytí pravidel', () => {
       'stage-prep-complete',
       'allergen-consistency',
       'min-age-consistency',
+      'min-age-not-inflated',
+      'adult-only-not-in-base',
+      'adult-only-not-in-baby-steps',
       'mercury-limit',
       'nitrate-note',
       'duplicate-detection',

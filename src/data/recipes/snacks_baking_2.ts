@@ -778,6 +778,8 @@ export const snacksBaking2: Recipe[] = [
     titleCz: 'Mozzarella s rajčaty a oreganem na špejli',
     category: 'svaciny-peceni',
     minAgeMonths: 12,
+    minAgeReason:
+      'Jídlo napíchané na špejli — ta do dětské ruky nepatří v žádné fázi a kulaté kousky sýra a rajčete se musí krájet podélně. Mladšímu dítěti dej složky rozmačkané volně na talíř.',
     timeMinutes: 15,
     servings: '2 dospělí + 1 batole',
     ingredients: [
