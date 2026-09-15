@@ -1050,3 +1050,14 @@ test('recept starší, než vyžadují jeho suroviny, řekne proč', async ({ pa
   await expect(page.getByTestId('duvod-veku')).toHaveCount(0);
   await expect(page.getByText('vhodné od 6 měsíců')).toBeVisible();
 });
+
+test('nadpis zdrojů u surovin nese jen jedno číslo', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty/ciziny-fik-s-jogurtem-a-orechy');
+
+  // Panel si obsah vykresluje sám, takže mu žádné zdroje nechodí. Dřív se
+  // k číslu v nadpisu přilepila ještě nula z prázdného seznamu.
+  const prepinac = page.getByTestId('zdroje-surovin');
+  await expect(prepinac).toHaveText(/^Zdroje u surovin \(\d+\)$/);
+  await expect(prepinac).not.toContainText('(0)');
+});

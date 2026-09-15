@@ -353,7 +353,8 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
 
       <SourceDisclosure
         sources={[]}
-        label={`Zdroje u surovin (${podleSuroviny.length})`}
+        label="Zdroje u surovin"
+        count={podleSuroviny.length}
         testId="zdroje-surovin"
       >
         <ul className="flex flex-col gap-3">

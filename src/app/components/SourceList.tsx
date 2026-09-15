@@ -39,11 +39,20 @@ export function SourceLinks({ sources }: { sources: readonly SourceRef[] }): Rea
 export function SourceDisclosure({
   sources,
   label = 'Zdroje',
+  count,
   testId,
   children,
 }: {
   sources: readonly SourceRef[];
   label?: string;
+  /**
+   * Číslo v závorce, když ho neurčuje `sources`.
+   *
+   * Panel, který si obsah vykresluje sám přes `children`, žádné `sources`
+   * nedostane — a bez tohohle by za jeho nadpisem svítila nula. Přesně to se
+   * dělo u zdrojů k surovinám v receptu: „Zdroje u surovin (6) (0)".
+   */
+  count?: number;
   testId?: string;
   children?: ReactNode;
 }): ReactNode {
@@ -59,7 +68,7 @@ export function SourceDisclosure({
         onClick={() => setOpen((value) => !value)}
         className="flex min-h-touch items-center justify-between gap-2 text-sm font-semibold"
       >
-        {label} ({sources.length})
+        {label} ({count ?? sources.length})
         <ChevronDown
           aria-hidden="true"
           className={`h-5 w-5 shrink-0 transition ${open ? 'rotate-180' : ''}`}
