@@ -57,6 +57,7 @@ npm run build        # produkční build
 ```
 SUROVIN: 208  (ověřeno: 208, k revizi: 0)
 RECEPTŮ: 84   (vegetariánských: 41, s masem a bezmasou variantou: 43)
+SEZNAMŮ: 8   (položek: 75)
 CHYB: 0
 VAROVÁNÍ: 0
 ```
@@ -70,4 +71,8 @@ VAROVÁNÍ: 0
 
 ## Co je mimo rozsah verze 1
 
-Plánovač jídel na týden, nákupní seznam, fotky jídel, sdílení mimo domácnost, růstové grafy, počítání živin, notifikace. Nenavrhuj je a nestav je.
+Nákupní seznam, fotky jídel, sdílení mimo domácnost, růstové grafy, počítání živin, notifikace. Nenavrhuj je a nestav je.
+
+**30denní plán** byl z rozsahu vyňat na přání zadavatele (září 2026). Návrh
+a otevřené otázky jsou v `docs/PLAN-30-DNI.md`; než se rozhodnou, je v aplikaci
+jen ukázka podoby, ne funkce.

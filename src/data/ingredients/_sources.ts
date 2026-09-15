@@ -30,6 +30,9 @@ const FETCHED = '2026-09-12';
 /** Druhé kolo ověřování, kterým se uzavřely poslední tři položky k revizi. */
 const FETCHED_13 = '2026-09-13';
 
+/** Ověřeno při přípravě seznamu na zoubkování (curl, HTTP 200). */
+const FETCHED_15 = '2026-09-15';
+
 function nhs(title: string, path: string, accessedAt = FETCHED): SourceRef {
   return { org: 'NHS', title, url: `https://www.nhs.uk${path}`, accessedAt, tier: 1 };
 }
@@ -113,6 +116,24 @@ export const NHS_YOUNG_CHILDREN = nhs(
   'What to feed young children',
   '/baby/weaning-and-feeding/what-to-feed-young-children/',
   FETCHED,
+);
+
+/**
+ * Zoubkování: od šesti měsíců se dá nabídnout syrové ovoce a zelenina
+ * k okusování, měkké ovoce jako meloun zklidní dásně. Vždy pod dohledem,
+ * nic zmrzlého a nic slazeného.
+ */
+export const NHS_TEETHING_TIPS = nhs(
+  'Tips for helping your teething baby',
+  '/baby/babys-development/teething/tips-for-helping-your-teething-baby/',
+  FETCHED_15,
+);
+
+/** Kdy zoubkování začíná a jak se projevuje. */
+export const NHS_TEETHING_SYMPTOMS = nhs(
+  'Baby teething symptoms',
+  '/baby/babys-development/teething/baby-teething-symptoms/',
+  FETCHED_15,
 );
 
 /** Nápoje: voda od začátku příkrmu, rýžové nápoje do 5 let ne. */

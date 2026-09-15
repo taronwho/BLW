@@ -42,6 +42,15 @@ const DiaryScreen = lazy(() =>
 const HouseholdScreen = lazy(() =>
   import('./screens/HouseholdScreen').then((m) => ({ default: m.HouseholdScreen })),
 );
+const ListsScreen = lazy(() =>
+  import('./screens/ListsScreen').then((m) => ({ default: m.ListsScreen })),
+);
+const ListDetailScreen = lazy(() =>
+  import('./screens/ListDetailScreen').then((m) => ({ default: m.ListDetailScreen })),
+);
+const PlanScreen = lazy(() =>
+  import('./screens/PlanScreen').then((m) => ({ default: m.PlanScreen })),
+);
 const NotFoundScreen = lazy(() =>
   import('./screens/NotFoundScreen').then((m) => ({ default: m.NotFoundScreen })),
 );
@@ -76,6 +85,9 @@ export function App(): ReactNode {
               <Route path="/recepty/:id" element={<RecipeDetailScreen />} />
               <Route path="/rady" element={<GuidesScreen />} />
               <Route path="/rady/:id" element={<GuideDetailScreen />} />
+              <Route path="/seznamy" element={<ListsScreen />} />
+              <Route path="/seznamy/:id" element={<ListDetailScreen />} />
+              <Route path="/plan" element={<PlanScreen />} />
               <Route path="/denik" element={<DiaryScreen />} />
               <Route path="/domacnost" element={<HouseholdScreen />} />
               <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />

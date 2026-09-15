@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   BookOpen,
+  CalendarCheck,
   Carrot,
   ChevronRight,
   LifeBuoy,
@@ -12,6 +13,8 @@ import type { ReactNode } from "react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CATALOG_COUNTS } from "@/data/counts";
+import { lists } from "@/data/lists";
+import { SeznamDlazdice } from "../components/SeznamDlazdice";
 import { useHouseholdStore } from "@/storage/householdStore";
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from "../lib/age";
 import { GRIP_LABELS, GRIP_SHORT, gripForAge } from "../lib/grip";
@@ -138,55 +141,126 @@ export function HomeScreen(): ReactNode {
         )}
       </header>
 
-      <section aria-label="Když se něco děje" className="flex flex-col gap-2">
+      {/* Co to vlastně je. Rodič, který aplikaci otevře poprvé, tuhle
+          otázku má — a odpověď i se zdroji už v Radách je, takže se sem
+          nepíše podruhé, jen se na ni ukazuje. */}
+      <Link
+        to="/rady/co-je-blw"
+        data-testid="karta-co-je-blw"
+        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-3 shadow-soft"
+      >
+        <BookOpen aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold">Co je BLW</span>
+          <span className="block text-xs leading-snug text-ink/75">
+            Dítě jí samo kusy ze společného stolu, místo aby se krmilo lžičkou.
+            Od šesti měsíců a jen když je na to vývojově zralé.
+          </span>
+        </span>
+        <ChevronRight
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 text-accent"
+        />
+      </Link>
+
+      {/* Dvě dlaždice v řádce místo dvou karet pod sebou. Informace, ke které
+          se sahá bez času hledat, musí být vidět hned — ale nemusí kvůli tomu
+          zabírat třetinu obrazovky. */}
+      <section
+        aria-label="Když se něco děje"
+        className="grid grid-cols-2 gap-2"
+      >
         <Link
           to="/rady/daveni-vs-duseni"
           data-testid="dlazdice-daveni"
-          className="flex items-center gap-2.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-3 shadow-soft"
+          className="flex flex-col gap-1 rounded-xl border-2 border-risk/35 bg-risk-soft p-3 shadow-soft"
         >
           <AlertTriangle
             aria-hidden="true"
             className="h-5 w-5 shrink-0 text-risk"
           />
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm font-bold text-risk">
-              Dávení není dušení
-            </span>
-            <span className="block text-xs leading-snug text-ink/80">
-              Hlučné kuckání je obrana, která funguje. Tiché dítě, které se
-              nenadechne, je naopak stav na okamžitý zásah.
-            </span>
+          <span className="text-sm font-bold leading-snug text-risk">
+            Dávení není dušení
           </span>
-          <ChevronRight
-            aria-hidden="true"
-            className="h-4 w-4 shrink-0 text-risk/70"
-          />
+          <span className="text-[11px] leading-snug text-ink/80">
+            Hlučné kuckání je obrana. Tiché dítě je nouze.
+          </span>
         </Link>
         <Link
           to="/rady/prvni-pomoc-pri-duseni"
-          className="flex items-center gap-2.5 rounded-xl border border-line bg-surface p-3 shadow-soft"
+          data-testid="dlazdice-prvni-pomoc"
+          className="flex flex-col gap-1 rounded-xl border border-line bg-surface p-3 shadow-soft"
         >
           <LifeBuoy aria-hidden="true" className="h-5 w-5 shrink-0 text-risk" />
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm font-semibold">
-              První pomoc při dušení
-            </span>
-            <span className="block text-xs leading-snug text-muted">
-              Pět úderů mezi lopatky, pak stlačení hrudníku. Heimlich do roku
-              ne.
-            </span>
+          <span className="text-sm font-bold leading-snug">První pomoc</span>
+          <span className="text-[11px] leading-snug text-muted">
+            Pět úderů mezi lopatky. Heimlich do roku ne.
           </span>
-          <ChevronRight
-            aria-hidden="true"
-            className="h-4 w-4 shrink-0 text-muted"
-          />
         </Link>
       </section>
 
-      {/* Rozcestník bez nadpisu a bez popisků: čtyři ikony s názvem na jednu
-          řádku. Velké dlaždice s popiskem braly dvě řádky a kvůli nim se
-          úvodní obrazovka musela rolovat — a to je to jediné, co od
-          rozcestníku nikdo nechce. */}
+      {/* Zatím ukázka, ne funkce — návrh je v docs/PLAN-30-DNI.md. Karta tu
+          je proto, aby se o podobě dalo mluvit dřív, než se napíše logika. */}
+      <Link
+        to="/plan"
+        data-testid="karta-planu"
+        className="flex items-center gap-3 rounded-xl border border-accent/30 bg-accent-sheen p-3 text-white shadow-soft"
+      >
+        <CalendarCheck aria-hidden="true" className="h-6 w-6 shrink-0" />
+        <span className="min-w-0 flex-1">
+          <span className="flex items-center gap-1.5">
+            <span className="text-sm font-bold">30denní plán</span>
+            <span className="rounded-full bg-white/25 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
+              ukázka
+            </span>
+          </span>
+          <span className="block text-[11px] leading-snug">
+            Na každý den jedna nová surovina a k ní železo. Podle věku dítěte a
+            toho, co už má za sebou.
+          </span>
+        </span>
+        <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+      </Link>
+
+      {/* Seznamy ve vodorovném pásu: na úvodní obrazovce jich není místo víc
+          než pár, ale zbytek je vidět hned za okrajem, takže se nepřehlédnou. */}
+      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <h2
+            id="seznamy-nadpis"
+            className="text-[11px] font-semibold uppercase tracking-wide text-muted"
+          >
+            Seznamy
+          </h2>
+          <Link
+            to="/seznamy"
+            data-testid="vsechny-seznamy"
+            className="flex min-h-touch items-center gap-1 text-xs font-semibold text-accent"
+          >
+            Všechny
+            <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+          </Link>
+        </div>
+        {/* Záporné okraje vytáhnou pás k okraji displeje, ať je poznat, že
+            pokračuje; obsah si vnitřní odsazení vrací zpátky. */}
+        <ul
+          className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1"
+          data-testid="pas-seznamu"
+        >
+          {lists.map((seznam) => (
+            <li key={seznam.id} className="flex snap-start">
+              <SeznamDlazdice
+                seznam={seznam}
+                ochutnano={
+                  seznam.ingredientIds.filter((id) => tasted.has(id)).length
+                }
+                compact
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section
         aria-label="Kam dál"
         className="grid grid-cols-4 gap-2"

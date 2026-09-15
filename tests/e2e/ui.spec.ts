@@ -861,35 +861,66 @@ test('zkrácený štítek na dlaždici čte odečítač obrazovky celý', async 
   await expect(duseni.locator('span.sr-only')).toHaveText(/riziko dušení/);
 });
 
-test('úvodní obrazovka se nemusí rolovat', async ({ page }) => {
+test('na úvodní obrazovce je to podstatné hned nahoře', async ({ page }) => {
   await acceptDisclaimer(page);
 
   const okno = page.viewportSize()?.height ?? 0;
   const navigace = 64;
 
-  // Karta o dávení je celá v první obrazovce, nad spodní navigací — je to
-  // informace, ke které se sahá bez času hledat.
+  // Co je metoda zač a co dělat, když se něco děje — obojí bez rolování.
+  const blw = await page.getByTestId('karta-co-je-blw').boundingBox();
   const daveni = await page.getByTestId('dlazdice-daveni').boundingBox();
-  if (daveni === null) throw new Error('karta o dávení není vidět');
+  const pomoc = await page.getByTestId('dlazdice-prvni-pomoc').boundingBox();
+  if (blw === null || daveni === null || pomoc === null) throw new Error('karty nejsou vidět');
   expect(daveni.y + daveni.height).toBeLessThan(okno - navigace);
+  expect(pomoc.y + pomoc.height).toBeLessThan(okno - navigace);
 
-  // Domácnost sedí v zelené hlavičce, ne až pod rozcestníkem.
+  // Dvě bezpečnostní dlaždice stojí vedle sebe, ne pod sebou.
+  expect(pomoc.y).toBeCloseTo(daveni.y, 0);
+  expect(pomoc.x).toBeGreaterThan(daveni.x);
+
+  // Domácnost sedí v zelené hlavičce, nad vším ostatním.
   const odkaz = await page.getByTestId('odkaz-domacnost').boundingBox();
   if (odkaz === null) throw new Error('odkaz na Domácnost není vidět');
-  expect(odkaz.y + odkaz.height).toBeLessThan(daveni.y);
+  expect(odkaz.y + odkaz.height).toBeLessThanOrEqual(blw.y);
 
-  const roluje = await page.evaluate(
-    () => document.documentElement.scrollHeight > window.innerHeight + 1,
-  );
-  // Rozcestník je vidět vždycky a celý nad spodní navigací, i na tom
-  // nejmenším displeji. Od 640 px výšky se obrazovka nesmí rolovat vůbec.
-  const menu = await page.getByTestId('hlavni-menu').boundingBox();
-  if (menu === null) throw new Error('rozcestník není vidět');
-  expect(menu.y + menu.height).toBeLessThanOrEqual(okno - navigace);
-  if (okno >= 640) expect(roluje).toBe(false);
+  await page.getByTestId('karta-co-je-blw').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Co metoda je a co není');
+});
 
-  await page.getByTestId('odkaz-domacnost').click();
-  await expect(page.getByTestId('sekce-domacnosti')).toBeVisible();
+test('seznamy vedou z úvodní obrazovky až k surovině', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-15');
+  await navLink(page, 'Domů').click();
+
+  // Pás na úvodní obrazovce nese všechny seznamy, další jsou za okrajem.
+  await expect(page.getByTestId('pas-seznamu').getByRole('listitem')).not.toHaveCount(0);
+  await page.getByTestId('vsechny-seznamy').click();
+  await expect(page.getByTestId('seznam-seznamu')).toBeVisible();
+
+  await page.getByTestId('seznam-zelezo-na-talir').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Železo na talíř');
+  await expect(page.getByTestId('postup-seznamu')).toContainText('Ochutnáno 0 z 10');
+
+  // Rada k seznamu je po ruce a vede do Rad.
+  await expect(page.getByTestId('rada-seznamu')).toBeVisible();
+
+  // Ochutnávka zapsaná ze seznamu posune jeho postup.
+  await page.getByTestId('ochutnano-cocka-hneda').click();
+  await page.getByRole('button', { name: 'Uložit ochutnávku' }).click();
+  await expect(page.getByTestId('postup-seznamu')).toContainText('Ochutnáno 1 z 10');
+
+  // A položka vede na detail suroviny.
+  await page.getByTestId('seznam-surovina-spenat').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('špenát');
+});
+
+test('karta plánu vede na ukázku a hlásí, že plán ještě není hotový', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.getByTestId('karta-planu').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('30denní plán');
+  await expect(page.getByTestId('plan-priprava')).toContainText('Zatím jen ukázka');
+  await expect(page.getByTestId('ukazka-dnu').getByRole('listitem')).toHaveCount(5);
 });
 
 test('deník se přepnutím dítěte vymění, sourozencovy ochutnávky nezůstanou', async ({ page }) => {
