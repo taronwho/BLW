@@ -1,8 +1,8 @@
-import { CalendarCheck, ChevronRight } from 'lucide-react';
+import { AlertTriangle, CalendarCheck, ChevronRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
-import { DNU_V_BLOKU, blokDokoncen, dalsiDen, vyrizenoDnu } from '@/plan/typy';
+import { DNU_V_BLOKU, blokDokoncen, dalsiDen, planSediSAlergiemi, vyrizenoDnu } from '@/plan/typy';
 import { useAktivniDite } from '../lib/dite';
 
 /**
@@ -17,12 +17,17 @@ export function PlanKarta(): ReactNode {
   const plans = useHouseholdStore((store) => store.state.plans);
   const plan = dite === null ? null : (plans?.[dite.id]?.hodnota ?? null);
 
+  // Neshoda s alergiemi se pozná porovnáním dvou seznamů, bez katalogu.
+  // Proto se o ní dá říct i tady, na obrazovce, která si katalog nestahuje.
+  const sedi = plan === null || planSediSAlergiemi(plan, dite);
   const popis =
     plan === null
       ? 'Třicet dnů dopředu: každý den jedna nová surovina a k ní celá jídla s recepty.'
-      : blokDokoncen(plan)
-        ? `Blok ${plan.blok} je hotový. Dalších třicet dní se sestaví z toho, co zbývá.`
-        : `Na řadě je den ${dalsiDen(plan)?.cislo ?? 1} z ${DNU_V_BLOKU}.`;
+      : !sedi
+        ? 'Alergie se od sestavení změnily. Plán je potřeba sestavit znovu.'
+        : blokDokoncen(plan)
+          ? `Blok ${plan.blok} je hotový. Dalších třicet dní se sestaví z toho, co zbývá.`
+          : `Na řadě je den ${dalsiDen(plan)?.cislo ?? 1} z ${DNU_V_BLOKU}.`;
 
   return (
     <Link
@@ -30,7 +35,11 @@ export function PlanKarta(): ReactNode {
       data-testid="karta-planu"
       className="flex items-center gap-3 rounded-xl border border-accent/30 bg-accent-sheen p-3 text-white shadow-soft"
     >
-      <CalendarCheck aria-hidden="true" className="h-6 w-6 shrink-0" />
+      {sedi ? (
+        <CalendarCheck aria-hidden="true" className="h-6 w-6 shrink-0" />
+      ) : (
+        <AlertTriangle aria-hidden="true" className="h-6 w-6 shrink-0" />
+      )}
       <span className="min-w-0 flex-1">
         <span className="flex items-center gap-1.5">
           <span className="text-sm font-bold">30denní plán</span>
@@ -41,7 +50,7 @@ export function PlanKarta(): ReactNode {
           )}
         </span>
         <span className="block text-[11px] leading-snug">{popis}</span>
-        {plan !== null && (
+        {plan !== null && sedi && (
           <span
             role="progressbar"
             aria-valuenow={vyrizenoDnu(plan)}

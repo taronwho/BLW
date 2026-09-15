@@ -3,7 +3,14 @@ import { ingredientById, recipeById } from '../../src/data';
 import { nutrientProfile } from '../../src/data/nutrients';
 import { recipeNutrients } from '../../src/data/recipeNutrients';
 import { jinyDen, noveSuroviny, sestavPlan, type VstupPlanu } from '../../src/plan/generator';
-import { DNU_V_BLOKU, odlozDen, type Plan, type PlanDen } from '../../src/plan/typy';
+import {
+  DNU_V_BLOKU,
+  odlozDen,
+  planSediSAlergiemi,
+  pribyleAlergie,
+  type Plan,
+  type PlanDen,
+} from '../../src/plan/typy';
 import type { AllergenGroup, Child } from '../../src/types';
 
 /**
@@ -217,5 +224,56 @@ describe('zásahy rodiče do hotového plánu', () => {
       ),
     };
     expect(odlozDen(hotovy, 30)).toEqual(hotovy);
+  });
+});
+
+describe('alergie zapsaná až po sestavení plánu', () => {
+  const plan = sestavPlan(vstup({ mesice: 10 }));
+
+  it('plán si pamatuje, s jakými alergiemi vznikl', () => {
+    expect(plan.alergie).toEqual([]);
+    const sAlergii = sestavPlan(
+      vstup({ mesice: 10, dite: { ...DITE, allergens: ['vejce', 'mleko'] } }),
+    );
+    // Seřazené, aby se dva seznamy daly porovnat prostým řetězcem.
+    expect(sAlergii.alergie).toEqual(['mleko', 'vejce']);
+  });
+
+  it('nová alergie se pozná a vyjmenuje', () => {
+    const dite: Child = { ...DITE, allergens: ['arasidy'] };
+    expect(planSediSAlergiemi(plan, dite)).toBe(false);
+    expect(pribyleAlergie(plan, dite)).toEqual(['arasidy']);
+  });
+
+  it('beze změny se nic nehlásí', () => {
+    expect(planSediSAlergiemi(plan, DITE)).toBe(true);
+    expect(pribyleAlergie(plan, DITE)).toEqual([]);
+  });
+
+  it('plán ze starší verze bez seznamu se za neshodu nepovažuje', () => {
+    const stary: Plan = { ...plan };
+    delete stary.alergie;
+    expect(planSediSAlergiemi(stary, { ...DITE, allergens: ['mleko'] })).toBe(true);
+  });
+
+  it('odebraná alergie je taky neshoda, jen se nic nezakazuje', () => {
+    const sAlergii = sestavPlan(vstup({ mesice: 10, dite: { ...DITE, allergens: ['mleko'] } }));
+    expect(planSediSAlergiemi(sAlergii, DITE)).toBe(false);
+    expect(pribyleAlergie(sAlergii, DITE)).toEqual([]);
+  });
+});
+
+describe('až dojdou nové suroviny', () => {
+  it('den zůstane plný, jen bez novinky', () => {
+    // Po několika blocích má dítě ochutnáno skoro celý katalog. Plán se tím
+    // nesmí rozpadnout: jídla dál jsou, jen se opakuje osvědčené.
+    const ochutnane = new Set(ingredientById.keys());
+    const plan = sestavPlan(vstup({ blok: 9, ochutnane, mesice: 12 }));
+
+    expect(plan.dny).toHaveLength(DNU_V_BLOKU);
+    for (const den of plan.dny) {
+      expect(den.novinka).toBeUndefined();
+      expect(den.jidla.length, `den ${den.cislo} je prázdný`).toBeGreaterThan(0);
+    }
   });
 });

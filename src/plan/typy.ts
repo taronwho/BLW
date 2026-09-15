@@ -1,4 +1,4 @@
-import type { Plan, PlanDen, StavDne } from '@/types';
+import type { AllergenGroup, Child, Plan, PlanDen, StavDne } from '@/types';
 
 /**
  * Práce s třicetidenním plánem.
@@ -11,6 +11,28 @@ export type { Plan, PlanDen, PlanJidlo, TypJidla, DuvodJidla, StavDne } from '@/
 
 /** Kolik dní má jeden blok plánu. */
 export const DNU_V_BLOKU = 30;
+
+/**
+ * Sedí plán na dnešní alergie dítěte?
+ *
+ * Porovnává jen dva seznamy, žádný katalog. Díky tomu se na neshodu dá
+ * upozornit i na úvodní obrazovce, která si katalog nestahuje.
+ *
+ * Plán uložený starší verzí seznam nemá. Ten se nepovažuje za neshodu:
+ * tvrdit rodiči, že plán neplatí, protože o něm aplikace něco neví, by
+ * ho jen posílalo přesestavovat plán, se kterým nic není.
+ */
+export function planSediSAlergiemi(plan: Plan, dite: Child | null): boolean {
+  if (plan.alergie === undefined) return true;
+  const dnesni = [...(dite?.allergens ?? [])].sort().join(',');
+  return plan.alergie.join(',') === dnesni;
+}
+
+/** Alergeny, které dítě nesmí, ale plán je sestavený bez nich. */
+export function pribyleAlergie(plan: Plan, dite: Child | null): AllergenGroup[] {
+  const znal = new Set(plan.alergie ?? []);
+  return (dite?.allergens ?? []).filter((skupina) => !znal.has(skupina));
+}
 
 export function stavDne(plan: Plan, cislo: number): StavDne {
   return plan.stavy[String(cislo)]?.hodnota ?? 'ceka';

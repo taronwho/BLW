@@ -243,6 +243,7 @@ Otevírá se z karty na úvodní obrazovce, počítá se pro vybrané dítě.
 - Detail dne (`/plan/den/:cislo`): nová surovina s odkazem do katalogu, upozornění na plánovanou expozici alergenu a všechna jídla dne s odkazem na recept, časem, počtem porcí a dětskou porcí podle fáze
 - Odškrtnutí otevře zápis ochutnávky do deníku; dá se odškrtnout i bez zápisu
 - Po dokončení bloku nabídka sestavit dalších třicet dnů; kdykoli jde blok přepočítat znovu nebo plán zrušit
+- Když se alergie dítěte změní až po sestavení, upozorní na to úvodní obrazovka, plán i detail dne a jídla se zakázaným alergenem dostanou štítek
 - Pravidla, podle kterých se plán skládá, jsou v `docs/PLAN-30-DNI.md` a v radě „Jak je postavený 30denní plán"
 
 ### 4.7 Domácnost a nastavení

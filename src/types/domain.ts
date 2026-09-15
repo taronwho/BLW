@@ -372,6 +372,15 @@ export interface Plan {
   blok: number;
   /** Datum sestavení, ISO. */
   vytvoreno: string;
+  /**
+   * Alergie dítěte v době sestavení, seřazené.
+   *
+   * Plán je hotový rozvrh, ne živý dotaz do katalogu. Když rodič alergii
+   * zapíše až potom, plán o ní neví a dál nabízí jídlo, které dítě nesmí.
+   * Uložený seznam se dá porovnat s dnešním, aniž by se kvůli tomu musel
+   * stahovat katalog, takže na to upozorní i úvodní obrazovka.
+   */
+  alergie?: AllergenGroup[];
   dny: PlanDen[];
   /**
    * Stav jednotlivých dnů podle jejich čísla.

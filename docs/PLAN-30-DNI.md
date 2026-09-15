@@ -117,6 +117,17 @@ protože v deníku nebude.
 zapíše mezi alergie dítěte a plán ho pak vynechá celý. Aplikace alergii
 nediagnostikuje.
 
+**Alergie zapsaná až potom se nepřehlédne.** Plán je hotový rozvrh, ne živý
+dotaz do katalogu, takže o alergii zapsané po sestavení neví. Proto si s sebou
+nese seznam alergií, se kterými vznikl. Když se rozejde s tím dnešním,
+upozorní na to úvodní obrazovka, plán i detail dne, a jídla, která zakázaný
+alergen nesou, dostanou v detailu dne štítek. Nic se nemění potichu: rodič
+má vědět, proč se plán přesestavuje.
+
+Porovnávají se jen dva seznamy, ne katalog. Díky tomu na neshodu upozorní
+i úvodní obrazovka, která si katalog nestahuje. Plán uložený verzí, která
+seznam ještě neměla, se za neshodu nepovažuje.
+
 ## Ukládání a sloučení
 
 Plán bydlí ve stavu domácnosti pod `plans`, klíčem je `childId`, schéma 4.

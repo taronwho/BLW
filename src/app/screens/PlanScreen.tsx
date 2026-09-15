@@ -1,4 +1,5 @@
 import {
+  AlertTriangle,
   ArrowLeft,
   CalendarCheck,
   Check,
@@ -16,12 +17,21 @@ import { Link } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
 import { noveSuroviny } from '@/plan/generator';
 import { useHouseholdStore } from '@/storage/householdStore';
-import { DNU_V_BLOKU, dalsiDen, hotovoDnu, stavDne, type PlanDen } from '@/plan/typy';
+import {
+  DNU_V_BLOKU,
+  dalsiDen,
+  hotovoDnu,
+  pribyleAlergie,
+  planSediSAlergiemi,
+  stavDne,
+  type PlanDen,
+} from '@/plan/typy';
 import { blokDokoncen } from '@/plan/typy';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
 import { useAktivniDite } from '../lib/dite';
+import { ALLERGEN_LABELS } from '../lib/labels';
 import { TYP_JIDLA_LABELS, useAktivniPlan, usePlanNastroje } from '../lib/plan';
 
 /**
@@ -230,6 +240,11 @@ export function PlanScreen(): ReactNode {
   const hotovo = hotovoDnu(plan);
   const vyrizeno = plan.dny.filter((den) => stavDne(plan, den.cislo) !== 'ceka').length;
   const dokonceno = blokDokoncen(plan);
+  const novaAlergie = pribyleAlergie(plan, dite).map((skupina) => ALLERGEN_LABELS[skupina]);
+  // Pět dnů dopředu stačí na nákup a nezabere půl obrazovky.
+  const pristi = plan.dny
+    .filter((den) => stavDne(plan, den.cislo) === 'ceka' && den.cislo !== dnes?.cislo)
+    .slice(0, 5);
 
   return (
     <section className="flex flex-col gap-3" aria-labelledby="plan-nadpis">
@@ -262,6 +277,36 @@ export function PlanScreen(): ReactNode {
           />
         </div>
       </header>
+
+      {/* Alergie zapsaná až po sestavení. Plán je hotový rozvrh, takže o ní
+          neví a dál nabízí jídlo, které dítě nesmí. Tichá oprava by byla
+          horší než upozornění: rodič má vědět, proč se plán mění. */}
+      {!planSediSAlergiemi(plan, dite) && (
+        <section
+          data-testid="plan-jine-alergie"
+          className="flex flex-col gap-2 rounded-2xl border-2 border-risk/40 bg-risk-soft p-3"
+        >
+          <h2 className="flex items-center gap-2 text-sm font-bold text-risk">
+            <AlertTriangle aria-hidden="true" className="h-5 w-5 shrink-0" />
+            Alergie se změnily
+          </h2>
+          <p className="text-xs leading-relaxed text-ink/80">
+            {novaAlergie.length > 0
+              ? `Plán je sestavený bez ohledu na ${novaAlergie.join(' a ')}, protože v té době ještě nebyla v Domácnosti zapsaná. Dokud ho nesestavíš znovu, může nabízet jídlo, které dítě nesmí.`
+              : 'Plán je sestavený s jiným seznamem alergií, než je v Domácnosti dnes. Sestav ho znovu, ať odpovídá.'}
+          </p>
+          <button
+            type="button"
+            disabled={pracuje}
+            data-testid="sestavit-po-alergii"
+            onClick={() => void sestavBlok(plan.blok)}
+            className="flex min-h-touch items-center justify-center gap-2 rounded-xl bg-risk px-4 text-sm font-semibold text-white disabled:opacity-60"
+          >
+            <RefreshCw aria-hidden="true" className="h-4 w-4" />
+            Sestavit plán znovu
+          </button>
+        </section>
+      )}
 
       {dnes !== null && (
         <section
@@ -331,6 +376,45 @@ export function PlanScreen(): ReactNode {
           })}
         </ul>
       </section>
+
+      {/* Co bude dál. Rodič, který jde nakupovat, potřebuje vědět, co ho
+          čeká, ale ne celých třicet dnů naráz; proto rozbalovací a jen pár
+          dnů. Mřížka nad tím ukazuje postup, tohle obsah. */}
+      {pristi.length > 0 && (
+        <details className="rounded-xl bg-surface p-3">
+          <summary className="min-h-touch cursor-pointer text-sm font-semibold">
+            Co bude dál
+          </summary>
+          <ul className="mt-2 flex flex-col gap-2" data-testid="plan-pristi-dny">
+            {pristi.map((den) => {
+              const novinka = ingredientById.get(den.novinka ?? '');
+              return (
+                <li key={den.cislo}>
+                  <Link
+                    to={`/plan/den/${den.cislo}`}
+                    className="flex min-h-touch items-center gap-2 rounded-lg bg-paper px-2 py-1.5"
+                  >
+                    <span className="w-12 shrink-0 text-[11px] font-semibold text-muted">
+                      den {den.cislo}
+                    </span>
+                    {novinka === undefined ? (
+                      <span className="min-w-0 flex-1 text-xs text-muted">bez nové suroviny</span>
+                    ) : (
+                      <>
+                        <IngredientIcon ingredient={novinka} className="h-5 w-5 shrink-0" />
+                        <span className="min-w-0 flex-1 truncate text-xs font-medium">
+                          {novinka.nameCz}
+                        </span>
+                      </>
+                    )}
+                    <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-muted" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      )}
 
       {dokonceno && (
         <section

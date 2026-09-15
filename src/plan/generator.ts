@@ -466,7 +466,14 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
     });
   }
 
-  return { childId: vstup.dite.id, blok: vstup.blok, vytvoreno: vstup.dnes, dny, stavy: {} };
+  return {
+    childId: vstup.dite.id,
+    blok: vstup.blok,
+    vytvoreno: vstup.dnes,
+    alergie: [...vyloucene].sort(),
+    dny,
+    stavy: {},
+  };
 }
 
 /**

@@ -946,6 +946,13 @@ test('plán se sestaví, odškrtne a zapíše ochutnávku do deníku', async ({ 
   await expect(page.getByTestId('den-novinka')).toContainText('brokolice');
   await expect(page.getByTestId('den-jidla').getByRole('listitem')).toHaveCount(1);
 
+  // Co bude dál: pět dnů dopředu i s novou surovinou, kvůli nákupu.
+  await page.goto('./#/plan');
+  await page.getByRole('group').filter({ hasText: 'Co bude dál' }).getByText('Co bude dál').click();
+  await expect(page.getByTestId('plan-pristi-dny').getByRole('listitem')).toHaveCount(5);
+  await expect(page.getByTestId('plan-pristi-dny')).toContainText('květák');
+
+  await page.goto('./#/plan/den/1');
   // Odškrtnutí zapíše ochutnávku do deníku a posune plán na druhý den.
   await page.getByTestId('den-hotovo').click();
   await page.getByTestId('volba-mnozstvi-snedla-vse').click();
@@ -982,6 +989,28 @@ test('den jde odložit, přeskočit i vrátit zpátky mezi čekající', async (
   await expect(page.getByTestId('den-stav')).toContainText('přeskočeno');
   await page.getByTestId('den-vratit').click();
   await expect(page.getByTestId('den-stav')).toContainText('čeká');
+});
+
+test('alergie zapsaná po sestavení plán nezmění, ale nahlásí se', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2025-06-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+  await expect(page.getByTestId('plan-jine-alergie')).toBeHidden();
+
+  // Rodič teprve teď zapíše alergii na mléko.
+  await otevriDomacnost(page, 'deti');
+  await page.getByTestId('alergie-mleko').click();
+
+  // Plán o ní neví, tak to řekne, a to i na úvodní obrazovce.
+  await navLink(page, 'Domů').click();
+  await expect(page.getByTestId('karta-planu')).toContainText('Alergie se od sestavení změnily');
+  await page.getByTestId('karta-planu').click();
+  await expect(page.getByTestId('plan-jine-alergie')).toContainText('mléko');
+
+  // Po přesestavení je zase ticho.
+  await page.getByTestId('sestavit-po-alergii').click();
+  await expect(page.getByTestId('plan-jine-alergie')).toBeHidden();
 });
 
 test('plán vynechá alergen, který má dítě zapsaný v Domácnosti', async ({ page }) => {

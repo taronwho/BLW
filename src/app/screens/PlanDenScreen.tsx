@@ -1,8 +1,9 @@
 import { AlertTriangle, ArrowLeft, ChevronRight, Clock, ShieldCheck, Utensils } from 'lucide-react';
 import type { ReactNode } from 'react';
+import type { AllergenGroup } from '@/types';
 import { Link, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
-import { denPodleCisla, kdyStavDne, stavDne } from '@/plan/typy';
+import { denPodleCisla, kdyStavDne, pribyleAlergie, stavDne } from '@/plan/typy';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
@@ -27,6 +28,24 @@ const DUVOD_TON: Record<string, string> = {
   osvedcene: 'border-line bg-paper text-muted',
 };
 
+/**
+ * Alergeny, které jídlo nese a dítě je podle Domácnosti nesmí.
+ *
+ * Plán se sestavuje jednou a alergii může rodič zapsat až potom. Tohle je
+ * poslední místo, kde se to dá zachytit dřív, než se podle receptu začne
+ * vařit, takže se kontroluje při každém zobrazení, ne jen při sestavení.
+ */
+function zakazaneVJidle(
+  jidlo: { recipeId?: string; ingredientId?: string },
+  zakazane: readonly AllergenGroup[],
+): AllergenGroup[] {
+  const nese = new Set<AllergenGroup>([
+    ...(recipeById.get(jidlo.recipeId ?? '')?.allergens ?? []),
+    ...(ingredientById.get(jidlo.ingredientId ?? '')?.allergens ?? []),
+  ]);
+  return zakazane.filter((skupina) => nese.has(skupina));
+}
+
 function datum(kdy: number | null): string {
   if (kdy === null) return '';
   return new Date(kdy).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric' });
@@ -44,6 +63,7 @@ export function PlanDenScreen(): ReactNode {
   const stav = stavDne(plan, den.cislo);
   const faze = stageForAge(ageInMonths(dite?.birthDate ?? ''));
   const novinka = ingredientById.get(den.novinka ?? '');
+  const pribylo = pribyleAlergie(plan, dite ?? null);
 
   return (
     <article className="flex flex-col gap-3" aria-labelledby="den-nadpis">
@@ -103,6 +123,33 @@ export function PlanDenScreen(): ReactNode {
         <ChokingBadge risk={novinka.chokingRisk} reason={novinka.chokingReason} />
       )}
 
+      {/* Po mnoha blocích dojdou suroviny, které dítě ještě nezná. Den bez
+          novinky je pak v pořádku, ale nesmí vypadat jako chyba. */}
+      {novinka === undefined && (
+        <p
+          data-testid="den-bez-novinky"
+          className="rounded-xl bg-surface p-3 text-xs leading-relaxed text-muted"
+        >
+          Dneska nic nového. V katalogu už nezbývá surovina, kterou by dítě neznalo, takže je
+          den poskládaný z osvědčeného. Opakování je u příkrmu v pořádku: chuť vzniká
+          opakovaným setkáním, ne prvním soustem.
+        </p>
+      )}
+
+      {pribylo.length > 0 && (
+        <p
+          data-testid="den-jine-alergie"
+          className="flex items-start gap-2 rounded-xl border-2 border-risk/40 bg-risk-soft p-3 text-xs leading-relaxed"
+        >
+          <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-risk" />
+          <span>
+            Tenhle den je sestavený bez ohledu na{' '}
+            <strong>{pribylo.map((skupina) => ALLERGEN_LABELS[skupina]).join(' a ')}</strong>.
+            Jídla, která to nesou, jsou níž označená. Na plánu se dá nechat sestavit nový.
+          </span>
+        </p>
+      )}
+
       {den.opakovanyAlergen !== undefined && (
         <p
           data-testid="den-expozice"
@@ -127,6 +174,14 @@ export function PlanDenScreen(): ReactNode {
           {den.jidla.map((jidlo, i) => {
             const recept = recipeById.get(jidlo.recipeId ?? '');
             const surovina = ingredientById.get(jidlo.ingredientId ?? '');
+            const zakazane = zakazaneVJidle(jidlo, pribylo);
+            const varovani =
+              zakazane.length === 0 ? null : (
+                <span className="flex items-center gap-1.5 rounded-lg border border-risk/40 bg-risk-soft px-2 py-1 text-[11px] font-semibold text-risk">
+                  <AlertTriangle aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+                  Obsahuje {zakazane.map((skupina) => ALLERGEN_LABELS[skupina]).join(' a ')}
+                </span>
+              );
             const stitek = (
               <span
                 className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
@@ -162,6 +217,7 @@ export function PlanDenScreen(): ReactNode {
                       </span>
                       <span>{recept.servings}</span>
                     </span>
+                    {varovani}
                     <span className="rounded-lg bg-paper p-2 text-[11px] leading-relaxed">
                       <strong className="font-semibold">Dětská porce: </strong>
                       {recept.babyServing[faze]}
@@ -189,6 +245,7 @@ export function PlanDenScreen(): ReactNode {
                     <span className="min-w-0 flex-1 text-sm font-semibold">{surovina.nameCz}</span>
                     <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-muted" />
                   </span>
+                  {varovani}
                   <ChokingBadge risk={surovina.chokingRisk} />
                   <span className="rounded-lg bg-paper p-2 text-[11px] leading-relaxed">
                     {surovina.prep[faze].serving}
