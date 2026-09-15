@@ -1,4 +1,4 @@
-import type { CasovanaHodnota, Child, HouseholdState, TastingEvent } from '@/types';
+import type { CasovanaHodnota, Child, HouseholdState, Plan, TastingEvent } from '@/types';
 
 /**
  * Slučování stavu domácnosti podle docs/SPEC.md kapitola 7.
@@ -19,8 +19,10 @@ import type { CasovanaHodnota, Child, HouseholdState, TastingEvent } from '@/typ
  * teď mapa id → hodnota se značkou času.
  * 2 → 3: jedno dítě (`childName`, `childBirthDate`, `childGrip`, `readySigns`,
  * `childAllergens`) se změnilo na mapu dětí; ochutnávky nesou `childId`.
+ * 3 → 4: přibyl třicetidenní plán (`plans`). Starší stav ho nemá a nemusí:
+ * chybějící plán znamená, že si ho rodič ještě nesestavil.
  */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 
 export function emptyHouseholdState(): HouseholdState {
   return {
@@ -195,6 +197,11 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
         )
     : [];
 
+  const plans: Record<string, CasovanaHodnota<Plan | null>> = {};
+  if (jeCasovanaMapa(vstup['plans'])) {
+    Object.assign(plans, vstup['plans']);
+  }
+
   return {
     ...zaklad,
     children,
@@ -214,6 +221,7 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     tastings,
     favorites,
     recipeNotes,
+    ...(Object.keys(plans).length > 0 ? { plans } : {}),
     schemaVersion: SCHEMA_VERSION,
   };
 }
@@ -225,6 +233,34 @@ export const PRVNI_DITE = 'dite-1';
 
 /** Maximální počet členů domácnosti (docs/SPEC.md kap. 7 i firestore.rules). */
 export const MAX_MEMBERS = 5;
+
+/**
+ * Sloučení plánů.
+ *
+ * Plán se skládá ze dvou částí, které se chovají jinak. `dny` jsou výsledek
+ * jednoho sestavení a mění se zřídka, takže u nich rozhoduje pozdější zápis.
+ * `stavy` se naopak mění pořád a každý den má vlastní značku času, aby se
+ * odškrtnutí ze dvou telefonů sloučilo místo přepsání.
+ *
+ * Stavy se slučují jen u téhož bloku sestaveného ve stejnou chvíli. Kdyby se
+ * přenášely i mezi různými sestaveními, odškrtnuté dny starého plánu by
+ * označily úplně jiná jídla toho nového.
+ */
+function mergePlany(
+  local: Record<string, CasovanaHodnota<Plan | null>> | undefined,
+  remote: Record<string, CasovanaHodnota<Plan | null>> | undefined,
+): Record<string, CasovanaHodnota<Plan | null>> | undefined {
+  if (local === undefined && remote === undefined) return undefined;
+  const out = mergeCasovane<Plan | null>(local ?? {}, remote ?? {});
+  for (const [childId, zaznam] of Object.entries(out)) {
+    const vitez = zaznam.hodnota;
+    const druhy = (zaznam === local?.[childId] ? remote?.[childId] : local?.[childId])?.hodnota;
+    if (vitez === null || druhy === null || druhy === undefined) continue;
+    if (vitez.blok !== druhy.blok || vitez.vytvoreno !== druhy.vytvoreno) continue;
+    out[childId] = { ...zaznam, hodnota: { ...vitez, stavy: mergeCasovane(druhy.stavy, vitez.stavy) } };
+  }
+  return out;
+}
 
 /**
  * Sloučení dvou stavů domácnosti.
@@ -240,6 +276,7 @@ export function mergeHouseholdState(
 ): HouseholdState {
   const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
   const popisy = mergeLabels(local.memberLabels, remote.memberLabels);
+  const plany = mergePlany(local.plans, remote.plans);
 
   return {
     // Děti mají u každé položky vlastní čas, takže dvě zařízení můžou offline
@@ -252,6 +289,7 @@ export function mergeHouseholdState(
     tastings: mergeTastings(local.tastings, remote.tastings),
     favorites: mergeCasovane(local.favorites, remote.favorites),
     recipeNotes: mergeCasovane(local.recipeNotes, remote.recipeNotes),
+    ...(plany === undefined ? {} : { plans: plany }),
     schemaVersion: Math.max(local.schemaVersion, remote.schemaVersion),
   };
 }

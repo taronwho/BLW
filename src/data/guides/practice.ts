@@ -1,11 +1,15 @@
 import type { Guide } from '@/types';
 import {
+  NHS_6M,
   NHS_7_9M,
+  NHS_ALLERGY,
+  NHS_IRON,
   NHS_PREP_SAFELY,
   NHS_10_12M,
   NHS_VEGETARIAN,
   NHS_YOUNG_CHILDREN,
   SZU_FIRST_SPOON,
+  WHO_IYCF,
 } from '../ingredients/_sources';
 
 const KNIHA = 'Baby-led weaning. Příběh metody vedené dítětem (kapitoly 1 a 2)';
@@ -193,6 +197,67 @@ export const practice: Guide[] = [
     ],
     sources: [NHS_7_9M, NHS_PREP_SAFELY],
     literature: [KNIHA],
+    reviewStatus: 'verified',
+  },
+  {
+    id: '30denni-plan',
+    titleCz: 'Jak je postavený 30denní plán',
+    category: 'praxe',
+    summary:
+      'Co který den v plánu rozhoduje: kolik jídel, která surovina je nová, kdy se opakuje alergen a proč se den posouvá až po odškrtnutí.',
+    keyPoints: [
+      'Jedna nová surovina denně, aby se při reakci poznalo, čeho se týká.',
+      'Počet jídel roste podle věku, ne podle chuti plánu: nejdřív jedno denně, pak dvě, pak tři.',
+      'Klíčové alergeny se zavádějí brzy a každý se ještě dvakrát zopakuje.',
+    ],
+    sections: [
+      {
+        heading: 'Kolikrát denně',
+        body: [
+          'Kolem šesti měsíců stačí malé množství jídla jednou denně, v čase, který rodině vyhovuje. Mléko zůstává hlavním zdrojem výživy a příkrm se k němu přidává, nenahrazuje ho.',
+          'Mezi sedmým a devátým měsícem se dítě postupně dostává na tři jídla denně, tedy snídani, oběd a večeři. Od desátého měsíce už na tři jídla zvyklé být má.',
+          'Svačiny navíc přijdou až po prvních narozeninách. Do roka je dítě nepotřebuje a plán je proto sám od sebe nenabízí.',
+          'Plán z toho bere opatrnější variantu. První týden jedno jídlo denně, druhý dvě, dál tři, a nikdy víc, než kolik odpovídá věku. Dítěti, kterému ještě nebylo sedm měsíců, nabídne nejvýš dvě jídla, i kdyby už jedlo měsíc.',
+        ],
+      },
+      {
+        heading: 'Jedna novinka denně',
+        body: [
+          'Každý den má právě jednu novou surovinu. Kdyby byly dvě a objevila se reakce, nepozná se, na kterou z nich.',
+          'Zbytek dne se skládá z toho, co už má dítě za sebou. Recept, který by přinesl další nezavedený alergen, plán nenabídne.',
+          'Co je v deníku, se jako novinka znovu nenabídne. Proto se každý další blok počítá až ve chvíli, kdy si o něj rodič řekne: počítá s tím, co se za předchozích třicet dnů opravdu stihlo.',
+        ],
+      },
+      {
+        heading: 'Jak se vybírá, co bude nové',
+        asList: true,
+        body: [
+          'První týden jsou to samotná sousta, ne recepty: měkká vařená zelenina, kterou dítě udrží v pěsti, a teprve za ní sladší druhy.',
+          'Pak se střídají tři věci. Zdroje železa, protože zásoba z těhotenství se kolem půl roku tenčí. Suroviny, které mají zrovna sezónu. A zbytek katalogu.',
+          'Každý třetí den je vyhrazený dalšímu klíčovému alergenu, aby se jich devět stihlo zavést zhruba za měsíc a mezi dvěma zůstaly dva klidné dny.',
+          'Uvnitř každé skupiny se střídají kategorie, aby nevyšly čtyři druhy luštěnin za sebou.',
+          'Co má v katalogu vysoké riziko dušení, plán sám od sebe nenabídne. V kuchařce takové suroviny zůstávají i s pokynem, jak je nakrájet, jen si je rodič vybírá sám.',
+          'Co je v Domácnosti zapsané jako alergie dítěte, se do plánu nedostane vůbec, ani jako složka receptu.',
+        ],
+      },
+      {
+        heading: 'Alergeny brzy a pak znovu',
+        body: [
+          'Odkládání alergenních potravin riziko alergie nesnižuje. Plán je proto zavádí od začátku, po jedné a s odstupem, aby šlo případnou reakci přiřadit.',
+          'Po prvním setkání naplánuje ještě dvě opakování, tři a sedm dnů poté. Jednou zavedený alergen se má nabízet dál, ne jednou vyzkoušet a odložit.',
+          'Reakce se do plánu nezapisuje sama. Když dítě zareaguje, patří to do deníku a k pediatrovi; alergen se dá zapsat mezi alergie dítěte a plán ho pak vynechá celý.',
+        ],
+      },
+      {
+        heading: 'Den se posune, až proběhne',
+        body: [
+          'Plán se neváže na kalendář. Den se posune ve chvíli, kdy ho rodič odškrtne, ne o půlnoci. Nemoc ani dovolená tím plán nerozbijí a nikdo se nevrací k dvanácti zmeškaným dnům.',
+          'Každý den se dá odložit na jindy, přeskočit úplně, nebo vyměnit za jiný nápad se stejnou novinkou. Přeskočená surovina se v dalším bloku vrátí, protože v deníku nebude.',
+          'Odškrtnutí zapíše ochutnávku rovnou do deníku, aby plán a deník nebyly dvě evidence téhož. Zapsat se dá i bez toho, protože domýšlet za rodiče, jak jídlo dopadlo, by deník znehodnotilo.',
+        ],
+      },
+    ],
+    sources: [NHS_6M, NHS_7_9M, NHS_10_12M, WHO_IYCF, NHS_ALLERGY, NHS_IRON],
     reviewStatus: 'verified',
   },
 ];

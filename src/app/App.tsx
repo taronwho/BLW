@@ -51,6 +51,9 @@ const ListDetailScreen = lazy(() =>
 const PlanScreen = lazy(() =>
   import('./screens/PlanScreen').then((m) => ({ default: m.PlanScreen })),
 );
+const PlanDenScreen = lazy(() =>
+  import('./screens/PlanDenScreen').then((m) => ({ default: m.PlanDenScreen })),
+);
 /* Přehled o používání. Otevře se jen na adrese s tajným klíčem, jinak se
    tváří jako neexistující stránka. Podrobnosti v src/admin/tajnyOdkaz.ts. */
 const AdminScreen = lazy(() =>
@@ -93,6 +96,7 @@ export function App(): ReactNode {
               <Route path="/seznamy" element={<ListsScreen />} />
               <Route path="/seznamy/:id" element={<ListDetailScreen />} />
               <Route path="/plan" element={<PlanScreen />} />
+              <Route path="/plan/den/:cislo" element={<PlanDenScreen />} />
               <Route path="/x/:klic" element={<AdminScreen />} />
               <Route path="/denik" element={<DiaryScreen />} />
               <Route path="/domacnost" element={<HouseholdScreen />} />

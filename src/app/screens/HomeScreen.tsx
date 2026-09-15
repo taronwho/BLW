@@ -1,7 +1,6 @@
 import {
   AlertTriangle,
   BookOpen,
-  CalendarCheck,
   ChevronRight,
   LifeBuoy,
   Sparkles,
@@ -13,6 +12,7 @@ import { Link } from "react-router-dom";
 import { CATALOG_COUNTS } from "@/data/counts";
 import { lists } from "@/data/lists";
 import { SeznamDlazdice } from "../components/SeznamDlazdice";
+import { PlanKarta } from "../components/PlanKarta";
 import { useHouseholdStore } from "@/storage/householdStore";
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from "../lib/age";
 import { GRIP_LABELS, GRIP_SHORT, gripForAge } from "../lib/grip";
@@ -170,28 +170,9 @@ export function HomeScreen(): ReactNode {
         </Link>
       </section>
 
-      {/* Zatím ukázka, ne funkce — návrh je v docs/PLAN-30-DNI.md. Karta tu
-          je proto, aby se o podobě dalo mluvit dřív, než se napíše logika. */}
-      <Link
-        to="/plan"
-        data-testid="karta-planu"
-        className="flex items-center gap-3 rounded-xl border border-accent/30 bg-accent-sheen p-3 text-white shadow-soft"
-      >
-        <CalendarCheck aria-hidden="true" className="h-6 w-6 shrink-0" />
-        <span className="min-w-0 flex-1">
-          <span className="flex items-center gap-1.5">
-            <span className="text-sm font-bold">30denní plán</span>
-            <span className="rounded-full bg-white/25 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
-              ukázka
-            </span>
-          </span>
-          <span className="block text-[11px] leading-snug">
-            Na každý den jedna nová surovina a k ní železo. Podle věku dítěte a
-            toho, co už má za sebou.
-          </span>
-        </span>
-        <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
-      </Link>
+      {/* Plán je jediná část aplikace, která rodiči řekne, co má být zítra.
+          Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
+      <PlanKarta />
 
       {/* Seznamy ve vodorovném pásu: na úvodní obrazovce jich není místo víc
           než pár, ale zbytek je vidět hned za okrajem, takže se nepřehlédnou. */}

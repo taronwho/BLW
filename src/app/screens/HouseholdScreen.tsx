@@ -33,7 +33,7 @@ const SEKCE = [
 type Sekce = (typeof SEKCE)[number]['id'];
 const SEKCE_IDS = SEKCE.map((jedna) => jedna.id);
 
-/** Domácnost a nastavení (docs/SPEC.md kap. 4.6). */
+/** Domácnost a nastavení (docs/SPEC.md kap. 4.7). */
 export function HouseholdScreen(): ReactNode {
   const { state, status, householdCode, init, connect, disconnect, createHousehold, importState } =
     useHouseholdStore();

@@ -327,6 +327,63 @@ export interface Child {
   allergens?: AllergenGroup[];
 }
 
+/**
+ * Třicetidenní plán jídel.
+ *
+ * Patří dítěti, ne domácnosti: sourozenci jsou každý jinde a sdílený plán by
+ * jednomu z nich nabízel jídlo, které ještě neumí. Funkce nad tímhle tvarem
+ * jsou v src/plan/.
+ */
+/** Jaké jídlo dne to je. */
+export type TypJidla = 'snidane' | 'obed' | 'svacina' | 'vecere';
+
+/** Proč plán zrovna tohle jídlo nabízí. Rodič to vidí u jídla jako štítek. */
+export type DuvodJidla =
+  | 'prvni-ochutnavka'
+  | 'nova-surovina'
+  | 'alergen'
+  | 'zelezo'
+  | 'osvedcene';
+
+export interface PlanJidlo {
+  typ: TypJidla;
+  /** Recept z kuchařky. U prvních ochutnávek chybí. */
+  recipeId?: string;
+  /** Samotná surovina. Používá se v prvních dnech, kdy se recept nevaří. */
+  ingredientId?: string;
+  duvod: DuvodJidla;
+}
+
+export interface PlanDen {
+  /** Pořadí v bloku, od jedné. */
+  cislo: number;
+  /** Surovina, která se ten den zavádí poprvé. */
+  novinka?: string;
+  /** Alergen, který se ten den opakuje. Druhá nebo třetí expozice. */
+  opakovanyAlergen?: AllergenGroup;
+  jidla: PlanJidlo[];
+}
+
+export type StavDne = 'ceka' | 'hotovo' | 'preskoceno';
+
+export interface Plan {
+  childId: string;
+  /** Kolikátých třicet dní to je. První blok má číslo jedna. */
+  blok: number;
+  /** Datum sestavení, ISO. */
+  vytvoreno: string;
+  dny: PlanDen[];
+  /**
+   * Stav jednotlivých dnů podle jejich čísla.
+   *
+   * Každý den nese vlastní značku času, aby se odškrtnutí ze dvou telefonů
+   * dalo sloučit. Bez toho by pozdější zápis celého plánu smazal den, který
+   * mezitím odškrtl druhý rodič.
+   */
+  stavy: Record<string, CasovanaHodnota<StavDne>>;
+}
+
+
 export interface HouseholdState {
   /**
    * Děti v domácnosti podle `id`.
@@ -370,6 +427,14 @@ export interface HouseholdState {
   /** Poznámky rodiče k receptům, klíčem je `recipeId`. Se značkou času ze
    *  stejného důvodu jako oblíbené: smazání poznámky musí přežít sloučení. */
   recipeNotes: Record<string, CasovanaHodnota<string>>;
+  /**
+   * Třicetidenní plán pro každé dítě, klíčem je `childId`.
+   *
+   * Nepovinné, protože data uložená dřívější verzí ho nemají. `null` je
+   * náhrobek po zrušeném plánu: bez něj by se zrušený plán při slučování
+   * z druhého telefonu vrátil.
+   */
+  plans?: Record<string, CasovanaHodnota<Plan | null>>;
   schemaVersion: number;
 }
 

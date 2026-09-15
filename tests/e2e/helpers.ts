@@ -97,6 +97,27 @@ export const SCREENS: readonly ScreenDef[] = [
     },
   },
   {
+    id: 'plan',
+    name: 'Plán',
+    open: async (page) => {
+      await zalozDite(page, 'Ema', '2026-03-01');
+      await page.goto('./#/plan');
+      await page.getByTestId('sestavit-plan').click();
+      await expect(page.getByTestId('plan-mrizka')).toBeVisible();
+    },
+  },
+  {
+    id: 'plan-den',
+    name: 'Plán, den',
+    open: async (page) => {
+      await zalozDite(page, 'Ema', '2025-06-01');
+      await page.goto('./#/plan');
+      await page.getByTestId('sestavit-plan').click();
+      await page.goto('./#/plan/den/12');
+      await expect(page.getByTestId('den-jidla')).toBeVisible();
+    },
+  },
+  {
     id: 'domacnost-deti',
     // Domácnost je rozdělená na tři okruhy a každý se kontroluje zvlášť 
     // jinak by přetečení nebo malý dotykový cíl v jednom z nich prošel.

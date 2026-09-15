@@ -1,5 +1,14 @@
 import { create } from 'zustand';
-import type { AllergenGroup, Child, Grip, HouseholdState, ReadySign, TastingEvent } from '@/types';
+import type {
+  AllergenGroup,
+  Child,
+  Grip,
+  HouseholdState,
+  Plan,
+  ReadySign,
+  StavDne,
+  TastingEvent,
+} from '@/types';
 import {
   activeChildren,
   emptyHouseholdState,
@@ -52,6 +61,8 @@ interface HouseholdStore {
   deleteTasting(id: string): Promise<void>;
   toggleFavorite(id: string): Promise<void>;
   setRecipeNote(recipeId: string, note: string): Promise<void>;
+  ulozPlan(childId: string, plan: Plan | null): Promise<void>;
+  nastavStavDne(childId: string, cislo: number, stav: StavDne): Promise<void>;
   importState(raw: unknown): Promise<void>;
 }
 
@@ -413,6 +424,43 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       await persist({
         ...stav,
         recipeNotes: { ...stav.recipeNotes, [recipeId]: { hodnota: note, kdy: Date.now() } },
+      });
+    },
+
+    /**
+     * Uloží nebo zruší plán jednoho dítěte.
+     *
+     * Hotový plán sem přichází zvenčí, ne že by si ho úložiště spočítalo:
+     * generátor sahá do celého katalogu a úložiště je v prvním balíku
+     * aplikace, takže by si ho na úvodní obrazovku stáhl každý, kdo plán
+     * nikdy neotevřel. `null` je náhrobek po zrušeném plánu.
+     */
+    async ulozPlan(childId: string, plan: Plan | null): Promise<void> {
+      const stav = get().state;
+      await persist({
+        ...stav,
+        plans: { ...stav.plans, [childId]: { hodnota: plan, kdy: Date.now() } },
+      });
+    },
+
+    /**
+     * Odškrtnutí, přeskočení nebo návrat dne zpátky mezi čekající.
+     *
+     * Stav se zapisuje dovnitř plánu s vlastní značkou času, aby se dva
+     * telefony mohly prostřídat: bez ní by pozdější zápis celého plánu
+     * smazal den, který mezitím odškrtl druhý rodič.
+     */
+    async nastavStavDne(childId: string, cislo: number, stav: StavDne): Promise<void> {
+      const soucasny = get().state.plans?.[childId]?.hodnota;
+      if (soucasny === undefined || soucasny === null) return;
+      const stavy = { ...soucasny.stavy, [String(cislo)]: { hodnota: stav, kdy: Date.now() } };
+      const celkovy = get().state;
+      await persist({
+        ...celkovy,
+        plans: {
+          ...celkovy.plans,
+          [childId]: { hodnota: { ...soucasny, stavy }, kdy: Date.now() },
+        },
       });
     },
 

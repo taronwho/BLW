@@ -885,7 +885,7 @@ test('na úvodní obrazovce je to podstatné hned nahoře', async ({ page }) => 
   expect(odkaz.y + odkaz.height).toBeLessThanOrEqual(blw.y);
 
   await page.getByTestId('karta-co-je-blw').click();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Co metoda je a co není');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Co je BLW');
 });
 
 test('seznamy vedou z úvodní obrazovky až k surovině', async ({ page }) => {
@@ -915,12 +915,92 @@ test('seznamy vedou z úvodní obrazovky až k surovině', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('špenát');
 });
 
-test('karta plánu vede na ukázku a hlásí, že plán ještě není hotový', async ({ page }) => {
+test('bez dítěte plán nejde sestavit, protože není z čeho počítat', async ({ page }) => {
   await acceptDisclaimer(page);
   await page.getByTestId('karta-planu').click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('30denní plán');
-  await expect(page.getByTestId('plan-priprava')).toContainText('Zatím jen ukázka');
-  await expect(page.getByTestId('ukazka-dnu').getByRole('listitem')).toHaveCount(5);
+  await expect(page.getByTestId('plan-zaloz-dite')).toBeVisible();
+  await expect(page.getByTestId('sestavit-plan')).toBeHidden();
+
+  // Pravidla plánu mají vlastní radu se zdroji, ne jen odstavec na obrazovce.
+  await page.getByTestId('odkaz-rada-plan').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Jak je postavený 30denní plán');
+  await expect(page.getByRole('link', { name: /NHS/ }).first()).toBeVisible();
+});
+
+test('plán se sestaví, odškrtne a zapíše ochutnávku do deníku', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  // Třicet dnů v mřížce a první den je na řadě.
+  await expect(page.getByTestId('plan-mrizka').getByRole('listitem')).toHaveCount(30);
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 1');
+  await expect(page.getByTestId('plan-postup')).toContainText('Hotovo 0 z 30');
+
+  // První den je samotné sousto, ne recept.
+  await page.getByTestId('plan-dnes-detail').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Den 1');
+  await expect(page.getByTestId('den-novinka')).toContainText('brokolice');
+  await expect(page.getByTestId('den-jidla').getByRole('listitem')).toHaveCount(1);
+
+  // Odškrtnutí zapíše ochutnávku do deníku a posune plán na druhý den.
+  await page.getByTestId('den-hotovo').click();
+  await page.getByTestId('volba-mnozstvi-snedla-vse').click();
+  await page.getByRole('button', { name: 'Zapsat a odškrtnout' }).click();
+  await expect(page.getByTestId('den-stav')).toContainText('hotovo');
+
+  await page.goto('./#/plan');
+  await expect(page.getByTestId('plan-postup')).toContainText('Hotovo 1 z 30');
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 2');
+
+  await navLink(page, 'Deník').click();
+  await expect(page.getByTestId('casova-osa')).toContainText('brokolice');
+});
+
+test('den jde odložit, přeskočit i vrátit zpátky mezi čekající', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  // Odložení prohodí obsah prvního a druhého dne, čísla zůstanou.
+  await expect(page.getByTestId('plan-dnes')).toContainText('brokolice');
+  await page.getByTestId('den-odlozit').click();
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 1');
+  await expect(page.getByTestId('plan-dnes')).toContainText('květák');
+
+  // Přeskočení posune plán dál a den zůstane přeškrtnutý.
+  await page.getByTestId('den-preskocit').click();
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 2');
+  await expect(page.getByTestId('plan-postup')).toContainText('přeskočeno 1');
+
+  // A dá se vzít zpátky.
+  await page.getByTestId('plan-den-1').click();
+  await expect(page.getByTestId('den-stav')).toContainText('přeskočeno');
+  await page.getByTestId('den-vratit').click();
+  await expect(page.getByTestId('den-stav')).toContainText('čeká');
+});
+
+test('plán vynechá alergen, který má dítě zapsaný v Domácnosti', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2025-06-01');
+
+  // Ema nesnáší mléko, vejce ani lepek.
+  for (const alergen of ['mleko', 'vejce', 'psenice-lepek']) {
+    await page.getByTestId(`alergie-${alergen}`).click();
+  }
+
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+  await page.getByTestId('plan-dnes-detail').click();
+  const jidla = page.getByTestId('den-jidla');
+  await expect(jidla).toBeVisible();
+  // Vyloučený alergen se nesmí objevit ani jako štítek u jídla.
+  await expect(jidla).not.toContainText('mléko');
+  await expect(jidla).not.toContainText('vejce');
 });
 
 test('deník se přepnutím dítěte vymění, sourozencovy ochutnávky nezůstanou', async ({ page }) => {

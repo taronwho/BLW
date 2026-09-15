@@ -236,7 +236,16 @@ Filtry: kategorie, čas do 20/40 minut, „mám doma" (výběr surovin), „jen 
 - Statistiky: ochutnáno X z Y surovin, rozpad po kategoriích, oblíbené, odmítnuté (s poznámkou, že odmítnutí je normální a opakovaná nabídka je běžná)
 - „Co dnes zkusit?" — návrh 3 dosud neochutnaných surovin vhodných k věku a sezóně
 
-### 4.6 Domácnost a nastavení
+### 4.6 30denní plán
+Otevírá se z karty na úvodní obrazovce, počítá se pro vybrané dítě.
+- Přehled bloku: postup (hotovo X z 30), karta dne, který je právě na řadě, a mřížka třiceti dnů po pěti, kde barva a ikona říkají hotovo / přeskočeno / čeká
+- Karta dne: nová surovina se štítkem rizika dušení, jídla dne pod sebou a čtyři akce, tedy Hotovo, Na jindy, Jiné jídlo, Přeskočit
+- Detail dne (`/plan/den/:cislo`): nová surovina s odkazem do katalogu, upozornění na plánovanou expozici alergenu a všechna jídla dne s odkazem na recept, časem, počtem porcí a dětskou porcí podle fáze
+- Odškrtnutí otevře zápis ochutnávky do deníku; dá se odškrtnout i bez zápisu
+- Po dokončení bloku nabídka sestavit dalších třicet dnů; kdykoli jde blok přepočítat znovu nebo plán zrušit
+- Pravidla, podle kterých se plán skládá, jsou v `docs/PLAN-30-DNI.md` a v radě „Jak je postavený 30denní plán"
+
+### 4.7 Domácnost a nastavení
 - Jméno a datum narození dcery
 - **Párovací kód domácnosti** + QR kód ke skenování druhým telefonem
 - Stav synchronizace: Připojeno / Jen na tomto zařízení / Offline (fronta N změn)

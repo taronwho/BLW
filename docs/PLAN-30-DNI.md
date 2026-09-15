@@ -1,70 +1,136 @@
-# 30denní plán — návrh, ne hotová věc
+# 30denní plán
 
-Tenhle dokument je zadání. Plán se nemá začít programovat dřív, než se
-rozhodnou otázky na konci.
+Hotová funkce, ne návrh. Tenhle dokument popisuje, podle čeho se plán
+skládá a proč, aby se logika dala kdykoli ověřit proti datům a testům.
+
+Kód: `src/plan/` (frekvence, generátor, práce s plánem), obrazovky
+`src/app/screens/PlanScreen.tsx` a `PlanDenScreen.tsx`, testy
+`tests/plan/`. Text pro rodiče je v radě `30denni-plan`.
 
 ## K čemu to je
 
 Rodič, který začíná, neví, co nabídnout zítra. Katalog má tři sta položek
 a filtry na něj jsou přesné, ale odpověď na otázku „co dneska" v nich není.
-Plán ji dává: na každý den jednu novou surovinu, k ní partnera, který dodá
-železo, a nápad, co z toho uvařit.
+Plán ji dává: na každý den jednu novou surovinu a k ní celá jídla i s recepty
+pro celou rodinu.
 
-## Co plán musí dodržet
+## Rozhodnutí, která padla (září 2026)
 
-Nic z toho není nové pravidlo — všechno už v aplikaci platí a dá se ověřit
-proti datům:
+Původní návrh se ptal na pět věcí. Odpovědi zadavatele:
+
+1. **Rozsah dne.** Celé dny, ne jedno jídlo. Snídaně, oběd, večeře
+   a od roka i svačiny, podle toho, kolikrát denně už má dítě jíst.
+2. **Kdy plán začíná.** Kdykoli. Co je v deníku, se jako novinka nenabídne.
+3. **Druhé dítě.** Plán patří dítěti, stejně jako deník.
+4. **Přeskočení dne.** Rodič rozhoduje: odškrtnout, odložit na jindy,
+   přeskočit úplně, nebo vyměnit za jiný nápad se stejnou novinkou.
+5. **Recepty v plánu.** Ano, celé recepty. První týden jsou to ale samotná
+   sousta: recept se u prvního ochutnání brokolice nevaří.
+
+K tomu přibylo pokračování: až blok doběhne, sestaví se dalších třicet dnů
+z toho, co za předchozích třicet opravdu proběhlo.
+
+## Kolikrát denně
+
+Opřeno o NHS a WHO, plán bere z obou tu opatrnější hranici.
+
+| stav | jídel | svačin |
+|---|---|---|
+| 1. blok, dny 1–7 | 1 | 0 |
+| 1. blok, dny 8–14 | 2 | 0 |
+| dál | 3 | 0 |
+| od 12 měsíců | 3 | 2 |
+
+Nad tím platí strop podle věku: do sedmi měsíců nejvýš dvě jídla, ať dítě
+jí jakkoli dlouho. Bez data narození se bere ta opatrnější varianta.
+
+Zdroje: NHS „from around 6 months" (jednou denně malé množství),
+NHS „7 to 9 months" (postupně tři jídla), NHS „10 to 12 months" (tři jídla),
+NHS „babies under 12 months do not need snacks", WHO IYCF (2–3 jídla
+6–8 měsíců, 3–4 jídla 9–23 měsíců, 1–2 svačiny podle potřeby).
+
+## Pravidla, která generátor drží
+
+Každé z nich má svůj test v `tests/plan/generator.test.ts`. Když test
+spadne, opravuje se generátor, ne test.
 
 1. **Jedna nová surovina denně.** Když se zavedou dvě a dítě zareaguje,
-   nepozná se na kterou. Zbytek dne se skládá z toho, co už má dítě za sebou.
-2. **Alergen brzy a opakovaně.** Každý z devíti klíčových alergenů dostane
-   v plánu tři expozice, rozložené s odstupem. První expozice patří do
-   dopoledne, doma, ne před spaním.
-3. **Železo v každém jídle.** Novozélandská studie BLISS to má jako první
-   ze tří doplňujících pravidel a aplikace podle toho značí suroviny.
-   U rostlinného železa plán přidá k jídlu vitamin C.
-4. **Energie v každém jídle.** Samotná zelenina a ovoce nestačí; plán do dne
-   vždy zařadí zdroj tuku nebo sacharidů.
-5. **Tvar sousta.** V prvních týdnech se nenabízí nic s vysokým rizikem
-   dušení. Později ano, ale vždy s pokynem, jak to nakrájet.
-6. **Fáze dítěte a jeho alergie.** Plán bere věk vybraného dítěte
-   a vynechá, na co je dítě podle Domácnosti alergické.
-7. **Co už je ochutnané.** Surovina z deníku se v plánu neobjeví jako nová.
+   nepozná se na kterou.
+2. **Železo v každém dni**, jakmile se začne vařit. První týden ne: to jsou
+   samotná zeleninová sousta a železo by do nich šlo dostat jen na sílu.
+3. **Alergen brzy a pak dvakrát znovu**, tři a sedm dnů po prvním setkání.
+   Nový alergen nikdy nepřijde dva dny po sobě.
+4. **Alergie dítěte** z Domácnosti se do plánu nedostanou vůbec, ani jako
+   složka receptu.
+5. **Nic s vysokým rizikem dušení** plán sám od sebe nenabídne. V katalogu
+   takové suroviny zůstávají i s pokynem ke krájení.
+6. **Recept nepřinese nezavedený alergen.** Jinak by se při reakci
+   nepoznalo, co ji způsobilo.
+7. **Recept se neopakuje** dřív než po šesti dnech a dvakrát v jednom dni
+   nepadne nikdy.
 
-## Jak by to mělo fungovat
+## Jak se vybírá novinka
 
-**Postupový, ne kalendářní.** Den se posune, až rodič potvrdí, že jídlo
-proběhlo — ne o půlnoci. Nemocné dítě, dovolená nebo týden, kdy se nic
-nepovedlo, pak plán nerozbijí a rodič nemá po návratu dvanáct zmeškaných
-dnů. Kalendářní plán by z pomůcky udělal dluh.
+- **První týden** je opsaný z rady o prvních potravinách: brokolice, květák,
+  cuketa, brambor, dýně hokaido, batát, avokádo. Není to odvozené z dat,
+  protože „rozumné první sousto" se z dat poznat nedá. Mrkev, kterou SZÚ
+  jmenuje jako první, tam schválně není: v katalogu má vysoké riziko dušení
+  kvůli syrové podobě a plán takové suroviny sám nenabízí.
+- **Klíčové alergeny** dostanou jednoho zástupce na skupinu, ne všechny
+  alergenní suroviny. Zástupce se vybírá tak, aby nesl co nejmíň skupin
+  naráz: při reakci se to pak vyhodnocuje líp.
+- **Zbytek** se řadí podle železa, pak sezóny, pak abecedy, a uvnitř každé
+  skupiny se střídají kategorie. Bez střídání vycházely čtyři druhy čočky
+  za sebou.
+- **Prokládání:** každý třetí den je alergenní, ostatní dny ze zbytku.
+  Devět skupin se tím stihne zhruba za měsíc a mezi dvěma novými alergeny
+  zůstanou dva klidné dny.
 
-**Jedna pravda, ne dvě.** Odškrtnutí dne zapíše ochutnávku do deníku.
-Plán a deník nesmí být dvě evidence téhož, které se rozejdou.
+## Jak se vybírá recept
 
-**Počítá se v telefonu.** Plán vzniká z katalogu a z deníku dítěte, žádný
-server. Jde vygenerovat znovu a jde ho zahodit.
+Nižší skóre vyhrává: recept s novinkou dne, pak recept, který doplní
+chybějící železo, pak počet surovin, které dítě ještě nezná (penalizace,
+ne zákaz: kuchařka se surovinám navíc nevyhne). Při shodě rozhoduje
+abeceda a posun podle bloku, aby se v dalších třiceti dnech nevracelo totéž.
 
-**Odmítnutí není konec.** Odmítnutá surovina se vrátí do fronty o pár dní
-později. Opakovaná nabídka je u příkrmu normální, některé suroviny
-potřebují deset i víc setkání.
+Novinka, na kterou v kuchařce recept není, se nabídne samostatně vedle
+jídla. Bez toho by den novou surovinu slíbil a nedodal.
 
-**Reakce plán zastaví.** Při reakci na alergen se ten alergen z plánu
-vyřadí a rodič dostane pokyn zeptat se pediatra. Aplikace alergii
+## Jak se chová
+
+**Postupový, ne kalendářní.** Den se posune, až ho rodič odškrtne, ne
+o půlnoci. Nemoc ani dovolená plán nerozbijí a nikdo se nevrací
+k dvanácti zmeškaným dnům.
+
+**Jedna pravda, ne dvě.** Odškrtnutí zapíše ochutnávku do deníku. Zapsat
+se dá i bez toho: domýšlet za rodiče, jak jídlo dopadlo, by deník
+znehodnotilo.
+
+**Počítá se v telefonu.** Generátor je čistá funkce nad katalogem a deníkem,
+žádný server. Ze stejného vstupu vyjde vždycky tentýž plán, takže se dá
+kdykoli přepočítat i otestovat.
+
+**Odmítnutí není konec.** Přeskočená surovina se v dalším bloku vrátí,
+protože v deníku nebude.
+
+**Reakce patří pediatrovi.** Plán ji sám nezpracovává. Rodič si alergen
+zapíše mezi alergie dítěte a plán ho pak vynechá celý. Aplikace alergii
 nediagnostikuje.
 
-## Otázky, které se musí rozhodnout předem
+## Ukládání a sloučení
 
-1. **Rozsah dne.** Jedno jídlo denně, nebo celý den (snídaně, oběd,
-   svačina, večeře)? Návrh: jedno hlavní jídlo s novou surovinou, zbytek
-   dne nechat na rodiči. Celý den naplánovat znamená plánovat i to, co
-   aplikace nemůže vědět — kolik dítě kojí a kdy spí.
-2. **Kdy plán začíná.** Od prvního dne příkrmu, nebo kdykoli? Návrh:
-   kdykoli, protože už ochutnané suroviny se z něj vynechají.
-3. **Co s druhým dítětem.** Plán patří dítěti, stejně jako deník.
-4. **Přeskočení dne.** Jde den přeskočit úplně, nebo se jen odsune?
-5. **Recepty v plánu.** Má každý den nabídnout recept z kuchařky, nebo jen
-   surovinu a způsob přípravy? Recept dává smysl u oběda, ne u prvního
-   ochutnání banánu.
+Plán bydlí ve stavu domácnosti pod `plans`, klíčem je `childId`, schéma 4.
+Skládá se ze dvou částí, které se při sloučení chovají jinak:
 
-Dokud nejsou tyhle odpovědi, je na úvodní obrazovce jen karta s ukázkou,
-jak bude den vypadat.
+- `dny` jsou výsledek jednoho sestavení, mění se zřídka, rozhoduje pozdější
+  zápis;
+- `stavy` se mění pořád a každý den má vlastní značku času, aby se
+  odškrtnutí ze dvou telefonů sloučilo místo přepsání.
+
+Stavy se slučují jen u téhož bloku sestaveného ve stejnou chvíli. Kdyby se
+přenášely mezi různými sestaveními, odškrtnuté dny starého plánu by označily
+úplně jiná jídla toho nového.
+
+Generátor se do úložiště neimportuje. Sahá do celého katalogu a úložiště je
+v prvním balíku aplikace, takže by si katalog stáhl i rodič, který plán nikdy
+neotevřel. Hotový plán proto do úložiště přichází zvenčí, z obrazovky.

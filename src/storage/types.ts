@@ -1,6 +1,6 @@
 import type { HouseholdState } from '@/types';
 
-/** Stav připojení, který se ukazuje v Nastavení (docs/SPEC.md kap. 4.6). */
+/** Stav připojení, který se ukazuje v Nastavení (docs/SPEC.md kap. 4.7). */
 export type SyncStatus =
   | { kind: 'local-only' }
   | { kind: 'connecting' }
