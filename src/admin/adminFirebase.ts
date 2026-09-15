@@ -72,7 +72,13 @@ export function popisChyby(error: unknown): string {
     return 'Příliš mnoho pokusů za sebou. Zkus to za chvíli.';
   }
   if (text.includes('auth/operation-not-allowed')) {
-    return 'Ve Firebase není zapnuté přihlášení e-mailem a heslem.';
+    return 'Ve Firebase není zapnuté přihlášení e-mailem a heslem. Zapíná se v konzoli, v Authentication.';
+  }
+  if (text.includes('auth/network-request-failed')) {
+    return 'Nepodařilo se spojit s Firebase. Zkontroluj připojení k síti.';
+  }
+  if (text.includes('auth/user-not-found')) {
+    return 'Takový účet ve Firebase není. Zakládá se ručně v konzoli, v Authentication.';
   }
   if (text.includes('permission-denied') || text.includes('insufficient permissions')) {
     return 'Účet je přihlášený, ale pravidla Firestore mu čtení nedovolila. Zkontroluj, že jsou nasazená nová pravidla a že sedí e-mail v nich.';
