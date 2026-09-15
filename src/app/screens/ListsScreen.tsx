@@ -27,7 +27,7 @@ export function ListsScreen(): ReactNode {
           <li key={seznam.id} className="flex">
             <SeznamDlazdice
               seznam={seznam}
-              ochutnano={seznam.ingredientIds.filter((id) => tasted.has(id)).length}
+              ochutnano={seznam.polozky.filter((polozka) => tasted.has(polozka.id)).length}
             />
           </li>
         ))}

@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { ingredientById, lists } from '../../src/data';
 import { guideById } from '../../src/data/guides';
 import { PODMINKY } from '../../src/data/listRules';
+import { najdiTypografii, najdiVykani } from '../../src/safety/language';
+import { GENDERED_ADDRESS_PATTERNS, KNOWN_TYPO_PATTERNS } from '../../src/safety/vocabulary';
+import { findPatterns } from '../../src/safety/text';
 
 /**
  * Seznam nesmí tvrdit nic, co katalog nepotvrzuje.
@@ -14,16 +17,17 @@ import { PODMINKY } from '../../src/data/listRules';
 describe('tematické seznamy surovin', () => {
   it('každá položka existuje v katalogu', () => {
     const chybejici = lists.flatMap((seznam) =>
-      seznam.ingredientIds
-        .filter((id) => !ingredientById.has(id))
-        .map((id) => `${seznam.id}: ${id}`),
+      seznam.polozky
+        .filter((polozka) => !ingredientById.has(polozka.id))
+        .map((polozka) => `${seznam.id}: ${polozka.id}`),
     );
     expect(chybejici).toEqual([]);
   });
 
   it('žádný seznam neopakuje tutéž surovinu', () => {
     for (const seznam of lists) {
-      expect(new Set(seznam.ingredientIds).size).toBe(seznam.ingredientIds.length);
+      const ids = seznam.polozky.map((polozka) => polozka.id);
+      expect(new Set(ids).size).toBe(ids.length);
     }
   });
 
@@ -32,7 +36,7 @@ describe('tematické seznamy surovin', () => {
     for (const seznam of lists) {
       if (seznam.podminka === undefined) continue;
       const podminka = PODMINKY[seznam.podminka];
-      for (const id of seznam.ingredientIds) {
+      for (const { id } of seznam.polozky) {
         const ingredient = ingredientById.get(id);
         if (ingredient === undefined) continue;
         if (!podminka.splnuje(ingredient)) {
@@ -52,7 +56,7 @@ describe('tematické seznamy surovin', () => {
 
   it('seznam má aspoň šest položek — kratší není seznam, ale výběr', () => {
     for (const seznam of lists) {
-      expect(seznam.ingredientIds.length).toBeGreaterThanOrEqual(6);
+      expect(seznam.polozky.length).toBeGreaterThanOrEqual(6);
     }
   });
 
@@ -84,7 +88,89 @@ describe('tematické seznamy surovin', () => {
     }
   });
 
+  it('každá položka má vlastní popisek, ne prázdný ani zástupný', () => {
+    for (const seznam of lists) {
+      for (const polozka of seznam.polozky) {
+        expect(polozka.note.trim().length).toBeGreaterThan(12);
+        expect(polozka.note.trim()).toMatch(/[.!?]$/);
+        expect(polozka.note.toLowerCase()).not.toMatch(/todo|lorem|doplnit/);
+      }
+    }
+  });
+
+  it('popisky se v jednom seznamu neopakují', () => {
+    for (const seznam of lists) {
+      const texty = seznam.polozky.map((polozka) => polozka.note);
+      expect(new Set(texty).size).toBe(texty.length);
+    }
+  });
+
   it('id seznamů jsou jedinečná', () => {
     expect(new Set(lists.map((one) => one.id)).size).toBe(lists.length);
+  });
+});
+
+/**
+ * Čeština v seznamech se kontroluje stejnými pravidly jako v katalogu.
+ *
+ * Katalog má na typografii, vykání a známé překlepy spustitelná pravidla
+ * v `src/safety/`. Seznamy jimi dosud neprocházely, protože vznikly později
+ * — a text, který nikdo nekontroluje, se pozná právě tím, že v něm chyby
+ * zůstanou.
+ */
+describe('čeština v seznamech', () => {
+  const texty = lists.flatMap((seznam) => [
+    { kde: `${seznam.id}/titleCz`, text: seznam.titleCz },
+    { kde: `${seznam.id}/summary`, text: seznam.summary },
+    { kde: `${seznam.id}/intro`, text: seznam.intro },
+    ...seznam.polozky.map((polozka) => ({
+      kde: `${seznam.id}/${polozka.id}`,
+      text: polozka.note,
+    })),
+  ]);
+
+  it('drží českou typografii — uvozovky, pomlčky, mezery', () => {
+    const chyby = texty
+      .map(({ kde, text }) => ({ kde, nalez: najdiTypografii(text) }))
+      .filter((one) => one.nalez !== null)
+      .map((one) => `${one.kde}: ${one.nalez?.problem ?? ''}`);
+    expect(chyby).toEqual([]);
+  });
+
+  it('tyká stejně jako zbytek aplikace', () => {
+    const chyby = texty
+      .map(({ kde, text }) => ({ kde, nalez: najdiVykani(text) }))
+      .filter((one) => one.nalez !== null)
+      .map((one) => `${one.kde}: ${one.nalez?.problem ?? ''}`);
+    expect(chyby).toEqual([]);
+  });
+
+  it('neobsahuje známé překlepy', () => {
+    const chyby = texty
+      .map(({ kde, text }) => ({
+        kde,
+        nalez: findPatterns(text, KNOWN_TYPO_PATTERNS, { honorNegation: false })[0],
+      }))
+      .filter((one) => one.nalez !== undefined)
+      .map((one) => `${one.kde}: ${one.nalez ?? ''}`);
+    expect(chyby).toEqual([]);
+  });
+
+  it('neoslovuje rodiče podle rodu', () => {
+    const chyby = texty
+      .map(({ kde, text }) => ({
+        kde,
+        nalez: findPatterns(text, GENDERED_ADDRESS_PATTERNS, { honorNegation: false })[0],
+      }))
+      .filter((one) => one.nalez !== undefined)
+      .map((one) => `${one.kde}: ${one.nalez ?? ''}`);
+    expect(chyby).toEqual([]);
+  });
+
+  it('věty začínají velkým písmenem', () => {
+    const chyby = texty
+      .filter(({ text }) => text.trim()[0] !== text.trim()[0]?.toUpperCase())
+      .map(({ kde }) => kde);
+    expect(chyby).toEqual([]);
   });
 });

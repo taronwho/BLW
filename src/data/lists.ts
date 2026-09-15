@@ -45,6 +45,18 @@ export type SeznamIkona =
 
 export type SeznamTon = 'zelezo' | 'cecko' | 'alergen' | 'riziko' | 'zacatek' | 'klid';
 
+/** Položka seznamu: surovina a jedna věta, proč v něm je. */
+export interface SeznamPolozka {
+  id: string;
+  /**
+   * Krátký popisek do řádky seznamu.
+   *
+   * Nesmí tvrdit nic, co katalog ani zdroje seznamu nepodkládají — je to
+   * vodítko, proč je položka zrovna tady, ne nové doporučení.
+   */
+  note: string;
+}
+
 export interface Seznam {
   id: string;
   titleCz: string;
@@ -56,7 +68,7 @@ export interface Seznam {
   icon: SeznamIkona;
   /** Rada, která k seznamu patří. Otevře se z jeho hlavičky. */
   guideId?: string;
-  ingredientIds: string[];
+  polozky: SeznamPolozka[];
   podminka?: SeznamPodminka;
   /**
    * Doklady k tomu, co seznam tvrdí nad rámec katalogu.
@@ -74,21 +86,21 @@ export const lists: Seznam[] = [
     titleCz: 'První sousta',
     summary: 'Čím začít, když jde talíř na stůl poprvé',
     intro:
-      'Měkké, uchopitelné a bez tvaru, který by mohl ucpat dýchací cesty. Pořadí nerozhoduje — začít jde kteroukoli z nich a žádná z nich není „ta správná první".',
+      'Měkké, uchopitelné a bez tvaru, který by mohl ucpat dýchací cesty. Pořadí nerozhoduje — začít jde kteroukoli z nich a žádná z nich není „ta správná první“.',
     tone: 'zacatek',
     icon: 'zacatek',
     guideId: 'prvni-potraviny',
-    ingredientIds: [
-      'banan',
-      'avokado',
-      'batat',
-      'brokolice',
-      'dyne-hokaido',
-      'dyne-maslova',
-      'cuketa',
-      'ovesne-vlocky-jemne',
-      'vejce-slepici',
-      'tofu-natural',
+    polozky: [
+      { id: 'banan', note: 'Měkký, sladký a po ruce kdykoli.' },
+      { id: 'avokado', note: 'Máslová dužina, kterou dásně rozmáčknou.' },
+      { id: 'batat', note: 'Upečený je tak měkký, že ho zvládne i začátečník.' },
+      { id: 'brokolice', note: 'Růžička má vlastní držadlo do dlaně.' },
+      { id: 'dyne-hokaido', note: 'Sladká dužina a slupka, která pečením změkne.' },
+      { id: 'dyne-maslova', note: 'Vyjde z ní kaše i pečený hranolek.' },
+      { id: 'cuketa', note: 'Rychle změkne a chutná skoro neutrálně.' },
+      { id: 'ovesne-vlocky-jemne', note: 'Kaše, na které stojí většina snídaní.' },
+      { id: 'vejce-slepici', note: 'Zároveň alergen, který se nemá odkládat.' },
+      { id: 'tofu-natural', note: 'Bílkovina bez masa, měkká na kousnutí.' },
     ],
     podminka: 'od-sesti-bez-vysokeho-rizika',
   },
@@ -101,17 +113,17 @@ export const lists: Seznam[] = [
     tone: 'zelezo',
     icon: 'zelezo',
     guideId: 'zelezo-proc-a-jak',
-    ingredientIds: [
-      'kureci-jatra',
-      'hovezi-zadni',
-      'cocka-cervena-loupana',
-      'cocka-hneda',
-      'tofu-natural',
-      'spenat',
-      'tahini',
-      'sezam-mlety',
-      'ovesne-vlocky-jemne',
-      'fazole-cervene-kidney',
+    polozky: [
+      { id: 'kureci-jatra', note: 'Nejsilnější zdroj železa v katalogu.' },
+      { id: 'hovezi-zadni', note: 'Hemové železo se vstřebává nejlépe.' },
+      { id: 'cocka-cervena-loupana', note: 'Rozvaří se do kaše, není co kousat.' },
+      { id: 'cocka-hneda', note: 'Drží tvar, hodí se do omáčky.' },
+      { id: 'tofu-natural', note: 'Rostlinné železo i bílkovina naráz.' },
+      { id: 'spenat', note: 'Nasekaný do kaše nebo do omelety.' },
+      { id: 'tahini', note: 'Sezamová pasta, tenká vrstva stačí.' },
+      { id: 'sezam-mlety', note: 'Mletý, ne celý. Semínko vcelku je riziko.' },
+      { id: 'ovesne-vlocky-jemne', note: 'Železo hned do ranní kaše.' },
+      { id: 'fazole-cervene-kidney', note: 'Rozmáčknout — slupka se jinak nedá rozkousat.' },
     ],
     podminka: 'zdroj-zeleza',
   },
@@ -124,15 +136,15 @@ export const lists: Seznam[] = [
     tone: 'cecko',
     icon: 'cecko',
     guideId: 'zelezo-proc-a-jak',
-    ingredientIds: [
-      'paprika-sladka',
-      'brokolice',
-      'kiwi',
-      'jahody',
-      'pomeranc',
-      'ruzickova-kapusta',
-      'mango',
-      'maliny',
+    polozky: [
+      { id: 'paprika-sladka', note: 'Ke každé luštěnině, ať se železo vstřebá.' },
+      { id: 'brokolice', note: 'Vitamin C rovnou v příloze.' },
+      { id: 'kiwi', note: 'Vitamin C k čočce i k ranní kaši.' },
+      { id: 'jahody', note: 'V sezóně si je dítě vezme samo.' },
+      { id: 'pomeranc', note: 'Dužina bez blan a bez jadérek.' },
+      { id: 'ruzickova-kapusta', note: 'Rozpůlená, aby přestala být kulatá.' },
+      { id: 'mango', note: 'Sladké a kluzké, krájej na proužky.' },
+      { id: 'maliny', note: 'Rozmáčknou se samy mezi prsty.' },
     ],
     podminka: 'zdroj-cecka',
   },
@@ -145,16 +157,16 @@ export const lists: Seznam[] = [
     tone: 'alergen',
     icon: 'alergen',
     guideId: 'zavadeni-alergenu',
-    ingredientIds: [
-      'vejce-slepici',
-      'arasidove-maslo',
-      'jogurt-bily-plnotucny',
-      'mandlove-maslo',
-      'chleb-kvaskovy',
-      'tofu-natural',
-      'losos',
-      'tahini',
-      'krevety',
+    polozky: [
+      { id: 'vejce-slepici', note: 'Vejce: uvařené natvrdo, nikdy tekuté.' },
+      { id: 'arasidove-maslo', note: 'Arašídy: tenká vrstva zředěná vodou.' },
+      { id: 'jogurt-bily-plnotucny', note: 'Mléko: plnotučný a neslazený.' },
+      { id: 'mandlove-maslo', note: 'Ořechy: jen jako máslo, nikdy celé.' },
+      { id: 'chleb-kvaskovy', note: 'Pšenice a lepek: kůrka na okusování.' },
+      { id: 'tofu-natural', note: 'Sója: měkké kostky do ruky.' },
+      { id: 'losos', note: 'Ryby: prohmatat a vybrat kosti.' },
+      { id: 'tahini', note: 'Sezam: pasta místo celých semínek.' },
+      { id: 'krevety', note: 'Korýši: dobře uvařené a nakrájené.' },
     ],
     podminka: 'klicovy-alergen',
   },
@@ -167,17 +179,17 @@ export const lists: Seznam[] = [
     tone: 'riziko',
     icon: 'riziko',
     guideId: 'daveni-vs-duseni',
-    ingredientIds: [
-      'hroznove-vino',
-      'rajce',
-      'boruvky',
-      'mrkev',
-      'redkvicka',
-      'tresne',
-      'lici',
-      'arasidy',
-      'mozzarella',
-      'celer-rapikaty',
+    polozky: [
+      { id: 'hroznove-vino', note: 'Podélně na čtvrtky, nikdy celé.' },
+      { id: 'rajce', note: 'Cherry rajče se krájí podélně na čtvrtky.' },
+      { id: 'boruvky', note: 'Rozmáčknout mezi prsty nebo rozpůlit.' },
+      { id: 'mrkev', note: 'Syrová ne. Vařená doměkka ano.' },
+      { id: 'redkvicka', note: 'Tvrdá a kulatá — nejhorší možná kombinace.' },
+      { id: 'tresne', note: 'Vypeckovat a teprve pak rozpůlit.' },
+      { id: 'lici', note: 'Pryč se slupkou i s peckou, pak na čtvrtky.' },
+      { id: 'arasidy', note: 'Celé nikdy. Jedině jako hladké máslo.' },
+      { id: 'mozzarella', note: 'Kulička se krájí podélně, ne na kolečka.' },
+      { id: 'celer-rapikaty', note: 'Vlákna se v puse spletou do chuchvalce.' },
     ],
     podminka: 'vysoke-riziko-duseni',
   },
@@ -186,20 +198,20 @@ export const lists: Seznam[] = [
     titleCz: 'Když lezou zoubky',
     summary: 'Vychlazené a měkké, na okusování',
     intro:
-      'NHS radí u dítěte od šesti měsíců, které už jí příkrm, nabídnout syrové ovoce a zeleninu k okusování; měkké ovoce jako meloun dásně zklidní. Vždycky u toho buď — žvýkání a dušení jsou u kojence blízko sebe. Nic zmrzlého, nic slazeného a žádné sušenky: cukr kazí zuby i těch pár, co zrovna lezou.',
+      'U dítěte od šesti měsíců, které už jí příkrm, radí NHS nabídnout k okusování syrové ovoce a zeleninu; měkké ovoce jako meloun dásně zklidní. Zůstaň u toho — z okusovaného kousku se může ulomit sousto, které dítě ještě nedokáže rozžvýkat. Nic zmrzlého, nic slazeného a žádné sušenky: cukr kazí i těch pár zubů, co zrovna lezou.',
     tone: 'klid',
     icon: 'zoubky',
-    ingredientIds: [
-      'meloun-vodni',
-      'meloun-cantaloupe',
-      'okurka-salatova',
-      'hruska',
-      'mango',
-      'banan',
-      'avokado',
-      'jogurt-bily-plnotucny',
-      'kefir',
-      'tvaroh-mekky',
+    polozky: [
+      { id: 'meloun-vodni', note: 'Studený z lednice, měkký na dásně.' },
+      { id: 'meloun-cantaloupe', note: 'Sladký a měkký, drží se za kůru.' },
+      { id: 'okurka-salatova', note: 'Vychlazený proužek na okusování.' },
+      { id: 'hruska', note: 'Zralá je měkká sama od sebe.' },
+      { id: 'mango', note: 'Chladné a kluzké, krájej na proužky.' },
+      { id: 'banan', note: 'Když nic jiného nejde, banán ano.' },
+      { id: 'avokado', note: 'Chladivé a mastné, na dásně netlačí.' },
+      { id: 'jogurt-bily-plnotucny', note: 'Studená lžíce, když bolí kousání.' },
+      { id: 'kefir', note: 'Chladné a tekuté, kousat se nemusí.' },
+      { id: 'tvaroh-mekky', note: 'Studený a hladký, bez kousání.' },
     ],
     podminka: 'od-sesti-bez-vysokeho-rizika',
     sources: [NHS_TEETHING_TIPS, NHS_TEETHING_SYMPTOMS],
@@ -209,22 +221,22 @@ export const lists: Seznam[] = [
     titleCz: 'Tuky, které dítě potřebuje',
     summary: 'Nízkotučné varianty do prvního roku nepatří',
     intro:
-      'Tuk je pro kojence hlavní zdroj energie a mozek z něj roste. Odtučněné mléčné výrobky a „light" varianty se do prvního roku nenabízejí.',
+      'Tuk je pro kojence hlavní zdroj energie a mozek z něj roste. Odtučněné mléčné výrobky a „light“ varianty se do prvního roku nenabízejí.',
     // Seznam nemá strojovou podmínku: „zdravý tuk" není pole v katalogu
     // a vymýšlet si ho jen kvůli kontrole by bylo horší než ho nemít.
     tone: 'zacatek',
     icon: 'tuky',
     guideId: 'tri-pravidla-kazdeho-jidla',
     sources: [NHS_YOUNG_CHILDREN],
-    ingredientIds: [
-      'avokado',
-      'olej-olivovy',
-      'tahini',
-      'arasidove-maslo',
-      'losos',
-      'vejce-slepici',
-      'jogurt-bily-plnotucny',
-      'mandlove-maslo',
+    polozky: [
+      { id: 'avokado', note: 'Nejtučnější ovoce, jaké se dá koupit.' },
+      { id: 'olej-olivovy', note: 'Lžička do kaše nebo na zeleninu.' },
+      { id: 'tahini', note: 'Sezamová pasta, tenká vrstva.' },
+      { id: 'arasidove-maslo', note: 'Zředit vodou nebo mlékem.' },
+      { id: 'losos', note: 'Tučná ryba; před podáním prohmatat na kosti.' },
+      { id: 'vejce-slepici', note: 'Žloutek je tuk i bílkovina.' },
+      { id: 'jogurt-bily-plnotucny', note: 'Plnotučný, ne odtučněný.' },
+      { id: 'mandlove-maslo', note: 'Mandle jako pasta, ne jako ořech.' },
     ],
   },
   {
@@ -235,17 +247,17 @@ export const lists: Seznam[] = [
       'Stačí oloupat, rozmáčknout nebo nakrájet. Hodí se na svačinu, k snídani i ve chvíli, kdy se oběd nepovedl.',
     tone: 'klid',
     icon: 'bezVareni',
-    ingredientIds: [
-      'banan',
-      'avokado',
-      'jogurt-bily-plnotucny',
-      'tvaroh-mekky',
-      'cottage',
-      'mango',
-      'maliny',
-      'okurka-salatova',
-      'tahini',
-      'kefir',
+    polozky: [
+      { id: 'banan', note: 'Oloupat a podat.' },
+      { id: 'avokado', note: 'Rozkrojit, vydlabat, rozmáčknout.' },
+      { id: 'jogurt-bily-plnotucny', note: 'Lžíce a hotovo.' },
+      { id: 'tvaroh-mekky', note: 'Rozmíchat s ovocem.' },
+      { id: 'cottage', note: 'Zrníčka, která se dají brát prsty.' },
+      { id: 'mango', note: 'Nakrájet na proužky, ať se dá držet.' },
+      { id: 'maliny', note: 'Rozmáčknout mezi prsty.' },
+      { id: 'okurka-salatova', note: 'Oloupat a nakrájet podélně.' },
+      { id: 'tahini', note: 'Tenká vrstva na chleba.' },
+      { id: 'kefir', note: 'Do hrnečku nebo na kaši.' },
     ],
     podminka: 'od-sesti-bez-vysokeho-rizika',
   },

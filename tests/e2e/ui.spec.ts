@@ -1092,3 +1092,19 @@ test('nadpis zdrojů u surovin nese jen jedno číslo', async ({ page }) => {
   await expect(prepinac).toHaveText(/^Zdroje u surovin \(\d+\)$/);
   await expect(prepinac).not.toContainText('(0)');
 });
+
+test('zdroje seznamu stojí až pod jeho položkami', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/seznamy/na-zoubky');
+
+  const polozky = await page.getByTestId('polozky-seznamu').boundingBox();
+  const zdroje = await page.getByTestId('zdroje-seznamu').boundingBox();
+  if (polozky === null || zdroje === null) throw new Error('seznam není vidět');
+  expect(zdroje.y).toBeGreaterThan(polozky.y);
+
+  // A doklady jsou opravdu odkazy na NHS, ne jen nadpis. Testid nese
+  // přepínač, odkazy se rozbalí vedle něj.
+  await page.getByTestId('zdroje-seznamu').click();
+  const odkazy = page.locator('a[href^="https://www.nhs.uk/"]');
+  await expect(odkazy).toHaveCount(2);
+});

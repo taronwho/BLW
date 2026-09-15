@@ -31,7 +31,7 @@ export function SeznamDlazdice({
   compact?: boolean;
 }): ReactNode {
   const Icon = IKONY_SEZNAMU[seznam.icon];
-  const celkem = seznam.ingredientIds.length;
+  const celkem = seznam.polozky.length;
   const podil = celkem === 0 ? 0 : Math.round((ochutnano / celkem) * 100);
 
   return (

@@ -127,7 +127,7 @@ function main(): void {
   }
   const urgent = catalog.guides.filter((g) => g.urgent === true).length;
   console.log(`RAD: ${catalog.guides.length}     (naléhavých: ${urgent})`);
-  const polozekVSeznamech = lists.reduce((soucet, one) => soucet + one.ingredientIds.length, 0);
+  const polozekVSeznamech = lists.reduce((soucet, one) => soucet + one.polozky.length, 0);
   console.log(`SEZNAMŮ: ${lists.length}   (položek: ${polozekVSeznamech})`);
   console.log(`CHYB: ${errors.length + guideFindings.length}`);
   console.log(`VAROVÁNÍ: ${warnings.length}`);

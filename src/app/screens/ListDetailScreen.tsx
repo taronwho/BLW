@@ -25,10 +25,12 @@ export function ListDetailScreen(): ReactNode {
     return <NotFoundScreen />;
   }
 
-  const polozky = seznam.ingredientIds
-    .map((one) => ingredientById.get(one))
-    .filter((one): one is NonNullable<typeof one> => one !== undefined);
-  const hotovo = polozky.filter((item) => tasted.has(item.id)).length;
+  const polozky = seznam.polozky
+    .map((polozka) => ({ polozka, item: ingredientById.get(polozka.id) }))
+    .filter((dvojice): dvojice is { polozka: (typeof seznam.polozky)[number]; item: NonNullable<typeof dvojice.item> } =>
+      dvojice.item !== undefined,
+    );
+  const hotovo = polozky.filter(({ item }) => tasted.has(item.id)).length;
   const rada = seznam.guideId === undefined ? undefined : guideById.get(seznam.guideId);
 
   return (
@@ -66,16 +68,8 @@ export function ListDetailScreen(): ReactNode {
         </Link>
       )}
 
-      {seznam.sources !== undefined && seznam.sources.length > 0 && (
-        <SourceDisclosure
-          sources={seznam.sources}
-          label="Zdroje seznamu"
-          testId="zdroje-seznamu"
-        />
-      )}
-
       <ul className="flex flex-col gap-2" data-testid="polozky-seznamu">
-        {polozky.map((item) => {
+        {polozky.map(({ polozka, item }) => {
           const profil = nutrientProfile(item);
           const alergen = item.allergens[0];
           return (
@@ -91,6 +85,9 @@ export function ListDetailScreen(): ReactNode {
                 <IngredientIcon ingredient={item} className="h-8 w-8" />
                 <span className="flex min-w-0 flex-col gap-1">
                   <span className="text-sm font-semibold leading-snug">{item.nameCz}</span>
+                  {/* Proč je položka zrovna v tomhle seznamu. Bez toho je
+                      seznam jen jinak poskládaný katalog. */}
+                  <span className="text-xs leading-snug text-muted">{polozka.note}</span>
                   <span className="flex flex-wrap items-center gap-1">
                     <span className="rounded-lg bg-paper px-2 py-0.5 text-[11px] font-medium text-muted">
                       <span aria-hidden="true">{item.minAgeMonths} m+</span>
@@ -120,6 +117,16 @@ export function ListDetailScreen(): ReactNode {
           );
         })}
       </ul>
+
+      {/* Doklady patří pod seznam, ne nad něj. Rodič sem jde pro suroviny;
+          zdroje si otevře, když bude chtít vědět, odkud to je. */}
+      {seznam.sources !== undefined && seznam.sources.length > 0 && (
+        <SourceDisclosure
+          sources={seznam.sources}
+          label="Zdroje seznamu"
+          testId="zdroje-seznamu"
+        />
+      )}
     </section>
   );
 }

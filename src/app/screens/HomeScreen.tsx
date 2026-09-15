@@ -252,7 +252,7 @@ export function HomeScreen(): ReactNode {
               <SeznamDlazdice
                 seznam={seznam}
                 ochutnano={
-                  seznam.ingredientIds.filter((id) => tasted.has(id)).length
+                  seznam.polozky.filter((polozka) => tasted.has(polozka.id)).length
                 }
                 compact
               />
