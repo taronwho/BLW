@@ -81,7 +81,7 @@ export function popisChyby(error: unknown): string {
     return 'Takový účet ve Firebase není. Zakládá se ručně v konzoli, v Authentication.';
   }
   if (text.includes('permission-denied') || text.includes('insufficient permissions')) {
-    return 'Účet je přihlášený, ale pravidla Firestore mu čtení nedovolila. Zkontroluj, že jsou nasazená nová pravidla a že sedí e-mail v nich.';
+    return 'Účet je přihlášený, ale pravidla Firestore mu čtení nedovolila. Zkontroluj, že jsou v konzoli publikovaná nová pravidla a že v nich sedí e-mail.';
   }
   if (text.includes('Sdílení není nastavené')) return text;
   return 'Přehled se nepodařilo načíst. Podrobnost je v konzoli prohlížeče.';

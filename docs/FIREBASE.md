@@ -269,14 +269,16 @@ Zprovoznění:
 1. Firebase konzole, **Authentication**, **Sign-in method**, zapni
    poskytovatele **Email/Password**.
 2. Záložka **Users**, **Add user**, zadej svůj e-mail a silné heslo.
-3. Ve Firebase je nový účet neověřený. Přihlas se s ním jednou na tajné
-   adrese; pokud pravidlo odmítne čtení kvůli `email_verified`,
-   pošli si ověřovací e-mail z konzole (u účtu tři tečky, **Reset password**
-   nebo **Send verification email**) a odkaz v něm potvrď.
-4. Zkontroluj, že e-mail v `firestore.rules` u `jsemSpravce()` sedí
+3. Zkontroluj, že e-mail v `firestore.rules` u `jsemSpravce()` sedí
    s tím, který jsi založil.
-5. Publikuj pravidla (**Firestore Database**, **Rules**, **Publish**).
+4. Publikuj pravidla (**Firestore Database**, **Rules**, **Publish**).
    Pravidla se z repozitáře nenasazují sama.
+
+Ověřenou adresu pravidlo nechce. Účet založený v konzoli je neověřený
+a konzole ověřovací e-mail poslat neumí, takže by ta podmínka jen bránila
+v přihlášení. Adresu si vybírá správce projektu v pravidlech, ne ten, kdo
+se přihlašuje, takže se tím nic neotevírá: kdokoli jiný má e-mail jiný
+a dál neprojde.
 
 Co je dobré vědět:
 

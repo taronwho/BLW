@@ -57,15 +57,20 @@ service cloud.firestore {
       // Přehled o používání aplikace.
       //
       // Jediná výjimka ze zákazu výpisu. Nestačí být přihlášený: musí jít
-      // o účet s tímhle e-mailem, přihlášený heslem a s ověřenou adresou.
-      // Anonymní účet, kterým jezdí aplikace pro rodiče, sem nedosáhne,
-      // protože e-mail vůbec nemá. Účet se zakládá ručně ve Firebase
-      // konzoli (Authentication, poskytovatel Email/Password) a heslo
-      // k němu je jediné, co ten výpis chrání. Postup je v docs/FIREBASE.md.
+      // o účet s tímhle e-mailem, přihlášený heslem. Anonymní účet, kterým
+      // jezdí aplikace pro rodiče, sem nedosáhne, protože e-mail vůbec
+      // nemá. Účet se zakládá ručně ve Firebase konzoli (Authentication,
+      // poskytovatel Email/Password) a heslo k němu je jediné, co ten výpis
+      // chrání. Postup je v docs/FIREBASE.md.
+      //
+      // Ověřenou adresu pravidlo nevyžaduje. Účet založený v konzoli je
+      // neověřený a konzole ověřovací e-mail poslat neumí, takže by ta
+      // podmínka jen znemožnila přihlášení. Adresu si stejně vybírá
+      // správce projektu, ne přihlašující se člověk, takže se tím nic
+      // neotevírá: kdokoli jiný má e-mail jiný a dál neprojde.
       function jsemSpravce() {
         return request.auth != null
           && request.auth.token.email == 'taronwho@gmail.com'
-          && request.auth.token.email_verified == true
           && request.auth.token.firebase.sign_in_provider == 'password';
       }
 
