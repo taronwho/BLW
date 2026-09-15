@@ -572,7 +572,7 @@ export const BP_NITRATES_VEG: SourceRef = {
 export function czfcdb(nazev: string, id: number): SourceRef {
   return {
     org: 'ÚZEI, Česká databáze složení potravin',
-    title: `${nazev} — Česká databáze složení potravin`,
+    title: `${nazev} (Česká databáze složení potravin)`,
     url: `https://www.nutridatabaze.cz/potraviny/?id=${id}`,
     accessedAt: FETCHED_14,
     tier: 1,
@@ -583,7 +583,7 @@ export function czfcdb(nazev: string, id: number): SourceRef {
 export function usdaFdc(nazev: string, fdcId: number): SourceRef {
   return {
     org: 'USDA FoodData Central',
-    title: `${nazev} — USDA FoodData Central`,
+    title: `${nazev} (USDA FoodData Central)`,
     url: `https://fdc.nal.usda.gov/food-details/${fdcId}/nutrients`,
     accessedAt: FETCHED_14,
     tier: 1,
@@ -594,7 +594,7 @@ export function usdaFdc(nazev: string, fdcId: number): SourceRef {
 export function matvaretabellen(nazev: string, cesta: string): SourceRef {
   return {
     org: 'Matvaretabellen (Mattilsynet)',
-    title: `${nazev} — Matvaretabellen`,
+    title: `${nazev} (Matvaretabellen)`,
     url: `https://www.matvaretabellen.no/${cesta}/`,
     accessedAt: FETCHED_14,
     tier: 1,

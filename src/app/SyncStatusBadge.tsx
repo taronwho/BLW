@@ -29,13 +29,13 @@ function describe(status: SyncStatus): {
 } {
   switch (status.kind) {
     case 'connected':
-      return { Icon: Cloud, text: 'Připojeno — změny se sdílejí', tone: 'text-safe' };
+      return { Icon: Cloud, text: 'Připojeno: změny se sdílejí', tone: 'text-safe' };
     case 'connecting':
       return { Icon: Loader2, text: 'Připojuji…', tone: 'text-muted' };
     case 'offline':
       return {
         Icon: CloudOff,
-        text: `Offline — ve frontě ${status.queued} změn`,
+        text: `Offline: ve frontě ${status.queued} změn`,
         tone: 'text-caution',
       };
     case 'error':

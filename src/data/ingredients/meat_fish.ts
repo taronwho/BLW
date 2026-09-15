@@ -441,7 +441,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['kosti'],
     hazardNotes: {
       kosti:
-        'Králičí kostra je drobná a kůstky jsou ostré. Maso obeber až po uvaření, každý kousek rozetři mezi palcem a ukazovákem a projeď ho i po délce nehtem — kůstka je cítit jako tvrdá nitka. Žebírka pro dítě nepoužívej vůbec.',
+        'Králičí kostra je drobná a kůstky jsou ostré. Maso obeber až po uvaření, každý kousek rozetři mezi palcem a ukazovákem a projeď ho i po délce nehtem: kůstka je cítit jako tvrdá nitka. Žebírka pro dítě nepoužívej vůbec.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1520,7 +1520,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Mleté maso je pro první sousta vděčnější než plátek — rozpadne se v puse samo. Smíchej ho s rozmačkanou vařenou zeleninou, vytvaruj podlouhlé válečky dlouhé jako dospělý prst a upeč doměkka. Kuličky netvaruj, kulatý tvar je u masa zbytečné riziko.',
+          'Mleté maso je pro první sousta vděčnější než plátek: rozpadne se v puse samo. Smíchej ho s rozmačkanou vařenou zeleninou, vytvaruj podlouhlé válečky dlouhé jako dospělý prst a upeč doměkka. Kuličky netvaruj, kulatý tvar je u masa zbytečné riziko.',
         caution:
           'Drůbeží maso propeč celé, dokud z něj nevytéká čirá šťáva; syrové drůbeží může nést kampylobakter.',
       },
@@ -1531,8 +1531,8 @@ export const meatFish: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí kuličky i karbanátky nakrájené na kousky, směs v omáčce na těstovinách i v plněné zelenině. Mleté maso je zároveň nejsnazší cesta, jak do jídla dostat hemové železo a zinek — u mletého kuřecího je ho ale málo, 0,93 mg na 100 g, takže krůtí nebo hovězí poslouží líp.',
-        caution: 'Mleté maso se kazí rychleji než celý kus — zpracuj ho v den nákupu, nebo zamraz.',
+          'Batole jí kuličky i karbanátky nakrájené na kousky, směs v omáčce na těstovinách i v plněné zelenině. Mleté maso je zároveň nejsnazší cesta, jak do jídla dostat hemové železo a zinek. U mletého kuřecího je ho ale málo, 0,93 mg na 100 g, takže krůtí nebo hovězí poslouží líp.',
+        caution: 'Mleté maso se kazí rychleji než celý kus: zpracuj ho v den nákupu, nebo zamraz.',
       },
     },
     prepIdeas: [
@@ -1571,7 +1571,7 @@ export const meatFish: Ingredient[] = [
       '9m': {
         serving:
           'V devíti měsících drží placička z krůtího se strouhankou a vejcem. Vláčnost zachráníš lžící zakysané smetany nebo strouhanou cuketou ve směsi.',
-        caution: 'Suché maso dítě vyplivne — vlhkost ve směsi je tu důležitější než koření.',
+        caution: 'Suché maso dítě vyplivne. Vlhkost ve směsi je tu důležitější než koření.',
       },
       '12m': {
         serving:
@@ -1655,7 +1655,7 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Platýs je bílá ryba s jemným, pevným masem, které se po upečení dá rozdělit na plátky dlouhé jako prst. Peč ho v troubě nebo duste v páře, dokud maso není celé neprůhledné a nerozpadá se vidličkou.',
-        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko. Každou porci před podáním prohmatej prsty, ne jen prohlédni.',
       },
       '9m': {
         serving:
@@ -1664,7 +1664,7 @@ export const meatFish: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí platýse jako součást hlavního jídla. NHS doporučuje aspoň dvě porce ryb týdně, z toho jednu tučnou — platýs patří mezi ty bílé.',
+          'Batole jí platýse jako součást hlavního jídla. NHS doporučuje aspoň dvě porce ryb týdně, z toho jednu tučnou: platýs patří mezi ty bílé.',
         caution: 'Smažený v těstíčku má víc tuku než pečený nebo dušený v páře.',
       },
     },
@@ -1699,7 +1699,7 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Kambala je plochá bílá ryba s jemným masem. Upeč ji celou nebo jako filet, dokud maso není neprůhledné, a rozeber ho na plátky; kosti u plochých ryb sedí přehledně a dají se snadno vybrat.',
-        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko. Každou porci před podáním prohmatej prsty, ne jen prohlédni.',
       },
       '9m': {
         serving:
@@ -1743,12 +1743,12 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Mořský vlk má pevné bílé maso, které se po upečení dělí na velké plátky. Peč ho v alobalu nebo v páře, dokud maso u páteře není neprůhledné, a pečlivě ho prohmatej.',
-        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko. Každou porci před podáním prohmatej prsty, ne jen prohlédni.',
       },
       '9m': {
         serving:
           'V devíti měsících podávej plátky, které dítě zvedne dvěma prsty. Kůži pro dětskou porci sundej, je tuhá.',
-        caution: 'Celá ryba se prohmatává hůř než filet — u celé počítej s tím, že to zabere čas.',
+        caution: 'Celá ryba se prohmatává hůř než filet: u celé počítej s tím, že to zabere čas.',
       },
       '12m': {
         serving:
@@ -1787,7 +1787,7 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Pražma je bílá mořská ryba s jemným, mírně nasládlým masem. Upeč ji doměkka, oddělej kůži i ploutve a maso rozeber na plátky, které prohmatáš prsty.',
-        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko. Každou porci před podáním prohmatej prsty, ne jen prohlédni.',
       },
       '9m': {
         serving:
@@ -1831,11 +1831,11 @@ export const meatFish: Ingredient[] = [
       '6m': {
         serving:
           'Okoun je sladkovodní ryba s pevným bílým masem. Filet upeč nebo duste doměkka a rozeber na plátky; u sladkovodních ryb je prohmatání porce ještě důležitější, mívají drobné kosti.',
-        caution: 'Rybí kost je u malého dítěte hlavní riziko — každou porci před podáním prohmatej prsty, ne jen prohlédni.',
+        caution: 'Rybí kost je u malého dítěte hlavní riziko. Každou porci před podáním prohmatej prsty, ne jen prohlédni.',
       },
       '9m': {
         serving:
-          'V devíti měsících podávej plátky na uchopení dvěma prsty. Okoun má málo tuku, takže vysychá — peč ho přikrytý nebo v omáčce.',
+          'V devíti měsících podávej plátky na uchopení dvěma prsty. Okoun má málo tuku, takže vysychá: peč ho přikrytý nebo v omáčce.',
         caution: 'Sladkovodní ryby kupuj z ověřeného zdroje.',
       },
       '12m': {
@@ -1867,7 +1867,7 @@ export const meatFish: Ingredient[] = [
     isKeyAllergen: false,
     chokingRisk: 'high',
     chokingReason:
-      'Kroužek z olihně drží tvar prstenu a maso je pružné — dásně ho nerozmělní a v puse zůstane celý.',
+      'Kroužek z olihně drží tvar prstenu a maso je pružné: dásně ho nerozmělní a v puse zůstane celý.',
     hazards: [],
     hazardNotes: {},
     minAgeMonths: 6,
@@ -1876,7 +1876,7 @@ export const meatFish: Ingredient[] = [
         serving:
           'NHS řadí oliheň mezi měkkýše a korýše, kteří jsou zdrojem selenu, zinku, jódu a mědi. Pro dítě je ale rozhodující tvar a měkkost: kroužky nikdy nepodávej, maso rozkrájej podélně na tenké proužky a duste ho nejméně třicet minut doměkka.',
         caution:
-          'Krátce osmažené kalamáry jsou pružné jako guma. Buď velmi krátce, nebo velmi dlouho — pro dítě platí jedině to druhé.',
+          'Krátce osmažené kalamáry jsou pružné jako guma. Buď velmi krátce, nebo velmi dlouho: pro dítě platí jedině to druhé.',
       },
       '9m': {
         serving:
@@ -1964,7 +1964,7 @@ export const meatFish: Ingredient[] = [
         serving:
           'Rozhoduje, jestli je maso bílé nebo hnědé. NHS uvádí, že hnědé krabí maso obsahuje kadmium, které při nadbytku působí na kosti a ledviny, a že pro bílé krabí maso ani pro ostatní měkkýše a korýše žádné nejvyšší množství doporučené není. Pro dítě proto používej jedině bílé maso z klepet a nožiček.',
         caution:
-          'Krabí tyčinky nejsou krab — bývá to drcená bílá ryba se škrobem a solí a pro kojence nejsou vhodné.',
+          'Krabí tyčinky nejsou krab. Bývá to drcená bílá ryba se škrobem a solí a pro kojence nejsou vhodné.',
       },
       '9m': {
         serving:
@@ -2002,7 +2002,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['rtut'],
     hazardNotes: {
       rtut:
-        'Tuňák patří mezi ryby s vyšším obsahem rtuti, proto se u něj drží omezené množství. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby — konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
+        'Tuňák patří mezi ryby s vyšším obsahem rtuti, proto se u něj drží omezené množství. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby. Konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
     },
     minAgeMonths: 6,
     prep: {
@@ -2053,7 +2053,7 @@ export const meatFish: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Do dětské porce nepatří. Ančovičky se nakládají do soli a jsou to jedny z nejslanějších potravin v běžné spíži — NHS u kojenců slané potraviny odmítá kvůli ledvinám. Rybu v jídelníčku dítěte zastane čerstvý filet bílé ryby.',
+          'Do dětské porce nepatří. Ančovičky se nakládají do soli a jsou to jedny z nejslanějších potravin v běžné spíži. NHS u kojenců slané potraviny odmítá kvůli ledvinám. Rybu v jídelníčku dítěte zastane čerstvý filet bílé ryby.',
         caution: 'Týká se i ančovičkové pasty a omáček, ve kterých jsou ančovičky skryté.',
       },
       '9m': {

@@ -40,7 +40,7 @@ describe('tematické seznamy surovin', () => {
         const ingredient = ingredientById.get(id);
         if (ingredient === undefined) continue;
         if (!podminka.splnuje(ingredient)) {
-          porusene.push(`${seznam.id}: ${ingredient.nameCz} — ${podminka.popis}`);
+          porusene.push(`${seznam.id}: ${ingredient.nameCz}, ${podminka.popis}`);
         }
       }
     }
@@ -54,7 +54,7 @@ describe('tematické seznamy surovin', () => {
     expect(chybejici).toEqual([]);
   });
 
-  it('seznam má aspoň šest položek — kratší není seznam, ale výběr', () => {
+  it('seznam má aspoň šest položek, kratší není seznam, ale výběr', () => {
     for (const seznam of lists) {
       expect(seznam.polozky.length).toBeGreaterThanOrEqual(6);
     }
@@ -71,7 +71,7 @@ describe('tematické seznamy surovin', () => {
     }
   });
 
-  it('seznam bez strojové podmínky musí mít zdroje — jinak si vybírá podle ničeho', () => {
+  it('seznam bez strojové podmínky musí mít zdroje, jinak si vybírá podle ničeho', () => {
     const bezOpory = lists
       .filter((seznam) => seznam.podminka === undefined && (seznam.sources ?? []).length === 0)
       .map((seznam) => seznam.id);
@@ -115,7 +115,7 @@ describe('tematické seznamy surovin', () => {
  *
  * Katalog má na typografii, vykání a známé překlepy spustitelná pravidla
  * v `src/safety/`. Seznamy jimi dosud neprocházely, protože vznikly později
- * — a text, který nikdo nekontroluje, se pozná právě tím, že v něm chyby
+ *, a text, který nikdo nekontroluje, se pozná právě tím, že v něm chyby
  * zůstanou.
  */
 describe('čeština v seznamech', () => {
@@ -129,7 +129,7 @@ describe('čeština v seznamech', () => {
     })),
   ]);
 
-  it('drží českou typografii — uvozovky, pomlčky, mezery', () => {
+  it('drží českou typografii, uvozovky, pomlčky, mezery', () => {
     const chyby = texty
       .map(({ kde, text }) => ({ kde, nalez: najdiTypografii(text) }))
       .filter((one) => one.nalez !== null)

@@ -15,7 +15,7 @@ import {
 /**
  * Barvy úrovní rizika se čtou ze src/index.css, ne opisují.
  *
- * Když se paleta kvůli kontrastu doladí, test se má přizpůsobit sám —
+ * Když se paleta kvůli kontrastu doladí, test se má přizpůsobit sám 
  * napsané natvrdo tady tři hodnoty už jednou zbytečně shodily celou sadu.
  * Bere se první výskyt, tedy světlý motiv; testy běží v něm.
  */
@@ -49,7 +49,7 @@ for (const screen of SCREENS) {
     await page.screenshot({ path: shot, fullPage: false });
     await testInfo.attach(`${screen.id}-${width}`, { path: shot, contentType: 'image/png' });
 
-    // Po odscrollování dolů se může objevit další obsah — kontrolujeme i to.
+    // Po odscrollování dolů se může objevit další obsah, kontrolujeme i to.
     await page.mouse.wheel(0, 2000);
     const afterScroll = await horizontalOverflow(page);
     expect(afterScroll, `${screen.name} přetéká po odscrollování`).toBeLessThanOrEqual(width);
@@ -135,7 +135,7 @@ test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
   await navLink(page, 'Suroviny').click();
   await page.getByTestId('hledat-surovinu').fill('brokolice');
 
-  // Fajfka v seznamu otevře tutéž nabídku jako detail suroviny — jedno
+  // Fajfka v seznamu otevře tutéž nabídku jako detail suroviny, jedno
   // klepnutí už nic samo neuloží, rodič vybírá množství i reakci.
   const toggle = page.getByTestId(/^ochutnano-/).first();
   await expect(toggle).toHaveAttribute('aria-label', /zapsat ochutnávku/);
@@ -155,7 +155,7 @@ test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
   await expect(page.getByTestId('casova-osa')).toContainText(/brokolice/i);
   await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 1 z');
 
-  // Zůstane to tam i po obnovení stránky — deník je v IndexedDB.
+  // Zůstane to tam i po obnovení stránky, deník je v IndexedDB.
   await page.reload();
   await expect(page.getByTestId('casova-osa')).toContainText(/brokolice/i);
 });
@@ -212,7 +212,7 @@ test('filtry receptů: jen vegetariánské a čas do 20 minut', async ({ page })
   await navLink(page, 'Recepty').click();
   await otevriFiltry(page, 'receptu');
 
-  // Počet se bere z katalogu, ne z natvrdo psaného čísla — jinak test
+  // Počet se bere z katalogu, ne z natvrdo psaného čísla, jinak test
   // zastará při každé další dávce receptů. Tvrzení zůstává stejné:
   // nefiltrovaný seznam ukazuje všechny recepty, po filtru je jich míň.
   const vsechny = `${recipes.length} z ${recipes.length}`;
@@ -245,7 +245,7 @@ test('značka železa otevře okénko místo detailu receptu', async ({ page }) 
   await acceptDisclaimer(page);
   await navLink(page, 'Recepty').click();
 
-  // První značka železa, ne první značka živiny — štítek zinku a vitaminu C
+  // První značka železa, ne první značka živiny, štítek zinku a vitaminu C
   // má v testId příponu, takže se dají odlišit. Dřív se klikalo na první
   // značku v pořadí a po doplnění naměřených hodnot to byl vitamin C.
   await page
@@ -257,7 +257,7 @@ test('značka železa otevře okénko místo detailu receptu', async ({ page }) 
   await expect(okenko).toBeVisible();
   await expect(okenko).toContainText('Železo');
   await expect(okenko).toContainText('naměřený obsah z potravinové tabulky');
-  // Značka je uvnitř odkazu na detail — proklik se nesmí spustit.
+  // Značka je uvnitř odkazu na detail, proklik se nesmí spustit.
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();
 
   await page.getByTestId('okenko-zavrit').click();
@@ -336,7 +336,7 @@ test('suroviny jdou seřadit podle obsahu železa', async ({ page }) => {
 test('šest měsíců není pevné datum, dokud nejsou znaky připravenosti', async ({ page }) => {
   await acceptDisclaimer(page);
 
-  // Bez odškrtnutí se u fáze 6m+ upozorňuje — to je stav před začátkem příkrmu.
+  // Bez odškrtnutí se u fáze 6m+ upozorňuje, to je stav před začátkem příkrmu.
   await page.goto('./#/suroviny/brokolice');
   const upozorneni = page.getByTestId('upozorneni-pripravenost');
   await expect(upozorneni).toBeVisible();
@@ -376,7 +376,7 @@ test('tmavý motiv se přepne a přežije obnovení stránky', async ({ page }) 
 
   await page.getByTestId('motiv-tmavy').click();
   await expect(html).toHaveAttribute('data-theme', 'dark');
-  // Pozadí stránky se mění přes proměnné, ne přes třídy `dark:` — kdyby se
+  // Pozadí stránky se mění přes proměnné, ne přes třídy `dark:`, kdyby se
   // někde zapomnělo, tahle kontrola to nechytí, ale audit v a11y.spec.ts ano.
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(18, 23, 21)');
 
@@ -443,7 +443,7 @@ test('u surovin v receptu jsou vidět úrovně živin', async ({ page }) => {
   await acceptDisclaimer(page);
   await page.goto('./#/recepty/candat-koprova-omacka-brambory');
 
-  // Brambor je zdroj vitaminu C — štítek má stejnou podobu jako v přehledu surovin.
+  // Brambor je zdroj vitaminu C, štítek má stejnou podobu jako v přehledu surovin.
   const ziviny = page.getByTestId('ziviny-suroviny-brambor');
   await expect(ziviny).toBeVisible();
   await expect(ziviny).toContainText('vitamin C');
@@ -488,7 +488,7 @@ test('druh železa a síla zdroje se nabídnou, až když jsou k čemu', async (
   await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
   await expect(page.getByTestId('filtr-sily')).toBeHidden();
 
-  // Vitamin C sám o sobě druh železa neotevře — jen sílu zdroje.
+  // Vitamin C sám o sobě druh železa neotevře, jen sílu zdroje.
   await page.getByTestId('prepinac-cecko').click();
   await expect(page.getByTestId('filtr-sily')).toBeVisible();
   await expect(page.getByTestId('filtr-druhu-zeleza')).toBeHidden();
@@ -515,7 +515,7 @@ test('okénko živin nevypisuje, čeho surovina není zdrojem', async ({ page })
   await acceptDisclaimer(page);
   await page.goto('./#/recepty/candat-koprova-omacka-brambory');
 
-  // Brambor je zdroj vitaminu C, ale železa ani zinku ne — v okénku proto
+  // Brambor je zdroj vitaminu C, ale železa ani zinku ne, v okénku proto
   // stojí jen vitamin C. „Není zdroj" patří na detail suroviny, kde je na
   // celý obrázek místo.
   await page.getByTestId('zeleza-recept-brambor-cecko').click();
@@ -533,7 +533,7 @@ test('filtry surovin se dají kombinovat', async ({ page }) => {
   const count = page.getByTestId('pocet-surovin');
   const vse = (await count.textContent()) ?? '';
 
-  // Sezónní a zároveň ještě neochutnané — dřív se volby vylučovaly a tohle nešlo.
+  // Sezónní a zároveň ještě neochutnané, dřív se volby vylučovaly a tohle nešlo.
   await page.getByTestId('filtr-sezonni').click();
   const sezonni = (await count.textContent()) ?? '';
   expect(sezonni).not.toBe(vse);
@@ -618,7 +618,7 @@ test('alergen je vidět u suroviny v seznamu i uvnitř receptu', async ({ page }
   await page.getByTestId('hledat-surovinu').fill('vejce slepici');
   await expect(page.getByTestId('alergen-vejce-slepici')).toContainText('alergen: vejce');
 
-  // Surovina bez alergenu štítek nemá — prázdné místo by jen rozhodilo řádku.
+  // Surovina bez alergenu štítek nemá, prázdné místo by jen rozhodilo řádku.
   await page.getByTestId('hledat-surovinu').fill('mrkev');
   await expect(page.getByTestId('alergen-mrkev')).toBeHidden();
 
@@ -632,7 +632,7 @@ test('v seznamu se nízké riziko dušení nevypisuje', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
 
-  // Mrkev je vysoké riziko, cibule nízké — v seznamu svítí jen ta první.
+  // Mrkev je vysoké riziko, cibule nízké, v seznamu svítí jen ta první.
   await page.getByTestId('hledat-surovinu').fill('mrkev');
   await expect(page.getByTestId('duseni-mrkev')).toContainText('vysoké riziko dušení');
 
@@ -761,7 +761,7 @@ test('první načtení nestahuje katalog ani knihovnu pro sdílení', async ({ p
 test('filtr bez alergenu bere víc alergenů a předvyplní se podle dítěte', async ({ page }) => {
   await acceptDisclaimer(page);
 
-  // 1. Dva alergeny naráz — dřív se dal vybrat jediný.
+  // 1. Dva alergeny naráz, dřív se dal vybrat jediný.
   await page.goto('./#/suroviny?bez=mleko,vejce');
   const dva = (await page.getByTestId('pocet-surovin').textContent()) ?? '';
   await page.goto('./#/suroviny?bez=mleko');
@@ -786,7 +786,7 @@ test('filtr bez alergenu bere víc alergenů a předvyplní se podle dítěte', 
 test('domácnost unese víc dětí a přepnutí promění celou aplikaci', async ({ page }) => {
   await acceptDisclaimer(page);
 
-  // Kojenec a batole — každý je v příkrmu jinde.
+  // Kojenec a batole, každý je v příkrmu jinde.
   await zalozDite(page, 'Ema', '2026-03-01');
   await page.getByTestId('pridat-dite').click();
   // Formulář pro nové dítě je nahoře u seznamu; ten dole upravuje vybrané.
@@ -817,7 +817,7 @@ test('dlouhý seznam se donačítá sám při rolování, bez tlačítka', async
   const prvni = await polozky.count();
   expect(prvni).toBeLessThan(301);
 
-  // Žádné tlačítko — jen značka konce seznamu, na kterou se doroluje.
+  // Žádné tlačítko, jen značka konce seznamu, na kterou se doroluje.
   await expect(page.getByRole('button', { name: 'Načíst další' })).toHaveCount(0);
 
   await page.getByTestId('nacist-dalsi-suroviny').scrollIntoViewIfNeeded();
@@ -834,7 +834,7 @@ test('suroviny stojí ve dvou sloupcích a nic z dlaždice nepřetéká', async 
   const treti = await polozky.nth(2).boundingBox();
   if (prvni === null || druha === null || treti === null) throw new Error('dlaždice nejsou vidět');
 
-  // Druhá dlaždice vedle první, třetí až pod nimi — tedy dva sloupce.
+  // Druhá dlaždice vedle první, třetí až pod nimi, tedy dva sloupce.
   expect(druha.y).toBeCloseTo(prvni.y, 0);
   expect(druha.x).toBeGreaterThan(prvni.x);
   expect(treti.y).toBeGreaterThan(prvni.y);
@@ -843,7 +843,7 @@ test('suroviny stojí ve dvou sloupcích a nic z dlaždice nepřetéká', async 
   const sirkaOkna = page.viewportSize()?.width ?? 0;
   expect(prvni.width).toBeLessThan(sirkaOkna * 0.6);
 
-  // Obsah se do dlaždice vejde — stránka nikde nejede do stran.
+  // Obsah se do dlaždice vejde, stránka nikde nejede do stran.
   const preteka = await page.evaluate(
     () => document.documentElement.scrollWidth > window.innerWidth + 1,
   );
@@ -867,7 +867,7 @@ test('na úvodní obrazovce je to podstatné hned nahoře', async ({ page }) => 
   const okno = page.viewportSize()?.height ?? 0;
   const navigace = 64;
 
-  // Co je metoda zač a co dělat, když se něco děje — obojí bez rolování.
+  // Co je metoda zač a co dělat, když se něco děje, obojí bez rolování.
   const blw = await page.getByTestId('karta-co-je-blw').boundingBox();
   const daveni = await page.getByTestId('dlazdice-daveni').boundingBox();
   const pomoc = await page.getByTestId('dlazdice-prvni-pomoc').boundingBox();
@@ -997,7 +997,7 @@ test('pozvánka s neplatným kódem se nepokouší připojit', async ({ page }) 
 });
 
 test('párovací kód jde zkopírovat, ne jen odkaz', async ({ page }) => {
-  // Firebase se v testu nikdy nevolá — párovací kód je uložený v prohlížeči
+  // Firebase se v testu nikdy nevolá, párovací kód je uložený v prohlížeči
   // a obrazovka ho vykreslí i bez spojení. Skutečná domácnost by se testem
   // zakládat neměla.
   await page.route('**://*.googleapis.com/**', (route) => route.abort());
@@ -1013,7 +1013,7 @@ test('párovací kód jde zkopírovat, ne jen odkaz', async ({ page }) => {
 
   await expect(page.getByTestId('parovaci-kod')).toHaveText('K7M2X-9QRT4');
   // Kód je spolehlivější cesta než odkaz z chatu, takže musí jít zkopírovat
-  // jedním klepnutím — dřív šel zkopírovat jen odkaz.
+  // jedním klepnutím, dřív šel zkopírovat jen odkaz.
   await expect(page.getByTestId('kopirovat-kod')).toBeVisible();
   await expect(page.getByTestId('kopirovat-odkaz')).toBeVisible();
   await expect(page.getByTestId('odkaz-k-pripojeni')).toContainText(
@@ -1070,7 +1070,7 @@ test('recepty jdou filtrovat podle věku dítěte', async ({ page }) => {
 test('recept starší, než vyžadují jeho suroviny, řekne proč', async ({ page }) => {
   await acceptDisclaimer(page);
 
-  // Špejle a syrový list — věk nevychází ze složení, ale z podoby jídla.
+  // Špejle a syrový list, věk nevychází ze složení, ale z podoby jídla.
   await page.goto('./#/recepty/mozzarella-a-rajce-na-spejli');
   await expect(page.getByTestId('duvod-veku')).toContainText('Proč až od 12 měsíců');
   await expect(page.getByTestId('duvod-veku')).toContainText('špejli');
@@ -1107,4 +1107,19 @@ test('zdroje seznamu stojí až pod jeho položkami', async ({ page }) => {
   await page.getByTestId('zdroje-seznamu').click();
   const odkazy = page.locator('a[href^="https://www.nhs.uk/"]');
   await expect(odkazy).toHaveCount(2);
+});
+
+test('přehled o používání je za heslem a v navigaci není', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Nikde v aplikaci na něj nevede odkaz.
+  await expect(page.locator('a[href*="prehled"]')).toHaveCount(0);
+
+  await page.goto('./#/prehled');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Přehled o používání');
+
+  // Bez přihlášení nejsou vidět žádná čísla.
+  await expect(page.getByTestId('prehled-vysledek')).toHaveCount(0);
+  await expect(page.getByTestId('prehled-email')).toBeVisible();
+  await expect(page.getByTestId('prehled-heslo')).toHaveAttribute('type', 'password');
 });

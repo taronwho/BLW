@@ -19,7 +19,7 @@ import { useAktivniDite, useAktivniDiteId } from '../lib/dite';
  */
 const DUVOD_NAVRHU: Record<DuvodNavrhu, string> = {
   alergen: 'Klíčový alergen, který ještě nemá tři expozice',
-  zelezo: 'Zdroj železa — kvůli němu se příkrm zavádí',
+  zelezo: 'Zdroj železa: kvůli němu se příkrm zavádí',
   zinek: 'Zdroj zinku',
   sezona: 'Teď je sezóna',
   dalsi: 'Ještě neochutnáno',

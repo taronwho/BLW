@@ -43,7 +43,7 @@ export const bezMleka: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce kaše do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Do porce vmíchej lžičku mletých lněných semínek; kaše po nich zhoustne a drží na lžíci.',
-      'Kápni pár kapek limetkové šťávy — vitamin C pomáhá vstřebat železo z jáhel i ze lnu.',
+      'Kápni pár kapek limetkové šťávy. Vitamin C pomáhá vstřebat železo z jáhel i ze lnu.',
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
@@ -83,7 +83,7 @@ export const bezMleka: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce kaše do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Do porce vmíchej půl lžičky mandlového másla rozmíchaného dohladka do řídké kaše, jinak se lepí na patro.',
-      'Přidej rozmačkané jahody — vitamin C z nich pomáhá vstřebat železo z pohanky.',
+      'Přidej rozmačkané jahody. Vitamin C z nich pomáhá vstřebat železo z pohanky.',
       'Nech porci zvlažnět a podávej ji hned.',
     ],
     babyServing: {
@@ -331,7 +331,7 @@ export const bezMleka: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce kaše do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Do porce vmíchej lžičku mletých dýňových semínek; jiná než mletá podoba do dětské porce nepatří.',
-      'Přidej kousek pomerančové dužiny bez blan a bez jadérek — vitamin C pomáhá vstřebat železo z mletých semínek.',
+      'Přidej kousek pomerančové dužiny bez blan a bez jadérek. Vitamin C pomáhá vstřebat železo z mletých semínek.',
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {

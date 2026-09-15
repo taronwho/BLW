@@ -101,6 +101,14 @@ export function najdiTypografii(text: string): JazykNalez | null {
   if (text !== text.trim()) {
     return { problem: 'mezera na začátku nebo na konci', ukazka: text.slice(0, 40) };
   }
+  // Dlouhá pomlčka mezi větami je v české sazbě řídká a v textu pro rodiče
+  // působí cize. Vysvětlení uvozuje dvojtečka, protiklad čárka, samostatnou
+  // myšlenku tečka. Číselné rozsahy se píšou spojovníkem nebo pomlčkou
+  // krátkou, těch se tohle netýká.
+  const dlouha = text.indexOf('—');
+  if (dlouha !== -1) {
+    return { problem: 'dlouhá pomlčka místo dvojtečky, čárky nebo tečky', ukazka: vyrizni(text, dlouha) };
+  }
   return null;
 }
 

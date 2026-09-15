@@ -23,7 +23,7 @@ export function GripPicker({ dite }: { dite: Child }): ReactNode {
         Jak dítě bere jídlo
       </legend>
       <p className="text-xs leading-relaxed text-muted">
-        Úchop rozhoduje o tvaru sousta — co dítě z tácku vůbec zvedne. Co se smí nabízet a jak
+        Úchop rozhoduje o tvaru sousta: co dítě z tácku vůbec zvedne. Co se smí nabízet a jak
         měkké to musí být, se dál řídí věkem.
       </p>
 
@@ -56,7 +56,7 @@ export function GripPicker({ dite }: { dite: Child }): ReactNode {
 
       {vybrany === undefined ? (
         <p className="text-xs text-muted">
-          Nevybráno — aplikace zatím radí tvar jen podle věku. Vybrat se dá kdykoli a jde to i
+          Nevybráno. Aplikace zatím radí tvar jen podle věku. Vybrat se dá kdykoli a jde to i
           změnit zpět.
         </p>
       ) : (

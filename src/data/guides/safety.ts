@@ -9,7 +9,7 @@ import {
 } from '../ingredients/_sources';
 
 /** Odborná kniha, ze které vychází výklad. Doplněk ke `sources`, ne náhrada. */
-const KNIHA = 'Baby-led weaning — příběh metody vedené dítětem (kapitoly 1 a 2)';
+const KNIHA = 'Baby-led weaning. Příběh metody vedené dítětem (kapitoly 1 a 2)';
 
 /**
  * Bezpečnost u stolu. Tyhle dvě rady jsou označené jako naléhavé, protože se
@@ -28,7 +28,7 @@ export const safety: Guide[] = [
     keyPoints: [
       'Dávící dítě dělá hluk: kašle, kucká, zrudne, slzí a sousto vypudí ven.',
       'Dusící se dítě je tiché, nenadechne se a mění barvu do bledé nebo namodralé.',
-      'Do dávících úst se nesahá — prst zasune sousto právě tam, kam nemá.',
+      'Do dávících úst se nesahá: prst zasune sousto právě tam, kam nemá.',
     ],
     urgent: true,
     sections: [
@@ -37,15 +37,15 @@ export const safety: Guide[] = [
         body: [
           'Dávicí reflex se spouští podrážděním zadní části jazyka a hltanu a jeho úkolem je vypudit sousto dopředu, ven z úst.',
           'U dospělého člověka leží spouštěcí zóna hluboko vzadu. U kojence leží výrazně blíž ke špičce jazyka a teprve během prvního roku a dalších let se posouvá dozadu.',
-          'Znamená to, že kojenec začne dávit dřív — nad soustem, které je od dýchacích cest ještě daleko — a vypudí ho ven dřív, než se stihne dostat tam, odkud by ho už nedostal. Je to obrana, která funguje, ne její selhání.',
+          'Znamená to, že kojenec začne dávit dřív. Nad soustem, které je od dýchacích cest ještě daleko, a vypudí ho ven dřív, než se stihne dostat tam, odkud by ho už nedostal. Je to obrana, která funguje, ne její selhání.',
         ],
       },
       {
         heading: 'Jak to od sebe poznat',
         asList: true,
         body: [
-          'DÁVENÍ — dítě vydává zvuk, kašle a kucká, zrudne, slzí, vyplázne jazyk, často vyzvrátí obsah úst na stůl a po pár vteřinách pokračuje v jídle, jako by se nic nestalo.',
-          'DUŠENÍ — dítě je tiché, protože vzduch neprochází hlasivkami; nekašle vůbec nebo kašle slabě a bez zvuku, nedokáže se nadechnout a barva kůže se mění od bledé k namodralé.',
+          'DÁVENÍ. Dítě vydává zvuk, kašle a kucká, zrudne, slzí, vyplázne jazyk, často vyzvrátí obsah úst na stůl a po pár vteřinách pokračuje v jídle, jako by se nic nestalo.',
+          'DUŠENÍ. Dítě je tiché, protože vzduch neprochází hlasivkami; nekašle vůbec nebo kašle slabě a bez zvuku, nedokáže se nadechnout a barva kůže se mění od bledé k namodralé.',
           'Hraniční případ: kašel, který je hlasitý a účinný, znamená nechat dítě kašlat dál a neodcházet od něj. Kašel tichý nebo neúčinný znamená zasáhnout.',
         ],
       },
@@ -56,7 +56,7 @@ export const safety: Guide[] = [
           'Zachovej klid a zůstaň u dítěte. Dávení odezní během několika vteřin samo.',
           'Nesahej dítěti do úst a nešátrej prstem. Zásah posune sousto směrem k dýchacím cestám.',
           'Nezvedej dítě ze židličky a nepřevracej ho. Vzpřímený sed dávení pomáhá.',
-          'Nekřič a neplácej dítě po zádech — při účinném kašli to není potřeba a dítě to vyleká.',
+          'Nekřič a neplácej dítě po zádech. Při účinném kašli to není potřeba a dítě to vyleká.',
           'Až dávení odezní, nech dítě pokračovat v jídle. Přerušené jídlo dělá z dávení událost, kterou si dítě zapamatuje.',
         ],
       },
@@ -82,7 +82,7 @@ export const safety: Guide[] = [
     keyPoints: [
       'Volej 155. Hlasitý účinný kašel nech pokračovat a neodcházej od dítěte.',
       'Do 1 roku: 5 úderů mezi lopatky, pak 5 stlačení hrudníku dvěma prsty.',
-      'Břišní stlačení (Heimlich) se do jednoho roku neprovádí — hrozí poranění jater.',
+      'Břišní stlačení (Heimlich) se do jednoho roku neprovádí: hrozí poranění jater.',
     ],
     urgent: true,
     sections: [
@@ -92,7 +92,7 @@ export const safety: Guide[] = [
         body: [
           'Kašel je hlasitý a dítě se mezi kašlem nadechne → povzbuzuj ho, ať kašle dál, a neodcházej od něj. Nesahej mu do úst.',
           'Kašel je tichý, slabý nebo žádný a dítě se nenadechne → hlasitě si řekni o pomoc a začni zasahovat.',
-          'Vidíš-li předmět v ústech a jde vyjmout, vyjmi ho. Nikdy ale nešátrej prsty naslepo ani opakovaně — předmět se tím zasune hlouběji.',
+          'Vidíš-li předmět v ústech a jde vyjmout, vyjmi ho. Nikdy ale nešátrej prsty naslepo ani opakovaně: předmět se tím zasune hlouběji.',
         ],
       },
       {
@@ -100,11 +100,11 @@ export const safety: Guide[] = [
         asList: true,
         body: [
           'Sedni si. Polož dítě obličejem dolů podél svého předloktí nebo stehna, hlavu mu podepři dlaní a drž ji níž než trup.',
-          'Dej mu až pět ostrých úderů hranou dlaně mezi lopatky. Po každém úderu zkontroluj, jestli předmět nevyšel ven — nemusíš vždy vyčerpat všech pět.',
+          'Dej mu až pět ostrých úderů hranou dlaně mezi lopatky. Po každém úderu zkontroluj, jestli předmět nevyšel ven: nemusíš vždy vyčerpat všech pět.',
           'Když údery nepomohou, otoč dítě obličejem nahoru podél svých stehen, hlavu níž než nohy.',
           'Polož dva prsty doprostřed hrudníku těsně pod úroveň bradavek a proveď až pět ostrých stlačení. Po každém zkontroluj ústa.',
           'Střídej pět úderů mezi lopatky a pět stlačení hrudníku, dokud předmět nevyjde nebo nepřijede pomoc.',
-          'Břišní stlačení, tedy Heimlichův manévr, se u dětí do jednoho roku neprovádí — hrozí poranění jater.',
+          'Břišní stlačení, tedy Heimlichův manévr, se u dětí do jednoho roku neprovádí: hrozí poranění jater.',
         ],
       },
       {
@@ -122,7 +122,7 @@ export const safety: Guide[] = [
         body: [
           'Vždy, když je kašel neúčinný a dítě se nenadechne.',
           'Vždy, když dítě ztratí vědomí.',
-          'Vždy po zásahu stlačením hrudníku nebo břicha, i když předmět vyšel ven a dítě vypadá v pořádku — vnitřní poranění není na první pohled vidět.',
+          'Vždy po zásahu stlačením hrudníku nebo břicha, i když předmět vyšel ven a dítě vypadá v pořádku: vnitřní poranění není na první pohled vidět.',
         ],
       },
       {
@@ -130,7 +130,7 @@ export const safety: Guide[] = [
         body: [
           'Nejužitečnější rada z celé metody zní: absolvuj kurz první pomoci zaměřený na kojence a malé děti ještě předtím, než začneš s příkrmem.',
           'Znalost postupu mění situaci u stolu podstatněji než cokoli jiného, protože odstraňuje bezmoc. Rodič, který ví, co udělá, se na dávící dítě dívá jinak než rodič, který to neví.',
-          'Platí to stejně pro rodiny, které metodu vedenou dítětem nepoužívají. K tuhé stravě se dostane každé dítě, jen o něco později — a udusit se může i nad kouskem, který našlo na zemi.',
+          'Platí to stejně pro rodiny, které metodu vedenou dítětem nepoužívají. K tuhé stravě se dostane každé dítě, jen o něco později, a udusit se může i nad kouskem, který našlo na zemi.',
           'Tenhle text kurz nenahrazuje. Je tu proto, aby se dal postup rychle připomenout, ne aby se člověk učil za pochodu.',
         ],
       },
@@ -146,7 +146,7 @@ export const safety: Guide[] = [
     summary:
       'Krátký a nesmlouvavý seznam. Vzpřímený sed, žádné krmení do úst, žádné hry u jídla, nikdy bez dozoru a pryč s tvary, které ucpou dýchací cesty.',
     keyPoints: [
-      'Dítě sedí vzpřímeně — ne v polosedu, ne v autosedačce, ne v náručí na zádech.',
+      'Dítě sedí vzpřímeně. Ne v polosedu, ne v autosedačce, ne v náručí na zádech.',
       'Dítě si jídlo bere samo. Nikdo mu nic do úst nedává.',
       'U jídla se nelechtá, nepřekvapuje zezadu a nehrají se hry.',
     ],
@@ -174,7 +174,7 @@ export const safety: Guide[] = [
         heading: 'Čím se malé děti opravdu dusí',
         body: [
           'V evropských i amerických přehledech jsou nejčastějšími předměty oříšky, hroznové víno, párek, bonbony, popcorn a drobné části hraček.',
-          'Věková skupina s nejvyšším výskytem není šest až dvanáct měsíců, ale jeden až tři roky — tedy období, kdy dítě chodí, dosáhne na věci a strká si do úst, co najde.',
+          'Věková skupina s nejvyšším výskytem není šest až dvanáct měsíců, ale jeden až tři roky. Tedy období, kdy dítě chodí, dosáhne na věci a strká si do úst, co najde.',
           'Prevence dušení je proto hlavně otázkou toho, co je v domácnosti na dosah, ne toho, jak se podával první příkrm.',
         ],
       },
@@ -188,18 +188,18 @@ export const safety: Guide[] = [
     titleCz: 'Zavádění alergenů',
     category: 'bezpecnost',
     summary:
-      'Alergeny se nemají odkládat. Zavádí se po jednom, s odstupem, ráno a doma — a při dobré snášenlivosti se musí nabízet opakovaně.',
+      'Alergeny se nemají odkládat. Zavádí se po jednom, s odstupem, ráno a doma, a při dobré snášenlivosti se musí nabízet opakovaně.',
     keyPoints: [
       'Alergenní potraviny se zavádějí od zhruba šesti měsíců jako každé jiné jídlo.',
       'Po jednom, s odstupem dva až tři dny, malé množství, ideálně dopoledne a doma.',
-      'Jednorázová expozice toleranci neudrží — po zavedení se potravina nabízí dál pravidelně.',
+      'Jednorázová expozice toleranci neudrží. Po zavedení se potravina nabízí dál pravidelně.',
     ],
     sections: [
       {
         heading: 'Proč se odkládání nevyplácí',
         body: [
           'Odkládání arašídů a slepičích vajec na dobu po šestém až dvanáctém měsíci se podle dostupných dat pojí s vyšším rizikem, že se na ně alergie rozvine.',
-          'Ořechy a arašídy se přitom nabízejí výhradně mleté nebo jako máslo rozředěné do hladka — celý ořech je tvar, který ucpe dýchací cesty.',
+          'Ořechy a arašídy se přitom nabízejí výhradně mleté nebo jako máslo rozředěné do hladka: celý ořech je tvar, který ucpe dýchací cesty.',
           'Korýši se nikdy nepodávají syroví ani krátce zahřátí.',
         ],
       },
@@ -207,8 +207,8 @@ export const safety: Guide[] = [
         heading: 'Jak postupovat',
         asList: true,
         body: [
-          'Zaváděj po jednom alergenu, s odstupem dvou až tří dnů — jinak se nedá poznat, co reakci způsobilo.',
-          'Začni malým množstvím, ideálně dopoledne, doma — ne v den očkování a ne když je dítě nemocné.',
+          'Zaváděj po jednom alergenu, s odstupem dvou až tří dnů: jinak se nedá poznat, co reakci způsobilo.',
+          'Začni malým množstvím, ideálně dopoledne, doma: ne v den očkování a ne když je dítě nemocné.',
           'Při dobré snášenlivosti nabízej potravinu opakovaně a pravidelně. Za zavedenou ji považuj po třech expozicích bez reakce.',
           'Má-li dítě diagnostikovanou potravinovou alergii nebo ekzém, nebo jsou alergie v rodině, prober postup napřed s pediatrem.',
         ],

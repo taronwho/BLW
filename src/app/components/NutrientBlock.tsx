@@ -115,7 +115,7 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
       {profile.ironForm === 'hemove' && profile.iron !== 'nevyznamny' && (
         <p className="text-sm leading-relaxed">
           Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale
-          podoba sousta — kostka dušená doměkka se rozpadá a dítě z ní něco získá, tuhý plátek
+          podoba sousta: kostka dušená doměkka se rozpadá a dítě z ní něco získá, tuhý plátek
           skončí ocucaný a vyplivnutý.
         </p>
       )}
@@ -172,7 +172,7 @@ export function NutrientBlock({ ingredient }: { ingredient: Ingredient }): React
 
       {profile.zinc !== 'nevyznamny' && (
         <p className="text-sm leading-relaxed">
-          Zinek se v jídelníčku drží stejných potravin jako železo — masa, luštěnin, semínek
+          Zinek se v jídelníčku drží stejných potravin jako železo: masa, luštěnin, semínek
           a celozrnných obilovin. Jedno takové jídlo proto obvykle dodá obojí najednou.
         </p>
       )}

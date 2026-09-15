@@ -8,7 +8,7 @@ import type { StoredHousehold } from '../../src/storage/types';
  *
  * O `init()` žádají nezávisle hlavička, Domácnost i párovací odkaz. Když
  * běžely dva starty naráz, druhý se pokusil otevřít Firestore podruhé,
- * dostal od SDK chybu a tou přebil už navázané spojení — rodiči se po
+ * dostal od SDK chybu a tou přebil už navázané spojení, rodiči se po
  * zapnutí ukázala červená hláška, kterou další načtení stránky smazalo.
  */
 

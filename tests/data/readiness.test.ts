@@ -12,14 +12,14 @@ import {
 import { READY_SIGNS } from '../../src/types';
 import type { Child, ReadySign } from '../../src/types';
 
-/** Znaky připravenosti patří dítěti, ne domácnosti — v ní jich může být víc. */
+/** Znaky připravenosti patří dítěti, ne domácnosti, v ní jich může být víc. */
 function stav(znaky?: ReadySign[]): Child {
   const dite: Child = { id: 'dite-1', name: 'Anna', birthDate: '2026-03-01' };
   return znaky === undefined ? dite : { ...dite, readySigns: znaky };
 }
 
 describe('připravenost na příkrm', () => {
-  it('bez odškrtnutí se upozorňuje — to je stav rodiče před začátkem', () => {
+  it('bez odškrtnutí se upozorňuje, to je stav rodiče před začátkem', () => {
     const s = stav();
     expect(readySigns(s)).toEqual([]);
     expect(isReady(s)).toBe(false);
@@ -56,7 +56,7 @@ describe('připravenost na příkrm', () => {
     for (const sign of READY_SIGNS) {
       expect(READY_LABELS[sign].trim().length).toBeGreaterThan(0);
       expect(READY_HOW_TO_TELL[sign].trim().length).toBeGreaterThan(40);
-      // Jmenný tvar musí jít vložit do věty „zbývá …“ — tedy malé písmeno
+      // Jmenný tvar musí jít vložit do věty „zbývá …“, tedy malé písmeno
       // na začátku a žádné sloveso v určitém tvaru.
       const jmenny = READY_MISSING_LABELS[sign];
       expect(jmenny[0]).toBe(jmenny[0]?.toLowerCase());

@@ -995,7 +995,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej — rozmixování přeměnu dusičnanů na dusitany urychluje. Dítěti se střevní infekcí špenát podle EFSA nedávej vůbec.',
+        'Špenát patří podle EFSA k zelenině, u které nelze u malých dětí při velké konzumaci vyloučit riziko z dusičnanů. Podávej ho spíš občas než denně, uvařený pokrm zchlaď rychle, nenechávej ho v teple a už ho podruhé neohřívej. Rozmixování přeměnu dusičnanů na dusitany urychluje. Dítěti se střevní infekcí špenát podle EFSA nedávej vůbec.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1040,7 +1040,7 @@ export const vegetables: Ingredient[] = [
     hazards: ['dusicnany'],
     hazardNotes: {
       dusicnany:
-        'Mangold je listová zelenina, a listy nesou dusičnanů nejvíc. Načtené hodnocení EFSA se ale týká špenátu a hlávkového salátu, mangold v něm jmenovaný není — tahle opatrnost je proto preventivní, ne odvozená z měření. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
+        'Mangold je listová zelenina, a listy nesou dusičnanů nejvíc. Načtené hodnocení EFSA se ale týká špenátu a hlávkového salátu, mangold v něm jmenovaný není. Tahle opatrnost je proto preventivní, ne odvozená z měření. Zařazuj ho střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď a znovu ho neohřívej.',
     },
     minAgeMonths: 6,
     prep: {
@@ -2022,14 +2022,14 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Protlak je uvařená a přecezená rajčata bez slupek a jadérek, takže odpadá spařování i loupání. Lžíci rozřeď vodou nebo vývarem a vmíchej do kaše, do rozmačkané zeleniny nebo do těstovin — kyselost zjemní kapka olivového oleje.',
+          'Protlak je uvařená a přecezená rajčata bez slupek a jadérek, takže odpadá spařování i loupání. Lžíci rozřeď vodou nebo vývarem a vmíchej do kaše, do rozmačkané zeleniny nebo do těstovin: kyselost zjemní kapka olivového oleje.',
         caution:
           'Vybírej passatu, ve které je ve složení jedině rajče. Hotové omáčky a koncentráty bývají dochucené už z výroby.',
       },
       '9m': {
         serving:
           'V devíti měsících je z protlaku hotový základ omáčky. Zaduš na oleji cibuli s mrkví, přilij protlak a povař; hustá omáčka drží na těstovinách líp než řídká.',
-        caution: 'Rajčata barví — počítej s tím, že se porce podepíše na tričku.',
+        caution: 'Rajčata barví. Počítej s tím, že se porce podepíše na tričku.',
       },
       '12m': {
         serving:
@@ -2071,7 +2071,7 @@ export const vegetables: Ingredient[] = [
       },
       '9m': {
         serving:
-          'V devíti měsících nech kousky hrubší, ať má dítě co žvýkat. Konzerva se hodí i mimo sezónu — rajčata do ní jdou zralá, takže chutnají líp než bledá čerstvá v zimě.',
+          'V devíti měsících nech kousky hrubší, ať má dítě co žvýkat. Konzerva se hodí i mimo sezónu. Rajčata do ní jdou zralá, takže chutnají líp než bledá čerstvá v zimě.',
         caution: 'Tvrdý úponek u stopky vykroj, v konzervě občas zbyde.',
       },
       '12m': {
@@ -2110,7 +2110,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Syrové nepodávej. Odkroj tvrdý košťál, list nakrájej najemno a duš ho nejméně dvacet minut doměkka. Barva pouští, takže obarví i bramboru vedle — na chuti to nic nemění.',
+          'Syrové nepodávej. Odkroj tvrdý košťál, list nakrájej najemno a duš ho nejméně dvacet minut doměkka. Barva pouští, takže obarví i bramboru vedle: na chuti to nic nemění.',
         caution: 'Tvrdá bílá žebra vyřízni, nerozžvýkají se ani po dušení.',
       },
       '9m': {
@@ -2154,7 +2154,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Nať i bílou část nasekej nadrobno a krátce orestuj nebo přidej do jídla na konci vaření. Kolečka nekrájej — prsten z duté natě drží tvar i v puse.',
+          'Nať i bílou část nasekej nadrobno a krátce orestuj nebo přidej do jídla na konci vaření. Kolečka nekrájej: prsten z duté natě drží tvar i v puse.',
         caution: 'Syrová je ostřejší než dušená; pro první porce ji vždycky krátce prohřej.',
       },
       '9m': {
@@ -2198,7 +2198,7 @@ export const vegetables: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Šalotka je jemnější a sladší než běžná cibule, takže se hodí tam, kde by cibule přebila zbytek. Nakrájej ji nadrobno a nech ji na oleji pomalu zesklovatět — prstence nepodávej.',
+          'Šalotka je jemnější a sladší než běžná cibule, takže se hodí tam, kde by cibule přebila zbytek. Nakrájej ji nadrobno a nech ji na oleji pomalu zesklovatět: prstence nepodávej.',
         caution: 'Syrová je ostrá; pro dítě ji vždycky nech změknout na tuku.',
       },
       '9m': {

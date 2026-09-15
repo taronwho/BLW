@@ -46,7 +46,7 @@ export const GRIP_SHAPE: Record<Grip, string> = {
   nuzkovy:
     'Proužky pořád dávají smysl, ale k nim už můžeš přidat i větší kousky na uchopení dvěma prsty. Dítě si samo vybere, co mu jde.',
   pinzetovy:
-    'Dlouhé proužky ztrácejí smysl — dítě si umí vzít malé kousky a obvykle jim dává přednost. Velikost pořád hlídej podle rizika dušení, ne podle toho, co dítě zvedne.',
+    'Dlouhé proužky ztrácejí smysl. Dítě si umí vzít malé kousky a obvykle jim dává přednost. Velikost pořád hlídej podle rizika dušení, ne podle toho, co dítě zvedne.',
 };
 
 /** Orientační věk, kdy se úchop objevuje. Není to podmínka ani cíl. */
@@ -97,7 +97,7 @@ export function gripVsAge(grip: Grip, months: number | null): GripVsAge {
 export const GRIP_VS_AGE_NOTE: Record<GripVsAge, string | null> = {
   shoda: null,
   napred:
-    'Ruka je napřed proti věku — to je běžné a nic to nemění na tom, co dítě smí dostat. Tvar sousta uprav podle úchopu, výběr a měkkost dál podle fáze.',
+    'Ruka je napřed proti věku. To je běžné a nic to nemění na tom, co dítě smí dostat. Tvar sousta uprav podle úchopu, výběr a měkkost dál podle fáze.',
   pozadu:
     'Ruka je zatím pozadu proti věku, což je taky běžné. Nabízej tvar, který dítě opravdu zvedne; nic se tím nezdržuje.',
 };
@@ -123,9 +123,9 @@ const GRIP_SHAPE_DROBNE: Record<Grip, string> = {
   dlanovy:
     'Tahle surovina je sama o sobě menší než dětská pěst, takže se na proužky nekrájí. Dlaňový úchop si s ní zatím neporadí: nabídni ji rozmačkanou, vmíchanou do kaše nebo nalepenou na proužek něčeho většího, po čem dítě sáhne.',
   nuzkovy:
-    'Na proužky se nekrájí — je drobná sama o sobě. Dítě, které už bere kousky mezi palec a bok ukazováku, ji z tácku sebere, ale ještě mu to nepůjde vždycky. Část nabídni volně, část vmíchanou do jídla, ať se nají tak jako tak.',
+    'Na proužky se nekrájí: je drobná sama o sobě. Dítě, které už bere kousky mezi palec a bok ukazováku, ji z tácku sebere, ale ještě mu to nepůjde vždycky. Část nabídni volně, část vmíchanou do jídla, ať se nají tak jako tak.',
   pinzetovy:
-    'Tohle je přesně velikost pro pinzetový úchop — dítě si ji z tácku sebere po jednom kousku. Délka proužku se tu neřeší, hlídej jen tvar podle pokynu k bezpečnosti výš.',
+    'Tohle je přesně velikost pro pinzetový úchop: dítě si ji z tácku sebere po jednom kousku. Délka proužku se tu neřeší, hlídej jen tvar podle pokynu k bezpečnosti výš.',
 };
 
 /**
@@ -134,7 +134,7 @@ const GRIP_SHAPE_DROBNE: Record<Grip, string> = {
  */
 const GRIP_SHAPE_KASOVITE: Record<Grip, string> = {
   dlanovy:
-    'Krájet tu není co. Dej dítěti naloženou lžíci do ruky, nebo nanes hustou vrstvu na proužek dlouhý jako dospělý prst — na měkký chleba, na vařenou mrkev — aby konec čouhal z pěsti.',
+    'Krájet tu není co. Dej dítěti naloženou lžíci do ruky, nebo nanes hustou vrstvu na proužek dlouhý jako dospělý prst. Na měkký chleba, na vařenou mrkev: aby konec čouhal z pěsti.',
   nuzkovy:
     'Krájet tu není co. Dítě už lžíci uchopí líp a zvládne i kratší nosiče: proužek pečiva, kousek dušené zeleniny s nanesenou vrstvou.',
   pinzetovy:

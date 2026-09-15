@@ -735,7 +735,7 @@ export const legumes: Ingredient[] = [
         serving:
           'Sušené fazole namoč přes noc, vodu slij a vař je v čerstvé vodě doměkka. Pro první porce je rozmačkej vidličkou na hrubé pyré a smíchej s rajčatovým základem nebo s rozmačkanou dýní.',
         caution:
-          'Syrové ani nedovařené fazole se nepodávají — obsahují látku, která se ničí až dostatečně dlouhým varem v čerstvé vodě.',
+          'Syrové ani nedovařené fazole se nepodávají. Obsahují látku, která se ničí až dostatečně dlouhým varem v čerstvé vodě.',
       },
       '9m': {
         serving:
@@ -781,7 +781,7 @@ export const legumes: Ingredient[] = [
       },
       '9m': {
         serving:
-          'V devíti měsících nech zrna celá, ale měkká — dítě je sbírá z tácku a trénuje na nich prsty. Kapka citronu v porci zlepší vstřebání železa, které čočka nese.',
+          'V devíti měsících nech zrna celá, ale měkká. Dítě je sbírá z tácku a trénuje na nich prsty. Kapka citronu v porci zlepší vstřebání železa, které čočka nese.',
         caution: 'Čočku před vařením propláchni a přeber, občas se mezi zrny najde kamínek.',
       },
       '12m': {

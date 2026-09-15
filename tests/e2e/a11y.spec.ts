@@ -8,7 +8,7 @@ import { acceptDisclaimer, navLink, SCREENS } from './helpers';
  * Audit přístupnosti podle WCAG 2.1 AA nad hotovou stránkou.
  *
  * Běží ve světlém i tmavém motivu. Tmavá paleta je totiž druhá sada barev,
- * kterou nikdo očima nezkontroluje na všech obrazovkách — a právě kontrast
+ * kterou nikdo očima nezkontroluje na všech obrazovkách, a právě kontrast
  * štítků rizika dušení je věc, kterou docs/SPEC.md kap. 6 vyžaduje.
  */
 

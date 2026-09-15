@@ -6,7 +6,7 @@ import { sortIngredients } from '../../src/app/lib/sorting';
 import { sortRecipes } from '../../src/app/lib/sortingRecipes';
 
 describe('řazení surovin', () => {
-  it('abecedně řadí česky — „č" patří hned za „c"', () => {
+  it('abecedně řadí česky, „č" patří hned za „c"', () => {
     const serazene = sortIngredients(ingredients, 'abeceda').map((item) => item.nameCz);
     const znovu = [...serazene].sort(new Intl.Collator('cs', { sensitivity: 'base' }).compare);
     expect(serazene).toEqual(znovu);
@@ -19,7 +19,7 @@ describe('řazení surovin', () => {
     expect(nutrientProfile(serazene[0] as never).iron).toBe('vyznamny');
   });
 
-  it('při shodné úrovni železa jde napřed hemové — vstřebá se líp', () => {
+  it('při shodné úrovni železa jde napřed hemové, vstřebá se líp', () => {
     const prvni = sortIngredients(ingredients, 'zelezo')[0];
     expect(nutrientProfile(prvni as never).ironForm).toBe('hemove');
   });

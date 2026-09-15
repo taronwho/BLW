@@ -54,8 +54,23 @@ service cloud.firestore {
           && nemazeDenik();
       }
 
+      // Přehled o používání aplikace.
+      //
+      // Jediná výjimka ze zákazu výpisu. Nestačí být přihlášený: musí jít
+      // o účet s tímhle e-mailem, přihlášený heslem a s ověřenou adresou.
+      // Anonymní účet, kterým jezdí aplikace pro rodiče, sem nedosáhne,
+      // protože e-mail vůbec nemá. Účet se zakládá ručně ve Firebase
+      // konzoli (Authentication, poskytovatel Email/Password) a heslo
+      // k němu je jediné, co ten výpis chrání. Postup je v docs/FIREBASE.md.
+      function jsemSpravce() {
+        return request.auth != null
+          && request.auth.token.email == 'taronwho@gmail.com'
+          && request.auth.token.email_verified == true
+          && request.auth.token.firebase.sign_in_provider == 'password';
+      }
+
       allow get: if prihlaseny();
-      allow list: if false; // zákaz enumerace domácností
+      allow list: if jsemSpravce(); // jinak zákaz enumerace domácností
       allow create: if prihlaseny() && maTvar() && noviClenove() == [request.auth.uid];
       allow update: if maTvar()
         && noviClenove().size() <= 5

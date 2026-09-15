@@ -102,7 +102,7 @@ export const soups: Recipe[] = [
       'Přidej zeleninu, nudle a nasekaný libeček; polévka tím získá bílkovinu i sytost.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí maso ve vývaru nahrazuje 200 g uvařené cizrny — polévka zůstane sytá a bílkovinu dodá luštěnina místo masa.',
+      'Kuřecí maso ve vývaru nahrazuje 200 g uvařené cizrny. Polévka zůstane sytá a bílkovinu dodá luštěnina místo masa.',
     allergens: ['psenice-lepek', 'celer'],
     tags: ['vývar', 'mrazitelné'],
     sources: [NHS_PREP_SAFELY, NHS_FIRST_FOODS],
@@ -222,7 +222,7 @@ export const soups: Recipe[] = [
       'Přidej špetku nasekaného kopru, ať má porce stejnou vůni jako talíře dospělých.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na lžíci a k ní kostku brambory velikosti prstu, kterou dítě sevře v dlani. Vločky tresky nech rozmíchané v polévce — samostatně by se v dlani ztratily.',
+      '6m': 'Podávej hustou polévku na lžíci a k ní kostku brambory velikosti prstu, kterou dítě sevře v dlani. Vločky tresky nech rozmíchané v polévce: samostatně by se v dlani ztratily.',
       '9m': 'Nabídni polévku s kostkami brambor a rybími vločkami v mělké misce ke sbírání prsty.',
       '12m': 'Servíruj polévku v misce se lžící a kousky ryby navrch; dítě si porci samo míchá.',
     },
@@ -235,7 +235,7 @@ export const soups: Recipe[] = [
       'Část fazolí rozmačkej, aby polévka zhoustla, a posyp ji koprem.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 250 g uvařených bílých fazolí — ve smetanové polévce zjemní a dodají bílkovinu i hutnost.',
+      'Tresku nahrazuje 250 g uvařených bílých fazolí. Ve smetanové polévce zjemní a dodají bílkovinu i hutnost.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'krémová'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -309,7 +309,7 @@ export const soups: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky s cizrnou, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Dětskou porci rozmixuj, aby v ní nezůstaly slupky z rajčat ani celá zrna cizrny.',
-      'Přidej lístek bazalky rozetřený mezi prsty — stačí vůně, celý list je pro dítě zbytečně velký.',
+      'Přidej lístek bazalky rozetřený mezi prsty. Stačí vůně, celý list je pro dítě zbytečně velký.',
       'Kyselost rajčat vyrovnej lžičkou ghí; polévka tím zjemní a lépe se snáší.',
       'Papriku z polévky nevynechávej: vitamin C z ní pomáhá vstřebat železo z cizrny.',
     ],
@@ -370,7 +370,7 @@ export const soups: Recipe[] = [
       'Část hrachu rozmačkej, aby polévka zhoustla, a posyp ji nasekaným libečkem.',
     ],
     vegetarianProteinSwap:
-      'Hovězí maso nahrazuje 150 g žlutého půleného hrachu — polévka zůstane sytá a hrách dodá bílkovinu i hustotu.',
+      'Hovězí maso nahrazuje 150 g žlutého půleného hrachu. Polévka zůstane sytá a hrách dodá bílkovinu i hustotu.',
     allergens: ['psenice-lepek'],
     tags: ['jednohrnec', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],

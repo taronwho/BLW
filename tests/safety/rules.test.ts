@@ -548,7 +548,7 @@ describe('min-age-not-inflated', () => {
     expect(expectFail('min-age-not-inflated', recipe, catalog)).toContain('vystačí s 6');
   });
 
-  it('s napsaným důvodem vyšší věk projde — brání mu podoba jídla, ne složení', () => {
+  it('s napsaným důvodem vyšší věk projde, brání mu podoba jídla, ne složení', () => {
     const recipe = makeRecipe({
       minAgeMonths: 12,
       minAgeReason: 'Jídlo se podává napíchané na špejli a ta do dětské ruky nepatří.',
@@ -556,7 +556,7 @@ describe('min-age-not-inflated', () => {
     expectPass('min-age-not-inflated', recipe, catalog);
   });
 
-  it('zachytí důvod u receptu, kterému věk vychází ze složek — nemá co vysvětlovat', () => {
+  it('zachytí důvod u receptu, kterému věk vychází ze složek, nemá co vysvětlovat', () => {
     const recipe = makeRecipe({
       minAgeReason: 'Tenhle důvod tu nemá co dělat, protože věk nikdo nezvedl.',
     });
@@ -760,7 +760,7 @@ describe('neutral-address', () => {
 
   it('zachytí „když si nejsi jistá" u suroviny', () => {
     const ingredient = makeIngredient({
-      prepIdeas: ['v páře', 'pyré', 'pečená — když si nejsi jistá, raději nepodávej'],
+      prepIdeas: ['v páře', 'pyré', 'pečená, když si nejsi jistá, raději nepodávej'],
     });
     expectFail('neutral-address', ingredient, catalog);
   });
@@ -783,7 +783,7 @@ describe('neutral-address', () => {
     expect(expectFail('neutral-address', recipe, catalog)).toContain('střední rod');
   });
 
-  it('nevadí mu „metoda sama o sobě" — tam o dítě nejde', () => {
+  it('nevadí mu „metoda sama o sobě", tam o dítě nejde', () => {
     expectPass(
       'neutral-address',
       makeIngredient({ prepIdeas: ['mouka sama o sobě se nepodává', 'v páře', 'pyré'] }),
@@ -798,7 +798,7 @@ describe('baby-serving-mentions-meat', () => {
   });
 
   it('projde recept, kde se maso do dětské porce vůbec nedostane', () => {
-    // babySteps mluví jen o mrkvi — dětská porce je bezmasá a je to v pořádku.
+    // babySteps mluví jen o mrkvi, dětská porce je bezmasá a je to v pořádku.
     expectPass('baby-serving-mentions-meat', makeMeatRecipe(), catalog);
   });
 
@@ -868,7 +868,7 @@ describe('czech-typography', () => {
   it('nevadí mu spojovník ani pomlčka uvnitř věty', () => {
     expectPass(
       'czech-typography',
-      makeRecipe({ babySteps: ['Placku nech vychladnout — vlažná je tak akorát.'] }),
+      makeRecipe({ babySteps: ['Placku nech vychladnout, vlažná je tak akorát.'] }),
       catalog,
     );
   });
@@ -897,7 +897,7 @@ describe('consistent-address', () => {
   });
 
   it('nevadí mu tvar, který jen náhodou končí na -te', () => {
-    // „chutě“, „soustě“ apod. nejsou rozkazy — hranice slova musí umět česky.
+    // „chutě“, „soustě“ apod. nejsou rozkazy, hranice slova musí umět česky.
     expectPass(
       'consistent-address',
       makeRecipe({ babySteps: ['Nech dítě poznat různé chutě a soustě neposouvej.'] }),

@@ -280,12 +280,12 @@ const meatTrackOnlyWithMeat: SafetyRule = {
   check(item, catalog) {
     if (!isRecipe(item)) return null;
     if (item.adultSteps.length === 0 || item.adultSteps.every((s) => s.trim() === '')) {
-      return 'adultSteps jsou prázdné — dochucení pro dospělé musí být vždy popsané.';
+      return 'adultSteps jsou prázdné: dochucení pro dospělé musí být vždy popsané.';
     }
     if (!recipeSuitsVegetarians(item, catalog)) return null;
 
     if ((item.vegetarianSteps ?? []).length > 0) {
-      return 'Recept je celý bezmasý, ale má vlastní bezmasou variantu — dochucení pro dospělé má být jen jedno.';
+      return 'Recept je celý bezmasý, ale má vlastní bezmasou variantu: dochucení pro dospělé má být jen jedno.';
     }
     if (item.vegetarianProteinSwap !== undefined) {
       return 'Recept je celý bezmasý, takže nemá co nahrazovat: vegetarianProteinSwap je navíc.';
@@ -587,7 +587,7 @@ const minAgeNotInflated: SafetyRule = {
     if (item.minAgeMonths <= max) {
       return item.minAgeReason === undefined
         ? null
-        : `minAgeReason je vyplněný, ale věk receptu (${item.minAgeMonths}) nepřevyšuje složky (${max}) — důvod nemá co vysvětlovat.`;
+        : `minAgeReason je vyplněný, ale věk receptu (${item.minAgeMonths}) nepřevyšuje složky (${max}): důvod nemá co vysvětlovat.`;
     }
     if ((item.minAgeReason ?? '').trim().length >= 20) return null;
     return `minAgeMonths receptu je ${item.minAgeMonths}, ale dětská porce vystačí s ${max}. Buď věk sniž, nebo do minAgeReason napiš, co konkrétně brání mladší fázi.`;
@@ -864,7 +864,7 @@ const knownTypos: SafetyRule = {
     for (const { field, value } of collectStrings(item)) {
       const nalez = findPatterns(value, KNOWN_TYPO_PATTERNS, { honorNegation: false })[0];
       if (nalez !== undefined) {
-        return `Chybný tvar „${nalez.pattern}" v poli ${field} — viz KNOWN_TYPO_PATTERNS.`;
+        return `Chybný tvar „${nalez.pattern}" v poli ${field}: viz KNOWN_TYPO_PATTERNS.`;
       }
     }
     return null;
@@ -889,7 +889,7 @@ const consistentAddress: SafetyRule = {
   id: 'consistent-address',
   severity: 'error',
   appliesTo: 'both',
-  description: 'Texty rodiči tykají — vykání se mezi ně nemíchá.',
+  description: 'Texty rodiči tykají: vykání se mezi ně nemíchá.',
   check(item) {
     for (const { field, value } of collectStrings(item)) {
       const nalez = najdiVykani(value);
@@ -913,7 +913,7 @@ const prepositionVocalization: SafetyRule = {
   id: 'preposition-vocalization',
   severity: 'error',
   appliesTo: 'both',
-  description: 'Neslabičná předložka se před stejnou hláskou vokalizuje — „se šťávou", ne „s šťávou".',
+  description: 'Neslabičná předložka se před stejnou hláskou vokalizuje. „se šťávou", ne „s šťávou".',
   check(item) {
     for (const { field, value } of collectStrings(item)) {
       const hit = PREPOSITION_NOT_VOCALIZED.exec(value);

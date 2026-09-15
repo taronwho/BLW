@@ -686,7 +686,7 @@ export const herbsSpices: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí skořici v kaši, v pečení i v kompotu, pořád ale po špetkách a spíš jednou za týden než denně. Děti jsou ke kumarinu citlivější než dospělí prostě proto, že váží míň. Cejlonská skořice má kumarinu málo, zato víc eugenolu, jehož přípustný denní příjem je 2,5 mg na kilogram tělesné hmotnosti — i proto zůstaň u koření na dochucení.',
+          'Batole jí skořici v kaši, v pečení i v kompotu, pořád ale po špetkách a spíš jednou za týden než denně. Děti jsou ke kumarinu citlivější než dospělí prostě proto, že váží míň. Cejlonská skořice má kumarinu málo, zato víc eugenolu, jehož přípustný denní příjem je 2,5 mg na kilogram tělesné hmotnosti, i proto zůstaň u koření na dochucení.',
         caution: 'Skořicové bonbony a nápoje obsahují hodně sladké složky.',
       },
     },

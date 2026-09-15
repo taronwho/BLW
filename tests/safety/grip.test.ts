@@ -65,7 +65,7 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
         const rada = gripShapeAdvice(grip, 'high', form);
         expect(rada.trim().length).toBeGreaterThan(0);
         if (grip === 'pinzetovy') {
-          // Právě tady by šlo nejsnáz svést dítě k drobečkům — text to musí odmítnout.
+          // Právě tady by šlo nejsnáz svést dítě k drobečkům, text to musí odmítnout.
           expect(rada).not.toMatch(/můžeš nabízet malé kousky/);
           expect(rada).toMatch(/bezpečnost/);
         }
@@ -111,7 +111,7 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
   });
 
   /**
-   * Recept nikdy nevyjde jako „neřeší se" — jídlo vždycky něco na talíři má.
+   * Recept nikdy nevyjde jako „neřeší se", jídlo vždycky něco na talíři má.
    * Kdyby vyšlo, panel o tvaru sousta by z receptu zmizel úplně.
    */
   it('recept má vždycky podobu, u které se tvar sousta řeší', () => {
@@ -120,7 +120,7 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
     }
   });
 
-  it('úchop nemění, které suroviny jsou vhodné — to zůstává na věku', () => {
+  it('úchop nemění, které suroviny jsou vhodné, to zůstává na věku', () => {
     // suitableNow bere jen věk. Kdyby někdo v budoucnu přidal úchop i sem,
     // začaly by se dítěti nabízet suroviny nad jeho věk.
     const sedmimesicni = ingredients.filter((item) => suitableNow(item, 7));
@@ -133,7 +133,7 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
 
   it('fáze krájení se odvozuje z věku, ne z úchopu', () => {
     // GRIP_STAGE existuje jen k pojmenování rozporu proti věku. Kdyby se z něj
-    // předvybírala fáze, měnil by úchop i měkkost a výběr — a to z něj neplyne.
+    // předvybírala fáze, měnil by úchop i měkkost a výběr, a to z něj neplyne.
     expect(stageForAge(7)).toBe('6m');
     expect(GRIP_STAGE.pinzetovy).toBe('12m');
     expect(stageForAge(7)).not.toBe(GRIP_STAGE.pinzetovy);
@@ -141,7 +141,7 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
 
   it('každý úchop má popis, podle čeho se pozná, i orientační věk', () => {
     // Rodič vybírá podle toho, co vidí. Kdyby některému úchopu popis chyběl,
-    // zbyl by z výběru jen věk — a tím by celá věc ztratila smysl.
+    // zbyl by z výběru jen věk, a tím by celá věc ztratila smysl.
     const grips: readonly Grip[] = GRIPS;
     expect(grips).toHaveLength(3);
     for (const grip of grips) {

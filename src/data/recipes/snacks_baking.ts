@@ -255,7 +255,7 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce jogurtové směsi do samostatné formičky, dřív než se zbytek pro dospělé dosladí.',
     babySteps: [
       'Dětskou formičku plň jen do poloviny; menší nanuk se rychleji rozpouští a dítě ho zvládne sníst dřív, než roztaje.',
-      'Nanuk před podáváním chvíli podrž v ruce, aby povrch povolil — ke rtům nesmí přimrznout.',
+      'Nanuk před podáváním chvíli podrž v ruce, aby povrch povolil: ke rtům nesmí přimrznout.',
       'Podávej ho vždy vsedě a pod dohledem; dítě si z něj bude ukusovat drobné kousky.',
     ],
     babyServing: {
@@ -340,7 +340,7 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 2 odeber dvě lžíce tvarohové náplně, dřív než se do zbytku zamíchá skořice a než se náplň pro dospělé dosladí.',
     babySteps: [
       'Jedno jablko naplň odebranou náplní bez dochucení a upeč ho vedle ostatních.',
-      'Upečené jablko oloupej — slupka po pečení ztvrdne a v puse se sbalí do kuličky.',
+      'Upečené jablko oloupej. Slupka po pečení ztvrdne a v puse se sbalí do kuličky.',
       'Dužinu rozmačkej vidličkou s náplní; mleté mandle jsou v ní pro miminko bezpečnou formou ořechů.',
       'Do dětské porce kápni čerstvou pomerančovou šťávu; vitamin C z ní pomáhá vstřebat železo z mletých mandlí.',
     ],
@@ -427,7 +427,7 @@ export const snacksBaking: Recipe[] = [
     babySteps: [
       'Arašídové máslo pro miminko musí být hladké a rozmíchané ve vodě; hustá vrstva se v puse slepí a špatně polyká.',
       'Chlebíček potři jen tenkou vrstvou a nalam ho na pásky, které dítě udrží.',
-      'Rýžové výrobky nabízej jen občas, ne jako každodenní svačinu — rýže na sebe váže anorganický arsen a malé děti ho snesou méně než dospělí.',
+      'Rýžové výrobky nabízej jen občas, ne jako každodenní svačinu. Rýže na sebe váže anorganický arsen a malé děti ho snesou méně než dospělí.',
       'Na dětský chlebíček polož plátky jahod; vitamin C z nich pomáhá vstřebat železo z arašídového másla.',
     ],
     babyServing: {

@@ -457,7 +457,7 @@ function describeError(error: unknown): string {
   // Firestore vrátí u zamítnutého zápisu jen „permission-denied“. Nejčastější
   // příčinou je plná domácnost, což ze samotné hlášky nikdo nepozná.
   if (/permission|insufficient/i.test(text)) {
-    return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení — odeber některé v Domácnosti na jiném telefonu), nebo nemá databáze nahraná pravidla přístupu; to se nastavuje jednou při zprovoznění sdílení.`;
+    return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení. Odeber některé v Domácnosti na jiném telefonu), nebo nemá databáze nahraná pravidla přístupu; to se nastavuje jednou při zprovoznění sdílení.`;
   }
   if (/unavailable|network|offline|failed to (get|fetch)/i.test(text)) {
     return 'Zařízení je teď bez spojení. Zapsané změny máš uložené v telefonu a odešlou se samy, jakmile bude síť zpátky.';

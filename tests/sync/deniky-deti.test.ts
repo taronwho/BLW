@@ -65,7 +65,7 @@ describe('deník patří dítěti, ne domácnosti', () => {
 
   it('bez dítěte se zapisuje do společného deníku a první dítě ho zdědí', () => {
     const zadneDite: HouseholdState = { ...emptyHouseholdState(), tastings: [zaznam({ id: 'x' })] };
-    // Rodič může zapisovat dřív, než dítě vyplní — záznam nesmí zmizet.
+    // Rodič může zapisovat dřív, než dítě vyplní, záznam nesmí zmizet.
     expect(activeTastings(zadneDite, null).map((e) => e.id)).toEqual(['x']);
 
     const sDitetem: HouseholdState = {

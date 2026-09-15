@@ -7,7 +7,7 @@ import {
   SZU_FIRST_SPOON,
 } from '../ingredients/_sources';
 
-const KNIHA = 'Baby-led weaning — příběh metody vedené dítětem (kapitoly 1 a 2)';
+const KNIHA = 'Baby-led weaning. Příběh metody vedené dítětem (kapitoly 1 a 2)';
 
 /** Start příkrmu: připravenost, první potraviny, co je metoda vedená dítětem. */
 export const starting: Guide[] = [
@@ -28,7 +28,7 @@ export const starting: Guide[] = [
         body: [
           'Klíčem k celé metodě není žádná filozofie, ale trojice vývojových znaků, které se u zdravého dítěte scházejí kolem šestého měsíce.',
           'Samostatný stabilní sed. Cílené uchopení předmětu a jeho dopravení do úst. A vyhasnutí reflexu, kterým dítě jazykem vytlačuje ven všechno, co se mu dostane do pusy.',
-          'Dokud tyhle tři věci nejsou pohromadě, nemá začínat ani jedna metoda příkrmu. Jakmile jsou, dá se začít oběma — lžičkou i kusy do ruky.',
+          'Dokud tyhle tři věci nejsou pohromadě, nemá začínat ani jedna metoda příkrmu. Jakmile jsou, dá se začít oběma: lžičkou i kusy do ruky.',
           'Přidej k tomu čtvrtý, měkčí znak: dítě projevuje o jídlo zájem, sleduje, co jíte, a sahá po tom.',
         ],
       },
@@ -45,9 +45,9 @@ export const starting: Guide[] = [
         heading: 'Jak poznat, že to ještě není ono',
         asList: true,
         body: [
-          'Dítě v židličce padá na stranu nebo se sesouvá dopředu — sed ještě není stabilní.',
+          'Dítě v židličce padá na stranu nebo se sesouvá dopředu: sed ještě není stabilní.',
           'Jídlo se mu do pusy dostane jen náhodou, ne cíleným pohybem.',
-          'Cokoli, co skončí v ústech, jazyk okamžitě vytlačí ven — vypuzovací reflex ještě nevyhasl.',
+          'Cokoli, co skončí v ústech, jazyk okamžitě vytlačí ven: vypuzovací reflex ještě nevyhasl.',
           'Nic z toho není důvod k obavám. Je to důvod počkat pár týdnů a zkusit to znovu.',
         ],
       },
@@ -65,7 +65,7 @@ export const starting: Guide[] = [
     keyPoints: [
       'Vařená mrkev na hranolky, brokolice a květák s dlouhým stonkem místo držadla.',
       'Banán rozkrojený podélně a z poloviny ponechaný ve slupce, aby měl za co držet.',
-      'Jablko výhradně vařené nebo pečené — syrové je tak tvrdé, že se z něj lámou kusy.',
+      'Jablko výhradně vařené nebo pečené: syrové je tak tvrdé, že se z něj lámou kusy.',
     ],
     sections: [
       {
@@ -76,7 +76,7 @@ export const starting: Guide[] = [
           'Květák a brokolice s dlouhým stonkem, který slouží jako držadlo.',
           'Vařený brambor a batát.',
           'Dýně a cuketa.',
-          'Avokádo — zrádné tím, že klouže, proto se často obaluje ve strouhance nebo v ovesných vločkách.',
+          'Avokádo. Zrádné tím, že klouže, proto se často obaluje ve strouhance nebo v ovesných vločkách.',
           'Banán rozkrojený podélně a z poloviny ponechaný ve slupce, aby ho dítě mělo za co držet.',
           'Hruška a jablko, ale jablko výhradně vařené nebo pečené.',
         ],
@@ -84,7 +84,7 @@ export const starting: Guide[] = [
       {
         heading: 'Velikost a tvar',
         body: [
-          'Sousto má být podlouhlé, zhruba velikosti prstu dospělého, a má z pěsti vyčnívat. Dítě v tomhle věku ještě neumí uvolnit, co sevře v dlani — co zmizí celé v pěsti, k ústům nedoputuje.',
+          'Sousto má být podlouhlé, zhruba velikosti prstu dospělého, a má z pěsti vyčnívat. Dítě v tomhle věku ještě neumí uvolnit, co sevře v dlani: co zmizí celé v pěsti, k ústům nedoputuje.',
           'Kolem devátého měsíce se rozvíjí klešťový úchop mezi palcem a ukazovákem. Od té chvíle dávají smysl menší kousky velikosti fazole.',
           'Kluzké kousky se drží špatně. Obalení v mletých vločkách, ve strouhance nebo v mletých semínkách problém vyřeší.',
         ],
@@ -107,7 +107,7 @@ export const starting: Guide[] = [
     titleCz: 'Co metoda je a co není',
     category: 'zacatek',
     summary:
-      'Dávat dítěti do ruky kus jídla ze společného stolu není novinka. A čistá podoba metody je v praxi vzácná — většina rodin kombinuje.',
+      'Dávat dítěti do ruky kus jídla ze společného stolu není novinka. A čistá podoba metody je v praxi vzácná: většina rodin kombinuje.',
     keyPoints: [
       'Většina rodin, které se k metodě hlásí, používá i lžičku. Ortodoxní podoba je vzácná.',
       'Metoda neprokázala prevenci vybíravosti ani ochranu před nadváhou.',
@@ -118,7 +118,7 @@ export const starting: Guide[] = [
         heading: 'Co se v praxi opravdu dělá',
         body: [
           'Šetření z různých zemí shodně ukazují, že rodiny hlásící se k metodě ji v čisté podobě provozují zřídka.',
-          'Nejběžnější je smíšený postup: dítě dostává kusy do ruky při většině jídel a lžičkou se podává to, co se do ruky vzít nedá — jogurt, tvaroh, hustá polévka a kaše.',
+          'Nejběžnější je smíšený postup: dítě dostává kusy do ruky při většině jídel a lžičkou se podává to, co se do ruky vzít nedá: jogurt, tvaroh, hustá polévka a kaše.',
           'Podíl rodin, které nikdy nepoužily lžičku, se pohyboval kolem několika procent. Kombinace je tedy pravidlo, ne selhání.',
         ],
       },
@@ -127,7 +127,7 @@ export const starting: Guide[] = [
         body: [
           'Prevence vybíravosti je tvrzení, které se metodě připisuje nejčastěji a které je zároveň nejhůř podložené. Vybíravost je vývojová fáze, která se u většiny dětí objevuje mezi druhým a čtvrtým rokem a má svůj biologický smysl.',
           'Ochrana před nadváhou se v randomizovaném pokusu neprokázala.',
-          'Vyšší příjem železa ani energie se neprokázal. Metoda se tedy nemá volit kvůli výživovým výhodám — ty musí zařídit složení talíře.',
+          'Vyšší příjem železa ani energie se neprokázal. Metoda se tedy nemá volit kvůli výživovým výhodám: ty musí zařídit složení talíře.',
         ],
       },
       {

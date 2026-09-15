@@ -42,7 +42,7 @@ export function ChildrenSection(): ReactNode {
 
         {deti.length === 0 ? (
           <p className="text-sm leading-relaxed text-muted">
-            Zatím tu žádné dítě není. Přidej ho a aplikace se rovnou přizpůsobí jeho věku — fáze
+            Zatím tu žádné dítě není. Přidej ho a aplikace se rovnou přizpůsobí jeho věku: fáze
             u surovin, filtr „Vhodné teď“ i tvar sousta.
           </p>
         ) : (
@@ -216,7 +216,7 @@ function ChildDetail({
         id="upravit-dite-nadpis"
         className="text-sm font-semibold uppercase tracking-wide text-muted"
       >
-        Údaje — {dite.name.trim().length > 0 ? dite.name : 'dítě'}
+        Údaje: {dite.name.trim().length > 0 ? dite.name : 'dítě'}
       </h2>
 
       <ChildForm vychozi={dite} onSubmit={onSave} onCancel={null} />
@@ -226,7 +226,7 @@ function ChildDetail({
           <div className="flex flex-col gap-2 rounded-xl border border-risk/40 bg-risk-soft p-3">
             <p className="text-xs leading-relaxed">
               Opravdu odebrat {dite.name.trim().length > 0 ? dite.name : 'tohle dítě'}? Záznamy
-              v deníku zůstanou — patří k datu, ne k seznamu.
+              v deníku zůstanou, patří k datu, ne k seznamu.
             </p>
             <div className="flex flex-wrap gap-2">
               <button

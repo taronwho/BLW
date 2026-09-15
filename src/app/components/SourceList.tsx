@@ -17,7 +17,7 @@ export function SourceLinks({ sources }: { sources: readonly SourceRef[] }): Rea
           >
             <ExternalLink aria-hidden="true" className="h-4 w-4 shrink-0" />
             <span className="min-w-0">
-              {source.org} — {source.title}
+              {source.org}: {source.title}
             </span>
           </a>
           <span className="text-xs text-muted">

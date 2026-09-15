@@ -38,7 +38,7 @@ export const lunchesDinners: Recipe[] = [
       'Zeleninu rozprostři do pekáče v jedné vrstvě, pokapej řepkovým olejem, promíchej rukou a vlož mezi ni snítky tymiánu.',
       'Podlij vodou a peč 25 minut, dokud mrkev nejde snadno propíchnout špičkou nože.',
       'Vyndej pekáč, zeleninu promíchej obracečkou, ať se spodní vrstva nepřipeče, a zkontroluj měkkost hranolků.',
-      'Od tohoto místa se pekáč dělí — každá linie se dopéká zvlášť podle svého postupu.',
+      'Od tohoto místa se pekáč dělí. Každá linie se dopéká zvlášť podle svého postupu.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce zeleniny do misky stranou, ještě než se pekáč dochucuje a než do něj přijde maso.',
@@ -49,7 +49,7 @@ export const lunchesDinners: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Hranolek mrkve i pastináku dlouhý jako prst dospělého, aby kus vyčníval z pěsti. Kuřecí vlákna podej delší a měkká, ať je miminko udrží celou dlaní.',
-      '9m': 'Zeleninu nakrájej na kostičky velikosti hrášku a maso natrhej na krátká vlákna — v tomhle věku už dítě sbírá sousta špetkou mezi palcem a ukazovákem.',
+      '9m': 'Zeleninu nakrájej na kostičky velikosti hrášku a maso natrhej na krátká vlákna. V tomhle věku už dítě sbírá sousta špetkou mezi palcem a ukazovákem.',
       '12m': 'Podávej stejnou porci jako dospělí, jen nedochucenou: kostky zeleniny a kousky masa velikosti nehtu na malíčku, k tomu lžičku, se kterou už si nabírá samo.',
     },
     adultSteps: [
@@ -90,7 +90,7 @@ export const lunchesDinners: Recipe[] = [
       'Rajčata spař, oloupej, nakrájej na kostky a přidej je do hrnce i se šťávou, která se uvolnila na prkénku.',
       'Základ duš pod pokličkou 20 minut a občas zamíchej, dokud se rajčata nerozpadnou na hustou omáčku.',
       'Těstoviny uvař v nesolené vodě o minutu kratší dobu, než uvádí obal, a schovej hrnek vody z vaření.',
-      'Omáčku rozděl do dvou hrnců — od tohoto místa jde každá linie vlastní cestou.',
+      'Omáčku rozděl do dvou hrnců. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce husté rajčatové omáčky do misky, dřív než do hrnců přijde maso nebo čočka a dřív než se základ dochucuje pro dospělé.',
@@ -100,7 +100,7 @@ export const lunchesDinners: Recipe[] = [
       'Lístek bazalky natrhej na drobno přímo do misky, aby dítě poznalo vůni z hrnce dospělých.',
     ],
     babyServing: {
-      '6m': 'Podávej dlouhé těstoviny přelité omáčkou — nejlépe jednu široké nudle přes celou dlaň, kterou dítě uchopí a saje z ní omáčku.',
+      '6m': 'Podávej dlouhé těstoviny přelité omáčkou. Nejlépe jednu široké nudle přes celou dlaň, kterou dítě uchopí a saje z ní omáčku.',
       '9m': 'Těstoviny nakrájej nůžkami na dvoucentimetrové kousky a omáčku nech hustší, aby zůstala na nich a ne na stole.',
       '12m': 'Nabídni porci v misce s lžící a nech dítě nabírat samostatně; kousky těstovin už můžou být velikosti běžné vidličkové sousto.',
     },
@@ -113,7 +113,7 @@ export const lunchesDinners: Recipe[] = [
       'Osol, povař pět minut, aby čočka nasála chuť rajčat, a spoj s těstovinami i s trochou vody z jejich vaření.',
     ],
     vegetarianProteinSwap:
-      'Mleté hovězí nahrazuje 120 g hnědé čočky uvařené doměkka — v omáčce drží tvar podobně jako maso a dodá porci bílkovinu i železo.',
+      'Mleté hovězí nahrazuje 120 g hnědé čočky uvařené doměkka. V omáčce drží tvar podobně jako maso a dodá porci bílkovinu i železo.',
     allergens: ['psenice-lepek'],
     tags: ['rodinné', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
@@ -140,7 +140,7 @@ export const lunchesDinners: Recipe[] = [
       'Brambory oloupej, nakrájej na stejné kusy a uvař v nesolené vodě doměkka, asi 20 minut.',
       'Slij vodu, brambory nech odpařit a rozšťouchej je s máslem a vlažným mlékem na hladkou kaši.',
       'Petrželku nasekej najemno a polovinu vmíchej do kaše, druhou si nech do karbanátků.',
-      'Vejce rozšlehej a smíchej s jemnými ovesnými vločkami — pojivo poslouží masité i bezmasé linii.',
+      'Vejce rozšlehej a smíchej s jemnými ovesnými vločkami: pojivo poslouží masité i bezmasé linii.',
       'Kaši i pojivo rozděl podle linií a dokonči každou zvlášť.',
     ],
     babySplitPoint:
@@ -148,11 +148,11 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Odebranou kaši zřeď lžící teplé vody nebo mléka, aby byla vláčná a nelepila se na patro.',
       'Z jedné lžíce kaše, lžičky vloček a kousku rozšlehaného vejce utvoř malou placičku a opeč ji na sucho na pánvi z obou stran do pevna.',
-      'Placičku nech vychladnout a rozlom — musí být propečená až do středu.',
+      'Placičku nech vychladnout a rozlom: musí být propečená až do středu.',
     ],
     babyServing: {
       '6m': 'Placičku podej jako podlouhlý váleček, který dítě sevře v pěsti; kaši nabídni na lžičce předané do ruky, ať si ji samo strká do pusy.',
-      '9m': 'Placičku rozlom na kousky velikosti hrášku a kaši nech hustší — v tomhle věku už dítě zvládne nabírat prsty i lžící.',
+      '9m': 'Placičku rozlom na kousky velikosti hrášku a kaši nech hustší. V tomhle věku už dítě zvládne nabírat prsty i lžící.',
       '12m': 'Podávej celou placičku na talíři vedle kaše a nech dítě, ať si ji samo láme; kousky zvládne ukousnout předními zuby.',
     },
     adultSteps: [
@@ -164,7 +164,7 @@ export const lunchesDinners: Recipe[] = [
       'Vytvaruj placičky, opeč je na pánvi dozlatova po pěti minutách z každé strany a podávej s kaší.',
     ],
     vegetarianProteinSwap:
-      'Krůtí maso nahrazuje 200 g uvařených bílých fazolí rozšťouchaných nahrubo — drží placičku pohromadě a dodá jí bílkovinu.',
+      'Krůtí maso nahrazuje 200 g uvařených bílých fazolí rozšťouchaných nahrubo: drží placičku pohromadě a dodá jí bílkovinu.',
     allergens: ['mleko', 'vejce', 'psenice-lepek'],
     tags: ['do ruky', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_ALLERGY],
@@ -190,7 +190,7 @@ export const lunchesDinners: Recipe[] = [
       'Dýni oloupej, zbav semen a nakrájej na měsíčky silné jako palec. Rozlož je na plech vyložený papírem na pečení.',
       'Měsíčky pokapej olivovým olejem a peč při 200 °C asi 25 minut, dokud okraje nezhnědnou a střed nezměkne.',
       'Bulgur zalij dvojnásobným objemem vroucí vody, přiklop a nech patnáct minut nabobtnat, pak ho načechrej vidličkou.',
-      'Kopr nasekej najemno a citron rozkroj — polovina přijde na rybu, druhá do bezmasé linie.',
+      'Kopr nasekej najemno a citron rozkroj. Polovina přijde na rybu, druhá do bezmasé linie.',
       'Plech i hrnec s bulgurem rozděl podle linií a každou dokonči zvlášť.',
     ],
     babySplitPoint:
@@ -198,7 +198,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Dýni pro miminko rozmačkej vidličkou nahrubo a smíchej s bulgurem, aby zrnka držela pohromadě a nerozsypala se.',
       'Lososa pro dítě upeč bez soli zvlášť v alobalovém balíčku deset minut a rozeber ho prsty na vlákna. Projeď každé sousto mezi prsty, jestli v něm nezůstala kostička.',
-      'Před podáním zkontroluj teplotu na vnitřní straně zápěstí — dýně drží teplo déle než bulgur.',
+      'Před podáním zkontroluj teplotu na vnitřní straně zápěstí: dýně drží teplo déle než bulgur.',
     ],
     babyServing: {
       '6m': 'Měsíček dýně podávej vcelku jako držadlo a rybu v podobě větších vloček položených na okraj misky, ať se dají sevřít v dlani.',
@@ -214,7 +214,7 @@ export const lunchesDinners: Recipe[] = [
       'Kostky tofu promíchej s bulgurem, pokapej citronem, posyp koprem a rozlož na ně pečenou dýni.',
     ],
     vegetarianProteinSwap:
-      'Místo lososa se opéká 250 g tofu natural nakrájeného na kostky — dodá bílkovinu a po opečení drží tvar stejně jako plátek ryby.',
+      'Místo lososa se opéká 250 g tofu natural nakrájeného na kostky. Dodá bílkovinu a po opečení drží tvar stejně jako plátek ryby.',
     allergens: ['ryby', 'psenice-lepek', 'soja'],
     tags: ['ryba', 'rychlé'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -245,14 +245,14 @@ export const lunchesDinners: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce hráškového pyré a dvě uvařené brambory, ještě než se pyré dochutí pro dospělé.',
     babySteps: [
-      'Brambory pro miminko oloupej — slupka je pro malé prsty kluzká a hůř se překousne.',
+      'Brambory pro miminko oloupej. Slupka je pro malé prsty kluzká a hůř se překousne.',
       'Pyré zřeď lžící vody z vaření, aby se dalo nabrat na lžíci a nezůstávalo v hrudkách.',
       'Tresku pro dítě uvař zvlášť v páře šest minut, rozeber ji na vločky a každou prohmatej mezi prsty kvůli kostičkám.',
     ],
     babyServing: {
-      '6m': 'Podej půlku měkké brambory vcelku, aby ji dítě sevřelo v pěsti, a pyré nabídni jako silnou vrstvu rozetřenou na okraji misky. Rybí vločky vmíchej do pyré — samotná vločka je pro sevřenou pěst příliš drobná a v dlani se ztratí.',
+      '6m': 'Podej půlku měkké brambory vcelku, aby ji dítě sevřelo v pěsti, a pyré nabídni jako silnou vrstvu rozetřenou na okraji misky. Rybí vločky vmíchej do pyré. Samotná vločka je pro sevřenou pěst příliš drobná a v dlani se ztratí.',
       '9m': 'Brambory nakrájej na kostky do dvou centimetrů a rybí vločky promíchej přímo s pyré, aby držely na lžíci.',
-      '12m': 'Rozdělené hromádky brambor, pyré a ryby polož vedle sebe a přidej lžíci — dítě už si nabírá a míchá samo.',
+      '12m': 'Rozdělené hromádky brambor, pyré a ryby polož vedle sebe a přidej lžíci: dítě už si nabírá a míchá samo.',
     },
     adultSteps: [
       'Filety tresky osol, polož je na pánev s lžící rozpuštěného másla a smaž po třech minutách z každé strany doztracena.',
@@ -263,7 +263,7 @@ export const lunchesDinners: Recipe[] = [
       'Kaši ze žlutého hrachu podávej vedle zeleného pyré a brambor a posyp zbylými lístky máty.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 150 g žlutého půleného hrachu uvařeného doměkka — chuťově navazuje na hrášek a je to sytý zdroj rostlinné bílkoviny.',
+      'Tresku nahrazuje 150 g žlutého půleného hrachu uvařeného doměkka. Chuťově navazuje na hrášek a je to sytý zdroj rostlinné bílkoviny.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'rychlé'],
     sources: [NHS_FISH, NHS_FIRST_FOODS],
@@ -313,7 +313,7 @@ export const lunchesDinners: Recipe[] = [
       'Plátky tempehu pokapej pomerančovou šťávou, prohřej minutu na pánvi a podávej na jáhlách s pečeným fenyklem.',
     ],
     vegetarianProteinSwap:
-      'Vepřovou panenku nahrazuje 250 g tempehu opečeného na plátky — po zakápnutí pomerančem chutná stejně slavnostně a dodá plnou bílkovinu.',
+      'Vepřovou panenku nahrazuje 250 g tempehu opečeného na plátky. Po zakápnutí pomerančem chutná stejně slavnostně a dodá plnou bílkovinu.',
     allergens: ['soja'],
     tags: ['bez lepku', 'nedělní oběd'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
@@ -351,8 +351,8 @@ export const lunchesDinners: Recipe[] = [
       'Králičí maso pro miminko odeber z hřbetu, duš ho zvlášť dvacet minut v troše vody a pečlivě prohmatej, aby v porci nezůstala žádná kost.',
     ],
     babyServing: {
-      '6m': 'Podej proužek měkké petržele delší než dětská dlaň a kroupy promíchané se zeleninou do husté kaše, kterou nabereš na lžíci. Králičí maso podej jako jedno dlouhé vlákno do pěsti, nebo ho nadrob do kaše — krátký kousek se v dlani ztratí.',
-      '9m': 'Zeleninu nakrájej na kostičky, maso natrhej na krátká vlákna a kroupy nech volnější — dítě si je sbírá po zrnkách.',
+      '6m': 'Podej proužek měkké petržele delší než dětská dlaň a kroupy promíchané se zeleninou do husté kaše, kterou nabereš na lžíci. Králičí maso podej jako jedno dlouhé vlákno do pěsti, nebo ho nadrob do kaše: krátký kousek se v dlani ztratí.',
+      '9m': 'Zeleninu nakrájej na kostičky, maso natrhej na krátká vlákna a kroupy nech volnější: dítě si je sbírá po zrnkách.',
       '12m': 'Servíruj porci jako zmenšenou verzi talíře dospělých: hromádka krup, dušená zelenina a nadrobno nakrájené maso vedle sebe.',
     },
     adultSteps: [
@@ -413,10 +413,10 @@ export const lunchesDinners: Recipe[] = [
     ],
     vegetarianSteps: [
       'Červené fazole vmíchej do druhé poloviny základu, osol a povař deset minut, aby nasákly paprikovou chuť.',
-      'Před podáváním omáčku rozmačkej z části vařečkou o stěnu kastrolu — zhoustne a lépe drží na rýži.',
+      'Před podáváním omáčku rozmačkej z části vařečkou o stěnu kastrolu: zhoustne a lépe drží na rýži.',
     ],
     vegetarianProteinSwap:
-      'Telecí maso nahrazuje 250 g uvařených fazolí kidney — v paprikovém základu zhoustnou a dodají porci bílkovinu i vlákninu.',
+      'Telecí maso nahrazuje 250 g uvařených fazolí kidney. V paprikovém základu zhoustnou a dodají porci bílkovinu i vlákninu.',
     allergens: [],
     tags: ['bez lepku', 'jednohrnec'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
@@ -453,7 +453,7 @@ export const lunchesDinners: Recipe[] = [
       'Kachní maso pro dítě odeber bez kůže, duš ho zvlášť v troše vody dvacet minut a nakrájej napříč vlákny na jemné proužky.',
     ],
     babyServing: {
-      '6m': 'Nabídni pruh měkké dýně bez slupky velikosti prstu a pohanku s jablkem jako hustou kaši rozetřenou po misce. Kachní maso podej v jednom širším proužku přes celou dlaň — kachní vlákna jsou pevná a krátký kousek se ocucává těžko.',
+      '6m': 'Nabídni pruh měkké dýně bez slupky velikosti prstu a pohanku s jablkem jako hustou kaši rozetřenou po misce. Kachní maso podej v jednom širším proužku přes celou dlaň. Kachní vlákna jsou pevná a krátký kousek se ocucává těžko.',
       '9m': 'Dýni nakrájej na kostičky, maso na krátké proužky a pohanku nech volnější, aby ji dítě sbíralo po hrstech.',
       '12m': 'Talíř postav jako pro dospělé: měsíček dýně, lžíce pohanky a plátky masa vedle sebe, jen bez dochucení.',
     },
@@ -466,7 +466,7 @@ export const lunchesDinners: Recipe[] = [
       'Podávej je navršené na pohance s pečenou dýní a pár kousky jablka navrch.',
     ],
     vegetarianProteinSwap:
-      'Kachní prsa nahrazují fazole adzuki prohřáté s pečeným jablkem — mají jemně sladkou chuť, která k dýni sedne, a dodají bílkovinu.',
+      'Kachní prsa nahrazují fazole adzuki prohřáté s pečeným jablkem. Mají jemně sladkou chuť, která k dýni sedne, a dodají bílkovinu.',
     allergens: [],
     tags: ['bez lepku', 'podzimní'],
     sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
@@ -517,7 +517,7 @@ export const lunchesDinners: Recipe[] = [
       'Opečenou cizrnu smíchej s cuketou a rajčaty, podávej na kuskusu a přelij jogurtem rozmíchaným do hladka.',
     ],
     vegetarianProteinSwap:
-      'Jehněčí maso nahrazuje 250 g cizrny opečené s kmínem — má podobně výraznou chuť a v porci zastane bílkovinu i sytost.',
+      'Jehněčí maso nahrazuje 250 g cizrny opečené s kmínem. Má podobně výraznou chuť a v porci zastane bílkovinu i sytost.',
     allergens: ['psenice-lepek', 'mleko'],
     tags: ['rychlé', 'rodinné'],
     sources: [NHS_FIRST_FOODS, NHS_ALLERGY],
@@ -545,7 +545,7 @@ export const lunchesDinners: Recipe[] = [
       'Brambory oloupej, nakrájej na kostky velikosti kostky cukroví a uvař je v nesolené vodě patnáct minut doměkka.',
       'V rendlíku rozpusť máslo, zaprašuj kukuřičným škrobem a za stálého míchání zalij smetanou, aby vznikla hladká omáčka.',
       'Omáčku vař tři minuty do zhoustnutí a vmíchej do ní nasekaný kopr; vypni plotnu, ať kopr neztratí barvu.',
-      'Rozděl omáčku do dvou rendlíků a brambory do tří porcí — každá linie se dokončuje zvlášť.',
+      'Rozděl omáčku do dvou rendlíků a brambory do tří porcí: každá linie se dokončuje zvlášť.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce koprové omáčky a hrst brambor do misky, dřív než se do rendlíků přidá sůl a citron pro dospělé.',
@@ -568,7 +568,7 @@ export const lunchesDinners: Recipe[] = [
       'Do omáčky rozšlehej tvaroh, prohřej ji bez varu, osol a podávej s bramborem.',
     ],
     vegetarianProteinSwap:
-      'Candáta nahrazuje 200 g polotučného tvarohu rozšlehaného do koprové omáčky spolu s dušeným květákem — omáčka zhoustne a porce má plnohodnotnou bílkovinu.',
+      'Candáta nahrazuje 200 g polotučného tvarohu rozšlehaného do koprové omáčky spolu s dušeným květákem. Omáčka zhoustne a porce má plnohodnotnou bílkovinu.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'česká klasika'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -593,7 +593,7 @@ export const lunchesDinners: Recipe[] = [
     baseSteps: [
       'Quinou propláchni v sítku pod tekoucí vodou, zalij dvojnásobkem vody a vař dvanáct minut, dokud se neobjeví bílé klíčky.',
       'Cuketu nakrájej na tenké plátky a rozlož je na dva archy alobalu jako podložku, aby se nic nepřipeklo.',
-      'Petrželku nasekej najemno, smíchej s měkkým máslem a odlož stranou — bude se mazat do balíčků.',
+      'Petrželku nasekej najemno, smíchej s měkkým máslem a odlož stranou: bude se mazat do balíčků.',
       'Troubu předehřej na 200 °C a připrav si plech, na který se balíčky poskládají.',
       'Quinou načechrej vidličkou a rozděl na tři porce podle linií.',
     ],
@@ -605,7 +605,7 @@ export const lunchesDinners: Recipe[] = [
       'Kus pstruha bez kůže zabal do vlastního alobalu bez dochucení, upeč patnáct minut a pak vlákna pečlivě prohmatej kvůli kostem.',
     ],
     babyServing: {
-      '6m': 'Podávej pruh dušené cukety přes celou dlaň a quinou slepenou do hrudky na okraji misky, aby šla sebrat hrstí. Pstruží vločky vmačkej do té hrudky — samy o sobě jsou pro sevřenou pěst příliš drobné.',
+      '6m': 'Podávej pruh dušené cukety přes celou dlaň a quinou slepenou do hrudky na okraji misky, aby šla sebrat hrstí. Pstruží vločky vmačkej do té hrudky. Samy o sobě jsou pro sevřenou pěst příliš drobné.',
       '9m': 'Cuketu nakrájej na kostičky, rybí vločky promíchej s quinoou a nabídni je v mělké misce k sebrání špetkou.',
       '12m': 'Nech balíček rozbalit u stolu a servíruj obsah na talíř: dítě už si kousky ryby, cukety i quinoy přebírá samo.',
     },
@@ -668,7 +668,7 @@ export const lunchesDinners: Recipe[] = [
       'Peč dvacet minut, dokud zrna nepopraskají, a podávej na kuskusu s okurkovým dipem.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí prsa nahrazuje 250 g cizrny zapečené ve stejné jogurtové marinádě — nasákne koření a dodá porci bílkovinu.',
+      'Kuřecí prsa nahrazuje 250 g cizrny zapečené ve stejné jogurtové marinádě: nasákne koření a dodá porci bílkovinu.',
     allergens: ['mleko', 'psenice-lepek'],
     tags: ['rychlé', 'do ruky'],
     sources: [NHS_FIRST_FOODS, NHS_ALLERGY],
@@ -701,7 +701,7 @@ export const lunchesDinners: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce dušeného pórku s mrkví, dřív než se do kastrolu vloží maso a dřív než se základ dochucuje pro dospělé.',
     babySteps: [
-      'Odebraný základ rozmačkej vidličkou — vnější vlákna pórku jsou tuhá a je lepší je rozdrtit nebo odstranit.',
+      'Odebraný základ rozmačkej vidličkou. Vnější vlákna pórku jsou tuhá a je lepší je rozdrtit nebo odstranit.',
       'Vmíchej lžíci uvařené rýže natural a lžíci vody z dušení, aby porce byla vláčná.',
       'Hovězí zadní pro miminko duš v malém hrnci hodinu doměkka a rozeber ho na vlákna napříč svalem.',
     ],
@@ -719,7 +719,7 @@ export const lunchesDinners: Recipe[] = [
       'Prohřívej deset minut, ať fazolky nasáknou chuť tymiánu, a podávej na rýži natural.',
     ],
     vegetarianProteinSwap:
-      'Hovězí zadní nahrazuje 200 g uvařených fazolek mungo — rychle nasáknou chuť dušeného pórku a dodají porci bílkovinu i železo.',
+      'Hovězí zadní nahrazuje 200 g uvařených fazolek mungo. Rychle nasáknou chuť dušeného pórku a dodají porci bílkovinu i železo.',
     allergens: [],
     tags: ['bez lepku', 'jednohrnec', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
@@ -758,7 +758,7 @@ export const lunchesDinners: Recipe[] = [
     babyServing: {
       '6m': 'Podávej pruh pečené řepy velikosti prstu a bramborovou kaši v silné vrstvě, do které se dá zabořit celá dlaň. Makrelu rozlož ve větších vločkách po kaši, aby je dítě setřelo dlaní spolu s ní.',
       '9m': 'Řepu i brambor nakrájej na kostičky a rybí vločky rozlož vedle nich, ať si dítě bere sousta špetkou.',
-      '12m': 'Servíruj řepný salát s bramborem promíchaný a rybu navrch — dítě už zvládne nabrat obojí najednou na vidličku.',
+      '12m': 'Servíruj řepný salát s bramborem promíchaný a rybu navrch. Dítě už zvládne nabrat obojí najednou na vidličku.',
     },
     adultSteps: [
       'Filety makrely osol, polož je kůží dolů na rozpálenou pánev a peč čtyři minuty, pak je jen obrať a dopeč minutu.',
@@ -802,7 +802,7 @@ export const lunchesDinners: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce rýže s hráškem stranou, ještě před tím, než se pánev pro dospělé dochutí a zakápne limetkou.',
     babySteps: [
-      'Hrášek pro miminko rozmačkej vidličkou — celá zrnka mají pevnou slupku a pro malé děti se hůř koušou.',
+      'Hrášek pro miminko rozmačkej vidličkou. Celá zrnka mají pevnou slupku a pro malé děti se hůř koušou.',
       'Rýži promíchej s rozmačkaným hráškem a lžičkou vody, aby se zrnka slepila a dala se nabrat.',
       'Krevety pro dítě uvař zvlášť dvě minuty ve vroucí vodě, zkontroluj, že jsou celé neprůhledné, a nakrájej je podélně na jemné proužky.',
     ],
@@ -820,7 +820,7 @@ export const lunchesDinners: Recipe[] = [
       'Zrna osol, vmíchej do rýže s hráškem, zakápni limetkou a prohřej minutu na pánvi.',
     ],
     vegetarianProteinSwap:
-      'Krevety nahrazuje 250 g edamame — zelená sójová zrna dodají porci stejnou porci bílkoviny a příjemně pevné sousto.',
+      'Krevety nahrazuje 250 g edamame. Zelená sójová zrna dodají porci stejnou porci bílkoviny a příjemně pevné sousto.',
     allergens: ['korysi', 'soja'],
     tags: ['bez lepku', 'rychlé'],
     sources: [NHS_FISH, NHS_ALLERGY],
@@ -854,7 +854,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Brambory rozmačkej s lžičkou másla a vmíchej dušená jablka, aby porce byla sladší a vláčná.',
       'Kuřecí játra pro miminko opláchni, zbav blan, duš je zvlášť deset minut a rozmačkej vidličkou na hladkou hmotu.',
-      'Jater nabídni dítěti jen lžičku a nezařazuj je častěji než jednou týdně — mají vysoký obsah vitaminu A, který se v těle ukládá.',
+      'Jater nabídni dítěti jen lžičku a nezařazuj je častěji než jednou týdně. Mají vysoký obsah vitaminu A, který se v těle ukládá.',
     ],
     babyServing: {
       '6m': 'Nabídni bramborovou kaši s jablkem v silné vrstvě a jaterní hmotu rozetři po lžíci, kterou dítěti podáš do ruky.',
@@ -870,7 +870,7 @@ export const lunchesDinners: Recipe[] = [
       'Přidej bílé fazole, osol a promíchej s druhou porcí dušených jablek s cibulí; podávej s bramborem.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí játra nahrazuje 200 g bílých fazolí opečených se žampiony — houby dodají hloubku chuti a fazole bílkovinu.',
+      'Kuřecí játra nahrazuje 200 g bílých fazolí opečených se žampiony. Houby dodají hloubku chuti a fazole bílkovinu.',
     allergens: ['mleko'],
     tags: ['bez lepku'],
     sources: [NHS_VITAMIN_A, NHS_FIRST_FOODS],
@@ -919,7 +919,7 @@ export const lunchesDinners: Recipe[] = [
       'Navrch navrstvi dušený mangold, zakápni citronem a posyp plátky opečeného česneku.',
     ],
     vegetarianProteinSwap:
-      'Krůtí prsa nahrazuje 250 g ricotty vmíchané do polenty — dodá porci mléčnou bílkovinu a udělá z polenty krémové hlavní jídlo.',
+      'Krůtí prsa nahrazuje 250 g ricotty vmíchané do polenty. Dodá porci mléčnou bílkovinu a udělá z polenty krémové hlavní jídlo.',
     allergens: ['mleko'],
     tags: ['bez lepku', 'rychlé'],
     sources: [NHS_FIRST_FOODS, NHS_7_9M],
@@ -947,14 +947,14 @@ export const lunchesDinners: Recipe[] = [
       'Brambory oloupej, nakrájej na kostky a uvař je zvlášť v nesolené vodě doměkka.',
       'Cibuli nakrájej najemno a osmahni ji na řepkovém oleji dozlatova, pak vmíchej majoránku.',
       'Osmaženou cibuli vmíchej do uvařené čočky a přidej k ní uvařené brambory.',
-      'Hrnec rozděl na tři porce — od tohoto místa se každá linie dochucuje zvlášť.',
+      'Hrnec rozděl na tři porce. Od tohoto místa se každá linie dochucuje zvlášť.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce čočky s bramborem, dřív než se do hrnce přidá ocet a dřív než se pokrm dochucuje pro dospělé.',
     babySteps: [
       'Odebranou čočku s bramborem rozmačkej vidličkou na hrubou kaši, aby slupky z čočky nezůstaly celé.',
       'Zřeď ji lžící vody z vaření čočky, aby se dala snadno nabrat a nelepila se na patro.',
-      'Vejce pro miminko uvař natvrdo devět minut — žloutek i bílek musí být úplně pevné — a nakrájej ho na měsíčky.',
+      'Vejce pro miminko uvař natvrdo devět minut. Žloutek i bílek musí být úplně pevné, a nakrájej ho na měsíčky.',
     ],
     babyServing: {
       '6m': 'Nabídni čočkovou kaši rozetřenou v misce a měsíček natvrdo uvařeného vejce, který dítě sevře v dlani.',
@@ -999,7 +999,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Cizrnu v odebrané porci rozmačkej vidličkou, aby zůstaly jen měkké kousky bez pevných slupek.',
       'Přimíchej lžíci uvařené rýže a nech porci vychladnout na teplotu ruky; kokosové mléko drží teplo dlouho.',
-      'Pokud je curry řídké, nech ho chvíli odstát — batát ho po vychladnutí sám zahustí.',
+      'Pokud je curry řídké, nech ho chvíli odstát: batát ho po vychladnutí sám zahustí.',
     ],
     babyServing: {
       '6m': 'Podávej hustou kaši z batátu a cizrny rozetřenou po misce a k ní kostku batátu velikosti prstu jako držadlo.',
@@ -1043,7 +1043,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Porci pro miminko zalij dvěma lžícemi zálivky bez dochucení a posyp lžící nastrouhaného eidamu.',
       'Zapékej dvacet minut při 190 °C, dokud se vejce nesrazí a povrch nezezlátne.',
-      'Před podáváním misku rozhrň lžící a nech vychladnout — zapečené brambory drží teplo ve středu déle, než se zdá.',
+      'Před podáváním misku rozhrň lžící a nech vychladnout. Zapečené brambory drží teplo ve středu déle, než se zdá.',
     ],
     babyServing: {
       '6m': 'Podej růžičku brokolice se stonkem jako držadlo a plátek zapečené brambory, který dítě uchopí celou dlaní.',
@@ -1052,7 +1052,7 @@ export const lunchesDinners: Recipe[] = [
     },
     adultSteps: [
       'Zbytek mísy zalij zálivkou, osol, posyp sýrem a zapékej 25 minut do zlatova.',
-      'Kdo jí maso, přidá si k porci plátek pečeného masa ze zásoby — zapékaná mísa samotná zůstává bezmasá.',
+      'Kdo jí maso, přidá si k porci plátek pečeného masa ze zásoby: zapékaná mísa samotná zůstává bezmasá.',
     ],
     allergens: ['mleko', 'vejce'],
     tags: ['vegetariánské', 'zapékané', 'rodinné'],
@@ -1079,19 +1079,19 @@ export const lunchesDinners: Recipe[] = [
       'Dýni oloupej a nakrájej na kostičky o hraně centimetr, aby se během vaření rozpadly do rýže.',
       'Cibuli nakrájej najemno a nech ji na půlce másla zesklovatět, pak přisyp rýži a minutu ji opékej, dokud nezprůhlední po okrajích.',
       'Přidej dýni a postupně po naběračkách přilévej horkou vodu; po každé dávce míchej, dokud se nevsákne.',
-      'Po dvaceti minutách je rýže na skus a dýně rozvařená do krému — v tu chvíli stáhni hrnec z plotny.',
+      'Po dvaceti minutách je rýže na skus a dýně rozvařená do krému: v tu chvíli stáhni hrnec z plotny.',
       'Rizoto rozděl na tři porce a každou dokonči podle linie.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce rizota do misky, ještě před tím, než se do hrnce zašlehá zbytek másla a než se rizoto dochutí pro dospělé.',
     babySteps: [
       'Do odebraného rizota vmíchej lžičku másla a lžíci horké vody, aby bylo krémové a nelepilo se v hrudkách.',
-      'Šalvějový lístek rozetři mezi prsty nad miskou — vůně stačí, celý list je pro miminko příliš tuhý.',
+      'Šalvějový lístek rozetři mezi prsty nad miskou. Vůně stačí, celý list je pro miminko příliš tuhý.',
       'Nech porci vychladnout a promíchej ji; rizoto zůstává horké uvnitř mnohem déle než navrchu.',
     ],
     babyServing: {
       '6m': 'Rizoto slep lžící do hrudky velikosti vlašské švestky, kterou dítě sevře v dlani a samo si ji dopraví do pusy.',
-      '9m': 'Podávej rizoto volně v mělké misce — zrnka rýže jsou ideální trénink na sbírání špetkou mezi palcem a ukazovákem.',
+      '9m': 'Podávej rizoto volně v mělké misce. Zrnka rýže jsou ideální trénink na sbírání špetkou mezi palcem a ukazovákem.',
       '12m': 'Nabídni porci se lžící a nech dítě nabírat samostatně; kousky dýně už nemusíš mačkat, zvládne je rozžvýkat.',
     },
     adultSteps: [
@@ -1130,7 +1130,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Vlákna dýně nakrájej nožem napříč, aby nebyla delší než dětský prst a nemotala se dítěti kolem jazyka.',
       'Promíchej je s rajčatovou omáčkou a lžičkou olivového oleje.',
-      'Mozzarellu pro miminko nakrájej na tenké proužky, nikdy ne na kuličky — kulatý tvar se v dětském hrdle zaklíní nejsnáz.',
+      'Mozzarellu pro miminko nakrájej na tenké proužky, nikdy ne na kuličky. Kulatý tvar se v dětském hrdle zaklíní nejsnáz.',
     ],
     babyServing: {
       '6m': 'Podávej krátká vlákna dýně s omáčkou v mělké misce a proužek mozzarelly dlouhý jako prst položený na okraj.',
@@ -1172,7 +1172,7 @@ export const lunchesDinners: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce zeleniny a tři kostky tofu, dřív než se pánev pro dospělé dochucuje.',
     babySteps: [
-      'Fazolky pro miminko podus ještě pět minut navíc pod pokličkou — restované jsou pro dítě moc pevné.',
+      'Fazolky pro miminko podus ještě pět minut navíc pod pokličkou: restované jsou pro dítě moc pevné.',
       'Tofu rozmačkej vidličkou nebo nakrájej na hranolky podle toho, co dítě zvládá; kostky jsou kluzké a špatně se drží.',
       'Přimíchej lžíci rýže a trochu vody z vaření zeleniny, aby porce držela na lžíci.',
     ],
@@ -1219,7 +1219,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Z odebraného těsta tvaruj podlouhlé placičky, které se lépe drží v dětské pěsti než kulaté.',
       'Opékej je na pánvi vytřené olejem po čtyřech minutách z každé strany a rozlom jednu, ať víš, že je propečená.',
-      'Do misky s kefírem pro miminko nepřidávej nic dalšího — samotný kefír je dostatečně chutný dip.',
+      'Do misky s kefírem pro miminko nepřidávej nic dalšího: samotný kefír je dostatečně chutný dip.',
       'Papriku z placiček nevynechávej: vitamin C z ní pomáhá tělu vstřebat železo z čočky, které se samo o sobě vstřebává hůř než železo z masa.',
     ],
     babyServing: {
@@ -1262,7 +1262,7 @@ export const lunchesDinners: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber lžíci hub s kapustou a dvě lžíce pohanky, dřív než se pánev pro dospělé dochucuje.',
     babySteps: [
-      'Houby pro miminko nakrájej na drobno — plátky jsou pružné a v ústech se chovají jako gumové.',
+      'Houby pro miminko nakrájej na drobno. Plátky jsou pružné a v ústech se chovají jako gumové.',
       'Kapustu nasekej najemno a přimíchej ji do pohanky, aby lístky nezůstaly celé.',
       'Vmíchej lžíci žervé, které porci spojí a zjemní zemitou chuť hub.',
     ],
@@ -1308,7 +1308,7 @@ export const lunchesDinners: Recipe[] = [
     babySteps: [
       'Fazole adzuki v odebrané náplni rozmačkej vidličkou, aby zůstala jen měkká dužina bez slupek.',
       'Rozmíchej náplň s rajčatovou omáčkou a zapékej ji v malé misce dvacet minut vedle papriky.',
-      'Kousek papriky pro miminko oloupej škrabkou — slupka se při pečení odděluje a pro malé děti je obtížná.',
+      'Kousek papriky pro miminko oloupej škrabkou. Slupka se při pečení odděluje a pro malé děti je obtížná.',
     ],
     babyServing: {
       '6m': 'Podávej pruh oloupané pečené papriky přes celou dlaň a náplň rozetřenou v misce do silné vrstvy.',
@@ -1443,7 +1443,7 @@ export const lunchesDinners: Recipe[] = [
       'Po kroku 3 odeber tři hranolky pečené zeleniny a dvě lžíce quinoy, dřív než se porce pro dospělé dochucuje.',
     babySteps: [
       'Hranolky pro miminko zkontroluj palcem: musí jít rozmáčknout, jinak je vrať do trouby ještě na pět minut.',
-      'Quinou promíchej se lžící tvarohu bez dochucení, aby zrnka držela pohromadě, a přidej proužek pečené papriky — vitamin C z ní pomáhá vstřebat železo z quinoy.',
+      'Quinou promíchej se lžící tvarohu bez dochucení, aby zrnka držela pohromadě, a přidej proužek pečené papriky. Vitamin C z ní pomáhá vstřebat železo z quinoy.',
       'Tuřín nabídni opatrně jako novou chuť; je nasládlý, ale výraznější než mrkev a děti ho někdy odmítnou napoprvé.',
     ],
     babyServing: {

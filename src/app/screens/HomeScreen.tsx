@@ -2,10 +2,8 @@ import {
   AlertTriangle,
   BookOpen,
   CalendarCheck,
-  Carrot,
   ChevronRight,
   LifeBuoy,
-  NotebookPen,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -20,33 +18,6 @@ import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from "../lib/age";
 import { GRIP_LABELS, GRIP_SHORT, gripForAge } from "../lib/grip";
 import { tastedIds } from "../lib/tastings";
 import { useAktivniDite } from "../lib/dite";
-
-const TILES = [
-  {
-    to: "/suroviny",
-    label: "Suroviny",
-    desc: "Katalog pro tři fáze",
-    Icon: Carrot,
-  },
-  {
-    to: "/recepty",
-    label: "Recepty",
-    desc: "Vaření pro celou rodinu",
-    Icon: BookOpen,
-  },
-  {
-    to: "/rady",
-    label: "Rady",
-    desc: "Bezpečnost, železo, praxe",
-    Icon: LifeBuoy,
-  },
-  {
-    to: "/denik",
-    label: "Deník",
-    desc: "Co už dítě ochutnalo",
-    Icon: NotebookPen,
-  },
-] as const;
 
 /**
  * Úvodní obrazovka a hlavní rozcestník.
@@ -112,7 +83,7 @@ export function HomeScreen(): ReactNode {
                   to="/domacnost"
                   className="flex min-h-touch items-center gap-1 rounded-full bg-white/20 px-3 text-xs font-semibold"
                 >
-                  úchop {GRIP_LABELS[gripForAge(months)]} — odhad podle věku,
+                  úchop {GRIP_LABELS[gripForAge(months)]} (odhad podle věku),
                   upřesnit
                   <ChevronRight
                     aria-hidden="true"
@@ -121,7 +92,7 @@ export function HomeScreen(): ReactNode {
                 </Link>
               ) : (
                 <span className="flex items-center rounded-full bg-white/20 px-2.5 py-1 text-xs font-semibold">
-                  úchop {GRIP_LABELS[grip]} — {GRIP_SHORT[grip]}
+                  úchop {GRIP_LABELS[grip]}, {GRIP_SHORT[grip]}
                 </span>
               )}
             </li>
@@ -259,25 +230,6 @@ export function HomeScreen(): ReactNode {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section
-        aria-label="Kam dál"
-        className="grid grid-cols-4 gap-2"
-        data-testid="hlavni-menu"
-      >
-        {TILES.map(({ to, label, Icon }) => (
-          <Link
-            key={to}
-            to={to}
-            className="flex min-h-touch flex-col items-center justify-center gap-1 rounded-xl border border-line bg-surface px-1 py-2 shadow-soft transition hover:border-accent/40"
-          >
-            <Icon aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
-            <span className="text-[11px] font-semibold leading-none">
-              {label}
-            </span>
-          </Link>
-        ))}
       </section>
 
       {/* Kolik už má dítě za sebou — jediné, co spodní navigace neukáže.

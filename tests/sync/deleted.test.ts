@@ -44,7 +44,7 @@ describe('smazaná ochutnávka', () => {
     expect(tastedIds(state, 'dite-1').has('brokolice')).toBe(true);
   });
 
-  it('sloučení ji z druhého zařízení nevzkřísí — smazání je novější zápis', () => {
+  it('sloučení ji z druhého zařízení nevzkřísí, smazání je novější zápis', () => {
     const merged = mergeTastings(
       [tasting({ createdAt: 3_000, deleted: true })],
       [tasting({ createdAt: 1_000 })],
@@ -54,7 +54,7 @@ describe('smazaná ochutnávka', () => {
     expect(activeTastings(stateWith(merged), 'dite-1')).toEqual([]);
   });
 
-  it('pozdější úprava smazání přebije — záznam se dá vrátit novějším zápisem', () => {
+  it('pozdější úprava smazání přebije, záznam se dá vrátit novějším zápisem', () => {
     const merged = mergeTastings(
       [tasting({ createdAt: 3_000, deleted: true })],
       [tasting({ createdAt: 4_000, note: 'omylem smazané, vráceno' })],

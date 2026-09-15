@@ -51,6 +51,11 @@ const ListDetailScreen = lazy(() =>
 const PlanScreen = lazy(() =>
   import('./screens/PlanScreen').then((m) => ({ default: m.PlanScreen })),
 );
+/* Přehled o používání. Není v navigaci ani nikde odkazovaný; kdo o adrese
+   neví, na ni nenarazí, a kdo ví, stejně bez hesla nic nedostane. */
+const AdminScreen = lazy(() =>
+  import('./screens/AdminScreen').then((m) => ({ default: m.AdminScreen })),
+);
 const NotFoundScreen = lazy(() =>
   import('./screens/NotFoundScreen').then((m) => ({ default: m.NotFoundScreen })),
 );
@@ -88,6 +93,7 @@ export function App(): ReactNode {
               <Route path="/seznamy" element={<ListsScreen />} />
               <Route path="/seznamy/:id" element={<ListDetailScreen />} />
               <Route path="/plan" element={<PlanScreen />} />
+              <Route path="/prehled" element={<AdminScreen />} />
               <Route path="/denik" element={<DiaryScreen />} />
               <Route path="/domacnost" element={<HouseholdScreen />} />
               <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />

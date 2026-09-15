@@ -5,7 +5,7 @@ import './index.css';
 
 const container = document.getElementById('root');
 if (container === null) {
-  throw new Error('Chybí #root — zkontroluj index.html.');
+  throw new Error('Chybí #root: zkontroluj index.html.');
 }
 
 ReactDOM.createRoot(container).render(

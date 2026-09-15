@@ -26,12 +26,12 @@ export function AllergyPicker({ dite }: { dite: Child }): ReactNode {
         className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
       >
         <ShieldAlert aria-hidden="true" className="h-4 w-4 text-accent" />
-        Alergie — {dite.name.trim().length > 0 ? dite.name : 'dítě'}
+        Alergie: {dite.name.trim().length > 0 ? dite.name : 'dítě'}
       </h2>
 
       <p className="text-sm leading-relaxed">
         Označ, na co dítě reaguje. Filtr „bez alergenu" v surovinách i v receptech se pak
-        předvyplní sám — a dá se v něm kdykoli odškrtnout.
+        předvyplní sám, a dá se v něm kdykoli odškrtnout.
       </p>
 
       <div
@@ -68,7 +68,7 @@ export function AllergyPicker({ dite }: { dite: Child }): ReactNode {
       {vybrane.length > 0 && (
         <p className="text-xs leading-relaxed text-muted" data-testid="alergie-shrnuti">
           Vylučuje se {vybrane.map((one) => ALLERGEN_LABELS[one]).join(', ')}. Recept, který
-          alergen obsahuje jen v dochucení pro dospělé, se vynechá taky — aplikace nerozlišuje,
+          alergen obsahuje jen v dochucení pro dospělé, se vynechá taky. Aplikace nerozlišuje,
           v které části jídla alergen je.
         </p>
       )}

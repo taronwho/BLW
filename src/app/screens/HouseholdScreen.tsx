@@ -121,7 +121,7 @@ export function HouseholdScreen(): ReactNode {
                 void navigator.clipboard
                   .writeText(formatHouseholdCode(householdCode))
                   .then(() => setMessage('Kód zkopírován. Druhý rodič ho vloží v aplikaci níž do políčka.'))
-                  .catch(() => setMessage('Kopírování neprošlo — kód opiš ručně.'));
+                  .catch(() => setMessage('Kopírování neprošlo: kód opiš ručně.'));
               }}
               className="flex min-h-touch items-center justify-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-on-accent"
             >
@@ -147,7 +147,7 @@ export function HouseholdScreen(): ReactNode {
                     void navigator.clipboard
                       .writeText(pairingUrl)
                       .then(() => setMessage('Odkaz zkopírován. Pošli ho komukoli, kdo se má připojit.'))
-                      .catch(() => setMessage('Kopírování neprošlo — odkaz vyber a zkopíruj ručně.'));
+                      .catch(() => setMessage('Kopírování neprošlo: odkaz vyber a zkopíruj ručně.'));
                   }}
                   className="flex min-h-touch items-center justify-center gap-2 rounded-xl border border-accent bg-accent-soft px-4 text-sm font-semibold text-accent"
                 >
@@ -164,11 +164,11 @@ export function HouseholdScreen(): ReactNode {
               <strong className="font-semibold text-ink">Nejjistější cesta:</strong> na druhém
               telefonu otevřít nainstalovaného Drobka a kód do něj vložit. Odkaz poslaný
               v Messengeru nebo WhatsAppu se otevře v jejich vlastním prohlížeči a spáruje se
-              právě ten — v nainstalované aplikaci pak není nic a v seznamu zařízení přibude
+              právě ten. V nainstalované aplikaci pak není nic a v seznamu zařízení přibude
               položka navíc. QR kód naskenovaný fotoaparátem tenhle problém nemá.
             </p>
             <p className="text-center text-xs text-muted">
-              Kdo kód zná, vidí do deníku — posílej ho jen lidem, kterým na dítě sáhneš.
+              Kdo kód zná, vidí do deníku, posílej ho jen lidem, kterým na dítě sáhneš.
               Domácnost unese pět zařízení.
             </p>
             <MemberList />
@@ -266,7 +266,7 @@ export function HouseholdScreen(): ReactNode {
                   await importState(JSON.parse(await file.text()));
                   setMessage('Data naimportována a sloučena.');
                 } catch {
-                  setMessage('Tohle není záloha Drobka — soubor se nenačetl.');
+                  setMessage('Tohle není záloha Drobka: soubor se nenačetl.');
                 }
               })();
             }}

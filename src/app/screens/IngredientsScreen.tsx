@@ -230,7 +230,7 @@ export function IngredientsScreen(): ReactNode {
           <>
             <FilterGroup
               nadpis="Musí obsahovat"
-              popis="Vybrané živiny se sčítají — surovina musí mít všechny."
+              popis="Vybrané živiny se sčítají: surovina musí mít všechny."
             >
               <FilterToggles
                 options={ZIVINY_OPTIONS}
@@ -352,7 +352,7 @@ export function IngredientsScreen(): ReactNode {
           className="rounded-xl bg-surface p-4 text-sm text-muted"
           data-testid="prazdny-stav"
         >
-          Nic neodpovídá. Nejspíš je podmínek najednou moc — zkus ubrat některou
+          Nic neodpovídá. Nejspíš je podmínek najednou moc. Zkus ubrat některou
           živinu, povolit všechny kategorie nebo klepnout na „zrušit filtry“.
         </p>
       ) : (

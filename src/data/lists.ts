@@ -86,7 +86,7 @@ export const lists: Seznam[] = [
     titleCz: 'První sousta',
     summary: 'Čím začít, když jde talíř na stůl poprvé',
     intro:
-      'Měkké, uchopitelné a bez tvaru, který by mohl ucpat dýchací cesty. Pořadí nerozhoduje — začít jde kteroukoli z nich a žádná z nich není „ta správná první“.',
+      'Měkké, uchopitelné a bez tvaru, který by mohl ucpat dýchací cesty. Pořadí nerozhoduje. Začít jde kteroukoli z nich a žádná z nich není „ta správná první“.',
     tone: 'zacatek',
     icon: 'zacatek',
     guideId: 'prvni-potraviny',
@@ -123,7 +123,7 @@ export const lists: Seznam[] = [
       { id: 'tahini', note: 'Sezamová pasta, tenká vrstva stačí.' },
       { id: 'sezam-mlety', note: 'Mletý, ne celý. Semínko vcelku je riziko.' },
       { id: 'ovesne-vlocky-jemne', note: 'Železo hned do ranní kaše.' },
-      { id: 'fazole-cervene-kidney', note: 'Rozmáčknout — slupka se jinak nedá rozkousat.' },
+      { id: 'fazole-cervene-kidney', note: 'Rozmáčknout: slupka se jinak nedá rozkousat.' },
     ],
     podminka: 'zdroj-zeleza',
   },
@@ -132,7 +132,7 @@ export const lists: Seznam[] = [
     titleCz: 'Vitamin C k železu',
     summary: 'Rostlinné železo se bez něj vstřebá mnohem hůř',
     intro:
-      'Železo z rostlin se vstřebává hůř než z masa. Vitamin C ve stejném jídle to výrazně zlepšuje — proto se k čočce hodí paprika a ke kaši ovoce.',
+      'Železo z rostlin se vstřebává hůř než z masa. Vitamin C ve stejném jídle to výrazně zlepšuje, proto se k čočce hodí paprika a ke kaši ovoce.',
     tone: 'cecko',
     icon: 'cecko',
     guideId: 'zelezo-proc-a-jak',
@@ -153,7 +153,7 @@ export const lists: Seznam[] = [
     titleCz: 'Klíčových devět',
     summary: 'Alergeny, které se nemají odkládat',
     intro:
-      'Odkládání zavedení riziko alergie nesnižuje. Každý z těchhle alergenů se nabízí brzy, v malém množství a pak opakovaně — aplikace počítá expozice v deníku.',
+      'Odkládání zavedení riziko alergie nesnižuje. Každý z těchhle alergenů se nabízí brzy, v malém množství a pak opakovaně: aplikace počítá expozice v deníku.',
     tone: 'alergen',
     icon: 'alergen',
     guideId: 'zavadeni-alergenu',
@@ -184,7 +184,7 @@ export const lists: Seznam[] = [
       { id: 'rajce', note: 'Cherry rajče se krájí podélně na čtvrtky.' },
       { id: 'boruvky', note: 'Rozmáčknout mezi prsty nebo rozpůlit.' },
       { id: 'mrkev', note: 'Syrová ne. Vařená doměkka ano.' },
-      { id: 'redkvicka', note: 'Tvrdá a kulatá — nejhorší možná kombinace.' },
+      { id: 'redkvicka', note: 'Tvrdá a kulatá: nejhorší možná kombinace.' },
       { id: 'tresne', note: 'Vypeckovat a teprve pak rozpůlit.' },
       { id: 'lici', note: 'Pryč se slupkou i s peckou, pak na čtvrtky.' },
       { id: 'arasidy', note: 'Celé nikdy. Jedině jako hladké máslo.' },
@@ -198,7 +198,7 @@ export const lists: Seznam[] = [
     titleCz: 'Když lezou zoubky',
     summary: 'Vychlazené a měkké, na okusování',
     intro:
-      'U dítěte od šesti měsíců, které už jí příkrm, radí NHS nabídnout k okusování syrové ovoce a zeleninu; měkké ovoce jako meloun dásně zklidní. Zůstaň u toho — z okusovaného kousku se může ulomit sousto, které dítě ještě nedokáže rozžvýkat. Nic zmrzlého, nic slazeného a žádné sušenky: cukr kazí i těch pár zubů, co zrovna lezou.',
+      'U dítěte od šesti měsíců, které už jí příkrm, radí NHS nabídnout k okusování syrové ovoce a zeleninu; měkké ovoce jako meloun dásně zklidní. Zůstaň u toho. Z okusovaného kousku se může ulomit sousto, které dítě ještě nedokáže rozžvýkat. Nic zmrzlého, nic slazeného a žádné sušenky: cukr kazí i těch pár zubů, co zrovna lezou.',
     tone: 'klid',
     icon: 'zoubky',
     polozky: [

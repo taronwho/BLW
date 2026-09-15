@@ -62,7 +62,7 @@ export const extras: Recipe[] = [
       'Plátky vlož do druhé porce zelí, prohřej pět minut a podávej s kroupami.',
     ],
     vegetarianProteinSwap:
-      'Vepřovou kýtu nahrazuje 250 g tempehu opečeného na plátky — v dušeném zelí drží tvar jako maso a dodá plnou bílkovinu.',
+      'Vepřovou kýtu nahrazuje 250 g tempehu opečeného na plátky. V dušeném zelí drží tvar jako maso a dodá plnou bílkovinu.',
     allergens: ['psenice-lepek', 'soja', 'mleko'],
     tags: ['česká klasika', 'jednohrnec', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_VEGETARIAN],
@@ -111,7 +111,7 @@ export const extras: Recipe[] = [
       'Podávej je na polentě s pečeným fenyklem, pokapané citronem a posypané natí.',
     ],
     vegetarianProteinSwap:
-      'Kapra nahrazuje 250 g uvařených bílých fazolí zapečených ve výpeku z fenyklu — dodají porci bílkovinu a stejně sytou konzistenci.',
+      'Kapra nahrazuje 250 g uvařených bílých fazolí zapečených ve výpeku z fenyklu. Dodají porci bílkovinu a stejně sytou konzistenci.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'nedělní oběd'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -144,7 +144,7 @@ export const extras: Recipe[] = [
     babySteps: [
       'Lilek v dětské porci zbav slupky, která je po zapečení pevná a v puse se sbalí do kuličky.',
       'Dužinu rozmačkej vidličkou do omáčky nebo ji nakrájej na proužky podle toho, co dítě zvládá.',
-      'Mozzarellu pro miminko nakrájej na tenké proužky, nikdy nepodávej kuličky — kulatý tvar je pro dětské hrdlo nejrizikovější.',
+      'Mozzarellu pro miminko nakrájej na tenké proužky, nikdy nepodávej kuličky. Kulatý tvar je pro dětské hrdlo nejrizikovější.',
     ],
     babyServing: {
       '6m': 'Podávej proužek měkkého lilku dlouhý přes dlaň, na kterém drží omáčka, a proužek mozzarelly vedle.',
@@ -318,7 +318,7 @@ export const extras: Recipe[] = [
       'Brambor rozmačkej vidličkou s lžící vody a vmíchej do něj rybí vločky, aby držely pohromadě.',
     ],
     babyServing: {
-      '6m': 'Podej brambor s vmíchanou rybou jako hustou hromádku na okraji misky, ze které dítě nabírá dlaní. Kousek celeru nabídni jako podlouhlý proužek na délku prstu — samotné rybí vločky se v pěsti ztratí, proto patří do brambory.',
+      '6m': 'Podej brambor s vmíchanou rybou jako hustou hromádku na okraji misky, ze které dítě nabírá dlaní. Kousek celeru nabídni jako podlouhlý proužek na délku prstu. Samotné rybí vločky se v pěsti ztratí, proto patří do brambory.',
       '9m': 'Brambor s rybou nakrájej na kostky do dvou centimetrů a celer na kousky velikosti hrášku pro klešťový úchop.',
       '12m': 'Rozděl na talíři hromádku brambor s rybou a hromádku celeru vedle sebe a přidej lžíci; dítě už si nabírá samo.',
     },
@@ -331,7 +331,7 @@ export const extras: Recipe[] = [
       'Fazole zakápni citronem a podávej je s pečeným celerem a bramborami místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 250 g uvařených bílých fazolí zapečených se stejnou zeleninou — drží tvar a dodají srovnatelné množství bílkovin.',
+      'Tresku nahrazuje 250 g uvařených bílých fazolí zapečených se stejnou zeleninou. Drží tvar a dodají srovnatelné množství bílkovin.',
     allergens: ['ryby', 'celer'],
     tags: ['bez lepku', 'ryba', 'pečené'],
     sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
@@ -364,7 +364,7 @@ export const extras: Recipe[] = [
     babySteps: [
       'Rybu rozeber na vlákna a znovu ji projeď prsty; drobné kosti sedí i mimo páteřní linii.',
       'Brambor rozmačkej vidličkou a vmíchej do něj rybí vlákna, aby se daly nabrat.',
-      'Hranolek ředkve zkontroluj palcem — musí se dát rozmáčknout, jinak ho vrať do trouby.',
+      'Hranolek ředkve zkontroluj palcem. Musí se dát rozmáčknout, jinak ho vrať do trouby.',
     ],
     babyServing: {
       '6m': 'Podej hranolek ředkve na délku prstu, ať ho dítě sevře v pěsti, a vedle hromádku brambory s vmíchaným sleděm. Rybu vždycky podávej spojenou s bramborem, samotná vlákna se rozsypou dřív, než je dítě donese k puse.',
@@ -380,7 +380,7 @@ export const extras: Recipe[] = [
       'Čočku promíchej s nasekaným koprem a lžící oleje a podávej ji k pečené ředkvi a bramboru místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Sleďa nahrazuje 200 g uvařené čočky beluga — drží tvar jako rybí vlákna a je to sytý zdroj rostlinné bílkoviny i železa.',
+      'Sleďa nahrazuje 200 g uvařené čočky beluga. Drží tvar jako rybí vlákna a je to sytý zdroj rostlinné bílkoviny i železa.',
     allergens: ['ryby'],
     tags: ['bez lepku', 'ryba', 'pečené'],
     sources: [NHS_FISH, NHS_AVOID, NHS_PREP_SAFELY],
@@ -429,7 +429,7 @@ export const extras: Recipe[] = [
       'Opečené tofu osol, promíchej se zelím a podávej na rýži místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 200 g tofu natural opečeného dozlatova — má srovnatelný obsah bílkovin a v dušeném zelí drží tvar.',
+      'Tresku nahrazuje 200 g tofu natural opečeného dozlatova. Má srovnatelný obsah bílkovin a v dušeném zelí drží tvar.',
     allergens: ['ryby', 'soja'],
     tags: ['bez lepku', 'ryba', 'jednohrnec'],
     sources: [NHS_FISH, BP_NITRATES_VEG, NHS_PREP_SAFELY],
@@ -478,7 +478,7 @@ export const extras: Recipe[] = [
       'Cizrnu s mrkví podávej na jáhlách a posyp petrželkou místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Sumce nahrazuje 250 g uvařené cizrny dušené s mrkví — udrží jídlo syté a dodá rostlinnou bílkovinu i železo.',
+      'Sumce nahrazuje 250 g uvařené cizrny dušené s mrkví. Udrží jídlo syté a dodá rostlinnou bílkovinu i železo.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'jednohrnec'],
     sources: [NHS_FISH, NHS_FIRST_FOODS, NHS_PREP_SAFELY],
@@ -510,7 +510,7 @@ export const extras: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce kaše, lžíci hrášku a kus ryby, ještě než se cokoli dochucuje.',
     babySteps: [
       'Rybu rozeber na vločky a projeď je prsty kvůli případným kostem.',
-      'Vločky vmíchej do kaše — suchá tilápie se sama o sobě drolí a dítě ji z talíře nedostane.',
+      'Vločky vmíchej do kaše. Suchá tilápie se sama o sobě drolí a dítě ji z talíře nedostane.',
       'Hrášek rozmáčkni vidličkou, aby z něj zmizel kulatý tvar.',
     ],
     babyServing: {
@@ -527,7 +527,7 @@ export const extras: Recipe[] = [
       'Čočku promíchej s hráškem a podávej na bramborové kaši místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Tilápii nahrazuje 200 g červené čočky uvařené doměkka — spojí se s kaší podobně jako rybí vločky a dodá rostlinnou bílkovinu.',
+      'Tilápii nahrazuje 200 g červené čočky uvařené doměkka. Spojí se s kaší podobně jako rybí vločky a dodá rostlinnou bílkovinu.',
     allergens: ['ryby', 'mleko'],
     tags: ['bez lepku', 'ryba', 'rychlé'],
     sources: [NHS_FISH, NHS_FIRST_FOODS, NHS_PREP_SAFELY],
@@ -576,7 +576,7 @@ export const extras: Recipe[] = [
       'Zakápni olivovým olejem a podávej místo slávek.',
     ],
     vegetarianProteinSwap:
-      'Slávky nahrazuje 150 g uvařených fazolek mungo vmíchaných do rizota — drží tvar a dodají rostlinnou bílkovinu.',
+      'Slávky nahrazuje 150 g uvařených fazolek mungo vmíchaných do rizota: drží tvar a dodají rostlinnou bílkovinu.',
     allergens: ['mekkysi'],
     tags: ['bez lepku', 'jednohrnec'],
     sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],

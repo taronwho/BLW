@@ -268,7 +268,7 @@ export function RecipesScreen(): ReactNode {
 
             <FilterGroup
               nadpis="Musí obsahovat"
-              popis="Vybrané živiny se sčítají — recept musí mít všechny."
+              popis="Vybrané živiny se sčítají: recept musí mít všechny."
             >
               <FilterToggles
                 options={ZIVINY_OPTIONS}
@@ -458,7 +458,7 @@ export function RecipesScreen(): ReactNode {
           className="rounded-xl bg-surface p-4 text-sm text-muted"
           data-testid="prazdny-stav-recepty"
         >
-          Nic neodpovídá. Nejspíš je podmínek najednou moc — zkus ubrat některou
+          Nic neodpovídá. Nejspíš je podmínek najednou moc. Zkus ubrat některou
           živinu, povolit delší čas nebo klepnout na „zrušit filtry“.
         </p>
       ) : (
@@ -517,7 +517,7 @@ function RecipeCard({
             </span>
             <span className="rounded-lg bg-paper px-2 py-0.5 font-medium">
               vhodné od {recipe.minAgeMonths} měsíců
-              {tooEarly ? ' — na dítě ještě brzy' : ''}
+              {tooEarly ? ': na dítě ještě brzy' : ''}
             </span>
             {vegetarian && (
               <span className="flex items-center gap-1 rounded-lg bg-accent/10 px-2 py-0.5 font-medium text-accent">

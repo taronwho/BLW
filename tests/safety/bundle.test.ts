@@ -28,7 +28,7 @@ describe('texty pro rodiče', () => {
   /**
    * Odkaz na soubor v repozitáři rodiči nic neřekne. Pravidlo
    * no-internal-references hlídá katalog, tenhle test hlídá zbytek
-   * aplikace — hlášky, popisky a texty v obrazovkách. Komentáře v kódu
+   * aplikace, hlášky, popisky a texty v obrazovkách. Komentáře v kódu
    * jsou v pořádku, ty se do buildu nedostanou.
    */
   it('obrazovky a úložiště neodkazují na soubory projektu', () => {

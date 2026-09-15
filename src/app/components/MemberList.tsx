@@ -75,7 +75,7 @@ export function MemberList(): ReactNode {
       <p className="text-xs leading-relaxed text-muted">
         {plno
           ? 'Domácnost je plná. Další telefon se připojí, až některé zařízení odebereš.'
-          : 'Každý prohlížeč se počítá zvlášť. Jeden telefon tu proto může být dvakrát — třeba jako nainstalovaná aplikace a zvlášť jako prohlížeč, ve kterém se otevřela pozvánka. Co už nepotřebuješ, odeber.'}
+          : 'Každý prohlížeč se počítá zvlášť. Jeden telefon tu proto může být dvakrát. Třeba jako nainstalovaná aplikace a zvlášť jako prohlížeč, ve kterém se otevřela pozvánka. Co už nepotřebuješ, odeber.'}
       </p>
     </section>
   );

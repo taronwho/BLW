@@ -3,7 +3,7 @@ import { errorsOf, runSafetyRules } from '../../src/safety/run';
 import { makeCatalog, makeIngredient, makeMeatRecipe } from './fixtures';
 import { recipes } from '../../src/data';
 
-/** Surovina pro dospělé — slaná, a proto až od roku. */
+/** Surovina pro dospělé, slaná, a proto až od roku. */
 const tofu = makeIngredient({
   id: 'tofu-uzene',
   nameCz: 'Tofu uzené',
@@ -98,7 +98,7 @@ describe('věk receptu se počítá z toho, co sní miminko', () => {
     expect(chyby.filter((e) => e.ruleId === 'min-age-not-inflated')).toEqual([]);
   });
 
-  it('důvod u receptu, kterému věk vychází ze surovin, je chyba — nemá co vysvětlovat', () => {
+  it('důvod u receptu, kterému věk vychází ze surovin, je chyba, nemá co vysvětlovat', () => {
     const recept = makeMeatRecipe({
       id: 'duvod-nazbyt',
       minAgeMonths: 6,

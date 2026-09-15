@@ -26,7 +26,7 @@ export function ReadinessNote({ stage }: { stage: Stage }): ReactNode {
       <p className="flex items-start gap-2 text-xs leading-relaxed">
         <Info aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         <span>
-          Šest měsíců není pevné datum. Začít se má, až jsou pohromadě tři vývojové znaky —{' '}
+          Šest měsíců není pevné datum. Začít se má, až jsou pohromadě tři vývojové znaky:{' '}
           {vseChybi ? (
             <>zatím není odškrtnutý ani jeden.</>
           ) : (

@@ -46,13 +46,13 @@ describe('vyhledávání', () => {
   it('kategorii jde najít napsáním celého jejího názvu', () => {
     expect(najdiSuroviny('luštěniny')).toContain('cocka-hneda');
     expect(najdiSuroviny('maso a ryby')).toContain('losos');
-    // Ale ne úlomkem — „ryby" je půlka názvu „Maso a ryby" a vracelo by
+    // Ale ne úlomkem, „ryby" je půlka názvu „Maso a ryby" a vracelo by
     // to zase hovězí.
     expect(najdiSuroviny('ryby')).not.toContain('hovezi-zadni');
   });
 
   it('skupinu najde přes název alergenu', () => {
-    // Žádná ryba nemá „ryba" v názvu, ale všechny mají alergen `ryby` —
+    // Žádná ryba nemá „ryba" v názvu, ale všechny mají alergen `ryby` 
     // tudy se k nim rodič dostane, a hovězí mezi nimi není.
     const ryby = najdiSuroviny('ryby');
     expect(ryby).toContain('losos');
@@ -67,7 +67,7 @@ describe('vyhledávání', () => {
   it('odpustí jeden překlep i jeden tvar navíc', () => {
     // Překlep.
     expect(najdiSuroviny('brambury')).toContain('brambor');
-    // Přehozená dvojice písmen, což je zároveň druhý pád — „mrkve" a „mrkev".
+    // Přehozená dvojice písmen, což je zároveň druhý pád, „mrkve" a „mrkev".
     expect(najdiSuroviny('mrkve')).toContain('mrkev');
     // Krátká slova se netolerují, jinak by „sůl" našla „síla" a „sója".
     expect(najdiSuroviny('sul')).not.toContain('soja-edamame');

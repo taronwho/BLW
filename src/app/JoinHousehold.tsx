@@ -83,7 +83,7 @@ export function JoinHousehold(): ReactNode {
           data-testid="uz-pripojeno"
           className="rounded-xl border border-safe/40 bg-safe/10 p-3 text-sm leading-snug"
         >
-          Tohle zařízení už v téhle domácnosti je — nic dalšího dělat nemusíš.
+          Tohle zařízení už v téhle domácnosti je, nic dalšího dělat nemusíš.
         </p>
       )}
 
@@ -111,7 +111,7 @@ export function JoinHousehold(): ReactNode {
             </p>
             <p className="text-ink/80">
               Připojí se právě on. Pokud máš Drobka nainstalovaného na ploše, otevři ho a kód do
-              něj vlož — jinak budeš mít z jednoho telefonu v domácnosti dvě zařízení a
+              něj vlož. Jinak budeš mít z jednoho telefonu v domácnosti dvě zařízení a
               v nainstalované aplikaci nebude nic.
             </p>
             <p className="flex items-center gap-1.5 text-xs text-muted">

@@ -22,7 +22,7 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
     // Pečené hovězí zadní má podle tabulky 2,5 mg železa na 100 g. To je nad
     // prahem „obsahuje" (2,22 mg), ale pod prahem „významný zdroj" (4,44 mg).
     // Hovězí není dobrý zdroj železa kvůli množství, ale proto, že hemové
-    // železo se vstřebává násobně líp než rostlinné — a to nese `ironForm`,
+    // železo se vstřebává násobně líp než rostlinné, a to nese `ironForm`,
     // ne stupnice teček. Dokud tu stálo zařazení podle skupiny, tvrdila
     // aplikace „významný zdroj"; číslo z tabulky to opravilo.
     expect(profile.iron).toBe('obsahuje');
@@ -30,7 +30,7 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
   });
 
   it('játra zůstávají významným zdrojem i podle naměřených hodnot', () => {
-    // Kuřecí játra mají 11,63 mg železa a 3,98 mg zinku na 100 g — jediné
+    // Kuřecí játra mají 11,63 mg železa a 3,98 mg zinku na 100 g, jediné
     // maso katalogu, které u železa prahu 4,44 mg dosáhne s velkou rezervou.
     const profile = nutrientProfile(get('kureci-jatra'));
     expect(profile.iron).toBe('vyznamny');
@@ -41,7 +41,7 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
   it('luštěniny nesou nehemové železo', () => {
     const profile = nutrientProfile(get('cocka-cervena-loupana'));
     // Uvařená čočka má 2,3 mg železa na 100 g. Suchá jich má 5,0, ale suchou
-    // nikdo nejí — a zrovna u luštěnin je ten rozdíl tak velký, že se podle
+    // nikdo nejí, a zrovna u luštěnin je ten rozdíl tak velký, že se podle
     // něj mění i stupeň. Nehemové železo je tu i tak to hlavní sdělení: bez
     // vitaminu C ve stejném jídle se z něj vstřebá málo.
     expect(profile.iron).toBe('obsahuje');
@@ -64,7 +64,7 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
 
   it('čerstvé ovoce mimo jmenovaný seznam vitamin C nese', () => {
     // Dřív tu stál ruční seznam jmen a co v něm nebylo, o tom aplikace
-    // tvrdila, že vitamin C nemá — u rakytníku, malin nebo manga to bylo
+    // tvrdila, že vitamin C nemá, u rakytníku, malin nebo manga to bylo
     // rovnou proti načteným zdrojům, které mluví o ovoci jako o skupině.
     for (const id of ['rakytnik', 'maliny', 'mango', 'ananas', 'kaki', 'aronie']) {
       expect(nutrientProfile(get(id)).vitaminC).not.toBe('nevyznamny');
@@ -75,7 +75,7 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
     // Skupinové pravidlo říká, že protlačené a zavařené ovoce se za zdroj
     // vitaminu C nevydává. U protlaku to ale číslo vyvrací: je zahuštěný
     // zhruba pětinásobně, takže i po ztrátách zbude 54,4 mg na 100 g podle
-    // české tabulky — a norská tabulka u téhož výrobku uvádí 45 mg, takže
+    // české tabulky, a norská tabulka u téhož výrobku uvádí 45 mg, takže
     // nejde o ojedinělý údaj. Naměřená hodnota má podle docs/BEZPECNOST.md
     // kap. 8 přednost před skupinou.
     expect(nutrientProfile(get('rajcatovy-protlak')).vitaminC).toBe('vyznamny');
@@ -129,8 +129,8 @@ describe('zařazení podle železa, zinku a vitaminu C', () => {
 
   it('napřed jdou partneři, které kuchařka se surovinou opravdu kombinuje', () => {
     // Pořadí musí odrážet, co kuchařka s luštěninou doopravdy vaří, jinak je
-    // rada nepoužitelná u sporáku. Netestuje se konkrétní surovina — ta se
-    // s každým novým receptem může posunout — ale pořadí podle obou klíčů:
+    // rada nepoužitelná u sporáku. Netestuje se konkrétní surovina, ta se
+    // s každým novým receptem může posunout, ale pořadí podle obou klíčů:
     // nejdřív počet receptů přímo s touhle surovinou, teprve při shodě počet
     // receptů s její kategorií.
     const cocka = get('cocka-cervena-loupana');
@@ -186,8 +186,8 @@ describe('návrh „Co dnes zkusit?"', () => {
     const navrhy = suggestions(stav, null, 6);
 
     expect(navrhy.length).toBeGreaterThan(0);
-    // Dřív to byly první tři neochutnané položky v abecedě — hruška, banán,
-    // avokádo — a nabízely se pořád dokola.
+    // Dřív to byly první tři neochutnané položky v abecedě, hruška, banán,
+    // avokádo, a nabízely se pořád dokola.
     expect(navrhy[0]?.duvod).toBe('alergen');
     expect(navrhy[0]?.ingredient.isKeyAllergen).toBe(true);
   });

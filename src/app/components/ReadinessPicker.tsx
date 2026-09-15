@@ -25,7 +25,7 @@ export function ReadinessPicker({ dite }: { dite: Child }): ReactNode {
       </legend>
       <p className="text-xs leading-relaxed text-muted">
         Nerozhoduje datum v kalendáři, ale tyhle tři znaky. Dokud nejsou pohromadě, nemá začínat
-        žádná metoda příkrmu — ani lžička.
+        žádná metoda příkrmu, ani lžička.
       </p>
 
       <ul className="flex flex-col gap-2">

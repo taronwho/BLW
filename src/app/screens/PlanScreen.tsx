@@ -92,7 +92,7 @@ export function PlanScreen(): ReactNode {
         <p className="text-sm leading-relaxed text-muted">
           Rodič, který začíná, neví, co nabídnout zítra. Plán dá na každý den jednu novou
           surovinu, k ní partnera se železem a nápad, co z toho uvařit. Počítá se z katalogu
-          a z deníku vybraného dítěte — co už je ochutnané, se jako novinka nenabídne.
+          a z deníku vybraného dítěte: co už je ochutnané, se jako novinka nenabídne.
         </p>
       </header>
 
@@ -148,7 +148,7 @@ export function PlanScreen(): ReactNode {
 
       <p className="rounded-xl bg-surface p-3 text-xs leading-relaxed text-muted">
         Odškrtnutý den zapíše ochutnávku rovnou do deníku, aby plán a deník nebyly dvě evidence
-        téhož. Odmítnutá surovina se vrátí o pár dní později — opakovaná nabídka je u příkrmu
+        téhož. Odmítnutá surovina se vrátí o pár dní později. Opakovaná nabídka je u příkrmu
         normální. Při reakci na alergen se ten alergen z plánu vyřadí a aplikace pošle
         k pediatrovi; alergii nediagnostikuje.
       </p>

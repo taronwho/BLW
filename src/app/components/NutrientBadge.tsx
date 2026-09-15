@@ -68,13 +68,13 @@ function mg(hodnota: number): string {
  */
 function popisZivin(profile: NutrientProfile): string | null {
   if (profile.ironForm === 'hemove') {
-    return 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta — kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.';
+    return 'Železo z masa a ryb je hemové a vstřebává se lépe než železo z rostlin. Rozhoduje ale podoba sousta. Kostka dušená doměkka se rozpadá, tuhý plátek skončí ocucaný.';
   }
   if (profile.ironForm === 'nehemove') {
     return 'Rostlinné, tedy nehemové železo se vstřebává hůř než železo z masa. Výrazně mu ale pomáhá vitamin C ve stejném jídle.';
   }
   if (profile.zinc !== 'nevyznamny') {
-    return 'Zinek se v jídelníčku drží stejných potravin jako železo — masa, luštěnin, semínek a celozrnných obilovin. Jedno takové jídlo proto obvykle dodá obojí.';
+    return 'Zinek se v jídelníčku drží stejných potravin jako železo. Masa, luštěnin, semínek a celozrnných obilovin. Jedno takové jídlo proto obvykle dodá obojí.';
   }
   // Zbývá jen vitamin C a o tom mluví další odstavec; opakovat se nemá smysl.
   return null;
@@ -192,7 +192,7 @@ export function NutrientBadge({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`Živiny — ${title}`}
+          aria-label={`Živiny. ${title}`}
           data-testid="okenko-zivin"
           className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/50 p-3 sm:items-center"
           onClick={(event) => {
@@ -306,7 +306,7 @@ export function NutrientBadge({
               <span>
                 Kde má aplikace naměřený obsah z potravinové tabulky, počítá stupnici z něj.
                 Jinde stojí zařazení na skupině potravin, kterou jako zdroj jmenují NHS a odborná
-                literatura — a to je hrubší odhad než miligramy.
+                literatura, a to je hrubší odhad než miligramy.
               </span>
             </p>
 

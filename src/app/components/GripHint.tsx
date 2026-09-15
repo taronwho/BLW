@@ -48,7 +48,7 @@ export function GripHint({
         <Hand aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" />
         Tvar podle úchopu
         <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-medium normal-case text-accent">
-          {GRIP_LABELS[grip]} — {GRIP_SHORT[grip]}
+          {GRIP_LABELS[grip]}, {GRIP_SHORT[grip]}
         </span>
       </p>
 

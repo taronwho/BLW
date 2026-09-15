@@ -236,6 +236,41 @@ Pro lokální vývoj slouží `.env.local` podle vzoru v `.env.local.example`.
 | `auth/api-key-not-valid` | Překlep v `VITE_FIREBASE_API_KEY`, nebo omezení klíče nesedí s doménou. |
 | V Domácnosti pořád stojí, že sdílení není nastavené | Některá z šesti hodnot je prázdná, nebo build po jejich vyplnění neproběhl znovu. U varianty B: proměnné musí být *repository*, ne *environment*. |
 
+## Přehled o používání aplikace
+
+Na adrese `#/prehled` je obrazovka s počty: kolik je domácností, zařízení,
+dětí, ochutnávek, jak jsou staré děti, jaká zařízení se připojila a které
+suroviny se v denících objevují nejčastěji. Nikde v aplikaci na ni nevede
+odkaz a v navigaci není.
+
+Obrazovku si otevře kdokoli, ale data vydá jen server, a to jedinému účtu.
+Rozhoduje o tom pravidlo `jsemSpravce()` ve `firestore.rules`, ne to, že se
+o adrese nikdo nedozví.
+
+Zprovoznění:
+
+1. Firebase konzole, **Authentication**, **Sign-in method**, zapni
+   poskytovatele **Email/Password**.
+2. Záložka **Users**, **Add user**, zadej svůj e-mail a silné heslo.
+3. Ve Firebase je nový účet neověřený. Přihlas se s ním jednou v aplikaci
+   na `#/prehled`; pokud pravidlo odmítne čtení kvůli `email_verified`,
+   pošli si ověřovací e-mail z konzole (u účtu tři tečky, **Reset password**
+   nebo **Send verification email**) a odkaz v něm potvrď.
+4. Zkontroluj, že e-mail v `firestore.rules` u `jsemSpravce()` sedí
+   s tím, který jsi založil.
+5. Publikuj pravidla (**Firestore Database**, **Rules**, **Publish**).
+   Pravidla se z repozitáře nenasazují sama.
+
+Co je dobré vědět:
+
+- **Heslo je to jediné, co ten výpis chrání.** Kdo ho zná, přečte si
+  všechny dokumenty domácností, ne jen počty. Obrazovka sama ukazuje pouze
+  souhrny a nic osobního nezobrazuje, ale technicky má přihlášený účet plné
+  právo číst. Zacházej s heslem podle toho a nepoužívej ho nikde jinde.
+- Přihlášení běží ve vlastní instanci Firebase, oddělené od té, kterou má
+  aplikace pro rodiče. Anonymní účet zařízení se tím nepřepíše.
+- Rodičovská část aplikace pravidlo nepotřebuje a nic se jí nemění.
+
 ## Náklady
 
 Provoz téhle aplikace se vejde do bezplatné úrovně Firebase (Spark).

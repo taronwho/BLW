@@ -263,7 +263,7 @@ export const soups2: Recipe[] = [
       'Po kroku 4 odeber naběračku polévky do misky, dřív než se do hrnce přidává koření pro dospělé.',
     babySteps: [
       'Polévku v dětské porci rozmačkej vidličkou úplně, celý hrách projde trávením beze změny.',
-      'Přidej špetku majoránky, která je pro miminko v pořádku a chuť zaokrouhlí, a nech v porci kostky brambor — vitamin C z nich pomáhá vstřebat železo z hrachu.',
+      'Přidej špetku majoránky, která je pro miminko v pořádku a chuť zaokrouhlí, a nech v porci kostky brambor. Vitamin C z nich pomáhá vstřebat železo z hrachu.',
       'Nech porci zvlažnět a podávej ji v mělké misce.',
     ],
     babyServing: {
@@ -483,7 +483,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Odebranou polévku rozmixuj nadobro, aby v ní nezůstal kousek slupky z papriky.',
-      'Kápni do misky pár kapek citronové šťávy — vitamin C z papriky i z citronu zlepší vstřebání železa, které čočka nese.',
+      'Kápni do misky pár kapek citronové šťávy. Vitamin C z papriky i z citronu zlepší vstřebání železa, které čočka nese.',
       'Nech vychladnout na teplotu ruky a rozprostři polévku v misce, uprostřed zůstává horká nejdéle.',
     ],
     babyServing: {
@@ -569,7 +569,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Cizrnu v odebrané porci rozmačkej vidličkou; celá cizrna má hladkou slupku a dásně si s ní neporadí.',
-      'Vmíchej špetku nasekané petrželky a zakápni kapkou citronu — vitamin C z rajčat, petrželky i citronu zlepší vstřebání železa z cizrny.',
+      'Vmíchej špetku nasekané petrželky a zakápni kapkou citronu. Vitamin C z rajčat, petrželky i citronu zlepší vstřebání železa z cizrny.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -696,7 +696,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmixuj nadobro, ať v ní nezůstane celá cizrna se slupkou.',
-      'Vymačkej do misky pár kapek limetky — vitamin C v ní zlepší vstřebání železa, které cizrna nese.',
+      'Vymačkej do misky pár kapek limetky. Vitamin C v ní zlepší vstřebání železa, které cizrna nese.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -776,13 +776,13 @@ export const soups2: Recipe[] = [
     baseSteps: [
       'Mrkev, petržel a brambory nakrájej na kostky, pórek na kolečka a kolečka rozděl na proužky.',
       'Zeleninu nech na oleji pět minut zesklovatět, zalij vodou a vař patnáct minut doměkka.',
-      'Vývar rozděl do dvou hrnců — od tohoto místa jde každá linie vlastní cestou.',
+      'Vývar rozděl do dvou hrnců. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 2 naber dvě lžíce vývaru se zeleninou do misky, dřív než do hrnců přijde ryba nebo fazole.',
     babySteps: [
       'Do odebrané porce vlož malý kousek filetu z tresky a nech ho pět minut táhnout, dokud maso není celé neprůhledné.',
-      'Rybu vyndej, rozeber vidličkou na plátky a každý prohmatej prsty — rybí kost najdeš jen hmatem.',
+      'Rybu vyndej, rozeber vidličkou na plátky a každý prohmatej prsty: rybí kost najdeš jen hmatem.',
       'Vrať maso do misky, zakápni kapkou citronu a posyp špetkou nasekaného kopru. Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -799,7 +799,7 @@ export const soups2: Recipe[] = [
       'Osol, zakápni citronem a posyp koprem.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 200 g vařených bílých fazolí — ve vývaru drží tvar podobně jako kousky ryby a dodají bílkovinu i rostlinné železo.',
+      'Tresku nahrazuje 200 g vařených bílých fazolí. Ve vývaru drží tvar podobně jako kousky ryby a dodají bílkovinu i rostlinné železo.',
     allergens: ['ryby'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -831,7 +831,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé. Zkontroluj, že v porci nezůstal kousek bobkového listu.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou na hrubé pyré; pro první sousta ji můžeš rozmixovat nadobro.',
-      'Přidej lžíci syrové papriky nakrájené nadrobno a povař ji minutu — paprika je bohatá na vitamin C a ten zlepší vstřebání železa z čočky.',
+      'Přidej lžíci syrové papriky nakrájené nadrobno a povař ji minutu. Paprika je bohatá na vitamin C a ten zlepší vstřebání železa z čočky.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -958,7 +958,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmixuj nadobro; slupka z papriky se v puse svine do proužku, takže v porci nesmí zůstat.',
-      'Kápni do misky citronovou šťávu — paprika i citron nesou vitamin C, který zlepší vstřebání železa z cizrny.',
+      'Kápni do misky citronovou šťávu. Paprika i citron nesou vitamin C, který zlepší vstřebání železa z cizrny.',
       'Zakápni lžičkou olivového oleje a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {

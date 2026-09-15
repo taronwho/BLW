@@ -145,7 +145,7 @@ export const snacksBaking2: Recipe[] = [
     babyServing: {
       '6m': 'Recept je stavěný na batole; v šesti měsících nabídni jen rozmačkanou datlovou pastu na lžíci.',
       '9m': 'V devíti měsících podávej světlý váleček bez kakaa, nakrájený na kousky velikosti fazole.',
-      '12m': 'Batoleti dej kakaový váleček nakrájený na sousta, spíš dopoledne — kofein může rušit usínání.',
+      '12m': 'Batoleti dej kakaový váleček nakrájený na sousta, spíš dopoledne: kofein může rušit usínání.',
     },
     adultSteps: [
       'Kuličky pro dospělé obal v kokosu nebo v nasekaných ořeších.',
@@ -779,7 +779,7 @@ export const snacksBaking2: Recipe[] = [
     category: 'svaciny-peceni',
     minAgeMonths: 12,
     minAgeReason:
-      'Jídlo napíchané na špejli — ta do dětské ruky nepatří v žádné fázi a kulaté kousky sýra a rajčete se musí krájet podélně. Mladšímu dítěti dej složky rozmačkané volně na talíř.',
+      'Jídlo napíchané na špejli. Ta do dětské ruky nepatří v žádné fázi a kulaté kousky sýra a rajčete se musí krájet podélně. Mladšímu dítěti dej složky rozmačkané volně na talíř.',
     timeMinutes: 15,
     servings: '2 dospělí + 1 batole',
     ingredients: [
@@ -806,7 +806,7 @@ export const snacksBaking2: Recipe[] = [
     babyServing: {
       '6m': 'Recept je stavěný na batole; v šesti měsících nabídni jen rozmačkané rajče bez slupky.',
       '9m': 'V devíti měsících podávej proužek mozzarelly a měkké rajče bez slupky, špejli vynech.',
-      '12m': 'Batoleti dej složky volně na talíři — proužky sýra, klínky rajčete a kostky chleba.',
+      '12m': 'Batoleti dej složky volně na talíři: proužky sýra, klínky rajčete a kostky chleba.',
     },
     adultSteps: [
       'Špejle pro dospělé osol, opepři a doplň je kostkou šunky.',
@@ -919,7 +919,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'mata', amount: 'pár lístků', track: 'all' },
     ],
     baseSteps: [
-      'Grapefruit i pomelo oloupej a každý díl zbav i vnitřní blány — právě ta je u citrusů to, co dítě nerozžvýká.',
+      'Grapefruit i pomelo oloupej a každý díl zbav i vnitřní blány: právě ta je u citrusů to, co dítě nerozžvýká.',
       'Meloun nakrájej na proužky dlouhé jako prst, ne na kostky; proužek se dá uchopit, kostka sklouzne.',
       'Dužninu citrusů rozděl na kousky a smíchej s melounem.',
     ],
@@ -968,7 +968,7 @@ export const snacksBaking2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Dužninu liči rozřež podélně na čtvrtky — celé ani přepůlené se nepodává nikdy, kulatý tvar dýchací cesty uzavře.',
+      'Dužninu liči rozřež podélně na čtvrtky. Celé ani přepůlené se nepodává nikdy, kulatý tvar dýchací cesty uzavře.',
       'Granátová jádra rozmačkej v sítu a protlač; do porce patří jen šťáva, tvrdá jadérka zůstanou v sítu.',
       'Banán nakrájej podélně na proužky a všechno vmíchej do odebraného jogurtu spolu se lžičkou mletých semínek chia, která necháš deset minut nabobtnat.',
       'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat rostlinné železo z jogurtové misky.',
@@ -1004,7 +1004,7 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Jablka i hrušku oloupej, zbav jádřinců a nakrájej na kostky.',
-      'Brusinky a aronii dej do hrnce s ovocem a s trochou vody a vař patnáct minut, dokud se bobule nerozpadnou — vařením se trpkost zmírní a kulatý tvar zmizí.',
+      'Brusinky a aronii dej do hrnce s ovocem a s trochou vody a vař patnáct minut, dokud se bobule nerozpadnou. Vařením se trpkost zmírní a kulatý tvar zmizí.',
       'Rakytník rozmačkej a protlač sítem přímo do hrnce, aby v omáčce nezůstala tvrdá jadérka.',
     ],
     babySplitPoint:
@@ -1046,7 +1046,7 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'pomeranc', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
-      'Všechny tři druhy ořechů umel v mlýnku na jemnou moučku — v těstě pro dítě nesmí zůstat ani kousek celého ořechu.',
+      'Všechny tři druhy ořechů umel v mlýnku na jemnou moučku. V těstě pro dítě nesmí zůstat ani kousek celého ořechu.',
       'Banány rozmačkej vidličkou, přidej ovesnou mouku, mletou ořechovou moučku, olej a špetku skořice.',
       'Těsto nech deset minut odpočinout, ovesná mouka mezitím nasákne a zhoustne.',
       'Z pomeranče nastrouhej kůru do těsta a dužinu bez blan nakrájej na kousky k podávání.',
@@ -1055,7 +1055,7 @@ export const snacksBaking2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
     babySteps: [
       'Z odebraného těsta vytvaruj dvě podlouhlé tyčinky dlouhé jako dospělý prst, ne kolečka.',
-      'Peč je na 170 °C patnáct minut, jen dokud nezpevní — přepečené sušenky tvrdnou a drolí se.',
+      'Peč je na 170 °C patnáct minut, jen dokud nezpevní: přepečené sušenky tvrdnou a drolí se.',
       'Nech vychladnout na teplotu ruky a zkontroluj, že v tyčince nezůstal tvrdý kousek.',
       'K dětské sušence polož kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo z mleté ořechové směsi.',
     ],
@@ -1098,7 +1098,7 @@ export const snacksBaking2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Vmíchej do odebraného jogurtu lžičku mleté pistáciové moučky a jen špetku mleté moučky z para ořechů — ta je kvůli selenu položkou na občas, ne na každý den.',
+      'Vmíchej do odebraného jogurtu lžičku mleté pistáciové moučky a jen špetku mleté moučky z para ořechů. Ta je kvůli selenu položkou na občas, ne na každý den.',
       'Přidej lžičku slunečnicového másla a rozmíchej ho, ať nezůstane v hrudce.',
       'Vedle nabídni podélný proužek hrušky, který dítě uchopí.',
       'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat železo z mleté ořechové směsi.',
@@ -1353,7 +1353,7 @@ export const snacksBaking2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce pomazánky, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj, že je odebraná pomazánka hladká a nezůstal v ní kousek slupky z papriky.',
-      'Vymačkej do misky citronovou šťávu — paprika i citron nesou vitamin C a ten zlepší vstřebání železa z čočky.',
+      'Vymačkej do misky citronovou šťávu. Paprika i citron nesou vitamin C a ten zlepší vstřebání železa z čočky.',
       'Krajíc chleba nakrájej na proužky široké jako dospělý prst a pomazánku na ně nanes v husté vrstvě.',
     ],
     babyServing: {
@@ -1809,7 +1809,7 @@ export const snacksBaking2: Recipe[] = [
     babySteps: [
       'Malý kousek propláchnutého sledě rozmačkej vidličkou a prohmatej prsty; sleď má drobné kosti.',
       'Vmíchej ho do odebrané pomazánky a zakápni kapkou citronu.',
-      'Porci drž malou — i propláchnutý sleď zůstává slanější než čerstvá ryba.',
+      'Porci drž malou, i propláchnutý sleď zůstává slanější než čerstvá ryba.',
     ],
     babyServing: {
       '6m': 'Podávej potřený proužek chleba dlouhý jako dospělý prst; vrstva pomazánky s rybou má být tenká, sleď je i po propláchnutí slanější než čerstvá ryba.',
@@ -1825,7 +1825,7 @@ export const snacksBaking2: Recipe[] = [
       'Osol a podávej na opečeném chlebu.',
     ],
     vegetarianProteinSwap:
-      'Sledě nahrazuje 150 g měkkého tvarohu — s jablkem a cibulkou drží pomazánku pohromadě stejně a dodá bílkovinu.',
+      'Sledě nahrazuje 150 g měkkého tvarohu. S jablkem a cibulkou drží pomazánku pohromadě stejně a dodá bílkovinu.',
     allergens: ['mleko', 'psenice-lepek', 'ryby'],
     tags: ['rodinné'],
     sources: [NHS_FISH, NHS_AVOID],

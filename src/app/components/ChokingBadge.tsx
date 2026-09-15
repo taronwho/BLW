@@ -23,7 +23,7 @@ export function ChokingBadge({ risk, reason }: Props): ReactNode {
     >
       <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
       <span>
-        {word} riziko dušení{reason === undefined ? '' : ` — ${reason}`}
+        {word} riziko dušení{reason === undefined ? '' : `. ${reason}`}
       </span>
     </span>
   );

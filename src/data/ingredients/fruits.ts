@@ -1710,7 +1710,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Oloupej a každý díl zbav i vnitřní blány — právě ta je u citrusů to, co dítě nerozžvýká. Dužninu rozděl na kousky a nabídni je jako měkké sousto, nebo vymačkej pár kapek šťávy do jídla s luštěninami; vitamin C zlepší vstřebání jejich železa.',
+          'Oloupej a každý díl zbav i vnitřní blány: právě ta je u citrusů to, co dítě nerozžvýká. Dužninu rozděl na kousky a nabídni je jako měkké sousto, nebo vymačkej pár kapek šťávy do jídla s luštěninami; vitamin C zlepší vstřebání jejich železa.',
         caution: 'Grapefruit je kyselejší než pomeranč a může podráždit kůži kolem pusy. Potři ji předem tenkou vrstvou tuku.',
       },
       '9m': {
@@ -1721,7 +1721,7 @@ export const fruits: Ingredient[] = [
       '12m': {
         serving:
           'Batole jí grapefruit v kouscích i vymačkaný do zálivky. Růžové odrůdy jsou sladší než žluté, takže je děti přijímají snáz.',
-        caution: 'Kyselé ovoce podávej k jídlu, ne samotné mezi jídly — je to šetrnější k zubní sklovině.',
+        caution: 'Kyselé ovoce podávej k jídlu, ne samotné mezi jídly: je to šetrnější k zubní sklovině.',
       },
     },
     prepIdeas: [
@@ -1755,7 +1755,7 @@ export const fruits: Ingredient[] = [
       '6m': {
         serving:
           'Pomelo má silnou kůru a velmi tuhé blány, takže příprava zabere víc času než u pomeranče. Oloupej, každý díl rozdělej a blány odstraň úplně; zbylé šťavnaté váčky dužniny nabídni v kouscích.',
-        caution: 'Blána je tady tužší než u jiných citrusů — když ji necháš, dítě ji vyplivne, nebo se s ní dusí.',
+        caution: 'Blána je tady tužší než u jiných citrusů. Když ji necháš, dítě ji vyplivne, nebo se s ní dusí.',
       },
       '9m': {
         serving:
@@ -1798,7 +1798,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Žlutý meloun je sladší a pevnější než vodní. Nakrájej ho na proužky dlouhé jako dospělý prst, ne na kostky — proužek se dá uchopit a kostka sklouzne.',
+          'Žlutý meloun je sladší a pevnější než vodní. Nakrájej ho na proužky dlouhé jako dospělý prst, ne na kostky: proužek se dá uchopit a kostka sklouzne.',
         caution: 'Vyber zralý, tvrdý meloun je pro dítě moc pevný na rozžvýkání.',
       },
       '9m': {
@@ -1842,7 +1842,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Oloupej slupku, vyndej pecku a dužninu rozřež podélně na čtvrtky — celé ani přepůlené liči se nepodává nikdy, kulatý tvar dýchací cesty uzavře. Čtvrtky můžeš ještě rozmačkat vidličkou.',
+          'Oloupej slupku, vyndej pecku a dužninu rozřež podélně na čtvrtky. Celé ani přepůlené liči se nepodává nikdy, kulatý tvar dýchací cesty uzavře. Čtvrtky můžeš ještě rozmačkat vidličkou.',
         caution: 'Pecku hledej pohledem i prstem, u zralého plodu drží jen volně.',
       },
       '9m': {
@@ -1852,7 +1852,7 @@ export const fruits: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí liči nakrájené na čtvrtky. Celý plod nech až na dobu, kdy dítě spolehlivě žvýká — u kulatého ovoce se s tím nespěchá.',
+          'Batole jí liči nakrájené na čtvrtky. Celý plod nech až na dobu, kdy dítě spolehlivě žvýká: u kulatého ovoce se s tím nespěchá.',
         caution: 'Slupka je nepoživatelná, sloupni ji celou.',
       },
     },
@@ -1929,7 +1929,7 @@ export const fruits: Ingredient[] = [
       '6m': {
         serving:
           'Mučenka je uvnitř rosolovitá dužnina s drobnými jadérky. Vylžičkuj ji a protlač sítem, ať v porci zůstane jen šťáva a dužnina; jadérka jsou tvrdá a pro první porce se nehodí.',
-        caution: 'Plod je zralý, když je slupka svraštělá — hladká a lesklá mučenka je ještě kyselá.',
+        caution: 'Plod je zralý, když je slupka svraštělá: hladká a lesklá mučenka je ještě kyselá.',
       },
       '9m': {
         serving:
@@ -1972,7 +1972,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Suchý kokos nikdy nesyp nasucho. Vmíchej ho do jogurtu, do kaše nebo do vlhkého těsta a nech ho několik minut nasáknout — teprve pak se dá podat.',
+          'Suchý kokos nikdy nesyp nasucho. Vmíchej ho do jogurtu, do kaše nebo do vlhkého těsta a nech ho několik minut nasáknout: teprve pak se dá podat.',
         caution: 'Kokosové chipsy a hrubé vločky do dětské porce nepatří, jsou tvrdé a ostré.',
       },
       '9m': {
@@ -2016,13 +2016,13 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Syrovou brusinku nikdy nepodávej celou — rozřež ji podélně na čtvrtky, nebo ji radši uvař na kompot a rozmačkej. Vařená brusinka se rozpadne sama a kulatý tvar tím ztratí.',
+          'Syrovou brusinku nikdy nepodávej celou. Rozřež ji podélně na čtvrtky, nebo ji radši uvař na kompot a rozmačkej. Vařená brusinka se rozpadne sama a kulatý tvar tím ztratí.',
         caution: 'Brusinky jsou velmi trpké; bez osladění je většina dětí odmítne, a sladit se do roka nemá čím.',
       },
       '9m': {
         serving:
           'V devíti měsících platí totéž: uvařit a rozmačkat, nebo každou syrovou bobuli rozřezat podélně na čtvrtky. Trpkost srovnej rozvařeným jablkem nebo hruškou ve stejném hrnci.',
-        caution: 'Trpkost srovnávej ovocem, ne ničím jiným — do roka se porce nepřislazuje.',
+        caution: 'Trpkost srovnávej ovocem, ne ničím jiným: do roka se porce nepřislazuje.',
       },
       '12m': {
         serving:
@@ -2060,7 +2060,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Syrovou bobuli rozřež podélně na čtvrtky, nebo ji rozvař a protlač — vařením se trpkost zmírní a kulatý tvar zmizí. Samotná aronie je pro dítě příliš svíravá, míchej ji s jablkem nebo s hruškou.',
+          'Syrovou bobuli rozřež podélně na čtvrtky, nebo ji rozvař a protlač. Vařením se trpkost zmírní a kulatý tvar zmizí. Samotná aronie je pro dítě příliš svíravá, míchej ji s jablkem nebo s hruškou.',
         caution: 'Šťáva barví tmavě fialově a z textilu jde ven špatně.',
       },
       '9m': {

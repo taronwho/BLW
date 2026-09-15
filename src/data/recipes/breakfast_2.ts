@@ -690,14 +690,14 @@ export const breakfast2: Recipe[] = [
     ],
     baseSteps: [
       'Mouku smíchej se sodou. Podmáslí rozšlehej s vejci a vlij do mouky; míchej jen do spojení, těsto má zůstat hrudkaté.',
-      'Nech deset minut odpočinout — soda s podmáslím mezitím těsto nadzvedne a lívanečky vyjdou vláčné.',
+      'Nech deset minut odpočinout. Soda s podmáslím mezitím těsto nadzvedne a lívanečky vyjdou vláčné.',
       'Pánev potři tenkou vrstvou oleje a rozehřej na mírný plamen.',
       'Jahody zbav stopek a rozmačkej je vidličkou na dřeň, kterou lívanečky doplníš místo sirupu.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě naběračky těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
     babySteps: [
-      'Borůvky pro dětskou porci rozmačkej vidličkou — celá borůvka má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí.',
+      'Borůvky pro dětskou porci rozmačkej vidličkou. Celá borůvka má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí.',
       'Vmíchej je do odebraného těsta a smaž dva podlouhlé lívanečky dlouhé jako dospělý prst, ne kolečka.',
       'Peč je na mírném plameni z obou stran, dokud uvnitř nezpevní, a nech vychladnout na teplotu ruky.',
       'Dětské lívanečky přelij jahodovou dření; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
@@ -732,7 +732,7 @@ export const breakfast2: Recipe[] = [
       { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
-      'Jáhly spař vroucí vodou a slij ji — zmizí tím nahořklá chuť.',
+      'Jáhly spař vroucí vodou a slij ji: zmizí tím nahořklá chuť.',
       'Zalij je kozím mlékem a vař na mírném plameni dvacet minut doměkka; občas zamíchej, ať se nepřipálí.',
       'Hrušky oloupej, zbav jádřinců, nakrájej na kostky a nech je v kaši poslední tři minuty změknout.',
       'Kiwi oloupej a nakrájej na měsíčky, kterými kaši doplníš až na talíři.',
@@ -741,7 +741,7 @@ export const breakfast2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
       'Odebranou kaši rozmíchej, ať je hladká, a posyp lžičkou mleté mandlové moučky.',
-      'Přidej špetku skořice — vůně udělá kaši sladší, aniž by se do ní cokoli přidávalo.',
+      'Přidej špetku skořice. Vůně udělá kaši sladší, aniž by se do ní cokoli přidávalo.',
       'Nech vychladnout na teplotu ruky.',
       'K porci přidej měkké kousky kiwi; vitamin C z nich pomáhá vstřebat železo z jáhel.',
     ],
@@ -776,14 +776,14 @@ export const breakfast2: Recipe[] = [
       { ingredientId: 'olej-repkovy', amount: 'na pánev', track: 'all' },
     ],
     baseSteps: [
-      'Obě mouky smíchej s tapiokovým škrobem — škrob tu dělá to, co jinde lepek, drží těsto pohromadě.',
+      'Obě mouky smíchej s tapiokovým škrobem. Škrob tu dělá to, co jinde lepek, drží těsto pohromadě.',
       'Vejce rozšlehej s mlékem, vlij do mouky a míchej do hladka. Nech deset minut odpočinout, aby mouky nasákly.',
       'Pánev potři tenkou vrstvou oleje a rozehřej na mírný plamen.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě naběračky těsta stranou, dřív než se do zbytku přidává cokoli dalšího pro dospělé.',
     babySteps: [
-      'Banán rozmačkej vidličkou a vmíchej ho do odebraného těsta — sladkost dodá ovoce, nic dalšího není potřeba.',
+      'Banán rozmačkej vidličkou a vmíchej ho do odebraného těsta. Sladkost dodá ovoce, nic dalšího není potřeba.',
       'Smaž dva podlouhlé lívanečky dlouhé jako dospělý prst, ne kolečka; peč je na mírném plameni, dokud uvnitř nezpevní.',
       'Nech vychladnout na teplotu ruky.',
     ],
@@ -861,7 +861,7 @@ export const breakfast2: Recipe[] = [
       { ingredientId: 'jahody', amount: '150 g', track: 'all' },
     ],
     baseSteps: [
-      'Zkontroluj složení lupínků — musí být bez přidaného cukru a bez soli.',
+      'Zkontroluj složení lupínků: musí být bez přidaného cukru a bez soli.',
       'Jogurt rozdělej lžící do hladka a rozděl do misek.',
       'Banán nakrájej na kolečka a borůvky přeber.',
       'Jahody zbav stopek a nakrájej je na tenké plátky, které rozložíš po jogurtu.',
@@ -869,7 +869,7 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu a hrst lupínků do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Borůvky pro dětskou porci rozmačkej vidličkou — celá borůvka má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí. Banánová kolečka přepůl podélně.',
+      'Borůvky pro dětskou porci rozmačkej vidličkou. Celá borůvka má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí. Banánová kolečka přepůl podélně.',
       'Lupínky vmíchej do jogurtu a nech je tři minuty nabobtnat, suché se lepí na patro.',
       'Posyp lžičkou mleté mandlové moučky a promíchej.',
       'Přidej k porci rozmačkané jahody; vitamin C z nich pomáhá vstřebat rostlinné železo z lupínků.',
@@ -906,7 +906,7 @@ export const breakfast2: Recipe[] = [
     baseSteps: [
       'Vločky zalij mlékem a vař na mírném plameni pět minut, dokud kaše nezhoustne.',
       'Mučenky rozkroj a dužninu vylžičkuj do misky.',
-      'Strouhaný kokos vmíchej do horké kaše a nech ho pár minut nasáknout — suchý kokos se nikdy nesype nasucho, v puse by se spekl do chuchvalce.',
+      'Strouhaný kokos vmíchej do horké kaše a nech ho pár minut nasáknout. Suchý kokos se nikdy nesype nasucho, v puse by se spekl do chuchvalce.',
       'Dužinu z mučenky zakápni šťávou z půlky limetky a rozmíchej ji do kaše.',
     ],
     babySplitPoint:
@@ -953,7 +953,7 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
-      'Rybíz pro dětskou porci rozmačkej vidličkou — celá kulička má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí.',
+      'Rybíz pro dětskou porci rozmačkej vidličkou. Celá kulička má tvar, který dýchací cesty uzavře, a rozmačkaná ho ztrácí.',
       'Vmíchej ho do odebrané kaše spolu se lžičkou mletých lněných semínek.',
       'Černý rybíz je vydatný zdroj vitaminu C a ten zlepší vstřebání železa z ovsa i z mletých semínek. Nech vychladnout na teplotu ruky.',
     ],

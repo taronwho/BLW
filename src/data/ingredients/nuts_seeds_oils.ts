@@ -893,7 +893,7 @@ export const nutsSeedsOils: Ingredient[] = [
       '6m': {
         serving:
           'NHS uvádí, že celé ořechy se dětem do pěti let nepodávají kvůli riziku zadušení, ale od začátku příkrmu je dostat můžou rozdrcené nebo mleté a vmíchané do jídla. Umel je najemno na moučku a vmíchej lžičku do kaše, do jogurtu nebo do těsta.',
-        caution: 'Celý ani rozpůlený ořech se nepodává — rozhoduje, jestli je opravdu mletý na moučku, ne jen nasekaný.',
+        caution: 'Celý ani rozpůlený ořech se nepodává, rozhoduje jen to, jestli je opravdu mletý na moučku, ne jen nasekaný.',
       },
       '9m': {
         serving:
@@ -936,12 +936,12 @@ export const nutsSeedsOils: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'NHS uvádí, že celé ořechy se dětem do pěti let nepodávají kvůli riziku zadušení, ale od začátku příkrmu je dostat můžou rozdrcené nebo mleté a vmíchané do jídla. Kešu je měkčí než ostatní ořechy, ale celé se stejně nepodává — patří do jídla jedině mleté na moučku.',
+          'NHS uvádí, že celé ořechy se dětem do pěti let nepodávají kvůli riziku zadušení, ale od začátku příkrmu je dostat můžou rozdrcené nebo mleté a vmíchané do jídla. Kešu je měkčí než ostatní ořechy, ale celé se stejně nepodává: patří do jídla jedině mleté na moučku.',
         caution: 'Pro dítě ber jedině přírodní kešu a umel si ho na mletou moučku, solená a pražená varianta se nehodí.',
       },
       '9m': {
         serving:
-          'V devíti měsících z mletých kešu udělej hladký krém rozmixováním s vodou — hodí se do omáček místo smetany.',
+          'V devíti měsících z mletých kešu udělej hladký krém rozmixováním s vodou: hodí se do omáček místo smetany.',
         caution: 'Mleté ořechy patří mezi klíčové alergeny; zaváděj je samostatně a s odstupem.',
       },
       '12m': {
@@ -981,7 +981,7 @@ export const nutsSeedsOils: Ingredient[] = [
       '6m': {
         serving:
           'NHS uvádí, že celé ořechy se dětem do pěti let nepodávají kvůli riziku zadušení, ale od začátku příkrmu je dostat můžou rozdrcené nebo mleté a vmíchané do jídla. U arašídů to platí dvojnásob: patří mezi klíčové alergeny a časné zavedení se doporučuje, ale výhradně v mleté podobě nebo jako hladké máslo tenkce natřené na jídlo.',
-        caution: 'Hladké arašídové máslo nikdy nedávej na lžičce samotné — NHS na to upozorňuje zvlášť, protože se jím dítě může zadusit. Vždycky ho roztři na jídlo.',
+        caution: 'Hladké arašídové máslo nikdy nedávej na lžičce samotné. NHS na to upozorňuje zvlášť, protože se jím dítě může zadusit. Vždycky ho roztři na jídlo.',
       },
       '9m': {
         serving:
@@ -1245,8 +1245,8 @@ export const nutsSeedsOils: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Slunečnicové máslo je mletá pasta ze slunečnicových semínek a hodí se do domácnosti, kde se ořechům vyhýbáte. Nikdy ho nedávej na lžičce samotné — vždycky ho roztři v tenké vrstvě na proužek pečiva nebo vmíchej do kaše.',
-        caution: 'Na obalu má být jediná složka a nic dalšího — žádný olej navíc, žádné sladidlo.',
+          'Slunečnicové máslo je mletá pasta ze slunečnicových semínek a hodí se do domácnosti, kde se ořechům vyhýbáte. Nikdy ho nedávej na lžičce samotné. Vždycky ho roztři v tenké vrstvě na proužek pečiva nebo vmíchej do kaše.',
+        caution: 'Na obalu má být jediná složka a nic dalšího: žádný olej navíc, žádné sladidlo.',
       },
       '9m': {
         serving:

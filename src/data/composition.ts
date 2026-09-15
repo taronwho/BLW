@@ -205,7 +205,7 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
   },
   'rakytnik': {
     ...z({ vitaminC: 131, iron: 0.7, zinc: 0.3 }, matvaretabellen('Tindved, havtorn, rå', 'tindved-havtorn-ra')),
-    poznamka: 'Česká ani americká tabulka rakytník nemají; hodnota je z norské tabulky. Vysoké hodnoty z článků o rakytníku bývají horní meze — tohle je naměřený obsah.',
+    poznamka: 'Česká ani americká tabulka rakytník nemají; hodnota je z norské tabulky. Vysoké hodnoty z článků o rakytníku bývají horní meze: tohle je naměřený obsah.',
   },
 
   /* Obiloviny */
@@ -317,7 +317,7 @@ export const COMPOSITION: Readonly<Record<string, Slozeni>> = {
   'mouka-ovesna': {
     ...z({ iron: 5.5 }, czfcdb('Mouka ovesná', 343)),
     ...z({ zinc: 2.7 }, matvaretabellen('Havremel', 'havremel')),
-    poznamka: 'Železo je z české tabulky, zinek z norské — česká ho u ovesné mouky neuvádí.',
+    poznamka: 'Železo je z české tabulky, zinek z norské: česká ho u ovesné mouky neuvádí.',
   },
   'mouka-sojova': {
     ...z({ iron: 6.37, zinc: 3.92 }, usdaFdc('Soy flour, full-fat, raw', 174273)),

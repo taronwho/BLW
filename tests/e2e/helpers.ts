@@ -98,9 +98,9 @@ export const SCREENS: readonly ScreenDef[] = [
   },
   {
     id: 'domacnost-deti',
-    // Domácnost je rozdělená na tři okruhy a každý se kontroluje zvlášť —
+    // Domácnost je rozdělená na tři okruhy a každý se kontroluje zvlášť 
     // jinak by přetečení nebo malý dotykový cíl v jednom z nich prošel.
-    name: 'Domácnost — děti',
+    name: 'Domácnost, děti',
     open: async (page) => {
       await otevriDomacnost(page, 'deti');
       await expect(page.getByTestId('jmeno-ditete')).toBeVisible();
@@ -108,7 +108,7 @@ export const SCREENS: readonly ScreenDef[] = [
   },
   {
     id: 'domacnost-sdileni',
-    name: 'Domácnost — sdílení',
+    name: 'Domácnost, sdílení',
     open: async (page) => {
       await otevriDomacnost(page, 'sdileni');
       await expect(page.getByTestId('stav-synchronizace')).toBeVisible();
@@ -116,7 +116,7 @@ export const SCREENS: readonly ScreenDef[] = [
   },
   {
     id: 'domacnost-aplikace',
-    name: 'Domácnost — aplikace',
+    name: 'Domácnost, aplikace',
     open: async (page) => {
       await otevriDomacnost(page, 'aplikace');
       await expect(page.getByTestId('pocet-k-revizi')).toBeVisible();
@@ -127,7 +127,7 @@ export const SCREENS: readonly ScreenDef[] = [
 /**
  * Založí dítě, aby šlo nastavovat, co k němu patří.
  *
- * Připravenost, úchop ani alergie nejdou zadat, dokud žádné dítě není —
+ * Připravenost, úchop ani alergie nejdou zadat, dokud žádné dítě není 
  * a to je správně, patří dítěti, ne domácnosti.
  */
 export async function zalozDite(page: Page, jmeno: string, narozeni: string): Promise<void> {
@@ -147,7 +147,7 @@ export interface TooSmallTarget {
 
 /**
  * Dotykové cíle < 44 px (docs/SPEC.md kap. 6). Prvky schované jen pro čtečku
- * obrazovky (`.sr-info`, `.sr-only`) se neměří — prstem se na ně nemíří.
+ * obrazovky (`.sr-info`, `.sr-only`) se neměří, prstem se na ně nemíří.
  */
 export async function tooSmallTargets(page: Page): Promise<TooSmallTarget[]> {
   return page.evaluate(() => {
@@ -172,7 +172,7 @@ export async function tooSmallTargets(page: Page): Promise<TooSmallTarget[]> {
   });
 }
 
-/** Šířka dokumentu proti šířce viewportu — jakýkoli přesah je chyba. */
+/** Šířka dokumentu proti šířce viewportu, jakýkoli přesah je chyba. */
 export async function horizontalOverflow(page: Page): Promise<number> {
   return page.evaluate(() =>
     Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),

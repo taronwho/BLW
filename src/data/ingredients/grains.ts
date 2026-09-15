@@ -999,7 +999,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Uvařený amarant se dobře váže, takže z něj vytvaruješ kuličky do ruky. Je bez lepku a z bezlepkových obilovin patří k těm s nejvyšším obsahem železa — 2,1 mg na 100 g uvařeného, tedy o něco víc než rýže nebo jáhly, ale pořád těsně pod hranicí „zdroj železa“.',
+          'Uvařený amarant se dobře váže, takže z něj vytvaruješ kuličky do ruky. Je bez lepku a z bezlepkových obilovin patří k těm s nejvyšším obsahem železa. 2,1 mg na 100 g uvařeného, tedy o něco víc než rýže nebo jáhly, ale pořád těsně pod hranicí „zdroj železa“.',
         caution: 'Pufovaný amarant je velmi lehký a snadno se vdechne nasucho.',
       },
       '12m': {
@@ -1214,7 +1214,7 @@ export const grains: Ingredient[] = [
       },
       '9m': {
         serving:
-          'V devíti měsících jí můžeš obalit kousky zeleniny nebo ryby a zapéct je v troubě. Obalované se peče, nesmaží — na pánvi nasákne tukem a ztvrdne.',
+          'V devíti měsících jí můžeš obalit kousky zeleniny nebo ryby a zapéct je v troubě. Obalované se peče, nesmaží: na pánvi nasákne tukem a ztvrdne.',
         caution: 'Kupovaná strouhanka bývá solená; usušená houska rozmixovaná doma solená není.',
       },
       '12m': {
@@ -1251,14 +1251,14 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tortilla je měkká placka, ze které se dá ukrojit proužek dlouhý jako dospělý prst — přesně tvar pro dlaňový úchop. Hodí se jako nosič: nanes na ni hummus, avokádo nebo tvaroh a srolovanou nakrájej.',
+          'Tortilla je měkká placka, ze které se dá ukrojit proužek dlouhý jako dospělý prst: přesně tvar pro dlaňový úchop. Hodí se jako nosič: nanes na ni hummus, avokádo nebo tvaroh a srolovanou nakrájej.',
         caution:
           'Obsahuje pšenici a lepek. Suchá tortilla se v puse svine do chuchvalce, proto ji vždycky něčím potři.',
       },
       '9m': {
         serving:
           'V devíti měsících se hodí srolovaná s náplní a nakrájená na kolečka, která dítě zvedne dvěma prsty. Krátce ohřátá na suché pánvi je vláčnější než studená.',
-        caution: 'Čti složení — některé tortilly mají hodně soli.',
+        caution: 'Čti složení: některé tortilly mají hodně soli.',
       },
       '12m': {
         serving:
@@ -1291,7 +1291,7 @@ export const grains: Ingredient[] = [
     hazards: ['arsen'],
     hazardNotes: {
       arsen:
-        'Rýže přijímá ze svého okolí víc arsenu než ostatní obiloviny. NHS k tomu uvádí, že ve Velké Británii platí pro rýži a výrobky z ní nejvyšší povolené hodnoty a pro potraviny určené malým dětem jsou nastavené ještě přísněji. Samotnou rýži to nevylučuje — omezení se týká rýžového nápoje jako náhrady mléka.',
+        'Rýže přijímá ze svého okolí víc arsenu než ostatní obiloviny. NHS k tomu uvádí, že ve Velké Británii platí pro rýži a výrobky z ní nejvyšší povolené hodnoty a pro potraviny určené malým dětem jsou nastavené ještě přísněji. Samotnou rýži to nevylučuje. Omezení se týká rýžového nápoje jako náhrady mléka.',
     },
     minAgeMonths: 6,
     prep: {
@@ -1424,13 +1424,13 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Ovesná mouka je jen jemně semleté vločky — uděláš ji doma za půl minuty v mixéru. Do kaše i do těsta přidá jemnost a zasytí líp než bílá mouka.',
+          'Ovesná mouka je jen jemně semleté vločky: uděláš ji doma za půl minuty v mixéru. Do kaše i do těsta přidá jemnost a zasytí líp než bílá mouka.',
         caution:
           'Oves sám lepek neobsahuje, ale běžně se zpracovává tam, kde se mele pšenice. Pro bezlepkovou dietu hledej na obalu označení bezlepkový oves.',
       },
       '9m': {
         serving:
-          'V devíti měsících z ní upeč měkké sušenky nebo ji přidej do placiček. Váže vlhkost, takže těsto po chvíli zhoustne — počítej s tím.',
+          'V devíti měsících z ní upeč měkké sušenky nebo ji přidej do placiček. Váže vlhkost, takže těsto po chvíli zhoustne: počítej s tím.',
         caution: 'Sušenky peč jen do zpevnění, přepečené jsou tvrdé a drolí se.',
       },
       '12m': {
@@ -1469,7 +1469,7 @@ export const grains: Ingredient[] = [
         serving:
           'NHS jmenuje sójovou mouku mezi zdroji železa, což z ní v bezmasé kuchyni dělá cennou položku. Přidej lžíci do těsta na placičky nebo do sušenek; samostatně se nepodává.',
         caution:
-          'Sója patří mezi klíčové alergeny, takže ji zaváděj jako ostatní — od šesti měsíců, v malém množství a s odstupem.',
+          'Sója patří mezi klíčové alergeny, takže ji zaváděj jako ostatní. Od šesti měsíců, v malém množství a s odstupem.',
       },
       '9m': {
         serving:
@@ -1511,7 +1511,7 @@ export const grains: Ingredient[] = [
       '6m': {
         serving:
           'Ječné vločky se vaří o něco déle než ovesné a kaše z nich vyjde hustší. Zalij je trojnásobkem tekutiny, vař deset minut a promíchej s ovocným pyré.',
-        caution: 'Ječmen obsahuje lepek — zaváděj ho jako ostatní klíčové alergeny.',
+        caution: 'Ječmen obsahuje lepek: zaváděj ho jako ostatní klíčové alergeny.',
       },
       '9m': {
         serving:
@@ -1597,7 +1597,7 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Rýžové nudle jsou bez lepku a stačí je zalít vroucí vodou. Široké nudle jsou pro první sousta lepší než tenké — dítě je uchopí celou dlaní a saje z nich omáčku.',
+          'Rýžové nudle jsou bez lepku a stačí je zalít vroucí vodou. Široké nudle jsou pro první sousta lepší než tenké. Dítě je uchopí celou dlaní a saje z nich omáčku.',
         caution: 'Rýžové výrobky střídej s jinými obilovinami, nedávej je každý den.',
       },
       '9m': {
@@ -1650,7 +1650,7 @@ export const grains: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí bezlepkové pečivo a pudinky s tapiokou. Perličková tapioka je jiný výrobek — kuličky se do roka nepodávají, mají tvar, který dýchací cesty uzavře.',
+          'Batole jí bezlepkové pečivo a pudinky s tapiokou. Perličková tapioka je jiný výrobek. Kuličky se do roka nepodávají, mají tvar, který dýchací cesty uzavře.',
         caution: 'Perličkovou tapioku v kuličkách malému dítěti nedávej.',
       },
     },
@@ -1682,7 +1682,7 @@ export const grains: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vyber variantu bez přidaného cukru a bez soli — běžné lupínky z obchodu mají obojí a NHS obojí u kojenců odmítá. Nasypané do mléka změknou a dají se rozmačkat lžící.',
+          'Vyber variantu bez přidaného cukru a bez soli. Běžné lupínky z obchodu mají obojí a NHS obojí u kojenců odmítá. Nasypané do mléka změknou a dají se rozmačkat lžící.',
         caution: 'Suché lupínky se v puse lepí na patro; vždycky je nech nabobtnat.',
       },
       '9m': {

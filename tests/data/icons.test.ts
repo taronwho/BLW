@@ -24,7 +24,7 @@ describe('ikony surovin', () => {
     expect(nepouzite).toEqual([]);
   });
 
-  it('surovina má vždycky aspoň jednu ikonu — kresbu nebo emoji', () => {
+  it('surovina má vždycky aspoň jednu ikonu, kresbu nebo emoji', () => {
     const bez = ingredients
       .filter((item) => item.icon === undefined && (item.emoji ?? '').length === 0)
       .map((item) => item.nameCz);

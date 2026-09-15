@@ -42,12 +42,12 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Do odebrané kaše vmíchej lžičku mletých lněných semínek a nech je pět minut nabobtnat.',
       'Kaši zřeď lžící mléka nebo vody, aby netvořila tuhý chuchvalec, který se špatně polyká.',
-      'Před podáváním promíchej a zkus teplotu na vnitřní straně zápěstí — kaše drží horko uprostřed.',
+      'Před podáváním promíchej a zkus teplotu na vnitřní straně zápěstí: kaše drží horko uprostřed.',
       'Přidej k porci rozmačkané jahody; vitamin C z nich pomáhá vstřebat železo z ovesných vloček, které se z rostlin vstřebává hůř než z masa.',
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši na lžíci, kterou dáš dítěti do ruky, a k tomu plátek syrové hrušky velikosti prstu na okusování.',
-      '9m': 'Kaši nech hustší a hruškové kostičky do ní jen zamíchej — dítě je loví prsty a trénuje špetku.',
+      '9m': 'Kaši nech hustší a hruškové kostičky do ní jen zamíchej: dítě je loví prsty a trénuje špetku.',
       '12m': 'Servíruj kaši v misce s vlastní lžící a kousky hrušky navrch; dítě už si nabírá samo a dojídá s malou pomocí.',
     },
     adultSteps: [
@@ -120,7 +120,7 @@ export const breakfast: Recipe[] = [
     baseSteps: [
       'Tvaroh rozmíchej s vejci do hladka, aby v těstě nezůstaly hrudky.',
       'Vmíchej špaldovou mouku a nech těsto deset minut odpočinout, ať mouka nabobtná.',
-      'Borůvky rozkroj každou zvlášť napůl — celá bobule je pro malé děti nebezpečně kulatá.',
+      'Borůvky rozkroj každou zvlášť napůl. Celá bobule je pro malé děti nebezpečně kulatá.',
       'Polovinu rozkrojených borůvek vmíchej do těsta a druhou si nech na dozdobení.',
       'Pánev potři máslem a peč lívance na mírném plameni po třech minutách z každé strany.',
       'Jahody zbav stopek a rozmačkej je vidličkou na dřeň, kterou lívance přeliješ místo sirupu.',
@@ -128,7 +128,7 @@ export const breakfast: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce těsta stranou a upeč z nich menší lívanečky pro miminko, dřív než se zbytek těsta dosladí.',
     babySteps: [
-      'Z odebraného těsta tvaruj podlouhlé lívanečky — v dětské ruce drží lépe než kulaté.',
+      'Z odebraného těsta tvaruj podlouhlé lívanečky: v dětské ruce drží lépe než kulaté.',
       'Peč je na mírném plameni o minutu déle, aby byly propečené i uprostřed; jeden rozlom a zkontroluj.',
       'Nech je vychladnout na mřížce, aby nezvlhly, a podávej vlažné.',
       'Dětský lívanec přelij jahodovou dření; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
@@ -171,7 +171,7 @@ export const breakfast: Recipe[] = [
       'Po kroku 4 odkroj dítětin díl omelety, dřív než přijde na řadu dochucení pro dospělé a než se na pánev přidá cottage.',
     babySteps: [
       'Dítětin díl omelety nakrájej na proužky nebo kostičky podle věku; vejce musí být propečené skrz naskrz, ne tekuté.',
-      'Nasekaný špenát v omeletě prohlédni — delší kusy listu nastříhej nůžkami, aby se nelepily na patro.',
+      'Nasekaný špenát v omeletě prohlédni. Delší kusy listu nastříhej nůžkami, aby se nelepily na patro.',
       'Navrch dej lžičku cottage bez dochucení, které porci zvláční.',
     ],
     babyServing: {
@@ -213,7 +213,7 @@ export const breakfast: Recipe[] = [
       'Po kroku 4 odlij tři lžíce hotového smoothie do misky, ještě před tím, než se zbytek dospělým dosladí.',
     babySteps: [
       'Odebrané smoothie pro miminko zahusti lžičkou rozdrcených vloček a nech pět minut nabobtnat.',
-      'Podávej ho v misce jako hustou kaši na lžíci, ne v lahvi — nápoje s ovocem se u malých dětí nedoporučují popíjet po celý den.',
+      'Podávej ho v misce jako hustou kaši na lžíci, ne v lahvi. Nápoje s ovocem se u malých dětí nedoporučují popíjet po celý den.',
       'Zbytek nech v lednici nejdéle do večera a znovu ho nemixuj.',
       'Do dětské porce nech i jahodovou dužinu; vitamin C z ní pomáhá vstřebat železo z ovesných vloček.',
     ],
@@ -296,7 +296,7 @@ export const breakfast: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber dvě lžíce avokádové pomazánky, dřív než se do misky přidá sůl a pepř pro dospělé.',
     babySteps: [
-      'Krajíc chleba pro miminko neopékej do křupava — měkčí střídka se lépe mačká v dásních. Kůrku odkroj.',
+      'Krajíc chleba pro miminko neopékej do křupava: měkčí střídka se lépe mačká v dásních. Kůrku odkroj.',
       'Střídku nakrájej na pásky široké jako dva prsty a potři je odebranou pomazánkou.',
       'Uvařené vejce nakrájej na měsíčky a polož je vedle; bílek je kluzký, proto sleduj, aby si ho dítě nenacpalo do pusy najednou.',
     ],
@@ -504,7 +504,7 @@ export const breakfast: Recipe[] = [
       'Vejce rozšlehej s polovinou jogurtu a přilij tolik vody, aby vznikla hladká, lehce tekoucí hmota.',
       'Vmíchej špaldovou mouku s práškem do pečiva a míchej jen do spojení; přemíchané těsto je tuhé.',
       'Nech těsto deset minut odpočinout, aby mouka nabobtnala a lívanečky nabyly.',
-      'Jahody zbav stopek a nakrájej je na plátky, nikdy je nenech celé — celá jahoda má nebezpečně kulatý tvar.',
+      'Jahody zbav stopek a nakrájej je na plátky, nikdy je nenech celé: celá jahoda má nebezpečně kulatý tvar.',
       'Pánev potři kokosovým olejem a peč lívanečky po dvou minutách z každé strany.',
     ],
     babySplitPoint:
@@ -552,7 +552,7 @@ export const breakfast: Recipe[] = [
     babySteps: [
       'Do dětské porce vmíchej lžíci malinového pyré, které kaši zbarví a dodá jí ovocnou chuť.',
       'Kaši zřeď mlékem, protože krupice po vychladnutí rychle houstne a tuhá kaše se hůř polyká.',
-      'Nech porci vychladnout a promíchej ji — uprostřed drží teplo výrazně déle než u okrajů.',
+      'Nech porci vychladnout a promíchej ji. Uprostřed drží teplo výrazně déle než u okrajů.',
     ],
     babyServing: {
       '6m': 'Nabídni kaši v hustší podobě na lžíci, kterou dáš dítěti do ruky, a lžičku malinového pyré rozetři navrch.',
@@ -717,7 +717,7 @@ export const breakfast: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce polentové kaše a jednu pečenou švestku, dřív než se kaše pro dospělé dochucuje skořicí a dosladí.',
     babySteps: [
-      'Pečenou švestku pro miminko oloupej — slupka je po pečení pevná a děti ji vyplivnou.',
+      'Pečenou švestku pro miminko oloupej. Slupka je po pečení pevná a děti ji vyplivnou.',
       'Dužinu rozmačkej vidličkou a vmíchej do odebrané kaše, aby zesládla ovocem.',
       'Kaši zřeď lžící vody nebo jogurtu, protože polenta po vychladnutí tuhne.',
     ],
@@ -759,7 +759,7 @@ export const breakfast: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce kaše se strouhaným jablkem, dřív než se do hrnce přimíchají mleté mandle a než se kaše pro dospělé dosladí.',
     babySteps: [
-      'Do dětské porce vmíchej půl lžičky mletých mandlí — v mleté podobě jsou bezpečné, celé ořechy do jednoho roku nepatří.',
+      'Do dětské porce vmíchej půl lžičky mletých mandlí. V mleté podobě jsou bezpečné, celé ořechy do jednoho roku nepatří.',
       'Kaši zřeď mlékem a promíchej, aby se mleté mandle nespekly do hrudky.',
       'Nech porci vychladnout a před podáváním ještě jednou promíchej.',
       'K porci přidej rozmačkané jahody; vitamin C z nich pomáhá vstřebat železo z quinoy i z mletých mandlí.',
@@ -835,7 +835,7 @@ export const breakfast: Recipe[] = [
     ],
     baseSteps: [
       'Banány nakrájej na kolečka a polovinu rozmixuj s dvěma třetinami borůvek a jogurtem na hustou hmotu.',
-      'Zbylé borůvky rozkroj napůl — celá bobule je přesně toho kulatého tvaru, který malým dětem hrozí zapadnutím do dýchacích cest.',
+      'Zbylé borůvky rozkroj napůl. Celá bobule je přesně toho kulatého tvaru, který malým dětem hrozí zapadnutím do dýchacích cest.',
       'Vločky krátce opraž na suché pánvi, dokud nezavoní, a nech je vychladnout.',
       'Hmotu rozděl do misek a navrch rozlož rozkrojené borůvky a kolečka banánu.',
       'Jahody zbav stopek, velké rozřež podélně na čtvrtky a menší rozmačkej vidličkou.',

@@ -133,7 +133,7 @@ export function IngredientDetailScreen(): ReactNode {
         )}
         {ingredient.reviewStatus === 'needs-review' && (
           <div className="flex flex-col gap-2 rounded-lg bg-risk/10 p-3">
-            <p className="text-sm font-semibold text-risk">Neověřeno — zkontroluj s pediatrem</p>
+            <p className="text-sm font-semibold text-risk">Neověřeno, zkontroluj s pediatrem</p>
             {ingredient.reviewNote !== undefined && (
               <p className="text-sm leading-relaxed">{ingredient.reviewNote}</p>
             )}

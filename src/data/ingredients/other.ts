@@ -302,7 +302,7 @@ export const other: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ani v devíti měsících se kakao nedoporučuje. Pokud chceš podobnou tmavou chuť do kaše, sáhni po karobu — je přirozeně sladký, takže ho nemusíš doslazovat. Že by karob neobsahoval povzbuzující látky, ale doložené není; důvodem k záměně je sladkost, ne kofein.',
+          'Ani v devíti měsících se kakao nedoporučuje. Pokud chceš podobnou tmavou chuť do kaše, sáhni po karobu. Je přirozeně sladký, takže ho nemusíš doslazovat. Že by karob neobsahoval povzbuzující látky, ale doložené není; důvodem k záměně je sladkost, ne kofein.',
         caution: 'Čokoládové pomazánky nejsou pro dítě do roka vhodné.',
       },
       '12m': {
@@ -353,7 +353,7 @@ export const other: Ingredient[] = [
         serving:
           'Batole jí karob v kaši, v pudinku i v pečení. Je přirozeně sladký, takže se nemusí doslazovat, a mletý lusk je bohatý na vlákninu, pektin a lignin; ze stopových prvků nese i železo.',
         caution:
-        'Karob rychle nasává vlhkost, skladuj ho v uzavřené nádobě. Že by byl oproti kakau bez povzbuzujících látek, doložené není — důvodem k záměně je sladkost, ne kofein.',
+        'Karob rychle nasává vlhkost, skladuj ho v uzavřené nádobě. Že by byl oproti kakau bez povzbuzujících látek, doložené není: důvodem k záměně je sladkost, ne kofein.',
       },
     },
     prepIdeas: [
@@ -468,19 +468,19 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Do prvních narozenin se nepodává vůbec, a to ani vařený nebo zapečený. Občas obsahuje bakterie, které ve střevě kojence vytvářejí toxin — NHS tak popisuje vznik kojeneckého botulismu a označuje ho za velmi vážné onemocnění. Sladit se dá ovocným pyré nebo rozmačkaným banánem.',
+          'Do prvních narozenin se nepodává vůbec, a to ani vařený nebo zapečený. Občas obsahuje bakterie, které ve střevě kojence vytvářejí toxin. NHS tak popisuje vznik kojeneckého botulismu a označuje ho za velmi vážné onemocnění. Sladit se dá ovocným pyré nebo rozmačkaným banánem.',
         caution:
           'Pozor na hotové výrobky: sušenky, müsli tyčinky a marinády ho mívají v receptuře, i když to na obalu není nápadné.',
       },
       '9m': {
         serving:
-          'Ani v devíti měsících se nic nemění — hranicí je první rok, ne to, co dítě zvládne rozžvýkat. Tepelná úprava riziko neodstraňuje, protože nejde o samotnou bakterii, ale o to, co dokáže vytvořit ve střevě.',
-        caution: 'Domácí i pastovaný, květový i lesní — před prvními narozeninami platí totéž pro všechny.',
+          'Ani v devíti měsících se nic nemění. Hranicí je první rok, ne to, co dítě zvládne rozžvýkat. Tepelná úprava riziko neodstraňuje, protože nejde o samotnou bakterii, ale o to, co dokáže vytvořit ve střevě.',
+        caution: 'Domácí i pastovaný, květový i lesní. Před prvními narozeninami platí totéž pro všechny.',
       },
       '12m': {
         serving:
           'Po prvním roce už batole med dostat může. Podle NHS ale zůstává cukrem, takže platí totéž co pro ostatní sladidla: čím míň a čím řidčeji, tím líp pro zuby. Lžička do jogurtu nebo na chleba je jiná věc než oslazené pití.',
-        caution: 'Sladká věc na zubech přes noc škodí nejvíc — po medu vyčisti zuby.',
+        caution: 'Sladká věc na zubech přes noc škodí nejvíc: po medu vyčisti zuby.',
       },
     },
     prepIdeas: [
@@ -514,7 +514,7 @@ export const other: Ingredient[] = [
         serving:
           'Do jídla pro kojence se nepřidává a nedává se ani do vody, ve které se vaří. NHS to zdůvodňuje ledvinami, které na takovou zátěž ještě nestačí. Tohle je právě ten důvod, proč se dětská porce odebírá stranou dřív, než se hrnec dochutí.',
         caution:
-          'Bujon v kostce, vývar z pytlíku a hotové omáčky patří do stejné kategorie — NHS je jmenuje přímo, protože jich obsahují hodně.',
+          'Bujon v kostce, vývar z pytlíku a hotové omáčky patří do stejné kategorie. NHS je jmenuje přímo, protože jich obsahují hodně.',
       },
       '9m': {
         serving:
@@ -557,12 +557,12 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Kojenec ho podle NHS nepotřebuje. Vyhýbání se sladkým svačinám a nápojům pomáhá předcházet zubnímu kazu — a to platí i pro ovocnou šťávu. Sladkou chuť dodá ovoce samo: rozmačkaný banán, dušená hruška, jablečné pyré.',
+          'Kojenec ho podle NHS nepotřebuje. Vyhýbání se sladkým svačinám a nápojům pomáhá předcházet zubnímu kazu, a to platí i pro ovocnou šťávu. Sladkou chuť dodá ovoce samo: rozmačkaný banán, dušená hruška, jablečné pyré.',
         caution: 'Sladkost si dítě rychle oblíbí a méně sladké jídlo pak odmítá. Není kam spěchat.',
       },
       '9m': {
         serving:
-          'V devíti měsících se nic nemění. Hlídej hotové výrobky — dětské sušenky, ochucené jogurty a müsli ho mívají v receptuře víc, než se na první pohled zdá.',
+          'V devíti měsících se nic nemění. Hlídej hotové výrobky. Dětské sušenky, ochucené jogurty a müsli ho mívají v receptuře víc, než se na první pohled zdá.',
         caution: 'Přírodní znějící sladidla (sirupy, koncentráty) jsou z hlediska zubů pořád cukr.',
       },
       '12m': {
@@ -600,7 +600,7 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Do jídelníčku kojence nepatří. Že je z javoru a ne z řepy, na věci nic nemění — pro zuby i pro chuťové návyky se chová jako každý jiný přidaný cukr, kterému se podle NHS má dítě vyhýbat.',
+          'Do jídelníčku kojence nepatří. Že je z javoru a ne z řepy, na věci nic nemění. Pro zuby i pro chuťové návyky se chová jako každý jiný přidaný cukr, kterému se podle NHS má dítě vyhýbat.',
         caution: 'Bývá v hotových kaších a müsli směsích označených jako „bez cukru“.',
       },
       '9m': {
@@ -643,7 +643,7 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Do dětského jídla nepatří. NHS ho jmenuje přímo vedle solení jako to, co se při vaření pro kojence nemá používat, protože bývá hodně slaný. Polévku i rizoto uvař na vodě nebo na domácím vývaru bez soli — zelenina, kost nebo kuřecí skelet dají chuť samy.',
+          'Do dětského jídla nepatří. NHS ho jmenuje přímo vedle solení jako to, co se při vaření pro kojence nemá používat, protože bývá hodně slaný. Polévku i rizoto uvař na vodě nebo na domácím vývaru bez soli. Zelenina, kost nebo kuřecí skelet dají chuť samy.',
         caution: 'Týká se i vývaru v prášku, v pytlíku a hotových „základů“ na omáčky.',
       },
       '9m': {
@@ -653,7 +653,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Po prvním roce se malé množství v rodinném jídle připustit dá, ale domácí vývar zůstává lepší volbou — víš, co je v něm.',
+          'Po prvním roce se malé množství v rodinném jídle připustit dá, ale domácí vývar zůstává lepší volbou: víš, co je v něm.',
         caution: 'Porci pro batole radši nalej dřív, než hrnec dochutíš.',
       },
     },
@@ -683,7 +683,7 @@ export const other: Ingredient[] = [
     hazards: ['arsen'],
     hazardNotes: {
       arsen:
-        'NHS uvádí, že děti do pěti let nemají rýžový nápoj dostávat jako náhradu mateřského mléka, umělé výživy ani kravského mléka, protože může obsahovat příliš mnoho arsenu. Rýže ho ze svého okolí přijímá víc než ostatní obiloviny. Samotnou rýži to podle NHS nevylučuje — omezení se týká nápoje.',
+        'NHS uvádí, že děti do pěti let nemají rýžový nápoj dostávat jako náhradu mateřského mléka, umělé výživy ani kravského mléka, protože může obsahovat příliš mnoho arsenu. Rýže ho ze svého okolí přijímá víc než ostatní obiloviny. Samotnou rýži to podle NHS nevylučuje: omezení se týká nápoje.',
     },
     minAgeMonths: 12,
     prep: {
@@ -699,7 +699,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Ani po prvním roce se nedoporučuje — NHS mluví o dětech do pěti let. Jako mléčná náhrada připadá v úvahu neslazený sójový, ovesný nebo mandlový nápoj obohacený vápníkem.',
+          'Ani po prvním roce se nedoporučuje. NHS mluví o dětech do pěti let. Jako mléčná náhrada připadá v úvahu neslazený sójový, ovesný nebo mandlový nápoj obohacený vápníkem.',
         caution: 'Zkontroluj obal: „rýžový nápoj“ bývá složkou i v kombinovaných rostlinných nápojích.',
       },
     },
@@ -732,7 +732,7 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jako nápoj se kojenci nedává. NHS uvádí neslazené rostlinné nápoje obohacené vápníkem — sójový, ovesný nebo mandlový — až od jednoho roku. Do šesti měsíců je nápojem mateřské mléko nebo umělá výživa, k jídlu voda.',
+          'Jako nápoj se kojenci nedává. NHS uvádí neslazené rostlinné nápoje obohacené vápníkem. Sójový, ovesný nebo mandlový: až od jednoho roku. Do šesti měsíců je nápojem mateřské mléko nebo umělá výživa, k jídlu voda.',
         caution: 'Ochucené a slazené varianty (vanilkový, čokoládový) jsou sladké nápoje, ne mléko.',
       },
       '9m': {
@@ -742,7 +742,7 @@ export const other: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Po prvních narozeninách ho batole může dostat jako součást pestrého jídelníčku. Vyber neslazený a obohacený vápníkem — na obalu bývá jako „vápník“ ve složení. Hodí se do kaše, do pečení i do kakaa.',
+          'Po prvních narozeninách ho batole může dostat jako součást pestrého jídelníčku. Vyber neslazený a obohacený vápníkem: na obalu bývá jako „vápník“ ve složení. Hodí se do kaše, do pečení i do kakaa.',
         caution: 'Má méně bílkovin i tuku než kravské mléko, takže samo o sobě není rovnocennou náhradou.',
       },
     },
@@ -774,17 +774,17 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jako nápoj se kojenci nedává — NHS ho spolu s ovesným a mandlovým uvádí až od jednoho roku, a to neslazený a obohacený vápníkem. Sója přitom patří mezi klíčové alergeny, takže se v jídle (tofu, tempeh) zavádí dřív a samostatně.',
+          'Jako nápoj se kojenci nedává. NHS ho spolu s ovesným a mandlovým uvádí až od jednoho roku, a to neslazený a obohacený vápníkem. Sója přitom patří mezi klíčové alergeny, takže se v jídle (tofu, tempeh) zavádí dřív a samostatně.',
         caution: 'Zavádění sóji jako alergenu řeš v jídle, ne nápojem.',
       },
       '9m': {
         serving:
-          'Ani v devíti měsících jako nápoj ne. V jídle je sója v pořádku — tofu rozmačkané do omáčky nebo edamame jsou vhodnější cesta.',
+          'Ani v devíti měsících jako nápoj ne. V jídle je sója v pořádku. Tofu rozmačkané do omáčky nebo edamame jsou vhodnější cesta.',
         caution: 'Po prvním podání sóji nech jeden až dva dny odstup, ať poznáš případnou reakci.',
       },
       '12m': {
         serving:
-          'Po prvním roce je z rostlinných nápojů nejblíž kravskému mléku — má srovnatelně bílkovin. Vyber neslazený a obohacený vápníkem.',
+          'Po prvním roce je z rostlinných nápojů nejblíž kravskému mléku: má srovnatelně bílkovin. Vyber neslazený a obohacený vápníkem.',
         caution: 'Nápoje označené „sójový dezert“ nebo „vanilkový“ jsou slazené.',
       },
     },
@@ -816,7 +816,7 @@ export const other: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jako nápoj se kojenci nedává; NHS ho uvádí až od jednoho roku, neslazený a obohacený vápníkem. Ořechy samotné se ale zavádět můžou — mleté nebo jako hladké máslo vmíchané do jídla.',
+          'Jako nápoj se kojenci nedává; NHS ho uvádí až od jednoho roku, neslazený a obohacený vápníkem. Ořechy samotné se ale zavádět můžou. Mleté nebo jako hladké máslo vmíchané do jídla.',
         caution: 'Mandlový nápoj neplatí za zavedení ořechů jako alergenu, bývá velmi řídký.',
       },
       '9m': {

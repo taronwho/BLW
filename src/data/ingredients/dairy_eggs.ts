@@ -1059,7 +1059,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ani v devíti měsících jako hlavní nápoj ne. Vyrobené kozí sýry a jogurty jsou jiná věc — u nich rozhoduje, jestli jsou z pasterizovaného mléka a jestli nejde o zrající sýr s plísní.',
+          'Ani v devíti měsících jako hlavní nápoj ne. Vyrobené kozí sýry a jogurty jsou jiná věc. U nich rozhoduje, jestli jsou z pasterizovaného mléka a jestli nejde o zrající sýr s plísní.',
         caution: 'Zrající kozí sýr NHS mezi vhodné sýry pro kojence neřadí.',
       },
       '12m': {
@@ -1098,7 +1098,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'NHS jmenuje jemný čedar přímo mezi sýry, které kojenec od šesti měsíců dostat může — musí být z pasterizovaného mléka a plnotučný. Nastrouhej ho najemno do kaše, do zeleninového pyré nebo do omáčky; kostky zatím ne.',
+          'NHS jmenuje jemný čedar přímo mezi sýry, které kojenec od šesti měsíců dostat může: musí být z pasterizovaného mléka a plnotučný. Nastrouhej ho najemno do kaše, do zeleninového pyré nebo do omáčky; kostky zatím ne.',
         caution:
           'Vybírej jemný, ne vyzrálý. Zrání zvyšuje slanost a ta je u kojence tím, co rozhoduje.',
       },
@@ -1141,7 +1141,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Syrový se nepodává. NHS řadí měkké sýry zrající pod bílou plísní mezi ty, které kojencům ani malým dětem nepatří, protože mohou nést listerii. Propečený je ale v pořádku — zapečení tuhle bakterii ničí, a NHS zapečený hermelín uvádí přímo jako bezpečnější volbu.',
+          'Syrový se nepodává. NHS řadí měkké sýry zrající pod bílou plísní mezi ty, které kojencům ani malým dětem nepatří, protože mohou nést listerii. Propečený je ale v pořádku. Zapečení tuhle bakterii ničí, a NHS zapečený hermelín uvádí přímo jako bezpečnější volbu.',
         caution:
           'Rozhoduje propečení skrz naskrz, ne jen ohřátí. Sýr musí být uvnitř horký a rozteklý.',
       },
@@ -1184,7 +1184,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Za studena se nepodává. NHS jmenuje měkké sýry s modrou plísní mezi těmi, které kojencům ani malým dětem nepatří kvůli listerii. Ve vařeném nebo zapečeném jídle je to jiná věc — varem se bakterie ničí.',
+          'Za studena se nepodává. NHS jmenuje měkké sýry s modrou plísní mezi těmi, které kojencům ani malým dětem nepatří kvůli listerii. Ve vařeném nebo zapečeném jídle je to jiná věc: varem se bakterie ničí.',
         caution:
           'Niva je navíc výrazně slaná, takže ji do dětské porce dávej po troškách jako chuť, ne jako složku.',
       },
@@ -1227,7 +1227,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zrající kozí sýr NHS jmenuje vedle hermelínu a nivy jako ten, který kojenci ani malé děti nedostávají syrový — kvůli listerii. Zapečený nebo rozpuštěný v horkém jídle v pořádku je.',
+          'Zrající kozí sýr NHS jmenuje vedle hermelínu a nivy jako ten, který kojenci ani malé děti nedostávají syrový: kvůli listerii. Zapečený nebo rozpuštěný v horkém jídle v pořádku je.',
         caution: 'Čerstvý kozí tvaroh z pasterizovaného mléka je jiná kategorie než zrající rohlíček.',
       },
       '9m': {
@@ -1269,7 +1269,7 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Jako nápoj kojenci nepatří — mléčné výrobky se od šesti měsíců používají v jídle a ve vaření, ale nápojem zůstává mateřské mléko nebo umělá výživa. Ve vaření je podmáslí vděčné: v těstě reaguje se sodou a nadzvedne ho, takže lívanečky vyjdou vláčné.',
+          'Jako nápoj kojenci nepatří. Mléčné výrobky se od šesti měsíců používají v jídle a ve vaření, ale nápojem zůstává mateřské mléko nebo umělá výživa. Ve vaření je podmáslí vděčné: v těstě reaguje se sodou a nadzvedne ho, takže lívanečky vyjdou vláčné.',
         caution: 'Kupuj z pasterizovaného mléka a neslazené.',
       },
       '9m': {
@@ -1355,14 +1355,14 @@ export const dairyEggs: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Křepelčí vejce se vždycky vaří natvrdo — NHS u kachních, husích a křepelčích vajec uvádí, že se mají uvařit, dokud bílek i žloutek nejsou pevné. Uvařené oloupej a rozčtvrť podélně, nikdy nepodávej celé ani přepůlené na kolečka.',
+          'Křepelčí vejce se vždycky vaří natvrdo. NHS u kachních, husích a křepelčích vajec uvádí, že se mají uvařit, dokud bílek i žloutek nejsou pevné. Uvařené oloupej a rozčtvrť podélně, nikdy nepodávej celé ani přepůlené na kolečka.',
         caution:
           'Značka British Lion, která u slepičích vajec dovoluje i nedovařenou úpravu, se na křepelčí vejce nevztahuje.',
       },
       '9m': {
         serving:
           'V devíti měsících platí totéž: uvařit natvrdo a rozčtvrtit podélně. Rozmačkané vidličkou se dají vmíchat do pomazánky nebo do salátu.',
-        caution: 'Kulatý tvar zůstává rizikový i u zručného dítěte — čtvrtky podélně, vždycky.',
+        caution: 'Kulatý tvar zůstává rizikový i u zručného dítěte: čtvrtky podélně, vždycky.',
       },
       '12m': {
         serving:

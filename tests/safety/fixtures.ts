@@ -2,7 +2,7 @@ import type { Catalog, Ingredient, Recipe, Stage, StagePrep } from '../../src/ty
 
 /**
  * Továrničky na platné položky. Test pak jen rozbije jedno pole a ověří,
- * že pravidlo zabere — negativní test tak nemůže projít omylem.
+ * že pravidlo zabere, negativní test tak nemůže projít omylem.
  */
 
 function prep(serving: string, caution?: string): StagePrep {

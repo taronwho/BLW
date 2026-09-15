@@ -104,7 +104,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Nabídni hustou kaši s rybou na lžíci nebo jako hromádku, ze které dítě olizuje prsty.',
-      '9m': 'Podávej kaši vytvarovanou do malých hromádek plus pruhy dušeného fenyklu na uchopení. Štika zůstává rozmělněná v kaši — v hromádce se případná kostička uhlídá líp než v samostatném kousku.',
+      '9m': 'Podávej kaši vytvarovanou do malých hromádek plus pruhy dušeného fenyklu na uchopení. Štika zůstává rozmělněná v kaši. V hromádce se případná kostička uhlídá líp než v samostatném kousku.',
       '12m': 'Servíruj brambor rozmačkaný nahrubo s kousky ryby a fenyklem promíchaným dovnitř.',
     },
     adultSteps: [
@@ -201,9 +201,9 @@ export const lunchesDinners2: Recipe[] = [
       'Sardinky drž z dětské porce stranou, jsou z konzervy a mají vysoký obsah soli.',
     ],
     babyServing: {
-      '6m': 'V šesti měsících tuhle pomazánku nenabízej — recept stojí na sardinkách z konzervy a počítá až s batoletem. Sardinky do dětské porce nepatří v žádné podobě.',
+      '6m': 'V šesti měsících tuhle pomazánku nenabízej. Recept stojí na sardinkách z konzervy a počítá až s batoletem. Sardinky do dětské porce nepatří v žádné podobě.',
       '9m': 'Ani v devíti měsících se sardinky z konzervy nehodí; nabídni jen tvaroh s pažitkou na proužku chleba.',
-      '12m': 'Batoleti namaž tenkou vrstvu tvarohové pomazánky na žitný proužek a přilož plátky ředkvičky. Sardinky nech dospělým — kvůli soli z konzervy zůstávají mimo dětskou porci i teď.',
+      '12m': 'Batoleti namaž tenkou vrstvu tvarohové pomazánky na žitný proužek a přilož plátky ředkvičky. Sardinky nech dospělým. Kvůli soli z konzervy zůstávají mimo dětskou porci i teď.',
     },
     adultSteps: [
       'Sardinky sceď, rozmačkej je vidličkou i s měkkými kůstkami a vmíchej do poloviny pomazánky.',
@@ -297,7 +297,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Kaši rozřeď lžící vody z vaření, aby nebyla tak hutná a dala se olizovat ze lžíce.',
       'Vmíchej lžičku ghí, tuk pomáhá vstřebat vitaminy rozpustné v tucích.',
-      'Přidej lžíci dušeného pórku nasekaného opravdu najemno a vedle polož měkkou růžičku brokolice — vitamin C z ní pomáhá vstřebat železo z hrachu a stonek je zároveň dobré držátko.',
+      'Přidej lžíci dušeného pórku nasekaného opravdu najemno a vedle polož měkkou růžičku brokolice. Vitamin C z ní pomáhá vstřebat železo z hrachu a stonek je zároveň dobré držátko.',
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
@@ -659,7 +659,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 4 odeber dvě lžíce náplně do misky, dřív než se patizony plní a sypou sýrem.',
     babySteps: [
       'Náplň rozmačkej vidličkou, houby jsou pružné a ukousnutý kus si drží tvar.',
-      'Vmíchej lžíci měkké vařené dužiny z patizonu, aby porce lépe držela pohromadě, a nech v ní i kostičky papriky — vitamin C z nich pomáhá vstřebat železo z pohanky.',
+      'Vmíchej lžíci měkké vařené dužiny z patizonu, aby porce lépe držela pohromadě, a nech v ní i kostičky papriky. Vitamin C z nich pomáhá vstřebat železo z pohanky.',
       'Nech ji zvlažnět a podávej hned, houby se nehodí ohřívat podruhé.',
     ],
     babyServing: {
@@ -1691,7 +1691,7 @@ export const lunchesDinners2: Recipe[] = [
     baseSteps: [
       'Cibuli, česnek a mrkev nastrouhej najemno a nech je na olivovém oleji osm minut zesklovatět.',
       'Přilij passatu, povař patnáct minut na mírném plameni a míchej, dokud omáčka nezhoustne.',
-      'Omáčku rozděl do dvou hrnců — od tohoto místa jde každá linie vlastní cestou.',
+      'Omáčku rozděl do dvou hrnců. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 2 naber dvě lžíce husté rajčatové omáčky do misky, dřív než se hrnce dochucují pro dospělé.',
@@ -1715,7 +1715,7 @@ export const lunchesDinners2: Recipe[] = [
       'Vmíchej ji do druhého hrnce s omáčkou, osol a povař pět minut, aby nasála chuť rajčat. Navrch dej bazalku.',
     ],
     vegetarianProteinSwap:
-      'Mleté kuřecí nahrazuje 150 g zelené čočky uvařené doměkka — v omáčce drží tvar podobně jako maso a dodá bílkovinu i rostlinné železo.',
+      'Mleté kuřecí nahrazuje 150 g zelené čočky uvařené doměkka. V omáčce drží tvar podobně jako maso a dodá bílkovinu i rostlinné železo.',
     allergens: ['psenice-lepek'],
     tags: ['rodinné', 'mrazitelné'],
     sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
@@ -1748,7 +1748,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Odebranou porci rozmačkej vidličkou na hrubé pyré, ať v ní nezůstane celá fazole se slupkou.',
       'Vmíchej lžičku nastrouhaného čedaru, který se v teplé směsi rozpustí a dodá chuť místo soli.',
-      'Kápni pár kapek limetkové šťávy — vitamin C v ní zlepší vstřebání železa z fazolí.',
+      'Kápni pár kapek limetkové šťávy. Vitamin C v ní zlepší vstřebání železa z fazolí.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -1807,7 +1807,7 @@ export const lunchesDinners2: Recipe[] = [
       'Vytvaruj placičky a peč je v troubě dvacet minut, dokud nezpevní. Podávej s pečenými bramborami.',
     ],
     vegetarianProteinSwap:
-      'Mleté krůtí nahrazuje 200 g vařené cizrny rozmačkané vidličkou — placička díky ní drží tvar a dodá bílkovinu i rostlinné železo.',
+      'Mleté krůtí nahrazuje 200 g vařené cizrny rozmačkané vidličkou. Placička díky ní drží tvar a dodá bílkovinu i rostlinné železo.',
     allergens: ['psenice-lepek'],
     tags: ['rodinné', 'do ruky'],
     sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
@@ -1877,7 +1877,7 @@ export const lunchesDinners2: Recipe[] = [
       'Čočku propláchni a přeber. Cibuli, mrkev a petržel nakrájej na drobné kostky.',
       'Zeleninu nech na oleji deset minut zesklovatět, přidej čočku, bobkový list a zalij vodou dva prsty nad povrch.',
       'Vař třicet minut doměkka, pak přidej loupaná rajčata a povař dalších deset minut. Bobkový list vyndej.',
-      'Obsah hrnce rozděl na dvě části — od tohoto místa jde každá linie vlastní cestou.',
+      'Obsah hrnce rozděl na dvě části. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce čočky se zeleninou do misky, dřív než do hrnce přijde maso a dřív než se dochucuje pro dospělé.',
@@ -1888,7 +1888,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej rozmačkanou čočku na lžíci, nebo ji nanes v husté vrstvě na proužek měkkého pečiva dlouhý jako dospělý prst.',
-      '9m': 'Nech zrna celá, ale měkká — dítě je sbírá z tácku a trénuje na nich prsty.',
+      '9m': 'Nech zrna celá, ale měkká. Dítě je sbírá z tácku a trénuje na nich prsty.',
       '12m': 'Batole jí čočku lžící z misky jako hlavní chod nebo jako přílohu.',
     },
     adultSteps: [
@@ -1900,7 +1900,7 @@ export const lunchesDinners2: Recipe[] = [
       'Povař pět minut a podávej s lžící zakysané smetany nebo s pečivem.',
     ],
     vegetarianProteinSwap:
-      'Mleté vepřové se tu nenahrazuje — bílkovinu i železo nese sama čočka, které je v základu dost pro obě linie.',
+      'Mleté vepřové se tu nenahrazuje. Bílkovinu i železo nese sama čočka, které je v základu dost pro obě linie.',
     allergens: [],
     tags: ['rodinné', 'mrazitelné', 'bez lepku'],
     sources: [NHS_VEGETARIAN, NHS_IRON, NHS_PREP_SAFELY],
@@ -1924,13 +1924,13 @@ export const lunchesDinners2: Recipe[] = [
     baseSteps: [
       'Troubu rozehřej na 180 °C. Hrušky oloupej, zbav jádřinců a nakrájej na plátky silné jako prst.',
       'Hermelín polož do zapékací misky, oblož ho hruškami, pokap olejem a přidej snítky tymiánu.',
-      'Peč dvacet minut, dokud není sýr uvnitř horký a rozteklý skrz naskrz — právě tohle propečení je u sýrů s bílou plísní podmínka, ne ozdoba.',
+      'Peč dvacet minut, dokud není sýr uvnitř horký a rozteklý skrz naskrz. Právě tohle propečení je u sýrů s bílou plísní podmínka, ne ozdoba.',
     ],
     babySplitPoint:
       'Po kroku 3 naber lžičku propečeného sýra a dva plátky pečené hrušky do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Lžičku horkého propečeného sýra rozmíchej se lžící crème fraîche, aby porce nebyla tak výrazná.',
-      'Plátky hrušky nech vcelku — jsou měkké a dají se uchopit.',
+      'Plátky hrušky nech vcelku: jsou měkké a dají se uchopit.',
       'Krajíc chleba nakrájej na proužky široké jako dospělý prst a směs na ně nanes.',
       'Nech vychladnout na teplotu ruky; sýr z trouby je zrádně horký.',
     ],
@@ -1968,7 +1968,7 @@ export const lunchesDinners2: Recipe[] = [
       'Troubu rozehřej na 180 °C. Brambory oloupej a nakrájej na tenká kolečka, šalotku nasekej nadrobno.',
       'Crème fraîche rozmíchej s mlékem, přidej nasekanou šalotku a snítky tymiánu.',
       'Brambory vrstvi do zapékací misky, každou vrstvu přelij směsí a navrch rozlož oba sýry.',
-      'Peč čtyřicet minut, dokud brambory nezměknou a sýry se úplně nerozpustí — tepelná úprava je u zrajících sýrů podmínka.',
+      'Peč čtyřicet minut, dokud brambory nezměknou a sýry se úplně nerozpustí: tepelná úprava je u zrajících sýrů podmínka.',
     ],
     babySplitPoint:
       'Po kroku 4 naber dvě lžíce ze středu gratinu do misky, dřív než se zbytek dochucuje pro dospělé.',
@@ -2016,7 +2016,7 @@ export const lunchesDinners2: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě vejce, lžíci dušeného zelí, pár kostek brambory a lžíci zálivky, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
-      'Každé odebrané křepelčí vejce rozčtvrť podélně — celé ani na kolečka se nepodává nikdy, kulatý tvar uzavře dýchací cesty.',
+      'Každé odebrané křepelčí vejce rozčtvrť podélně. Celé ani na kolečka se nepodává nikdy, kulatý tvar uzavře dýchací cesty.',
       'Dušené zelí nasekej ještě jednou nadrobno a smíchej s kostkami brambory.',
       'Zakápni lžící zálivky z acidofilního mléka a přidej špetku nasekané jarní cibulky.',
     ],
@@ -2055,12 +2055,12 @@ export const lunchesDinners2: Recipe[] = [
       'Mrkev a cuketu nakrájej na tenké proužky dlouhé jako prst, jarní cibulku nasekej nadrobno.',
       'Zeleninu duš na oleji deset minut doměkka a na konci přidej cibulku.',
       'Rýžové nudle zalij vroucí vodou, nech je změknout podle obalu a propláchni, ať se neslepí.',
-      'Zeleninu rozděl do dvou pánví — od tohoto místa jde každá linie vlastní cestou.',
+      'Zeleninu rozděl do dvou pánví. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber lžíci dušené zeleniny a hrst nudlí, dřív než do pánví přijde maso nebo tofu a dřív než se dochucuje pro dospělé.',
     babySteps: [
-      'Odebranou mrkev a cuketu zkontroluj prstem — musí se dát rozmáčknout, jinak duš dál.',
+      'Odebranou mrkev a cuketu zkontroluj prstem: musí se dát rozmáčknout, jinak duš dál.',
       'Nudle nech dlouhé a přelij je lžící šťávy ze zeleniny, ať kloužou.',
       'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
     ],
@@ -2078,7 +2078,7 @@ export const lunchesDinners2: Recipe[] = [
       'Přidej nudle, osol a zakápni limetkou.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí prsa nahrazuje 250 g tofu naturál opečeného dozlatova — drží tvar podobně jako maso a dodá bílkovinu.',
+      'Kuřecí prsa nahrazuje 250 g tofu naturál opečeného dozlatova: drží tvar podobně jako maso a dodá bílkovinu.',
     allergens: ['soja'],
     tags: ['rodinné', 'bez lepku', 'rychlé'],
     sources: [EFSA_ARSENIC, NHS_VEGETARIAN],
@@ -2150,7 +2150,7 @@ export const lunchesDinners2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber kousek pečené ryby a dva hranolky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Rybu rozeber vidličkou na plátky a každý kousek prohmatej prsty — rybí kost je u malého dítěte hlavní riziko a najdeš ji jen hmatem.',
+      'Rybu rozeber vidličkou na plátky a každý kousek prohmatej prsty. Rybí kost je u malého dítěte hlavní riziko a najdeš ji jen hmatem.',
       'Zakápni kapkou citronu a olivového oleje, ať porce neoschne.',
       'Nech vychladnout na teplotu ruky.',
     ],
@@ -2168,7 +2168,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a podávej s pečenými bramborami místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Rybu nahrazuje 150 g čočky beluga uvařené doměkka — drží tvar, chuťově se s koprem a citronem snese a dodá bílkovinu i rostlinné železo.',
+      'Rybu nahrazuje 150 g čočky beluga uvařené doměkka. Drží tvar, chuťově se s koprem a citronem snese a dodá bílkovinu i rostlinné železo.',
     allergens: ['ryby'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -2199,7 +2199,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber kousek ryby a lžíci pečené zeleniny, dřív než se plech dochucuje pro dospělé.',
     babySteps: [
       'Rybu zbav kůže, rozeber na plátky a každý prohmatej prsty; u celé ryby na to počítej s víc časem než u filetu.',
-      'Zeleninu zkontroluj prstem — musí se dát rozmáčknout.',
+      'Zeleninu zkontroluj prstem: musí se dát rozmáčknout.',
       'Zakápni olivovým olejem a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -2216,7 +2216,7 @@ export const lunchesDinners2: Recipe[] = [
       'Peč dvacet minut, osol, zakápni citronem a podávej se zeleninou místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Rybu nahrazuje 250 g tofu naturál pečeného se zeleninou — nasákne citron i olej podobně a dodá bílkovinu.',
+      'Rybu nahrazuje 250 g tofu naturál pečeného se zeleninou. Nasákne citron i olej podobně a dodá bílkovinu.',
     allergens: ['ryby', 'soja'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -2263,7 +2263,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol a podávej s bramborovou kaší místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Okouna nahrazuje 200 g vařených bílých fazolí rozmačkaných vidličkou — s koprem a máslem chuťově sedí a dodají bílkovinu.',
+      'Okouna nahrazuje 200 g vařených bílých fazolí rozmačkaných vidličkou. S koprem a máslem chuťově sedí a dodají bílkovinu.',
     allergens: ['ryby', 'mleko'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -2287,7 +2287,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'fazole-cerne', amount: '200 g vařené', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Kalamáry rozkrájej podélně na tenké proužky — kroužky nikdy, prsten drží tvar i v puse.',
+      'Kalamáry rozkrájej podélně na tenké proužky: kroužky nikdy, prsten drží tvar i v puse.',
       'Česnek nech na oleji zesklovatět, přilij passatu a vlož proužky kalamárů. Duste přikryté nejméně třicet minut, dokud se maso nedá rozmáčknout mezi prsty.',
       'Hřebenatky nakrájej na plátky a přidej je na poslední tři minuty, aby se propekly, ale nezatvrdly.',
       'Těstoviny uvař v nesolené vodě a omáčku rozděl do dvou hrnců.',
@@ -2313,7 +2313,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol a spoj s druhou polovinou těstovin.',
     ],
     vegetarianProteinSwap:
-      'Kalamáry a hřebenatky nahrazuje 200 g vařených černých fazolí — v rajčatové omáčce drží tvar a dodají bílkovinu i rostlinné železo.',
+      'Kalamáry a hřebenatky nahrazuje 200 g vařených černých fazolí. V rajčatové omáčce drží tvar a dodají bílkovinu i rostlinné železo.',
     allergens: ['mekkysi', 'psenice-lepek'],
     tags: ['rodinné'],
     sources: [NHS_FISH, NHS_ALLERGY],
@@ -2361,7 +2361,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni limetkou a podávej na opečeném chlebu místo pomazánky s rybou.',
     ],
     vegetarianProteinSwap:
-      'Krabí maso a tuňáka nahrazuje 200 g vařené cizrny rozmačkané vidličkou — v avokádovém základu drží podobně a dodá bílkovinu.',
+      'Krabí maso a tuňáka nahrazuje 200 g vařené cizrny rozmačkané vidličkou. V avokádovém základu drží podobně a dodá bílkovinu.',
     allergens: ['korysi', 'ryby', 'psenice-lepek'],
     tags: ['rychlé', 'do ruky'],
     sources: [NHS_FISH, NHS_ALLERGY],
@@ -2392,7 +2392,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 2 odeber lžíci hladké ořechové omáčky a pár proužků zeleniny, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj, že je odebraná omáčka opravdu hladká; kousek mletého ořechu v ní zůstat nesmí.',
-      'Proužky zeleniny zkus rozmáčknout prstem — když to nejde, duste dál.',
+      'Proužky zeleniny zkus rozmáčknout prstem: když to nejde, duste dál.',
       'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -2434,7 +2434,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce směsi do misky, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou na hrubé pyré, ať v ní nezůstane tvrdý kousek slupky z papriky.',
-      'Vymačkej do misky citronovou šťávu — paprika i citron nesou vitamin C a ten výrazně zlepší vstřebání železa, které čočka nese.',
+      'Vymačkej do misky citronovou šťávu. Paprika i citron nesou vitamin C a ten výrazně zlepší vstřebání železa, které čočka nese.',
       'Zakápni olivovým olejem a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -2478,7 +2478,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Zkontroluj prstem, že se odebraná zelenina dá rozmáčknout; když ne, duste ji dál.',
       'Posyp porci lžičkou mletého sezamu, který nese železo i vápník.',
-      'Vymačkej pár kapek limetky — brokolice i limetka jsou zdroje vitaminu C a ten zlepší vstřebání železa z mletého sezamu i z tofu.',
+      'Vymačkej pár kapek limetky. Brokolice i limetka jsou zdroje vitaminu C a ten zlepší vstřebání železa z mletého sezamu i z tofu.',
     ],
     babyServing: {
       '6m': 'Podávej proužek tofu dlouhý jako dospělý prst, aby konec čouhal z pěsti, a růžičku brokolice, kterou dítě uchopí za stonek.',
@@ -2520,7 +2520,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce směsi do misky, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou; celá fazole má hladkou slupku a dásně si s ní neporadí.',
-      'Vymačkej do misky limetkovou šťávu a přidej lžíci syrové papriky nakrájené nadrobno — vitamin C z obojího zlepší vstřebání železa z fazolí.',
+      'Vymačkej do misky limetkovou šťávu a přidej lžíci syrové papriky nakrájené nadrobno. Vitamin C z obojího zlepší vstřebání železa z fazolí.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -2563,7 +2563,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce směsi do misky, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou a každou kuličku hrášku rozmáčkni; celý hrášek má tvar, který dýchací cesty uzavře.',
-      'Posyp lžičkou mletých slunečnicových semínek a vymačkej do misky citronovou šťávu — vitamin C z citronu zlepší vstřebání železa z quinoy i z mletých semínek.',
+      'Posyp lžičkou mletých slunečnicových semínek a vymačkej do misky citronovou šťávu. Vitamin C z citronu zlepší vstřebání železa z quinoy i z mletých semínek.',
       'Přidej jeden natrhaný lístek máty a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -2607,7 +2607,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Cizrnu v odebrané porci rozmačkej vidličkou a zkontroluj, že na zelenině nezůstala tvrdá slupka.',
       'Vymačkej do misky citronovou šťávu; paprika a citron dodají vitamin C, který zlepší vstřebání železa z cizrny.',
-      'Zakápni olivovým olejem — samotný kuskus je suchý a dítě ho jinak sbírá po zrnku.',
+      'Zakápni olivovým olejem. Samotný kuskus je suchý a dítě ho jinak sbírá po zrnku.',
     ],
     babyServing: {
       '6m': 'Podávej vlhkou směs na naložené lžíci a vedle proužek pečené papriky dlouhý jako dospělý prst.',
@@ -2644,7 +2644,7 @@ export const lunchesDinners2: Recipe[] = [
       'Hovězí nakrájej na kostky velikosti ořechu, opeč je na oleji ze všech stran a zalij vodou.',
       'Přidej cibuli a bobkový list a duste hodinu a půl přikryté, dokud se maso nerozpadá vidličkou.',
       'Brambory uvař doměkka. Brokolici a papriku duste osm minut, ať zůstanou svěže zelená a červená.',
-      'Obsah hrnce rozděl na dvě části — od tohoto místa jde každá linie vlastní cestou.',
+      'Obsah hrnce rozděl na dvě části. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 3 odeber kostku hovězího masa, růžičku brokolice, proužek papriky a kousek brambory, dřív než se hrnce dochucují pro dospělé.',
@@ -2667,7 +2667,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, opepři a povař pět minut. Podávej s bramborem a s dušenou zeleninou.',
     ],
     vegetarianProteinSwap:
-      'Hovězí nahrazuje 200 g hnědé čočky uvařené doměkka — drží tvar podobně jako kostky masa a dodá bílkovinu i rostlinné železo, které se díky papriky v porci lépe vstřebá.',
+      'Hovězí nahrazuje 200 g hnědé čočky uvařené doměkka. Drží tvar podobně jako kostky masa a dodá bílkovinu i rostlinné železo, které se díky papriky v porci lépe vstřebá.',
     allergens: [],
     tags: ['rodinné', 'bez lepku', 'mrazitelné'],
     sources: [NHS_IRON, NHS_PREP_SAFELY],
@@ -2697,7 +2697,7 @@ export const lunchesDinners2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber kousek lososa, růžičku brokolice a dva hranolky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Lososa rozeber vidličkou na plátky a každý kousek prohmatej prsty — rybí kost najdeš jen hmatem, ne pohledem.',
+      'Lososa rozeber vidličkou na plátky a každý kousek prohmatej prsty: rybí kost najdeš jen hmatem, ne pohledem.',
       'Kůži z porce sundej, po upečení je tuhá.',
       'Zakápni kapkou citronu a olivového oleje a nech vychladnout na teplotu ruky.',
     ],
@@ -2715,7 +2715,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a posyp koprem. Podávej místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Lososa nahrazuje 250 g tofu naturál pečeného dozlatova — nasákne citron i kopr podobně jako ryba a dodá bílkovinu.',
+      'Lososa nahrazuje 250 g tofu naturál pečeného dozlatova. Nasákne citron i kopr podobně jako ryba a dodá bílkovinu.',
     allergens: ['ryby', 'soja'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -2764,7 +2764,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a podávej s bramborovou kaší místo jater.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí játra nahrazuje 150 g červené čočky uvařené doměkka — s dušeným jablkem drží podobně a dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
+      'Kuřecí játra nahrazuje 150 g červené čočky uvařené doměkka. S dušeným jablkem drží podobně a dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
     allergens: [],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_IRON, NHS_VITAMIN_A],
@@ -2813,7 +2813,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni limetkou a promíchej s rýží a pečenou zeleninou místo masa.',
     ],
     vegetarianProteinSwap:
-      'Krůtí prsa nahrazuje 250 g vařené cizrny opečené s tymiánem — dodá bílkovinu i rostlinné železo a paprika v porci přidá vitamin C, který jeho vstřebání zlepší.',
+      'Krůtí prsa nahrazuje 250 g vařené cizrny opečené s tymiánem. Dodá bílkovinu i rostlinné železo a paprika v porci přidá vitamin C, který jeho vstřebání zlepší.',
     allergens: [],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_IRON, NHS_PREP_SAFELY],
@@ -2861,7 +2861,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a podávej s bramborem místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Candáta nahrazuje 200 g vařených bílých fazolí rozmačkaných vidličkou — s fenyklem a koprem chuťově sedí a dodají bílkovinu i rostlinné železo.',
+      'Candáta nahrazuje 200 g vařených bílých fazolí rozmačkaných vidličkou. S fenyklem a koprem chuťově sedí a dodají bílkovinu i rostlinné železo.',
     allergens: ['ryby'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -2977,7 +2977,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce pesta a hrst těstovin, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj, že je odebrané pesto opravdu hladké; kousek rozdrceného piniového oříšku v něm zůstat nesmí.',
-      'Vymačkej do misky citronovou šťávu — vitamin C zlepší vstřebání železa z hrášku i z rozdrcených oříšků.',
+      'Vymačkej do misky citronovou šťávu. Vitamin C zlepší vstřebání železa z hrášku i z rozdrcených oříšků.',
       'Promíchej s těstovinami a přilij lžíci vody z vaření, ať porce klouže.',
     ],
     babyServing: {
@@ -3233,7 +3233,7 @@ export const lunchesDinners2: Recipe[] = [
     baseSteps: [
       'Brambory uvař doměkka a rozšlehej je s mlékem na hladkou kaši.',
       'Cibuli a papriku nakrájej nadrobno a nech je na oleji zesklovatět; přilij loupaná rajčata a povař deset minut.',
-      'Omáčku rozděl do dvou hrnců — od tohoto místa jde každá linie vlastní cestou.',
+      'Omáčku rozděl do dvou hrnců. Od tohoto místa jde každá linie vlastní cestou.',
     ],
     babySplitPoint:
       'Po kroku 2 naber dvě lžíce rajčatového základu do misky, dřív než do hrnců přijde maso nebo čočka.',
@@ -3256,7 +3256,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, opepři a povař pět minut. Podávej s bramborovou kaší.',
     ],
     vegetarianProteinSwap:
-      'Mleté hovězí nahrazuje 200 g hnědé čočky uvařené doměkka — v rajčatové omáčce drží tvar podobně jako maso a dodá bílkovinu i rostlinné železo, kterému paprika v porci pomůže do těla.',
+      'Mleté hovězí nahrazuje 200 g hnědé čočky uvařené doměkka. V rajčatové omáčce drží tvar podobně jako maso a dodá bílkovinu i rostlinné železo, kterému paprika v porci pomůže do těla.',
     allergens: ['mleko'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_IRON, NHS_PREP_SAFELY],
@@ -3305,7 +3305,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, promíchej s dušeným zelím a podávej s bramborem místo masa.',
     ],
     vegetarianProteinSwap:
-      'Vepřovou panenku nahrazuje 250 g uzeného tofu opečeného dozlatova — k dušenému zelí se hodí podobně jako maso a dodá bílkovinu.',
+      'Vepřovou panenku nahrazuje 250 g uzeného tofu opečeného dozlatova. K dušenému zelí se hodí podobně jako maso a dodá bílkovinu.',
     allergens: ['soja'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_IRON, NHS_PREP_SAFELY],
@@ -3335,7 +3335,7 @@ export const lunchesDinners2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 odeber kousek tresky, dvě lžíce hráškového pyré a pár kostek brambory, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Tresku rozeber vidličkou na plátky a každý kousek prohmatej prsty — rybí kost najdeš jen hmatem.',
+      'Tresku rozeber vidličkou na plátky a každý kousek prohmatej prsty: rybí kost najdeš jen hmatem.',
       'Zkontroluj, že je hráškové pyré opravdu hladké; celá kulička hrášku má tvar, který dýchací cesty uzavře.',
       'Zakápni kapkou citronu a nech vychladnout na teplotu ruky.',
     ],
@@ -3353,7 +3353,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a podávej s bramborem místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Tresku nahrazuje 250 g vařené cizrny rozmačkané vidličkou — s hráškovým pyré a mátou chuťově sedí a dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
+      'Tresku nahrazuje 250 g vařené cizrny rozmačkané vidličkou. S hráškovým pyré a mátou chuťově sedí a dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
     allergens: ['ryby'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -3468,7 +3468,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce směsi do misky, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Cizrnu v odebrané porci rozmačkej vidličkou a zkontroluj, že v ní nezůstal tvrdý stonek kadeřávku.',
-      'Vymačkej do misky citronovou šťávu — kadeřávek i citron nesou vitamin C a ten zlepší vstřebání železa z cizrny i z listů.',
+      'Vymačkej do misky citronovou šťávu. Kadeřávek i citron nesou vitamin C a ten zlepší vstřebání železa z cizrny i z listů.',
       'Zakápni olivovým olejem a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
@@ -3612,7 +3612,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, opepři a podávej místo masa.',
     ],
     vegetarianProteinSwap:
-      'Kuřecí stehno nahrazuje 200 g čočky beluga uvařené doměkka — s pečenou zeleninou drží tvar a dodá bílkovinu i rostlinné železo, kterému paprika v porci pomůže do těla.',
+      'Kuřecí stehno nahrazuje 200 g čočky beluga uvařené doměkka. S pečenou zeleninou drží tvar a dodá bílkovinu i rostlinné železo, kterému paprika v porci pomůže do těla.',
     allergens: [],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_IRON, NHS_PREP_SAFELY],
@@ -3660,7 +3660,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol a podávej s bramborem a s koprovou omáčkou místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Pstruha nahrazují dvě vejce uvařená natvrdo — ke koprové omáčce s bramborem se hodí stejně a dodají bílkovinu.',
+      'Pstruha nahrazují dvě vejce uvařená natvrdo. Ke koprové omáčce s bramborem se hodí stejně a dodají bílkovinu.',
     allergens: ['mleko', 'ryby', 'vejce'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -3692,7 +3692,7 @@ export const lunchesDinners2: Recipe[] = [
     babySteps: [
       'Batát zbav slupky a dužninu rozmačkej vidličkou spolu s odebranou čočkou.',
       'Vmíchej lžičku nastrouhaného čedaru a nech ho v teplé směsi rozpustit; dodá chuť místo soli.',
-      'Vymačkej kapku limetky — paprika i limetka nesou vitamin C a ten zlepší vstřebání železa z čočky.',
+      'Vymačkej kapku limetky. Paprika i limetka nesou vitamin C a ten zlepší vstřebání železa z čočky.',
     ],
     babyServing: {
       '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle proužek pečeného batátu dlouhý jako dospělý prst.',
@@ -3877,7 +3877,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a spoj s těstovinami.',
     ],
     vegetarianProteinSwap:
-      'Slávky nahrazuje 200 g vařených bílých fazolí — v rajčatové omáčce drží tvar a dodají bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
+      'Slávky nahrazuje 200 g vařených bílých fazolí. V rajčatové omáčce drží tvar a dodají bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
     allergens: ['mekkysi', 'psenice-lepek'],
     tags: ['rodinné'],
     sources: [NHS_FISH, NHS_ALLERGY],
@@ -3925,7 +3925,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol a podávej s bramborem a koprovou omáčkou místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Sumce nahrazují tři vejce uvařená natvrdo — ke koprové omáčce s bramborem se hodí stejně a dodají bílkovinu.',
+      'Sumce nahrazují tři vejce uvařená natvrdo. Ke koprové omáčce s bramborem se hodí stejně a dodají bílkovinu.',
     allergens: ['mleko', 'ryby', 'vejce'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],
@@ -3973,7 +3973,7 @@ export const lunchesDinners2: Recipe[] = [
       'Osol, zakápni citronem a podávej s bramborem místo ryby.',
     ],
     vegetarianProteinSwap:
-      'Tilápii nahrazuje 250 g vařené cizrny opečené s mrkví — dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
+      'Tilápii nahrazuje 250 g vařené cizrny opečené s mrkví. Dodá bílkovinu i rostlinné železo, kterému citron v porci pomůže do těla.',
     allergens: ['ryby'],
     tags: ['rodinné', 'bez lepku'],
     sources: [NHS_FISH, NHS_PREP_SAFELY],

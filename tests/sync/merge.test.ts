@@ -25,7 +25,7 @@ function state(overrides: Partial<HouseholdState> = {}): HouseholdState {
   return { ...emptyHouseholdState(), ...overrides };
 }
 
-describe('mergeTastings — append-only', () => {
+describe('mergeTastings, append-only', () => {
   it('spojí záznamy z obou zařízení a žádný nezahodí', () => {
     const local = [tasting({ id: 'ev-telefon-matky' })];
     const remote = [tasting({ id: 'ev-telefon-otce', createdBy: 'uid-otec' })];
@@ -57,7 +57,7 @@ describe('mergeTastings — append-only', () => {
     expect(merged[0]?.reaction).toBe('kozni');
   });
 
-  it('slučování je idempotentní — druhý průchod nic nepřidá', () => {
+  it('slučování je idempotentní, druhý průchod nic nepřidá', () => {
     const local = [tasting({ id: 'a' }), tasting({ id: 'b' })];
     const once = mergeTastings(local, []);
     const twice = mergeTastings(once, local);
@@ -275,7 +275,7 @@ describe('předpoklad, na kterém stojí pravidla Firestore', () => {
   it('sloučení nikdy nezkrátí seznam ochutnávek', () => {
     // Pravidlo `nemazeDenik()` ve firestore.rules zakazuje připojujícímu se
     // telefonu zkrátit pole ochutnávek. Drží to jen proto, že sloučení umí
-    // záznamy výhradně přidávat — mazání je náhrobek, ne odstranění.
+    // záznamy výhradně přidávat, mazání je náhrobek, ne odstranění.
     const a = state({
       tastings: [
         tasting({ id: 'ev-1' }),

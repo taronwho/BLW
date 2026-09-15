@@ -8,7 +8,7 @@ import {
   SZU_FIRST_SPOON,
 } from '../ingredients/_sources';
 
-const KNIHA = 'Baby-led weaning — příběh metody vedené dítětem (kapitoly 1 a 2)';
+const KNIHA = 'Baby-led weaning. Příběh metody vedené dítětem (kapitoly 1 a 2)';
 
 /** Praktický provoz: co čekat, jak vařit pro celou rodinu, jak na okolí. */
 export const practice: Guide[] = [
@@ -37,14 +37,14 @@ export const practice: Guide[] = [
         body: [
           'Nejčastější situace, kterou rodiče popisují, je návštěva, při níž někdo sáhne po lžičce s odůvodněním, že dítě má hlad a nic nesnědlo.',
           'Konflikt přitom není o metodě, je o důvěře. Kdo vidí plný talíř a dítě, které se od něj odvrací, přirozeně z toho vyvodí, že něco není v pořádku. Vysvětlení, že dítě bere většinu energie z mléka a talíř je nácvik, není samozřejmé nikomu, kdo ho neslyšel.',
-          'Řešení, které rodiny nacházejí, obvykle není argumentační. Přestanou metodu obhajovat a začnou ji jen provozovat — a spor odezní ve chvíli, kdy dítě začne viditelně jíst, tedy někdy kolem devátého až desátého měsíce.',
+          'Řešení, které rodiny nacházejí, obvykle není argumentační. Přestanou metodu obhajovat a začnou ji jen provozovat, a spor odezní ve chvíli, kdy dítě začne viditelně jíst, tedy někdy kolem devátého až desátého měsíce.',
         ],
       },
       {
         heading: 'Kdy naopak zpozornět',
         body: [
           'Když dítě neprospívá, nepřibývá na váze nebo je nápadně unavené, nejde o fázi metody a patří to pediatrovi.',
-          'Totéž platí při opakovaných infekcích nebo kožních změnách — mohou, ale nemusí souviset s nedostatkem zinku, a rozhodnout to aplikace neumí.',
+          'Totéž platí při opakovaných infekcích nebo kožních změnách. Mohou, ale nemusí souviset s nedostatkem zinku, a rozhodnout to aplikace neumí.',
         ],
       },
     ],
@@ -59,7 +59,7 @@ export const practice: Guide[] = [
     summary:
       'Základ se uvaří bez soli, odebere se porce pro dítě a teprve pak se dochucuje. Každý recept v aplikaci to má popsané krok po kroku.',
     keyPoints: [
-      'Vař základ bez soli — dosolit jde vždycky, odsolit ne.',
+      'Vař základ bez soli: dosolit jde vždycky, odsolit ne.',
       'Porce pro dítě se odebírá v konkrétním kroku, ještě před dochucením.',
       'Metoda nešetří čas plošně. Šetří ho rodinám, kterým jejich způsob stravování vyhovoval už předtím.',
     ],
@@ -68,8 +68,8 @@ export const practice: Guide[] = [
         heading: 'Jak to funguje v receptech',
         body: [
           'Každý recept v aplikaci má společný základ, bod odběru dětské porce, podání pro dítě a nakonec dochucení pro dospělé.',
-          'Dochucení se dělí na masité a bezmasé jen tam, kde v jídle maso opravdu je. U kaše ani ovocné misky se nedělí na nic — dětská porce je hotová a zbytek si dospělí dochutí podle svého.',
-          'Bod odběru je vždy uvedený doslova — „po kroku 3 odeber…“ — není potřeba odhadovat, kdy je ještě čas.',
+          'Dochucení se dělí na masité a bezmasé jen tam, kde v jídle maso opravdu je. U kaše ani ovocné misky se nedělí na nic. Dětská porce je hotová a zbytek si dospělí dochutí podle svého.',
+          'Bod odběru je vždy uvedený doslova. „po kroku 3 odeber…“: není potřeba odhadovat, kdy je ještě čas.',
           'Teprve po odběru se solí, koření a dochucuje pro dospělé.',
         ],
       },
@@ -78,20 +78,20 @@ export const practice: Guide[] = [
         body: [
           'Zelenina se vaří v páře nebo peče na plechu doměkka, obvykle několik druhů najednou a na několik dní dopředu.',
           'Maso se dusí dlouho a rozvlákňuje. Luštěniny se vaří ve větším množství a mrazí se v porcích.',
-          'Nejde o gastronomii, jde o zásobování — a rodiče to tak sami popisují.',
+          'Nejde o gastronomii, jde o zásobování, a rodiče to tak sami popisují.',
         ],
       },
       {
         heading: 'Upřímně o čase',
         body: [
-          'Tvrzení, že odpadá vaření zvláštních porcí, platí jen částečně. Když rodina jí hodně soleně a kořeněně nebo hodně polotovarů, musí se pro dítě stejně vařit zvlášť — a úspora se ztrácí.',
-          'Metoda tedy nešetří čas plošně. Šetří ho rodinám, které se i předtím stravovaly podobně — bez hromady soli, koření a polotovarů.',
+          'Tvrzení, že odpadá vaření zvláštních porcí, platí jen částečně. Když rodina jí hodně soleně a kořeněně nebo hodně polotovarů, musí se pro dítě stejně vařit zvlášť, a úspora se ztrácí.',
+          'Metoda tedy nešetří čas plošně. Šetří ho rodinám, které se i předtím stravovaly podobně: bez hromady soli, koření a polotovarů.',
         ],
       },
       {
         heading: 'Bezmasá domácnost',
         body: [
-          'Vegetariánská linie musí nést bílkovinu, ne jen vynechat maso. V aplikaci má proto každý recept s masem uvedenou konkrétní náhradu — čočku, cizrnu, tofu, vejce nebo sýr.',
+          'Vegetariánská linie musí nést bílkovinu, ne jen vynechat maso. V aplikaci má proto každý recept s masem uvedenou konkrétní náhradu: čočku, cizrnu, tofu, vejce nebo sýr.',
           'Rostlinné železo se vstřebává hůř, proto se luštěniny a obiloviny podávají spolu s vitaminem C z ovoce nebo zeleniny.',
         ],
       },
@@ -107,9 +107,9 @@ export const practice: Guide[] = [
     summary:
       'Od podlouhlých kusů do pěsti přes klešťový úchop až k rodinné stravě. Fáze 6m+, 9m+ a 12m+ najdeš u každé suroviny i receptu.',
     keyPoints: [
-      '6m+ — podlouhlé měkké kusy velikosti prstu, které z pěsti vyčnívají.',
-      '9m+ — menší kousky velikosti fazole pro úchop mezi palec a ukazovák.',
-      '12m+ — rodinná strava, tvrdší textury, dítě jí lžící samo.',
+      '6m+. Podlouhlé měkké kusy velikosti prstu, které z pěsti vyčnívají.',
+      '9m+. Menší kousky velikosti fazole pro úchop mezi palec a ukazovák.',
+      '12m+. Rodinná strava, tvrdší textury, dítě jí lžící samo.',
     ],
     sections: [
       {
@@ -131,7 +131,7 @@ export const practice: Guide[] = [
       {
         heading: 'Kde to v aplikaci najdeš',
         body: [
-          'U každé suroviny je popis pro všechny tři fáze zvlášť — jak ji nakrájet, na co si dát pozor a jak ji podat.',
+          'U každé suroviny je popis pro všechny tři fáze zvlášť. Jak ji nakrájet, na co si dát pozor a jak ji podat.',
           'U každého receptu najdeš totéž pro hotové jídlo: jak porci podat v šesti, v devíti a ve dvanácti měsících.',
           'Přepínač fází je přímo u každé suroviny a u každého receptu. Předvybírá se podle data narození z Domácnosti, ale kdykoli ho přepneš ručně.',
         ],
@@ -150,7 +150,7 @@ export const practice: Guide[] = [
     keyPoints: [
       'Dlaňový úchop: sousto dlouhé jako dospělý prst, aby konec čouhal z pěsti.',
       'Pinzetový úchop: dítě zvedne hrášek nebo drobek a dlouhé proužky ztrácejí smysl.',
-      'Úchop nemění, co dítě smí dostat — jen jaký tvar mu to podáš.',
+      'Úchop nemění, co dítě smí dostat: jen jaký tvar mu to podáš.',
       'U potravin s vysokým rizikem dušení rozhoduje pravidlo o tvaru, ne zručnost ruky.',
     ],
     sections: [
@@ -159,7 +159,7 @@ export const practice: Guide[] = [
         body: [
           'Ze tří vývojových podmínek, na kterých metoda stojí, je úchop ta nejzajímavější, protože se mění týden po týdnu a je vidět pouhým okem.',
           'Šestiměsíční dítě uchopuje dlaňovým úchopem: předmět přitiskne ke dlani a obalí ho prsty i palcem tak, že celý zmizí v pěsti. Pěst se přitom cíleně neotevře a neuvolní jen část obsahu.',
-          'Z toho plyne jediný praktický důsledek: cokoli menšího než dětská pěst dítě sevře a už se k tomu nedostane. Proto se v prvních týdnech krájí na kusy dlouhé zhruba jako dospělý prst — konec čouhá z pěsti a dítě si ho strčí do úst.',
+          'Z toho plyne jediný praktický důsledek: cokoli menšího než dětská pěst dítě sevře a už se k tomu nedostane. Proto se v prvních týdnech krájí na kusy dlouhé zhruba jako dospělý prst. Konec čouhá z pěsti a dítě si ho strčí do úst.',
           'Posloupnost úchopů popsala vývojová psychologie dávno před metodou vedenou dítětem, v pracích Arnolda Gesella ve třicátých letech a později u Jeana Piageta. Nové na tom bylo až použití: vývojová tabulka se proměnila v návod ke krájení, který si rodič ověří pohledem na to, jak dítě zvedá kostku.',
         ],
       },
@@ -187,7 +187,7 @@ export const practice: Guide[] = [
         body: [
           'V Domácnosti se dá vybrat úchop podle popisu toho, co je u dítěte vidět. U každé suroviny a u každého receptu se pak vedle pokynu ke krájení ukáže tvar, který z úchopu plyne.',
           'Dokud úchop nevybereš, aplikace ho odhaduje z věku a řekne to. Výběr jde kdykoli změnit i zrušit.',
-          'Fáze 6m+ / 9m+ / 12m+ zůstává na věku. Kdyby úchop posouval i ji, měnil by tím výběr surovin a jejich měkkost — a to je přesně to, co z úchopu nevyplývá.',
+          'Fáze 6m+ / 9m+ / 12m+ zůstává na věku. Kdyby úchop posouval i ji, měnil by tím výběr surovin a jejich měkkost, a to je přesně to, co z úchopu nevyplývá.',
         ],
       },
     ],
