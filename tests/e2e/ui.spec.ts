@@ -929,3 +929,87 @@ test('deník se přepnutím dítěte vymění, sourozencovy ochutnávky nezůsta
   await expect(page.getByTestId('casova-osa')).toContainText('brokolice');
   await expect(page.getByTestId('pocet-ochutnanych')).toContainText('Ochutnáno 1 z');
 });
+
+const UA_MESSENGER =
+  'Mozilla/5.0 (Linux; Android 14; SM-S911B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36 [FB_IAB/MESSENGER;FBAV/460.0.0.0;]';
+
+test('pozvánka otevřená v Messengeru varuje, že se spáruje jeho prohlížeč', async ({
+  browser,
+  baseURL,
+}) => {
+  const context = await browser.newContext({
+    userAgent: UA_MESSENGER,
+    viewport: { width: 375, height: 667 },
+    baseURL,
+  });
+  const page = await context.newPage();
+  await acceptDisclaimer(page);
+  await page.goto('./#/domacnost/pripojit/K7M2X9QRT4');
+
+  const upozorneni = page.getByTestId('upozorneni-prohlizec');
+  await expect(upozorneni).toBeVisible();
+  await expect(upozorneni).toContainText('prohlížeč uvnitř Messengeru');
+  await expect(upozorneni).toContainText('dvě zařízení');
+
+  // Kód jde přenést do nainstalované aplikace jedním klepnutím.
+  await expect(page.getByTestId('kod-z-odkazu')).toHaveText('K7M2X-9QRT4');
+  await expect(page.getByTestId('kopirovat-kod-z-odkazu')).toBeVisible();
+
+  await context.close();
+});
+
+test('pozvánka s neplatným kódem se nepokouší připojit', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/domacnost/pripojit/NENIKOD');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Neplatný kód');
+  await expect(page.getByTestId('pripojit-z-odkazu')).toHaveCount(0);
+});
+
+test('párovací kód jde zkopírovat, ne jen odkaz', async ({ page }) => {
+  // Firebase se v testu nikdy nevolá — párovací kód je uložený v prohlížeči
+  // a obrazovka ho vykreslí i bez spojení. Skutečná domácnost by se testem
+  // zakládat neměla.
+  await page.route('**://*.googleapis.com/**', (route) => route.abort());
+  await page.route('**://*.firebaseio.com/**', (route) => route.abort());
+  await acceptDisclaimer(page);
+  await page.evaluate(() => {
+    window.localStorage.setItem('blw.household.code.v1', 'K7M2X9QRT4');
+  });
+  // Přenačtení, ne jen změna adresy: obrazovka se liší jen hashem a stav
+  // aplikace by se jinak nenačetl znovu.
+  await page.reload();
+  await otevriDomacnost(page, 'sdileni');
+
+  await expect(page.getByTestId('parovaci-kod')).toHaveText('K7M2X-9QRT4');
+  // Kód je spolehlivější cesta než odkaz z chatu, takže musí jít zkopírovat
+  // jedním klepnutím — dřív šel zkopírovat jen odkaz.
+  await expect(page.getByTestId('kopirovat-kod')).toBeVisible();
+  await expect(page.getByTestId('kopirovat-odkaz')).toBeVisible();
+  await expect(page.getByTestId('odkaz-k-pripojeni')).toContainText(
+    '#/domacnost/pripojit/K7M2X9QRT4',
+  );
+
+  // A rodič se dozví, proč poslaný odkaz nemusí spárovat to, co čeká.
+  await expect(page.getByText('Nejjistější cesta:')).toBeVisible();
+});
+
+test('pozvánka do domácnosti, ve které zařízení už je, nenabízí připojení znovu', async ({
+  page,
+}) => {
+  await page.route('**://*.googleapis.com/**', (route) => route.abort());
+  await acceptDisclaimer(page);
+  await page.evaluate(() => {
+    window.localStorage.setItem('blw.household.code.v1', 'K7M2X9QRT4');
+  });
+  await page.reload();
+
+  // Týž kód: klepnutí na odkaz podruhé nemá nic dělat.
+  await page.goto('./#/domacnost/pripojit/K7M2X9QRT4');
+  await expect(page.getByTestId('uz-pripojeno')).toBeVisible();
+  await expect(page.getByTestId('pripojit-z-odkazu')).toBeDisabled();
+
+  // Cizí kód naopak musí říct, že se domácnost přepne.
+  await page.goto('./#/domacnost/pripojit/ABCDE12345');
+  await expect(page.getByTestId('jina-domacnost')).toContainText('přepne');
+  await expect(page.getByTestId('pripojit-z-odkazu')).toBeEnabled();
+});

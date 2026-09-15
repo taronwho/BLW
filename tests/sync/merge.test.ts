@@ -294,3 +294,27 @@ describe('předpoklad, na kterém stojí pravidla Firestore', () => {
     }
   });
 });
+
+describe('popisy zařízení', () => {
+  it('sjednotí se, protože každé zařízení zapisuje jen svůj klíč', () => {
+    const local: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['uid-a'],
+      memberLabels: { 'uid-a': 'Nainstalovaná aplikace' },
+    };
+    const remote: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['uid-b'],
+      memberLabels: { 'uid-b': 'Prohlížeč v Messengeru' },
+    };
+    expect(mergeHouseholdState(local, remote).memberLabels).toEqual({
+      'uid-a': 'Nainstalovaná aplikace',
+      'uid-b': 'Prohlížeč v Messengeru',
+    });
+  });
+
+  it('bez popisů zůstává pole nevyplněné, ne prázdný objekt', () => {
+    const prazdny = mergeHouseholdState(emptyHouseholdState(), emptyHouseholdState());
+    expect(prazdny.memberLabels).toBeUndefined();
+  });
+});

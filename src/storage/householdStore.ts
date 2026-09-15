@@ -11,6 +11,7 @@ import {
   SCHEMA_VERSION,
 } from '@/sync/merge';
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
+import { popisZarizeni } from '@/sync/zarizeni';
 import { IndexedDbAdapter } from './indexedDb';
 import { loadFirebaseConfig } from './firebaseConfig';
 import type { StorageAdapter, StoredHousehold, SyncStatus } from './types';
@@ -333,10 +334,13 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       if (!stav.members.includes(uid)) return;
       const seenAt = { ...stav.memberSeenAt };
       delete seenAt[uid];
+      const popisy = { ...stav.memberLabels };
+      delete popisy[uid];
       await persist({
         ...stav,
         members: stav.members.filter((one) => one !== uid),
         memberSeenAt: seenAt,
+        memberLabels: popisy,
       });
     },
 
@@ -430,7 +434,14 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 
 function withMember(state: HouseholdState, uid: string): HouseholdState {
   const members = state.members.includes(uid) ? state.members : [...state.members, uid];
-  return { ...state, members, memberSeenAt: { ...state.memberSeenAt, [uid]: Date.now() } };
+  return {
+    ...state,
+    members,
+    memberSeenAt: { ...state.memberSeenAt, [uid]: Date.now() },
+    // Popis se přepisuje při každém připojení: rodič si aplikaci může mezitím
+    // nainstalovat a z „Chrome" se stane „Nainstalovaná aplikace".
+    memberLabels: { ...state.memberLabels, [uid]: popisZarizeni() },
+  };
 }
 
 /**

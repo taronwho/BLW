@@ -325,6 +325,15 @@ export interface HouseholdState {
    * míst. Bez téhle značky by nešlo poznat, které z uid ještě někomu patří.
    */
   memberSeenAt?: Record<string, number>;
+  /**
+   * Jak se které zařízení jmenuje (uid → popis).
+   *
+   * Z uid se nepozná nic. Jeden telefon přitom v seznamu klidně vystupuje
+   * dvakrát — jednou jako nainstalovaná aplikace a jednou jako prohlížeč,
+   * ve kterém se otevřela pozvánka z chatu. Bez popisu rodič neví, které
+   * z nich smí odebrat.
+   */
+  memberLabels?: Record<string, string>;
   tastings: TastingEvent[];
   /**
    * Oblíbené suroviny a recepty, klíčem je `ingredientId` nebo `recipeId`.

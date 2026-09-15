@@ -23,6 +23,13 @@ export default defineConfig({
         start_url: '/BLW/',
         scope: '/BLW/',
         display: 'standalone',
+        // Android tím dovolí nainstalované aplikaci zachytit odkaz do své
+        // domény místo prohlížeče — právě tak se otevírá pozvánka do
+        // domácnosti. Vestavěný prohlížeč v Messengeru se tím obejít nedá,
+        // ten systému odkaz nikdy nepředá; na sdílení přes SMS, Chrome nebo
+        // naskenovaný QR to ale funguje.
+        handle_links: 'preferred',
+        launch_handler: { client_mode: 'navigate-existing' },
         orientation: 'portrait',
         background_color: '#F8F8F5',
         theme_color: '#1F6F5C',

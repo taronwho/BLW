@@ -189,9 +189,33 @@ Proměnné mají přednost před souborem, takže jdou obě cesty i kombinovat.
 2. Nesmí tam být žádná zmínka o tom, že sdílení není nastavené. Kdyby tam
    byla, krok 7 neproběhl nebo se nenasadil.
 3. Klikni na **Založit domácnost**. Objeví se kód, QR a odkaz k připojení.
-4. **Kopírovat odkaz** a pošli ho druhému člověku.
-5. Ten odkaz otevře, klepne na **Připojit tohle zařízení** — a od té chvíle
-   vidí stejný deník.
+4. **Zkopírovat kód** a pošli ho druhému člověku.
+5. Ten si otevře nainstalovanou aplikaci, v Domácnosti → Sdílení kód vloží
+   do pole **Připojit se ke stávající domácnosti** a klepne na **Připojit**.
+   Od té chvíle vidí stejný deník.
+
+### Proč se párovací kód posílá radši než odkaz
+
+Odkaz poslaný v Messengeru, WhatsAppu nebo na Facebooku se otevře ve
+vestavěném prohlížeči té aplikace. Ten má vlastní úložiště, takže anonymní
+přihlášení dostane jiné uid než nainstalovaná aplikace na téže ploše a
+spáruje se právě on:
+
+- v nainstalované aplikaci není nic,
+- v seznamu zařízení přibude z jednoho telefonu položka navíc,
+- a domácnost má míst jen pět.
+
+Aplikace na to při otevření pozvánky sama upozorní, pojmenuje prohlížeč,
+ve kterém běží, a nabídne kód ke zkopírování. Zbytečné zařízení jde v seznamu
+odebrat; podle popisu („Prohlížeč v Messengeru" vs. „Nainstalovaná aplikace")
+je poznat, které to je.
+
+Bez vestavěného prohlížeče jsou v pořádku obě cesty:
+
+- **QR kód naskenovaný fotoaparátem** — systém odkaz předá, a protože manifest
+  má `handle_links: preferred`, Android ho u nainstalované aplikace otevře
+  přímo v ní (dokud to uživatel nezakáže v nastavení aplikace).
+- **odkaz poslaný SMS nebo otevřený v Chromu** — totéž.
 
 ## Jak to funguje bez nastavení
 

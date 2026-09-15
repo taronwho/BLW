@@ -38,25 +38,29 @@ export function MemberList(): ReactNode {
         {state.members.map((uid) => {
           const jaTo = uid === jaUid;
           const videno = state.memberSeenAt?.[uid];
+          const popis = state.memberLabels?.[uid];
           return (
             <li
               key={uid}
               className="flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2"
             >
               <span className="min-w-0 flex-1 text-sm">
-                <span className="font-mono font-medium">{zkratka(uid)}</span>
+                {/* Popis zařízení místo holého uid. „A1B2C3" rodiči neřeklo,
+                    které z jeho zařízení to je, a odebrat proto nešlo nic. */}
+                <span className="font-medium">{popis ?? 'Neznámé zařízení'}</span>
                 {jaTo && <span className="ml-2 text-xs text-accent">tohle zařízení</span>}
                 <span className="block text-xs text-muted">
+                  <span className="font-mono">{zkratka(uid)}</span>
                   {videno === undefined
-                    ? 'poslední připojení neznámé'
-                    : `naposled ${formatDate(new Date(videno).toISOString().slice(0, 10))}`}
+                    ? ' · poslední připojení neznámé'
+                    : ` · naposled ${formatDate(new Date(videno).toISOString().slice(0, 10))}`}
                 </span>
               </span>
               {!jaTo && (
                 <button
                   type="button"
                   data-testid={`odebrat-${uid}`}
-                  aria-label={`Odebrat zařízení ${zkratka(uid)}`}
+                  aria-label={`Odebrat zařízení ${popis ?? zkratka(uid)}`}
                   onClick={() => void removeMember(uid)}
                   className="flex min-h-touch min-w-touch items-center justify-center rounded-lg text-muted hover:text-risk"
                 >
@@ -71,7 +75,7 @@ export function MemberList(): ReactNode {
       <p className="text-xs leading-relaxed text-muted">
         {plno
           ? 'Domácnost je plná. Další telefon se připojí, až některé zařízení odebereš.'
-          : 'Kdo smaže data prohlížeče nebo aplikaci přeinstaluje, přihlásí se příště jako nové zařízení. To staré tu zůstane a jde odebrat.'}
+          : 'Každý prohlížeč se počítá zvlášť. Jeden telefon tu proto může být dvakrát — třeba jako nainstalovaná aplikace a zvlášť jako prohlížeč, ve kterém se otevřela pozvánka. Co už nepotřebuješ, odeber.'}
       </p>
     </section>
   );

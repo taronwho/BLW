@@ -74,6 +74,18 @@ function mergeSeenAt(
   return out;
 }
 
+/**
+ * Popisy zařízení. Každé zapisuje jen svůj vlastní klíč, takže se mapy
+ * sjednotí; při shodě rozhoduje vzdálená hodnota jako všude jinde.
+ */
+function mergeLabels(
+  local: Record<string, string> | undefined,
+  remote: Record<string, string> | undefined,
+): Record<string, string> | undefined {
+  if (local === undefined && remote === undefined) return undefined;
+  return { ...local, ...remote };
+}
+
 function mergeUnique(local: readonly string[], remote: readonly string[]): string[] {
   return [...new Set([...local, ...remote])];
 }
@@ -194,6 +206,11 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     !Array.isArray(vstup['memberSeenAt'])
       ? { memberSeenAt: vstup['memberSeenAt'] as Record<string, number> }
       : {}),
+    ...(vstup['memberLabels'] !== null &&
+    typeof vstup['memberLabels'] === 'object' &&
+    !Array.isArray(vstup['memberLabels'])
+      ? { memberLabels: vstup['memberLabels'] as Record<string, string> }
+      : {}),
     tastings,
     favorites,
     recipeNotes,
@@ -222,6 +239,7 @@ export function mergeHouseholdState(
   remote: HouseholdState,
 ): HouseholdState {
   const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
+  const popisy = mergeLabels(local.memberLabels, remote.memberLabels);
 
   return {
     // Děti mají u každé položky vlastní čas, takže dvě zařízení můžou offline
@@ -229,6 +247,7 @@ export function mergeHouseholdState(
     children: mergeCasovane(local.children, remote.children),
     members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
     ...(videno === undefined ? {} : { memberSeenAt: videno }),
+    ...(popisy === undefined ? {} : { memberLabels: popisy }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),
     favorites: mergeCasovane(local.favorites, remote.favorites),

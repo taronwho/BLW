@@ -111,6 +111,23 @@ export function HouseholdScreen(): ReactNode {
             <p data-testid="parovaci-kod" className="font-mono text-2xl font-bold tracking-[0.2em]">
               {formatHouseholdCode(householdCode)}
             </p>
+            {/* Kód je spolehlivější cesta než odkaz: ten se v chatu otevře ve
+                vestavěném prohlížeči té aplikace a spáruje se on, ne
+                nainstalovaný Drobek. */}
+            <button
+              type="button"
+              data-testid="kopirovat-kod"
+              onClick={() => {
+                void navigator.clipboard
+                  .writeText(formatHouseholdCode(householdCode))
+                  .then(() => setMessage('Kód zkopírován. Druhý rodič ho vloží v aplikaci níž do políčka.'))
+                  .catch(() => setMessage('Kopírování neprošlo — kód opiš ručně.'));
+              }}
+              className="flex min-h-touch items-center justify-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-on-accent"
+            >
+              <Copy aria-hidden="true" className="h-4 w-4 shrink-0" />
+              Zkopírovat kód
+            </button>
             {pairingUrl !== null && (
               <QrCode value={pairingUrl} label="QR kód pro spárování druhého telefonu" />
             )}
@@ -139,9 +156,20 @@ export function HouseholdScreen(): ReactNode {
                 </button>
               </div>
             )}
+            {/* Poslaný odkaz se v chatu otevře ve vestavěném prohlížeči té
+                aplikace — spáruje se on, ne nainstalovaný Drobek, a z jednoho
+                telefonu tak v domácnosti vzniknou dvě zařízení. Tohle je
+                jediné místo, kde se to dá říct dřív, než se to stane. */}
+            <p className="rounded-lg bg-paper px-3 py-2 text-xs leading-relaxed text-muted">
+              <strong className="font-semibold text-ink">Nejjistější cesta:</strong> na druhém
+              telefonu otevřít nainstalovaného Drobka a kód do něj vložit. Odkaz poslaný
+              v Messengeru nebo WhatsAppu se otevře v jejich vlastním prohlížeči a spáruje se
+              právě ten — v nainstalované aplikaci pak není nic a v seznamu zařízení přibude
+              položka navíc. QR kód naskenovaný fotoaparátem tenhle problém nemá.
+            </p>
             <p className="text-center text-xs text-muted">
-              Kdo odkaz otevře, připojí se jedním klepnutím a uvidí stejný deník. Kdo kód zná, vidí
-              do deníku — posílej ho jen lidem, kterým na dítě sáhneš. Domácnost unese pět zařízení.
+              Kdo kód zná, vidí do deníku — posílej ho jen lidem, kterým na dítě sáhneš.
+              Domácnost unese pět zařízení.
             </p>
             <MemberList />
             <button
