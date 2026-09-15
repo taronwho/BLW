@@ -1109,17 +1109,37 @@ test('zdroje seznamu stojí až pod jeho položkami', async ({ page }) => {
   await expect(odkazy).toHaveCount(2);
 });
 
-test('přehled o používání je za heslem a v navigaci není', async ({ page }) => {
+test('přehled o používání se bez tajného odkazu neukáže vůbec', async ({ page }) => {
   await acceptDisclaimer(page);
 
   // Nikde v aplikaci na něj nevede odkaz.
   await expect(page.locator('a[href*="prehled"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/x/"]')).toHaveCount(0);
 
-  await page.goto('./#/prehled');
+  // Stará adresa i adresa se špatným klíčem vypadají jako překlep v odkazu.
+  for (const adresa of ['./#/prehled', './#/x/tohlenenispravnyklic']) {
+    await page.goto(adresa);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('stránka tu není');
+    await expect(page.getByTestId('prehled-email')).toHaveCount(0);
+  }
+});
+
+/**
+ * Klíč v repozitáři být nesmí, ten je veřejný. Test se pustí jen tam, kde
+ * je klíč v proměnné prostředí:
+ *
+ *   DROBEK_ADMIN_KLIC=… npm run test:e2e
+ */
+const ADMIN_KLIC = process.env['DROBEK_ADMIN_KLIC'] ?? '';
+
+test('se správným klíčem se přehled otevře, ale data chce až po heslu', async ({ page }) => {
+  test.skip(ADMIN_KLIC === '', 'bez DROBEK_ADMIN_KLIC není co zkoušet');
+  await acceptDisclaimer(page);
+  await page.goto(`./#/x/${ADMIN_KLIC}`);
+
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Přehled o používání');
-
-  // Bez přihlášení nejsou vidět žádná čísla.
-  await expect(page.getByTestId('prehled-vysledek')).toHaveCount(0);
   await expect(page.getByTestId('prehled-email')).toBeVisible();
   await expect(page.getByTestId('prehled-heslo')).toHaveAttribute('type', 'password');
+  // Dokud se nikdo nepřihlásí, žádná čísla tu nejsou.
+  await expect(page.getByTestId('prehled-vysledek')).toHaveCount(0);
 });

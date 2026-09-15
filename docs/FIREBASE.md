@@ -238,22 +238,39 @@ Pro lokální vývoj slouží `.env.local` podle vzoru v `.env.local.example`.
 
 ## Přehled o používání aplikace
 
-Na adrese `#/prehled` je obrazovka s počty: kolik je domácností, zařízení,
-dětí, ochutnávek, jak jsou staré děti, jaká zařízení se připojila a které
-suroviny se v denících objevují nejčastěji. Nikde v aplikaci na ni nevede
-odkaz a v navigaci není.
+V aplikaci je obrazovka s počty: kolik je domácností, zařízení, dětí
+a ochutnávek, jak jsou staré děti, jaká zařízení se připojila a které
+suroviny se v denících objevují nejčastěji. Nikde na ni nevede odkaz
+a v navigaci není.
 
-Obrazovku si otevře kdokoli, ale data vydá jen server, a to jedinému účtu.
-Rozhoduje o tom pravidlo `jsemSpravce()` ve `firestore.rules`, ne to, že se
-o adrese nikdo nedozví.
+Otevře se jen na adrese s tajným klíčem, tedy `#/x/<klíč>`. Každá jiná
+adresa se chová jako překlep v odkazu: ukáže se „Taková stránka tu není“.
+Rodič se tak o existenci přehledu vůbec nedozví.
+
+Klíč není v repozitáři ani v hotovém balíku, je tam jen jeho otisk SHA-256
+v `src/admin/tajnyOdkaz.ts`. Z otisku se klíč nedopočítá. Samotný klíč si
+drž mimo repozitář; testy si ho berou z proměnné `DROBEK_ADMIN_KLIC`
+a bez ní se ta část testů přeskočí.
+
+Tajný odkaz je ale jen zámek na dveřích. Data chrání až pravidlo
+`jsemSpravce()` ve `firestore.rules` a heslo k účtu, kterým se přehled
+načítá. I kdyby klíč někdo znal, bez hesla neuvidí nic.
+
+Když klíč chceš změnit, spočítej si nový otisk a přepiš ho ve zdroji:
+
+```bash
+python3 -c "import hashlib,secrets,string; \
+k=''.join(secrets.choice(string.ascii_lowercase+string.digits) for _ in range(28)); \
+print('klíč:', k); print('otisk:', hashlib.sha256(k.encode()).hexdigest())"
+```
 
 Zprovoznění:
 
 1. Firebase konzole, **Authentication**, **Sign-in method**, zapni
    poskytovatele **Email/Password**.
 2. Záložka **Users**, **Add user**, zadej svůj e-mail a silné heslo.
-3. Ve Firebase je nový účet neověřený. Přihlas se s ním jednou v aplikaci
-   na `#/prehled`; pokud pravidlo odmítne čtení kvůli `email_verified`,
+3. Ve Firebase je nový účet neověřený. Přihlas se s ním jednou na tajné
+   adrese; pokud pravidlo odmítne čtení kvůli `email_verified`,
    pošli si ověřovací e-mail z konzole (u účtu tři tečky, **Reset password**
    nebo **Send verification email**) a odkaz v něm potvrď.
 4. Zkontroluj, že e-mail v `firestore.rules` u `jsemSpravce()` sedí

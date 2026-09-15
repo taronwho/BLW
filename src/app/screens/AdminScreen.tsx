@@ -1,18 +1,43 @@
 import { KeyRound, RefreshCw, ShieldCheck } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ingredientById } from '@/data';
 import { nactiPrehled, popisChyby } from '@/admin/adminFirebase';
 import { spocitejPrehled, type Prehled } from '@/admin/prehled';
+import { jeSpravnyKlic } from '@/admin/tajnyOdkaz';
+import { NotFoundScreen } from './NotFoundScreen';
 
 /**
- * Přehled o používání aplikace. Není nikam odkazovaný a do navigace nepatří.
+ * Přehled o používání aplikace.
  *
- * Formulář se dá otevřít komukoli, ale data vydá jen server, a to jedinému
- * účtu, který pravidla Firestore jmenují. Bezpečnost tedy nestojí na tom,
- * že se o adrese nikdo nedozví.
+ * Otevře se jen na adrese s tajným klíčem. Jakákoli jiná adresa vypadá
+ * stejně jako překlep v odkazu, takže se rodič o existenci přehledu vůbec
+ * nedozví. Data pak chrání ještě heslo a pravidla Firestore, takže samotná
+ * znalost odkazu nikomu nic nedá.
  */
 export function AdminScreen(): ReactNode {
+  const { klic } = useParams<{ klic: string }>();
+  // `null` znamená, že se otisk ještě počítá. Než je hotový, nevykreslí se
+  // ani formulář, aby nebylo z čeho poznat, že na té adrese něco je.
+  const [pusti, setPusti] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let platne = true;
+    void jeSpravnyKlic(klic).then((vysledek) => {
+      if (platne) setPusti(vysledek);
+    });
+    return () => {
+      platne = false;
+    };
+  }, [klic]);
+
+  if (pusti === null) return null;
+  if (!pusti) return <NotFoundScreen />;
+  return <Prehledovka />;
+}
+
+function Prehledovka(): ReactNode {
   const [email, setEmail] = useState('');
   const [heslo, setHeslo] = useState('');
   const [nacitam, setNacitam] = useState(false);
