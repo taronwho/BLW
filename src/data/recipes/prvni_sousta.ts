@@ -36,7 +36,7 @@ export const prvniSousta: Recipe[] = [
     babySplitPoint:
       'Po kroku 4 odeber dvě růžičky do misky stranou, ještě než se zbytek dochucuje.',
     babySteps: [
-      'Odebrané růžičky nech vychladnout na teplotu ruky. Zkoušej je zevnitř, ne jen na povrchu: pára drží teplo uvnitř stonku déle, než by čekal.',
+      'Odebrané růžičky nech vychladnout na teplotu ruky. Zkoušej je zevnitř, ne jen na povrchu: pára drží teplo uvnitř stonku nečekaně dlouho.',
       'Pokapej je půl lžičkou olivového oleje a prsty rozetři, ať kus tolik neklouže a drží se líp.',
     ],
     babyServing: {
@@ -224,7 +224,7 @@ export const prvniSousta: Recipe[] = [
     ],
     babySplitPoint: 'Po kroku 4 odeber tři hranolky stranou, ještě než se plech dochucuje.',
     babySteps: [
-      'Odebrané hranolky nech vychladnout na teplotu ruky. Batát drží teplo uvnitř déle, než by se zdálo.',
+      'Odebrané hranolky nech vychladnout na teplotu ruky. Batát drží teplo uvnitř mnohem déle než na povrchu.',
       'Batát po upečení hodně klouže. Obal hranolek v hrsti mletých vloček nebo jemné strouhanky, aby ho dítě udrželo.',
     ],
     babyServing: {
