@@ -6,6 +6,7 @@ import { extras } from './extras';
 import { lunchesDinners } from './lunches_dinners';
 import { prvniSousta } from './prvni_sousta';
 import { prvniUpravyLusteniny } from './prvni_upravy_lusteniny';
+import { prvniUpravyMaso } from './prvni_upravy_maso';
 import { prvniUpravyOvoce } from './prvni_upravy_ovoce';
 import { prvniUpravyZelenina } from './prvni_upravy_zelenina';
 import { lunchesDinners2 } from './lunches_dinners_2';
@@ -22,6 +23,7 @@ export const recipes: Recipe[] = [
   ...prvniUpravyZelenina,
   ...prvniUpravyOvoce,
   ...prvniUpravyLusteniny,
+  ...prvniUpravyMaso,
   ...lunchesDinners,
   ...lunchesDinners2,
   ...breakfast,
