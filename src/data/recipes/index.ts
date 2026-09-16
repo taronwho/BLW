@@ -18,6 +18,7 @@ import { prvniUpravyMouky } from './prvni_upravy_mouky';
 import { prvniUpravyMaso3 } from './prvni_upravy_maso_3';
 import { prvniUpravyMlecne } from './prvni_upravy_mlecne';
 import { prvniUpravyOrechyBylinky } from './prvni_upravy_orechy_bylinky';
+import { prvniUpravyZbytek2 } from './prvni_upravy_zbytek_2';
 import { prvniUpravyZelenina } from './prvni_upravy_zelenina';
 import { lunchesDinners2 } from './lunches_dinners_2';
 import { snacksBaking } from './snacks_baking';
@@ -37,6 +38,7 @@ export const recipes: Recipe[] = [
   ...prvniUpravyMaso3,
   ...prvniUpravyMlecne,
   ...prvniUpravyOrechyBylinky,
+  ...prvniUpravyZbytek2,
   ...prvniUpravyLusteniny,
   ...prvniUpravyMaso,
   ...prvniUpravyObiloviny,
