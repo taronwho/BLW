@@ -14,6 +14,7 @@ import { prvniUpravyZbytek } from './prvni_upravy_zbytek';
 import { prvniUpravyRyby } from './prvni_upravy_ryby';
 import { prvniUpravyOvoce } from './prvni_upravy_ovoce';
 import { prvniUpravyOvoce2 } from './prvni_upravy_ovoce_2';
+import { prvniUpravyMouky } from './prvni_upravy_mouky';
 import { prvniUpravyZelenina } from './prvni_upravy_zelenina';
 import { lunchesDinners2 } from './lunches_dinners_2';
 import { snacksBaking } from './snacks_baking';
@@ -29,6 +30,7 @@ export const recipes: Recipe[] = [
   ...prvniUpravyZelenina,
   ...prvniUpravyOvoce,
   ...prvniUpravyOvoce2,
+  ...prvniUpravyMouky,
   ...prvniUpravyLusteniny,
   ...prvniUpravyMaso,
   ...prvniUpravyObiloviny,
