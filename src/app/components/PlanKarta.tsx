@@ -9,9 +9,11 @@ import { useAktivniDite } from '../lib/dite';
  * Plán na úvodní obrazovce.
  *
  * Je to jediná karta, která rodiči odpovídá na otázku „co dneska", takže se
- * nesmí ztratit mezi ostatními dlaždicemi. Dostala proto celou šířku, barevný
- * podklad a číslo dne velkým písmem; ostatní karty na obrazovce jsou ploché
- * a světlé, aby ten rozdíl byl vidět na první pohled.
+ * nesmí ztratit mezi ostatními dlaždicemi. Barvou ji ale odlišit nejde tak,
+ * jak by se nabízelo: hlavička nad ní je plná zelená a druhá plná zelená
+ * plocha s ní splyne. Karta je proto zelená obráceně, tedy světlý podklad
+ * s výrazným rámem a plnou zelenou jen na číslici dne. Rám zároveň dělá to,
+ * co má tlačítko dělat, totiž svádí na sebe klepnout.
  *
  * Schválně bez jediného importu katalogu: úvodní obrazovka je v prvním balíku
  * aplikace a stačí jí číslo dne a postup. Názvy surovin a recepty se dotahují
@@ -31,103 +33,82 @@ export function PlanKarta(): ReactNode {
   const stav: 'zacatek' | 'alergie' | 'dokonceno' | 'bezi' =
     plan === null ? 'zacatek' : !sedi ? 'alergie' : blokDokoncen(plan) ? 'dokonceno' : 'bezi';
 
-  const popisky: Record<typeof stav, { nadpis: string; text: string }> = {
-    zacatek: {
-      nadpis: '30denní plán',
-      text: 'Třicet dnů dopředu. Každý den jedna nová surovina a k ní celá jídla s recepty pro celou rodinu.',
-    },
-    alergie: {
-      nadpis: 'Plán je potřeba přesestavit',
-      text: 'Alergie se od sestavení změnily, takže plán může nabízet jídlo, které dítě nesmí.',
-    },
-    dokonceno: {
-      nadpis: `Blok ${plan?.blok ?? 1} je hotový`,
-      text: 'Dalších třicet dní se sestaví z toho, co zbývá a co už má dítě za sebou.',
-    },
-    bezi: {
-      // Rodič sem nechodí pro název funkce, ale pro odpověď na jedinou
-      // otázku. Nadpis ji proto rovnou pojmenuje.
-      nadpis: 'Co dnes vařit',
-      text: 'Nová surovina dne a k ní recepty na celý den, pro celou rodinu.',
-    },
+  const popis: Record<typeof stav, string> = {
+    zacatek:
+      'Každý den jedna nová surovina a k ní celá jídla s recepty pro celou rodinu.',
+    alergie: 'Alergie se od sestavení změnily. Plán je potřeba sestavit znovu.',
+    dokonceno: `Blok ${plan?.blok ?? 1} je hotový. Dalších třicet dní se sestaví z toho, co zbývá.`,
+    bezi: 'Co dnes vařit: nová surovina dne a k ní recepty na celý den.',
   };
-  const { nadpis, text } = popisky[stav];
+
+  const varovani = stav === 'alergie';
 
   return (
     <Link
       to="/plan"
       data-testid="karta-planu"
-      aria-label={`30denní plán, ${stav === 'bezi' ? `na řadě den ${den?.cislo ?? 1} z ${DNU_V_BLOKU}` : nadpis}`}
-      /* Hlavička nahoře je taky zelená, takže samotná barva kartu neodliší.
-         Světlý rám a silnější stín ji z plochy vytáhnou jako samostatnou
-         věc, ne jako pokračování hlavičky. */
-      className={`relative flex items-stretch gap-3.5 overflow-hidden rounded-2xl p-4 shadow-lift ring-1 ${
-        stav === 'alergie'
-          ? 'bg-risk-soft text-ink ring-risk/50'
-          : 'bg-accent-sheen text-white ring-white/25'
+      aria-label={`30denní plán. ${stav === 'bezi' ? `Na řadě den ${den?.cislo ?? 1} z ${DNU_V_BLOKU}.` : popis[stav]}`}
+      /* Silnější stín než u ostatních karet. Rám říká „klikni sem", stín
+         kartu nadzvedne nad ploché dlaždice kolem. */
+      className={`flex items-stretch gap-3 rounded-2xl border-2 p-3 shadow-lift ${
+        varovani ? 'border-risk/50 bg-risk-soft' : 'border-accent bg-accent-soft'
       }`}
     >
-      {/* Číslo dne jako hlavní prvek karty. Rodič ho hledá jako první a
-          z odstavce textu se nevyčte tak rychle jako z velké číslice. */}
-      {stav === 'bezi' ? (
-        <span className="flex w-[4.25rem] shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-white/20 px-1 py-2.5 leading-none ring-1 ring-white/25">
-          <span className="text-[10px] font-semibold uppercase tracking-wider opacity-90">den</span>
-          <span className="text-[2.15rem] font-bold tabular-nums">{den?.cislo ?? 1}</span>
-          <span className="text-[10px] opacity-90">z {DNU_V_BLOKU}</span>
-        </span>
-      ) : (
-        <span
-          className={`flex w-16 shrink-0 items-center justify-center rounded-xl ${
-            stav === 'alergie' ? 'bg-risk/15 text-risk' : 'bg-white/20'
-          }`}
-        >
-          {stav === 'alergie' ? (
-            <AlertTriangle aria-hidden="true" className="h-8 w-8" />
-          ) : stav === 'dokonceno' ? (
-            <Sparkles aria-hidden="true" className="h-8 w-8" />
-          ) : (
-            <CalendarCheck aria-hidden="true" className="h-8 w-8" />
-          )}
-        </span>
-      )}
+      {/* Plná barva je jen tady, na číslici. Drží pohled a zároveň nedělá
+          z celé karty druhou zelenou plochu vedle hlavičky. */}
+      <span
+        className={`flex w-14 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl leading-none ${
+          varovani ? 'bg-risk text-white' : 'bg-accent text-on-accent'
+        }`}
+      >
+        {stav === 'bezi' ? (
+          <>
+            <span className="text-[9px] font-semibold uppercase tracking-wider opacity-90">den</span>
+            <span className="text-2xl font-bold tabular-nums">{den?.cislo ?? 1}</span>
+            <span className="text-[9px] opacity-90">z {DNU_V_BLOKU}</span>
+          </>
+        ) : varovani ? (
+          <AlertTriangle aria-hidden="true" className="h-7 w-7" />
+        ) : stav === 'dokonceno' ? (
+          <Sparkles aria-hidden="true" className="h-7 w-7" />
+        ) : (
+          <CalendarCheck aria-hidden="true" className="h-7 w-7" />
+        )}
+      </span>
 
-      <span className="flex min-w-0 flex-1 flex-col justify-center gap-1">
-        <span className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
-          <span className="text-[1.05rem] font-bold leading-tight">{nadpis}</span>
+      <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
+        <span className="flex flex-wrap items-center gap-x-1.5">
+          <span className="text-base font-bold leading-tight">30denní plán</span>
           {stav === 'bezi' && plan !== null && plan.blok > 1 && (
-            <span className="shrink-0 rounded-full bg-white/25 px-2 py-0.5 text-[10px] font-semibold">
+            <span className="shrink-0 rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold">
               {plan.blok}. blok
             </span>
           )}
         </span>
-        <span
-          className={`block text-[11px] leading-snug ${stav === 'alergie' ? 'text-ink/80' : 'text-white/90'}`}
-        >
-          {text}
-        </span>
+        <span className="block text-[11px] leading-snug text-ink/75">{popis[stav]}</span>
         {stav === 'bezi' && (
-          <span className="mt-0.5 flex items-center gap-2">
+          <span className="mt-1 flex items-center gap-2">
             <span
               role="progressbar"
               aria-valuenow={hotovo}
               aria-valuemin={0}
               aria-valuemax={DNU_V_BLOKU}
               aria-label="Postup v plánu"
-              className="block h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25 ring-1 ring-inset ring-white/20"
+              className="block h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-accent/20"
             >
               <span
-                className="block h-full rounded-full bg-white transition-all"
+                className="block h-full rounded-full bg-accent transition-all"
                 style={{ width: `${(hotovo / DNU_V_BLOKU) * 100}%` }}
               />
             </span>
-            <span className="shrink-0 text-[10px] font-semibold tabular-nums text-white/90">
+            <span className="shrink-0 text-[10px] font-semibold tabular-nums text-ink/75">
               {hotovo}/{DNU_V_BLOKU}
             </span>
           </span>
         )}
       </span>
 
-      <span className="flex shrink-0 items-center">
+      <span className={`flex shrink-0 items-center ${varovani ? 'text-risk' : 'text-accent'}`}>
         <ChevronRight aria-hidden="true" className="h-5 w-5" />
       </span>
     </Link>
