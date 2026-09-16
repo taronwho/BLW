@@ -257,6 +257,16 @@ interface KontextVyberu {
   /** První dny: raději krátký recept o pár surovinách než dušená směs. */
   chceJednoduche: boolean;
   /**
+   * První blok: raději sousto do ruky než kaše a polévka.
+   *
+   * Metoda stojí na tom, že si dítě jídlo vezme samo, a kaši ani polévku
+   * do ruky nevezme. Kategorie snídaní je přitom kašemi přeplněná, takže
+   * bez tohohle vážení vycházela v prvním měsíci kaše každé ráno.
+   * Není to zákaz: kaše na předem naložené lžíci do metody patří taky,
+   * jen nemá být tím hlavním, co se dítě první měsíc učí.
+   */
+  chceDoRuky: boolean;
+  /**
    * O kolik horší recept se smí nabídnout.
    *
    * Výchozí plán bere to nejlepší, co na daný den sedí. Teprve když si rodič
@@ -320,12 +330,21 @@ function skoreReceptu(
   // dítě udrží v ruce, a polévku do ruky nevezme; proto jde na začátku
   // stranou, později se hodí stejně jako cokoli jiného.
   const slozitost = ctx.chceJednoduche
-    ? Math.min(recipe.ingredients.length, 8) +
-      (recipe.timeMinutes > 30 ? 3 : 0) +
-      (recipe.category === 'polevky' ? 6 : 0)
+    ? Math.min(recipe.ingredients.length, 8) + (recipe.timeMinutes > 30 ? 3 : 0)
+    : 0;
+  // Podoba jídla. Lžička se v prvním bloku nezakazuje, jen ustupuje soustu,
+  // které dítě zvedne samo.
+  const podoba = ctx.chceDoRuky
+    ? (recipe.category === 'polevky' ? 7 : 0) +
+      (recipe.tags.includes('kaše') ? 6 : 0) +
+      (recipe.tags.includes('do ruky') ? -2 : 0)
     : 0;
   return (
-    (maHledanou ? 0 : 16) + (chybiZelezo && !maZelezo ? 4 : 0) + Math.min(neznamych, 3) + slozitost
+    (maHledanou ? 0 : 16) +
+    (chybiZelezo && !maZelezo ? 4 : 0) +
+    Math.min(neznamych, 3) +
+    slozitost +
+    podoba
   );
 }
 
@@ -557,6 +576,9 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
       // Dva týdny na rozjezd. Dítě zatím skoro nic nezná, takže složitý
       // recept by stejně vyšel jako seznam neznámých surovin.
       chceJednoduche: prvniBlok && den <= 14,
+      // Celý první blok, ne jen první dva týdny. Učit se brát jídlo do ruky
+      // je na začátku to hlavní a měsíc je na to sotva dost.
+      chceDoRuky: prvniBlok,
       smiSeOpakovat: false,
       rozptyl: (vstup.varianta ?? 0) > 0 ? ROZPTYL_VYBERU : 0,
     };

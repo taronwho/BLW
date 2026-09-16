@@ -9,6 +9,7 @@ import { prvniUpravyLusteniny } from './prvni_upravy_lusteniny';
 import { prvniUpravyMaso } from './prvni_upravy_maso';
 import { prvniUpravyObiloviny } from './prvni_upravy_obiloviny';
 import { prvniUpravyMaso2 } from './prvni_upravy_maso_2';
+import { prvniUpravyDokonceni } from './prvni_upravy_dokonceni';
 import { prvniUpravyZbytek } from './prvni_upravy_zbytek';
 import { prvniUpravyRyby } from './prvni_upravy_ryby';
 import { prvniUpravyOvoce } from './prvni_upravy_ovoce';
@@ -32,6 +33,7 @@ export const recipes: Recipe[] = [
   ...prvniUpravyRyby,
   ...prvniUpravyMaso2,
   ...prvniUpravyZbytek,
+  ...prvniUpravyDokonceni,
   ...lunchesDinners,
   ...lunchesDinners2,
   ...breakfast,

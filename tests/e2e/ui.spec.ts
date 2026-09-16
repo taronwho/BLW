@@ -1207,6 +1207,27 @@ test('recepty jdou filtrovat podle věku dítěte', async ({ page }) => {
   await expect(page.getByTestId('filtr-vhodne')).toHaveAttribute('aria-pressed', 'true');
 });
 
+test('filtr jednoduchých úprav zúží kuchařku na pár složek a krátký čas', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+
+  const pocet = page.getByTestId('pocet-receptu');
+  await expect(pocet).toContainText(`${CATALOG_COUNTS.recipes} z ${CATALOG_COUNTS.recipes}`);
+
+  await otevriFiltry(page, 'receptu');
+  await page.getByTestId('filtr-jednoduche').click();
+  await expect(pocet).not.toContainText(`${CATALOG_COUNTS.recipes} z ${CATALOG_COUNTS.recipes}`);
+  // Zůstat musí ty krátké úpravy o pár složkách.
+  await expect(page.getByTestId('seznam-receptu')).toContainText('Brokolice na páře');
+
+  // Filtr přežije odkaz stejně jako ostatní.
+  const filtrovano = await pocet.textContent();
+  await page.reload();
+  await expect(pocet).toHaveText(filtrovano ?? '');
+  await otevriFiltry(page, 'receptu');
+  await expect(page.getByTestId('filtr-jednoduche')).toHaveAttribute('aria-pressed', 'true');
+});
+
 test('recept starší, než vyžadují jeho suroviny, řekne proč', async ({ page }) => {
   await acceptDisclaimer(page);
 

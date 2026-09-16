@@ -145,7 +145,7 @@ export function PlanDenAkce({
           <div
             role="dialog"
             aria-modal="true"
-            aria-label={`Jak šla surovina ${novinka.nameCz}`}
+            aria-label={`Zápis ochutnávky: ${novinka.nameCz}`}
             data-testid="den-hotovo-okenko"
             className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/50 p-3 sm:items-center"
             onClick={() => setOtevreno(false)}
@@ -156,7 +156,13 @@ export function PlanDenAkce({
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-2">
-                <h2 className="text-base font-bold">Jak šlo {novinka.nameCz}?</h2>
+                {/* Rod suroviny se z katalogu neodvodí: cizrna je ženská,
+                    brambor mužský, avokádo střední. Nadpis proto název
+                    neohýbá, jen ho postaví vedle otázky. */}
+                <h2 className="text-base font-bold">
+                  Jak to šlo?
+                  <span className="block text-sm font-semibold text-muted">{novinka.nameCz}</span>
+                </h2>
                 <button
                   type="button"
                   aria-label="Zavřít"

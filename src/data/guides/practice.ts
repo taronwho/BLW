@@ -235,6 +235,7 @@ export const practice: Guide[] = [
         heading: 'Jak se vybírá, co bude nové',
         asList: true,
         body: [
+          'První blok stojí na soustech, která dítě zvedne samo. Kaše a polévky v něm skoro nejsou, i když jich je v kuchařce dost: metoda je vedená dítětem a kaši do ruky nevezme. Od druhého bloku se nabídka srovná, protože tou dobou už dítě jíst umí a kaše na předem naložené lžíci do příkrmu patří stejně jako cokoli jiného.',
           'První týden má pevné pořadí podle rady o prvních potravinách: měkká zelenina, kterou dítě udrží v pěsti, a teprve za ní sladší druhy. Vaří se z ní jednoduché úpravy o dvou nebo třech složkách, ne holé sousto vedle talíře.',
           'Pak se střídají tři věci. Zdroje železa, protože zásoba z těhotenství se kolem půl roku tenčí. Suroviny, které mají zrovna sezónu. A zbytek katalogu.',
           'Každý třetí den je vyhrazený dalšímu klíčovému alergenu, aby se jich devět stihlo zavést zhruba za měsíc a mezi dvěma zůstaly dva klidné dny.',

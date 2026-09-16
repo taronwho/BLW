@@ -77,6 +77,12 @@ spadne, opravuje se generátor, ne test.
   surovinou. Když ani tak nevyjde, surovina se odloží a na řadu jde další
   z fronty; nepropadne. Holé sousto vedle talíře zůstává jen jako poslední
   záchrana pro plán, ve kterém už nezbývá nic jiného.
+- **První blok je o úchopu.** Polévky a recepty se štítkem „kaše“ dostávají
+  po celý první blok penalizaci, sousta do ruky malý bonus. Není to zákaz:
+  kaše na předem naložené lžíci do metody patří taky. Jenže kategorie snídaní
+  je kašemi přeplněná, takže bez vážení vycházela v prvním měsíci kaše každé
+  ráno a z příkrmu vedeného dítětem zbylo krmení lžičkou. Od druhého bloku
+  vážení mizí.
 - **První dny jsou jednoduché.** Dva týdny se preferují recepty o pár
   složkách, do půl hodiny a mimo polévky: dítě zatím nic nezná a dušená směs
   o deseti surovinách by mu den zaplnila neznámými věcmi.

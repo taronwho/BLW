@@ -18,7 +18,7 @@ export const starting: Guide[] = [
     summary:
       'Nerozhoduje datum v kalendáři, ale tři vývojové znaky. Dokud nejsou pohromadě, nemá začínat žádná metoda příkrmu.',
     keyPoints: [
-      'Samostatný stabilní sed a udržená hlava.',
+      'Vzpřímený sed a pevně držená hlava. Opora se počítá, sedět samo uprostřed pokoje nemusí.',
       'Koordinace oko–ruka–ústa: dítě sáhne po jídle a trefí si ho do pusy.',
       'Vyhasl vypuzovací reflex jazyka, kterým dítě vytlačuje ven všechno, co se mu dostane do úst.',
     ],
@@ -27,9 +27,19 @@ export const starting: Guide[] = [
         heading: 'Tři znaky, které musí být pohromadě',
         body: [
           'Klíčem k celé metodě není žádná filozofie, ale trojice vývojových znaků, které se u zdravého dítěte scházejí kolem šestého měsíce.',
-          'Samostatný stabilní sed. Cílené uchopení předmětu a jeho dopravení do úst. A vyhasnutí reflexu, kterým dítě jazykem vytlačuje ven všechno, co se mu dostane do pusy.',
+          'Vzpřímený sed s pevně drženou hlavou. Cílené uchopení předmětu a jeho dopravení do úst. A vyhasnutí reflexu, kterým dítě jazykem vytlačuje ven všechno, co se mu dostane do pusy.',
           'Dokud tyhle tři věci nejsou pohromadě, nemá začínat ani jedna metoda příkrmu. Jakmile jsou, dá se začít oběma: lžičkou i kusy do ruky.',
           'Přidej k tomu čtvrtý, měkčí znak: dítě projevuje o jídlo zájem, sleduje, co jíte, a sahá po tom.',
+        ],
+      },
+      {
+        heading: 'Co přesně znamená sed',
+        body: [
+          'Tohle je nejčastější nedorozumění z celého seznamu, tak na rovinu. Doporučení mluví o tom, že dítě udrží polohu vsedě a hlavu drží pevně. Neříká, že musí umět sednout si samo ani sedět bez opory uprostřed pokoje.',
+          'Opora se počítá. Židlička s oporou zad je v pořádku, klín dospělého taky. Rozhoduje, že je dítě ve vzpřímené poloze a nepropadá se, protože právě vzpřímený trup dovolí sousto bezpečně polknout. Vleže nebo v polosedu jde jídlo špatně a riziko se zbytečně zvyšuje.',
+          'Dítě, které se v židličce sesouvá dopředu, převažuje na stranu nebo mu padá hlava, ještě připravené není. Nepomůže podložit ho polštáři: opora má držet záda, ne dítě v pozici, do které samo nedosáhne.',
+          'Tenhle znak platí pro každý příkrm, ne jen pro jídlo do ruky. Někdy se tvrdí, že u mixované stravy ze lžičky sedět netřeba; doporučení takový rozdíl nedělá a vzpřímená poloha se u polykání hodí stejně.',
+          'Pro dítě, které ještě samo nesedí, ale ostatní znaky má, se nabízí klín. Sedí zády opřené o hruď dospělého, vzpřímeně, a jídlo má před sebou. Není to náhrada za připravenost, jen řešení opory.',
         ],
       },
       {

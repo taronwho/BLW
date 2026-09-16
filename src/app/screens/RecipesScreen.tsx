@@ -7,12 +7,14 @@ import {
   ShoppingBasket,
   Sparkles,
   Star,
+  Timer,
   X,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
+import { jeJednoduchaUprava } from '@/data/jednoduche';
 import { recipeNutrients } from '@/data/recipeNutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { RECIPE_CATEGORIES } from '@/types';
@@ -82,6 +84,7 @@ export function RecipesScreen(): ReactNode {
   const [vegetarianOnly, setVegetarianOnly] = useUrlFlag('vege');
   const [oblibene, setOblibene] = useUrlFlag('oblibene');
   const [vhodneTed, setVhodneTed] = useUrlFlag('vhodne');
+  const [jednoduche, setJednoduche] = useUrlFlag('jedn');
   const bezAlergenu = useFiltrAlergenu();
   const [pantry, setPantry] = useUrlList('spiz');
   // Rozbalení spíže a její vlastní hledání jsou stav okna, ne filtr — do
@@ -113,6 +116,7 @@ export function RecipesScreen(): ReactNode {
     (oblibene ? 1 : 0) +
     (vegetarianOnly ? 1 : 0) +
     (vhodneTed ? 1 : 0) +
+    (jednoduche ? 1 : 0) +
     (pantrySet.size > 0 ? 1 : 0) +
     (bezAlergenu.vybrane.length > 0 ? 1 : 0);
 
@@ -124,6 +128,7 @@ export function RecipesScreen(): ReactNode {
     vegetarianOnly ||
     oblibene ||
     vhodneTed ||
+    jednoduche ||
     bezAlergenu.vybrane.length > 0 ||
     pantry.length > 0;
 
@@ -146,7 +151,7 @@ export function RecipesScreen(): ReactNode {
   function zrusFiltry(): void {
     nastavFiltry({
       q: null, kat: null, cas: null, ziv: null, fe: null, sila: null,
-      vege: null, oblibene: null, vhodne: null, bez: null, spiz: null,
+      vege: null, oblibene: null, vhodne: null, jedn: null, bez: null, spiz: null,
     });
   }
 
@@ -167,6 +172,7 @@ export function RecipesScreen(): ReactNode {
         // bere šest měsíců — tedy začátek příkrmu, ne „všechno projde".
         if (vhodneTed && recipe.minAgeMonths > (months ?? 6)) return false;
         if (oblibene && !favorites.has(recipe.id)) return false;
+        if (jednoduche && !jeJednoduchaUprava(recipe)) return false;
         if (!vyhovujeZivinam(recipeNutrients(recipe), ziviny, druhZeleza, sila))
           return false;
         if (bezAlergenu.vybrane.some((skupina) => recipeAllergens(recipe).includes(skupina)))
@@ -189,6 +195,7 @@ export function RecipesScreen(): ReactNode {
       vegetarianOnly,
       oblibene,
       vhodneTed,
+      jednoduche,
       months,
       favorites,
       bezAlergenu.vybrane,
@@ -323,6 +330,15 @@ export function RecipesScreen(): ReactNode {
                   pressed={vhodneTed}
                   onClick={() => setVhodneTed((value) => !value)}
                   testId="filtr-vhodne"
+                />
+                {/* Odpověď na „mám doma pastinák, co s ním". Počítá se
+                    z receptu, ne ze štítku, takže platí i pro starší položky. */}
+                <ChipButton
+                  label="jednoduchá úprava"
+                  Icon={Timer}
+                  pressed={jednoduche}
+                  onClick={() => setJednoduche((value) => !value)}
+                  testId="filtr-jednoduche"
                 />
                 <ChipButton
                   label="oblíbené"

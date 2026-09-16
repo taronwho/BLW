@@ -96,6 +96,23 @@ describe('sestavení třicetidenního plánu', () => {
     }
   });
 
+  it('první blok stojí na soustech do ruky, ne na kaších a polévkách', () => {
+    // Metoda stojí na tom, že si dítě jídlo vezme samo. Kategorie snídaní je
+    // ale kašemi přeplněná, takže bez vážení vycházela v prvním měsíci kaše
+    // každé ráno a z příkrmu vedeného dítětem zbylo krmení lžičkou.
+    const jidla = plan.dny.flatMap((den) =>
+      den.jidla
+        .map((jidlo) => recipeById.get(jidlo.recipeId ?? ''))
+        .filter((recept): recept is NonNullable<typeof recept> => recept !== undefined),
+    );
+    const kasi = jidla.filter((recept) => recept.tags.includes('kaše')).length;
+    const polevek = jidla.filter((recept) => recept.category === 'polevky').length;
+    const doRuky = jidla.filter((recept) => recept.tags.includes('do ruky')).length;
+
+    expect(kasi + polevek).toBeLessThan(jidla.length * 0.15);
+    expect(doRuky).toBeGreaterThan(kasi + polevek);
+  });
+
   it('od chvíle, kdy se začne vařit, je v každém dni železo', () => {
     for (const den of plan.dny.slice(7)) {
       expect(maZelezo(den), `den ${den.cislo} je bez železa`).toBe(true);

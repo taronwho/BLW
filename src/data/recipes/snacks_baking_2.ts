@@ -705,16 +705,16 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Cottage sýr rozmíchej vidličkou s nasekaným koprem do hladkého dipu.',
-      'Ředkvičky omyj, odkroj nať i kořínek a nakrájej je na tenké plátky.',
+      'Ředkvičky omyj a odkroj nať i kořínek. Jednu si nech celou stranou pro dětskou porci, zbytek nakrájej na tenké plátky.',
       'Okurku oloupej a nakrájej ji na dlouhé úzké proužky, ne na kolečka.',
       'Kedlubnu oloupej a nakrájej ji na stejně dlouhé proužky jako okurku.',
       'Na talíř navrš dip a kolem něj rozlož zeleninové proužky a plátky ředkviček.',
     ],
     babySplitPoint:
-      'Po kroku 1 odeber dvě lžíce dipu do misky, dřív než se do zbytku přidává cokoli na dochucení.',
+      'Po kroku 1 odeber dvě lžíce dipu do misky, dřív než se do zbytku přidává cokoli na dochucení. Celou ředkvičku odloženou v kroku 2 si nech k ní.',
     babySteps: [
       'Kedlubnové proužky pro dítě krátce povař v páře, syrová kedlubna je pro tenhle věk moc tvrdá.',
-      'Ředkvičku do dětské porce nedávej celou, je ostrá a pevná; nastrouhej ji do dipu.',
+      'Tu odloženou celou ředkvičku nastrouhej do dětského dipu. Celá ani na plátky do téhle porce nepatří, je ostrá a pevná.',
       'Okurkový proužek nech syrový, ale oloupaný, slupka se pod dásněmi neroztrhne.',
     ],
     babyServing: {

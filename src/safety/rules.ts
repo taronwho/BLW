@@ -1001,6 +1001,77 @@ const recipeIngredientsUsed: SafetyRule = {
   },
 };
 
+
+/**
+ * Strouhat jde jen celý kus.
+ *
+ * Recept na cottage dip krájel ředkvičky na tenké plátky a dětská linie pak
+ * chtěla ředkvičku nastrouhat. V tu chvíli už ale žádná celá nezbyla a rodič
+ * stojí u prkénka s pokynem, který nejde splnit. Dětská porce musí vycházet
+ * ze stavu, ve kterém jídlo v okamžiku odebrání opravdu je.
+ *
+ * Pravidlo je schválně úzké. Hlídá jediný, zato nevratný případ: společný
+ * postup surovinu rozkrájí a dětský ji chce strouhat. Ostatní přechody
+ * (rozmačkat plátek, povařit kus) jdou udělat i potom, takže se nehlásí.
+ */
+const REZNE_VERBY = ['nakrajej*', 'nakrajel*', 'rozkroj*', 'nasekej*', 'rozctvrt*', 'krajej*'];
+const STROUHACI_VERBY = ['nastrouhej*', 'nastrouhan*', 'strouhej*'];
+/** Věty, které kus schválně nechávají stranou, pravidlo neruší. */
+const VYHRAZENI = ['nech*', 'ponech*', 'odeber*', 'stranou', 'celou', 'celý', 'cely', 'vcelku'];
+
+const babyStepFeasible: SafetyRule = {
+  id: 'baby-step-feasible',
+  severity: 'error',
+  appliesTo: 'recipe',
+  description:
+    'Dětský krok nechce surovinu ve tvaru, který společný postup už zlikvidoval (krájení proti strouhání).',
+  check(item, catalog) {
+    if (!isRecipe(item)) return null;
+
+    for (const ref of item.ingredients) {
+      const ingredient = catalog.ingredients.find((one) => one.id === ref.ingredientId);
+      if (ingredient === undefined) continue;
+
+      const kmeny = [ingredient.nameCz, ...ingredient.altNamesCz]
+        .flatMap((jmeno) => normalize(jmeno).split(/[^a-z0-9]+/))
+        .filter((slovo) => slovo.length > 4)
+        .map((slovo) => slovo.slice(0, slovo.length - 1));
+      if (kmeny.length === 0) continue;
+
+      // Sloveso musí stát u té suroviny, ne kdekoli ve větě. Bez tohohle
+      // okna hlásilo pravidlo recept, kde se krájely brambory a strouhal sýr.
+      const sloveso = (veta: string, vzory: readonly string[]): boolean => {
+        const text = normalize(veta);
+        for (const kmen of kmeny) {
+          let i = text.indexOf(kmen);
+          while (i !== -1) {
+            if (containsPattern(text.slice(i, i + 90), vzory, { honorNegation: false })) return true;
+            i = text.indexOf(kmen, i + 1);
+          }
+        }
+        return false;
+      };
+
+      // Když se surovina strouhá už ve společném postupu, dětský krok na ni
+      // jen navazuje a nic si neprotiřečí.
+      if (item.baseSteps.some((veta) => sloveso(veta, STROUHACI_VERBY))) continue;
+
+      const kraji = item.baseSteps.some(
+        (veta) =>
+          sloveso(veta, REZNE_VERBY) &&
+          !containsPattern(veta, VYHRAZENI, { honorNegation: false }),
+      );
+      if (!kraji) continue;
+
+      const strouha = item.babySteps.find((veta) => sloveso(veta, STROUHACI_VERBY));
+      if (strouha === undefined) continue;
+
+      return `Dětský krok chce strouhat „${ingredient.nameCz}", ale společný postup ji už nakrájel: „${strouha.slice(0, 90)}".`;
+    }
+    return null;
+  },
+};
+
 /** Všechna pravidla z docs/SPEC.md kapitola 3, v pořadí tabulky. */
 export const safetyRules: readonly SafetyRule[] = [
   noHoneyBaby,
@@ -1009,6 +1080,7 @@ export const safetyRules: readonly SafetyRule[] = [
   noWholeNuts,
   roundFoodShape,
   babySplitRequired,
+  babyStepFeasible,
   vegTrackComplete,
   meatTrackOnlyWithMeat,
   hiddenAnimalIngredients,

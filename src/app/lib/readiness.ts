@@ -15,7 +15,7 @@ import { READY_SIGNS } from '@/types';
  */
 
 export const READY_LABELS: Record<ReadySign, string> = {
-  sed: 'Samostatný stabilní sed',
+  sed: 'Vzpřímený sed a pevná hlava',
   koordinace: 'Trefí si jídlo do pusy',
   reflex: 'Vyhasl vypuzovací reflex jazyka',
 };
@@ -27,14 +27,14 @@ export const READY_LABELS: Record<ReadySign, string> = {
  * „zbývá …“ se nedají vložit, aniž by drhla.
  */
 export const READY_MISSING_LABELS: Record<ReadySign, string> = {
-  sed: 'samostatný stabilní sed',
+  sed: 'vzpřímený sed a pevná hlava',
   koordinace: 'trefování jídla do pusy',
   reflex: 'vyhasnutí vypuzovacího reflexu',
 };
 
 /** Podle čeho rodič znak pozná — pozorovatelné, ne odvozené z věku. */
 export const READY_HOW_TO_TELL: Record<ReadySign, string> = {
-  sed: 'Dítě udrží trup i hlavu vzpřímeně bez opírání rukama. V židličce nepadá na stranu ani se nesesouvá dopředu.',
+  sed: 'Dítě udrží polohu vsedě a hlavu drží pevně. Opora se počítá: stačí židlička s oporou zad nebo klín dospělého. Nemusí sedět samo uprostřed pokoje, ale nesmí se v židličce sesouvat dopředu ani padat na stranu.',
   koordinace:
     'Dítě po jídle cíleně sáhne, uchopí ho a dopraví si ho do úst. Ne náhodou, ale když chce.',
   reflex:

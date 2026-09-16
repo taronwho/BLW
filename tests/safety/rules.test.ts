@@ -930,6 +930,47 @@ describe('known-typos', () => {
   });
 });
 
+describe('baby-step-feasible', () => {
+  it('projde recept, kde si společný postup nechá kus stranou', () => {
+    expectPass(
+      'baby-step-feasible',
+      makeRecipe({
+        ingredients: [{ ingredientId: 'mrkev', amount: '3 kusy', track: 'all' }],
+        baseSteps: [
+          'Mrkev oškrábej. Jednu si nech celou stranou, zbytek nakrájej na hranolky.',
+          'Hranolky uvař doměkka v páře.',
+        ],
+        babySteps: ['Tu odloženou mrkev nastrouhej do porce najemno.'],
+      }),
+      catalog,
+    );
+  });
+
+  it('spadne, když se surovina rozkrájí a dětský krok ji chce strouhat', () => {
+    expectFail(
+      'baby-step-feasible',
+      makeRecipe({
+        ingredients: [{ ingredientId: 'mrkev', amount: '3 kusy', track: 'all' }],
+        baseSteps: ['Mrkev oškrábej a nakrájej ji na tenké plátky.', 'Plátky rozlož na talíř.'],
+        babySteps: ['Mrkev pro dítě nastrouhej do misky.'],
+      }),
+      catalog,
+    );
+  });
+
+  it('strouhání ve společném postupu není rozpor, dětský krok na něj navazuje', () => {
+    expectPass(
+      'baby-step-feasible',
+      makeRecipe({
+        ingredients: [{ ingredientId: 'mrkev', amount: '3 kusy', track: 'all' }],
+        baseSteps: ['Mrkev oškrábej a nastrouhej ji najemno.', 'Brambory nakrájej na plátky.'],
+        babySteps: ['Lžíci nastrouhané mrkve vmíchej do dětské porce.'],
+      }),
+      catalog,
+    );
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -939,6 +980,7 @@ describe('pokrytí pravidel', () => {
       'no-whole-nuts',
       'round-food-shape',
       'baby-split-required',
+      'baby-step-feasible',
       'veg-track-complete',
       'meat-track-only-with-meat',
       'hidden-animal-ingredients',
