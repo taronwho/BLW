@@ -5,6 +5,7 @@ import { bezMleka } from './bez_mleka';
 import { extras } from './extras';
 import { lunchesDinners } from './lunches_dinners';
 import { prvniSousta } from './prvni_sousta';
+import { prvniUpravyLusteniny } from './prvni_upravy_lusteniny';
 import { prvniUpravyOvoce } from './prvni_upravy_ovoce';
 import { prvniUpravyZelenina } from './prvni_upravy_zelenina';
 import { lunchesDinners2 } from './lunches_dinners_2';
@@ -20,6 +21,7 @@ export const recipes: Recipe[] = [
   ...prvniSousta,
   ...prvniUpravyZelenina,
   ...prvniUpravyOvoce,
+  ...prvniUpravyLusteniny,
   ...lunchesDinners,
   ...lunchesDinners2,
   ...breakfast,
