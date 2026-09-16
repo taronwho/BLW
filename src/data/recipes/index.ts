@@ -8,6 +8,7 @@ import { prvniSousta } from './prvni_sousta';
 import { prvniUpravyLusteniny } from './prvni_upravy_lusteniny';
 import { prvniUpravyMaso } from './prvni_upravy_maso';
 import { prvniUpravyObiloviny } from './prvni_upravy_obiloviny';
+import { prvniUpravyRyby } from './prvni_upravy_ryby';
 import { prvniUpravyOvoce } from './prvni_upravy_ovoce';
 import { prvniUpravyZelenina } from './prvni_upravy_zelenina';
 import { lunchesDinners2 } from './lunches_dinners_2';
@@ -26,6 +27,7 @@ export const recipes: Recipe[] = [
   ...prvniUpravyLusteniny,
   ...prvniUpravyMaso,
   ...prvniUpravyObiloviny,
+  ...prvniUpravyRyby,
   ...lunchesDinners,
   ...lunchesDinners2,
   ...breakfast,
