@@ -1000,6 +1000,7 @@ test('den jde odložit, přeskočit i vrátit zpátky mezi čekající', async (
   // Vrátit jde i z detailu dne, když se mezitím odroluje jinam.
   await page.getByTestId('den-preskocit').click();
   await page.getByTestId('plan-den-1').click();
+  await page.getByTestId('nahled-cely-den').click();
   await expect(page.getByTestId('den-stav')).toContainText('přeskočeno');
   await page.getByTestId('den-vratit').click();
   await expect(page.getByTestId('den-stav')).toContainText('čeká');
@@ -1303,4 +1304,69 @@ test('se správným klíčem se přehled otevře, ale data chce až po heslu', a
   await expect(page.getByTestId('prehled-heslo')).toHaveAttribute('type', 'password');
   // Dokud se nikdo nepřihlásí, žádná čísla tu nejsou.
   await expect(page.getByTestId('prehled-vysledek')).toHaveCount(0);
+});
+
+test('číslo v mřížce otevře náhled dne, celou stránku až na vyžádání', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  // Náhled odpoví na otázku „co je devátého" bez odchodu z plánu.
+  await page.getByTestId('plan-den-9').click();
+  const nahled = page.getByTestId('plan-den-nahled');
+  await expect(nahled).toBeVisible();
+  await expect(nahled).toContainText('Den 9');
+  await expect(page.getByTestId('plan-mrizka')).toBeVisible();
+
+  // Zavřením se rodič vrátí tam, kde byl.
+  await page.getByTestId('nahled-zavrit').click();
+  await expect(nahled).toBeHidden();
+
+  // Teprve tlačítko v náhledu otevře celou stránku dne.
+  await page.getByTestId('plan-den-9').click();
+  await page.getByTestId('nahled-cely-den').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Den 9');
+});
+
+test('tlačítko hotovo je výzva, teprve po klepnutí se zaplní a odškrtne', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  // Čekající den má tlačítko jen orámované, ne plně zelené.
+  const tlacitko = page.getByTestId('den-hotovo');
+  await expect(tlacitko).toHaveText('Hotovo');
+  const pred = await tlacitko.evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(pred).toContain('rgba');
+
+  // Po potvrzení se plocha zaplní, objeví se fajfka a plán postoupí dál.
+  await tlacitko.click();
+  await page.getByTestId('den-hotovo-bez-zapisu').click();
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 2');
+  await expect(page.getByTestId('plan-postup')).toContainText('Hotovo 1 z 30');
+});
+
+test('úvodní obrazovka se na vysokém displeji vejde bez rolování', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await navLink(page, 'Domů').click();
+  await expect(page.getByTestId('karta-planu')).toBeVisible();
+
+  const okno = page.viewportSize()?.height ?? 0;
+  const obsah = await page.evaluate(() => document.scrollingElement?.scrollHeight ?? 0);
+  const posledni = await page.getByTestId('postup-do-deniku').boundingBox();
+  if (posledni === null) throw new Error('poslední karta není vidět');
+
+  // Na dnešních telefonech (výška od 800 px) drží rozcestník celý na
+  // obrazovce, tedy stránka nemá co rolovat.
+  if (okno >= 800) {
+    expect(obsah).toBeLessThanOrEqual(okno);
+    expect(posledni.y + posledni.height).toBeLessThanOrEqual(okno - 64);
+  }
+
+  // I na malém displeji, kde se rolovat musí, má obsah zůstat v téhle
+  // výšce: další karta se na rozcestník nepřidá bez toho, aby jiná ubrala.
+  expect(posledni.y + posledni.height).toBeLessThanOrEqual(730);
 });

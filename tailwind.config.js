@@ -50,6 +50,27 @@ export default {
       minWidth: {
         touch: '44px',
       },
+      /*
+       * Odškrtnutí dne. Tlačítko se z obrysu přelije do plné zelené a
+       * teprve pak plán postoupí dál — rodič tak vidí, že se klepnutí
+       * povedlo, místo aby mu obrazovka beze slova přeskočila jinam.
+       * Zkrácení pro `prefers-reduced-motion` řeší src/index.css.
+       */
+      keyframes: {
+        odskrtnuto: {
+          '0%': { transform: 'scale(0.4)', opacity: '0' },
+          '60%': { transform: 'scale(1.18)', opacity: '1' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        vyskoceni: {
+          '0%': { transform: 'translateY(12px) scale(0.98)', opacity: '0' },
+          '100%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+        },
+      },
+      animation: {
+        odskrtnuto: 'odskrtnuto 340ms ease-out',
+        vyskoceni: 'vyskoceni 180ms ease-out',
+      },
     },
   },
   plugins: [],

@@ -38,13 +38,20 @@ export function SeznamDlazdice({
     <Link
       to={`/seznamy/${seznam.id}`}
       data-testid={`seznam-${seznam.id}`}
-      className={`flex flex-col gap-2 rounded-xl border p-3 shadow-soft transition hover:shadow-lift ${
+      className={`flex flex-col rounded-xl border shadow-soft transition hover:shadow-lift ${
         TONY[seznam.tone]
-      } ${compact ? 'w-44 shrink-0' : 'h-full w-full'}`}
+      } ${compact ? 'w-44 shrink-0 gap-1.5 p-2.5' : 'h-full w-full gap-2 p-3'}`}
     >
-      <Icon aria-hidden="true" className="h-6 w-6 shrink-0 text-accent" />
+      <Icon
+        aria-hidden="true"
+        className={`shrink-0 text-accent ${compact ? 'h-5 w-5' : 'h-6 w-6'}`}
+      />
 
-      <span className="text-sm font-semibold leading-snug">{seznam.titleCz}</span>
+      <span
+        className={`font-semibold leading-snug ${compact ? 'text-[13px]' : 'text-sm'}`}
+      >
+        {seznam.titleCz}
+      </span>
       {!compact && <span className="text-[11px] leading-snug text-ink/70">{seznam.summary}</span>}
 
       {/* Postup se počítá z deníku vybraného dítěte, takže po přepnutí

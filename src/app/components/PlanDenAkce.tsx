@@ -1,4 +1,4 @@
-import { Check, Clock3, RotateCcw, Shuffle, SkipForward, X } from 'lucide-react';
+import { Check, Circle, Clock3, RotateCcw, Shuffle, SkipForward, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -10,6 +10,22 @@ import { draftPayload, emptyDraft, type Draft } from '../lib/tastingDraft';
 import { useModalFokus } from '../lib/modalFokus';
 import { usePlanNastroje } from '../lib/plan';
 import { TastingForm } from './TastingForm';
+
+/** Jak dlouho tlačítko ukazuje fajfku, než plán postoupí na další den. */
+const ANIMACE_MS = 620;
+
+/**
+ * Nula, když si prohlížeč vyžádal omezený pohyb.
+ *
+ * Zkrácení animací přes CSS na takový požadavek myslí samo, ale tahle
+ * prodleva je v kódu, takže se o ni musí postarat kód.
+ */
+function dobaAnimace(): number {
+  const omezeny =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+  return omezeny ? 0 : ANIMACE_MS;
+}
 
 /**
  * Co se dá s dnem udělat.
@@ -42,6 +58,8 @@ export function PlanDenAkce({
    *  vrátilo tentýž nápad jako to první. */
   const [varianta, setVarianta] = useState(1);
   const [draft, setDraft] = useState<Draft>(emptyDraft);
+  /** Běží potvrzovací animace? Po ni teprve plán postoupí na další den. */
+  const [potvrzuje, setPotvrzuje] = useState(false);
   const okenko = useModalFokus<HTMLDivElement>(otevreno);
 
   const stav = stavDne(plan, den.cislo);
@@ -58,6 +76,8 @@ export function PlanDenAkce({
   }, [otevreno]);
 
   async function odskrtni(sZapisem: boolean): Promise<void> {
+    setOtevreno(false);
+    setPotvrzuje(true);
     if (sZapisem && novinka !== undefined) {
       await recordTasting({
         ingredientId: novinka.id,
@@ -65,9 +85,13 @@ export function PlanDenAkce({
         createdBy: status.kind === 'connected' ? status.uid : 'toto-zarizeni',
       });
     }
+    // Tlačítko se stihne přelít do plné zelené a ukázat fajfku dřív, než
+    // se pod rukou vymění obsah karty za další den. Bez té chvilky vypadá
+    // odškrtnutí jako by obrazovka jen sama od sebe přeskočila jinam.
+    await new Promise((hotovo) => setTimeout(hotovo, dobaAnimace()));
     await nastavStavDne(plan.childId, den.cislo, 'hotovo');
     onZmena?.(den.cislo, 'hotovo');
-    setOtevreno(false);
+    setPotvrzuje(false);
     setDraft(emptyDraft());
   }
 
@@ -91,14 +115,26 @@ export function PlanDenAkce({
   return (
     <>
       <div className="flex flex-col gap-1.5">
+        {/* Prázdné zelené tlačítko vypadalo jako už odškrtnutý den: plná
+            plocha je v téhle aplikaci všude stav, ne výzva. Obrys
+            s průsvitnou zelení zve ke klepnutí a teprve po něm se plocha
+            zaplní a naskočí fajfka. */}
         <button
           type="button"
           data-testid="den-hotovo"
+          disabled={potvrzuje}
+          aria-busy={potvrzuje}
           onClick={() => (novinka === undefined ? void odskrtni(false) : setOtevreno(true))}
-          className="flex min-h-touch items-center justify-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-on-accent"
+          className={`flex min-h-touch items-center justify-center gap-2 rounded-xl border-2 border-accent px-4 text-sm font-semibold transition-colors duration-300 ${
+            potvrzuje ? 'bg-accent text-on-accent' : 'bg-accent/10 text-accent'
+          }`}
         >
-          <Check aria-hidden="true" className="h-4 w-4 shrink-0" />
-          Hotovo
+          {potvrzuje ? (
+            <Check aria-hidden="true" className="h-4 w-4 shrink-0 animate-odskrtnuto" />
+          ) : (
+            <Circle aria-hidden="true" className="h-4 w-4 shrink-0" />
+          )}
+          {potvrzuje ? 'Odškrtnuto' : 'Hotovo'}
         </button>
         <div className="grid grid-cols-3 gap-1.5">
           <button

@@ -15,7 +15,7 @@ import {
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ingredientById, recipeById } from '@/data';
+import { ingredientById } from '@/data';
 import { noveSuroviny } from '@/plan/generator';
 import { useHouseholdStore } from '@/storage/householdStore';
 import {
@@ -25,16 +25,15 @@ import {
   pribyleAlergie,
   planSediSAlergiemi,
   stavDne,
-  type PlanDen,
   type StavDne,
 } from '@/plan/typy';
 import { blokDokoncen } from '@/plan/typy';
-import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
+import { JidlaDne, NovinkaRadek, PlanDenNahled } from '../components/PlanDenNahled';
 import { useAktivniDite } from '../lib/dite';
 import { ALLERGEN_LABELS } from '../lib/labels';
-import { TYP_JIDLA_LABELS, useAktivniPlan, usePlanNastroje } from '../lib/plan';
+import { useAktivniPlan, usePlanNastroje } from '../lib/plan';
 
 /**
  * Třicetidenní plán jídel.
@@ -67,55 +66,6 @@ const PRAVIDLA = [
   },
 ] as const;
 
-function Novinka({ id }: { id: string }): ReactNode {
-  const item = ingredientById.get(id);
-  if (item === undefined) return null;
-  return (
-    <Link
-      to={`/suroviny/${item.id}`}
-      className="flex min-h-touch min-w-0 items-center gap-2 rounded-lg bg-paper px-2 py-1"
-    >
-      <IngredientIcon ingredient={item} className="h-5 w-5 shrink-0" />
-      <span className="flex min-w-0 flex-col leading-tight">
-        <span className="text-[10px] uppercase tracking-wide text-muted">nová surovina</span>
-        <span className="truncate text-xs font-medium">{item.nameCz}</span>
-      </span>
-      {/* Riziko dušení patří ke každé surovině, kterou aplikace nabízí.
-          Plán nabízí nízké a střední; slovo u něj musí být i tak. */}
-      <ChokingBadge risk={item.chokingRisk} />
-    </Link>
-  );
-}
-
-/**
- * Jídla dne pod sebou, bez postupů. Ty jsou v detailu dne.
- *
- * Když je jediné jídlo dne ta nová surovina bez receptu, vypisovat ji podruhé
- * pod chipem s novinkou by jen zabralo řádek a nic nepřidalo.
- */
-function Jidla({ den }: { den: PlanDen }): ReactNode {
-  const jenNovinka = den.jidla.every((jidlo) => jidlo.ingredientId === den.novinka);
-  if (jenNovinka) return null;
-  return (
-    <ul className="flex flex-col gap-1">
-      {den.jidla.map((jidlo, i) => {
-        const recept = recipeById.get(jidlo.recipeId ?? '');
-        const surovina = ingredientById.get(jidlo.ingredientId ?? '');
-        const nazev = recept?.titleCz ?? surovina?.nameCz ?? '';
-        if (nazev.length === 0) return null;
-        return (
-          <li key={`${jidlo.typ}-${i}`} className="flex items-baseline gap-2 text-xs">
-            <span className="w-14 shrink-0 text-[10px] uppercase tracking-wide text-muted">
-              {TYP_JIDLA_LABELS[jidlo.typ]}
-            </span>
-            <span className="min-w-0 flex-1 truncate font-medium">{nazev}</span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
 export function PlanScreen(): ReactNode {
   const dite = useAktivniDite();
   const plan = useAktivniPlan();
@@ -124,6 +74,8 @@ export function PlanScreen(): ReactNode {
   const [pracuje, setPracuje] = useState(false);
   /** Poslední odškrtnutý nebo přeskočený den, aby šel vzít zpátky. */
   const [posledni, setPosledni] = useState<{ cislo: number; stav: StavDne } | null>(null);
+  /** Číslo dne otevřeného v náhledu, nebo `null`, když je mřížka jen mřížka. */
+  const [nahled, setNahled] = useState<number | null>(null);
   const nastavStavDne = useHouseholdStore((store) => store.nastavStavDne);
 
   /**
@@ -250,6 +202,7 @@ export function PlanScreen(): ReactNode {
   const vyrizeno = plan.dny.filter((den) => stavDne(plan, den.cislo) !== 'ceka').length;
   const dokonceno = blokDokoncen(plan);
   const novaAlergie = pribyleAlergie(plan, dite).map((skupina) => ALLERGEN_LABELS[skupina]);
+  const nahledDen = plan.dny.find((den) => den.cislo === nahled) ?? null;
   // Pět dnů dopředu stačí na nákup a nezabere půl obrazovky.
   const pristi = plan.dny
     .filter((den) => stavDne(plan, den.cislo) === 'ceka' && den.cislo !== dnes?.cislo)
@@ -336,8 +289,8 @@ export function PlanScreen(): ReactNode {
               <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
             </Link>
           </div>
-          {dnes.novinka !== undefined && <Novinka id={dnes.novinka} />}
-          <Jidla den={dnes} />
+          {dnes.novinka !== undefined && <NovinkaRadek id={dnes.novinka} />}
+          <JidlaDne den={dnes} />
           <PlanDenAkce plan={plan} den={dnes} onZmena={(cislo, stav) => setPosledni({ cislo, stav })} />
         </section>
       )}
@@ -366,11 +319,16 @@ export function PlanScreen(): ReactNode {
                     : 'border-line bg-surface';
             return (
               <li key={den.cislo}>
-                <Link
-                  to={`/plan/den/${den.cislo}`}
+                {/* Klepnutí na číslo otevře náhled, ne rovnou celý den.
+                    Zvědavá otázka „co je devátého?" se tak dá zodpovědět,
+                    aniž by rodič odešel z plánu a musel se vracet. */}
+                <button
+                  type="button"
                   data-testid={`plan-den-${den.cislo}`}
+                  aria-haspopup="dialog"
                   aria-label={`Den ${den.cislo}, ${stav === 'hotovo' ? 'hotovo' : stav === 'preskoceno' ? 'přeskočeno' : 'čeká'}`}
-                  className={`flex min-h-touch items-center justify-center rounded-lg border text-sm ${barva}`}
+                  onClick={() => setNahled(den.cislo)}
+                  className={`flex min-h-touch w-full items-center justify-center rounded-lg border text-sm transition ${barva}`}
                 >
                   {stav === 'hotovo' ? (
                     <Check aria-hidden="true" className="h-4 w-4" />
@@ -379,12 +337,16 @@ export function PlanScreen(): ReactNode {
                   ) : (
                     den.cislo
                   )}
-                </Link>
+                </button>
               </li>
             );
           })}
         </ul>
       </section>
+
+      {nahledDen !== null && (
+        <PlanDenNahled plan={plan} den={nahledDen} onZavrit={() => setNahled(null)} />
+      )}
 
       {/* Vrácení posledního kroku. Přeskočený den zmizí z karty „na řadě" a
           rodič by ho musel hledat v mřížce; nabídnout vrácení hned na místě
