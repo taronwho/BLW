@@ -12,6 +12,6 @@
  */
 export const CATALOG_COUNTS = {
   ingredients: 301,
-  recipes: 468,
+  recipes: 481,
   guides: 16,
 } as const;
