@@ -652,6 +652,7 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
     vytvoreno: vstup.dnes,
     alergie: [...vyloucene].sort(),
     varianta: vstup.varianta ?? 0,
+    zname: [...vstup.ochutnane].sort(),
     dny,
     stavy: {},
   };

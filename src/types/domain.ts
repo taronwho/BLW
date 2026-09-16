@@ -396,6 +396,16 @@ export interface Plan {
    * sáhne po jiných receptech ze stejně vhodných.
    */
   varianta?: number;
+  /**
+   * Co dítě znalo ve chvíli, kdy blok vznikl.
+   *
+   * Druhý blok navazuje na první, ale ukládá se vždycky jen ten poslední.
+   * Bez tohohle seznamu by aplikace ve druhém bloku nabízela vedle novinky
+   * jen suroviny z jeho vlastních dnů, jako by na první měsíc příkrmu
+   * zapomněla. Deník sám nestačí: rodič, který dny jen odškrtává a nezapisuje,
+   * by v něm nic neměl.
+   */
+  zname?: string[];
   dny: PlanDen[];
   /**
    * Stav jednotlivých dnů podle jejich čísla.

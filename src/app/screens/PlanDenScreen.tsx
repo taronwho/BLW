@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { AllergenGroup } from '@/types';
 import { Link, useParams } from 'react-router-dom';
 import { ingredientById, recipeById } from '@/data';
+import { useHouseholdStore } from '@/storage/householdStore';
 import { denPodleCisla, kdyStavDne, pribyleAlergie, stavDne } from '@/plan/typy';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
@@ -10,7 +11,7 @@ import { PlanDenAkce } from '../components/PlanDenAkce';
 import { ageInMonths, stageForAge } from '../lib/age';
 import { useAktivniDite } from '../lib/dite';
 import { ALLERGEN_LABELS } from '../lib/labels';
-import { DUVOD_LABELS, TYP_JIDLA_LABELS, useAktivniPlan } from '../lib/plan';
+import { DUVOD_LABELS, TYP_JIDLA_LABELS, useAktivniPlan, znameNaTalir } from '../lib/plan';
 import { NotFoundScreen } from './NotFoundScreen';
 
 /**
@@ -55,6 +56,7 @@ export function PlanDenScreen(): ReactNode {
   const { cislo } = useParams<{ cislo: string }>();
   const plan = useAktivniPlan();
   const dite = useAktivniDite();
+  const state = useHouseholdStore((store) => store.state);
   const poradi = Number(cislo);
   const den = plan === null || !Number.isInteger(poradi) ? null : denPodleCisla(plan, poradi);
 
@@ -65,16 +67,9 @@ export function PlanDenScreen(): ReactNode {
   const novinka = ingredientById.get(den.novinka ?? '');
   const pribylo = pribyleAlergie(plan, dite ?? null);
 
-  // Co už dítě z plánu zná. Metoda stojí na tom, že si dítě z talíře vybírá,
-  // a k tomu potřebuje víc než jedno sousto. Novinka zůstává jedna kvůli
-  // přiřazení reakce, ale vedle ní může ležet cokoli osvědčeného; proto je
-  // to nabídka na talíř, ne další jídlo navíc.
-  const znameJiz = plan.dny
-    .filter((jiny) => jiny.cislo < den.cislo && jiny.novinka !== undefined)
-    .slice(-3)
-    .reverse()
-    .map((jiny) => ingredientById.get(jiny.novinka ?? ''))
-    .filter((item): item is NonNullable<typeof item> => item !== undefined);
+  // Co už dítě zná: dřívější dny tohoto bloku, deník a to, co znalo při
+  // sestavení bloku. Nabídka na talíř, ne další jídlo navíc.
+  const znameJiz = znameNaTalir(plan, den, state, dite?.id ?? null, dite?.allergens ?? []);
 
   return (
     <article className="flex flex-col gap-3" aria-labelledby="den-nadpis">

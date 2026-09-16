@@ -1,10 +1,12 @@
 import { useCallback, useMemo } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
+import { ingredientById } from '@/data';
 import { sestavPlan, type VstupPlanu } from '@/plan/generator';
-import type { DuvodJidla, Plan, TypJidla } from '@/plan/typy';
+import type { DuvodJidla, Plan, PlanDen, TypJidla } from '@/plan/typy';
+import type { AllergenGroup, HouseholdState, Ingredient } from '@/types';
 import { ageInMonths } from './age';
 import { todayIso } from './labels';
-import { tastedIds } from './tastings';
+import { isAdverse, tastedIds, tastingsByIngredient } from './tastings';
 import { useAktivniDite } from './dite';
 
 /**
@@ -84,4 +86,61 @@ export function usePlanNastroje(): PlanNastroje {
   );
 
   return { sestav, vstup };
+}
+
+/** Kolik známých surovin se nabídne vedle dnešní novinky. */
+export const ZNAMYCH_NA_TALIR = 6;
+
+/**
+ * Co může ležet na talíři vedle dnešní novinky.
+ *
+ * Metoda stojí na tom, že si dítě z talíře vybírá, a k tomu potřebuje víc
+ * než jedno sousto. Novinka zůstává jedna kvůli přiřazení reakce, vedle ní
+ * ale může ležet cokoli osvědčeného.
+ *
+ * Bere se celá historie dítěte, ne jen probíhající blok. Ukládá se vždycky
+ * jen poslední plán, takže druhý blok sám o sobě o prvním nic neví; bez
+ * uloženého seznamu a bez deníku by nabídka ve druhém bloku vypadala, jako
+ * by aplikace na první měsíc příkrmu zapomněla.
+ *
+ * Pořadí je od nejčerstvějšího: co dítě jedlo včera, si vybaví spíš než
+ * surovinu z prvního týdne. Po nežádoucí reakci se surovina nenabízí, ta
+ * patří k pediatrovi, ne zpátky na talíř.
+ */
+export function znameNaTalir(
+  plan: Plan,
+  den: PlanDen,
+  state: HouseholdState,
+  childId: string | null,
+  alergie: readonly AllergenGroup[] = [],
+): Ingredient[] {
+  const vyloucene = new Set(alergie);
+  const videne = new Set<string>(den.novinka === undefined ? [] : [den.novinka]);
+  const out: Ingredient[] = [];
+
+  const pridej = (id: string | undefined): void => {
+    if (id === undefined || videne.has(id)) return;
+    videne.add(id);
+    const item = ingredientById.get(id);
+    if (item === undefined) return;
+    if (item.allergens.some((skupina) => vyloucene.has(skupina))) return;
+    out.push(item);
+  };
+
+  // 1. Novinky z dřívějších dnů tohoto bloku, od té nejčerstvější.
+  for (const jiny of [...plan.dny].reverse()) {
+    if (jiny.cislo < den.cislo) pridej(jiny.novinka);
+  }
+
+  // 2. Deník: co dítě opravdu ochutnalo, od poslední ochutnávky.
+  const podleSuroviny = [...tastingsByIngredient(state, childId).entries()]
+    .filter(([, udalosti]) => !udalosti.some(isAdverse))
+    .sort((a, b) => (a[1][0]?.date ?? '').localeCompare(b[1][0]?.date ?? '') * -1);
+  for (const [id] of podleSuroviny) pridej(id);
+
+  // 3. Co dítě znalo, když blok vznikl. Sem spadnou dny odškrtnuté bez
+  //    zápisu do deníku i celý předchozí blok, který už uložený není.
+  for (const id of plan.zname ?? []) pridej(id);
+
+  return out.slice(0, ZNAMYCH_NA_TALIR);
 }
