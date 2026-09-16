@@ -65,6 +65,17 @@ export function PlanDenScreen(): ReactNode {
   const novinka = ingredientById.get(den.novinka ?? '');
   const pribylo = pribyleAlergie(plan, dite ?? null);
 
+  // Co už dítě z plánu zná. Metoda stojí na tom, že si dítě z talíře vybírá,
+  // a k tomu potřebuje víc než jedno sousto. Novinka zůstává jedna kvůli
+  // přiřazení reakce, ale vedle ní může ležet cokoli osvědčeného; proto je
+  // to nabídka na talíř, ne další jídlo navíc.
+  const znameJiz = plan.dny
+    .filter((jiny) => jiny.cislo < den.cislo && jiny.novinka !== undefined)
+    .slice(-3)
+    .reverse()
+    .map((jiny) => ingredientById.get(jiny.novinka ?? ''))
+    .filter((item): item is NonNullable<typeof item> => item !== undefined);
+
   return (
     <article className="flex flex-col gap-3" aria-labelledby="den-nadpis">
       <Link
@@ -161,6 +172,35 @@ export function PlanDenScreen(): ReactNode {
             Jednou zavedený alergen se má nabízet dál, jinak se tolerance ztrácí.
           </span>
         </p>
+      )}
+
+      {znameJiz.length > 0 && (
+        <section
+          data-testid="den-na-vyber"
+          aria-labelledby="vyber-nadpis"
+          className="flex flex-col gap-2 rounded-xl border border-line bg-surface p-3"
+        >
+          <h2 id="vyber-nadpis" className="text-sm font-semibold">
+            Přidej na talíř i něco známého
+          </h2>
+          <p className="text-[11px] leading-relaxed text-muted">
+            Dítě si vybírá samo, a k tomu potřebuje z čeho. Nová surovina je jedna, aby se dala
+            přiřadit případná reakce; vedle ní může ležet cokoli, co už mělo.
+          </p>
+          <ul className="flex flex-wrap gap-1.5">
+            {znameJiz.map((item) => (
+              <li key={item.id}>
+                <Link
+                  to={`/suroviny/${item.id}`}
+                  className="flex min-h-touch items-center gap-1.5 rounded-lg bg-paper px-2 py-1 text-xs font-medium"
+                >
+                  <IngredientIcon ingredient={item} className="h-5 w-5 shrink-0" />
+                  {item.nameCz}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       <section aria-labelledby="jidla-nadpis" className="flex flex-col gap-2">

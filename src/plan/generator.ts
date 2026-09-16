@@ -25,9 +25,11 @@ import { DNU_V_BLOKU, type Plan, type PlanDen, type PlanJidlo, type TypJidla } f
  *     vůbec, ani jako složka receptu.
  *  5. Nic s vysokým rizikem dušení. Takové suroviny v katalogu zůstávají
  *     i s pokynem ke krájení, ale plán je sám od sebe nenabízí.
- *  6. První týden jsou to samotné suroviny, ne recepty, a začíná se
- *     zeleninou, která není sladká.
- *  7. Recept nesmí přinést alergen, který dítě ještě nedostalo. Jinak by se
+ *  6. Novinka je vždycky součástí jídla, ne příloha vedle něj. Surovina,
+ *     na kterou dneska recept nevyjde, se odloží na jindy.
+ *  7. První dny jsou jednoduché recepty o pár složkách. Dítě zatím nic nezná
+ *     a dušená směs o deseti surovinách by mu den zaplnila neznámými věcmi.
+ *  8. Recept nesmí přinést alergen, který dítě ještě nedostalo. Jinak by se
  *     při reakci nepoznalo, co ji způsobilo.
  */
 
@@ -79,6 +81,12 @@ const ODSTUP_EXPOZIC: readonly number[] = [3, 7];
 
 /** Jak dlouho se recept neopakuje. */
 const BEZ_OPAKOVANI_DNU = 6;
+
+/** O kolik horší smí být recept, aby se dal nabídnout jako jiný nápad. */
+const ROZPTYL_VYBERU = 3;
+
+/** Kolik nápadů na jedno jídlo se střídá, ať se nesjede až na konec řady. */
+const MAX_KANDIDATU = 5;
 
 function jeVhodnaNovinka(
   item: Ingredient,
@@ -246,16 +254,40 @@ interface KontextVyberu {
   den: number;
   /** Posun podle bloku a varianty, aby se nevracely tytéž recepty. */
   posun: number;
+  /** První dny: raději krátký recept o pár surovinách než dušená směs. */
+  chceJednoduche: boolean;
+  /**
+   * O kolik horší recept se smí nabídnout.
+   *
+   * Výchozí plán bere to nejlepší, co na daný den sedí. Teprve když si rodič
+   * řekne o jiný nápad nebo o přesestavení, okno se otevře, aby se bylo
+   * z čeho vybírat. Dokud platilo pořád, vycházela v prvním týdnu místo
+   * třicetiminutových hranolků pětačtyřicetiminutová pečená brambora.
+   */
+  rozptyl: number;
+  /**
+   * Smí se sáhnout po receptu, který nedávno padl?
+   *
+   * Zapíná se jen při posledním hledání jídla pro novinku. Recept, který
+   * byl před pěti dny, je pořád lepší než lžička holé suroviny vedle talíře.
+   */
+  smiSeOpakovat: boolean;
 }
 
-function jeVhodnyRecept(recipe: Recipe, typ: TypJidla, ctx: KontextVyberu): boolean {
-  if (!KATEGORIE[typ].includes(recipe.category)) return false;
+function jeVhodnyRecept(
+  recipe: Recipe,
+  typ: TypJidla,
+  ctx: KontextVyberu,
+  jakakoliKategorie = false,
+): boolean {
+  if (!jakakoliKategorie && !KATEGORIE[typ].includes(recipe.category)) return false;
   if (recipe.minAgeMonths > (ctx.mesice ?? 6)) return false;
   if (ctx.dnesni.has(recipe.id)) return false;
   if (recipe.allergens.some((skupina) => ctx.vyloucene.has(skupina))) return false;
   // Nový alergen smí do dne přijít jen přes novinku nebo přes plánovanou
   // expozici, ne náhodou jako složka receptu.
   if (recipe.allergens.some((skupina) => !ctx.zavedeneAlergeny.has(skupina))) return false;
+  if (ctx.smiSeOpakovat) return true;
   const kdy = ctx.naposledy.get(recipe.id);
   return kdy === undefined || ctx.den - kdy > BEZ_OPAKOVANI_DNU;
 }
@@ -267,42 +299,76 @@ function jeVhodnyRecept(recipe: Recipe, typ: TypJidla, ctx: KontextVyberu): bool
  * nezná. Recept plný neznámých věcí sice pravidlo o alergenech neporuší, ale
  * den, který měl mít jednu novinku, promění v pět. Proto se za ně přidává
  * penalizace, ne zákaz: úplně vyhnout se jim v kuchařce nejde.
+ *
+ * `jednoduchost` platí v prvních dnech. Tehdy dítě nezná skoro nic a složitý
+ * recept by stejně skončil jako seznam neznámých surovin; krátký recept
+ * o třech položkách je pro první sousta lepší než dušená směs o deseti.
  */
-function skoreReceptu(recipe: Recipe, ctx: KontextVyberu, hledana: string | undefined, chybiZelezo: boolean): number {
+function skoreReceptu(
+  recipe: Recipe,
+  ctx: KontextVyberu,
+  hledana: string | undefined,
+  chybiZelezo: boolean,
+): number {
   const maHledanou =
     hledana !== undefined && recipe.ingredients.some((ref) => ref.ingredientId === hledana);
   const maZelezo = recipeNutrients(recipe).iron !== 'nevyznamny';
   const neznamych = recipe.ingredients.filter(
     (ref) => ref.ingredientId !== hledana && !ctx.zname.has(ref.ingredientId),
   ).length;
-  return (maHledanou ? 0 : 8) + (chybiZelezo && !maZelezo ? 4 : 0) + Math.min(neznamych, 3);
+  // V prvních dnech rozhoduje i podoba jídla. Metoda stojí na soustech, která
+  // dítě udrží v ruce, a polévku do ruky nevezme; proto jde na začátku
+  // stranou, později se hodí stejně jako cokoli jiného.
+  const slozitost = ctx.chceJednoduche
+    ? Math.min(recipe.ingredients.length, 8) +
+      (recipe.timeMinutes > 30 ? 3 : 0) +
+      (recipe.category === 'polevky' ? 6 : 0)
+    : 0;
+  return (
+    (maHledanou ? 0 : 16) + (chybiZelezo && !maZelezo ? 4 : 0) + Math.min(neznamych, 3) + slozitost
+  );
 }
 
 /**
  * Výběr receptu. Pořadí rozhoduje: co obsahuje hledanou surovinu, pak co
- * doplní chybějící železo, pak abeceda. Posun podle bloku a varianty zajistí,
- * že se v dalších třiceti dnech nevrátí totéž.
+ * doplní chybějící železo, pak jednoduchost a abeceda. Posun podle bloku
+ * a varianty zajistí, že se v dalších třiceti dnech nevrátí totéž.
+ *
+ * `musiObsahovat` je tvrdý filtr, ne preference. Používá se, když se hledá
+ * jídlo pro novinku dne: buď recept s tou surovinou existuje, nebo se zkusí
+ * jiné jídlo dne, ale nikdy se místo něj nevrátí recept bez ní.
  */
 function vyberRecept(
   typ: TypJidla,
   ctx: KontextVyberu,
   hledana: string | undefined,
   chybiZelezo: boolean,
+  musiObsahovat = false,
+  jakakoliKategorie = false,
 ): Recipe | undefined {
-  const vhodne = recipes.filter((recipe) => jeVhodnyRecept(recipe, typ, ctx));
+  const vhodne = recipes.filter(
+    (recipe) =>
+      jeVhodnyRecept(recipe, typ, ctx, jakakoliKategorie) &&
+      (!musiObsahovat ||
+        (hledana !== undefined &&
+          recipe.ingredients.some((ref) => ref.ingredientId === hledana))),
+  );
   if (vhodne.length === 0) return undefined;
 
+  const skore = (recipe: Recipe): number => skoreReceptu(recipe, ctx, hledana, chybiZelezo);
   const serazene = [...vhodne].sort((a, b) => {
-    const rozdil =
-      skoreReceptu(a, ctx, hledana, chybiZelezo) - skoreReceptu(b, ctx, hledana, chybiZelezo);
+    const rozdil = skore(a) - skore(b);
     return rozdil !== 0 ? rozdil : a.titleCz.localeCompare(b.titleCz, 'cs');
   });
-  const nejlepsi = skoreReceptu(serazene[0] as Recipe, ctx, hledana, chybiZelezo);
-  // Posun bere jiný recept ze stejně dobrých, ne horší z celé řady.
-  const stejneDobre = serazene.filter(
-    (recipe) => skoreReceptu(recipe, ctx, hledana, chybiZelezo) === nejlepsi,
-  );
-  return stejneDobre[(ctx.posun + ctx.den) % stejneDobre.length];
+  // Posun bere jiný recept z těch srovnatelně dobrých, ne horší z celé řady.
+  // Jen shodné skóre nestačilo: většinou vyšel jediný a tlačítko „jiné jídlo"
+  // pak vracelo pořád totéž. Rozpětí se drží úzké, aby se místo nápadu
+  // nenabídl recept, který se tam nehodí.
+  const nejlepsi = skore(serazene[0] as Recipe);
+  const srovnatelne = serazene
+    .filter((recipe) => skore(recipe) <= nejlepsi + ctx.rozptyl)
+    .slice(0, MAX_KANDIDATU);
+  return srovnatelne[(ctx.posun + ctx.den) % srovnatelne.length];
 }
 
 /** Recept, který obsahuje daný alergen. Pro plánovanou expozici. */
@@ -323,33 +389,100 @@ function receptSAlergenem(
   return vhodne[(ctx.posun + ctx.den) % vhodne.length];
 }
 
-/** Sestaví jídla jednoho dne. */
+/**
+ * Ve kterém jídle se novinka hledá nejdřív.
+ *
+ * Oběd je hlavní jídlo dne a vejde se do něj nejvíc surovin, takže tam má
+ * novinka největší šanci. Svačina je poslední, protože do ní patří spíš
+ * doplněk než to, kvůli čemu se den vaří.
+ */
+const PORADI_PRO_NOVINKU: readonly TypJidla[] = ['obed', 'vecere', 'snidane', 'svacina'];
+
+/** Kolik surovin dopředu se prohlédne, když na tu první recept nevyjde. */
+const OKNO_NOVINEK = 10;
+
+export interface NalezenaNovinka {
+  slot: number;
+  recept: Recipe;
+}
+
+/**
+ * Jídlo, ve kterém se novinka podá.
+ *
+ * Hledá se ve dvou kolech. Nejdřív recept, který do daného jídla patří
+ * i kategorií. Pak jakýkoli recept s tou surovinou, protože snídaňová miska
+ * podaná k obědu je pořád lepší než holé sousto vedle talíře.
+ *
+ * Co neustupuje ani v druhém kole: alergie dítěte, věk, riziko dušení
+ * a šestidenní odstup mezi dvěma stejnými recepty. Surovina, na kterou
+ * kvůli nim dneska recept nevyjde, se odloží na jindy.
+ */
+function receptProNovinku(
+  novinka: Ingredient,
+  sloty: readonly TypJidla[],
+  ctx: KontextVyberu,
+): NalezenaNovinka | undefined {
+  for (const volnost of [0, 1]) {
+    const kolo: KontextVyberu = { ...ctx, smiSeOpakovat: false };
+    for (const typ of PORADI_PRO_NOVINKU) {
+      const slot = sloty.indexOf(typ);
+      if (slot === -1) continue;
+      const recept = vyberRecept(typ, kolo, novinka.id, false, true, volnost >= 1);
+      if (recept !== undefined) return { slot, recept };
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Sestaví jídla jednoho dne.
+ *
+ * Nová surovina se hledá jako první a napříč všemi jídly dne. Dřív se
+ * zkoušela postupně slot po slotu a když na ni v tom prvním nepadl recept,
+ * skončila vedle jídla jako samotné sousto. Rodič tak dostal den s recepty
+ * a k tomu lžičku holé suroviny, což není ani vaření, ani BLW.
+ */
 function jidlaDne(
   den: number,
   novinka: Ingredient | undefined,
+  nalezena: NalezenaNovinka | undefined,
   opakovany: AllergenGroup | undefined,
   ctx: KontextVyberu,
   jidel: number,
   svacin: number,
 ): PlanJidlo[] {
-  const jidla: PlanJidlo[] = [];
-  let novinkaPouzita = false;
-  let zeleznoVeDni = false;
+  const sloty = typyJidel(jidel, svacin);
 
-  for (const typ of typyJidel(jidel, svacin)) {
-    const hledana = novinkaPouzita ? undefined : novinka?.id;
+  // 1. Jídlo pro novinku. Hledá se už venku, při výběru samotné novinky:
+  //    surovina, na kterou dneska recept nevyjde, se odloží na jindy místo
+  //    toho, aby skončila jako lžička vedle talíře.
+  const slotNovinky = nalezena?.slot ?? -1;
+  const receptNovinky = nalezena?.recept;
+
+  // 2. Zbytek dne kolem něj. Železo se počítá i z receptu pro novinku, aby
+  //    se kvůli němu nepřidávalo druhé železné jídlo zbytečně.
+  const jidla: PlanJidlo[] = [];
+  let zeleznoVeDni =
+    receptNovinky !== undefined && recipeNutrients(receptNovinky).iron !== 'nevyznamny';
+  if (receptNovinky !== undefined) {
+    ctx.naposledy.set(receptNovinky.id, den);
+    ctx.dnesni.add(receptNovinky.id);
+  }
+
+  sloty.forEach((typ, index) => {
+    if (index === slotNovinky && receptNovinky !== undefined) {
+      jidla.push({ typ, recipeId: receptNovinky.id, duvod: 'nova-surovina' });
+      return;
+    }
     const jeHlavni = typ === 'obed' || typ === 'vecere';
     const recept =
       opakovany !== undefined && jeHlavni && !jidla.some((j) => j.duvod === 'alergen')
-        ? (receptSAlergenem(opakovany, typ, ctx) ??
-          vyberRecept(typ, ctx, hledana, !zeleznoVeDni))
-        : vyberRecept(typ, ctx, hledana, !zeleznoVeDni);
-    if (recept === undefined) continue;
+        ? (receptSAlergenem(opakovany, typ, ctx) ?? vyberRecept(typ, ctx, undefined, !zeleznoVeDni))
+        : vyberRecept(typ, ctx, undefined, !zeleznoVeDni);
+    if (recept === undefined) return;
 
     ctx.naposledy.set(recept.id, den);
     ctx.dnesni.add(recept.id);
-    const maNovinku =
-      novinka !== undefined && recept.ingredients.some((ref) => ref.ingredientId === novinka.id);
     const maZelezo = recipeNutrients(recept).iron !== 'nevyznamny';
     // Štítek expozice patří jen prvnímu jídlu, které alergen nese. Když ho
     // dostanou všechna tři, den vypadá, jako by šlo o tři různé expozice.
@@ -362,23 +495,18 @@ function jidlaDne(
     jidla.push({
       typ,
       recipeId: recept.id,
-      duvod: jeExpozice
-        ? 'alergen'
-        : maNovinku
-          ? 'nova-surovina'
-          : prvniZeleznyDne
-            ? 'zelezo'
-            : 'osvedcene',
+      duvod: jeExpozice ? 'alergen' : prvniZeleznyDne ? 'zelezo' : 'osvedcene',
     });
-
-    if (maNovinku) novinkaPouzita = true;
     if (maZelezo) zeleznoVeDni = true;
-  }
+  });
 
-  // Novinka, na kterou nevyšel recept, se nabídne samostatně vedle jídla.
-  // Bez toho by den novou surovinu slíbil a nedodal ji.
-  if (!novinkaPouzita && novinka !== undefined) {
-    jidla.push({ typ: 'svacina', ingredientId: novinka.id, duvod: 'nova-surovina' });
+  // 3. Poslední záchrana. Každá surovina, kterou plán nabízí, má v kuchařce
+  //    aspoň jeden recept, takže sem se dojde jen když ho ten den blokuje
+  //    věk, alergen nebo opakování. Pak se novinka podá samostatně i s tím,
+  //    jak se připravuje; holý název bez pokynu by rodiči nestačil.
+  if (novinka !== undefined && receptNovinky === undefined) {
+    const kam = sloty.includes('svacina') ? 'svacina' : (sloty[0] ?? 'obed');
+    jidla.push({ typ: kam, ingredientId: novinka.id, duvod: 'nova-surovina' });
   }
   return jidla;
 }
@@ -395,8 +523,8 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
 
   const bezne = poradiNovinek(vstup, vyloucene);
   const alergeny = zastupciAlergenu(bezne, zavedeneAlergeny);
-  // První týden se nevaří a začíná se nesladkou zeleninou; alergeny jdou
-  // až za ní, aby první ochutnávky byly co nejjednodušší.
+  // První dny mají pevné pořadí podle rady o prvních potravinách; alergeny
+  // jdou až za ním, aby první sousta byla co nejjednodušší.
   const zelenina = prvniBlok ? prvniSousta(vstup.mesice, vyloucene, vstup.ochutnane) : [];
   const fronta: Ingredient[] = [
     ...zelenina,
@@ -409,35 +537,65 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
   const naposledy = new Map<string, number>();
   const expozice = new Map<number, AllergenGroup>();
   const dny: PlanDen[] = [];
+  const cekajici = [...fronta];
+  /** Zavedl včerejšek nový alergen? Dnešek pak žádný další nepřidá. */
+  let vceraNovyAlergen = false;
 
   for (let den = 1; den <= DNU_V_BLOKU; den += 1) {
     const { jidel, svacin } = frekvence(den, vstup.blok, vstup.mesice);
-    const novinka = fronta[den - 1];
+    const sloty = typyJidel(jidel, svacin);
     const opakovany = expozice.get(den);
 
-    // Alergen, který se zavádí dneska, smí být v dnešním receptu. Jinak by
-    // novinka skončila vedle jídla jako samostatné sousto, i když na ni
-    // v kuchařce recept je.
-    const dnesniAlergeny = new Set<AllergenGroup>(zavedeneAlergeny);
-    for (const skupina of novinka?.allergens ?? []) dnesniAlergeny.add(skupina);
-
-    const ctx: KontextVyberu = {
+    const zaklad = {
       mesice: vstup.mesice,
       vyloucene,
-      zavedeneAlergeny: dnesniAlergeny,
       naposledy,
       dnesni: new Set<string>(),
       zname: new Set(zname),
       den,
       posun: vstup.blok * 7 + (vstup.varianta ?? 0) * 3,
+      // Dva týdny na rozjezd. Dítě zatím skoro nic nezná, takže složitý
+      // recept by stejně vyšel jako seznam neznámých surovin.
+      chceJednoduche: prvniBlok && den <= 14,
+      smiSeOpakovat: false,
+      rozptyl: (vstup.varianta ?? 0) > 0 ? ROZPTYL_VYBERU : 0,
     };
 
-    // První týden se nevaří. Samotná surovina, jednou denně, ať je při
-    // reakci jasné, co ji způsobilo.
-    const jidla =
-      prvniBlok && den <= 7 && novinka !== undefined
-        ? [{ typ: 'obed' as TypJidla, ingredientId: novinka.id, duvod: 'prvni-ochutnavka' as const }]
-        : jidlaDne(den, novinka, opakovany, ctx, jidel, svacin);
+    /** Kontext pro jednu konkrétní novinku: její alergen dnes projde. */
+    const ctxPro = (kandidat: Ingredient | undefined): KontextVyberu => ({
+      ...zaklad,
+      dnesni: new Set<string>(),
+      zavedeneAlergeny: new Set([...zavedeneAlergeny, ...(kandidat?.allergens ?? [])]),
+    });
+
+    // Novinka dne. Bere se ta na řadě, ale když na ni dneska žádný recept
+    // nevyjde, prohlédne se pár dalších a vezme se první, na kterou recept
+    // je. Ta odložená nepropadne, zůstává ve frontě na další den. Bez toho
+    // vycházely dny, kde novinka skončila jako lžička vedle talíře jen
+    // proto, že její jediné recepty nesly ještě nezavedený alergen.
+    let novinka: Ingredient | undefined;
+    let nalezena: NalezenaNovinka | undefined;
+    const prinasiNovyAlergen = (kandidat: Ingredient): boolean =>
+      kandidat.allergens.some((skupina) => !zavedeneAlergeny.has(skupina));
+    for (const kandidat of cekajici.slice(0, OKNO_NOVINEK)) {
+      // Přeskakování ve frontě nesmí porušit odstup mezi alergeny. Dva nové
+      // alergeny za sebou znamenají, že se reakce nedá přiřadit ani jednomu.
+      if (vceraNovyAlergen && prinasiNovyAlergen(kandidat)) continue;
+      const pokus = receptProNovinku(kandidat, sloty, ctxPro(kandidat));
+      if (pokus !== undefined) {
+        novinka = kandidat;
+        nalezena = pokus;
+        break;
+      }
+    }
+    novinka ??= cekajici[0];
+    if (novinka !== undefined) cekajici.splice(cekajici.indexOf(novinka), 1);
+
+    const ctx = ctxPro(novinka);
+    const jidla = jidlaDne(den, novinka, nalezena, opakovany, ctx, jidel, svacin);
+
+    vceraNovyAlergen =
+      novinka !== undefined && novinka.allergens.some((skupina) => !zavedeneAlergeny.has(skupina));
 
     if (novinka !== undefined) {
       zname.add(novinka.id);
@@ -471,6 +629,7 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
     blok: vstup.blok,
     vytvoreno: vstup.dnes,
     alergie: [...vyloucene].sort(),
+    varianta: vstup.varianta ?? 0,
     dny,
     stavy: {},
   };

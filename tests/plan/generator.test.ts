@@ -70,22 +70,30 @@ describe('sestavení třicetidenního plánu', () => {
     expect(new Set(novinky).size).toBe(DNU_V_BLOKU);
   });
 
-  it('první týden jsou samotná sousta z rady o prvních potravinách', () => {
-    const prvni = plan.dny.slice(0, 7);
-    for (const den of prvni) {
-      expect(den.jidla).toHaveLength(1);
-      expect(den.jidla[0]?.recipeId).toBeUndefined();
-      expect(den.jidla[0]?.duvod).toBe('prvni-ochutnavka');
+  it('první dny jsou jednoduché recepty s tou novou surovinou', () => {
+    // Metoda stojí na tom, že dítě jí to co rodina, ne lžičku holé suroviny
+    // vedle talíře. První sousta proto mají recept, jen ten nejjednodušší:
+    // pár složek, krátký čas a nic, co se nedá vzít do ruky.
+    for (const den of plan.dny.slice(0, 7)) {
+      const jidlo = den.jidla[0];
+      expect(jidlo?.recipeId, `den ${den.cislo} nemá recept`).toBeDefined();
+      const recept = recipeById.get(jidlo?.recipeId ?? '');
+      expect(recept?.ingredients.map((r) => r.ingredientId)).toContain(den.novinka);
+      expect(recept?.ingredients.length, `den ${den.cislo}: ${recept?.titleCz}`).toBeLessThanOrEqual(6);
+      expect(recept?.timeMinutes, `den ${den.cislo}: ${recept?.titleCz}`).toBeLessThanOrEqual(35);
+      expect(recept?.category, `den ${den.cislo}: ${recept?.titleCz}`).not.toBe('polevky');
     }
-    expect(prvni.map((den) => den.novinka)).toEqual([
-      'brokolice',
-      'kvetak',
-      'cuketa',
-      'brambor',
-      'dyne-hokaido',
-      'batat',
-      'avokado',
-    ]);
+  });
+
+  it('nová surovina je vždycky součástí jídla, ne příloha vedle něj', () => {
+    // Dřív se novinka, na kterou nevyšel recept, nabídla jako holé sousto.
+    // Teď se místo toho odloží na den, kdy se z ní dá něco uvařit.
+    for (const den of plan.dny) {
+      const jidlo = den.jidla.find((j) => j.duvod === 'nova-surovina');
+      expect(jidlo?.recipeId, `den ${den.cislo} nabízí novinku bez receptu`).toBeDefined();
+      const recept = recipeById.get(jidlo?.recipeId ?? '');
+      expect(recept?.ingredients.map((r) => r.ingredientId)).toContain(den.novinka);
+    }
   });
 
   it('od chvíle, kdy se začne vařit, je v každém dni železo', () => {

@@ -223,7 +223,10 @@ export const practice: Guide[] = [
       {
         heading: 'Jedna novinka denně',
         body: [
-          'Každý den má právě jednu novou surovinu. Kdyby byly dvě a objevila se reakce, nepozná se, na kterou z nich.',
+          'Každý den má právě jednu novou surovinu a ta je vždycky součástí některého jídla. Metoda stojí na tom, že dítě jí to co rodina, takže samotné sousto vedle talíře do ní nepatří.',
+          'Když na surovinu ten den žádný vhodný recept nevyjde, protože ji blokuje věk, nezavedený alergen nebo nedávné opakování, odloží se na jindy a na řadu přijde další v pořadí. Nepropadne, jen se posune.',
+          'Kdyby byly novinky dvě a objevila se reakce, nepozná se, na kterou z nich. Proto právě jedna.',
+          'Jedna novinka ale neznamená jedno sousto na talíři. Metoda stojí na tom, že si dítě vybírá samo, a k tomu potřebuje z čeho. Vedle nové suroviny proto klidně nabídni i to, co už mělo; detail dne k tomu rovnou připomene posledních pár surovin z plánu.',
           'Zbytek dne se skládá z toho, co už má dítě za sebou. Recept, který by přinesl další nezavedený alergen, plán nenabídne.',
           'Co je v deníku, se jako novinka znovu nenabídne. Proto se každý další blok počítá až ve chvíli, kdy si o něj rodič řekne: počítá s tím, co se za předchozích třicet dnů opravdu stihlo.',
         ],
@@ -232,7 +235,7 @@ export const practice: Guide[] = [
         heading: 'Jak se vybírá, co bude nové',
         asList: true,
         body: [
-          'První týden jsou to samotná sousta, ne recepty: měkká vařená zelenina, kterou dítě udrží v pěsti, a teprve za ní sladší druhy.',
+          'První týden má pevné pořadí podle rady o prvních potravinách: měkká zelenina, kterou dítě udrží v pěsti, a teprve za ní sladší druhy. Vaří se z ní jednoduché úpravy o dvou nebo třech složkách, ne holé sousto vedle talíře.',
           'Pak se střídají tři věci. Zdroje železa, protože zásoba z těhotenství se kolem půl roku tenčí. Suroviny, které mají zrovna sezónu. A zbytek katalogu.',
           'Každý třetí den je vyhrazený dalšímu klíčovému alergenu, aby se jich devět stihlo zavést zhruba za měsíc a mezi dvěma zůstaly dva klidné dny.',
           'Uvnitř každé skupiny se střídají kategorie, aby nevyšly čtyři druhy luštěnin za sebou.',

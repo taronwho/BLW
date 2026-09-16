@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Droplet,
   RefreshCw,
+  RotateCcw,
   ShieldCheck,
   Sparkles,
   SkipForward,
@@ -25,6 +26,7 @@ import {
   planSediSAlergiemi,
   stavDne,
   type PlanDen,
+  type StavDne,
 } from '@/plan/typy';
 import { blokDokoncen } from '@/plan/typy';
 import { ChokingBadge } from '../components/ChokingBadge';
@@ -46,7 +48,7 @@ const PRAVIDLA = [
   {
     Icon: Sparkles,
     nadpis: 'Jedna nová surovina denně',
-    text: 'Když se zavedou dvě a dítě zareaguje, nepozná se na kterou. Zbytek dne se skládá z toho, co už má za sebou.',
+    text: 'Vždycky uvnitř jídla, ne jako lžička vedle talíře. Když se zavedou dvě a dítě zareaguje, nepozná se na kterou.',
   },
   {
     Icon: Droplet,
@@ -88,8 +90,8 @@ function Novinka({ id }: { id: string }): ReactNode {
 /**
  * Jídla dne pod sebou, bez postupů. Ty jsou v detailu dne.
  *
- * První týden se nevaří a jediné jídlo dne je ta nová surovina. Vypisovat ji
- * podruhé pod chipem s novinkou by jen zabralo řádek a nic nepřidalo.
+ * Když je jediné jídlo dne ta nová surovina bez receptu, vypisovat ji podruhé
+ * pod chipem s novinkou by jen zabralo řádek a nic nepřidalo.
  */
 function Jidla({ den }: { den: PlanDen }): ReactNode {
   const jenNovinka = den.jidla.every((jidlo) => jidlo.ingredientId === den.novinka);
@@ -120,6 +122,9 @@ export function PlanScreen(): ReactNode {
   const { sestav } = usePlanNastroje();
   const ulozPlan = useHouseholdStore((store) => store.ulozPlan);
   const [pracuje, setPracuje] = useState(false);
+  /** Poslední odškrtnutý nebo přeskočený den, aby šel vzít zpátky. */
+  const [posledni, setPosledni] = useState<{ cislo: number; stav: StavDne } | null>(null);
+  const nastavStavDne = useHouseholdStore((store) => store.nastavStavDne);
 
   /**
    * Sestaví blok. Při pokračování se k deníku přidají suroviny z hotových
@@ -136,7 +141,11 @@ export function PlanScreen(): ReactNode {
           : predchozi.dny
               .filter((den) => stavDne(predchozi, den.cislo) === 'hotovo')
               .flatMap((den) => noveSuroviny(den));
-      const novy = sestav(blok, hotove);
+      // Přesestavení téhož bloku musí dát jiné recepty. Generátor je čistá
+      // funkce, takže beze změny varianty by vrátil řádek po řádku to samé
+      // a tlačítko by vypadalo jako nefunkční.
+      const varianta = plan !== null && plan.blok === blok ? (plan.varianta ?? 0) + 1 : 0;
+      const novy = sestav(blok, hotove, varianta);
       if (novy !== null) await ulozPlan(dite.id, novy);
     } finally {
       setPracuje(false);
@@ -329,7 +338,7 @@ export function PlanScreen(): ReactNode {
           </div>
           {dnes.novinka !== undefined && <Novinka id={dnes.novinka} />}
           <Jidla den={dnes} />
-          <PlanDenAkce plan={plan} den={dnes} />
+          <PlanDenAkce plan={plan} den={dnes} onZmena={(cislo, stav) => setPosledni({ cislo, stav })} />
         </section>
       )}
 
@@ -376,6 +385,32 @@ export function PlanScreen(): ReactNode {
           })}
         </ul>
       </section>
+
+      {/* Vrácení posledního kroku. Přeskočený den zmizí z karty „na řadě" a
+          rodič by ho musel hledat v mřížce; nabídnout vrácení hned na místě
+          je rychlejší a hlavně to o té možnosti řekne. */}
+      {posledni !== null && stavDne(plan, posledni.cislo) !== 'ceka' && (
+        <p
+          data-testid="plan-vratit-posledni"
+          className="flex items-center gap-2 rounded-xl border border-line bg-surface p-2 pl-3 text-xs"
+        >
+          <span className="min-w-0 flex-1">
+            Den {posledni.cislo} {posledni.stav === 'hotovo' ? 'je odškrtnutý' : 'jsi přeskočil'}.
+          </span>
+          <button
+            type="button"
+            data-testid="plan-vratit-tlacitko"
+            onClick={() => {
+              void nastavStavDne(plan.childId, posledni.cislo, 'ceka');
+              setPosledni(null);
+            }}
+            className="flex min-h-touch shrink-0 items-center gap-1.5 rounded-lg px-2 font-semibold text-accent"
+          >
+            <RotateCcw aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+            Vrátit zpět
+          </button>
+        </p>
+      )}
 
       {/* Co bude dál. Rodič, který jde nakupovat, potřebuje vědět, co ho
           čeká, ale ne celých třicet dnů naráz; proto rozbalovací a jen pár

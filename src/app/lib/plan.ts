@@ -40,7 +40,7 @@ export function useAktivniPlan(): Plan | null {
 
 export interface PlanNastroje {
   /** Sestaví blok. Jedna pro první, vyšší číslo pro pokračování. */
-  sestav(blok: number, navic?: Iterable<string>): Plan | null;
+  sestav(blok: number, navic?: Iterable<string>, varianta?: number): Plan | null;
   /** Vstup generátoru, aby si obrazovka mohla přepočítat jediný den. */
   vstup(blok: number, navic?: Iterable<string>): VstupPlanu | null;
 }
@@ -76,9 +76,9 @@ export function usePlanNastroje(): PlanNastroje {
   );
 
   const sestav = useCallback(
-    (blok: number, navic?: Iterable<string>): Plan | null => {
+    (blok: number, navic?: Iterable<string>, varianta?: number): Plan | null => {
       const zadani = vstup(blok, navic);
-      return zadani === null ? null : sestavPlan(zadani);
+      return zadani === null ? null : sestavPlan({ ...zadani, varianta: varianta ?? 0 });
     },
     [vstup],
   );

@@ -349,7 +349,13 @@ export interface PlanJidlo {
   typ: TypJidla;
   /** Recept z kuchařky. U prvních ochutnávek chybí. */
   recipeId?: string;
-  /** Samotná surovina. Používá se v prvních dnech, kdy se recept nevaří. */
+  /**
+   * Samotná surovina bez receptu.
+   *
+   * Poslední záchrana pro den, na který se na novinku recept nenašel.
+   * Zůstává i kvůli plánům uloženým dřív, kdy byl první týden schválně
+   * bez vaření.
+   */
   ingredientId?: string;
   duvod: DuvodJidla;
 }
@@ -381,6 +387,15 @@ export interface Plan {
    * stahovat katalog, takže na to upozorní i úvodní obrazovka.
    */
   alergie?: AllergenGroup[];
+  /**
+   * Kolikátá podoba bloku to je.
+   *
+   * Plán je čistá funkce, takže ze stejného zadání vyjde vždycky tentýž.
+   * Tlačítko „sestavit znovu" proto bez tohohle čísla vracelo řádek po řádku
+   * to samé a vypadalo jako nefunkční. Každé přesestavení číslo zvedne a plán
+   * sáhne po jiných receptech ze stejně vhodných.
+   */
+  varianta?: number;
   dny: PlanDen[];
   /**
    * Stav jednotlivých dnů podle jejich čísla.

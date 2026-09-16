@@ -940,11 +940,13 @@ test('plán se sestaví, odškrtne a zapíše ochutnávku do deníku', async ({ 
   await expect(page.getByTestId('plan-dnes')).toContainText('den 1');
   await expect(page.getByTestId('plan-postup')).toContainText('Hotovo 0 z 30');
 
-  // První den je samotné sousto, ne recept.
+  // První den má recept, a ten tu novou surovinu obsahuje.
   await page.getByTestId('plan-dnes-detail').click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Den 1');
   await expect(page.getByTestId('den-novinka')).toContainText('brokolice');
-  await expect(page.getByTestId('den-jidla').getByRole('listitem')).toHaveCount(1);
+  const prvniJidlo = page.getByTestId('den-jidla').getByRole('listitem').first();
+  await expect(prvniJidlo).toContainText('brokolic', { ignoreCase: true });
+  await expect(prvniJidlo).toContainText('nová surovina');
 
   // Co bude dál: pět dnů dopředu i s novou surovinou, kvůli nákupu.
   await page.goto('./#/plan');
@@ -979,16 +981,41 @@ test('den jde odložit, přeskočit i vrátit zpátky mezi čekající', async (
   await expect(page.getByTestId('plan-dnes')).toContainText('den 1');
   await expect(page.getByTestId('plan-dnes')).toContainText('květák');
 
-  // Přeskočení posune plán dál a den zůstane přeškrtnutý.
+  // Jiné jídlo vymění recept, ale nová surovina dne zůstává.
+  const predVymenou = await page.getByTestId('plan-dnes').innerText();
+  await page.getByTestId('den-jiny').click();
+  await expect(page.getByTestId('plan-dnes')).not.toHaveText(predVymenou);
+  await expect(page.getByTestId('plan-dnes')).toContainText('květák');
+
+  // Přeskočení posune plán dál a hned nabídne vrácení zpátky.
   await page.getByTestId('den-preskocit').click();
   await expect(page.getByTestId('plan-dnes')).toContainText('den 2');
   await expect(page.getByTestId('plan-postup')).toContainText('přeskočeno 1');
+  await expect(page.getByTestId('plan-vratit-posledni')).toContainText('Den 1');
+  await page.getByTestId('plan-vratit-tlacitko').click();
+  await expect(page.getByTestId('plan-dnes')).toContainText('den 1');
+  await expect(page.getByTestId('plan-postup')).not.toContainText('přeskočeno');
 
-  // A dá se vzít zpátky.
+  // Vrátit jde i z detailu dne, když se mezitím odroluje jinam.
+  await page.getByTestId('den-preskocit').click();
   await page.getByTestId('plan-den-1').click();
   await expect(page.getByTestId('den-stav')).toContainText('přeskočeno');
   await page.getByTestId('den-vratit').click();
   await expect(page.getByTestId('den-stav')).toContainText('čeká');
+});
+
+test('sestavit blok znovu nabídne jiné recepty, ne ten samý plán', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  const puvodni = await page.getByTestId('plan-dnes').innerText();
+  await page.getByRole('group').filter({ hasText: 'Plán nesedí' }).getByText('Plán nesedí').click();
+  await page.getByTestId('sestavit-znovu').click();
+  await expect(page.getByTestId('plan-dnes')).not.toHaveText(puvodni);
+  // Pořadí surovin se nemění, mění se to, co se z nich uvaří.
+  await expect(page.getByTestId('plan-dnes')).toContainText('brokolice');
 });
 
 test('alergie zapsaná po sestavení plán nezmění, ale nahlásí se', async ({ page }) => {
@@ -1161,11 +1188,11 @@ test('recepty jdou filtrovat podle věku dítěte', async ({ page }) => {
   await navLink(page, 'Recepty').click();
 
   const pocet = page.getByTestId('pocet-receptu');
-  await expect(pocet).toContainText('299 z 299');
+  await expect(pocet).toContainText('313 z 313');
 
   await otevriFiltry(page, 'receptu');
   await page.getByTestId('filtr-vhodne').click();
-  await expect(pocet).not.toContainText('299 z 299');
+  await expect(pocet).not.toContainText('313 z 313');
   await expect(page.getByTestId('seznam-receptu')).not.toContainText('na špejli');
 
   // Filtr přežije odkaz, stejně jako ostatní.

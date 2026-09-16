@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { ingredientById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { jinyDen, noveSuroviny } from '@/plan/generator';
-import { odlozDen, stavDne, type Plan, type PlanDen } from '@/plan/typy';
+import { odlozDen, stavDne, type Plan, type PlanDen, type StavDne } from '@/plan/typy';
 import { draftPayload, emptyDraft, type Draft } from '../lib/tastingDraft';
 import { useModalFokus } from '../lib/modalFokus';
 import { usePlanNastroje } from '../lib/plan';
@@ -22,7 +22,16 @@ import { TastingForm } from './TastingForm';
  * evidence téhož. Zapsat se dá i „jen odškrtnout", protože domýšlet za rodiče,
  * jak jídlo dopadlo, by deník znehodnotilo.
  */
-export function PlanDenAkce({ plan, den }: { plan: Plan; den: PlanDen }): ReactNode {
+export function PlanDenAkce({
+  plan,
+  den,
+  onZmena,
+}: {
+  plan: Plan;
+  den: PlanDen;
+  /** Ohlásí změnu stavu dne, aby na ni šlo nabídnout vrácení zpět. */
+  onZmena?: (cislo: number, stav: StavDne) => void;
+}): ReactNode {
   const ulozPlan = useHouseholdStore((store) => store.ulozPlan);
   const status = useHouseholdStore((store) => store.status);
   const nastavStavDne = useHouseholdStore((store) => store.nastavStavDne);
@@ -57,6 +66,7 @@ export function PlanDenAkce({ plan, den }: { plan: Plan; den: PlanDen }): ReactN
       });
     }
     await nastavStavDne(plan.childId, den.cislo, 'hotovo');
+    onZmena?.(den.cislo, 'hotovo');
     setOtevreno(false);
     setDraft(emptyDraft());
   }
@@ -66,7 +76,10 @@ export function PlanDenAkce({ plan, den }: { plan: Plan; den: PlanDen }): ReactN
       <button
         type="button"
         data-testid="den-vratit"
-        onClick={() => void nastavStavDne(plan.childId, den.cislo, 'ceka')}
+        onClick={() => {
+          void nastavStavDne(plan.childId, den.cislo, 'ceka');
+          onZmena?.(den.cislo, 'ceka');
+        }}
         className="flex min-h-touch items-center justify-center gap-2 rounded-xl border border-line bg-paper px-4 text-sm font-medium"
       >
         <RotateCcw aria-hidden="true" className="h-4 w-4 shrink-0" />
@@ -114,7 +127,10 @@ export function PlanDenAkce({ plan, den }: { plan: Plan; den: PlanDen }): ReactN
           <button
             type="button"
             data-testid="den-preskocit"
-            onClick={() => void nastavStavDne(plan.childId, den.cislo, 'preskoceno')}
+            onClick={() => {
+              void nastavStavDne(plan.childId, den.cislo, 'preskoceno');
+              onZmena?.(den.cislo, 'preskoceno');
+            }}
             className="flex min-h-touch flex-col items-center justify-center gap-0.5 rounded-xl border border-line bg-paper px-1 text-[11px] font-medium"
           >
             <SkipForward aria-hidden="true" className="h-4 w-4 shrink-0 text-muted" />

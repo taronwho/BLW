@@ -24,8 +24,8 @@ Původní návrh se ptal na pět věcí. Odpovědi zadavatele:
 3. **Druhé dítě.** Plán patří dítěti, stejně jako deník.
 4. **Přeskočení dne.** Rodič rozhoduje: odškrtnout, odložit na jindy,
    přeskočit úplně, nebo vyměnit za jiný nápad se stejnou novinkou.
-5. **Recepty v plánu.** Ano, celé recepty. První týden jsou to ale samotná
-   sousta: recept se u prvního ochutnání brokolice nevaří.
+5. **Recepty v plánu.** Ano, celé recepty, a to i první den. Novinka je
+   vždycky součástí jídla, ne lžička vedle talíře.
 
 K tomu přibylo pokračování: až blok doběhne, sestaví se dalších třicet dnů
 z toho, co za předchozích třicet opravdu proběhlo.
@@ -56,8 +56,9 @@ spadne, opravuje se generátor, ne test.
 
 1. **Jedna nová surovina denně.** Když se zavedou dvě a dítě zareaguje,
    nepozná se na kterou.
-2. **Železo v každém dni**, jakmile se začne vařit. První týden ne: to jsou
-   samotná zeleninová sousta a železo by do nich šlo dostat jen na sílu.
+2. **Železo v každém dni**, jakmile dítě jí víc než jedno jídlo denně.
+   V prvním týdnu ne: jediné jídlo dne je jednoduchá zeleninová úprava
+   a železo by do ní šlo dostat jen na sílu.
 3. **Alergen brzy a pak dvakrát znovu**, tři a sedm dnů po prvním setkání.
    Nový alergen nikdy nepřijde dva dny po sobě.
 4. **Alergie dítěte** z Domácnosti se do plánu nedostanou vůbec, ani jako
@@ -71,6 +72,14 @@ spadne, opravuje se generátor, ne test.
 
 ## Jak se vybírá novinka
 
+- **Novinka je vždycky součástí jídla.** Hledá se ve dvou kolech: nejdřív
+  recept, který do daného jídla patří i kategorií, pak jakýkoli recept s tou
+  surovinou. Když ani tak nevyjde, surovina se odloží a na řadu jde další
+  z fronty; nepropadne. Holé sousto vedle talíře zůstává jen jako poslední
+  záchrana pro plán, ve kterém už nezbývá nic jiného.
+- **První dny jsou jednoduché.** Dva týdny se preferují recepty o pár
+  složkách, do půl hodiny a mimo polévky: dítě zatím nic nezná a dušená směs
+  o deseti surovinách by mu den zaplnila neznámými věcmi.
 - **První týden** je opsaný z rady o prvních potravinách: brokolice, květák,
   cuketa, brambor, dýně hokaido, batát, avokádo. Není to odvozené z dat,
   protože „rozumné první sousto" se z dat poznat nedá. Mrkev, kterou SZÚ
@@ -90,17 +99,27 @@ spadne, opravuje se generátor, ne test.
 
 Nižší skóre vyhrává: recept s novinkou dne, pak recept, který doplní
 chybějící železo, pak počet surovin, které dítě ještě nezná (penalizace,
-ne zákaz: kuchařka se surovinám navíc nevyhne). Při shodě rozhoduje
-abeceda a posun podle bloku, aby se v dalších třiceti dnech nevracelo totéž.
+ne zákaz: kuchařka se surovinám navíc nevyhne), a v prvních dvou týdnech
+i složitost. Při shodě rozhoduje abeceda a posun podle bloku.
 
-Novinka, na kterou v kuchařce recept není, se nabídne samostatně vedle
-jídla. Bez toho by den novou surovinu slíbil a nedodal.
+Výchozí plán bere to nejlepší, co na daný den sedí. Okno srovnatelných
+nápadů se otevře teprve tehdy, když si rodič řekne o jiné jídlo nebo
+o přesestavení bloku; jinak by se místo třicetiminutových hranolků
+nabídla pětačtyřicetiminutová pečená brambora.
+
+Plán si pamatuje, kolikátá podoba bloku to je. Bez toho vracelo tlačítko
+„sestavit znovu" řádek po řádku to samé, protože generátor je čistá funkce.
 
 ## Jak se chová
 
 **Postupový, ne kalendářní.** Den se posune, až ho rodič odškrtne, ne
 o půlnoci. Nemoc ani dovolená plán nerozbijí a nikdo se nevrací
 k dvanácti zmeškaným dnům.
+
+**Jedna novinka, ale ne jedno sousto.** Detail dne připomene posledních pár
+surovin z plánu jako nabídku na talíř. Novinka zůstává jedna kvůli přiřazení
+reakce, ale výběr na talíři k metodě patří a druhé jídlo navíc kvůli němu
+přidávat nejde: počet jídel řídí věk.
 
 **Jedna pravda, ne dvě.** Odškrtnutí zapíše ochutnávku do deníku. Zapsat
 se dá i bez toho: domýšlet za rodiče, jak jídlo dopadlo, by deník

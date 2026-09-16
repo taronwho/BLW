@@ -1,0 +1,546 @@
+import type { Recipe } from '@/types';
+import { NHS_FIRST_FOODS, NHS_PREP_SAFELY, SZU_FIRST_SPOON } from '../ingredients/_sources';
+
+/**
+ * První sousta: jedna surovina, pár minut, žádná omáčka.
+ *
+ * Kuchařka měla samé rodinné pokrmy o osmi složkách a hodině v troubě. Plán
+ * z nich pak na první dny vybíral dušené hovězí nebo polévku, protože nic
+ * jednoduššího v ní nebylo. Tohle je ta chybějící vrstva: příloha, kterou si
+ * dospělí dochutí u stolu a miminko dostane přesně tu samou, jen bez soli.
+ *
+ * Tvar sousta se drží rady o prvních potravinách: podlouhlý kus velikosti
+ * prstu dospělého, který vyčnívá z pěsti, protože dítě v tomhle věku ještě
+ * neumí uvolnit, co sevře v dlani.
+ */
+export const prvniSousta: Recipe[] = [
+  {
+    id: 'brokolice-na-pare',
+    titleCz: 'Brokolice na páře se stonkem na držení',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 12,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'brokolice', amount: '1 velká', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+      { ingredientId: 'voda', amount: '200 ml', track: 'all' },
+    ],
+    baseSteps: [
+      'Brokolici opláchni a rozděl na růžičky. Každé nech stonek dlouhý zhruba jako prst dospělého, protože právě za něj se dítě chytí.',
+      'Do hrnce nalij vodu do výšky dvou centimetrů a přiveď ji k varu. Do hrnce vlož napařovací košík, nebo použij cedník, který se vody nedotýká.',
+      'Růžičky vlož do košíku stonky dolů, přiklop a nech napařovat 6 až 8 minut.',
+      'Měkkost poznáš tak, že růžičku rozmáčkneš mezi palcem a ukazovákem. Když povolí bez tlaku, je hotová; když klade odpor, dej jí další dvě minuty.',
+      'Od tohoto místa se hrnec dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber dvě růžičky do misky stranou, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Odebrané růžičky nech vychladnout na teplotu ruky. Zkoušej je zevnitř, ne jen na povrchu: pára drží teplo uvnitř stonku déle, než by čekal.',
+      'Pokapej je půl lžičkou olivového oleje a prsty rozetři, ať kus tolik neklouže a drží se líp.',
+    ],
+    babyServing: {
+      '6m': 'Celá růžička se stonkem, dlouhá jako prst dospělého. Z pěsti musí kus vyčnívat, jinak se k ústům nedostane.',
+      '9m': 'Růžičku rozděl na menší kousky velikosti fazole a stonek nakrájej na kolečka. Klešťový úchop mezi palcem a ukazovákem už si o drobnější sousta říká.',
+      '12m': 'Stejná porce jako pro dospělé, jen nedochucená. K tomu lžička, se kterou si dítě nabírá samo.',
+    },
+    adultSteps: [
+      'Zbylé růžičky přendej do mísy, osol, pokapej olivovým olejem a promíchej. Hodí se k nim pár kapek citronu a hrubě mletý pepř.',
+      'Kdo má rád brokolici opečenou, může ji po napaření hodit na dvě minuty na rozpálenou pánev.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kvetak-pecene-ruzicky',
+    titleCz: 'Pečené květákové růžičky',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 28,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'kvetak', amount: '1 menší', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C a plech vylož pečicím papírem.',
+      'Květák rozeber na růžičky a ty větší rozkroj napůl tak, aby každá měla rovnou plochu, na které bude ležet. Stonek nech delší, slouží jako držadlo.',
+      'Růžičky rozprostři na plech v jedné vrstvě, pokapej olivovým olejem a promíchej rukou, ať je olej všude.',
+      'Peč 20 až 25 minut, dokud okraje nezhnědnou a růžička nejde snadno rozmáčknout mezi prsty.',
+      'Od tohoto místa se plech dělí. Dětská porce se odebírá dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber dvě růžičky na talířek stranou, ještě než se plech dochucuje.',
+    babySteps: [
+      'Odebrané růžičky nech zchladnout na teplotu ruky a znovu ověř, že povolí pod mírným tlakem prstů.',
+      'Pečením květák trochu vysychá. Když je porce moc suchá, zakápni ji lžičkou vody nebo kojeneckého mléka.',
+    ],
+    babyServing: {
+      '6m': 'Růžička se stonkem, dlouhá jako prst dospělého. Celý kus schovaný v dlani dítě zatím pustit neumí, proto musí vyčnívat.',
+      '9m': 'Kousky velikosti fazole, které dítě sebere špetkou mezi palcem a ukazovákem.',
+      '12m': 'Stejná porce jako pro dospělé, bez soli a bez pálivého koření.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp mletým kmínem nebo uzenou paprikou a vrať na tři minuty do trouby.',
+      'K pečenému květáku sedne lžíce jogurtu s česnekem nebo tahini.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'cuketa-opecena-prouzky',
+    titleCz: 'Cuketa opečená na proužky',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 10,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'cuketa', amount: '1 střední', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Cuketu omyj, konce odkroj a nakrájej ji podélně na proužky silné jako prst dospělého. Slupku nech, drží kus pohromadě.',
+      'Pánev rozpal na střední teplotu a rozetři po ní olivový olej.',
+      'Proužky pokládej na pánev v jedné vrstvě a opékej je tři minuty z každé strany.',
+      'Hotový proužek se dá rozmáčknout mezi prsty, ale ještě se neláme na kousky. Zvenku má být zlatý, uvnitř měkký.',
+      'Od tohoto místa se pánev dělí. Dětská porce jde stranou před dochucením.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber dva proužky na talířek, ještě než se pánev dochucuje.',
+    babySteps: [
+      'Nech proužky vychladnout na teplotu ruky. Cuketa drží teplo uvnitř, takže povrch klame.',
+      'Když proužek hodně klouže, obal ho v hrsti jemné strouhanky nebo mletých vloček, aby se dal udržet.',
+    ],
+    babyServing: {
+      '6m': 'Proužek dlouhý jako prst dospělého, který z pěsti vyčnívá. Slupka na jedné straně pomáhá kus udržet pohromadě.',
+      '9m': 'Nakrájej na kostičky velikosti hrášku, které dítě sbírá špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli a bez chilli.',
+    },
+    adultSteps: [
+      'Zbylé proužky osol, posyp utrhanou bazalkou a zakápni citronem. Hodí se k nim i strouhaný parmezán.',
+      'Kdo má rád ostřejší chuť, přidá na pánev v posledních třiceti vteřinách nasekaný česnek.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'bramborove-hranolky-z-trouby',
+    titleCz: 'Bramborové hranolky z trouby',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 32,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'brambor', amount: '600 g', track: 'all' },
+      { ingredientId: 'olej-repkovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C. Brambory oškrábej a nakrájej na hranolky silné jako prst dospělého.',
+      'Hranolky opláchni pod studenou vodou, ať se zbaví škrobu, a osuš je utěrkou. Mokré se v troubě spíš dusí než pečou.',
+      'Promíchej je v míse s řepkovým olejem a rozprostři na plech v jedné vrstvě, aby se nedotýkaly.',
+      'Peč 25 minut a v polovině je obrať obracečkou. Hotový hranolek jde rozmáčknout mezi palcem a ukazovákem.',
+      'Od tohoto místa se plech dělí. Dětská porce se odebírá dřív, než se dochucuje.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber tři hranolky na talířek stranou, ještě než se plech dochucuje.',
+    babySteps: [
+      'Odebrané hranolky nech vychladnout na teplotu ruky a ověř měkkost. Tvrdší kus se v puse neroztlačí a dítě ho vyplivne.',
+      'Když jsou moc suché, zakápni je lžičkou vody nebo kojeneckého mléka.',
+    ],
+    babyServing: {
+      '6m': 'Celý hranolek dlouhý jako prst dospělého. Kus musí z pěsti vyčnívat, aby se dostal k ústům.',
+      '9m': 'Hranolek rozlom na kousky velikosti fazole, po kterých už dítě sahá špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp rozmarýnem a sladkou paprikou a vrať na pět minut do trouby, ať se okraje zatáhnou.',
+      'K hranolkům se hodí jogurtový dip s bylinkami.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené'],
+    sources: [NHS_FIRST_FOODS, SZU_FIRST_SPOON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'dyne-hokaido-pecene-mesicky',
+    titleCz: 'Pečené měsíčky z dýně hokaido',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 30,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'dyne-hokaido', amount: '1 menší', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 190 °C. Dýni hokaido omyj, rozpul a lžící vyber semínka s dužinou uprostřed.',
+      'Nakrájej ji na měsíčky silné jako prst dospělého. Slupka se u hokaida neloupe, po upečení je měkká a drží kus pohromadě.',
+      'Měsíčky rozlož na plech s pečicím papírem, pokapej olivovým olejem a promíchej rukou.',
+      'Peč 22 až 25 minut. Hotový měsíček se dá rozmáčknout mezi prsty a špička nože do něj vjede bez tlaku.',
+      'Od tohoto místa se plech dělí. Dětská porce jde stranou před dochucením.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber dva měsíčky stranou, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Odebrané měsíčky nech vychladnout na teplotu ruky.',
+      'Slupku klidně nech: po upečení je měkká a dítěti dává za co kus držet. Když ti přesto vadí, sloupni ji nožem, jde dolů sama.',
+    ],
+    babyServing: {
+      '6m': 'Měsíček dlouhý jako prst dospělého, se slupkou jako držadlem na jedné straně.',
+      '9m': 'Kostičky velikosti fazole bez slupky, které dítě sebere špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, bez soli a bez javorového sirupu.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp skořicí nebo chilli a zakápni javorovým sirupem. Vrať na tři minuty do trouby.',
+      'Dýně sedne k praženým dýňovým semínkům a lžíci zakysané smetany.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené', 'podzimní'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'batatove-hranolky-z-trouby',
+    titleCz: 'Batátové hranolky z trouby',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 30,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'batat', amount: '500 g', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C a plech vylož pečicím papírem.',
+      'Batát oloupej a nakrájej na hranolky silné jako prst dospělého. Batát je měkčí než brambora, takže hranolky nedělej tenké, jinak se rozpadnou.',
+      'Promíchej je s olivovým olejem a rozlož na plech v jedné vrstvě.',
+      'Peč 22 minut a v polovině obrať. Hotový hranolek povolí pod tlakem prstů a okraje má karamelově hnědé.',
+      'Od tohoto místa se plech dělí. Dětská porce se odebírá dřív, než se dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber tři hranolky stranou, ještě než se plech dochucuje.',
+    babySteps: [
+      'Odebrané hranolky nech vychladnout na teplotu ruky. Batát drží teplo uvnitř déle, než by se zdálo.',
+      'Batát po upečení hodně klouže. Obal hranolek v hrsti mletých vloček nebo jemné strouhanky, aby ho dítě udrželo.',
+    ],
+    babyServing: {
+      '6m': 'Hranolek dlouhý jako prst dospělého, obalený, aby tolik neklouzal.',
+      '9m': 'Kostičky velikosti fazole. Klešťový úchop už si o drobnější sousta říká.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp uzenou paprikou a mletým kmínem a vrať na tři minuty do trouby.',
+      'K batátům se hodí limetka a lžíce jogurtu s koriandrem.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'avokado-ve-vlockach',
+    titleCz: 'Avokádo obalené v ovesných vločkách',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 6,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'avokado', amount: '1 zralé', track: 'all' },
+      { ingredientId: 'oves-bezlepkovy', amount: '3 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Avokádo rozkroj podélně, pecku vyjmi lžící a dužinu vyloupni z obou polovin vcelku.',
+      'Zralost poznáš tak, že dužina povolí pod mírným tlakem palce. Tvrdé avokádo nech ještě den nebo dva dozrát, měkké se rozpadne.',
+      'Nakrájej dužinu na díly silné jako prst dospělého.',
+      'Bezlepkový oves rozdrť chvíli v hmoždíři nebo mixéru na hrubou moučku a nasyp ji na talíř.',
+      'Od tohoto místa se talíř dělí. Dětská porce se obaluje, porce pro dospělé se dochutí.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber dva díly avokáda a obal je v ovesné moučce, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Díl avokáda prováleč v ovesné moučce ze všech stran. Avokádo je kluzké a dítěti v pěsti utíká; obalení to vyřeší.',
+      'Obalený díl podávej hned. Po pár minutách moučka nasákne a povrch zase klouže.',
+    ],
+    babyServing: {
+      '6m': 'Obalený díl dlouhý jako prst dospělého, který z pěsti vyčnívá.',
+      '9m': 'Kostičky velikosti fazole, obalené v moučce, aby se daly sebrat špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli. Lžička vedle talíře už dává smysl.',
+    },
+    adultSteps: [
+      'Zbylé avokádo osol, zakápni citronem a posyp opraženými ovesnými vločkami, které zůstaly celé.',
+      'Hodí se k němu chilli vločky a lžíce olivového oleje.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé', 'studená kuchyně'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'hruska-dusena-mesicky',
+    titleCz: 'Dušené hruškové měsíčky',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 12,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'hruska', amount: '2 zralé', track: 'all' },
+      { ingredientId: 'voda', amount: '100 ml', track: 'all' },
+    ],
+    baseSteps: [
+      'Hrušky omyj, rozčtvrť a vykroj jádřinec i tvrdou stopku.',
+      'Nakrájej je na měsíčky silné jako prst dospělého. Slupku u zralé hrušky nech, měkne dušením a drží kus pohromadě.',
+      'Do pánve nalij vodu, vlož měsíčky a přiklop. Duš je na mírném ohni 6 až 8 minut.',
+      'Hotový měsíček se dá rozmáčknout mezi palcem a ukazovákem. Syrová hruška to neudělá, proto se pro první sousta dusí.',
+      'Od tohoto místa se pánev dělí. Dětská porce jde stranou bez cukru.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 odeber dva měsíčky do misky stranou, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Nech měsíčky vychladnout na teplotu ruky a znovu zkus měkkost prsty.',
+      'Šťávu z pánve klidně přelij přes porci. Dušením hruška zesládne sama, takže do dětské misky nic dalšího nepatří.',
+    ],
+    babyServing: {
+      '6m': 'Měsíček dlouhý jako prst dospělého. Kus musí vyčnívat z pěsti, jinak se do pusy nedostane.',
+      '9m': 'Kostičky velikosti fazole bez slupky, po kterých dítě sahá špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, bez cukru a bez skořice.',
+    },
+    adultSteps: [
+      'Zbylé měsíčky posyp skořicí, zakápni medem a nech dvě minuty probublat, ať vznikne sirup.',
+      'Dušená hruška sedne k jogurtu, ke tvarohu i k pečenému masu jako příloha.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé', 'podzimní'],
+    sources: [NHS_FIRST_FOODS, SZU_FIRST_SPOON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'brokolice-pecena-na-plechu',
+    titleCz: 'Brokolice pečená na plechu',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 25,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'brokolice', amount: '1 velká', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C a plech vylož pečicím papírem.',
+      'Brokolici rozděl na růžičky se stonkem dlouhým jako prst dospělého a ty největší rozkroj napůl, ať mají rovnou plochu.',
+      'Promíchej je v míse s olivovým olejem, aby byly lesklé ze všech stran, a rozlož na plech v jedné vrstvě.',
+      'Peč 18 až 20 minut. Okraje mají zhnědnout a stonek povolit pod tlakem prstů; pečená brokolie chutná jinak než napařená, je sladší.',
+      'Od tohoto místa se plech dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber dvě růžičky stranou, ještě než se plech dochucuje.',
+    babySteps: [
+      'Nech růžičky vychladnout na teplotu ruky a zkus stonek prsty, jestli povolí.',
+      'Spálené černé okraje odlom, chutnají hořce a dítě porci kvůli nim odmítne celou.',
+    ],
+    babyServing: {
+      '6m': 'Růžička se stonkem, dlouhá jako prst dospělého, aby z pěsti vyčnívala.',
+      '9m': 'Kousky velikosti fazole, po kterých už dítě sahá špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp strouhaným parmezánem a vrať na dvě minuty do trouby, ať se sýr rozteče.',
+      'Hodí se k tomu citronová kůra a hrst pražených mandlí nasekaných nahrubo.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'kvetak-na-pare',
+    titleCz: 'Květák na páře s olivovým olejem',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 14,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'kvetak', amount: '1 menší', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+      { ingredientId: 'voda', amount: '200 ml', track: 'all' },
+    ],
+    baseSteps: [
+      'Květák rozeber na růžičky a nech jim delší stonek, za který se dítě chytí.',
+      'Do hrnce nalij vodu do výšky dvou centimetrů, přiveď ji k varu a vlož napařovací košík.',
+      'Růžičky vlož do košíku, přiklop a nech napařovat 8 až 10 minut.',
+      'Hotová růžička se dá rozmáčknout mezi palcem a ukazovákem. Napařený květák zůstává světlý a drží tvar líp než vařený.',
+      'Od tohoto místa se hrnec dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber dvě růžičky do misky, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Nech růžičky vychladnout na teplotu ruky; pára drží teplo uvnitř stonku déle, než se zdá.',
+      'Pokapej je půl lžičkou olivového oleje a rozetři prsty, ať kus tolik neklouže.',
+    ],
+    babyServing: {
+      '6m': 'Celá růžička se stonkem, dlouhá jako prst dospělého.',
+      '9m': 'Menší kousky velikosti fazole a stonek na kolečka.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbylý květák osol, zakápni citronem a posyp opraženou strouhankou s petrželkou.',
+      'Kdo má rád výraznější chuť, přidá lžíci kaparů nebo trochu ančovičkové pasty.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'cuketa-pecena-v-troube',
+    titleCz: 'Cuketa pečená v troubě na měsíčky',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 25,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'cuketa', amount: '2 střední', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '2 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C a plech vylož pečicím papírem.',
+      'Cuketu omyj a nakrájej podélně na měsíčky silné jako prst dospělého. Slupku nech, drží kus pohromadě.',
+      'Promíchej měsíčky s olivovým olejem a rozlož je na plech v jedné vrstvě, ať se nedotýkají.',
+      'Peč 18 minut. Hotový měsíček povolí pod prsty a na okrajích má zlatavé skvrny; pečená cuketa je sušší než opékaná na pánvi, a proto se drží líp.',
+      'Od tohoto místa se plech dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber dva měsíčky stranou, ještě než se plech dochucuje.',
+    babySteps: [
+      'Nech měsíčky vychladnout na teplotu ruky a znovu je zkus prsty.',
+      'Cuketa pouští při pečení vodu. Když je porce mokrá, otři ji papírovou utěrkou, ať dítěti neklouže.',
+    ],
+    babyServing: {
+      '6m': 'Měsíček dlouhý jako prst dospělého, se slupkou jako držadlem.',
+      '9m': 'Kostičky velikosti hrášku, které dítě sebere špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, bez soli a bez chilli.',
+    },
+    adultSteps: [
+      'Zbytek na plechu osol, posyp oregánem a zakápni balzamikem.',
+      'Pečená cuketa sedne k feta sýru a k praženým piniovým oříškům.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené', 'letní'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'brambor-vareny-na-dily',
+    titleCz: 'Vařené brambory na dílky',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 25,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'brambor', amount: '700 g', track: 'all' },
+      { ingredientId: 'voda', amount: '1,5 l', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Brambory oškrábej a nakrájej na dílky silné jako prst dospělého.',
+      'Do hrnce dej vodu, přiveď ji k varu a vlož dílky. Do vody pro dětskou porci nepatří sůl, ochutí se až talíř dospělých.',
+      'Vař 15 až 18 minut podle velikosti dílků.',
+      'Hotový dílek jde propíchnout špičkou nože bez tlaku a rozmáčkne se mezi prsty. Vařená brambora je vláčnější než pečená, zato se snadněji drolí.',
+      'Od tohoto místa se hrnec dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber tři dílky do misky, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Nech dílky vychladnout na teplotu ruky. Vařená brambora drží teplo uvnitř dlouho.',
+      'Pokapej je půl lžičkou olivového oleje. Bez tuku jsou suché a dítě je hůř polkne.',
+    ],
+    babyServing: {
+      '6m': 'Dílek dlouhý jako prst dospělého. Když se drolí, zmáčkni ho prsty do podlouhlého tvaru.',
+      '9m': 'Kostičky velikosti fazole, po kterých dítě sahá špetkou.',
+      '12m': 'Stejná porce jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbylé brambory osol, promíchej s máslem a posyp nasekanou petrželkou nebo pažitkou.',
+      'Kdo má rád kontrast, může dílky ještě chvíli opéct na pánvi do křupava.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rodinné'],
+    sources: [NHS_FIRST_FOODS, SZU_FIRST_SPOON],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'dyne-hokaido-dusena-na-panvi',
+    titleCz: 'Dýně hokaido dušená na pánvi',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 18,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'dyne-hokaido', amount: '1 menší', track: 'all' },
+      { ingredientId: 'voda', amount: '100 ml', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Dýni hokaido omyj, rozpul, vyber semínka a nakrájej ji na dílky silné jako prst dospělého. Slupka se u hokaida nechává.',
+      'Pánev potři olivovým olejem, rozlož na ni dílky v jedné vrstvě a nech je dvě minuty zatáhnout.',
+      'Podlij vodou, přiklop a duš 10 minut na mírném ohni.',
+      'Hotový dílek se dá rozmáčknout mezi prsty. Dušená dýně zůstává vlhčí než pečená, takže se dítěti líp polyká.',
+      'Od tohoto místa se pánev dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint: 'Po kroku 4 odeber dva dílky do misky, ještě než se pánev dochucuje.',
+    babySteps: [
+      'Nech dílky vychladnout na teplotu ruky.',
+      'Šťávu z pánve klidně přelij přes porci, dýně tím nevyschne.',
+    ],
+    babyServing: {
+      '6m': 'Dílek dlouhý jako prst dospělého, se slupkou jako držadlem na jedné straně.',
+      '9m': 'Kostičky velikosti fazole bez slupky.',
+      '12m': 'Stejná porce jako pro dospělé, bez soli a bez ostrého koření.',
+    },
+    adultSteps: [
+      'Zbytek na pánvi osol, posyp mletým zázvorem a zakápni limetkou.',
+      'Dušená dýně sedne ke kokosovému mléku, ze kterého se z ní za pár minut stane omáčka.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'rychlé', 'podzimní'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+  {
+    id: 'batat-peceny-ve-slupce',
+    titleCz: 'Batát pečený celý ve slupce',
+    category: 'obed-vecere',
+    minAgeMonths: 6,
+    timeMinutes: 45,
+    servings: '2 dospělí + 1 miminko',
+    ingredients: [
+      { ingredientId: 'batat', amount: '3 střední', track: 'all' },
+      { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
+    ],
+    baseSteps: [
+      'Troubu předehřej na 200 °C. Batáty omyj kartáčkem, ale neloupej je.',
+      'Každý několikrát propíchni vidličkou, ať pára uniká, a potři ho zvenku olivovým olejem.',
+      'Polož je přímo na mřížku a pod ni dej plech, na který bude odkapávat šťáva. Peč 35 až 40 minut.',
+      'Hotový batát povolí, když ho zmáčkneš přes utěrku, a slupka se odděluje sama. Dužina z pečení je sladší a hutnější než z vaření.',
+      'Od tohoto místa se batát dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
+    ],
+    babySplitPoint:
+      'Po kroku 4 rozkroj jeden batát podélně a odeber dva podlouhlé kusy dužiny, ještě než se zbytek dochucuje.',
+    babySteps: [
+      'Nech kusy vychladnout na teplotu ruky; uvnitř je pečený batát dlouho horký.',
+      'Kousek slupky nech na jedné straně, dítě má za co kus držet a dužina tolik neklouže.',
+    ],
+    babyServing: {
+      '6m': 'Podlouhlý kus dužiny se zbytkem slupky jako držadlem, dlouhý jako prst dospělého.',
+      '9m': 'Kostičky velikosti fazole bez slupky.',
+      '12m': 'Půlka batátu rozkrojená podélně, stejně jako pro dospělé, jen bez soli.',
+    },
+    adultSteps: [
+      'Zbylé batáty rozkroj, osol a doplň lžící jogurtu s limetkou a koriandrem.',
+      'Do rozkrojené dužiny se hodí i černé fazole s kmínem, batát se tím promění v hlavní jídlo.',
+    ],
+    allergens: [],
+    tags: ['vegetariánské', 'bez lepku', 'do ruky', 'pečené', 'rodinné'],
+    sources: [NHS_FIRST_FOODS, NHS_PREP_SAFELY],
+    reviewStatus: 'verified',
+  },
+];
