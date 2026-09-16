@@ -20,6 +20,7 @@ import { recipesWithIngredient } from '../lib/deriveRecipes';
 import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '../lib/labels';
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
+import { NakupTlacitko } from '../components/NakupTlacitko';
 import { NotFoundScreen } from './NotFoundScreen';
 import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
 
@@ -82,6 +83,14 @@ export function IngredientDetailScreen(): ReactNode {
           >
             <Star aria-hidden="true" className="h-5 w-5" />
           </button>
+          {/* Surovina do nákupu bez množství: kolik jí vzít, ví rodič sám,
+              a recept, který by množství určil, tu žádný není. */}
+          <NakupTlacitko
+            ikona
+            davky={[{ ingredientId: ingredient.id }]}
+            popis={`${ingredient.nameCz} do nákupu`}
+            testId="surovina-do-nakupu"
+          />
         </div>
         <div className="flex flex-wrap gap-1.5">
           <span className="rounded-lg bg-surface px-2 py-1 text-xs font-medium text-muted">

@@ -72,7 +72,13 @@ VAROVÁNÍ: 0
 
 ## Co je mimo rozsah verze 1
 
-Nákupní seznam, fotky jídel, sdílení mimo domácnost, růstové grafy, počítání živin, notifikace. Nenavrhuj je a nestav je.
+Fotky jídel, sdílení mimo domácnost, růstové grafy, počítání živin, notifikace. Nenavrhuj je a nestav je.
+
+**Nákupní seznam** do rozsahu patří (rozhodnuto září 2026). Plní se z receptů,
+z jednotlivých surovin a z třicetidenního plánu; množství téže suroviny se
+sčítají a odškrtnuté položky zůstávají v seznamu jako koupené. Pravidla pro
+sčítání jsou spustitelné testy v `tests/nakup/` a platí pro ně totéž co pro
+`tests/safety/`: když test spadne, opravuje se počítání, ne test.
 
 **30denní plán** do rozsahu patří (rozhodnuto září 2026). Je to plán celých
 dnů s recepty na snídani, oběd a večeři, který po doběhnutí pokračuje dalším

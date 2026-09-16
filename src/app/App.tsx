@@ -48,6 +48,9 @@ const ListsScreen = lazy(() =>
 const ListDetailScreen = lazy(() =>
   import('./screens/ListDetailScreen').then((m) => ({ default: m.ListDetailScreen })),
 );
+const NakupScreen = lazy(() =>
+  import('./screens/NakupScreen').then((m) => ({ default: m.NakupScreen })),
+);
 const PlanScreen = lazy(() =>
   import('./screens/PlanScreen').then((m) => ({ default: m.PlanScreen })),
 );
@@ -95,6 +98,7 @@ export function App(): ReactNode {
               <Route path="/rady/:id" element={<GuideDetailScreen />} />
               <Route path="/seznamy" element={<ListsScreen />} />
               <Route path="/seznamy/:id" element={<ListDetailScreen />} />
+              <Route path="/nakup" element={<NakupScreen />} />
               <Route path="/plan" element={<PlanScreen />} />
               <Route path="/plan/den/:cislo" element={<PlanDenScreen />} />
               <Route path="/x/:klic" element={<AdminScreen />} />

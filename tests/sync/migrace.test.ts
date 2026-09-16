@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { activeChildren, migrateHouseholdState, SCHEMA_VERSION } from '../../src/sync/merge';
+import {
+  activeChildren,
+  mergeHouseholdState,
+  migrateHouseholdState,
+  SCHEMA_VERSION,
+} from '../../src/sync/merge';
 
 describe('převod staršího stavu', () => {
   it('z pole oblíbených udělá mapu se značkou času', () => {
@@ -70,5 +75,37 @@ describe('převod staršího stavu', () => {
     });
     expect(vysledek.tastings).toHaveLength(1);
     expect(vysledek.tastings[0]?.id).toBe('a');
+  });
+});
+
+describe('nákupní seznam', () => {
+  it('projde převodem i sloučením a odebrání se nevrací', () => {
+    const local = migrateHouseholdState({
+      schemaVersion: 5,
+      nakup: {
+        mrkev: { hodnota: { davky: [{ mnozstvi: '150 g' }], koupeno: false }, kdy: 10 },
+        jablko: { hodnota: null, kdy: 30 },
+      },
+    });
+    const remote = migrateHouseholdState({
+      schemaVersion: 5,
+      nakup: {
+        mrkev: { hodnota: { davky: [{ mnozstvi: '150 g' }], koupeno: true }, kdy: 20 },
+        jablko: { hodnota: { davky: [], koupeno: false }, kdy: 5 },
+      },
+    });
+
+    const slouceny = mergeHouseholdState(local, remote);
+
+    // Pozdější zápis vyhrává u každé položky zvlášť.
+    expect(slouceny.nakup?.['mrkev']?.hodnota?.koupeno).toBe(true);
+    // Odebrání je plnohodnotný zápis, ne prázdno, takže se položka nevrátí.
+    expect(slouceny.nakup?.['jablko']?.hodnota).toBeNull();
+  });
+
+  it('starší stav bez seznamu se převede beze změny', () => {
+    const stav = migrateHouseholdState({ schemaVersion: 4, favorites: {} });
+    expect(stav.nakup).toBeUndefined();
+    expect(stav.schemaVersion).toBe(SCHEMA_VERSION);
   });
 });

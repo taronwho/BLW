@@ -13,6 +13,7 @@ import { CATALOG_COUNTS } from "@/data/counts";
 import { lists } from "@/data/lists";
 import { SeznamDlazdice } from "../components/SeznamDlazdice";
 import { PlanKarta } from "../components/PlanKarta";
+import { NakupKarta } from "../components/NakupKarta";
 import { useHouseholdStore } from "@/storage/householdStore";
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from "../lib/age";
 import { GRIP_LABELS, gripForAge } from "../lib/grip";
@@ -39,7 +40,7 @@ export function HomeScreen(): ReactNode {
   const jmeno = dite?.name.trim() ?? "";
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5">
       {/* Hlavička je jeden řádek, ne blok.
           Jméno dítěte i fázi ukazuje horní lišta, takže tady stačí to, co
           se jinde nedozvíš: podle čeho je aplikace nastavená a kudy se to
@@ -155,6 +156,10 @@ export function HomeScreen(): ReactNode {
       {/* Plán je jediná část aplikace, která rodiči řekne, co má být zítra.
           Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
       <PlanKarta />
+
+      {/* Nákup navazuje na plán: co se má vařit, se kupuje. Proto stojí
+          hned pod ním, ne až někde v nastavení. */}
+      <NakupKarta />
 
       {/* Seznamy ve vodorovném pásu: na úvodní obrazovce jich není místo víc
           než pár, ale zbytek je vidět hned za okrajem, takže se nepřehlédnou. */}

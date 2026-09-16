@@ -8,6 +8,8 @@ import { denPodleCisla, kdyStavDne, pribyleAlergie, stavDne } from '@/plan/typy'
 import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
+import { NakupTlacitko } from '../components/NakupTlacitko';
+import { slozkyDoNakupu } from '@/nakup/seznam';
 import { ageInMonths, stageForAge } from '../lib/age';
 import { useAktivniDite } from '../lib/dite';
 import { ALLERGEN_LABELS } from '../lib/labels';
@@ -70,6 +72,15 @@ export function PlanDenScreen(): ReactNode {
   // Co už dítě zná: dřívější dny tohoto bloku, deník a to, co znalo při
   // sestavení bloku. Nabídka na talíř, ne další jídlo navíc.
   const znameJiz = znameNaTalir(plan, den, state, dite?.id ?? null, dite?.allergens ?? []);
+
+  // Co se ten den vaří, to se dá rovnou hodit do nákupu.
+  const davkyDne = den.jidla.flatMap((jidlo) =>
+    jidlo.recipeId === undefined
+      ? jidlo.ingredientId === undefined
+        ? []
+        : [{ ingredientId: jidlo.ingredientId }]
+      : slozkyDoNakupu(jidlo.recipeId).map((slozka) => ({ ...slozka, recipeId: jidlo.recipeId })),
+  );
 
   return (
     <article className="flex flex-col gap-3" aria-labelledby="den-nadpis">
@@ -199,12 +210,24 @@ export function PlanDenScreen(): ReactNode {
       )}
 
       <section aria-labelledby="jidla-nadpis" className="flex flex-col gap-2">
-        <h2
-          id="jidla-nadpis"
-          className="text-[11px] font-semibold uppercase tracking-wide text-muted"
-        >
-          Jídla dne
-        </h2>
+        <div className="flex items-center justify-between gap-2">
+          <h2
+            id="jidla-nadpis"
+            className="text-[11px] font-semibold uppercase tracking-wide text-muted"
+          >
+            Jídla dne
+          </h2>
+          {/* Suroviny jednoho dne do nákupu. Hodí se, když si rodič doplňuje
+              jen to, co chybí na zítřek, ne celý týden. */}
+          {davkyDne.length > 0 && (
+            <NakupTlacitko
+              davky={davkyDne}
+              popis="Do nákupu"
+              potvrzeni="Přidáno"
+              testId="den-do-nakupu"
+            />
+          )}
+        </div>
         <ul className="flex flex-col gap-2" data-testid="den-jidla">
           {den.jidla.map((jidlo, i) => {
             const recept = recipeById.get(jidlo.recipeId ?? '');

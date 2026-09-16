@@ -13,6 +13,8 @@ import { COMPOSITION } from '@/data/composition';
 import { NutrientBadge } from '../components/NutrientBadge';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
+import { NakupTlacitko } from '../components/NakupTlacitko';
+import { slozkyDoNakupu } from '@/nakup/seznam';
 import { StageSwitch } from '../components/StageSwitch';
 import { ageInMonths, stageForAge } from '../lib/age';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian, recipeServingForm } from '../lib/deriveRecipes';
@@ -277,9 +279,22 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
 
   return (
     <section aria-labelledby="suroviny-nadpis" className="flex flex-col gap-2">
-      <h2 id="suroviny-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
-        Suroviny
-      </h2>
+      <div className="flex items-center justify-between gap-2">
+        <h2
+          id="suroviny-nadpis"
+          className="text-sm font-semibold uppercase tracking-wide text-muted"
+        >
+          Suroviny
+        </h2>
+        {/* Nákup patří k surovinám, ne k postupu: rodič se rozhoduje ve
+            chvíli, kdy se na složení dívá. */}
+        <NakupTlacitko
+          davky={slozkyDoNakupu(recipe.id).map((slozka) => ({ ...slozka, recipeId: recipe.id }))}
+          popis="Do nákupu"
+          potvrzeni="Přidáno"
+          testId="recept-do-nakupu"
+        />
+      </div>
       {tracks.map((track) => {
         const refs = recipe.ingredients.filter((ref) => ref.track === track);
         if (refs.length === 0) return null;

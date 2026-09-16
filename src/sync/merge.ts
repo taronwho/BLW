@@ -1,4 +1,11 @@
-import type { CasovanaHodnota, Child, HouseholdState, Plan, TastingEvent } from '@/types';
+import type {
+  CasovanaHodnota,
+  Child,
+  HouseholdState,
+  NakupPolozka,
+  Plan,
+  TastingEvent,
+} from '@/types';
 
 /**
  * Slučování stavu domácnosti podle docs/SPEC.md kapitola 7.
@@ -21,8 +28,10 @@ import type { CasovanaHodnota, Child, HouseholdState, Plan, TastingEvent } from 
  * `childAllergens`) se změnilo na mapu dětí; ochutnávky nesou `childId`.
  * 3 → 4: přibyl třicetidenní plán (`plans`). Starší stav ho nemá a nemusí:
  * chybějící plán znamená, že si ho rodič ještě nesestavil.
+ * 4 → 5: přibyl nákupní seznam (`nakup`). Chybějící seznam znamená prázdný,
+ * takže starší stav není co převádět.
  */
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 
 export function emptyHouseholdState(): HouseholdState {
   return {
@@ -202,6 +211,11 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     Object.assign(plans, vstup['plans']);
   }
 
+  const nakup: Record<string, CasovanaHodnota<NakupPolozka | null>> = {};
+  if (jeCasovanaMapa(vstup['nakup'])) {
+    Object.assign(nakup, vstup['nakup']);
+  }
+
   return {
     ...zaklad,
     children,
@@ -222,6 +236,7 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     favorites,
     recipeNotes,
     ...(Object.keys(plans).length > 0 ? { plans } : {}),
+    ...(Object.keys(nakup).length > 0 ? { nakup } : {}),
     schemaVersion: SCHEMA_VERSION,
   };
 }
@@ -263,6 +278,21 @@ function mergePlany(
 }
 
 /**
+ * Sloučení nákupních seznamů.
+ *
+ * U každé suroviny rozhoduje pozdější zápis, takže projde i odškrtnutí
+ * a odebrání. Dávky se nesčítají napříč telefony: kdyby se sjednocovaly,
+ * recept přidaný na obou zařízeních by v seznamu skončil dvakrát.
+ */
+function mergeNakup(
+  local: Record<string, CasovanaHodnota<NakupPolozka | null>> | undefined,
+  remote: Record<string, CasovanaHodnota<NakupPolozka | null>> | undefined,
+): Record<string, CasovanaHodnota<NakupPolozka | null>> | undefined {
+  if (local === undefined && remote === undefined) return undefined;
+  return mergeCasovane<NakupPolozka | null>(local ?? {}, remote ?? {});
+}
+
+/**
  * Sloučení dvou stavů domácnosti.
  *
  * Nebere čas zápisu celého dokumentu, protože ho už nepotřebuje: každá
@@ -277,6 +307,7 @@ export function mergeHouseholdState(
   const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
   const popisy = mergeLabels(local.memberLabels, remote.memberLabels);
   const plany = mergePlany(local.plans, remote.plans);
+  const nakup = mergeNakup(local.nakup, remote.nakup);
 
   return {
     // Děti mají u každé položky vlastní čas, takže dvě zařízení můžou offline
@@ -290,6 +321,7 @@ export function mergeHouseholdState(
     favorites: mergeCasovane(local.favorites, remote.favorites),
     recipeNotes: mergeCasovane(local.recipeNotes, remote.recipeNotes),
     ...(plany === undefined ? {} : { plans: plany }),
+    ...(nakup === undefined ? {} : { nakup }),
     schemaVersion: Math.max(local.schemaVersion, remote.schemaVersion),
   };
 }

@@ -50,7 +50,7 @@ export function PlanKarta(): ReactNode {
       aria-label={`30denní plán. ${stav === 'bezi' ? `Na řadě den ${den?.cislo ?? 1} z ${DNU_V_BLOKU}.` : popis[stav]}`}
       /* Silnější stín než u ostatních karet. Rám říká „klikni sem", stín
          kartu nadzvedne nad ploché dlaždice kolem. */
-      className={`flex items-stretch gap-3 rounded-2xl border-2 p-3 shadow-lift ${
+      className={`flex items-stretch gap-3 rounded-2xl border-2 p-2.5 shadow-lift ${
         varovani ? 'border-risk/50 bg-risk-soft' : 'border-accent bg-accent-soft'
       }`}
     >

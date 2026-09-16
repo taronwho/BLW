@@ -4,6 +4,8 @@ import type {
   Child,
   Grip,
   HouseholdState,
+  NakupDavka,
+  NakupPolozka,
   Plan,
   ReadySign,
   StavDne,
@@ -63,6 +65,10 @@ interface HouseholdStore {
   setRecipeNote(recipeId: string, note: string): Promise<void>;
   ulozPlan(childId: string, plan: Plan | null): Promise<void>;
   nastavStavDne(childId: string, cislo: number, stav: StavDne): Promise<void>;
+  pridejDoNakupu(davky: readonly { ingredientId: string; mnozstvi?: string; recipeId?: string }[]): Promise<void>;
+  odeberZNakupu(ingredientId: string): Promise<void>;
+  prepniKoupeno(ingredientId: string): Promise<void>;
+  vyprazdniNakup(jenKoupene?: boolean): Promise<void>;
   importState(raw: unknown): Promise<void>;
 }
 
@@ -462,6 +468,75 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
           [childId]: { hodnota: { ...soucasny, stavy }, kdy: Date.now() },
         },
       });
+    },
+
+    /**
+     * Přidá suroviny do nákupního seznamu.
+     *
+     * Dávky se ukládají jednotlivě, ne jako hotový součet: rodič může tentýž
+     * recept přidat dvakrát a taky ho může zase odebrat, a z „450 g" se
+     * zpátky nedopočítá, kolik z toho bylo z čeho. Už koupená položka se
+     * přidáním znovu odškrtne, protože přibylo něco, co doma není.
+     */
+    async pridejDoNakupu(
+      davky: readonly { ingredientId: string; mnozstvi?: string; recipeId?: string }[],
+    ): Promise<void> {
+      if (davky.length === 0) return;
+      const stav = get().state;
+      const nakup = { ...(stav.nakup ?? {}) };
+      const ted = Date.now();
+      for (const { ingredientId, mnozstvi, recipeId } of davky) {
+        const soucasna = nakup[ingredientId]?.hodnota ?? null;
+        const davka: NakupDavka = {
+          ...(recipeId === undefined ? {} : { recipeId }),
+          ...(mnozstvi === undefined ? {} : { mnozstvi }),
+        };
+        const nova: NakupPolozka = {
+          davky: [...(soucasna?.davky ?? []), davka],
+          koupeno: false,
+        };
+        nakup[ingredientId] = { hodnota: nova, kdy: ted };
+      }
+      await persist({ ...stav, nakup });
+    },
+
+    /** Odebere surovinu ze seznamu. Náhrobek, ať se z druhého telefonu nevrátí. */
+    async odeberZNakupu(ingredientId: string): Promise<void> {
+      const stav = get().state;
+      await persist({
+        ...stav,
+        nakup: { ...(stav.nakup ?? {}), [ingredientId]: { hodnota: null, kdy: Date.now() } },
+      });
+    },
+
+    /** Koupeno, nebo zase ne. Položka v seznamu zůstává, jen zešedne. */
+    async prepniKoupeno(ingredientId: string): Promise<void> {
+      const stav = get().state;
+      const soucasna = stav.nakup?.[ingredientId]?.hodnota ?? null;
+      if (soucasna === null) return;
+      await persist({
+        ...stav,
+        nakup: {
+          ...(stav.nakup ?? {}),
+          [ingredientId]: {
+            hodnota: { ...soucasna, koupeno: !soucasna.koupeno },
+            kdy: Date.now(),
+          },
+        },
+      });
+    },
+
+    /** Uklidí seznam: buď jen odškrtnuté položky, nebo celý. */
+    async vyprazdniNakup(jenKoupene = false): Promise<void> {
+      const stav = get().state;
+      const nakup = { ...(stav.nakup ?? {}) };
+      const ted = Date.now();
+      for (const [id, zaznam] of Object.entries(nakup)) {
+        if (zaznam.hodnota === null) continue;
+        if (jenKoupene && !zaznam.hodnota.koupeno) continue;
+        nakup[id] = { hodnota: null, kdy: ted };
+      }
+      await persist({ ...stav, nakup });
     },
 
     /**

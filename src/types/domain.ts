@@ -469,7 +469,36 @@ export interface HouseholdState {
    * z druhého telefonu vrátil.
    */
   plans?: Record<string, CasovanaHodnota<Plan | null>>;
+  /**
+   * Nákupní seznam domácnosti, klíčem je `ingredientId`.
+   *
+   * Patří domácnosti, ne dítěti: nakupuje se pro celý stůl a druhý rodič
+   * musí u regálu vidět totéž. Nepovinné kvůli datům uloženým dřívější
+   * verzí. `null` je náhrobek po odebrané položce — bez něj by se odebraná
+   * surovina při slučování z druhého telefonu vrátila.
+   */
+  nakup?: Record<string, CasovanaHodnota<NakupPolozka | null>>;
   schemaVersion: number;
+}
+
+/**
+ * Jedna položka nákupního seznamu.
+ *
+ * Množství se nesčítá při vkládání, ale až při zobrazení. Kdyby se sčítalo
+ * hned, nešlo by pak odebrat jeden recept ze seznamu — z „450 g" se zpátky
+ * nedopočítá, kolik z toho bylo z které kuchařské položky.
+ */
+export interface NakupPolozka {
+  davky: NakupDavka[];
+  /** Odškrtnuté = koupené. Vrátit se dá stejným klepnutím. */
+  koupeno: boolean;
+}
+
+export interface NakupDavka {
+  /** Recept, ze kterého množství přišlo. Chybí u ručně přidané suroviny. */
+  recipeId?: string;
+  /** Text z receptu, třeba „150 g". Chybí u ručně přidané suroviny. */
+  mnozstvi?: string;
 }
 
 

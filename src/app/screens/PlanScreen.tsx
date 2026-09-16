@@ -31,6 +31,8 @@ import { blokDokoncen } from '@/plan/typy';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
 import { JidlaDne, NovinkaRadek, PlanDenNahled } from '../components/PlanDenNahled';
+import { NakupTlacitko } from '../components/NakupTlacitko';
+import { slozkyDoNakupu } from '@/nakup/seznam';
 import { useAktivniDite } from '../lib/dite';
 import { ALLERGEN_LABELS } from '../lib/labels';
 import { useAktivniPlan, usePlanNastroje } from '../lib/plan';
@@ -203,6 +205,21 @@ export function PlanScreen(): ReactNode {
   const dokonceno = blokDokoncen(plan);
   const novaAlergie = pribyleAlergie(plan, dite).map((skupina) => ALLERGEN_LABELS[skupina]);
   const nahledDen = plan.dny.find((den) => den.cislo === nahled) ?? null;
+  // Sedm nejbližších čekajících dnů. Recept, který se v týdnu opakuje, se
+  // do nákupu započítá dvakrát — uvaří se dvakrát, tak se dvakrát nakoupí.
+  const tydenDnu = plan.dny.filter((den) => stavDne(plan, den.cislo) === 'ceka').slice(0, 7);
+  const davkyTydne = tydenDnu.flatMap((den) =>
+    den.jidla.flatMap((jidlo) =>
+      jidlo.recipeId === undefined
+        ? jidlo.ingredientId === undefined
+          ? []
+          : [{ ingredientId: jidlo.ingredientId }]
+        : slozkyDoNakupu(jidlo.recipeId).map((slozka) => ({
+            ...slozka,
+            recipeId: jidlo.recipeId,
+          })),
+    ),
+  );
   // Pět dnů dopředu stačí na nákup a nezabere půl obrazovky.
   const pristi = plan.dny
     .filter((den) => stavDne(plan, den.cislo) === 'ceka' && den.cislo !== dnes?.cislo)
@@ -292,6 +309,38 @@ export function PlanScreen(): ReactNode {
           {dnes.novinka !== undefined && <NovinkaRadek id={dnes.novinka} />}
           <JidlaDne den={dnes} />
           <PlanDenAkce plan={plan} den={dnes} onZmena={(cislo, stav) => setPosledni({ cislo, stav })} />
+        </section>
+      )}
+
+      {/* Nákup na týden dopředu.
+          Plán ví, co se bude vařit, takže seznam surovin z něj vypadne sám;
+          bez toho by ho rodič skládal ručně recept po receptu. Bere se sedm
+          nejbližších dnů, které ještě čekají, ne celý blok: na měsíc dopředu
+          se nenakupuje. */}
+      {davkyTydne.length > 0 && (
+        <section
+          data-testid="plan-nakup"
+          aria-label="Nákup podle plánu"
+          className="flex flex-wrap items-center gap-2 rounded-2xl border border-line bg-surface p-3"
+        >
+          <span className="min-w-0 flex-1 text-xs leading-snug text-muted">
+            Suroviny z nejbližších {tydenDnu.length} dnů, které ještě čekají. Množství se
+            v seznamu sečtou.
+          </span>
+          <NakupTlacitko
+            davky={davkyTydne}
+            popis="Příští týden do nákupu"
+            potvrzeni="Přidáno do nákupu"
+            testId="plan-do-nakupu"
+          />
+          <Link
+            to="/nakup"
+            data-testid="plan-otevrit-nakup"
+            className="flex min-h-touch items-center gap-1 text-xs font-semibold text-accent"
+          >
+            Otevřít seznam
+            <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+          </Link>
         </section>
       )}
 

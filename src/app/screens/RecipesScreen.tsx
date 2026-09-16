@@ -15,6 +15,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
 import { jeJednoduchaUprava } from '@/data/jednoduche';
+import { slozkyDoNakupu } from '@/nakup/seznam';
 import { recipeNutrients } from '@/data/recipeNutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { RECIPE_CATEGORIES } from '@/types';
@@ -23,6 +24,7 @@ import { ChokingChip } from '../components/SafetyChips';
 import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
 import { KonecSeznamu } from '../components/KonecSeznamu';
 import { FavoriteToggle } from '../components/FavoriteToggle';
+import { NakupTlacitko } from '../components/NakupTlacitko';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
@@ -555,11 +557,19 @@ function RecipeCard({
               ))}
           </span>
         </Link>
-        <span className="flex shrink-0 items-start">
+        <span className="flex shrink-0 flex-col items-center gap-1">
           <FavoriteToggle
             id={recipe.id}
             name={recipe.titleCz}
             favorite={favorite}
+          />
+          {/* Suroviny celého receptu do nákupu, bez otevírání receptu.
+              Rodič, který plánuje nákup, projde seznam receptů jednou. */}
+          <NakupTlacitko
+            ikona
+            davky={slozkyDoNakupu(recipe.id).map((slozka) => ({ ...slozka, recipeId: recipe.id }))}
+            popis={`Suroviny receptu ${recipe.titleCz} do nákupu`}
+            testId={`do-nakupu-${recipe.id}`}
           />
         </span>
       </div>
