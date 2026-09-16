@@ -124,12 +124,6 @@ export function RecipeDetailScreen(): ReactNode {
         </p>
       </header>
 
-      <SourceDisclosure
-        sources={recipe.sources}
-        label="Zdroje receptu"
-        testId="zdroje-receptu"
-      />
-
       <IngredientsBlock recipe={recipe} />
 
       <section aria-labelledby="postup-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
@@ -261,6 +255,19 @@ export function RecipeDetailScreen(): ReactNode {
           </p>
         )}
       </section>
+
+      {/* Doklady stojí až na konci stránky.
+          Patří k receptu a nikam se neztrácejí, ale rodič u sporáku listuje
+          k surovinám a k postupu, ne k odkazům. Nahoře mezi hlavičkou
+          a surovinami odsouvaly seznam složek pod okraj displeje. */}
+      <div className="flex flex-col gap-3" data-testid="zdroje-receptu-blok">
+        <SourceDisclosure
+          sources={recipe.sources}
+          label="Zdroje receptu"
+          testId="zdroje-receptu"
+        />
+        <SurovinoveZdroje recipe={recipe} />
+      </div>
     </article>
   );
 }
@@ -268,16 +275,8 @@ export function RecipeDetailScreen(): ReactNode {
 function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
   const tracks: RecipeIngredientRef['track'][] = ['all', 'meat', 'vegetarian'];
 
-  // Doklady k surovinám patří k receptu stejně jako k detailu suroviny —
-  // rodič, který stojí u sporáku, se kvůli nim nemá proklikávat jinam.
-  const podleSuroviny = [
-    ...new Map(recipe.ingredients.map((ref) => [ref.ingredientId, ref])).values(),
-  ]
-    .map((ref) => ingredientById.get(ref.ingredientId))
-    .filter((one): one is Ingredient => one !== undefined && one.sources.length > 0)
-    .map((one) => ({ ingredient: one, sources: dedupeSources(one.sources) }));
   return (
-    <section aria-labelledby="suroviny-nadpis" className="flex flex-col gap-3">
+    <section aria-labelledby="suroviny-nadpis" className="flex flex-col gap-2">
       <h2 id="suroviny-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
         Suroviny
       </h2>
@@ -285,11 +284,11 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
         const refs = recipe.ingredients.filter((ref) => ref.track === track);
         if (refs.length === 0) return null;
         return (
-          <div key={track} className="flex flex-col gap-2 rounded-xl bg-surface p-3">
+          <div key={track} className="flex flex-col gap-1.5 rounded-xl bg-surface p-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
               {TRACK_LABELS[track]}
             </h3>
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-col gap-0.5">
               {refs.map((ref) => {
                 const ingredient = ingredientById.get(ref.ingredientId);
                 const profil = ingredient === undefined ? undefined : nutrientProfile(ingredient);
@@ -303,11 +302,19 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                 const alergen = ingredient?.allergens[0];
                 const maStitky = maZiviny || rizikoVidet || alergen !== undefined;
                 return (
-                  <li key={`${ref.ingredientId}-${ref.track}`}>
+                  /* Štítky stojí v téže řádce jako název, ne pod ním.
+                     Odznak s živinami je dotykový cíl, takže vlastní řádka
+                     stála celých 44 px u každé složky a ze čtyř surovin
+                     byla obrazovka. Když se štítky vedle názvu nevejdou,
+                     zalomí se pod něj jako dřív. */
+                  <li
+                    key={`${ref.ingredientId}-${ref.track}`}
+                    className="flex flex-wrap items-center gap-x-1"
+                  >
                     <Link
                       to={`/suroviny/${ref.ingredientId}`}
                       data-testid={`odkaz-surovina-${ref.ingredientId}`}
-                      className="flex min-h-touch items-center justify-between gap-3 rounded-lg px-2 text-sm"
+                      className="flex min-h-touch min-w-[8.5rem] flex-1 items-center justify-between gap-2 rounded-lg px-2 text-sm"
                     >
                       <span className="min-w-0 font-medium text-accent">
                         {ingredient?.nameCz ?? ref.ingredientId}
@@ -318,7 +325,7 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                         (dušení, alergen) a co surovina přináší (živiny). */}
                     {maStitky && (
                       <span
-                        className="flex flex-wrap items-center gap-x-1.5 px-2"
+                        className="flex flex-wrap items-center justify-end gap-x-1.5 px-1"
                         data-testid={`ziviny-suroviny-${ref.ingredientId}`}
                       >
                         {riziko !== undefined && (
@@ -341,7 +348,7 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
                       </span>
                     )}
                     {ref.note !== undefined && (
-                      <p className="px-2 text-xs leading-relaxed text-muted">{ref.note}</p>
+                      <p className="w-full px-2 text-xs leading-relaxed text-muted">{ref.note}</p>
                     )}
                   </li>
                 );
@@ -351,23 +358,42 @@ function IngredientsBlock({ recipe }: { recipe: Recipe }): ReactNode {
         );
       })}
 
-      <SourceDisclosure
-        sources={[]}
-        label="Zdroje u surovin"
-        count={podleSuroviny.length}
-        testId="zdroje-surovin"
-      >
-        <ul className="flex flex-col gap-3">
-          {podleSuroviny.map(({ ingredient, sources }) => (
-            <li key={ingredient.id} className="flex flex-col gap-1.5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-                {ingredient.nameCz}
-              </p>
-              <SourceLinks sources={sources} />
-            </li>
-          ))}
-        </ul>
-      </SourceDisclosure>
     </section>
+  );
+}
+
+/**
+ * Doklady k jednotlivým surovinám receptu.
+ *
+ * Patří k receptu stejně jako k detailu suroviny — rodič, který stojí
+ * u sporáku, se kvůli nim nemá proklikávat jinam. Stojí ale až na konci
+ * stránky, za postupy, protože se k nim listuje výjimečně.
+ */
+function SurovinoveZdroje({ recipe }: { recipe: Recipe }): ReactNode {
+  const podleSuroviny = [
+    ...new Map(recipe.ingredients.map((ref) => [ref.ingredientId, ref])).values(),
+  ]
+    .map((ref) => ingredientById.get(ref.ingredientId))
+    .filter((one): one is Ingredient => one !== undefined && one.sources.length > 0)
+    .map((one) => ({ ingredient: one, sources: dedupeSources(one.sources) }));
+
+  return (
+    <SourceDisclosure
+      sources={[]}
+      label="Zdroje u surovin"
+      count={podleSuroviny.length}
+      testId="zdroje-surovin"
+    >
+      <ul className="flex flex-col gap-3">
+        {podleSuroviny.map(({ ingredient, sources }) => (
+          <li key={ingredient.id} className="flex flex-col gap-1.5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {ingredient.nameCz}
+            </p>
+            <SourceLinks sources={sources} />
+          </li>
+        ))}
+      </ul>
+    </SourceDisclosure>
   );
 }
