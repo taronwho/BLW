@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { CATALOG_COUNTS } from '../../src/data/counts';
 import { readFileSync } from 'node:fs';
 import { ingredients, recipes } from '@/data';
 import {
@@ -1187,12 +1188,15 @@ test('recepty jdou filtrovat podle věku dítěte', async ({ page }) => {
   await zalozDite(page, 'Ema', '2026-03-15');
   await navLink(page, 'Recepty').click();
 
+  // Počet se bere z katalogu, ne napevno: kuchařka roste a přepisovat kvůli
+  // tomu test je jen zdroj falešných pádů.
+  const vse = `${CATALOG_COUNTS.recipes} z ${CATALOG_COUNTS.recipes}`;
   const pocet = page.getByTestId('pocet-receptu');
-  await expect(pocet).toContainText('313 z 313');
+  await expect(pocet).toContainText(vse);
 
   await otevriFiltry(page, 'receptu');
   await page.getByTestId('filtr-vhodne').click();
-  await expect(pocet).not.toContainText('313 z 313');
+  await expect(pocet).not.toContainText(vse);
   await expect(page.getByTestId('seznam-receptu')).not.toContainText('na špejli');
 
   // Filtr přežije odkaz, stejně jako ostatní.
