@@ -32,9 +32,12 @@ npm run test:e2e       # Playwright na viewportech 320 / 375 / 414 px
 npm run build          # produkční build
 ```
 
-Pokud `npm run test:e2e` hlásí, že chybí binárka prohlížeče, spusť
-`npx playwright install chromium`. Na stroji s předinstalovaným Chromiem jiné
-verze nastav `PLAYWRIGHT_CHROMIUM_EXECUTABLE` na cestu k binárce.
+Sada `npm run test:e2e` běží na čtyřech projektech: tři šířky ze specifikace
+(320 / 375 / 414) na Chromiu s dotykovou emulací a jeden na WebKitu, protože
+iOS se chová jinak. Než ji poprvé spustíš, nainstaluj obojí:
+`npx playwright install chromium webkit`. Na stroji s předinstalovaným
+Chromiem jiné verze nastav `PLAYWRIGHT_CHROMIUM_EXECUTABLE` na cestu
+k binárce.
 
 ## Stav stavby
 
@@ -49,7 +52,12 @@ verze nastav `PLAYWRIGHT_CHROMIUM_EXECUTABLE` na cestu k binárce.
 ## Nasazení
 
 Push do `main` spustí workflow `.github/workflows/deploy.yml`: `npm run validate`,
-`npm run build` a teprve pak deploy na Pages. **Když validace selže, nenasadí se nic.**
+`npm audit`, `npm run build` a teprve pak deploy na Pages. **Když validace
+selže, nenasadí se nic.**
+
+Na větvích a v pull requestech běží `.github/workflows/ci.yml`: tatáž validace
+a k tomu mobilní e2e sada včetně kontroly přístupnosti přes axe a kontrola
+dostupnosti odkazů ze `sources`.
 
 Jednorázově je potřeba v repozitáři zapnout Settings → Pages → Source: **GitHub Actions**.
 

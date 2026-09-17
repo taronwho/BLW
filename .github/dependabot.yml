@@ -1,0 +1,27 @@
+# Aktualizace závislostí.
+#
+# Audit 17. 9. 2026 našel tři high advisories v react-router-dom, které
+# v repozitáři ležely nepovšimnuté, protože nic závislosti nesledovalo.
+# Měsíčně stačí: je to rodinná aplikace, ne služba s SLA, a týdenní příval
+# pull requestů by se přestal číst.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # Jeden pull request na všechno vývojové. Tyhle balíky se do buildu
+      # nedostanou, takže je nemá smysl posuzovat po jednom.
+      vyvojove:
+        dependency-type: development
+    commit-message:
+      prefix: 'zavislosti'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: 'zavislosti'

@@ -28,6 +28,7 @@ jobs:
       - run: npm ci
       # Deploy nikdy neproběhne, když validace selže (CLAUDE.md, Nasazení).
       - run: npm run validate
+      - run: npm audit --omit=dev --audit-level=high
       # Firebase web-konfigurace se zapéká do buildu, aby nikdo nic nevyplňoval.
       # Není to tajemství — v prohlížeči je stejně vidět; bezpečnost dělají
       # firestore.rules. Repository variables mají přednost, secrets fungují taky.

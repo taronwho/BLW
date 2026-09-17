@@ -18,3 +18,48 @@ jobs:
       - run: npm ci
       - run: npm run validate
       - run: npm run build
+      # Zranitelnosti v běhových závislostech. `--omit=dev` schválně:
+      # nástroje, které se nedostanou do balíku, rodiče neohrožují a jejich
+      # nálezy by hlášení zahltily. `high` a výš zastaví běh.
+      - name: Kontrola zranitelností
+        run: npm audit --omit=dev --audit-level=high
+
+  e2e:
+    name: Mobilní testy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Obojí, protože sada běží na Chromiu i na WebKitu — iOS je pro PWA
+      # pro rodiče ta důležitější polovina a dřív se netestoval vůbec.
+      - run: npx playwright install --with-deps chromium webkit
+      # Audit 17. 9. 2026: e2e sada, včetně celé kontroly přístupnosti přes
+      # axe ve světlém i tmavém motivu, neběžela v CI vůbec. Právě proto
+      # tam čtrnáct zelených běhů vydržel zastaralý test s natvrdo psaným
+      # počtem receptů.
+      - run: npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  zdroje:
+    name: Dostupnost zdrojů
+    runs-on: ubuntu-latest
+    # Sahá na cizí servery, takže výpadek NHS nesmí shodit celý běh.
+    # Nález je informace pro člověka, ne důvod nepustit změnu dál.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check:sources
