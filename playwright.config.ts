@@ -8,7 +8,20 @@ import { defineConfig, devices } from '@playwright/test';
 const chromiumExecutable = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
 const launchOptions = chromiumExecutable ? { executablePath: chromiumExecutable } : {};
 
-/** Mobilní viewporty z docs/SPEC.md kapitola 6 — test selže při vodorovném přetečení. */
+/**
+ * Mobilní viewporty z docs/SPEC.md kapitola 6 — test selže při vodorovném
+ * přetečení.
+ *
+ * Tři šířky jsou ze specifikace a zůstávají. Co se změnilo: dřív to byly
+ * tři instance `devices['Desktop Chrome']` s `isMobile: false`, tedy
+ * desktopový prohlížeč v malém okně. Testovala se myš, ne prst, a hlavně
+ * se nikdy nespustil žádný WebKit — přitom PWA pro rodiče s telefonem
+ * v ruce se na iOSu chová jinak v instalaci na plochu, v `env(safe-area-inset-*)`
+ * i v limitech IndexedDB. Teď jedou dvě jádra.
+ *
+ * WebKit se instaluje zvlášť: `npx playwright install webkit`. Bez něj
+ * projekt `mobile-webkit-375` selže na chybějící binárce, ne na aplikaci.
+ */
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
@@ -22,17 +35,26 @@ export default defineConfig({
     launchOptions,
   },
   projects: [
+    // Nejužší displej ze specifikace. `Pixel 5` nese `isMobile: true`
+    // i `hasTouch: true`, takže se konečně testuje dotyk a ne myš;
+    // viewport se přepisuje na rozměr ze specifikace.
     {
       name: 'mobile-320',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 320, height: 568 }, isMobile: false },
+      use: { ...devices['Pixel 5'], viewport: { width: 320, height: 568 } },
     },
     {
       name: 'mobile-375',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 375, height: 667 }, isMobile: false },
+      use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 } },
     },
     {
       name: 'mobile-414',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 414, height: 896 }, isMobile: false },
+      use: { ...devices['Pixel 5'], viewport: { width: 414, height: 896 } },
+    },
+    // Druhé jádro. Rozměr odpovídá iPhonu SE / 8, tedy tomu nejmenšímu,
+    // co ještě lidi běžně nosí.
+    {
+      name: 'mobile-webkit-375',
+      use: { ...devices['iPhone SE'], viewport: { width: 375, height: 667 } },
     },
   ],
   webServer: {

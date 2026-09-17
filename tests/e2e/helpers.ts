@@ -199,3 +199,73 @@ export async function horizontalOverflow(page: Page): Promise<number> {
     Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
   );
 }
+
+export interface PretekajiciPrvek {
+  tag: string;
+  testId: string | null;
+  trida: string;
+  text: string;
+  pravyOkraj: number;
+}
+
+/**
+ * Které prvky přetékají doprava.
+ *
+ * `horizontalOverflow` výš řekne, **že** se přeteklo, ale ne čím — a u
+ * obrazovky s třemi sty položkami je to rozdíl mezi „něco je špatně"
+ * a opravou. Proto tenhle doplněk: vrátí konkrétní prvky i s testId,
+ * třídou a začátkem textu.
+ *
+ * Neměří přes `scrollWidth`, ale přes pozici prvků na stránce. Dvě věci
+ * tím chytí navíc: prvek, který přetéká uvnitř vlastního posuvného
+ * kontejneru (vodorovné čipy filtrů), a prvek, který je z toku vyňatý.
+ *
+ * Skryté a nulové prvky se přeskakují a bere se jen nejhlubší přetékající
+ * prvek v každé větvi — jinak by jedna široká karta nahlásila i všechny
+ * své rodiče a výpis by se nedal číst.
+ */
+export async function pretekajiciPrvky(page: Page, tolerance = 1): Promise<PretekajiciPrvek[]> {
+  return page.evaluate((mez) => {
+    const sirka = window.innerWidth;
+    const nalezy: Element[] = [];
+
+    for (const prvek of document.querySelectorAll('body *')) {
+      const style = window.getComputedStyle(prvek);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+      const rect = prvek.getBoundingClientRect();
+      if (rect.width === 0 && rect.height === 0) continue;
+      if (rect.right <= sirka + mez) continue;
+
+      // Prvek uvnitř vodorovně posuvného rodiče přetéká právem — tak je
+      // ten pruh navržený (čipy kategorií). Ptáme se proto, jestli se
+      // dostane přes okraj *stránky*, ne přes okraj svého rodiče.
+      let rodic: Element | null = prvek.parentElement;
+      let vPosuvniku = false;
+      while (rodic !== null && rodic !== document.body) {
+        const rodicStyle = window.getComputedStyle(rodic);
+        if (rodicStyle.overflowX === 'auto' || rodicStyle.overflowX === 'scroll') {
+          const rodicRect = rodic.getBoundingClientRect();
+          if (rodicRect.right <= sirka + mez) vPosuvniku = true;
+          break;
+        }
+        rodic = rodic.parentElement;
+      }
+      if (vPosuvniku) continue;
+
+      nalezy.push(prvek);
+    }
+
+    // Jen nejhlubší prvek z každé větve, ať výpis není celý strom.
+    const nejhlubsi = nalezy.filter(
+      (prvek) => !nalezy.some((jiny) => jiny !== prvek && prvek.contains(jiny)),
+    );
+
+    return nejhlubsi.map((prvek) => ({
+      tag: prvek.tagName.toLowerCase(),
+      testId: prvek.getAttribute('data-testid'),
+      trida: (prvek.getAttribute('class') ?? '').slice(0, 80),
+      text: (prvek.textContent ?? '').trim().slice(0, 60),
+      pravyOkraj: Math.round(prvek.getBoundingClientRect().right),
+    }));
+  }, tolerance);
+}

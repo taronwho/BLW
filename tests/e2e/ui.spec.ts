@@ -6,6 +6,7 @@ import {
   SCREENS,
   acceptDisclaimer,
   horizontalOverflow,
+  pretekajiciPrvky,
   navLink,
   otevriDomacnost,
   otevriFiltry,
@@ -42,6 +43,13 @@ for (const screen of SCREENS) {
     await screen.open(page);
 
     const scrollWidth = await horizontalOverflow(page);
+    // Když se přeteče, je potřeba vědět čím — u obrazovky s třemi sty
+    // položkami je to rozdíl mezi „něco je špatně" a opravou.
+    const vinici = await pretekajiciPrvky(page);
+    expect(
+      vinici,
+      `${screen.name} přetéká vodorovně přes tyhle prvky:\n${JSON.stringify(vinici, null, 2)}`,
+    ).toEqual([]);
     expect(scrollWidth, `${screen.name} přetéká vodorovně`).toBeLessThanOrEqual(width);
 
     // Screenshot horní části obrazovky. Ukládá se mimo repozitář
