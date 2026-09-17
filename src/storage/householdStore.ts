@@ -16,13 +16,16 @@ import {
   emptyHouseholdState,
   MAX_MEMBERS,
   mergeHouseholdState,
+  jeZNovejsiVerze,
   migrateHouseholdState,
   newChildId,
+  prevedStav,
   newTastingId,
   SCHEMA_VERSION,
 } from '@/sync/merge';
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
 import { popisZarizeni } from '@/sync/zarizeni';
+import type { Zahozeno } from '@/sync/validace';
 import { IndexedDbAdapter } from './indexedDb';
 import { loadFirebaseConfig } from './firebaseConfig';
 import type { StorageAdapter, StoredHousehold, SyncStatus } from './types';
@@ -69,7 +72,7 @@ interface HouseholdStore {
   odeberZNakupu(ingredientId: string): Promise<void>;
   prepniKoupeno(ingredientId: string): Promise<void>;
   vyprazdniNakup(jenKoupene?: boolean): Promise<void>;
-  importState(raw: unknown): Promise<void>;
+  importState(raw: unknown): Promise<Zahozeno>;
 }
 
 let localAdapter: StorageAdapter | null = null;
@@ -193,6 +196,20 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
 
       const remote = await adapter.load();
       const localState = get().state;
+      if (remote !== null && jeZNovejsiVerze(remote.state)) {
+        // Druhý telefon má novější verzi aplikace. Kdybychom dokument
+        // sloučili a zapsali, ořezali bychom mu pole, která tahle verze
+        // ještě nezná — a on by o ně přišel.
+        remoteAdapter = null;
+        set({
+          status: {
+            kind: 'error',
+            message:
+              'Druhý telefon má novější verzi aplikace, než je tahle. Obnov ji (v nabídce aktualizace nebo znovunačtením stránky), jinak by se sdílením ztratila data. Do té doby aplikace jede jen v tomhle telefonu.',
+          },
+        });
+        return;
+      }
       if (remote !== null) {
         const merged = mergeHouseholdState(localState, migrateHouseholdState(remote.state));
         await persist(withMember(merged, session.uid));
@@ -204,6 +221,8 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       // nezpracují dvakrát.
       remoteUnsubscribe?.();
       remoteUnsubscribe = adapter.subscribe((incoming) => {
+        // Novější tvar se ignoruje ze stejného důvodu jako při připojení.
+        if (jeZNovejsiVerze(incoming.state)) return;
         const merged = mergeHouseholdState(get().state, migrateHouseholdState(incoming.state));
         // Čas zápisu musí sedět v paměti i na disku. Dřív se do paměti
         // neukládal vůbec, takže se po přenačtení stránky lišil od toho na
@@ -547,10 +566,16 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
      * nedostala ven a aplikace hlásila úspěch, i když se nic neuložilo.
      * Převod na dnešní tvar zároveň otevře i staré zálohy.
      */
-    async importState(raw: unknown): Promise<void> {
-      const vstup = migrateHouseholdState(raw);
+    async importState(raw: unknown): Promise<Zahozeno> {
+      // Záloha z novější verze aplikace se nepřebírá. Převod umí jen pole,
+      // která tahle verze zná, takže by zbytek tiše zahodil.
+      if (jeZNovejsiVerze(raw)) {
+        throw new Error('Záloha je z novější verze aplikace.');
+      }
+      const { stav: vstup, zahozeno } = prevedStav(raw);
       const merged = mergeHouseholdState(get().state, vstup);
       await persist({ ...merged, schemaVersion: SCHEMA_VERSION });
+      return zahozeno;
     },
   };
 });

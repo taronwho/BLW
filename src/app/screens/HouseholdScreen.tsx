@@ -11,6 +11,8 @@ import {
   normalizeHouseholdCode,
 } from '@/sync/householdCode';
 import { hasFirebaseConfig } from '@/storage/firebaseConfig';
+import { popisZahozenych } from '@/sync/validace';
+import { POLOZKA, SUROVINA, sklonuj } from '@/text/sklonovani';
 import { QrCode } from '../QrCode';
 import { ChildrenSection } from '../components/ChildrenSection';
 import { MemberList } from '../components/MemberList';
@@ -263,10 +265,17 @@ export function HouseholdScreen(): ReactNode {
               // neuložilo. Přesně to se dřív stávalo u jiného souboru.
               void (async () => {
                 try {
-                  await importState(JSON.parse(await file.text()));
-                  setMessage('Data naimportována a sloučena.');
-                } catch {
-                  setMessage('Tohle není záloha Drobka: soubor se nenačetl.');
+                  const zahozeno = await importState(JSON.parse(await file.text()));
+                  // Poškozené záznamy se nedoplňují náhradní hodnotou, ale
+                  // zahazují — a rodič se to musí dozvědět, jinak si bude
+                  // myslet, že má deník kompletní.
+                  setMessage(popisZahozenych(zahozeno) ?? 'Data naimportována a sloučena.');
+                } catch (chyba) {
+                  setMessage(
+                    chyba instanceof Error && chyba.message.includes('novější verze')
+                      ? 'Záloha je z novější verze aplikace. Obnov Drobka a zkus to znovu.'
+                      : 'Tohle není záloha Drobka: soubor se nenačetl.',
+                  );
                 }
               })();
             }}
@@ -279,7 +288,8 @@ export function HouseholdScreen(): ReactNode {
           K revizi
         </h2>
         <p className="text-sm font-medium" data-testid="pocet-k-revizi">
-          {needsReview.length} položek čeká na ověření z {ingredients.length} surovin
+          {sklonuj(needsReview.length, POLOZKA)} čeká na ověření z{' '}
+          {sklonuj(ingredients.length, SUROVINA)}
         </p>
         <ul className="flex flex-col gap-1">
           {needsReview.map((item) => (

@@ -6,6 +6,7 @@ import type {
   Plan,
   TastingEvent,
 } from '@/types';
+import { platnaOchutnavka, platneDite, type Zahozeno } from './validace';
 
 /**
  * Slučování stavu domácnosti podle docs/SPEC.md kapitola 7.
@@ -136,8 +137,22 @@ function jeCasovanaMapa(value: unknown): boolean {
  * je pole a ne mapa, a rodič by přišel o celý deník.
  */
 export function migrateHouseholdState(raw: unknown): HouseholdState {
+  return prevedStav(raw).stav;
+}
+
+/**
+ * Totéž, ale i s počtem zahozených záznamů.
+ *
+ * Používá to import zálohy, aby rodiči mohl říct, že se část souboru
+ * načíst nedala. Tiché zahození by bylo horší než chyba: rodič by si
+ * myslel, že má deník kompletní.
+ */
+export function prevedStav(raw: unknown): { stav: HouseholdState; zahozeno: Zahozeno } {
+  const zahozeno: Zahozeno = { ochutnavky: 0, deti: 0 };
   const zaklad = emptyHouseholdState();
-  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return zaklad;
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
+    return { stav: zaklad, zahozeno };
+  }
   const vstup = raw as Record<string, unknown>;
 
   const favorites: Record<string, CasovanaHodnota<boolean>> = {};
@@ -163,9 +178,26 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
 
   // Děti. Tvar 2 a starší uměl jedno dítě rozepsané do pěti polí stavu;
   // udělá se z něj první dítě a ochutnávky se mu přiřadí.
+  // Časovaná mapa se dřív přebírala celá, protože `jeCasovanaMapa` ověří
+  // jen přítomnost klíče `kdy`. Dítě s rozbitým `birthDate` pak rozhodilo
+  // výpočet věku i předvolbu fáze.
   const children: Record<string, CasovanaHodnota<Child | null>> = {};
   if (jeCasovanaMapa(vstup['children'])) {
-    Object.assign(children, vstup['children']);
+    for (const [id, zaznam] of Object.entries(vstup['children'] as Record<string, CasovanaHodnota<unknown>>)) {
+      if (!jeCas(zaznam.kdy)) continue;
+      // `null` je náhrobek po smazaném dítěti a musí projít — bez něj by
+      // se smazané dítě při slučování vrátilo.
+      if (zaznam.hodnota === null) {
+        children[id] = { hodnota: null, kdy: zaznam.kdy };
+        continue;
+      }
+      const dite = platneDite(zaznam.hodnota);
+      if (dite === null) {
+        zahozeno.deti += 1;
+        continue;
+      }
+      children[id] = { hodnota: dite, kdy: zaznam.kdy };
+    }
   }
   let prvniId: string | undefined = Object.entries(children).find(
     ([, zaznam]) => zaznam.hodnota !== null,
@@ -195,16 +227,22 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     prvniId = id;
   }
 
-  const tastings = Array.isArray(vstup['tastings'])
-    ? (vstup['tastings'] as TastingEvent[])
-        .filter((event) => typeof event?.id === 'string' && typeof event?.ingredientId === 'string')
-        // Záznamy z doby jednoho dítěte patří tomu prvnímu.
-        .map((event) =>
-          event.childId === undefined && prvniId !== undefined
-            ? { ...event, childId: prvniId }
-            : event,
-        )
-    : [];
+  const tastings: TastingEvent[] = [];
+  if (Array.isArray(vstup['tastings'])) {
+    for (const syrovy of vstup['tastings'] as unknown[]) {
+      const event = platnaOchutnavka(syrovy);
+      if (event === null) {
+        zahozeno.ochutnavky += 1;
+        continue;
+      }
+      // Záznamy z doby jednoho dítěte patří tomu prvnímu.
+      tastings.push(
+        event.childId === undefined && prvniId !== undefined
+          ? { ...event, childId: prvniId }
+          : event,
+      );
+    }
+  }
 
   const plans: Record<string, CasovanaHodnota<Plan | null>> = {};
   if (jeCasovanaMapa(vstup['plans'])) {
@@ -216,7 +254,7 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     Object.assign(nakup, vstup['nakup']);
   }
 
-  return {
+  const stav: HouseholdState = {
     ...zaklad,
     children,
     members: Array.isArray(vstup['members'])
@@ -239,6 +277,27 @@ export function migrateHouseholdState(raw: unknown): HouseholdState {
     ...(Object.keys(nakup).length > 0 ? { nakup } : {}),
     schemaVersion: SCHEMA_VERSION,
   };
+  return { stav, zahozeno };
+}
+
+/** Značka času v časované mapě. Bez ní se nedá rozhodnout žádný konflikt. */
+function jeCas(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+/**
+ * Je tenhle dokument z novější verze aplikace, než jakou má tohle zařízení?
+ *
+ * `migrateHouseholdState` vrací jen pole, která zná — neznámá zahazuje.
+ * Starší telefon by tedy dokument nové verze ořezal, orazítkoval ho vyšším
+ * `schemaVersion` a zapsal zpátky; druhý telefon by o data přišel a nikdo
+ * by se to nedozvěděl. Protože se PWA aktualizuje až po klepnutí na
+ * „Obnovit", je rozjetá verze zrovna tady běžnější než jinde.
+ */
+export function jeZNovejsiVerze(raw: unknown): boolean {
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return false;
+  const verze = (raw as Record<string, unknown>)['schemaVersion'];
+  return typeof verze === 'number' && verze > SCHEMA_VERSION;
 }
 
 /** Id, pod kterým se uloží dítě převzaté ze starší verze s jedním dítětem. */

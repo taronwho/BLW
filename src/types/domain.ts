@@ -85,6 +85,24 @@ export type AllergenGroup =
   | 'lupina'
   | 'siricitany';
 
+/** Všech 14 alergenových skupin za běhu — viz komentář u TASTING_AMOUNTS. */
+export const ALLERGEN_GROUPS: readonly AllergenGroup[] = [
+  'vejce',
+  'arasidy',
+  'mleko',
+  'orechy',
+  'psenice-lepek',
+  'soja',
+  'ryby',
+  'sezam',
+  'korysi',
+  'mekkysi',
+  'celer',
+  'horcice',
+  'lupina',
+  'siricitany',
+] as const;
+
 /** 9 alergenů, u kterých aplikace sleduje plánované zavádění (docs/BEZPECNOST.md kap. 4) */
 export const KEY_ALLERGENS: readonly AllergenGroup[] = [
   'vejce',
@@ -275,6 +293,30 @@ export interface Recipe {
 
 export type TastingAmount = 'ochutnala' | 'snedla-cast' | 'snedla-vse' | 'odmitla';
 export type TastingReaction = 'zadna' | 'chutnalo' | 'nelibilo' | 'kozni' | 'travici' | 'jina';
+
+/**
+ * Tytéž hodnoty za běhu.
+ *
+ * Typ sám o sobě po překladu zmizí, takže se proti němu nedá zkontrolovat
+ * nahraná záloha ani dokument z Firestore. Tahle pole jsou jediný způsob,
+ * jak se dá na hranici aplikace zeptat „je tohle platná hodnota" — používá
+ * je `src/sync/validace.ts` a formulář ochutnávky.
+ */
+export const TASTING_AMOUNTS: readonly TastingAmount[] = [
+  'ochutnala',
+  'snedla-cast',
+  'snedla-vse',
+  'odmitla',
+] as const;
+
+export const TASTING_REACTIONS: readonly TastingReaction[] = [
+  'zadna',
+  'chutnalo',
+  'nelibilo',
+  'kozni',
+  'travici',
+  'jina',
+] as const;
 
 export interface TastingEvent {
   id: string;

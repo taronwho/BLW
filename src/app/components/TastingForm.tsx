@@ -1,18 +1,12 @@
 import { Check, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { TastingAmount, TastingReaction } from '@/types';
+import { TASTING_AMOUNTS, TASTING_REACTIONS } from '@/types';
 import { AMOUNT_LABELS, REACTION_LABELS } from '../lib/labels';
 import type { Draft } from '../lib/tastingDraft';
 
-const AMOUNTS: readonly TastingAmount[] = ['ochutnala', 'snedla-cast', 'snedla-vse', 'odmitla'];
-const REACTIONS: readonly TastingReaction[] = [
-  'zadna',
-  'chutnalo',
-  'nelibilo',
-  'kozni',
-  'travici',
-  'jina',
-];
+const AMOUNTS: readonly TastingAmount[] = TASTING_AMOUNTS;
+const REACTIONS: readonly TastingReaction[] = TASTING_REACTIONS;
 
 /** Reakce, u kterých se ukáže připomínka, že rozhoduje pediatr. */
 const ADVERSE: ReadonlySet<TastingReaction> = new Set(['kozni', 'travici', 'jina']);
