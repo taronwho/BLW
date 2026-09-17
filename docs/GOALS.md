@@ -18,7 +18,7 @@ Před spuštěním zapni auto mód — `/goal` sám permission mód nemění.
 
 Nejdřív zadej normální prompt:
 
-> Založ Vite + React + TypeScript projekt podle `CLAUDE.md`, přidej Tailwind, ESLint, Vitest, Playwright, skripty `validate`, `validate:data`, `test:e2e`, prázdnou datovou vrstvu s typy podle `docs/SPEC.md` a kostru validátoru `scripts/validate-data.ts`. Přidej `.github/workflows/deploy.yml` pro GitHub Pages, `base: '/blw-app/'`, `public/.nojekyll`, HashRouter. Aplikace zatím zobrazí jen název a disclaimer.
+> Založ Vite + React + TypeScript projekt podle `CLAUDE.md`, přidej Tailwind, ESLint, Vitest, Playwright, skripty `validate`, `validate:data`, `test:e2e`, prázdnou datovou vrstvu s typy podle `docs/SPEC.md` a kostru validátoru `scripts/validate-data.ts`. Přidej `.github/workflows/deploy.yml` pro GitHub Pages, `base: '/BLW/'`, `public/.nojekyll`, HashRouter. Aplikace zatím zobrazí jen název a disclaimer.
 
 Pak:
 
@@ -46,6 +46,9 @@ Běž **po kategoriích**, každou kategorii jako vlastní goal. Vzor pro jednu:
 
 Pak stejné pro `fruits` (36), `grains` (24), `meat_fish` (26), `legumes` (16), `dairy_eggs` (20), `nuts_seeds_oils` (20), `herbs_spices` (18), `other` (10). Vždy `/clear` mezi kategoriemi.
 
+Počty v závorkách jsou minima ze `SUROVINY-SEZNAM.md`, ne stropy — katalog
+je od té doby větší.
+
 Uzavírací goal fáze 2:
 
 ```
@@ -56,7 +59,11 @@ Uzavírací goal fáze 2:
 
 ## Fáze 3 — recepty
 
-Po kategoriích, vzor:
+Po kategoriích, vzor. **Pozor:** podmínka „alespoň 4 kroky v `baseSteps`"
+z prvního znění tady záměrně není. Kuchařka mezitím pojala i jednoduché
+úpravy o jedné složce („mám doma pastinák, co s ním"), kterým čtyři kroky
+udělat nejde, aniž by se vymýšlela vata. Kolik jich je, měří
+`jeJednoduchaUprava` v `src/data/jednoduche.ts`.
 
 ```
 /goal Kategorie receptů "obed-vecere" je hotová: src/data/recipes/lunches_dinners.ts obsahuje 30 receptů podle typu Recipe z docs/SPEC.md, každý má neprázdný babySplitPoint odkazující na konkrétní krok z baseSteps, všechny tři fáze babyServing, neprázdné `adultSteps` (dříve `meatSteps`) i vegetarianSteps, a každý recept obsahující surovinu z kategorie maso-ryby má vyplněný vegetarianProteinSwap, který nahrazuje bílkovinu (ne pouhé vynechání). Všechny ingredientId existují v katalogu. `npm run validate` skončí exit kódem 0 a jeho úplný výstup je v konverzaci. V konverzaci vypiš tabulku: název receptu | vegetarián ano/ne | náhrada bílkoviny | minAgeMonths. Nesmíš měnit src/safety/, tests/ ani data surovin.
@@ -65,7 +72,7 @@ Po kategoriích, vzor:
 Pak `breakfast` (20), `soups` (10), `snacks_baking` (14). Uzavírací:
 
 ```
-/goal Kuchařka je kompletní: `npm run validate:data` vypíše RECEPTŮ ≥ 80, z toho vegetariánských ≥ 40, CHYB: 0, VAROVÁNÍ: 0, a úplný výstup je v konverzaci. V konverzaci je vypsaná kontrola, že žádné dva recepty nemají shodný název a že každý recept má alespoň 4 kroky v baseSteps. Nesmíš měnit src/safety/ ani testy.
+/goal Kuchařka je kompletní: `npm run validate:data` vypíše RECEPTŮ ≥ 80, z toho vegetariánských ≥ 40, CHYB: 0, VAROVÁNÍ: 0, a úplný výstup je v konverzaci. V konverzaci je vypsaná kontrola, že žádné dva recepty nemají shodný název. Nesmíš měnit src/safety/ ani testy.
 ```
 
 ---
@@ -89,7 +96,7 @@ Pak `breakfast` (20), `soups` (10), `snacks_baking` (14). Uzavírací:
 ## Fáze 6 — uzavření
 
 ```
-/goal Aplikace splňuje všech 10 akceptačních kritérií z docs/SPEC.md kapitola 9. Pro každé z nich je v konverzaci uvedeno číslo kritéria, doklad (výstup příkazu nebo výpis souboru) a verdikt splněno/nesplněno. `npm run validate`, `npm run test:e2e` i `npm run build` končí exit kódem 0 s úplným výstupem v konverzaci, poslední GitHub Actions běh je úspěšný a `curl -sI https://<nick>.github.io/blw-app/` vrací 200. Nesmíš žádné kritérium prohlásit za splněné bez doloženého výstupu; nesplněná kritéria vypiš jako seznam zbývající práce a skonči.
+/goal Aplikace splňuje všech 10 akceptačních kritérií z docs/SPEC.md kapitola 9. Pro každé z nich je v konverzaci uvedeno číslo kritéria, doklad (výstup příkazu nebo výpis souboru) a verdikt splněno/nesplněno. `npm run validate`, `npm run test:e2e` i `npm run build` končí exit kódem 0 s úplným výstupem v konverzaci, poslední GitHub Actions běh je úspěšný a `curl -sI https://<nick>.github.io/BLW/` vrací 200. Nesmíš žádné kritérium prohlásit za splněné bez doloženého výstupu; nesplněná kritéria vypiš jako seznam zbývající práce a skonči.
 ```
 
 ---

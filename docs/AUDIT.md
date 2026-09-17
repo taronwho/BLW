@@ -1,5 +1,10 @@
 # Závěrečný audit aplikace Drobek
 
+> **Historický dokument.** Čísla v něm (216 surovin, 160 receptů) platila
+> 12. 9. 2026. Aktuální stav a novější nálezy jsou
+> v [`AUDIT-2026-09-17.md`](AUDIT-2026-09-17.md). Tenhle soubor se
+> needituje — je to záznam o tom, co tehdy platilo.
+
 **Datum:** 12. 9. 2026
 **Větev:** `claude/epic-hawking-l1py1m`
 **Stav dat:** 216 surovin, 160 receptů

@@ -131,24 +131,61 @@ export interface Recipe {
 export interface TastingEvent {
   id: string;
   ingredientId: string;
+  childId?: string;           // chybí u záznamů z doby jednoho dítěte
   date: string;               // ISO
   amount: 'ochutnala' | 'snedla-cast' | 'snedla-vse' | 'odmitla';
   reaction: 'zadna' | 'chutnalo' | 'nelibilo' | 'kozni' | 'travici' | 'jina';
   note?: string;
   createdBy: string;          // uid rodiče
   createdAt: number;          // pro řešení konfliktů
+  deleted?: boolean;          // měkké smazání, jinak ho sync vzkřísí
+}
+
+/** Hodnota s vlastní značkou času — jinak by odebrání sloučení vrátilo. */
+export interface CasovanaHodnota<T> {
+  hodnota: T;
+  kdy: number;
 }
 
 export interface HouseholdState {
-  childName: string;
-  childBirthDate: string;     // ISO
-  members: string[];          // uid
+  members: string[];                                     // uid
+  children: Record<string, CasovanaHodnota<Child | null>>; // null = náhrobek
   tastings: TastingEvent[];
-  favorites: string[];        // ingredientId + recipeId
-  recipeNotes: Record<string, string>;
+  favorites: Record<string, CasovanaHodnota<boolean>>;
+  recipeNotes: Record<string, CasovanaHodnota<string>>;
+  plans?: Record<string, CasovanaHodnota<Plan | null>>;   // klíč = childId
+  nakup?: Record<string, CasovanaHodnota<NakupPolozka | null>>;
+  memberSeenAt?: Record<string, number>;
+  memberLabels?: Record<string, string>;
   schemaVersion: number;
 }
 ```
+
+### Co se od prvního znění změnilo a proč
+
+Tenhle výpis je **zkrácený**; úplný a závazný tvar je v
+`src/types/domain.ts`. Rozdíly oproti původnímu návrhu stojí za vysvětlení,
+protože žádný z nich nebyl kosmetický:
+
+- **Dětí je víc než jedno.** `childName` a `childBirthDate` se změnily na
+  mapu `children`. Sourozenci se v příkrmu potkávají běžně a každý je
+  jinde — jiný věk, jiný úchop, jiné alergie. `Child` navíc nese `grip`,
+  `readySigns` a `allergens`.
+- **Oblíbené a poznámky mají značku času.** Původní `favorites: string[]`
+  mělo tichou vadu: sjednocení seznamů umí jen přidávat, takže se
+  odebrání při sloučení dvou telefonů vždycky vrátilo.
+- **Smazání je náhrobek, ne díra.** `deleted: true` u ochutnávky a `null`
+  u dítěte, plánu nebo položky nákupu. Bez toho by je druhý telefon
+  vzkřísil.
+- **Přibyl 30denní plán** (`plans`, `docs/PLAN-30-DNI.md`) a **nákupní
+  seznam** (`nakup`). Obojí rozhodnuto září 2026, viz `CLAUDE.md`.
+- **Surovina nese navíc** `servingForm` (kusové / drobné / kašovité /
+  neřeší se), `icon` a profil živin (`src/data/nutrients.ts`).
+- **Katalog vede i rady** (`Guide`, `src/data/guides/`) **a seznamy**
+  (`src/data/lists.ts`).
+
+Všechno, co přijde zvenčí, projde kontrolou tvaru v
+`src/sync/validace.ts` — viz kapitola 7.
 
 ## 3. Bezpečnostní vrstva — `src/safety/`
 
@@ -166,6 +203,7 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | `no-whole-nuts` | error | celé ořechy / celá semínka v dětské linii bez slova „mleté"/"máslo"/"pasta" |
 | `round-food-shape` | error | suroviny s `chokingRisk: 'high'` a kulatým tvarem musí mít v `prep['6m'].serving` i `prep['9m'].serving` explicitní pokyn k podélnému rozčtvrcení |
 | `baby-split-required` | error | `babySplitPoint` je neprázdný a odkazuje na konkrétní krok z `baseSteps` |
+| `baby-step-feasible` | error | pokyn pro miminko jde podle `babySplitPoint` skutečně provést — neodkazuje na krok, který v tu chvíli ještě neproběhl |
 | `veg-track-complete` | error | `vegetarianSteps` neprázdné; pokud recept obsahuje surovinu z `maso-ryby`, musí být vyplněný `vegetarianProteinSwap` |
 | `hidden-animal-ingredients` | error | v `vegetarianSteps` se nesmí objevit želatina, sádlo, rybí omáčka, worcesterská omáčka, ančovičky, syřidlo živočišného původu; parmazán a pecorino jsou vedeny jako `vegetarian: false` a v bezmasé verzi se nahrazují |
 | `source-required` | error | každá surovina má ≥1 `SourceRef` s `tier: 1` nebo dva s `tier: 2` |
@@ -180,6 +218,8 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | `adult-only-not-in-baby-steps` | error | složka označená `adultOnly` se neobjeví v `babySplitPoint`, `babySteps` ani `babyServing` |
 | `mercury-limit` | warning | ryby s `hazards: ['rtut']` mají vyplněný `frequencyLimit` |
 | `nitrate-note` | warning | suroviny s `hazards: ['dusicnany']` mají pokyn neohřívat opakovaně |
+| `hazard-coverage` | error | surovina zakázaná do 12 měsíců podle `BEZPECNOST.md` kap. 2 nese odpovídající hazard — med `botulismus`, sůl a bujón `sul`, cukr a sirup `cukr`. Tabulka je v `src/safety/hazard-coverage.ts` |
+| `hazard-notes-complete` | error | ke každému hazardu je v `hazardNotes` vysvětlení a žádné vysvětlení nevisí bez hazardu |
 | `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz`; žádné dva recepty se stejným `titleCz` |
 | `text-uniqueness` | warning | žádné dva popisy `serving` nejsou shodné na >85 % (odhalí generování šablonou) |
 | `length-sanity` | warning | `serving` má 80–400 znaků; `chokingReason` není obecná fráze ze zakázaného seznamu („dbejte opatrnosti", „konzultujte s lékařem") |
@@ -197,9 +237,21 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 
 Validátor `scripts/validate-data.ts` projde všechna pravidla, vypíše **tabulku po kategoriích** a souhrn ve tvaru z `CLAUDE.md`, a skončí s exit kódem 1 při jakékoli chybě.
 
+Že tahle tabulka odpovídá `src/safety/rules.ts`, hlídá test
+`tests/safety/specTabulka.test.ts`. Dokumentace, která se rozejde s kódem,
+přestává být měřítkem — a rozešla se, aniž si toho kdokoli všiml.
+
 ## 4. Obrazovky
 
-Spodní navigace, 4 položky: **Suroviny · Recepty · Deník · Domácnost**.
+Spodní navigace, 5 položek: **Domů · Suroviny · Recepty · Rady · Deník**.
+
+Domácnost ve spodní liště **není** — chodí se do ní z úvodní obrazovky.
+Je to nastavení, ne místo, kam rodič u sporáku chodí; lišta o pěti
+položkách je na 320 px maximum, při kterém se ještě vejde slovo pod ikonu.
+
+Nad hlavičkou stojí tlačítko „Přeskočit na obsah", viditelné až po
+zaostření klávesnicí. Je to tlačítko, ne odkaz na fragment: aplikace jede
+na HashRouteru, kde je hash adresa routy.
 
 ### 4.1 Suroviny
 - Vyhledávání (bez diakritiky i s ní, hledá i v `altNamesCz`)
@@ -250,7 +302,6 @@ Otevírá se z karty na úvodní obrazovce, počítá se pro vybrané dítě.
 - Jméno a datum narození dcery
 - **Párovací kód domácnosti** + QR kód ke skenování druhým telefonem
 - Stav synchronizace: Připojeno / Jen na tomto zařízení / Offline (fronta N změn)
-- Zadání Firebase konfigurace (pole pro vložení JSON z konzole)
 - Export/import dat do JSON
 - Disclaimer a přehled zdrojů
 - Počet položek k revizi s odkazem na seznam
@@ -287,6 +338,8 @@ Navrhovaná paleta (můžeš ji vylepšit, ne zploštit):
 - Kontrast textu ≥ 4.5:1
 - Žádný text se neořezává; dlouhé názvy se zalamují, ne přetékají
 - Testováno Playwrightem na 320×568, 375×667 a 414×896 — test selže při jakémkoli vodorovném přetečení nebo překryvu
+- Tři šířky běží na Chromiu s dotykovou emulací (`isMobile`, `hasTouch`), čtvrtý projekt na WebKitu; iOS se chová jinak a PWA pro rodiče se na něm používá
+- Při přetečení test jmenuje konkrétní prvek, ne jen šířku dokumentu
 
 ## 7. Synchronizace
 
@@ -294,12 +347,21 @@ Navrhovaná paleta (můžeš ji vylepšit, ne zploštit):
 Bez Firebase konfigurace aplikace plně funguje nad IndexedDB. Žádná funkce se neschovává, jen se nesynchronizuje. V UI o tom informuje jeden nevtíravý pruh v nastavení.
 
 ### Firebase režim
+Konfigurace se **zapéká do buildu** (`src/storage/firebaseDefaults.ts` nebo
+proměnné `VITE_FIREBASE_*`), nezadává se v aplikaci. Dřív se vyplňovala
+v Nastavení, což znamenalo, že každý, komu se aplikace pošle, musel něco
+opisovat z konzole — přesně to, co má sdílení odbourat. Hodnoty nejsou
+tajemství, Firebase je posílá do prohlížeče každému; chrání to
+`firestore.rules`, párovací kód a omezení klíče na doménu.
+
 - **Anonymous Auth** — žádná hesla
 - Dokument `households/{householdId}`, kde `householdId` je 10 znaků z abecedy Crockford Base32 (bez I, L, O, U — nepletou se při přepisování)
 - Kód se zobrazuje po pěticích: `K7M2X-9QRT4`
 - Druhý rodič ho zadá nebo naskenuje QR; jeho `uid` se přidá do `members` (max 5)
 - Realtime přes `onSnapshot`, offline přes `persistentLocalCache` — změny se frontují a dosynchronizují
-- Konflikty: `TastingEvent` je append-only (nikdy se nepřepisuje, jen přidává), ostatní pole last-write-wins podle `createdAt`
+- Konflikty: `TastingEvent` je append-only (nikdy se nepřepisuje, jen přidává), ostatní pole last-write-wins podle vlastní značky času u každé hodnoty (`CasovanaHodnota`)
+- Všechno, co přijde zvenčí — záloha, IndexedDB po starší verzi, Firestore — projde kontrolou tvaru v `src/sync/validace.ts`. Co neprojde, se zahodí a spočítá; nic se nedoplňuje náhradní hodnotou
+- Dokument z **novější** verze schématu se nesloučí ani nepřepíše. Převod umí jen pole, která daná verze zná, takže by starší telefon novější dokument ořezal
 
 ### Firestore pravidla (nasadit, ne nechat v test mode)
 
@@ -338,7 +400,7 @@ Aplikace je hotová, když platí **všechno**:
 4. ≥80 receptů, z toho ≥40 čistě vegetariánských; každý recept s masem má vyplněný `vegetarianProteinSwap`
 5. Každý recept má `babySplitPoint` a všechny tři fáze `babyServing`
 6. `npm run test:e2e` prochází na všech třech viewportech, včetně testu na vodorovné přetečení
-7. `npm run build` prochází, výstup se nasadí a `https://<nick>.github.io/blw-app/` vrací 200
+7. `npm run build` prochází, výstup se nasadí a `https://<nick>.github.io/BLW/` vrací 200 (repozitář se jmenuje `BLW`, viz `CLAUDE.md`, Nasazení)
 8. Ruční průchod: založení domácnosti, spárování druhým zařízením, záznam ochutnávky na jednom zařízení se do 5 s objeví na druhém
 9. Aplikace po vypnutí sítě dál funguje a zobrazuje data
 10. Disclaimer je vidět při prvním spuštění

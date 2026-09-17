@@ -6,7 +6,7 @@ Tenhle soubor není pro Claude Code. Je pro tebe. Zbylé soubory vlož do repozi
 
 | Krok | Kde | Poznámka |
 |---|---|---|
-| Založit prázdný GitHub repozitář `blw-app` | github.com | Public (kvůli GitHub Pages zdarma). V repu nebudou žádná citlivá data. |
+| Založit prázdný GitHub repozitář `BLW` | github.com | Public (kvůli GitHub Pages zdarma). V repu nebudou žádná citlivá data. |
 | V repu zapnout Pages | Settings → Pages → Source: **GitHub Actions** | Ne „Deploy from branch". |
 | Založit Firebase projekt | console.firebase.google.com | Zdarma (plán Spark). Přidat **Web app**, opsat konfiguraci. |
 | Zapnout Firestore | Firebase → Build → Firestore Database → Create | Region **eur3 (europe-west)**. Start v *production mode*, pravidla nahradí Claude Code. |

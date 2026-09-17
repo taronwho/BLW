@@ -43,11 +43,14 @@ k binárce.
 
 - [x] **Fáze 0** — kostra projektu, validátor, CI/CD na GitHub Pages
 - [x] **Fáze 1** — bezpečnostní vrstva `src/safety/` se spustitelnými testy
-- [ ] **Fáze 2** — katalog surovin (≥190 položek)
-- [ ] **Fáze 3** — recepty (≥80, z toho ≥40 vegetariánských)
-- [ ] **Fáze 4** — uživatelské rozhraní
+- [x] **Fáze 2** — katalog surovin (301 položek)
+- [x] **Fáze 3** — recepty (494, z toho 370 vegetariánských)
+- [x] **Fáze 4** — uživatelské rozhraní
 - [x] **Fáze 5** — synchronizace a PWA (mimo pořadí: fáze 2 čeká na síť)
 - [ ] **Fáze 6** — uzavření podle akceptačních kritérií
+
+Poslední audit a jeho otevřené nálezy jsou v
+[`docs/AUDIT-2026-09-17.md`](docs/AUDIT-2026-09-17.md).
 
 ## Nasazení
 

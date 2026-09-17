@@ -56,12 +56,17 @@ npm run build        # produkční build
 `npm run validate:data` musí vždy vypsat souhrn ve tvaru:
 
 ```
-SUROVIN: 208  (ověřeno: 208, k revizi: 0)
-RECEPTŮ: 84   (vegetariánských: 41, s masem a bezmasou variantou: 43)
+SUROVIN: 301  (ověřeno: 301, k revizi: 0)
+RECEPTŮ: 494   (vegetariánských: 370, se dvěma variantami dochucení: 124)
+RAD: 16     (naléhavých: 2)
 SEZNAMŮ: 8   (položek: 75)
 CHYB: 0
 VAROVÁNÍ: 0
 ```
+
+Čísla se mění, tvar ne. „Vegetariánských" znamená receptů, které sní
+vegetarián — tedy i bez parmazánu se živočišným syřidlem, ne jen bez masa.
+Obě čísla v závorce jsou disjunktní množiny, takže se dají sečíst.
 
 ## Nasazení
 
