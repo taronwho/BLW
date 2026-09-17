@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { nakupPocty } from '@/nakup/pocty';
+import { POLOZKA, sklonuj } from '@/text/sklonovani';
 
 /**
  * Nákupní seznam na úvodní obrazovce.
@@ -24,7 +25,7 @@ export function NakupKarta(): ReactNode {
       ? 'Zatím prázdný'
       : zbyva === 0
         ? 'Všechno v košíku'
-        : `${zbyva} ${zbyva === 1 ? 'položka' : zbyva <= 4 ? 'položky' : 'položek'} k nákupu`;
+        : `${sklonuj(zbyva, POLOZKA)} k nákupu`;
 
   return (
     <Link

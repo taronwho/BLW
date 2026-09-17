@@ -1,4 +1,5 @@
 import type { Stage } from '@/types';
+import { MESIC, ROK, sklonuj } from '@/text/sklonovani';
 
 /** Popisky fází, jak je vidí rodič. */
 export const STAGE_LABELS: Record<Stage, string> = {
@@ -28,8 +29,15 @@ export function stageForAge(months: number | null): Stage {
 /** Nejnižší věk fáze v měsících — pro porovnání s `minAgeMonths`. */
 export const STAGE_MIN_MONTHS: Record<Stage, number> = { '6m': 6, '9m': 9, '12m': 12 };
 
+/**
+ * Věk, jak ho čte rodič v hlavičce.
+ *
+ * Skloňuje se přes `sklonuj`, ne šablonou. Dřív tu stálo
+ * `${months} měsíců`, což u batolete vyrobilo „1 měsíců" i „2 měsíců"
+ * a u staršího dítěte „5 roky" — a bylo to vidět na každé obrazovce.
+ */
 export function formatAge(months: number | null): string {
   if (months === null) return 'věk nevyplněn';
-  if (months < 24) return `${months} měsíců`;
-  return `${Math.floor(months / 12)} roky`;
+  if (months < 24) return sklonuj(months, MESIC);
+  return sklonuj(Math.floor(months / 12), ROK);
 }

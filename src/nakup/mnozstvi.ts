@@ -1,3 +1,5 @@
+import { cislo, tvarPodlePoctu, type Tvary as SdileneTvary } from '@/text/sklonovani';
+
 /**
  * Počítání množství pro nákupní seznam.
  *
@@ -24,7 +26,7 @@ export interface Mnozstvi {
  * hlásil „2 lžic" nebo „5 lžíce". Značky jako „g" nebo „ml" se neskloňují,
  * mají proto všechny tvary stejné.
  */
-type Tvary = readonly [string, string, string, string];
+type Tvary = SdileneTvary;
 
 const JEDNOTKY: Record<string, Tvary> = {
   g: ['g', 'g', 'g', 'g'],
@@ -241,22 +243,13 @@ export function rozeberMnozstvi(text: string): Mnozstvi | null {
   return index > 0 ? { hodnota, jednotka: 'kus' } : null;
 }
 
-/** České číslo: celé bez desetinné čárky, jinak nejvýš na jedno místo. */
-function cislo(hodnota: number): string {
-  const zaokrouhlene = Math.round(hodnota * 10) / 10;
-  return Number.isInteger(zaokrouhlene)
-    ? String(zaokrouhlene)
-    : zaokrouhlene.toFixed(1).replace('.', ',');
-}
-
 /** Tvar jednotky podle počtu: 1 lžíce, 2 lžíce, 5 lžic, 1,5 lžíce. */
 function tvar(jednotka: string, hodnota: number): string {
   const tvary = JEDNOTKY[jednotka];
+  // Jednotka, kterou slovník nezná, se nechává tak, jak ji napsal recept.
+  // Hádat její tvary by znamenalo vyrobit slovo, které v češtině není.
   if (tvary === undefined) return jednotka;
-  if (!Number.isInteger(hodnota)) return tvary[3];
-  if (hodnota === 1) return tvary[0];
-  if (hodnota >= 2 && hodnota <= 4) return tvary[1];
-  return tvary[2];
+  return tvarPodlePoctu(hodnota, tvary);
 }
 
 /** Zapíše množství česky. Velká čísla se převedou zpátky na kila a litry. */
