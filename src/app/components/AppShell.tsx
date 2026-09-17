@@ -32,6 +32,21 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
 
   return (
     <div className="flex min-h-full flex-col">
+      {/* Přeskočení na obsah. Vidět je až po zaostření klávesnicí; kdo
+          aplikaci ovládá prstem, o něm neví.
+
+          Je to tlačítko, ne odkaz s `href="#obsah"`, a to schválně:
+          aplikace jede na HashRouteru, takže hash je adresa routy.
+          Odkaz na fragment by se přeložil jako přechod na routu „obsah"
+          a rodič by skončil na stránce „Tahle stránka tu není". */}
+      <button
+        type="button"
+        data-testid="preskocit-na-obsah"
+        onClick={() => document.getElementById('obsah')?.focus()}
+        className="sr-only left-4 top-4 z-30 rounded-lg bg-accent px-4 py-3 font-semibold text-on-accent focus:not-sr-only focus:fixed"
+      >
+        Přeskočit na obsah
+      </button>
       <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-md items-center gap-2 px-4 py-1.5">
           <Link to="/" className="flex min-h-touch shrink-0 items-center">
@@ -54,7 +69,15 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
           Každý bod navíc je bod, o který se musí rolovat na rozcestníku,
           který se jinak vejde celý. Vzduch pod poslední kartou dělá její
           vlastní stín, ne odsazení. */}
-      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+4rem)] pt-2">
+      {/* `tabIndex={-1}` je tu kvůli fokusu: bez něj `<main>` zaostřit
+          nejde, takže by přesun po změně obrazovky (ScrollToTop) ani
+          skok přes „Přeskočit na obsah" neměly kam. Do pořadí tabování
+          se tím nic nepřidává. */}
+      <main
+        id="obsah"
+        tabIndex={-1}
+        className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+4rem)] pt-2 focus:outline-none"
+      >
         {children}
       </main>
 
