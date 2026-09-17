@@ -49,6 +49,30 @@ export default defineConfig({
         // Data jsou statická a jdou cachovat natvrdo — aplikace pak funguje
         // i po vypnutí sítě (akceptační kritérium 9).
         globPatterns: ['**/*.{js,css,html,woff,woff2,png,svg,webmanifest}'],
+        // Firebase se z předběžné cache vyjímá.
+        //
+        // `src/storage/householdStore.ts` ho schválně stahuje až ve chvíli,
+        // kdy se rodič připojuje k domácnosti — knihovna váží víc než celý
+        // zbytek kódu a kdo sdílení nepoužívá, ji nepotřebuje. Jenže
+        // `globPatterns` bere všechny `.js`, takže si ji service worker
+        // stáhl do cache hned při prvním načtení a ta optimalizace
+        // nefungovala: precache měl 3,5 MB.
+        //
+        // Offline režim tím netrpí. Kdo sdílení nepoužívá, nemá co
+        // cachovat; kdo ho použije, má knihovnu v běžné cache od prvního
+        // připojení — a připojení k domácnosti stejně potřebuje síť.
+        globIgnores: ['**/firebase-vendor-*.js'],
+        runtimeCaching: [
+          {
+            urlPattern: /\/assets\/firebase-vendor-.*\.js$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'firebase-sdk',
+              expiration: { maxEntries: 4 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
         // Katalog roste a s ním i balík; výchozí strop 2 MiB ho od února 2026
         // přestal brát a build kvůli tomu padal. Offline režim je u téhle
         // aplikace celý smysl — rodič stojí u sporáku, ne u routeru — takže
@@ -70,5 +94,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        /**
+         * Firebase dostává stabilní jméno chunku, aby ho šlo vyjmout
+         * z předběžné cache service workeru (viz `globIgnores` výš).
+         * Bez pojmenování se jmenuje podle vstupního souboru knihovny
+         * (`index.esm-*.js`) a na takový vzorek se spolehnout nedá.
+         */
+        manualChunks(id: string): string | undefined {
+          if (/node_modules\/(@firebase|firebase)\//.test(id)) return 'firebase-vendor';
+          return undefined;
+        },
+      },
+    },
   },
 });
