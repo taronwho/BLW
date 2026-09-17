@@ -1348,29 +1348,39 @@ test('tlačítko hotovo je výzva, teprve po klepnutí se zaplní a odškrtne', 
   await expect(page.getByTestId('plan-postup')).toContainText('Hotovo 1 z 30');
 });
 
-test('úvodní obrazovka se na vysokém displeji vejde bez rolování', async ({ page }) => {
+test('úvodní obrazovka se vejde bez rolování', async ({ page }) => {
   await acceptDisclaimer(page);
   await zalozDite(page, 'Ema', '2026-03-01');
+
+  // Plán i nákupní seznam mají obsah: karty jsou tím vyšší než naprázdno,
+  // a právě tak rozcestník vypadá u rodiče, který aplikaci používá.
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+  await page.getByTestId('plan-do-nakupu').click();
   await navLink(page, 'Domů').click();
-  await expect(page.getByTestId('karta-planu')).toBeVisible();
+  await expect(page.getByTestId('karta-nakupu')).toBeVisible();
 
   const okno = page.viewportSize()?.height ?? 0;
-  const obsah = await page.evaluate(() => document.scrollingElement?.scrollHeight ?? 0);
-  const posledni = await page.getByTestId('postup-do-deniku').boundingBox();
-  if (posledni === null) throw new Error('poslední karta není vidět');
+  const spodek = await page.evaluate(() => {
+    const deti = [...(document.querySelector('main > div')?.children ?? [])];
+    const posledni = deti[deti.length - 1];
+    return posledni === undefined ? -1 : Math.round(posledni.getBoundingClientRect().bottom);
+  });
+  const roluje = await page.evaluate(() => {
+    const el = document.scrollingElement;
+    return el === null ? false : el.scrollHeight > el.clientHeight;
+  });
 
-  // Na dnešních telefonech (výška od 800 px) drží rozcestník celý na
-  // obrazovce, tedy stránka nemá co rolovat.
-  if (okno >= 800) {
-    expect(obsah).toBeLessThanOrEqual(okno);
-    expect(posledni.y + posledni.height).toBeLessThanOrEqual(okno - 64);
+  // Lišta dole měří 64 px a obsah pod ni nesmí zasahovat.
+  if (okno >= 665) {
+    expect(spodek).toBeLessThanOrEqual(okno - 64);
+    expect(roluje).toBe(false);
   }
 
-  // I tam, kde se rolovat musí, má obsah zůstat v téhle výšce: další karta
-  // se na rozcestník nepřidá bez toho, aby jiná ubrala. Na nejužším displeji
-  // se text víc zalamuje, takže strop je o kus vyšší.
-  const strop = (page.viewportSize()?.width ?? 0) >= 375 ? 730 : 800;
-  expect(posledni.y + posledni.height).toBeLessThanOrEqual(strop);
+  // I na displeji, kde se rolovat musí, má obsah zůstat v téhle výšce: další
+  // karta se na rozcestník nepřidá bez toho, aby jiná ubrala.
+  const strop = (page.viewportSize()?.width ?? 0) >= 360 ? 610 : 700;
+  expect(spodek).toBeLessThanOrEqual(strop);
 });
 
 test('nákupní seznam sečte suroviny z receptů a odškrtnuté pošle dolů', async ({ page }) => {

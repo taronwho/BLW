@@ -1,4 +1,4 @@
-import { ChevronRight, ShoppingBasket } from 'lucide-react';
+import { ShoppingBasket } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -6,6 +6,9 @@ import { nakupPocty } from '@/nakup/pocty';
 
 /**
  * Nákupní seznam na úvodní obrazovce.
+ *
+ * Stojí v řádce vedle deníku jako dlaždice, ne přes celou šířku: hlavní
+ * kartou zůstává plán, tohle jsou dvě čísla, na která se rodič kouká cestou.
  *
  * Schválně bez jediného importu katalogu: čísla se dají spočítat z uloženého
  * stavu, takže kvůli kartě nemusí rodič stahovat celou kuchařku. Názvy
@@ -18,39 +21,36 @@ export function NakupKarta(): ReactNode {
 
   const popis =
     celkem === 0
-      ? 'Přidej recept nebo surovinu a množství se sečtou dohromady.'
+      ? 'Zatím prázdný'
       : zbyva === 0
-        ? 'Všechno odškrtnuté. Seznam je hotový.'
-        : `Zbývá koupit ${zbyva} ${zbyva === 1 ? 'položku' : zbyva <= 4 ? 'položky' : 'položek'}.`;
+        ? `Hotovo, ${celkem} v košíku`
+        : `Zbývá ${zbyva} z ${celkem}`;
 
   return (
     <Link
       to="/nakup"
       data-testid="karta-nakupu"
-      aria-label={`Nákupní seznam. ${popis}`}
-      className="flex items-stretch gap-3 rounded-2xl border border-line bg-surface p-2.5 shadow-soft"
+      aria-label={`Nákupní seznam. ${popis}.`}
+      className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
     >
-      <span className="flex w-12 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-accent-soft leading-none text-accent">
-        {celkem === 0 ? (
-          <ShoppingBasket aria-hidden="true" className="h-6 w-6" />
-        ) : (
-          <>
-            <span className="text-xl font-bold tabular-nums">{zbyva}</span>
-            <span className="text-[9px] uppercase tracking-wider opacity-90">
-              {koupeno > 0 ? `z ${celkem}` : 'k nákupu'}
-            </span>
-          </>
-        )}
+      <span className="flex items-center gap-1.5">
+        <ShoppingBasket aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+        <span className="text-[13px] font-bold leading-tight">Nákupní seznam</span>
       </span>
-
-      <span className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
-        <span className="text-base font-bold leading-tight">Nákupní seznam</span>
-        <span className="block text-[11px] leading-snug text-ink/75">{popis}</span>
-      </span>
-
-      <span className="flex shrink-0 items-center text-accent">
-        <ChevronRight aria-hidden="true" className="h-5 w-5" />
-      </span>
+      <span className="text-[11px] leading-tight text-ink/75">{popis}</span>
+      {celkem > 0 && (
+        <span className="mt-0.5 flex items-center gap-1.5">
+          <span className="block h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-accent/20">
+            <span
+              className="block h-full rounded-full bg-accent transition-all"
+              style={{ width: `${(koupeno / celkem) * 100}%` }}
+            />
+          </span>
+          <span className="shrink-0 text-[10px] font-semibold tabular-nums text-ink/75">
+            {koupeno}/{celkem}
+          </span>
+        </span>
+      )}
     </Link>
   );
 }

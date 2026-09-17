@@ -40,13 +40,13 @@ export function HomeScreen(): ReactNode {
   const jmeno = dite?.name.trim() ?? "";
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       {/* Hlavička je jeden řádek, ne blok.
           Jméno dítěte i fázi ukazuje horní lišta, takže tady stačí to, co
           se jinde nedozvíš: podle čeho je aplikace nastavená a kudy se to
           mění. Dřív tu byly dva řádky odznaků a vytlačily zbytek
           rozcestníku pod okraj displeje. */}
-      <header className="rounded-2xl bg-accent-sheen px-3 py-2 text-white shadow-lift">
+      <header className="rounded-2xl bg-accent-sheen px-3 py-1 text-white shadow-lift">
         <div className="flex items-center justify-between gap-2">
           {hasChild ? (
             <Link
@@ -60,10 +60,10 @@ export function HomeScreen(): ReactNode {
               {/* Jeden řádek, ne odstavec: delší poznámka („odhad podle
                   věku") se sem nevejde a ořízla by i to podstatné. Kdo
                   chce vědět víc, klepne a je v Domácnosti. */}
-              <span className="truncate text-[11px] leading-tight text-white/85">
+              <span className="truncate text-[10px] leading-tight text-white/85">
                 fáze {stage}
-                {months === null ? "" : ` · ${formatAge(months)}`} · úchop{" "}
-                {GRIP_LABELS[grip ?? gripForAge(months)]}
+                {months === null ? "" : ` · ${formatAge(months)}`} ·{" "}
+                {GRIP_LABELS[grip ?? gripForAge(months)]} úchop
               </span>
             </Link>
           ) : (
@@ -76,7 +76,7 @@ export function HomeScreen(): ReactNode {
               <h1 className="truncate text-sm font-bold leading-tight">
                 Příkrmy krok za krokem
               </h1>
-              <span className="truncate text-[11px] leading-tight text-white/85">
+              <span className="truncate text-[10px] leading-tight text-white/85">
                 Nastav dítě a fázi, ať sedí porce i tvar soust
               </span>
             </Link>
@@ -87,7 +87,7 @@ export function HomeScreen(): ReactNode {
           <Link
             to="/domacnost"
             data-testid="odkaz-domacnost"
-            className="flex min-h-touch shrink-0 items-center gap-1.5 rounded-full bg-white/20 px-3 text-sm font-semibold text-white"
+            className="flex min-h-touch shrink-0 items-center gap-1 rounded-full bg-white/20 px-2.5 text-[13px] font-semibold text-white"
           >
             <Users aria-hidden="true" className="h-4 w-4 shrink-0" />
             Domácnost
@@ -101,12 +101,12 @@ export function HomeScreen(): ReactNode {
       <Link
         to="/rady/co-je-blw"
         data-testid="karta-co-je-blw"
-        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-2.5 shadow-soft"
+        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-2 shadow-soft"
       >
         <BookOpen aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
         <span className="min-w-0 flex-1">
           <span className="block text-sm font-semibold">Co je BLW</span>
-          <span className="block text-xs leading-snug text-ink/75">
+          <span className="block text-[11px] leading-tight text-ink/75">
             Dítě jí samo kusy ze společného stolu, místo aby se krmilo lžičkou.
             Od šesti měsíců a jen když je na to vývojově zralé.
           </span>
@@ -127,27 +127,27 @@ export function HomeScreen(): ReactNode {
         <Link
           to="/rady/daveni-vs-duseni"
           data-testid="dlazdice-daveni"
-          className="flex flex-col gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-2.5 shadow-soft"
+          className="flex flex-col gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-2 shadow-soft"
         >
           <AlertTriangle
             aria-hidden="true"
             className="h-5 w-5 shrink-0 text-risk"
           />
-          <span className="text-sm font-bold leading-snug text-risk">
+          <span className="text-[13px] font-bold leading-tight text-risk">
             Dávení není dušení
           </span>
-          <span className="text-[11px] leading-snug text-ink/80">
+          <span className="text-[11px] leading-tight text-ink/80">
             Hlučné kuckání je obrana. Tiché dítě je nouze.
           </span>
         </Link>
         <Link
           to="/rady/prvni-pomoc-pri-duseni"
           data-testid="dlazdice-prvni-pomoc"
-          className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2.5 shadow-soft"
+          className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
         >
           <LifeBuoy aria-hidden="true" className="h-5 w-5 shrink-0 text-risk" />
-          <span className="text-sm font-bold leading-snug">První pomoc</span>
-          <span className="text-[11px] leading-snug text-muted">
+          <span className="text-[13px] font-bold leading-tight">První pomoc</span>
+          <span className="text-[11px] leading-tight text-muted">
             Pět úderů mezi lopatky. Heimlich do roku ne.
           </span>
         </Link>
@@ -157,13 +157,46 @@ export function HomeScreen(): ReactNode {
           Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
       <PlanKarta />
 
-      {/* Nákup navazuje na plán: co se má vařit, se kupuje. Proto stojí
-          hned pod ním, ne až někde v nastavení. */}
-      <NakupKarta />
+      {/* Nákup a deník v jedné řádce pod plánem.
+          Obojí je jen číslo, na které se rodič kouká cestou: co koupit a jak
+          daleko je dítě v katalogu. Přes celou šířku braly dvě řádky
+          a vytlačily konec obrazovky pod okraj displeje. */}
+      <section aria-label="Nákup a postup" className="grid grid-cols-2 gap-1.5">
+        <NakupKarta />
+        {hasChild && (
+          <Link
+            to="/denik"
+            data-testid="postup-do-deniku"
+            className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
+          >
+            <span className="flex items-center gap-1.5">
+              <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+              <span className="text-[13px] font-bold leading-tight">Ochutnáno</span>
+            </span>
+            <span className="text-[11px] leading-tight text-ink/75">
+              {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
+            </span>
+            <span className="mt-0.5 flex items-center gap-1.5">
+              <span className="block h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-accent/20">
+                <span
+                  className="block h-full rounded-full bg-accent transition-all"
+                  style={{
+                    width: `${(tasted.size / CATALOG_COUNTS.ingredients) * 100}%`,
+                  }}
+                />
+              </span>
+              <span className="shrink-0 text-[10px] font-semibold tabular-nums text-ink/75">
+                {Math.round((tasted.size / CATALOG_COUNTS.ingredients) * 100)} %
+              </span>
+            </span>
+          </Link>
+        )}
+      </section>
+
 
       {/* Seznamy ve vodorovném pásu: na úvodní obrazovce jich není místo víc
           než pár, ale zbytek je vidět hned za okrajem, takže se nepřehlédnou. */}
-      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-2">
+      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-1.5">
         <div className="flex items-center justify-between gap-2">
           <h2
             id="seznamy-nadpis"
@@ -183,7 +216,7 @@ export function HomeScreen(): ReactNode {
         {/* Záporné okraje vytáhnou pás k okraji displeje, ať je poznat, že
             pokračuje; obsah si vnitřní odsazení vrací zpátky. */}
         <ul
-          className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1"
+          className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-0.5"
           data-testid="pas-seznamu"
         >
           {lists.map((seznam) => (
@@ -200,27 +233,6 @@ export function HomeScreen(): ReactNode {
         </ul>
       </section>
 
-      {/* Kolik už má dítě za sebou — jediné, co spodní navigace neukáže.
-          Dokud žádné dítě není, není co počítat. */}
-      {hasChild && (
-        <Link
-          to="/denik"
-          data-testid="postup-do-deniku"
-          className="flex items-center gap-2.5 rounded-xl border border-line bg-surface p-2.5 shadow-soft"
-        >
-          <Sparkles
-            aria-hidden="true"
-            className="h-5 w-5 shrink-0 text-accent"
-          />
-          <span className="min-w-0 flex-1 text-sm font-semibold">
-            Ochutnáno {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
-          </span>
-          <ChevronRight
-            aria-hidden="true"
-            className="h-4 w-4 shrink-0 text-muted"
-          />
-        </Link>
-      )}
     </div>
   );
 }

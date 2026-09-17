@@ -50,7 +50,11 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
           bezpečnou zónu telefonu. Napevno daných 7 rem bylo o půldruhé
           řádky víc, než navigace potřebuje, a na nízkém displeji kvůli tomu
           musela rolovat i obrazovka, která se jinak vejde celá. */}
-      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+5rem)] pt-4">
+      {/* Spodní odsazení je přesně na výšku plovoucí lišty, ani o bod víc.
+          Každý bod navíc je bod, o který se musí rolovat na rozcestníku,
+          který se jinak vejde celý. Vzduch pod poslední kartou dělá její
+          vlastní stín, ne odsazení. */}
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+4rem)] pt-2">
         {children}
       </main>
 

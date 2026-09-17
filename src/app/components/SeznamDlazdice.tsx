@@ -40,19 +40,23 @@ export function SeznamDlazdice({
       data-testid={`seznam-${seznam.id}`}
       className={`flex flex-col rounded-xl border shadow-soft transition hover:shadow-lift ${
         TONY[seznam.tone]
-      } ${compact ? 'w-44 shrink-0 gap-1.5 p-2.5' : 'h-full w-full gap-2 p-3'}`}
+      } ${compact ? 'w-44 shrink-0 gap-1 p-2' : 'h-full w-full gap-2 p-3'}`}
     >
-      <Icon
-        aria-hidden="true"
-        className={`shrink-0 text-accent ${compact ? 'h-5 w-5' : 'h-6 w-6'}`}
-      />
-
-      <span
-        className={`font-semibold leading-snug ${compact ? 'text-[13px]' : 'text-sm'}`}
-      >
-        {seznam.titleCz}
-      </span>
-      {!compact && <span className="text-[11px] leading-snug text-ink/70">{seznam.summary}</span>}
+      {/* V úsporné podobě stojí ikona vedle názvu, ne nad ním: na úvodní
+          obrazovce je každá řádka znát a dlaždice se nemá roztahovat do
+          výšky kvůli obrázku. V plné podobě zůstává nad textem. */}
+      {compact ? (
+        <span className="flex items-start gap-1.5">
+          <Icon aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <span className="text-[13px] font-semibold leading-tight">{seznam.titleCz}</span>
+        </span>
+      ) : (
+        <>
+          <Icon aria-hidden="true" className="h-6 w-6 shrink-0 text-accent" />
+          <span className="text-sm font-semibold leading-snug">{seznam.titleCz}</span>
+          <span className="text-[11px] leading-snug text-ink/70">{seznam.summary}</span>
+        </>
+      )}
 
       {/* Postup se počítá z deníku vybraného dítěte, takže po přepnutí
           sourozence ukazuje jeho čísla, ne cizí. */}
