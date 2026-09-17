@@ -462,8 +462,11 @@ export const other: Ingredient[] = [
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['botulismus'],
+    hazardNotes: {
+      botulismus:
+        'Med občas obsahuje spory bakterie, které ve střevě kojence vytvoří toxin. NHS kvůli tomu med do prvního roku nedoporučuje a upozorňuje, že vaření ani pečení na tom nic nemění. Po prvních narozeninách riziko pomine, protože střevo už si se sporami poradí.',
+    },
     minAgeMonths: 12,
     prep: {
       '6m': {
@@ -506,8 +509,11 @@ export const other: Ingredient[] = [
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['sul'],
+    hazardNotes: {
+      sul:
+        'Ledviny kojence sůl ještě neumějí zpracovat, a proto se do jeho jídla nepřidává vůbec, ani do vody na vaření. Právě kvůli tomu se dětská porce odebírá dřív, než se hrnec dochutí. Po prvním roce zůstává množství co nejnižší.',
+    },
     minAgeMonths: 12,
     prep: {
       '6m': {
@@ -551,8 +557,11 @@ export const other: Ingredient[] = [
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['cukr'],
+    hazardNotes: {
+      cukr:
+        'Přidaný cukr kojenec nepotřebuje a NHS ho spolu se sladkými nápoji spojuje se zubním kazem. Sladkou chuť dodá ovoce samo, takže se v dětské porci nenahrazuje jiným sladidlem, ale vynechává.',
+    },
     minAgeMonths: 12,
     prep: {
       '6m': {
@@ -594,8 +603,11 @@ export const other: Ingredient[] = [
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['cukr'],
+    hazardNotes: {
+      cukr:
+        'Pro zuby i pro chuťové návyky se chová jako každý jiný přidaný cukr, ať je z javoru, z řepy nebo z agáve. NHS mezi nimi nerozlišuje a do prvního roku je nedoporučuje žádné.',
+    },
     minAgeMonths: 12,
     prep: {
       '6m': {
@@ -637,8 +649,11 @@ export const other: Ingredient[] = [
     allergens: [],
     isKeyAllergen: false,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['sul'],
+    hazardNotes: {
+      sul:
+        'Bujón v kostce bývá hodně slaný a NHS ho jmenuje přímo vedle solení jako to, co se při vaření pro kojence nemá používat. Chuť do polévky i rizota dá zelenina nebo domácí vývar bez soli.',
+    },
     minAgeMonths: 12,
     prep: {
       '6m': {

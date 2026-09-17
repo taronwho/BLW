@@ -11,6 +11,7 @@ import {
   trigrams,
 } from './text';
 import { coverageExceptionReason, isCoverageException } from './coverage-exceptions';
+import { povinneHazardy } from './hazard-coverage';
 import { najdiTypografii, najdiVykani } from './language';
 import { isIngredient, isRecipe, type SafetyRule } from './types';
 import {
@@ -687,6 +688,52 @@ const nitrateNote: SafetyRule = {
   },
 };
 
+const hazardCoverage: SafetyRule = {
+  id: 'hazard-coverage',
+  severity: 'error',
+  appliesTo: 'ingredient',
+  description:
+    'Surovina zakázaná do 12 měsíců podle docs/BEZPECNOST.md kap. 2 nese odpovídající hazard.',
+  check(item) {
+    if (!isIngredient(item)) return null;
+    const povinne = povinneHazardy(item.id);
+    const chybi = povinne.filter((hazard) => !item.hazards.includes(hazard));
+    if (chybi.length === 0) return null;
+    // Bez hazardu se u položky neukáže štítek rizika, nejde podle něj
+    // filtrovat a pravidla počítající nad `hazards` na ni nedosáhnou —
+    // i když text v próze riziko popisuje správně.
+    return `Chybí povinný hazard: ${chybi.join(', ')}. Vyplývá z tabulky zákazů v docs/BEZPECNOST.md kap. 2.`;
+  },
+};
+
+const hazardNotesComplete: SafetyRule = {
+  id: 'hazard-notes-complete',
+  severity: 'error',
+  appliesTo: 'ingredient',
+  description: 'Ke každému hazardu je vysvětlení a žádné vysvětlení nevisí bez hazardu.',
+  check(item) {
+    if (!isIngredient(item)) return null;
+    const klice = Object.keys(item.hazardNotes);
+
+    const bezPoznamky = item.hazards.filter(
+      (hazard) => (item.hazardNotes[hazard] ?? '').trim().length === 0,
+    );
+    if (bezPoznamky.length > 0) {
+      return `Hazard bez vysvětlení: ${bezPoznamky.join(', ')}. Samotný štítek rodiči neřekne, co s tím.`;
+    }
+
+    // Opačný směr: poznámka k hazardu, který položka nemá, se v UI nikdy
+    // nezobrazí — je to tichý mrtvý text, přesně jako byla mrtvá výjimka
+    // `voda` v coverage-exceptions.ts.
+    const osirele = klice.filter((klic) => !item.hazards.includes(klic as (typeof item.hazards)[number]));
+    if (osirele.length > 0) {
+      return `Vysvětlení bez odpovídajícího hazardu: ${osirele.join(', ')}. Nikde se nezobrazí.`;
+    }
+
+    return null;
+  },
+};
+
 const duplicateDetection: SafetyRule = {
   id: 'duplicate-detection',
   severity: 'warning',
@@ -1100,6 +1147,8 @@ export const safetyRules: readonly SafetyRule[] = [
   adultOnlyNotInBabySteps,
   mercuryLimit,
   nitrateNote,
+  hazardCoverage,
+  hazardNotesComplete,
   duplicateDetection,
   textUniqueness,
   lengthSanity,

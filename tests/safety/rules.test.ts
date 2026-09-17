@@ -971,6 +971,72 @@ describe('baby-step-feasible', () => {
   });
 });
 
+describe('hazard-coverage', () => {
+  it('projde med s hazardem botulismu', () => {
+    expectPass(
+      'hazard-coverage',
+      makeIngredient({
+        id: 'med',
+        nameCz: 'med',
+        minAgeMonths: 12,
+        hazards: ['botulismus'],
+        hazardNotes: { botulismus: 'Do prvního roku se nepodává, ani vařený.' },
+      }),
+      catalog,
+    );
+  });
+
+  it('zachytí med s prázdným polem hazards', () => {
+    // Přesně stav, ve kterém katalog byl: text v próze riziko popisoval,
+    // ale štítek se u položky neukázal a filtrovat podle něj nešlo.
+    const broken = makeIngredient({ id: 'med', nameCz: 'med', minAgeMonths: 12 });
+    expect(expectFail('hazard-coverage', broken, catalog)).toContain('botulismus');
+  });
+
+  it('zachytí bujón bez hazardu soli', () => {
+    const broken = makeIngredient({ id: 'bujon-kostka', nameCz: 'bujón v kostce', minAgeMonths: 12 });
+    expect(expectFail('hazard-coverage', broken, catalog)).toContain('sul');
+  });
+
+  it('nevyžaduje hazard po surovině, která v tabulce zákazů není', () => {
+    expectPass('hazard-coverage', makeIngredient(), catalog);
+  });
+
+  it('nežádá hazard po kozím mléce — žádný z deseti ho nepopisuje', () => {
+    expectPass('hazard-coverage', makeIngredient({ id: 'mleko-kozi', minAgeMonths: 12 }), catalog);
+  });
+});
+
+describe('hazard-notes-complete', () => {
+  it('projde surovina, kde má každý hazard vysvětlení', () => {
+    expectPass(
+      'hazard-notes-complete',
+      makeIngredient({
+        hazards: ['dusicnany'],
+        hazardNotes: { dusicnany: 'Znovu neohřívej, dusičnany se mění na dusitany.' },
+      }),
+      catalog,
+    );
+  });
+
+  it('zachytí hazard bez vysvětlení', () => {
+    const broken = makeIngredient({ hazards: ['dusicnany'], hazardNotes: {} });
+    expect(expectFail('hazard-notes-complete', broken, catalog)).toContain('bez vysvětlení');
+  });
+
+  it('zachytí prázdné vysvětlení', () => {
+    const broken = makeIngredient({ hazards: ['sul'], hazardNotes: { sul: '   ' } });
+    expectFail('hazard-notes-complete', broken, catalog);
+  });
+
+  it('zachytí osiřelé vysvětlení bez hazardu', () => {
+    // Mrtvý text: v UI se nikdy nezobrazí, protože se vypisuje podle
+    // `hazards`, ne podle klíčů poznámek.
+    const broken = makeIngredient({ hazards: [], hazardNotes: { rtut: 'Zbytek po přepsání.' } });
+    expect(expectFail('hazard-notes-complete', broken, catalog)).toContain('bez odpovídajícího hazardu');
+  });
+});
+
 describe('pokrytí pravidel', () => {
   it('každé pravidlo ze specifikace má vlastní describe blok v tomhle souboru', () => {
     const expected = [
@@ -1000,6 +1066,8 @@ describe('pokrytí pravidel', () => {
       'adult-only-not-in-baby-steps',
       'mercury-limit',
       'nitrate-note',
+      'hazard-coverage',
+      'hazard-notes-complete',
       'duplicate-detection',
       'text-uniqueness',
       'length-sanity',
