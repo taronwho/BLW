@@ -157,25 +157,25 @@ export function HomeScreen(): ReactNode {
           Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
       <PlanKarta />
 
-      {/* Nákup a deník v jedné řádce pod plánem.
-          Obojí je jen číslo, na které se rodič kouká cestou: co koupit a jak
-          daleko je dítě v katalogu. Přes celou šířku braly dvě řádky
-          a vytlačily konec obrazovky pod okraj displeje. */}
-      <section aria-label="Nákup a postup" className="grid grid-cols-2 gap-1.5">
+      {/* Nákup a deník, každý na vlastní řádce pod plánem.
+          Obojí je jen název a jedno číslo, takže se na jeden řádek vejde
+          celé: název vlevo, stav vpravo. Stohovaný obsah by na plné šířce
+          nechal půlku řádky prázdnou a byl o třetinu vyšší — a rozcestník
+          se musí vejít na displej bez rolování. */}
+      <section aria-label="Nákup a postup" className="flex flex-col gap-1">
         <NakupKarta />
         {hasChild && (
           <Link
             to="/denik"
             data-testid="postup-do-deniku"
-            className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
+            className="flex min-h-touch items-center gap-2 rounded-xl border border-line bg-surface px-2.5 py-1 shadow-soft"
           >
-            <span className="flex items-center gap-1.5">
-              <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
-              <span className="text-[13px] font-bold leading-tight">Ochutnáno</span>
-            </span>
-            <span className="text-[11px] leading-tight text-ink/75">
+            <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+            <span className="shrink-0 text-[13px] font-bold leading-tight">Ochutnáno</span>
+            <span className="min-w-0 flex-1 truncate text-right text-[11px] leading-tight text-ink/75">
               {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
             </span>
+            <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
           </Link>
         )}
       </section>
@@ -183,23 +183,18 @@ export function HomeScreen(): ReactNode {
 
       {/* Seznamy ve vodorovném pásu: na úvodní obrazovce jich není místo víc
           než pár, ale zbytek je vidět hned za okrajem, takže se nepřehlédnou. */}
-      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-1.5">
-        <div className="flex items-center justify-between gap-2">
-          <h2
-            id="seznamy-nadpis"
-            className="text-[11px] font-semibold uppercase tracking-wide text-muted"
-          >
-            Seznamy
-          </h2>
-          <Link
-            to="/seznamy"
-            data-testid="vsechny-seznamy"
-            className="flex min-h-touch items-center gap-1 text-xs font-semibold text-accent"
-          >
-            Všechny
-            <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
-          </Link>
-        </div>
+      {/* Nadpis je jen popisek, ne řádka s odkazem.
+          Odkaz „Všechny" stál vedle nadpisu a jako dotykový cíl si bral
+          celých 44 px výšky jen pro sebe. Přesunul se na konec pásu, kam
+          rodič při prohlížení seznamů stejně dojede — a rozcestník se díky
+          tomu vejde na displej i s nákupem a deníkem na vlastních řádkách. */}
+      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-1">
+        <h2
+          id="seznamy-nadpis"
+          className="text-[11px] font-semibold uppercase tracking-wide text-muted"
+        >
+          Seznamy
+        </h2>
         {/* Záporné okraje vytáhnou pás k okraji displeje, ať je poznat, že
             pokračuje; obsah si vnitřní odsazení vrací zpátky. */}
         <ul
@@ -217,6 +212,18 @@ export function HomeScreen(): ReactNode {
               />
             </li>
           ))}
+          {/* Poslední dlaždice pásu, ne odkaz nad ním. Kdo dojede na konec,
+              má rovnou kudy dál; kdo ne, o nic nepřišel. */}
+          <li className="flex snap-start">
+            <Link
+              to="/seznamy"
+              data-testid="vsechny-seznamy"
+              className="flex w-28 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-accent/50 p-2 text-center text-xs font-semibold text-accent"
+            >
+              <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+              Všechny seznamy
+            </Link>
+          </li>
         </ul>
       </section>
 

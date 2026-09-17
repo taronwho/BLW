@@ -1,4 +1,4 @@
-import { ShoppingBasket } from 'lucide-react';
+import { ChevronRight, ShoppingBasket } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -8,8 +8,10 @@ import { POLOZKA, sklonuj } from '@/text/sklonovani';
 /**
  * Nákupní seznam na úvodní obrazovce.
  *
- * Stojí v řádce vedle deníku jako dlaždice, ne přes celou šířku: hlavní
- * kartou zůstává plán, tohle jsou dvě čísla, na která se rodič kouká cestou.
+ * Řádek přes celou šířku, ne dlaždice v půlce. Obsah je název a jedno
+ * číslo, takže se na jeden řádek vejde celý a nemusí se lámat do dvou —
+ * díky tomu stojí řádek na výšku dotykového cíle a ne o nic víc. Stohovaný
+ * obsah by na plné šířce nechal půlku řádky prázdnou a byl o třetinu vyšší.
  *
  * Schválně bez jediného importu katalogu: čísla se dají spočítat z uloženého
  * stavu, takže kvůli kartě nemusí rodič stahovat celou kuchařku. Názvy
@@ -32,16 +34,18 @@ export function NakupKarta(): ReactNode {
       to="/nakup"
       data-testid="karta-nakupu"
       aria-label={`Nákupní seznam. ${popis}.`}
-      className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
+      className="flex min-h-touch items-center gap-2 rounded-xl border border-line bg-surface px-2.5 py-1 shadow-soft"
     >
-      <span className="flex items-center gap-1.5">
-        <ShoppingBasket aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
-        <span className="text-[13px] font-bold leading-tight">Nákupní seznam</span>
-      </span>
+      <ShoppingBasket aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+      <span className="shrink-0 text-[13px] font-bold leading-tight">Nákupní seznam</span>
       {/* Jedna věta, žádné počitadlo navíc. Dvojí číslo („zbývá 9 z 9"
           a k tomu proužek s 0/9) říkalo totéž dvakrát a dlaždici to jen
-          zaplnilo. */}
-      <span className="text-[11px] leading-tight text-ink/75">{popis}</span>
+          zaplnilo. Stav stojí vpravo, aby se obě řádky rozcestníku četly
+          pod sebou v jednom sloupci. */}
+      <span className="min-w-0 flex-1 truncate text-right text-[11px] leading-tight text-ink/75">
+        {popis}
+      </span>
+      <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
     </Link>
   );
 }
