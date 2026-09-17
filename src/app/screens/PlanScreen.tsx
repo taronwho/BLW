@@ -316,31 +316,36 @@ export function PlanScreen(): ReactNode {
           Plán ví, co se bude vařit, takže seznam surovin z něj vypadne sám;
           bez toho by ho rodič skládal ručně recept po receptu. Bere se sedm
           nejbližších dnů, které ještě čekají, ne celý blok: na měsíc dopředu
-          se nenakupuje. */}
+          se nenakupuje.
+
+          Jedna řádka, ne odstavec vedle tlačítka. Vysvětlení zabalené do
+          pěti úzkých řádek vedle tlačítka odsunulo mřížku dnů pod okraj
+          displeje, a ta je na plánu to hlavní. */}
       {davkyTydne.length > 0 && (
         <section
           data-testid="plan-nakup"
           aria-label="Nákup podle plánu"
-          className="flex flex-wrap items-center gap-2 rounded-2xl border border-line bg-surface p-3"
+          className="flex flex-col gap-1 rounded-2xl border border-line bg-surface p-2"
         >
-          <span className="min-w-0 flex-1 text-xs leading-snug text-muted">
-            Suroviny z nejbližších {tydenDnu.length} dnů, které ještě čekají. Množství se
-            v seznamu sečtou.
-          </span>
-          <NakupTlacitko
-            davky={davkyTydne}
-            popis="Příští týden do nákupu"
-            potvrzeni="Přidáno do nákupu"
-            testId="plan-do-nakupu"
-          />
-          <Link
-            to="/nakup"
-            data-testid="plan-otevrit-nakup"
-            className="flex min-h-touch items-center gap-1 text-xs font-semibold text-accent"
-          >
-            Otevřít seznam
-            <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
-          </Link>
+          <div className="flex items-center gap-2">
+            <NakupTlacitko
+              davky={davkyTydne}
+              popis="Příští týden do nákupu"
+              potvrzeni="Přidáno do nákupu"
+              testId="plan-do-nakupu"
+            />
+            <Link
+              to="/nakup"
+              data-testid="plan-otevrit-nakup"
+              className="flex min-h-touch items-center gap-1 text-xs font-semibold text-accent"
+            >
+              Otevřít seznam
+              <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+            </Link>
+          </div>
+          <p className="text-[11px] leading-tight text-muted">
+            Suroviny z {tydenDnu.length} nejbližších čekajících dnů, množství se sečtou.
+          </p>
         </section>
       )}
 

@@ -176,19 +176,6 @@ export function HomeScreen(): ReactNode {
             <span className="text-[11px] leading-tight text-ink/75">
               {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
             </span>
-            <span className="mt-0.5 flex items-center gap-1.5">
-              <span className="block h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-accent/20">
-                <span
-                  className="block h-full rounded-full bg-accent transition-all"
-                  style={{
-                    width: `${(tasted.size / CATALOG_COUNTS.ingredients) * 100}%`,
-                  }}
-                />
-              </span>
-              <span className="shrink-0 text-[10px] font-semibold tabular-nums text-ink/75">
-                {Math.round((tasted.size / CATALOG_COUNTS.ingredients) * 100)} %
-              </span>
-            </span>
           </Link>
         )}
       </section>

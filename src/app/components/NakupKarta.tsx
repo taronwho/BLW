@@ -23,8 +23,8 @@ export function NakupKarta(): ReactNode {
     celkem === 0
       ? 'Zatím prázdný'
       : zbyva === 0
-        ? `Hotovo, ${celkem} v košíku`
-        : `Zbývá ${zbyva} z ${celkem}`;
+        ? 'Všechno v košíku'
+        : `${zbyva} ${zbyva === 1 ? 'položka' : zbyva <= 4 ? 'položky' : 'položek'} k nákupu`;
 
   return (
     <Link
@@ -37,20 +37,10 @@ export function NakupKarta(): ReactNode {
         <ShoppingBasket aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
         <span className="text-[13px] font-bold leading-tight">Nákupní seznam</span>
       </span>
+      {/* Jedna věta, žádné počitadlo navíc. Dvojí číslo („zbývá 9 z 9"
+          a k tomu proužek s 0/9) říkalo totéž dvakrát a dlaždici to jen
+          zaplnilo. */}
       <span className="text-[11px] leading-tight text-ink/75">{popis}</span>
-      {celkem > 0 && (
-        <span className="mt-0.5 flex items-center gap-1.5">
-          <span className="block h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-accent/20">
-            <span
-              className="block h-full rounded-full bg-accent transition-all"
-              style={{ width: `${(koupeno / celkem) * 100}%` }}
-            />
-          </span>
-          <span className="shrink-0 text-[10px] font-semibold tabular-nums text-ink/75">
-            {koupeno}/{celkem}
-          </span>
-        </span>
-      )}
     </Link>
   );
 }
