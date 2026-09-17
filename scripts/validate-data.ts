@@ -10,6 +10,8 @@ import { checkGuides } from '../src/safety/guides';
 import { errorsOf, runSafetyRules, warningsOf } from '../src/safety/run';
 import { safetyRules } from '../src/safety/rules';
 import type { Finding } from '../src/safety/types';
+import { recipeIsVegetarian } from '../src/app/lib/deriveRecipes';
+import type { Recipe } from '../src/types';
 import { GUIDE_CATEGORIES, INGREDIENT_CATEGORIES, RECIPE_CATEGORIES } from '../src/types';
 
 const MIN_INGREDIENTS = 190;
@@ -24,11 +26,18 @@ function padLeft(text: string, width: number): string {
   return text.length >= width ? text : ' '.repeat(width - text.length) + text;
 }
 
-function isVegetarianRecipe(recipeIndex: number): boolean {
-  const recipe = catalog.recipes[recipeIndex];
-  if (recipe === undefined) return false;
-  const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
-  return !recipe.ingredients.some((ref) => byId.get(ref.ingredientId)?.category === 'maso-ryby');
+/**
+ * Sní tenhle recept vegetarián?
+ *
+ * Bere `recipeIsVegetarian`, tedy tutéž funkci jako filtr „jen
+ * vegetariánské" v aplikaci. Dřív se tady ptalo jen na kategorii
+ * `maso-ryby`, takže souhrn hlásil 374, kdežto rodič ve filtru viděl 370 —
+ * čtyři recepty s parmazánem, pecorinem a granou padano maso neobsahují,
+ * ale vyrábějí se se živočišným syřidlem a vegetariánce u stolu nepomůžou.
+ * Dvě definice téhož znamenají, že se jedna z nich mýlí.
+ */
+function isVegetarianRecipe(recipe: Recipe): boolean {
+  return recipeIsVegetarian(recipe);
 }
 
 function printIngredientTable(findings: readonly Finding[]): void {
@@ -109,16 +118,20 @@ function main(): void {
 
   const verified = catalog.ingredients.filter((i) => i.reviewStatus === 'verified').length;
   const needsReview = catalog.ingredients.filter((i) => i.reviewStatus === 'needs-review').length;
-  const vegetarian = catalog.recipes.filter((_, index) => isVegetarianRecipe(index)).length;
-  // Dvě varianty dochucení má jen recept, který maso opravdu obsahuje.
+  const vegetarian = catalog.recipes.filter(isVegetarianRecipe).length;
+  // Dvě varianty dochucení. Ne nutně kvůli masu: čtyři recepty je mají
+  // kvůli syřidlovému sýru, takže popisek „s masem" by na ně nesedl.
+  // Množiny jsou disjunktní, aby se čísla dala sečíst a vyšel počet
+  // receptů — dřív dávala dohromady 498 ze 494.
   const withBothTracks = catalog.recipes.filter(
-    (r) => r.adultSteps.length > 0 && (r.vegetarianSteps ?? []).length > 0,
+    (r) =>
+      !isVegetarianRecipe(r) && r.adultSteps.length > 0 && (r.vegetarianSteps ?? []).length > 0,
   ).length;
 
   console.log('');
   console.log(`SUROVIN: ${catalog.ingredients.length}  (ověřeno: ${verified}, k revizi: ${needsReview})`);
   console.log(
-    `RECEPTŮ: ${catalog.recipes.length}   (vegetariánských: ${vegetarian}, s masem a bezmasou variantou: ${withBothTracks})`,
+    `RECEPTŮ: ${catalog.recipes.length}   (vegetariánských: ${vegetarian}, se dvěma variantami dochucení: ${withBothTracks})`,
   );
   const guideFindings = checkGuides(catalog.guides);
   if (guideFindings.length > 0) {
