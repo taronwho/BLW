@@ -1,5 +1,7 @@
 import { ArrowLeft, Check, Circle, ShoppingBasket, Trash2, X } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { INGREDIENT_CATEGORIES } from '@/types';
 import type { IngredientCategory } from '@/types';
@@ -7,6 +9,8 @@ import { useHouseholdStore } from '@/storage/householdStore';
 import { sestavNakupniSeznam, type NakupniRadek } from '@/nakup/seznam';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { CATEGORY_LABELS } from '../lib/labels';
+import { useModalFokus } from '../lib/modalFokus';
+import { POLOZKA, sklonuj } from '@/text/sklonovani';
 
 /**
  * Nákupní seznam.
@@ -21,6 +25,8 @@ export function NakupScreen(): ReactNode {
   const prepniKoupeno = useHouseholdStore((store) => store.prepniKoupeno);
   const odeberZNakupu = useHouseholdStore((store) => store.odeberZNakupu);
   const vyprazdniNakup = useHouseholdStore((store) => store.vyprazdniNakup);
+  const [ptaSe, setPtaSe] = useState(false);
+  const okenko = useModalFokus<HTMLDivElement>(ptaSe);
 
   const radky = sestavNakupniSeznam(state);
   const kNakupu = radky.filter((radek) => !radek.koupeno);
@@ -54,7 +60,7 @@ export function NakupScreen(): ReactNode {
           </span>
         </div>
         <p className="text-xs leading-relaxed text-white/90">
-          Množství se sčítají napříč recepty, takže u regálu vidíš rovnou, kolik toho vzít.
+          Množství se sčítá napříč recepty, takže u regálu vidíš rovnou, kolik čeho vzít.
         </p>
       </header>
 
@@ -136,28 +142,69 @@ export function NakupScreen(): ReactNode {
             </section>
           )}
 
-          <details className="rounded-xl bg-surface p-3">
-            <summary className="min-h-touch cursor-pointer text-sm font-semibold">
-              Začít seznam znovu
-            </summary>
-            <div className="mt-2 flex flex-col gap-2">
-              <p className="text-xs leading-relaxed text-muted">
-                Smaže celý seznam včetně toho, co ještě není koupené. Recepty ani plán se tím
-                nemění, dají se do seznamu přidat znovu.
-              </p>
-              <button
-                type="button"
-                data-testid="nakup-vyprazdnit"
-                onClick={() => void vyprazdniNakup(false)}
-                className="flex min-h-touch items-center justify-center gap-2 rounded-xl border border-line bg-paper px-4 text-sm font-medium text-muted"
-              >
-                <Trash2 aria-hidden="true" className="h-4 w-4 shrink-0" />
-                Vyprázdnit seznam
-              </button>
-            </div>
-          </details>
+          {/* Rovnou tlačítko, ne rozbalovátko. Schovat mazání pod „Začít
+              seznam znovu" znamenalo, že ho rodič musel nejdřív najít — a
+              přitom ho to stejně před omylem nechránilo, protože pod ním
+              stačilo jedno klepnutí. Pojistkou je otázka, ne schovávačka. */}
+          <button
+            type="button"
+            data-testid="nakup-vyprazdnit"
+            onClick={() => setPtaSe(true)}
+            className="flex min-h-touch items-center justify-center gap-2 self-start rounded-xl border border-line bg-surface px-4 text-sm font-medium text-muted"
+          >
+            <Trash2 aria-hidden="true" className="h-4 w-4 shrink-0" />
+            Vyprázdnit seznam
+          </button>
         </>
       )}
+      {ptaSe &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="vyprazdnit-nadpis"
+            data-testid="nakup-vyprazdnit-okenko"
+            className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/50 p-3 sm:items-center"
+            onClick={() => setPtaSe(false)}
+          >
+            <div
+              ref={okenko}
+              className="flex w-full max-w-md flex-col gap-3 rounded-2xl bg-surface p-4 shadow-lift"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <h2 id="vyprazdnit-nadpis" className="text-base font-bold">
+                Opravdu vyprázdnit celý seznam?
+              </h2>
+              <p className="text-xs leading-relaxed text-muted">
+                Smaže se {sklonuj(radky.length, POLOZKA)} včetně toho, co ještě není koupené.
+                Recepty ani plán se tím nemění, dají se do seznamu přidat znovu.
+              </p>
+              <div className="flex flex-col gap-2">
+                <button
+                  type="button"
+                  data-testid="nakup-vyprazdnit-potvrdit"
+                  onClick={() => {
+                    void vyprazdniNakup(false);
+                    setPtaSe(false);
+                  }}
+                  className="flex min-h-touch items-center justify-center gap-2 rounded-xl bg-risk px-4 text-sm font-semibold text-white"
+                >
+                  <Trash2 aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  Ano, vyprázdnit
+                </button>
+                <button
+                  type="button"
+                  data-testid="nakup-vyprazdnit-zrusit"
+                  onClick={() => setPtaSe(false)}
+                  className="flex min-h-touch items-center justify-center rounded-xl border border-line bg-paper px-4 text-sm font-medium"
+                >
+                  Nechat seznam být
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 }

@@ -19,6 +19,7 @@ import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
 import { FilterChips } from '../components/FilterChips';
 import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
 import { KonecSeznamu } from '../components/KonecSeznamu';
+import { OdkazNaNakup } from '../components/OdkazNaNakup';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
 import { FilterToggles } from '../components/FilterToggles';
@@ -183,9 +184,15 @@ export function IngredientsScreen(): ReactNode {
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="suroviny-nadpis">
-      <h1 id="suroviny-nadpis" className="text-xl font-bold">
-        Suroviny
-      </h1>
+      {/* Nadpis a vedle něj cesta do nákupního seznamu. Přidávat do něj
+          šlo z téhle obrazovky odjakživa, podívat se na něj ne — rodič
+          musel zpátky na úvodní obrazovku. */}
+      <div className="flex items-center justify-between gap-2">
+        <h1 id="suroviny-nadpis" className="text-xl font-bold">
+          Suroviny
+        </h1>
+        <OdkazNaNakup testId="suroviny-na-nakup" />
+      </div>
 
       <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
         <Search aria-hidden="true" className="h-5 w-5 shrink-0 text-muted" />
