@@ -1,7 +1,13 @@
-import { ingredientById, recipeById } from '@/data';
+import { ingredientById, recipeById, recipes } from '@/data';
 import type { HouseholdState, Ingredient, IngredientCategory } from '@/types';
 import { nakupniPolozky } from './pocty';
-import { popisSouctu, sectiMnozstvi, type Soucet } from './mnozstvi';
+import {
+  popisMnozstvi,
+  popisSouctu,
+  rozeberMnozstvi,
+  sectiMnozstvi,
+  type Soucet,
+} from './mnozstvi';
 
 /**
  * Nákupní seznam sestavený z uloženého stavu domácnosti.
@@ -25,6 +31,10 @@ export interface NakupniRadek {
   soucet: Soucet;
   /** Celé množství na jednu řádku, třeba „450 g + 2 lžíce". */
   popis: string;
+  /** Množství spočítané z receptů, i když ho rodič přepsal. */
+  popisZReceptu: string;
+  /** Přepsal množství rodič? Pak `popis` je jeho, ne součet z dávek. */
+  rucni: boolean;
   koupeno: boolean;
   puvod: NakupPuvod[];
 }
@@ -68,10 +78,16 @@ export function sestavNakupniSeznam(state: HouseholdState): NakupniRadek[] {
       .map((davka) => davka.mnozstvi)
       .filter((text): text is string => text !== undefined && text.trim().length > 0);
     const soucet = sectiMnozstvi(zapisy);
+    const zReceptu = popisSouctu(soucet);
+    const rucni = (polozka.rucniMnozstvi ?? '').trim();
     radky.push({
       ingredient,
       soucet,
-      popis: popisSouctu(soucet),
+      // Ruční množství přebíjí součet, ale dávky zůstávají — po odebrání
+      // receptu se seznam vrátí k počítanému množství.
+      popis: rucni.length > 0 ? rucni : zReceptu,
+      popisZReceptu: zReceptu,
+      rucni: rucni.length > 0,
       koupeno: polozka.koupeno,
       puvod: polozka.davky.map((davka) => ({
         ...(davka.recipeId === undefined ? {} : { recipeId: davka.recipeId }),
@@ -105,4 +121,46 @@ export function slozkyDoNakupu(recipeId: string): { ingredientId: string; mnozst
   return recipe.ingredients
     .filter((ref) => ref.ingredientId !== 'voda')
     .map((ref) => ({ ingredientId: ref.ingredientId, mnozstvi: ref.amount }));
+}
+
+/**
+ * Kolik téhle suroviny obvykle padne, když se z ní vaří.
+ *
+ * Nabízí se rodiči, který si surovinu přidává sám od sebe — bez návrhu by
+ * musel u každé položky vymýšlet, jestli psát „2 ks" nebo „300 g", a
+ * většina by skončila bez množství. Číslo se nehádá: bere se **medián**
+ * z toho, jak surovinu odměřují recepty v kuchařce, a jednotka ta
+ * nejčastější. Medián proto, že jeden recept s kilem masa na osmiporci by
+ * průměr vyhnal nahoru.
+ *
+ * Surovina, kterou žádný recept neodměřuje rozebratelně, dostane „1 ks".
+ * Je to návrh, ne pravidlo — rodič ho v okénku přepíše.
+ */
+export function vychoziMnozstvi(ingredientId: string): string {
+  const zapisy: string[] = [];
+  for (const recipe of recipes) {
+    for (const ref of recipe.ingredients) {
+      if (ref.ingredientId === ingredientId) zapisy.push(ref.amount);
+    }
+  }
+
+  const podleJednotky = new Map<string, number[]>();
+  for (const zapis of zapisy) {
+    const rozebrane = rozeberMnozstvi(zapis);
+    if (rozebrane === null) continue;
+    const dosud = podleJednotky.get(rozebrane.jednotka) ?? [];
+    dosud.push(rozebrane.hodnota);
+    podleJednotky.set(rozebrane.jednotka, dosud);
+  }
+  if (podleJednotky.size === 0) return '1 ks';
+
+  // Nejčastější jednotka; při shodě rozhodne abeceda, ať je výsledek stejný
+  // při každém spuštění.
+  const [jednotka, hodnoty] = [...podleJednotky.entries()].sort(
+    (a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]),
+  )[0] as [string, number[]];
+
+  const serazene = [...hodnoty].sort((a, b) => a - b);
+  const median = serazene[Math.floor(serazene.length / 2)] as number;
+  return popisMnozstvi({ hodnota: median, jednotka });
 }

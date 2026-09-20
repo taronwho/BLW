@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { pocetPridani } from '@/nakup/pocty';
+import { MnozstviOkenko } from './MnozstviOkenko';
 
 /**
  * Počet opakování slovy, pro odečítač obrazovky.
@@ -38,6 +39,7 @@ export function NakupTlacitko({
   popis,
   potvrzeni = 'Přidáno do nákupu',
   ikona = false,
+  zeptejSe,
   testId,
 }: {
   /** Co se má přidat. Recept dává celý svůj seznam složek. */
@@ -47,12 +49,25 @@ export function NakupTlacitko({
   potvrzeni?: string;
   /** Úsporná podoba jen s ikonou, do řádky v přehledu. */
   ikona?: boolean;
+  /**
+   * Zeptat se před přidáním na množství.
+   *
+   * Dává smysl u samotné suroviny, kde žádný recept množství neurčuje:
+   * bez návrhu by rodič u každé položky vymýšlel, jestli psát „2 ks"
+   * nebo „300 g", a většina by skončila bez množství. Recept si množství
+   * nese sám, takže se u něj neptáme.
+   *
+   * Návrh počítá volající (`vychoziMnozstvi`), aby tohle tlačítko
+   * nemuselo sahat do katalogu.
+   */
+  zeptejSe?: { nadpis: string; vychozi: string };
   testId?: string;
 }): ReactNode {
   const pridejDoNakupu = useHouseholdStore((store) => store.pridejDoNakupu);
   const state = useHouseholdStore((store) => store.state);
   const kolikrat = pocetPridani(state, davky);
   const [hotovo, setHotovo] = useState(false);
+  const [ptaSe, setPtaSe] = useState(false);
 
   useEffect(() => {
     if (!hotovo) return undefined;
@@ -60,14 +75,40 @@ export function NakupTlacitko({
     return () => window.clearTimeout(casovac);
   }, [hotovo]);
 
+  function pridej(mnozstvi?: string): void {
+    void pridejDoNakupu(
+      mnozstvi === undefined || mnozstvi.length === 0
+        ? davky
+        : davky.map((davka) => ({ ...davka, mnozstvi })),
+    );
+    setHotovo(true);
+  }
+
   const klepnuti = (event: { preventDefault(): void; stopPropagation(): void }): void => {
     // Tlačítko sedí uvnitř odkazu na kartě receptu; bez zastavení události
     // by klepnutí zároveň otevřelo recept a seznam by rodič nikdy neviděl.
     event.preventDefault();
     event.stopPropagation();
-    void pridejDoNakupu(davky);
-    setHotovo(true);
+    if (zeptejSe !== undefined) {
+      setPtaSe(true);
+      return;
+    }
+    pridej();
   };
+
+  const okenko =
+    ptaSe && zeptejSe !== undefined ? (
+      <MnozstviOkenko
+        nadpis={zeptejSe.nadpis}
+        vychozi={zeptejSe.vychozi}
+        potvrzeni="Přidat do nákupu"
+        onZavri={() => setPtaSe(false)}
+        onUloz={(mnozstvi) => {
+          setPtaSe(false);
+          pridej(mnozstvi);
+        }}
+      />
+    ) : null;
 
   const Icon = hotovo ? Check : ShoppingBasket;
   const barva = hotovo
@@ -80,6 +121,7 @@ export function NakupTlacitko({
 
   if (ikona) {
     return (
+      <>
       <button
         type="button"
         data-testid={testId}
@@ -101,10 +143,13 @@ export function NakupTlacitko({
           </span>
         )}
       </button>
+      {okenko}
+      </>
     );
   }
 
   return (
+    <>
     <button
       type="button"
       data-testid={testId}
@@ -129,5 +174,7 @@ export function NakupTlacitko({
         </span>
       )}
     </button>
+    {okenko}
+    </>
   );
 }

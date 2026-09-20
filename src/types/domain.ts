@@ -534,6 +534,15 @@ export interface NakupPolozka {
   davky: NakupDavka[];
   /** Odškrtnuté = koupené. Vrátit se dá stejným klepnutím. */
   koupeno: boolean;
+  /**
+   * Množství přepsané rodičem, třeba „1 kg".
+   *
+   * Přebíjí součet z dávek, ale nemaže je: recept jde pořád odebrat
+   * a po odebrání se seznam vrátí k počítanému množství. Rodič u regálu
+   * ví líp než kuchařka, jestli koupí větší balení — a součet „450 g"
+   * je odhad ze tří receptů, ne to, co se prodává.
+   */
+  rucniMnozstvi?: string;
 }
 
 export interface NakupDavka {

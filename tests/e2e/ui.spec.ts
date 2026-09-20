@@ -1041,7 +1041,7 @@ test('alergie zapsaná po sestavení plán nezmění, ale nahlásí se', async (
 
   // Plán o ní neví, tak to řekne, a to i na úvodní obrazovce.
   await navLink(page, 'Domů').click();
-  await expect(page.getByTestId('karta-planu')).toContainText('Alergie se od sestavení změnily');
+  await expect(page.getByTestId('karta-planu')).toContainText('Alergie se změnily');
   await page.getByTestId('karta-planu').click();
   await expect(page.getByTestId('plan-jine-alergie')).toContainText('mléko');
 
@@ -1437,11 +1437,17 @@ test('do nákupu se dá přidat z přehledu receptů, od suroviny i z plánu', a
   await page.goto('./#/nakup');
   await expect(page.getByTestId('nakup-polozka-mouka-cizrnova')).toBeVisible();
 
-  // Od jednotlivé suroviny.
+  // Od jednotlivé suroviny. Tam žádný recept množství neurčuje, takže se
+  // tlačítko zeptá a předvyplní návrh podle kuchařky.
   await page.goto('./#/suroviny/brokolice');
   await page.getByTestId('surovina-do-nakupu').click();
+  await expect(page.getByTestId('mnozstvi-okenko')).toBeVisible();
+  await expect(page.getByTestId('mnozstvi-pole')).not.toHaveValue('');
+  await page.getByTestId('mnozstvi-pole').fill('3 ks');
+  await page.getByTestId('mnozstvi-ulozit').click();
   await page.goto('./#/nakup');
   await expect(page.getByTestId('nakup-polozka-brokolice')).toBeVisible();
+  await expect(page.getByTestId('nakup-mnozstvi-brokolice')).toContainText('3 ks');
 
   // Z plánu jedním klepnutím na celý příští týden.
   await page.goto('./#/plan');
@@ -1451,4 +1457,65 @@ test('do nákupu se dá přidat z přehledu receptů, od suroviny i z plánu', a
   await expect(page.getByTestId('nakup-postup')).toContainText('0 z');
   const polozek = await page.getByTestId('nakup-postup').innerText();
   expect(Number(polozek.replace(/.*z (\d+).*/s, '$1'))).toBeGreaterThan(5);
+});
+
+test('množství v seznamu jde přepsat a zase vrátit k součtu z receptů', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  // Dva recepty se stejnou složkou, ať je co sčítat.
+  await page.goto('./#/recepty');
+  await page.getByTestId('hledat-recept').fill('socca');
+  await page.getByTestId('do-nakupu-socca-z-cizrnove-mouky').click();
+  await page.getByTestId('do-nakupu-socca-z-cizrnove-mouky').click();
+
+  await page.goto('./#/nakup');
+  const mnozstvi = page.getByTestId('nakup-mnozstvi-mouka-cizrnova');
+  const zReceptu = ((await mnozstvi.textContent()) ?? '').trim();
+  expect(zReceptu.length).toBeGreaterThan(0);
+
+  // Rodič u regálu ví líp než kuchařka, co se prodává.
+  await mnozstvi.click();
+  await page.getByTestId('mnozstvi-pole').fill('1 kg');
+  await page.getByTestId('mnozstvi-ulozit').click();
+  await expect(mnozstvi).toContainText('1 kg');
+  // Počítané množství zůstává vidět, jinak by po přidání dalšího receptu
+  // nikdo nepochopil, proč se číslo nezměnilo.
+  await expect(mnozstvi).toContainText(zReceptu);
+
+  await mnozstvi.click();
+  await page.getByTestId('mnozstvi-podle-receptu').click();
+  await expect(mnozstvi).not.toContainText('1 kg');
+  await expect(mnozstvi).toContainText(zReceptu);
+});
+
+test('vyprázdnění seznamu se zeptá a zrušit se dá', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await page.goto('./#/recepty');
+  await page.getByTestId('hledat-recept').fill('socca');
+  await page.getByTestId('do-nakupu-socca-z-cizrnove-mouky').click();
+
+  await page.goto('./#/nakup');
+  await expect(page.getByTestId('nakup-polozka-mouka-cizrnova')).toBeVisible();
+
+  // Pojistkou je otázka, ne schovávačka pod rozbalovátkem.
+  await page.getByTestId('nakup-vyprazdnit').click();
+  await expect(page.getByTestId('nakup-vyprazdnit-okenko')).toBeVisible();
+  await page.getByTestId('nakup-vyprazdnit-zrusit').click();
+  await expect(page.getByTestId('nakup-polozka-mouka-cizrnova')).toBeVisible();
+
+  await page.getByTestId('nakup-vyprazdnit').click();
+  await page.getByTestId('nakup-vyprazdnit-potvrdit').click();
+  await expect(page.getByTestId('nakup-prazdny')).toBeVisible();
+});
+
+test('do nákupního seznamu se dá dostat ze surovin i z receptů', async ({ page }) => {
+  await acceptDisclaimer(page);
+
+  await navLink(page, 'Suroviny').click();
+  await page.getByTestId('suroviny-na-nakup').click();
+  await expect(page.getByTestId('nakup-prazdny')).toBeVisible();
+
+  await navLink(page, 'Recepty').click();
+  await page.getByTestId('recepty-na-nakup').click();
+  await expect(page.getByTestId('nakup-prazdny')).toBeVisible();
 });

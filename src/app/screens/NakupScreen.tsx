@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Circle, ShoppingBasket, Trash2, X } from 'lucide-react';
+import { ArrowLeft, Check, Circle, Pencil, ShoppingBasket, Trash2, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -10,6 +10,7 @@ import { sestavNakupniSeznam, type NakupniRadek } from '@/nakup/seznam';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { useModalFokus } from '../lib/modalFokus';
+import { MnozstviOkenko } from '../components/MnozstviOkenko';
 import { POLOZKA, sklonuj } from '@/text/sklonovani';
 
 /**
@@ -26,11 +27,16 @@ export function NakupScreen(): ReactNode {
   const odeberZNakupu = useHouseholdStore((store) => store.odeberZNakupu);
   const vyprazdniNakup = useHouseholdStore((store) => store.vyprazdniNakup);
   const [ptaSe, setPtaSe] = useState(false);
+  const nastavMnozstvi = useHouseholdStore((store) => store.nastavMnozstvi);
+  /** Která surovina má právě otevřené okénko s množstvím. */
+  const [upravovana, setUpravovana] = useState<string | null>(null);
   const okenko = useModalFokus<HTMLDivElement>(ptaSe);
 
   const radky = sestavNakupniSeznam(state);
   const kNakupu = radky.filter((radek) => !radek.koupeno);
   const koupene = radky.filter((radek) => radek.koupeno);
+
+  const upravena = radky.find((radek) => radek.ingredient.id === upravovana);
 
   const skupiny = INGREDIENT_CATEGORIES.map((kategorie) => ({
     kategorie,
@@ -107,6 +113,7 @@ export function NakupScreen(): ReactNode {
                     radek={radek}
                     onPrepni={() => void prepniKoupeno(radek.ingredient.id)}
                     onOdeber={() => void odeberZNakupu(radek.ingredient.id)}
+                    onUprav={() => setUpravovana(radek.ingredient.id)}
                   />
                 ))}
               </ul>
@@ -136,6 +143,7 @@ export function NakupScreen(): ReactNode {
                     radek={radek}
                     onPrepni={() => void prepniKoupeno(radek.ingredient.id)}
                     onOdeber={() => void odeberZNakupu(radek.ingredient.id)}
+                    onUprav={() => setUpravovana(radek.ingredient.id)}
                   />
                 ))}
               </ul>
@@ -157,6 +165,20 @@ export function NakupScreen(): ReactNode {
           </button>
         </>
       )}
+      {upravena !== undefined && (
+        <MnozstviOkenko
+          nadpis={`Kolik koupit: ${upravena.ingredient.nameCz}`}
+          vychozi={upravena.popis}
+          potvrzeni="Uložit množství"
+          muzeSmazat={upravena.rucni}
+          onZavri={() => setUpravovana(null)}
+          onUloz={(mnozstvi) => {
+            void nastavMnozstvi(upravena.ingredient.id, mnozstvi.length === 0 ? null : mnozstvi);
+            setUpravovana(null);
+          }}
+        />
+      )}
+
       {ptaSe &&
         createPortal(
           <div
@@ -220,12 +242,14 @@ function Radek({
   radek,
   onPrepni,
   onOdeber,
+  onUprav,
 }: {
   radek: NakupniRadek;
   onPrepni: () => void;
   onOdeber: () => void;
+  onUprav: () => void;
 }): ReactNode {
-  const { ingredient, popis, koupeno, puvod } = radek;
+  const { ingredient, popis, popisZReceptu, rucni, koupeno, puvod } = radek;
   const zdroje = [...new Set(puvod.map((jeden) => jeden.nazev))];
 
   return (
@@ -264,15 +288,35 @@ function Radek({
           )}
         </span>
 
-        {popis.length > 0 && (
-          <span
-            data-testid={`nakup-mnozstvi-${ingredient.id}`}
-            className={`shrink-0 text-xs font-semibold tabular-nums ${
-              koupeno ? 'text-muted line-through' : 'text-accent'
-            }`}
-          >
-            {popis}
-          </span>
+      </button>
+
+      {/* Množství je vlastní tlačítko, ne text uvnitř řádky.
+          U regálu se hodí přepsat, kolik čeho koupit — součet z receptů
+          je odhad z kuchařky, ale prodává se v balení. Zvlášť proto, že
+          klepnutí do řádky znamená „mám" a spojit obojí do jednoho místa
+          by znamenalo odškrtnout položku pokaždé, když ji chci upravit. */}
+      <button
+        type="button"
+        onClick={onUprav}
+        data-testid={`nakup-mnozstvi-${ingredient.id}`}
+        aria-label={
+          popis.length > 0
+            ? `Upravit množství: ${ingredient.nameCz}, teď ${popis}`
+            : `Zadat množství: ${ingredient.nameCz}`
+        }
+        className={`flex min-h-touch shrink-0 flex-col items-end justify-center rounded-xl px-2 text-xs font-semibold tabular-nums ${
+          koupeno ? 'text-muted line-through' : 'text-accent'
+        }`}
+      >
+        {popis.length > 0 ? (
+          popis
+        ) : (
+          <Pencil aria-hidden="true" className="h-4 w-4 shrink-0" />
+        )}
+        {/* Když rodič množství přepsal, je vidět i to počítané — jinak by
+            po přidání dalšího receptu nepochopil, proč se číslo nezměnilo. */}
+        {rucni && popisZReceptu.length > 0 && (
+          <span className="text-[10px] font-normal text-muted">z receptů {popisZReceptu}</span>
         )}
       </button>
 

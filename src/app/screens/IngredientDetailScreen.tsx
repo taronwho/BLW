@@ -21,6 +21,7 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '.
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { NakupTlacitko } from '../components/NakupTlacitko';
+import { vychoziMnozstvi } from '@/nakup/seznam';
 import { NotFoundScreen } from './NotFoundScreen';
 import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
 
@@ -83,12 +84,18 @@ export function IngredientDetailScreen(): ReactNode {
           >
             <Star aria-hidden="true" className="h-5 w-5" />
           </button>
-          {/* Surovina do nákupu bez množství: kolik jí vzít, ví rodič sám,
-              a recept, který by množství určil, tu žádný není. */}
+          {/* U samotné suroviny žádný recept množství neurčuje, tak se
+              na ně tlačítko zeptá a předvyplní, kolik jí obvykle padne
+              v kuchařce. Bez návrhu by rodič u každé položky vymýšlel,
+              jestli psát „2 ks" nebo „300 g". */}
           <NakupTlacitko
             ikona
             davky={[{ ingredientId: ingredient.id }]}
             popis={`${ingredient.nameCz} do nákupu`}
+            zeptejSe={{
+              nadpis: `${ingredient.nameCz} do nákupu`,
+              vychozi: vychoziMnozstvi(ingredient.id),
+            }}
             testId="surovina-do-nakupu"
           />
         </div>

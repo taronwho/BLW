@@ -71,6 +71,7 @@ interface HouseholdStore {
   pridejDoNakupu(davky: readonly { ingredientId: string; mnozstvi?: string; recipeId?: string }[]): Promise<void>;
   odeberZNakupu(ingredientId: string): Promise<void>;
   prepniKoupeno(ingredientId: string): Promise<void>;
+  nastavMnozstvi(ingredientId: string, mnozstvi: string | null): Promise<void>;
   vyprazdniNakup(jenKoupene?: boolean): Promise<void>;
   importState(raw: unknown): Promise<Zahozeno>;
 }
@@ -542,6 +543,28 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
             kdy: Date.now(),
           },
         },
+      });
+    },
+
+    /**
+     * Ruční množství u položky, nebo `null` pro návrat k počítanému.
+     *
+     * Dávky zůstávají: recept jde pořád odebrat a seznam se pak vrátí
+     * k součtu z receptů. Rodič u regálu ví líp než kuchařka, jestli
+     * koupí větší balení.
+     */
+    async nastavMnozstvi(ingredientId: string, mnozstvi: string | null): Promise<void> {
+      const stav = get().state;
+      const soucasna = stav.nakup?.[ingredientId]?.hodnota ?? null;
+      if (soucasna === null) return;
+      const text = mnozstvi === null ? '' : mnozstvi.trim();
+      const nova: NakupPolozka =
+        text.length === 0
+          ? { davky: soucasna.davky, koupeno: soucasna.koupeno }
+          : { ...soucasna, rucniMnozstvi: text };
+      await persist({
+        ...stav,
+        nakup: { ...(stav.nakup ?? {}), [ingredientId]: { hodnota: nova, kdy: Date.now() } },
       });
     },
 
