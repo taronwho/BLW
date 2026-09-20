@@ -27,18 +27,28 @@ export function NakupKarta(): ReactNode {
   const zbyva = celkem - koupeno;
   const podil = celkem === 0 ? 0 : Math.round((koupeno / celkem) * 100);
 
-  const popis =
+  /**
+   * Věta pod názvem je jen pro prázdný seznam.
+   *
+   * Jakmile v něm něco je, říká všechno odznak „3 z 12 v košíku" a proužek
+   * pod ním. Přidat k tomu ještě „Zbývá 9 položek" znamenalo napsat totéž
+   * dvakrát a rodič to musí u regálu číst pokaždé znova.
+   */
+  const popis = celkem === 0 ? 'Zatím prázdný, plní se z receptů a z plánu' : '';
+
+  /** Pro odečítač obrazovky celá věta, ať se nemusí luštit z odznaku. */
+  const popisProOdecitac =
     celkem === 0
-      ? 'Zatím prázdný, plní se z receptů a z plánu'
+      ? popis
       : zbyva === 0
         ? 'Všechno v košíku'
-        : `Zbývá ${sklonuj(zbyva, POLOZKA)}`;
+        : `${sklonuj(zbyva, POLOZKA)} k nákupu z ${celkem}`;
 
   return (
     <Link
       to="/nakup"
       data-testid="karta-nakupu"
-      aria-label={`Nákupní seznam. ${popis}.`}
+      aria-label={`Nákupní seznam. ${popisProOdecitac}.`}
       className="flex items-center gap-2.5 rounded-2xl bg-accent-sheen p-2.5 text-white shadow-lift"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20">
@@ -54,7 +64,9 @@ export function NakupKarta(): ReactNode {
             </span>
           )}
         </span>
-        <span className="truncate text-[11px] leading-tight text-white/85">{popis}</span>
+        {popis.length > 0 && (
+          <span className="truncate text-[11px] leading-tight text-white/85">{popis}</span>
+        )}
         {/* Proužek jen když je co měřit. Prázdná lišta u prázdného seznamu
             nic neříká a jen zabírá řádku. */}
         {celkem > 0 && (
