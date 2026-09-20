@@ -230,10 +230,19 @@ export function RecipesScreen(): ReactNode {
         <h1 id="recepty-nadpis" className="text-xl font-bold">
           Recepty
         </h1>
+        {/* Obě akce drží vpravo v jedné skupině. Bez obalu je řádka tři
+            prvky pod `justify-between` a kostka skončila plavat uprostřed
+            mezi nadpisem a košíkem, jako by tam nepatřila. */}
+        <span className="flex shrink-0 items-center gap-2">
         {/* Kostka losuje z toho, co je právě vidět, ne z celé kuchařky.
             Když si rodič nafiltroval „do 20 minut, bez mléka", chce náhodu
             uvnitř toho výběru — jinak by mu tlačítko nabídlo přesně to, co
-            si před chvílí odfiltroval. */}
+            si před chvílí odfiltroval.
+
+            Popisek je u ní schválně: samotná kostka je hádanka. „Zkus
+            štěstí" se vejde i na displej široký 320 px, kdežto „Náhodný
+            recept" by nadpis vytlačil. Odečítač obrazovky dostane celou
+            větu v aria-label. */}
         <button
           type="button"
           data-testid="recepty-nahoda"
@@ -247,11 +256,13 @@ export function RecipesScreen(): ReactNode {
             const vylosovany = vyberNahodny(serazene);
             if (vylosovany !== null) void navigate(`/recepty/${vylosovany.id}`);
           }}
-          className="flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-xl border border-accent/40 bg-accent-soft text-accent disabled:opacity-40"
+          className="flex min-h-touch shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl border border-accent/40 bg-accent-soft px-2.5 text-[13px] font-semibold text-accent disabled:opacity-40"
         >
           <Dices aria-hidden="true" className="h-5 w-5 shrink-0" />
+          <span aria-hidden="true">Zkus štěstí</span>
         </button>
         <OdkazNaNakup testId="recepty-na-nakup" />
+        </span>
       </div>
 
       <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
