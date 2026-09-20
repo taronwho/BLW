@@ -56,14 +56,17 @@ export function PlanKarta(): ReactNode {
       aria-label={`30denní plán. ${stav === 'bezi' ? `Na řadě den ${den?.cislo ?? 1} z ${DNU_V_BLOKU}.` : popis[stav]}`}
       /* Silnější stín než u ostatních karet. Rám říká „klikni sem", stín
          kartu nadzvedne nad ploché dlaždice kolem. */
-      className={`flex items-stretch gap-3 rounded-2xl border-2 p-2 shadow-lift ${
+      className={`flex grow items-stretch gap-3 rounded-2xl border-2 p-2 shadow-lift ${
         varovani ? 'border-risk/50 bg-risk-soft' : 'border-accent bg-accent-soft'
       }`}
     >
       {/* Plná barva je jen tady, na číslici. Drží pohled a zároveň nedělá
           z celé karty druhou zelenou plochu vedle hlavičky. */}
       <span
-        className={`flex w-14 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl leading-none ${
+        /* Výška je omezená a políčko se drží na střed. Bez toho se na
+           vysokém displeji natáhlo s kartou do úzkého sloupku přes půl
+           obrazovky a vypadalo jako domino, ne jako číslo dne. */
+        className={`flex max-h-20 w-14 shrink-0 flex-col items-center justify-center gap-0.5 self-center rounded-xl leading-none ${
           varovani ? 'bg-risk text-white' : 'bg-accent text-on-accent'
         }`}
       >

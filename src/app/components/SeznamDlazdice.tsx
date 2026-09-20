@@ -40,7 +40,7 @@ export function SeznamDlazdice({
       data-testid={`seznam-${seznam.id}`}
       className={`flex flex-col rounded-xl border shadow-soft transition hover:shadow-lift ${
         TONY[seznam.tone]
-      } ${compact ? 'w-44 shrink-0 gap-1 p-1.5' : 'h-full w-full gap-2 p-3'}`}
+      } ${compact ? 'w-44 shrink-0 justify-center gap-1 p-1.5' : 'h-full w-full gap-2 p-3'}`}
     >
       {/* V úsporné podobě stojí ikona vedle názvu, ne nad ním: na úvodní
           obrazovce je každá řádka znát a dlaždice se nemá roztahovat do

@@ -41,7 +41,13 @@ export function HomeScreen(): ReactNode {
   const jmeno = dite?.name.trim() ?? "";
 
   return (
-    <div className="flex flex-col gap-1">
+    /* Rozcestník vyplní displej, ať je jakkoli vysoký.
+       Ladit ho na pevnou výšku znamenalo, že na malém telefonu tak tak
+       vyšel a na velkém zbyla pod posledním pásem prázdná třetina
+       obrazovky. `min-h-full` s `justify-between` nechá mezery narůst
+       přesně o to, co přebývá: na 375x667 se nezmění nic, protože tam
+       žádný přebytek není, a na vyšším displeji se obsah rozprostře. */
+    <div className="flex flex-1 flex-col justify-between gap-1">
       {/* Hlavička je jeden řádek, ne blok.
           Jméno dítěte i fázi ukazuje horní lišta, takže tady stačí to, co
           se jinde nedozvíš: podle čeho je aplikace nastavená a kudy se to
@@ -102,7 +108,7 @@ export function HomeScreen(): ReactNode {
       <Link
         to="/rady/co-je-blw"
         data-testid="karta-co-je-blw"
-        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-1.5 shadow-soft"
+        className="flex grow-[2] shrink-0 items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-1.5 shadow-soft"
       >
         <BookOpen aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
         <span className="min-w-0 flex-1">
@@ -123,12 +129,12 @@ export function HomeScreen(): ReactNode {
           zabírat třetinu obrazovky. */}
       <section
         aria-label="Když se něco děje"
-        className="grid grid-cols-2 gap-2"
+        className="grid shrink-0 grow-[3] grid-cols-2 gap-2"
       >
         <Link
           to="/rady/daveni-vs-duseni"
           data-testid="dlazdice-daveni"
-          className="flex flex-col gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-1.5 shadow-soft"
+          className="flex flex-col justify-center gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-1.5 shadow-soft"
         >
           <AlertTriangle
             aria-hidden="true"
@@ -144,7 +150,7 @@ export function HomeScreen(): ReactNode {
         <Link
           to="/rady/prvni-pomoc-pri-duseni"
           data-testid="dlazdice-prvni-pomoc"
-          className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-1.5 shadow-soft"
+          className="flex flex-col justify-center gap-0.5 rounded-xl border border-line bg-surface p-1.5 shadow-soft"
         >
           <LifeBuoy aria-hidden="true" className="h-5 w-5 shrink-0 text-risk" />
           <span className="text-[13px] font-bold leading-tight">První pomoc</span>
@@ -156,7 +162,10 @@ export function HomeScreen(): ReactNode {
 
       {/* Plán je jediná část aplikace, která rodiči řekne, co má být zítra.
           Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
-      <PlanKarta />
+      {/* Plán a náhoda jsou jedna dvojice, proto mají vlastní obal:
+          přebytek se rozdělí mezi sekce, ale mezi tyhle dvě řádky ne. */}
+      <div className="flex shrink-0 grow-[3] flex-col gap-1">
+        <PlanKarta />
 
       {/* Náhodný recept hned pod plánem: obojí odpovídá na „co dnes vařit",
           jen jinak. Plán je pořádek, tohle je únik z něj, když se na plán
@@ -178,13 +187,14 @@ export function HomeScreen(): ReactNode {
         <span className="shrink-0 text-[11px] text-muted">když nevíš, co vařit</span>
         <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
       </Link>
+      </div>
 
       {/* Nákup a deník, každý na vlastní řádce pod plánem.
           Nákup je karta, deník tichá řádka — viz komentář v NakupKarta.tsx.
           Proužek u Ochutnáno se vejde dovnitř dotykového cíle, takže řádku
           ani o bod nezvýšil; rozcestník se musí vejít na displej bez
           rolování. */}
-      <section aria-label="Nákup a postup" className="flex flex-col gap-1.5">
+      <section aria-label="Nákup a postup" className="flex shrink-0 grow-[2] flex-col gap-1.5">
         <NakupKarta />
         {hasChild && (
           <Link
@@ -231,7 +241,7 @@ export function HomeScreen(): ReactNode {
       {/* Nadpis je jen pro odečítač obrazovky, ne vlastní řádka.
           Dlaždice v pásu jsou samy sebou popsané a řádka navíc znamenala
           dvacet bodů výšky, o které by se rozcestník musel rolovat. */}
-      <section aria-label="Seznamy surovin" className="flex flex-col gap-1">
+      <section aria-label="Seznamy surovin" className="flex shrink-0 grow-[2] flex-col gap-1">
         {/* Záporné okraje vytáhnou pás k okraji displeje, ať je poznat, že
             pokračuje; obsah si vnitřní odsazení vrací zpátky. */}
         <ul

@@ -1379,16 +1379,18 @@ test('úvodní obrazovka se vejde bez rolování', async ({ page }) => {
     return el === null ? false : el.scrollHeight > el.clientHeight;
   });
 
-  // Lišta dole měří 64 px a obsah pod ni nesmí zasahovat.
+  // Rozcestník displej vyplňuje: karty mají `grow`, takže spodek obsahu
+  // roste s výškou okna. Absolutní strop proto neměří, co měřil — na
+  // vysokém telefonu by ho obsah překročil právem. Co platit musí dál:
   if (okno >= 665) {
+    // Lišta dole měří 64 px a obsah pod ni nesmí zasahovat ani o bod.
     expect(spodek).toBeLessThanOrEqual(okno - 64);
     expect(roluje).toBe(false);
+  } else {
+    // Na nízkém displeji se rolovat musí. Strop tu zůstává jako pojistka,
+    // aby se další karta na rozcestník nepřidala bez toho, aby jiná ubrala.
+    expect(spodek).toBeLessThanOrEqual(700);
   }
-
-  // I na displeji, kde se rolovat musí, má obsah zůstat v téhle výšce: další
-  // karta se na rozcestník nepřidá bez toho, aby jiná ubrala.
-  const strop = (page.viewportSize()?.width ?? 0) >= 360 ? 610 : 700;
-  expect(spodek).toBeLessThanOrEqual(strop);
 });
 
 test('nákupní seznam sečte suroviny z receptů a odškrtnuté pošle dolů', async ({ page }) => {

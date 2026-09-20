@@ -47,7 +47,7 @@ export function NakupKarta(): ReactNode {
       to="/nakup"
       data-testid="karta-nakupu"
       aria-label={`Nákupní seznam. ${popis}.`}
-      className="flex items-center gap-2.5 rounded-2xl bg-accent-sheen p-1.5 text-white shadow-lift"
+      className="flex grow items-center gap-2.5 rounded-2xl bg-accent-sheen p-1.5 text-white shadow-lift"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20">
         <ShoppingBasket aria-hidden="true" className="h-5 w-5 shrink-0" />

@@ -76,7 +76,10 @@ export function AppShell({ children }: { children: ReactNode }): ReactNode {
       <main
         id="obsah"
         tabIndex={-1}
-        className="mx-auto w-full max-w-md flex-1 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+4rem)] pt-2 focus:outline-none"
+        /* Sloupcový flex, aby obrazovka mohla vyplnit výšku displeje —
+           rozcestník toho využívá (`flex-1` na svém kořeni). Ostatní
+           obrazovky se chovají dál jako dřív, protože `flex-grow` nemají. */
+        className="mx-auto flex w-full max-w-md flex-1 flex-col px-4 pb-[calc(env(safe-area-inset-bottom,0px)+4rem)] pt-2 focus:outline-none"
       >
         {children}
       </main>
