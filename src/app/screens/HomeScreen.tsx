@@ -158,11 +158,11 @@ export function HomeScreen(): ReactNode {
       <PlanKarta />
 
       {/* Nákup a deník, každý na vlastní řádce pod plánem.
-          Obojí je jen název a jedno číslo, takže se na jeden řádek vejde
-          celé: název vlevo, stav vpravo. Stohovaný obsah by na plné šířce
-          nechal půlku řádky prázdnou a byl o třetinu vyšší — a rozcestník
-          se musí vejít na displej bez rolování. */}
-      <section aria-label="Nákup a postup" className="flex flex-col gap-1">
+          Nákup je karta, deník tichá řádka — viz komentář v NakupKarta.tsx.
+          Proužek u Ochutnáno se vejde dovnitř dotykového cíle, takže řádku
+          ani o bod nezvýšil; rozcestník se musí vejít na displej bez
+          rolování. */}
+      <section aria-label="Nákup a postup" className="flex flex-col gap-1.5">
         <NakupKarta />
         {hasChild && (
           <Link
@@ -171,9 +171,27 @@ export function HomeScreen(): ReactNode {
             className="flex min-h-touch items-center gap-2 rounded-xl border border-line bg-surface px-2.5 py-1 shadow-soft"
           >
             <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
-            <span className="shrink-0 text-[13px] font-bold leading-tight">Ochutnáno</span>
-            <span className="min-w-0 flex-1 truncate text-right text-[11px] leading-tight text-ink/75">
-              {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
+            <span className="flex min-w-0 flex-1 flex-col gap-1">
+              <span className="flex items-baseline justify-between gap-2">
+                <span className="shrink-0 text-[13px] font-bold leading-tight">Ochutnáno</span>
+                <span className="shrink-0 text-[11px] leading-tight tabular-nums text-ink/75">
+                  {tasted.size} z {CATALOG_COUNTS.ingredients} surovin
+                </span>
+              </span>
+              <span
+                role="progressbar"
+                aria-valuenow={tasted.size}
+                aria-valuemin={0}
+                aria-valuemax={CATALOG_COUNTS.ingredients}
+                aria-label="Kolik surovin už dítě ochutnalo"
+                data-testid="ochutnano-postup"
+                className="block h-1 w-full overflow-hidden rounded-full bg-accent/20"
+              >
+                <span
+                  className="block h-full rounded-full bg-accent transition-all"
+                  style={{ width: `${(tasted.size / CATALOG_COUNTS.ingredients) * 100}%` }}
+                />
+              </span>
             </span>
             <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
           </Link>

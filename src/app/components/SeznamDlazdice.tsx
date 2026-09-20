@@ -46,9 +46,17 @@ export function SeznamDlazdice({
           obrazovce je každá řádka znát a dlaždice se nemá roztahovat do
           výšky kvůli obrázku. V plné podobě zůstává nad textem. */}
       {compact ? (
+        /* Počet stojí v řádce s názvem, ne pod ním: na úvodní obrazovce
+           je každá řádka znát a „ochutnáno 0 z 10" na vlastním řádku
+           přidávalo dlaždici čtrnáct bodů výšky jen kvůli dvěma číslům. */
         <span className="flex items-start gap-1.5">
           <Icon aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-          <span className="text-[13px] font-semibold leading-tight">{seznam.titleCz}</span>
+          <span className="min-w-0 flex-1 text-[13px] font-semibold leading-tight">
+            {seznam.titleCz}
+          </span>
+          <span className="shrink-0 text-[11px] tabular-nums text-ink/70">
+            {ochutnano}/{celkem}
+          </span>
         </span>
       ) : (
         <>
@@ -61,12 +69,14 @@ export function SeznamDlazdice({
       {/* Postup se počítá z deníku vybraného dítěte, takže po přepnutí
           sourozence ukazuje jeho čísla, ne cizí. */}
       <span className="mt-auto flex flex-col gap-1">
-        <span className="flex items-center justify-between gap-2 text-[11px] text-ink/70">
-          <span>
-            ochutnáno {ochutnano} z {celkem}
+        {!compact && (
+          <span className="flex items-center justify-between gap-2 text-[11px] text-ink/70">
+            <span>
+              ochutnáno {ochutnano} z {celkem}
+            </span>
+            <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
           </span>
-          {!compact && <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />}
-        </span>
+        )}
         <span className="h-1 w-full overflow-hidden rounded-full bg-ink/15">
           <span
             className="block h-full rounded-full bg-accent transition-all"

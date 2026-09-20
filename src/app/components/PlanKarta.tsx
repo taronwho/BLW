@@ -33,12 +33,18 @@ export function PlanKarta(): ReactNode {
   const stav: 'zacatek' | 'alergie' | 'dokonceno' | 'bezi' =
     plan === null ? 'zacatek' : !sedi ? 'alergie' : blokDokoncen(plan) ? 'dokonceno' : 'bezi';
 
+  /**
+   * Popisky se vejdou na jednu řádku.
+   *
+   * Dvě řádky tu stály čtrnáct bodů výšky a rozcestník se musí vejít na
+   * displej celý. Delší vysvětlení má plán na vlastní obrazovce, kam se
+   * kliká odsud — tohle je rozcestník, ne článek.
+   */
   const popis: Record<typeof stav, string> = {
-    zacatek:
-      'Každý den jedna nová surovina a k ní celá jídla s recepty pro celou rodinu.',
-    alergie: 'Alergie se od sestavení změnily. Plán je potřeba sestavit znovu.',
-    dokonceno: `Blok ${plan?.blok ?? 1} je hotový. Dalších třicet dní se sestaví z toho, co zbývá.`,
-    bezi: 'Co dnes vařit: nová surovina dne a k ní recepty na celý den.',
+    zacatek: 'Třicet dnů, každý s novou surovinou.',
+    alergie: 'Alergie se změnily, sestav plán znovu.',
+    dokonceno: `Blok ${plan?.blok ?? 1} je hotový. Dá se sestavit další.`,
+    bezi: 'Co dnes vařit a co dítě ještě nezná.',
   };
 
   const varovani = stav === 'alergie';
