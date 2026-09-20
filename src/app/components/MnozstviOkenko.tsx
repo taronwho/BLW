@@ -1,8 +1,9 @@
-import { X } from 'lucide-react';
+import { Minus, Plus, X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useModalFokus } from '../lib/modalFokus';
+import { zmenMnozstvi } from '@/nakup/mnozstvi';
 
 /**
  * Zadání množství.
@@ -17,6 +18,13 @@ import { useModalFokus } from '../lib/modalFokus';
  * dvě klepnutí navíc a seznam jednotek, do kterého se stejně všechno
  * nevejde. Co se rozebrat dá, sečte `src/nakup/mnozstvi.ts`; co ne,
  * zůstane vypsané tak, jak to rodič napsal.
+ *
+ * Vedle pole stojí minus a plus. Psát „600 g" na mobilní klávesnici jednou
+ * rukou v obchodě je práce navíc, když rodič chce jen o jedno balení víc.
+ * Krokuje se po padesáti u gramů a mililitrů, jinak po jedné, a hodnota
+ * mimo krok se zarovná — z „120 g" udělá plus „150 g", ne „170 g".
+ * U zápisu, který se rozebrat nedá („balíček"), není co krokovat, takže
+ * jsou obě tlačítka vypnutá a zůstává psaní.
  */
 export function MnozstviOkenko({
   nadpis,
@@ -37,6 +45,8 @@ export function MnozstviOkenko({
   onZavri: () => void;
 }): ReactNode {
   const [text, setText] = useState(vychozi);
+  const nahoru = zmenMnozstvi(text, 1);
+  const dolu = zmenMnozstvi(text, -1);
   const okenko = useModalFokus<HTMLFormElement>(true);
 
   // Escape zavírá, jako u každého okénka. Bez toho se z něj klávesnicí
@@ -79,18 +89,43 @@ export function MnozstviOkenko({
           </button>
         </div>
 
-        <label className="flex flex-col gap-1">
-          <span className="text-xs font-semibold text-muted">Množství</span>
-          <input
-            type="text"
-            value={text}
-            autoFocus
-            data-testid="mnozstvi-pole"
-            onChange={(event) => setText(event.target.value)}
-            placeholder="třeba 500 g, 2 ks nebo balíček"
-            className="min-h-touch w-full rounded-xl border border-line bg-paper px-3 text-base"
-          />
-        </label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="mnozstvi-pole" className="text-xs font-semibold text-muted">
+            Množství
+          </label>
+          <div className="flex items-stretch gap-2">
+            <button
+              type="button"
+              disabled={dolu === null}
+              aria-label="O krok míň"
+              data-testid="mnozstvi-min"
+              onClick={() => dolu !== null && setText(dolu)}
+              className="flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-xl border border-line bg-paper text-accent disabled:opacity-40"
+            >
+              <Minus aria-hidden="true" className="h-5 w-5" />
+            </button>
+            <input
+              id="mnozstvi-pole"
+              type="text"
+              value={text}
+              autoFocus
+              data-testid="mnozstvi-pole"
+              onChange={(event) => setText(event.target.value)}
+              placeholder="třeba 500 g, 2 ks nebo balíček"
+              className="min-h-touch min-w-0 flex-1 rounded-xl border border-line bg-paper px-3 text-center text-base"
+            />
+            <button
+              type="button"
+              disabled={nahoru === null}
+              aria-label="O krok víc"
+              data-testid="mnozstvi-plus"
+              onClick={() => nahoru !== null && setText(nahoru)}
+              className="flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-xl border border-line bg-paper text-accent disabled:opacity-40"
+            >
+              <Plus aria-hidden="true" className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
 
         <div className="flex flex-col gap-2">
           <button

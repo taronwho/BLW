@@ -295,3 +295,38 @@ export function sectiMnozstvi(zapisy: readonly string[]): Soucet {
 export function popisSouctu(soucet: Soucet): string {
   return [...soucet.mnozstvi.map(popisMnozstvi), ...soucet.zbytek].join(' + ');
 }
+
+/**
+ * O kolik se množství posune jedním klepnutím na plus nebo minus.
+ *
+ * Gramy a mililitry po padesáti: krokovat mouku po gramu by znamenalo
+ * držet prst na tlačítku půl minuty. Všechno ostatní po jedné — kusy,
+ * lžíce, stroužky ani svazky se na půlky nekupují.
+ */
+export function krokMnozstvi(jednotka: string): number {
+  return jednotka === 'g' || jednotka === 'ml' ? 50 : 1;
+}
+
+/**
+ * Množství o krok nahoru (`1`) nebo dolů (`-1`).
+ *
+ * Vrací `null`, když není co krokovat: buď se zápis rozebrat nedá
+ * („balíček", „na pánev"), nebo by se šlo na nulu a níž. Odebrat položku
+ * je jiná akce a má vlastní tlačítko, takže nula tady nedává smysl.
+ *
+ * Hodnota mimo krok se nejdřív zarovná: z „120 g" udělá plus „150 g",
+ * ne „170 g". Jinak by se po pár klepnutích dostal rodič k číslům jako
+ * „370 g", která v obchodě neodpovídají ničemu.
+ */
+export function zmenMnozstvi(text: string, smer: 1 | -1): string | null {
+  const rozebrane = rozeberMnozstvi(text);
+  if (rozebrane === null) return null;
+  const krok = krokMnozstvi(rozebrane.jednotka);
+  const navrh =
+    smer > 0
+      ? Math.floor(rozebrane.hodnota / krok) * krok + krok
+      : Math.ceil(rozebrane.hodnota / krok) * krok - krok;
+  const zaokrouhlene = Math.round(navrh * 100) / 100;
+  if (zaokrouhlene <= 0) return null;
+  return popisMnozstvi({ hodnota: zaokrouhlene, jednotka: rozebrane.jednotka });
+}

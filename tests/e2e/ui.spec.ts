@@ -1540,3 +1540,36 @@ test('surovinu jde přidat do nákupu rovnou z přehledu, bez prokliku', async (
   await expect(page.getByTestId('nakup-polozka-amarant')).toBeVisible();
   await expect(page.getByTestId('nakup-mnozstvi-amarant')).toContainText('2 ks');
 });
+
+test('množství jde krokovat plusem a mínusem i přepsat ručně', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await page.getByTestId('do-nakupu-surovina-amarant').click();
+
+  const pole = page.getByTestId('mnozstvi-pole');
+  await pole.fill('150 g');
+  // Gramy po padesáti — krokovat mouku po gramu by znamenalo držet prst
+  // na tlačítku půl minuty.
+  await page.getByTestId('mnozstvi-plus').click();
+  await expect(pole).toHaveValue('200 g');
+  await page.getByTestId('mnozstvi-min').click();
+  await expect(pole).toHaveValue('150 g');
+
+  // Kusy po jedné a se správným tvarem slova.
+  await pole.fill('4 kusy');
+  await page.getByTestId('mnozstvi-plus').click();
+  await expect(pole).toHaveValue('5 kusů');
+
+  // Na nulu se nejde, odebrat položku je jiná akce.
+  await pole.fill('1 kus');
+  await expect(page.getByTestId('mnozstvi-min')).toBeDisabled();
+
+  // Co se rozebrat nedá, se krokovat nedá — psaní zůstává.
+  await pole.fill('balíček');
+  await expect(page.getByTestId('mnozstvi-plus')).toBeDisabled();
+  await expect(page.getByTestId('mnozstvi-min')).toBeDisabled();
+
+  await page.getByTestId('mnozstvi-ulozit').click();
+  await page.getByTestId('suroviny-na-nakup').click();
+  await expect(page.getByTestId('nakup-mnozstvi-amarant')).toContainText('balíček');
+});

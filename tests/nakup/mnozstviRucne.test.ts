@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { sestavNakupniSeznam, vychoziMnozstvi } from '../../src/nakup/seznam';
-import { rozeberMnozstvi } from '../../src/nakup/mnozstvi';
+import { krokMnozstvi, rozeberMnozstvi, zmenMnozstvi } from '../../src/nakup/mnozstvi';
 import { emptyHouseholdState } from '../../src/sync/merge';
 import { ingredients, recipes } from '../../src/data';
 import type { HouseholdState, NakupPolozka } from '../../src/types';
@@ -96,5 +96,71 @@ describe('vychoziMnozstvi', () => {
       expect(navrh.trim().length, `${item.id} dal prázdný návrh`).toBeGreaterThan(0);
       expect(navrh, `${item.id} dal nulu`).not.toMatch(/^0\s/);
     }
+  });
+});
+
+/**
+ * Krokování plusem a mínusem.
+ *
+ * Psát „600 g" na mobilní klávesnici jednou rukou v obchodě je práce navíc,
+ * když rodič chce jen o jedno balení víc.
+ */
+describe('zmenMnozstvi', () => {
+  it('gramy a mililitry krokuje po padesáti', () => {
+    expect(zmenMnozstvi('150 g', 1)).toBe('200 g');
+    expect(zmenMnozstvi('150 g', -1)).toBe('100 g');
+    expect(zmenMnozstvi('200 ml', 1)).toBe('250 ml');
+  });
+
+  it('kusy a lžíce po jedné', () => {
+    expect(zmenMnozstvi('2 kusy', 1)).toBe('3 kusy');
+    expect(zmenMnozstvi('2 kusy', -1)).toBe('1 kus');
+    expect(zmenMnozstvi('1 lžíce', 1)).toBe('2 lžíce');
+  });
+
+  it('skloňuje podle nového počtu, ne podle starého', () => {
+    expect(zmenMnozstvi('4 kusy', 1)).toBe('5 kusů');
+    expect(zmenMnozstvi('5 kusů', -1)).toBe('4 kusy');
+  });
+
+  it('hodnotu mimo krok nejdřív zarovná', () => {
+    // Jinak by se po pár klepnutích došlo k „370 g", což v obchodě
+    // neodpovídá ničemu.
+    expect(zmenMnozstvi('120 g', 1)).toBe('150 g');
+    expect(zmenMnozstvi('120 g', -1)).toBe('100 g');
+  });
+
+  it('na nulu ani pod ni nejde', () => {
+    // Odebrat položku je jiná akce a má vlastní tlačítko.
+    expect(zmenMnozstvi('1 kus', -1)).toBeNull();
+    expect(zmenMnozstvi('50 g', -1)).toBeNull();
+    expect(zmenMnozstvi('0,5 kusu', -1)).toBeNull();
+  });
+
+  it('u zápisu, který se rozebrat nedá, vrací null', () => {
+    // „špetka soli" tu schválně není: tu rozebrat jde, parser ji bere
+    // jako jednu špetku a plus z ní udělá dvě. Sem patří jen zápisy,
+    // ve kterých žádná známá jednotka není.
+    for (const text of ['balíček', 'na pánev', '', 'podle chuti']) {
+      expect(zmenMnozstvi(text, 1)).toBeNull();
+      expect(zmenMnozstvi(text, -1)).toBeNull();
+    }
+  });
+
+  it('krok tam a zpátky vrátí totéž', () => {
+    for (const text of ['200 g', '3 kusy', '500 ml', '2 lžíce']) {
+      const nahoru = zmenMnozstvi(text, 1);
+      expect(nahoru).not.toBeNull();
+      expect(zmenMnozstvi(nahoru as string, -1)).toBe(text);
+    }
+  });
+});
+
+describe('krokMnozstvi', () => {
+  it('padesát u hmotnosti a objemu, jinak jedna', () => {
+    expect(krokMnozstvi('g')).toBe(50);
+    expect(krokMnozstvi('ml')).toBe(50);
+    expect(krokMnozstvi('kus')).toBe(1);
+    expect(krokMnozstvi('svazek')).toBe(1);
   });
 });
