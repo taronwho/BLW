@@ -1573,3 +1573,28 @@ test('množství jde krokovat plusem a mínusem i přepsat ručně', async ({ pa
   await page.getByTestId('suroviny-na-nakup').click();
   await expect(page.getByTestId('nakup-mnozstvi-amarant')).toContainText('balíček');
 });
+
+test('náhodný recept jde vylosovat z úvodní obrazovky i z kuchařky', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+
+  // Z rozcestníku: je to prostý odkaz, losuje se až na /recepty/nahoda,
+  // aby si úvodní obrazovka kvůli němu nestahovala celou kuchařku.
+  await navLink(page, 'Domů').click();
+  await page.getByTestId('domu-nahodny-recept').click();
+  await expect(page.getByTestId('recept-do-nakupu')).toBeVisible();
+  expect(page.url()).toContain('#/recepty/');
+  expect(page.url()).not.toContain('nahoda');
+
+  // Zpětné tlačítko vrací na rozcestník, ne do losování — jinak by se
+  // vylosovalo znovu a rodič by se ven nedostal.
+  await page.goBack();
+  await expect(page.getByTestId('domu-nahodny-recept')).toBeVisible();
+
+  // Z kuchařky: losuje se z toho, co je právě vidět.
+  await navLink(page, 'Recepty').click();
+  await page.getByTestId('hledat-recept').fill('polévka');
+  await page.getByTestId('recepty-nahoda').click();
+  await expect(page.getByTestId('recept-do-nakupu')).toBeVisible();
+  await expect(page.locator('h1').first()).toContainText(/polévka/i);
+});

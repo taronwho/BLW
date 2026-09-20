@@ -27,6 +27,12 @@ const IngredientDetailScreen = lazy(() =>
 const RecipesScreen = lazy(() =>
   import('./screens/RecipesScreen').then((m) => ({ default: m.RecipesScreen })),
 );
+/* Statická část adresy vyhraje nad `/recepty/:id`, takže se tahle routa
+   nikdy nesplete s receptem. Losuje se až tady, ne na úvodní obrazovce:
+   ta si schválně nestahuje kuchařku. */
+const NahodnyReceptScreen = lazy(() =>
+  import('./screens/NahodnyReceptScreen').then((m) => ({ default: m.NahodnyReceptScreen })),
+);
 const RecipeDetailScreen = lazy(() =>
   import('./screens/RecipeDetailScreen').then((m) => ({ default: m.RecipeDetailScreen })),
 );
@@ -93,6 +99,7 @@ export function App(): ReactNode {
               <Route path="/suroviny" element={<IngredientsScreen />} />
               <Route path="/suroviny/:id" element={<IngredientDetailScreen />} />
               <Route path="/recepty" element={<RecipesScreen />} />
+              <Route path="/recepty/nahoda" element={<NahodnyReceptScreen />} />
               <Route path="/recepty/:id" element={<RecipeDetailScreen />} />
               <Route path="/rady" element={<GuidesScreen />} />
               <Route path="/rady/:id" element={<GuideDetailScreen />} />

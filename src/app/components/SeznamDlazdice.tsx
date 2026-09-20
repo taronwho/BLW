@@ -40,7 +40,7 @@ export function SeznamDlazdice({
       data-testid={`seznam-${seznam.id}`}
       className={`flex flex-col rounded-xl border shadow-soft transition hover:shadow-lift ${
         TONY[seznam.tone]
-      } ${compact ? 'w-44 shrink-0 gap-1 p-2' : 'h-full w-full gap-2 p-3'}`}
+      } ${compact ? 'w-44 shrink-0 gap-1 p-1.5' : 'h-full w-full gap-2 p-3'}`}
     >
       {/* V úsporné podobě stojí ikona vedle názvu, ne nad ním: na úvodní
           obrazovce je každá řádka znát a dlaždice se nemá roztahovat do
@@ -68,7 +68,7 @@ export function SeznamDlazdice({
 
       {/* Postup se počítá z deníku vybraného dítěte, takže po přepnutí
           sourozence ukazuje jeho čísla, ne cizí. */}
-      <span className="mt-auto flex flex-col gap-1">
+      <span className={`mt-auto flex flex-col ${compact ? '' : 'gap-1'}`}>
         {!compact && (
           <span className="flex items-center justify-between gap-2 text-[11px] text-ink/70">
             <span>
@@ -77,12 +77,17 @@ export function SeznamDlazdice({
             <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
           </span>
         )}
-        <span className="h-1 w-full overflow-hidden rounded-full bg-ink/15">
-          <span
-            className="block h-full rounded-full bg-accent transition-all"
-            style={{ width: `${podil}%` }}
-          />
-        </span>
+        {/* Proužek jen v plné podobě. V úsporné stojí počet „0/10" rovnou
+            v řádce s názvem a proužek pod ním říkal totéž podruhé — stejný
+            důvod, proč zmizel z karty nákupu na úvodní obrazovce. */}
+        {!compact && (
+          <span className="h-1 w-full overflow-hidden rounded-full bg-ink/15">
+            <span
+              className="block h-full rounded-full bg-accent transition-all"
+              style={{ width: `${podil}%` }}
+            />
+          </span>
+        )}
       </span>
     </Link>
   );

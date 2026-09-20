@@ -1,6 +1,7 @@
 import {
   Baby,
   Clock,
+  Dices,
   Leaf,
   RotateCcw,
   Search,
@@ -12,7 +13,7 @@ import {
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ingredientById, ingredients, recipes } from '@/data';
 import { jeJednoduchaUprava } from '@/data/jednoduche';
 import { slozkyDoNakupu } from '@/nakup/seznam';
@@ -26,6 +27,7 @@ import { KonecSeznamu } from '../components/KonecSeznamu';
 import { FavoriteToggle } from '../components/FavoriteToggle';
 import { NakupTlacitko } from '../components/NakupTlacitko';
 import { OdkazNaNakup } from '../components/OdkazNaNakup';
+import { vyberNahodny } from '../lib/nahodnyRecept';
 import { FilterChips } from '../components/FilterChips';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
@@ -75,6 +77,7 @@ const TIME_OPTIONS: readonly ChipOption[] = [
 /** Seznam receptů s filtry (docs/SPEC.md kap. 4.3). */
 export function RecipesScreen(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
+  const navigate = useNavigate();
   const favorites = useMemo(() => favoriteIds(state), [state]);
   // Filtry drží adresa, ne komponenta — viz src/app/lib/urlState.ts.
   const [query, setQuery] = useUrlText('q', '');
@@ -227,6 +230,27 @@ export function RecipesScreen(): ReactNode {
         <h1 id="recepty-nadpis" className="text-xl font-bold">
           Recepty
         </h1>
+        {/* Kostka losuje z toho, co je právě vidět, ne z celé kuchařky.
+            Když si rodič nafiltroval „do 20 minut, bez mléka", chce náhodu
+            uvnitř toho výběru — jinak by mu tlačítko nabídlo přesně to, co
+            si před chvílí odfiltroval. */}
+        <button
+          type="button"
+          data-testid="recepty-nahoda"
+          disabled={serazene.length === 0}
+          aria-label={
+            filtrujeSe
+              ? `Náhodný recept z ${serazene.length} vyfiltrovaných`
+              : 'Náhodný recept z celé kuchařky'
+          }
+          onClick={() => {
+            const vylosovany = vyberNahodny(serazene);
+            if (vylosovany !== null) void navigate(`/recepty/${vylosovany.id}`);
+          }}
+          className="flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-xl border border-accent/40 bg-accent-soft text-accent disabled:opacity-40"
+        >
+          <Dices aria-hidden="true" className="h-5 w-5 shrink-0" />
+        </button>
         <OdkazNaNakup testId="recepty-na-nakup" />
       </div>
 

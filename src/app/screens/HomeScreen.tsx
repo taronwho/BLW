@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   BookOpen,
   ChevronRight,
+  Dices,
   LifeBuoy,
   Sparkles,
   Users,
@@ -101,7 +102,7 @@ export function HomeScreen(): ReactNode {
       <Link
         to="/rady/co-je-blw"
         data-testid="karta-co-je-blw"
-        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-2 shadow-soft"
+        className="flex items-center gap-2.5 rounded-xl border border-accent/30 bg-accent-soft p-1.5 shadow-soft"
       >
         <BookOpen aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
         <span className="min-w-0 flex-1">
@@ -127,7 +128,7 @@ export function HomeScreen(): ReactNode {
         <Link
           to="/rady/daveni-vs-duseni"
           data-testid="dlazdice-daveni"
-          className="flex flex-col gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-2 shadow-soft"
+          className="flex flex-col gap-0.5 rounded-xl border-2 border-risk/35 bg-risk-soft p-1.5 shadow-soft"
         >
           <AlertTriangle
             aria-hidden="true"
@@ -143,7 +144,7 @@ export function HomeScreen(): ReactNode {
         <Link
           to="/rady/prvni-pomoc-pri-duseni"
           data-testid="dlazdice-prvni-pomoc"
-          className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-2 shadow-soft"
+          className="flex flex-col gap-0.5 rounded-xl border border-line bg-surface p-1.5 shadow-soft"
         >
           <LifeBuoy aria-hidden="true" className="h-5 w-5 shrink-0 text-risk" />
           <span className="text-[13px] font-bold leading-tight">První pomoc</span>
@@ -156,6 +157,27 @@ export function HomeScreen(): ReactNode {
       {/* Plán je jediná část aplikace, která rodiči řekne, co má být zítra.
           Proto má na úvodní obrazovce samostatnou kartu, ne řádek v seznamu. */}
       <PlanKarta />
+
+      {/* Náhodný recept hned pod plánem: obojí odpovídá na „co dnes vařit",
+          jen jinak. Plán je pořádek, tohle je únik z něj, když se na plán
+          zrovna nechce. Proto je řádka vědomě tišší než karta nad ní —
+          přerušovaný rám, žádná plocha.
+
+          Je to prostý odkaz, ne tlačítko: losuje se až na adrese
+          /recepty/nahoda, aby si úvodní obrazovka kvůli němu nestahovala
+          celou kuchařku. */}
+      <Link
+        to="/recepty/nahoda"
+        data-testid="domu-nahodny-recept"
+        className="flex min-h-touch items-center gap-2.5 rounded-xl border border-dashed border-accent/50 px-2.5 text-accent"
+      >
+        <Dices aria-hidden="true" className="h-5 w-5 shrink-0" />
+        <span className="min-w-0 flex-1 truncate text-[13px] font-semibold">
+          Náhodný recept
+        </span>
+        <span className="shrink-0 text-[11px] text-muted">když nevíš, co vařit</span>
+        <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+      </Link>
 
       {/* Nákup a deník, každý na vlastní řádce pod plánem.
           Nákup je karta, deník tichá řádka — viz komentář v NakupKarta.tsx.
@@ -206,13 +228,10 @@ export function HomeScreen(): ReactNode {
           celých 44 px výšky jen pro sebe. Přesunul se na konec pásu, kam
           rodič při prohlížení seznamů stejně dojede — a rozcestník se díky
           tomu vejde na displej i s nákupem a deníkem na vlastních řádkách. */}
-      <section aria-labelledby="seznamy-nadpis" className="flex flex-col gap-1">
-        <h2
-          id="seznamy-nadpis"
-          className="text-[11px] font-semibold uppercase tracking-wide text-muted"
-        >
-          Seznamy
-        </h2>
+      {/* Nadpis je jen pro odečítač obrazovky, ne vlastní řádka.
+          Dlaždice v pásu jsou samy sebou popsané a řádka navíc znamenala
+          dvacet bodů výšky, o které by se rozcestník musel rolovat. */}
+      <section aria-label="Seznamy surovin" className="flex flex-col gap-1">
         {/* Záporné okraje vytáhnou pás k okraji displeje, ať je poznat, že
             pokračuje; obsah si vnitřní odsazení vrací zpátky. */}
         <ul
