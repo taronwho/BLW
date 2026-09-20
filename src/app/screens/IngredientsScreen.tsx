@@ -20,6 +20,8 @@ import { FilterChips } from '../components/FilterChips';
 import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
 import { KonecSeznamu } from '../components/KonecSeznamu';
 import { OdkazNaNakup } from '../components/OdkazNaNakup';
+import { NakupTlacitko } from '../components/NakupTlacitko';
+import { vychoziMnozstvi } from '@/nakup/seznam';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
 import { FilterToggles } from '../components/FilterToggles';
@@ -461,6 +463,22 @@ function IngredientTile({
           )}
         </span>
       </Link>
+
+      {/* Do nákupu rovnou z přehledu, bez prokliku do detailu.
+          Vlastní řádka přes celou šířku, ne třetí ikona nahoře: na displeji
+          širokém 320 px je dlaždice 140 px a tři dotykové cíle po 44 px se
+          do ní vedle ikony suroviny nevejdou. Popisek je navíc srozumitelnější
+          než další samotná ikona. */}
+      <NakupTlacitko
+        davky={[{ ingredientId: ingredient.id }]}
+        popis="Do nákupu"
+        potvrzeni="Přidáno"
+        zeptejSe={{
+          nadpis: `${ingredient.nameCz} do nákupu`,
+          vychozi: vychoziMnozstvi(ingredient.id),
+        }}
+        testId={`do-nakupu-surovina-${ingredient.id}`}
+      />
 
       {maZiviny && (
         <span

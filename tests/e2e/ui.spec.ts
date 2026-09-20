@@ -1519,3 +1519,24 @@ test('do nákupního seznamu se dá dostat ze surovin i z receptů', async ({ pa
   await page.getByTestId('recepty-na-nakup').click();
   await expect(page.getByTestId('nakup-prazdny')).toBeVisible();
 });
+
+test('surovinu jde přidat do nákupu rovnou z přehledu, bez prokliku', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+
+  const tlacitko = page.getByTestId('do-nakupu-surovina-amarant');
+  await expect(tlacitko).toBeVisible();
+  await tlacitko.click();
+  // Ptá se na množství stejně jako v detailu — je to tatáž otázka.
+  await expect(page.getByTestId('mnozstvi-okenko')).toBeVisible();
+  await expect(page.getByTestId('mnozstvi-pole')).not.toHaveValue('');
+  await page.getByTestId('mnozstvi-pole').fill('2 ks');
+  await page.getByTestId('mnozstvi-ulozit').click();
+
+  // Počet přidání je vidět rovnou u tlačítka.
+  await expect(page.getByTestId('do-nakupu-surovina-amarant-pocet')).toHaveText('1×');
+
+  await page.getByTestId('suroviny-na-nakup').click();
+  await expect(page.getByTestId('nakup-polozka-amarant')).toBeVisible();
+  await expect(page.getByTestId('nakup-mnozstvi-amarant')).toContainText('2 ks');
+});

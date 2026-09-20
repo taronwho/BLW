@@ -25,68 +25,51 @@ export function NakupKarta(): ReactNode {
   const state = useHouseholdStore((store) => store.state);
   const { celkem, koupeno } = nakupPocty(state);
   const zbyva = celkem - koupeno;
-  const podil = celkem === 0 ? 0 : Math.round((koupeno / celkem) * 100);
 
   /**
-   * Věta pod názvem je jen pro prázdný seznam.
+   * Jedno číslo: kolik věcí ještě není v košíku.
    *
-   * Jakmile v něm něco je, říká všechno odznak „3 z 12 v košíku" a proužek
-   * pod ním. Přidat k tomu ještě „Zbývá 9 položek" znamenalo napsat totéž
-   * dvakrát a rodič to musí u regálu číst pokaždé znova.
+   * Žádný proužek ani poměr „0 ze 7". Proužek měří postup k pevnému cíli —
+   * u Ochutnáno jím je 301 surovin katalogu a cíl se nemění. V nákupu si
+   * ale celek určuje rodič: přidá recept a ze sedmi je dvanáct, takže
+   * plný proužek neznamená hotovo a prázdný neznamená nic. Jediné, co ho
+   * u regálu zajímá, je kolik toho ještě nemá v košíku.
    */
-  const popis = celkem === 0 ? 'Zatím prázdný, plní se z receptů a z plánu' : '';
-
-  /** Pro odečítač obrazovky celá věta, ať se nemusí luštit z odznaku. */
-  const popisProOdecitac =
+  const popis =
     celkem === 0
-      ? popis
+      ? 'Zatím prázdný, plní se z receptů a z plánu'
       : zbyva === 0
         ? 'Všechno v košíku'
-        : `${sklonuj(zbyva, POLOZKA)} k nákupu z ${celkem}`;
+        : `${sklonuj(zbyva, POLOZKA)} k nákupu`;
 
   return (
     <Link
       to="/nakup"
       data-testid="karta-nakupu"
-      aria-label={`Nákupní seznam. ${popisProOdecitac}.`}
+      aria-label={`Nákupní seznam. ${popis}.`}
       className="flex items-center gap-2.5 rounded-2xl bg-accent-sheen p-2.5 text-white shadow-lift"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20">
         <ShoppingBasket aria-hidden="true" className="h-5 w-5 shrink-0" />
       </span>
 
-      <span className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="flex items-baseline justify-between gap-2">
-          <span className="text-sm font-bold leading-tight">Nákupní seznam</span>
-          {celkem > 0 && (
-            <span className="shrink-0 text-[11px] font-semibold tabular-nums text-white/85">
-              {koupeno} z {celkem} v košíku
-            </span>
-          )}
-        </span>
-        {popis.length > 0 && (
-          <span className="truncate text-[11px] leading-tight text-white/85">{popis}</span>
-        )}
-        {/* Proužek jen když je co měřit. Prázdná lišta u prázdného seznamu
-            nic neříká a jen zabírá řádku. */}
-        {celkem > 0 && (
-          <span
-            role="progressbar"
-            aria-valuenow={koupeno}
-            aria-valuemin={0}
-            aria-valuemax={celkem}
-            aria-label="Kolik z nákupu je v košíku"
-            className="block h-1.5 w-full overflow-hidden rounded-full bg-white/25"
-          >
-            <span
-              className="block h-full rounded-full bg-white transition-all"
-              style={{ width: `${podil}%` }}
-            />
-          </span>
-        )}
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span className="text-sm font-bold leading-tight">Nákupní seznam</span>
+        <span className="truncate text-[11px] leading-tight text-white/85">{popis}</span>
       </span>
 
-      <ChevronRight aria-hidden="true" className="h-5 w-5 shrink-0 text-white/80" />
+      {/* Počet velkými číslicemi vpravo. U regálu je to to jediné, na co se
+          rodič kouká, a z rozcestníku to má přečíst na jeden pohled. */}
+      {zbyva > 0 && (
+        <span
+          aria-hidden="true"
+          data-testid="karta-nakupu-zbyva"
+          className="shrink-0 text-2xl font-bold tabular-nums leading-none"
+        >
+          {zbyva}
+        </span>
+      )}
+        <ChevronRight aria-hidden="true" className="h-5 w-5 shrink-0 text-white/80" />
     </Link>
   );
 }

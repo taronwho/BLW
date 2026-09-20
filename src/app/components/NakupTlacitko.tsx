@@ -155,18 +155,23 @@ export function NakupTlacitko({
       data-testid={testId}
       aria-label={(hotovo ? potvrzeni : popis) + kolikratVetou}
       onClick={klepnuti}
-      className={`flex min-h-touch items-center justify-center gap-2 rounded-xl border-2 px-4 text-sm font-semibold transition-colors duration-300 ${barva}`}
+      /* `whitespace-nowrap` a úsporné odsazení kvůli dlaždici v přehledu
+         surovin: ta je na displeji širokém 320 px jen 140 px a popisek se
+         v ní lámal na dvě řádky, přes které pak ležel odznak s počtem. */
+      className={`flex min-h-touch items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border-2 px-2.5 text-[13px] font-semibold transition-colors duration-300 ${barva}`}
     >
       <Icon
         aria-hidden="true"
         className={`h-4 w-4 shrink-0 ${hotovo ? 'animate-odskrtnuto' : ''}`}
       />
-      <span aria-hidden="true">{hotovo ? potvrzeni : popis}</span>
+      <span aria-hidden="true" className="min-w-0 truncate">
+        {hotovo ? potvrzeni : popis}
+      </span>
       {kolikrat > 0 && (
         <span
           aria-hidden="true"
           data-testid={testId === undefined ? undefined : `${testId}-pocet`}
-          className={`flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-bold leading-none ${
+          className={`flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full px-1 text-[10px] font-bold leading-none ${
             hotovo ? 'bg-on-accent/20 text-on-accent' : 'bg-accent text-on-accent'
           }`}
         >
