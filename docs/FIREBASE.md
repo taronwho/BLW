@@ -295,3 +295,50 @@ Co je dobré vědět:
 Provoz téhle aplikace se vejde do bezplatné úrovně Firebase (Spark).
 Jeden dokument na domácnost, několik zápisů denně. Platební kartu Firebase
 pro Spark nevyžaduje.
+
+## App Check — proti zakládání domácností skriptem
+
+Tohle je nepovinný krok. Bez něj aplikace funguje, jen se spoléhá na to, že
+o adresu projektu nikdo nezavadí.
+
+**Proč:** přihlášení je anonymní a pravidlo na zakládání domácnosti zní
+„stačí být přihlášený". Kdokoli si tedy skriptem může založit libovolný
+počet dokumentů a účet pojede na kvótě Firebase. App Check k požadavku
+přidá potvrzení, že jde ze skutečné aplikace v prohlížeči.
+
+Zapíná se ve **dvou krocích a v tomhle pořadí** — obráceně si odřízneš
+vlastní aplikaci od dat.
+
+**Krok 1: klíč a zapnutí v aplikaci.**
+
+1. V konzoli Firebase → *App Check* → *Apps* → vyber webovou aplikaci →
+   poskytovatel **reCAPTCHA v3**. Konzole tě pošle zaregistrovat doménu
+   `<nick>.github.io` a vrátí **site key**.
+2. Klíč vlož jako proměnnou `VITE_RECAPTCHA_SITE_KEY` — stejným způsobem,
+   jakým vkládáš `VITE_FIREBASE_*` (kapitola 7, varianta A nebo B).
+3. Nasaď a otevři aplikaci. V konzoli Firebase → *App Check* → *Metrics*
+   se během pár minut objeví ověřené požadavky.
+
+Site key je veřejný, stejně jako `apiKey`. Patří do repozitáře i do
+prohlížeče a není to tajemství.
+
+**Krok 2: vyžádání v pravidlech.** Teprve až *Metrics* ukazují ověřené
+požadavky a žádné neověřené, přidej do `firestore.rules` do funkce
+`prihlaseny()` podmínku `request.app != null` a pravidla nahraj znovu.
+Dokud v metrikách svítí neověřené požadavky, je mezi nimi nejspíš tvůj
+vlastní telefon — pak by ho krok 2 odstřihl.
+
+Vrátit se dá kdykoli: smaž podmínku z pravidel a nahraj je znovu.
+
+## Správcovská adresa v pravidlech
+
+`firestore.rules` má funkci `jsemSpravce()` s konkrétní e-mailovou
+adresou. Je to veřejný repozitář, takže adresu vidí i roboti sbírající
+e-maily. Bezpečnost tím netrpí (chrání ji heslo), ale za úvahu stojí:
+
+- založit si na to vyhrazenou adresu, kterou nikde jinde nepoužíváš, nebo
+- nastavit si přes Admin SDK vlastní příznak (`admin: true`) a v pravidlech
+  se ptát na `request.auth.token.admin == true` místo na adresu.
+
+Druhá varianta je čistší, ale vyžaduje jednorázové spuštění skriptu s
+Admin SDK, tedy servisní klíč — a ten do repozitáře nepatří nikdy.

@@ -52,8 +52,41 @@ export function connectFirebase(config: FirebaseConfig): Promise<FirebaseSession
   return spojeni;
 }
 
+/**
+ * App Check — potvrzení, že požadavek jde ze skutečné aplikace.
+ *
+ * Bez něj znamená anonymní přihlášení plus `allow create: if prihlaseny()`,
+ * že si kdokoli skriptem založí libovolný počet domácností a účet jede na
+ * kvótě Firebase (audit 17. 9. 2026, nález 8.3).
+ *
+ * Zapíná se jen tehdy, když je v prostředí klíč pro reCAPTCHA v3. Jinak
+ * se mlčky přeskočí: lokální režim i vývoj bez klíče musí dál fungovat a
+ * chyba v App Checku nesmí shodit přihlášení. Postup zapnutí včetně
+ * druhého kroku v `firestore.rules` je v docs/FIREBASE.md.
+ *
+ * Import je dynamický, aby se reCAPTCHA nestahovala v instalacích, kde
+ * se nepoužívá.
+ */
+async function zapniAppCheck(app: FirebaseApp): Promise<void> {
+  const klic = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  if (klic === undefined || klic.trim() === '') return;
+  try {
+    const { ReCaptchaV3Provider, initializeAppCheck } = await import('firebase/app-check');
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(klic),
+      isTokenAutoRefreshEnabled: true,
+    });
+  } catch (chyba) {
+    // Zalogovat a jet dál. Dokud pravidla App Check nevyžadují, je to
+    // zhoršená ochrana, ne rozbitá aplikace.
+    console.warn('App Check se nepodařilo zapnout:', chyba);
+  }
+}
+
 async function otevriSpojeni(config: FirebaseConfig): Promise<FirebaseSession> {
   const app = getApps().length === 0 ? initializeApp(config) : getApp();
+  // Před přihlášením: token App Checku má nést už první požadavek.
+  await zapniAppCheck(app);
   const db = otevriFirestore(app);
   const auth = getAuth(app);
   const credential = await signInAnonymously(auth);

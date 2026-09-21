@@ -65,6 +65,15 @@ z prvního znění tady záměrně není. Kuchařka mezitím pojala i jednoduch�
 udělat nejde, aniž by se vymýšlela vata. Kolik jich je, měří
 `jeJednoduchaUprava` v `src/data/jednoduche.ts`.
 
+Pravdivě k tomu patří i druhá půlka (audit 17. 9. 2026, nález 2.3): ke
+21. 9. 2026 je v kuchařce **202 jednoduchých úprav a 292 plnohodnotných
+receptů** a **90 z těch plnohodnotných má tři kroky, ne čtyři**. Nejde
+tedy jen o úpravy o jedné složce — je to otevřený úkol na doplnění kroků
+tam, kde recept skutečně víc kroků má. Čísla vypisuje `npm run
+validate:data` v bloku `SLOŽITOST RECEPTŮ`, takže se nedají přehlédnout.
+Dokud se nedoplní, platí, že „494 receptů" je součet dvou různých věcí a
+v textech se tak má číst.
+
 ```
 /goal Kategorie receptů "obed-vecere" je hotová: src/data/recipes/lunches_dinners.ts obsahuje 30 receptů podle typu Recipe z docs/SPEC.md, každý má neprázdný babySplitPoint odkazující na konkrétní krok z baseSteps, všechny tři fáze babyServing, neprázdné `adultSteps` (dříve `meatSteps`) i vegetarianSteps, a každý recept obsahující surovinu z kategorie maso-ryby má vyplněný vegetarianProteinSwap, který nahrazuje bílkovinu (ne pouhé vynechání). Všechny ingredientId existují v katalogu. `npm run validate` skončí exit kódem 0 a jeho úplný výstup je v konverzaci. V konverzaci vypiš tabulku: název receptu | vegetarián ano/ne | náhrada bílkoviny | minAgeMonths. Nesmíš měnit src/safety/, tests/ ani data surovin.
 ```

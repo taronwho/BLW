@@ -12,6 +12,7 @@ import { safetyRules } from '../src/safety/rules';
 import type { Finding } from '../src/safety/types';
 import { pouzitiDomen, pouzitiUrl, zkontrolujZdroje } from '../src/safety/zdroje';
 import { recipeIsVegetarian } from '../src/app/lib/deriveRecipes';
+import { jeJednoduchaUprava, JEDNODUCHA_MINUT, JEDNODUCHA_SLOZEK } from '../src/data/jednoduche';
 import type { Recipe } from '../src/types';
 import { GUIDE_CATEGORIES, INGREDIENT_CATEGORIES, RECIPE_CATEGORIES } from '../src/types';
 
@@ -133,6 +134,36 @@ function printSourceTable(): void {
   }
 }
 
+/**
+ * Kolik z kuchařky jsou plnohodnotné recepty a kolik rychlé úpravy.
+ *
+ * Audit 17. 9. 2026 (nález 2.3): číslo 494 nese dvě různé věci. „Dušená
+ * mrkev na dva prsty" i „Čočka na kyselo pro celou rodinu" se počítají
+ * stejně, takže kritérium „≥ 80 receptů" měří něco jiného, než měřit
+ * chtělo. V aplikaci se obojí rozliší filtrem „jednoduché", ve výpisu se
+ * to dosud nerozlišilo nijak.
+ *
+ * Řádek o krocích je otevřený úkol: cíl fáze 3 v docs/GOALS.md žádal u
+ * každého receptu aspoň čtyři kroky v `baseSteps` a u části plnohodnotných
+ * receptů to zatím neplatí.
+ */
+function printRecipeComplexity(): void {
+  const jednoduche = catalog.recipes.filter(jeJednoduchaUprava);
+  const plne = catalog.recipes.filter((r) => !jeJednoduchaUprava(r));
+  const malokroku = plne.filter((r) => r.baseSteps.length < 4).length;
+  const nejmene = catalog.recipes.reduce(
+    (min, r) => Math.min(min, r.baseSteps.length),
+    Number.POSITIVE_INFINITY,
+  );
+  console.log('\nSLOŽITOST RECEPTŮ');
+  console.log(
+    `  jednoduchých úprav (do ${JEDNODUCHA_SLOZEK} složek a ${JEDNODUCHA_MINUT} minut): ${jednoduche.length}`,
+  );
+  console.log(`  plnohodnotných receptů: ${plne.length}`);
+  console.log(`  z toho s méně než 4 kroky v baseSteps: ${malokroku}`);
+  console.log(`  nejmenší počet kroků v kuchařce: ${nejmene}`);
+}
+
 function main(): void {
   const findings = runSafetyRules(catalog);
   const errors = errorsOf(findings);
@@ -145,6 +176,7 @@ function main(): void {
   console.log(`Pravidel v src/safety/rules.ts: ${safetyRules.length}`);
   printIngredientTable(findings);
   printRecipeTable(findings);
+  printRecipeComplexity();
   printGuideTable();
   printFindings('CHYBY', errors);
   printSourceTable();
