@@ -10,6 +10,7 @@ import { checkGuides } from '../src/safety/guides';
 import { errorsOf, runSafetyRules, warningsOf } from '../src/safety/run';
 import { safetyRules } from '../src/safety/rules';
 import type { Finding } from '../src/safety/types';
+import { pouzitiDomen, pouzitiUrl, zkontrolujZdroje } from '../src/safety/zdroje';
 import { recipeIsVegetarian } from '../src/app/lib/deriveRecipes';
 import type { Recipe } from '../src/types';
 import { GUIDE_CATEGORIES, INGREDIENT_CATEGORIES, RECIPE_CATEGORIES } from '../src/types';
@@ -104,9 +105,41 @@ function printGuideTable(): void {
   }
 }
 
+/**
+ * Přehled zdrojů — odkud katalog bere jistotu.
+ *
+ * Audit 17. 9. 2026 (nález 1.2) našel 91 % odkazů na jediné britské
+ * doméně a 34 unikátních URL na 795 položek. Dokud to tahle tabulka
+ * nevypisuje, není ten stav v ničem vidět a při každé další dávce se
+ * tiše zhoršuje.
+ */
+function printSourceTable(): void {
+  const domeny = pouzitiDomen(catalog);
+  const polozek = catalog.ingredients.length + catalog.recipes.length;
+  console.log('\nZDROJE PODLE DOMÉN');
+  console.log(pad('doména', 28) + padLeft('položek', 9) + padLeft('podíl', 8) + padLeft('URL', 6));
+  for (const radek of domeny) {
+    const podil = polozek === 0 ? 0 : Math.round((radek.polozek / polozek) * 100);
+    console.log(
+      pad(radek.domena, 28) +
+        padLeft(String(radek.polozek), 9) +
+        padLeft(`${podil} %`, 8) +
+        padLeft(String(radek.url), 6),
+    );
+  }
+  const nejcastejsi = pouzitiUrl(catalog).slice(0, 3);
+  for (const radek of nejcastejsi) {
+    console.log(`  nejvytíženější: ${radek.polozek}× ${radek.url}`);
+  }
+}
+
 function main(): void {
   const findings = runSafetyRules(catalog);
   const errors = errorsOf(findings);
+  // Dnešek se bere jednou: kdyby si každé pravidlo sahalo pro datum samo,
+  // lišil by se výpis běhu, který přeteče půlnoc.
+  const dnes = new Date().toISOString().slice(0, 10);
+  const zdrojoveNalezy = zkontrolujZdroje(catalog, dnes);
   const warnings = warningsOf(findings);
 
   console.log(`Pravidel v src/safety/rules.ts: ${safetyRules.length}`);
@@ -114,7 +147,12 @@ function main(): void {
   printRecipeTable(findings);
   printGuideTable();
   printFindings('CHYBY', errors);
+  printSourceTable();
   printFindings('VAROVÁNÍ', warnings);
+  if (zdrojoveNalezy.length > 0) {
+    console.log('\nVAROVÁNÍ O ZDROJÍCH');
+    for (const nalez of zdrojoveNalezy) console.log(`  ${nalez.ruleId}: ${nalez.message}`);
+  }
 
   const verified = catalog.ingredients.filter((i) => i.reviewStatus === 'verified').length;
   const needsReview = catalog.ingredients.filter((i) => i.reviewStatus === 'needs-review').length;
@@ -143,7 +181,7 @@ function main(): void {
   const polozekVSeznamech = lists.reduce((soucet, one) => soucet + one.polozky.length, 0);
   console.log(`SEZNAMŮ: ${lists.length}   (položek: ${polozekVSeznamech})`);
   console.log(`CHYB: ${errors.length + guideFindings.length}`);
-  console.log(`VAROVÁNÍ: ${warnings.length}`);
+  console.log(`VAROVÁNÍ: ${warnings.length + zdrojoveNalezy.length}`);
 
   // Cílové počty z docs/SPEC.md kapitola 9. Dokud se katalog plní, jsou to
   // informativní řádky — ne chyba, jinak by nešlo commitnout ani první dávku.

@@ -31,6 +31,20 @@ Blogy, e-shopy, magazíny, Pinterest, recepty od uživatelů: **nikdy**.
 4. Když se zdroje rozcházejí (což se u zavádění příkrmů stává často, zvlášť mezi českou a britskou praxí), uveď obě verze a nastav `reviewStatus: 'needs-review'`. Nesnaž se rozdíl rozhodnout.
 5. Když zdroj nenajdeš, položku ponech s minimálním popisem a `needs-review`. **Nedoplňuj z paměti.**
 
+`solidstarts.com` je v tier 2, ale jeho texty i fotky jsou chráněný obsah. Odkazovat se na něj smí, přebírat z něj formulace ani blízké parafráze ne — platí pravidlo 3 z `CLAUDE.md`. Totéž pro `nhs.uk`. Z obou se berou **fakta**, ne věty.
+
+### Kolik položek smí stát na jednom odkazu
+
+Obecná stránka o zavádění příkrmů nedokládá konkrétní tvrzení o topinamburu. Pravidlo `source-url-cap` v `src/safety/zdroje.ts` proto varuje, jakmile jeden odkaz drží víc než **50 položek** katalogu. Je to varování, ne chyba: stav se nedá spravit jedním commitem, ale `npm run validate:data` ho vypisuje pokaždé, takže se na něj nezapomene.
+
+Tabulka `ZDROJE PODLE DOMÉN` ve stejném výpisu ukazuje monokulturu. K září 2026 stojí 99 % položek na `nhs.uk`; cíl je dostat pod 70 % a doplnit ESPGHAN a ČPS ČLS JEP, protože česká a britská praxe se liší (vitamin D, načasování lepku, mléko).
+
+### Jak často se zdroje čtou znovu
+
+`accessedAt` znamená „tenhle den jsem tu stránku opravdu otevřel". Pravidlo `source-freshness` varuje, jakmile je odkazu víc než **12 měsíců**. Revize znamená stránku znovu načíst a ověřit, že pořád říká totéž — ne jen přepsat datum. Když se obsah změnil, opravuje se text položky; když stránka zmizela, hledá se náhrada a do té doby jde položka na `needs-review`.
+
+`npm run check:sources` ověřuje jen HTTP status, tedy že stránka existuje. Že pořád říká totéž, nezjistí žádný skript.
+
 ## 2. Absolutní zákazy pro dětskou linii (do 12 měsíců)
 
 | Zákaz | Důvod | Do kdy |
