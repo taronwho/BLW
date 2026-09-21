@@ -520,6 +520,14 @@ export interface HouseholdState {
    * recept, který doma funguje, funguje pro rodinu.
    */
   favorites: Record<string, CasovanaHodnota<boolean>>;
+  /**
+   * Pro kolik dospělých se vaří — přepočet množství v nákupním seznamu.
+   *
+   * Kuchařka je psaná na dva dospělé a jedno dítě. Kdo vaří pro pět, si to
+   * dosud musel přepočítat sám (audit 17. 9. 2026, kapitola 10 bod 2).
+   * Se značkou času jako všechno ostatní, ať se dva telefony nepřetahují.
+   */
+  nakupDospelych?: CasovanaHodnota<number>;
   /** Poznámky rodiče k receptům, klíčem je `recipeId`. Se značkou času ze
    *  stejného důvodu jako oblíbené: smazání poznámky musí přežít sloučení. */
   recipeNotes: Record<string, CasovanaHodnota<string>>;

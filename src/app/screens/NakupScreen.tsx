@@ -11,7 +11,13 @@ import { IngredientIcon } from '../components/IngredientIcon';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { useModalFokus } from '../lib/modalFokus';
 import { MnozstviOkenko } from '../components/MnozstviOkenko';
-import { POLOZKA, sklonuj } from '@/text/sklonovani';
+import { DOSPELY, POLOZKA, sklonuj } from '@/text/sklonovani';
+import {
+  VOLBY_DOSPELYCH,
+  ZAKLAD_DOSPELYCH,
+  nasobekProDospele,
+  popisNasobku,
+} from '@/nakup/porce';
 
 /**
  * Nákupní seznam.
@@ -28,6 +34,9 @@ export function NakupScreen(): ReactNode {
   const vyprazdniNakup = useHouseholdStore((store) => store.vyprazdniNakup);
   const [ptaSe, setPtaSe] = useState(false);
   const nastavMnozstvi = useHouseholdStore((store) => store.nastavMnozstvi);
+  const nastavPocetDospelych = useHouseholdStore((store) => store.nastavPocetDospelych);
+  const dospelych = state.nakupDospelych?.hodnota ?? ZAKLAD_DOSPELYCH;
+  const nasobek = nasobekProDospele(dospelych);
   /** Která surovina má právě otevřené okénko s množstvím. */
   const [upravovana, setUpravovana] = useState<string | null>(null);
   const okenko = useModalFokus<HTMLDivElement>(ptaSe);
@@ -68,6 +77,30 @@ export function NakupScreen(): ReactNode {
         <p className="text-xs leading-relaxed text-white/90">
           Množství se sčítá napříč recepty, takže u regálu vidíš rovnou, kolik čeho vzít.
         </p>
+        {/* Kuchařka je psaná na dva dospělé a jedno dítě. Kdo vaří pro víc,
+            si to dosud musel přepočítat sám (audit 17. 9. 2026, kap. 10
+            bod 2). Počítá se podle dospělých: dětská porce se odebírá
+            z téhož hrnce a na nákup se prakticky neprojeví. */}
+        <label className="flex flex-wrap items-center gap-2 text-xs text-white/90">
+          <span>Vaříš pro</span>
+          <select
+            data-testid="nakup-dospelych"
+            value={dospelych}
+            onChange={(event) => void nastavPocetDospelych(Number(event.target.value))}
+            className="min-h-touch rounded-xl bg-white/20 px-2 text-sm font-semibold text-white"
+          >
+            {VOLBY_DOSPELYCH.map((pocet) => (
+              <option key={pocet} value={pocet} className="text-ink">
+                {sklonuj(pocet, DOSPELY)}
+              </option>
+            ))}
+          </select>
+          {nasobek !== 1 && (
+            <span data-testid="nakup-nasobek" className="font-semibold">
+              množství z receptů {popisNasobku(nasobek)}
+            </span>
+          )}
+        </label>
       </header>
 
       {radky.length === 0 ? (

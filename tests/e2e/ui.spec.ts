@@ -1653,3 +1653,140 @@ test('nepřesnost jde nahlásit z detailu suroviny i receptu', async ({ page }) 
   await expect(odkaz).toHaveAttribute('target', '_blank');
   await expect(odkaz).toHaveAttribute('rel', /noopener/);
 });
+
+test('prázdný stav nabízí vypnutí těch filtrů, které jsou opravdu zapnuté', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await otevriFiltry(page, 'surovin');
+
+  // Dvě podmínky naráz: kategorie a „už ochutnané" na čistém deníku.
+  await page.getByTestId('filtr-kategorii').selectOption('ovoce');
+  await page.getByTestId('filtr-deniku').getByTestId('chip-ochutnano').click();
+  const prazdny = page.getByTestId('prazdny-stav');
+  await expect(prazdny).toBeVisible();
+
+  // Nabídka pojmenovává, co je zapnuté — ne obecná rada „zkus ubrat filtr".
+  const nabidky = page.getByTestId('prazdny-stav-nabidky');
+  await expect(nabidky).toContainText('kategorii');
+  await expect(nabidky).toContainText('už ochutnané');
+  // Filtr, který zapnutý není, se nenabízí.
+  await expect(nabidky).not.toContainText('sezón');
+
+  // Jedno klepnutí vypne jednu podmínku a seznam se vrátí.
+  await nabidky.getByRole('button', { name: /už ochutnané/ }).click();
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+  await expect(prazdny).toBeHidden();
+  // A vypnula se jenom ta jedna — kategorie drží dál.
+  await expect(page.getByTestId('filtr-kategorii')).toHaveValue('ovoce');
+});
+
+test('u jediného zapnutého filtru se nenabízí „zrušit všechny"', async ({ page }) => {
+  // Dvě tlačítka, která dělají totéž, jen zdržují.
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+  await hledejVSeznamu(page, 'hledat-recept', 'pocet-receptu', 'qqqqq');
+
+  const prazdny = page.getByTestId('prazdny-stav-recepty');
+  await expect(prazdny).toBeVisible();
+  await expect(prazdny.getByTestId('prazdny-stav-recepty-zrusit-vse')).toHaveCount(0);
+
+  await prazdny.getByRole('button', { name: /hledání/ }).click();
+  await expect(page.getByTestId('seznam-receptu')).toBeVisible();
+});
+
+test('nákupní seznam přepočítá množství podle počtu dospělých', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Recepty').click();
+  await page.getByTestId('seznam-receptu').getByRole('link').first().click();
+  await page.getByTestId('recept-do-nakupu').click();
+
+  await navLink(page, 'Domů').click();
+  await page.getByTestId('karta-nakupu').click();
+
+  const prvni = page.getByTestId(/^nakup-mnozstvi-/).first();
+  const pred = ((await prvni.textContent()) ?? '').trim();
+
+  // Kuchařka je psaná na dva dospělé; pro čtyři se množství zdvojnásobí.
+  await page.getByTestId('nakup-dospelych').selectOption('4');
+  await expect(page.getByTestId('nakup-nasobek')).toContainText('2×');
+  await expect(prvni).not.toHaveText(pred);
+
+  // Volba se drží i po obnovení stránky — je ve stavu domácnosti, ne v paměti.
+  await page.reload();
+  await expect(page.getByTestId('nakup-dospelych')).toHaveValue('4');
+
+  await page.getByTestId('nakup-dospelych').selectOption('2');
+  await expect(page.getByTestId('nakup-nasobek')).toHaveCount(0);
+  await expect(prvni).toHaveText(pred);
+});
+
+test('oprava katalogu se projeví bez nasazení, ale jen když projde pravidly', async ({ page }) => {
+  // Soubor se podstrčí místo toho na serveru — jinak by test musel měnit
+  // data v repozitáři, aby ověřil chování, které na datech nezávisí.
+  const brokolice = ingredients.find((one) => one.id === 'brokolice');
+  expect(brokolice, 'brokolice musí být v katalogu').toBeDefined();
+
+  await page.route('**/opravy.json', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        verze: 99,
+        vydano: '2026-10-05',
+        opravy: [
+          {
+            druh: 'surovina',
+            id: 'brokolice',
+            duvod: 'Upřesněno podle novějšího doporučení.',
+            frequencyLimit: 'Klidně i každý den.',
+          },
+          {
+            // Tahle neprojde: med do pokynu pro šestiměsíční dítě nepatří
+            // a bezpečnostní pravidlo ji zahodí, i když přišla stejnou cestou.
+            druh: 'surovina',
+            id: 'mrkev',
+            duvod: 'Údajné upřesnění.',
+            prep: { '6m': { serving: 'Osladit medem, bude to chutnat.' } },
+          },
+        ],
+      }),
+    }),
+  );
+
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await hledejVSeznamu(page, 'hledat-surovinu', 'pocet-surovin', 'brokolice');
+  await page.getByTestId('seznam-surovin').getByRole('link').first().click();
+
+  // Opravený text je vidět a rodič se dozví, že se změnil.
+  await expect(page.getByTestId('duvod-opravy')).toContainText('Upřesněno');
+  await expect(page.locator('article')).toContainText('Klidně i každý den.');
+
+  // Zahozená oprava se nikam nedostala.
+  await page.goto('./#/suroviny/mrkev');
+  // Nejdřív se ujisti, že se detail vůbec vykreslil — jinak by „neobsahuje
+  // med" prošlo i na prázdné stránce.
+  await expect(page.locator('article')).toContainText(/mrkev/i);
+  await expect(page.getByTestId('duvod-opravy')).toHaveCount(0);
+  await expect(page.locator('article')).not.toContainText('medem');
+});
+
+test('otevření surovin nestahuje kuchařku', async ({ page }) => {
+  // Audit 17. 9. 2026, nález 3.2: největší balík v aplikaci je kuchařka
+  // (skoro megabajt). Kdo prochází suroviny, ji nepotřebuje — dokud se
+  // z ní návrh množství i hledání počítaly za běhu, stahovala se stejně.
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await expect(page.getByTestId('seznam-surovin')).toBeVisible();
+  // I hledání: index se staví líně, až při prvním dotazu.
+  await hledejVSeznamu(page, 'hledat-surovinu', 'pocet-surovin', 'brokolice');
+
+  const kb = await page.evaluate(() =>
+    performance
+      .getEntriesByType('resource')
+      .filter((r) => r.name.endsWith('.js'))
+      .reduce((soucet, r) => soucet + (r as PerformanceResourceTiming).encodedBodySize, 0) / 1024,
+  );
+  // S kuchařkou to bylo přes 400 kB komprimovaně.
+  expect(kb).toBeLessThan(320);
+});

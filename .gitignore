@@ -20,3 +20,7 @@ tests/e2e/screenshots
 .audit*.ts
 .dump.ts
 dbg.mjs
+
+# Výstup Lighthouse. Měří se v CI, do repozitáře nic z toho nepatří.
+lighthouse-report/
+.lighthouseci/

@@ -14,7 +14,8 @@
     "validate": "npm run typecheck && npm run lint && vitest run && npm run validate:data",
     "test:e2e": "playwright test",
     "check:sources": "tsx scripts/check-sources.ts",
-    "audit:stats": "tsx scripts/audit-stats.ts"
+    "audit:stats": "tsx scripts/audit-stats.ts",
+    "generate:mnozstvi": "tsx scripts/generuj-mnozstvi.ts"
   },
   "dependencies": {
     "@fontsource/inter": "5.1.0",

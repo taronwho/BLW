@@ -52,3 +52,4 @@ export const RECEPT: Tvary = ['recept', 'recepty', 'receptů', 'receptu'];
 export const SUROVINA: Tvary = ['surovina', 'suroviny', 'surovin', 'suroviny'];
 export const DEN: Tvary = ['den', 'dny', 'dnů', 'dne'];
 export const ZAZNAM: Tvary = ['záznam', 'záznamy', 'záznamů', 'záznamu'];
+export const DOSPELY: Tvary = ['dospělého', 'dospělé', 'dospělých', 'dospělého'];

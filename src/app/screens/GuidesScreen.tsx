@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { guidesByUrgency } from '@/data/guides';
 import { GUIDE_CATEGORIES } from '@/types';
+import type { GuideCategory } from '@/types';
 import { FilterSelect } from '../components/FilterSelect';
 import type { SelectOption } from '../components/FilterSelect';
 import { GUIDE_CATEGORY_LABELS } from '../lib/labels';
@@ -14,6 +15,8 @@ const CATEGORY_OPTIONS: readonly SelectOption[] = [
   ...GUIDE_CATEGORIES.map((category) => ({ id: category, label: GUIDE_CATEGORY_LABELS[category] })),
 ];
 import { useUrlText } from '../lib/urlState';
+import { PrazdnyStav } from '../components/PrazdnyStav';
+import type { ZapnutyFiltr } from '../components/PrazdnyStav';
 
 /** Seznam rad. Naléhavé jsou vždy nahoře a odlišené barvou. */
 export function GuidesScreen(): ReactNode {
@@ -31,6 +34,17 @@ export function GuidesScreen(): ReactNode {
       return haystack.includes(needle);
     });
   }, [query, category]);
+
+  // Prázdný stav nabízí vypnutí toho, co je zapnuté — ne radu, co zkusit
+  // (docs/SPEC.md kap. 4.1).
+  const zapnuteFiltry: ZapnutyFiltr[] = [];
+  if (query !== '') zapnuteFiltry.push({ popis: `hledání „${query}"`, zrus: { q: null } });
+  if (category !== 'vse') {
+    zapnuteFiltry.push({
+      popis: `okruh ${GUIDE_CATEGORY_LABELS[category as GuideCategory]}`,
+      zrus: { okruh: null },
+    });
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -103,9 +117,7 @@ export function GuidesScreen(): ReactNode {
       </ul>
 
       {visible.length === 0 && (
-        <p data-testid="prazdny-stav" className="rounded-2xl bg-surface p-6 text-center text-sm text-muted">
-          Žádná rada tomuhle hledání neodpovídá.
-        </p>
+        <PrazdnyStav co="rada" zapnute={zapnuteFiltry} zrusVse={{ q: null, okruh: null }} />
       )}
     </div>
   );

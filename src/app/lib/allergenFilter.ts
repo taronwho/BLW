@@ -19,7 +19,9 @@ import { useCallback, useMemo } from 'react';
  * Bez toho rozlišení by odškrtnutí posledního alergenu vymazalo klíč z adresy
  * a předvyplnění by ho okamžitě vrátilo zpátky.
  */
-const ZADNY = '-';
+export const ZADNY_ALERGEN = '-';
+
+const ZADNY = ZADNY_ALERGEN;
 
 export interface FiltrAlergenu {
   /** Co se právě vylučuje. */

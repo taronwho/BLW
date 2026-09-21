@@ -14,6 +14,7 @@ import { NutrientBadge } from '../components/NutrientBadge';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
 import { NahlasitNepresnost } from '../components/NahlasitNepresnost';
+import { useDuvodOpravy, useOpravaReceptu } from '@/storage/opravyStore';
 import { NakupTlacitko } from '../components/NakupTlacitko';
 import { slozkyDoNakupu } from '@/nakup/seznam';
 import { StageSwitch } from '../components/StageSwitch';
@@ -34,7 +35,10 @@ const TRACK_LABELS: Record<RecipeIngredientRef['track'], string> = {
 /** Detail receptu (docs/SPEC.md kap. 4.4). */
 export function RecipeDetailScreen(): ReactNode {
   const { id = '' } = useParams();
-  const recipe = recipeById.get(id);
+  // Oprava katalogu bez nasazení (src/data/opravy.ts).
+  const oprava = useOpravaReceptu(id);
+  const duvodOpravy = useDuvodOpravy(id);
+  const recipe = oprava ?? recipeById.get(id);
   const state = useHouseholdStore((store) => store.state);
   const setRecipeNote = useHouseholdStore((store) => store.setRecipeNote);
   const toggleFavorite = useHouseholdStore((store) => store.toggleFavorite);
@@ -270,6 +274,15 @@ export function RecipeDetailScreen(): ReactNode {
           testId="zdroje-receptu"
         />
         <SurovinoveZdroje recipe={recipe} />
+        {duvodOpravy !== null && (
+          <p
+            data-testid="duvod-opravy"
+            className="rounded-xl border border-line bg-surface p-3 text-xs leading-relaxed text-muted"
+          >
+            <strong className="font-semibold text-ink">Opraveno po vydání aplikace: </strong>
+            {duvodOpravy}
+          </p>
+        )}
         <NahlasitNepresnost druh="Recept" nazev={recipe.titleCz} id={recipe.id} />
       </div>
     </article>

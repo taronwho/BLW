@@ -20,7 +20,7 @@ import { slozkyDoNakupu } from '@/nakup/seznam';
 import { recipeNutrients } from '@/data/recipeNutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { RECIPE_CATEGORIES } from '@/types';
-import type { AllergenGroup, Recipe } from '@/types';
+import type { AllergenGroup, Recipe, RecipeCategory } from '@/types';
 import { ChokingChip } from '../components/SafetyChips';
 import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
 import { KonecSeznamu } from '../components/KonecSeznamu';
@@ -44,10 +44,14 @@ import type { SelectOption } from '../components/FilterSelect';
 import { ageInMonths } from '../lib/age';
 import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
 import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/deriveRecipes';
-import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { ALLERGEN_LABELS, RECIPE_CATEGORY_LABELS } from '../lib/labels';
+import { ZADNY_ALERGEN } from '../lib/allergenFilter';
+import { PrazdnyStav } from '../components/PrazdnyStav';
+import type { ZapnutyFiltr } from '../components/PrazdnyStav';
 import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
 import { useFiltrAlergenu } from '../lib/allergenFilter';
-import { hledejRecepty, hledejSuroviny } from '../lib/hledaciIndex';
+import { hledejRecepty } from '../lib/hledaciIndexReceptu';
+import { hledejSuroviny } from '../lib/hledaciIndexSurovin';
 import { usePozdrzeno } from '../lib/pozdrzeni';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { RECIPE_SORTS } from '../lib/sorting';
@@ -139,6 +143,48 @@ export function RecipesScreen(): ReactNode {
     bezAlergenu.vybrane.length > 0 ||
     pantry.length > 0;
 
+  /**
+   * Filtry, které jsou zapnuté — a dají se odsud vypnout po jednom.
+   *
+   * Prázdný stav nemá radit, má nabízet (docs/SPEC.md kap. 4.1).
+   */
+  const zapnuteFiltry: ZapnutyFiltr[] = [];
+  if (query !== '') zapnuteFiltry.push({ popis: `hledání „${query}"`, zrus: { q: null } });
+  if (category !== 'vse') {
+    zapnuteFiltry.push({
+      popis: `kategorii ${RECIPE_CATEGORY_LABELS[category as RecipeCategory]}`,
+      zrus: { kat: null },
+    });
+  }
+  if (time !== 'vse') {
+    zapnuteFiltry.push({ popis: `omezení na ${time} minut`, zrus: { cas: null } });
+  }
+  if (vegetarianOnly) zapnuteFiltry.push({ popis: 'jen vegetariánské', zrus: { vege: null } });
+  if (oblibene) zapnuteFiltry.push({ popis: 'jen oblíbené', zrus: { oblibene: null } });
+  if (vhodneTed) zapnuteFiltry.push({ popis: 'vhodné teď', zrus: { vhodne: null } });
+  if (jednoduche) zapnuteFiltry.push({ popis: 'jen jednoduché', zrus: { jedn: null } });
+  if (bezAlergenu.vybrane.length > 0) {
+    zapnuteFiltry.push({
+      popis: `vynechání alergenů (${bezAlergenu.vybrane
+        .map((one) => ALLERGEN_LABELS[one])
+        .join(', ')})`,
+      // Prázdný filtr se zapisuje značkou, ne smazáním: bez ní by se
+      // alergeny dítěte z Domácnosti nasadily automaticky znovu.
+      zrus: { bez: ZADNY_ALERGEN },
+    });
+  }
+  if (ziviny.length > 0) {
+    zapnuteFiltry.push({ popis: 'filtr živin', zrus: { ziv: null, fe: null, sila: null } });
+  }
+  if (pantry.length > 0) {
+    zapnuteFiltry.push({ popis: 'výběr podle spíže', zrus: { spiz: null } });
+  }
+
+  const ZRUSIT_VSE = {
+    q: null, kat: null, cas: null, ziv: null, fe: null, sila: null,
+    vege: null, oblibene: null, vhodne: null, jedn: null, bez: null, spiz: null,
+  };
+
   function prepniZivinu(id: string): void {
     const dalsi = ziviny.includes(id) ? ziviny.filter((one) => one !== id) : [...ziviny, id];
     // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
@@ -156,10 +202,7 @@ export function RecipesScreen(): ReactNode {
   }
 
   function zrusFiltry(): void {
-    nastavFiltry({
-      q: null, kat: null, cas: null, ziv: null, fe: null, sila: null,
-      vege: null, oblibene: null, vhodne: null, jedn: null, bez: null, spiz: null,
-    });
+    nastavFiltry(ZRUSIT_VSE);
   }
 
   // Hledá se až chvíli po dopsání a nad předpočítaným indexem. Dřív se
@@ -519,13 +562,12 @@ export function RecipesScreen(): ReactNode {
       </p>
 
       {visible.length === 0 ? (
-        <p
-          className="rounded-xl bg-surface p-4 text-sm text-muted"
-          data-testid="prazdny-stav-recepty"
-        >
-          Nic neodpovídá. Nejspíš je podmínek najednou moc. Zkus ubrat některou
-          živinu, povolit delší čas nebo klepnout na „zrušit filtry“.
-        </p>
+        <PrazdnyStav
+          co="recept"
+          zapnute={zapnuteFiltry}
+          zrusVse={ZRUSIT_VSE}
+          testId="prazdny-stav-recepty"
+        />
       ) : (
         <ul className="flex flex-col gap-2" data-testid="seznam-receptu">
           {zobrazene.map((recipe) => (

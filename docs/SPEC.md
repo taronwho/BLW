@@ -391,6 +391,19 @@ Do `docs/FIREBASE.md` napiš přesný postup nasazení pravidel a omezení API k
 
 `vite-plugin-pwa`: manifest s českým názvem, ikony 192/512 + maskable, `display: standalone`, offline cache celé aplikace i dat (data jsou statická, jdou cachovat natvrdo), aktualizace s nenápadnou výzvou „Je dostupná novější verze — obnovit".
 
+### Opravy katalogu bez nasazení
+
+Vedle balíku leží `public/opravy.json`: verzovaný soubor, kterým jde
+opravit zdravotní údaj u konkrétní suroviny nebo receptu bez buildu
+a deploye. Stahuje se až po vykreslení, bez sítě se použije poslední
+uložená podoba a bez ní katalog z balíku — aplikace na opravách nikdy
+nečeká.
+
+Opravit jde jen vyjmenovaná textová pole a **každá opravená položka
+projde týmiž pravidly z `src/safety/`** jako data v repozitáři; co
+neprojde, se zahodí. Rodič u opravené položky vidí, že se text po vydání
+změnil, a proč. Podrobnosti a postup jsou v `docs/OPRAVY.md`.
+
 ## 9. Akceptační kritéria
 
 Aplikace je hotová, když platí **všechno**:

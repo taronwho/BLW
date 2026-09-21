@@ -291,6 +291,26 @@ export function sectiMnozstvi(zapisy: readonly string[]): Soucet {
   };
 }
 
+/**
+ * Spojí dva už sečtené součty.
+ *
+ * Potřeba tam, kde se část množství přepočítává a část ne: množství z
+ * receptů se násobí počtem dospělých, ale to, co si rodič přidal ručně,
+ * zůstává, jak ho napsal.
+ */
+export function spojSoucty(a: Soucet, b: Soucet): Soucet {
+  const soucty = new Map<string, number>();
+  for (const { jednotka, hodnota } of [...a.mnozstvi, ...b.mnozstvi]) {
+    soucty.set(jednotka, (soucty.get(jednotka) ?? 0) + hodnota);
+  }
+  const zbytek = [...a.zbytek];
+  for (const text of b.zbytek) if (!zbytek.includes(text)) zbytek.push(text);
+  return {
+    mnozstvi: [...soucty].map(([jednotka, hodnota]) => ({ jednotka, hodnota })),
+    zbytek,
+  };
+}
+
 /** Celé množství na jednu řádku: „450 g + 2 lžíce". */
 export function popisSouctu(soucet: Soucet): string {
   return [...soucet.mnozstvi.map(popisMnozstvi), ...soucet.zbytek].join(' + ');

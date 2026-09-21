@@ -13,7 +13,7 @@ import { ingredients } from '@/data/ingredients';
 import { nutrientProfile } from '@/data/nutrients';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { INGREDIENT_CATEGORIES } from '@/types';
-import type { AllergenGroup, Ingredient } from '@/types';
+import type { AllergenGroup, Ingredient, IngredientCategory } from '@/types';
 import { ageInMonths } from '../lib/age';
 import { usePostupneZobrazeni } from '../lib/postupneZobrazeni';
 import { FilterChips } from '../components/FilterChips';
@@ -21,7 +21,7 @@ import { RozbalovaciFiltry } from '../components/RozbalovaciFiltry';
 import { KonecSeznamu } from '../components/KonecSeznamu';
 import { OdkazNaNakup } from '../components/OdkazNaNakup';
 import { NakupTlacitko } from '../components/NakupTlacitko';
-import { vychoziMnozstvi } from '@/nakup/seznam';
+import { vychoziMnozstviSuroviny } from '@/data/mnozstviVychozi';
 import type { ChipOption } from '../components/FilterChips';
 import { FilterSelect } from '../components/FilterSelect';
 import { FilterToggles } from '../components/FilterToggles';
@@ -39,10 +39,13 @@ import { NutrientBadge } from '../components/NutrientBadge';
 import type { SelectOption } from '../components/FilterSelect';
 import { TastedToggle } from '../components/TastedToggle';
 import { inSeason, suitableNow, tastedIds } from '../lib/derive';
-import { CATEGORY_LABELS } from '../lib/labels';
+import { ALLERGEN_LABELS, CATEGORY_LABELS } from '../lib/labels';
+import { ZADNY_ALERGEN } from '../lib/allergenFilter';
+import { PrazdnyStav } from '../components/PrazdnyStav';
+import type { ZapnutyFiltr } from '../components/PrazdnyStav';
 import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
 import { useFiltrAlergenu } from '../lib/allergenFilter';
-import { hledejSuroviny } from '../lib/hledaciIndex';
+import { hledejSuroviny } from '../lib/hledaciIndexSurovin';
 import { usePozdrzeno } from '../lib/pozdrzeni';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
@@ -175,6 +178,50 @@ export function IngredientsScreen(): ReactNode {
     bezAlergenu.vybrane.length > 0 ||
     ziviny.length > 0;
 
+  /**
+   * Filtry, které jsou zapnuté — a dají se odsud vypnout po jednom.
+   *
+   * Prázdný stav nemá radit, má nabízet (docs/SPEC.md kap. 4.1). Nabízet
+   * „zrušit filtr sezóny" někomu, kdo sezónu nezapnul, by ale mátlo víc
+   * než ticho, takže se seznam skládá z toho, co opravdu platí.
+   */
+  const zapnuteFiltry: ZapnutyFiltr[] = [];
+  if (query !== '') zapnuteFiltry.push({ popis: `hledání „${query}"`, zrus: { q: null } });
+  if (category !== 'vse') {
+    zapnuteFiltry.push({
+      popis: `kategorii ${CATEGORY_LABELS[category as IngredientCategory]}`,
+      zrus: { kat: null },
+    });
+  }
+  if (denik !== 'vse') {
+    zapnuteFiltry.push({
+      popis: DENIK_OPTIONS.find((one) => one.id === denik)?.label ?? 'filtr deníku',
+      zrus: { denik: null },
+    });
+  }
+  if (oblibene) zapnuteFiltry.push({ popis: 'jen oblíbené', zrus: { oblibene: null } });
+  if (vhodneTed) zapnuteFiltry.push({ popis: 'vhodné teď', zrus: { ted: null } });
+  if (sezonni) zapnuteFiltry.push({ popis: 'filtr sezóny', zrus: { sezona: null } });
+  if (alergeny) zapnuteFiltry.push({ popis: 'jen klíčové alergeny', zrus: { alergeny: null } });
+  if (bezAlergenu.vybrane.length > 0) {
+    zapnuteFiltry.push({
+      popis: `vynechání alergenů (${bezAlergenu.vybrane
+        .map((one) => ALLERGEN_LABELS[one])
+        .join(', ')})`,
+      // Prázdný filtr se zapisuje značkou, ne smazáním: bez ní by se
+      // alergeny dítěte z Domácnosti nasadily automaticky znovu.
+      zrus: { bez: ZADNY_ALERGEN },
+    });
+  }
+  if (ziviny.length > 0) {
+    zapnuteFiltry.push({ popis: 'filtr živin', zrus: { ziv: null, fe: null, sila: null } });
+  }
+
+  const ZRUSIT_VSE = {
+    q: null, kat: null, ziv: null, fe: null, sila: null, denik: null,
+    oblibene: null, ted: null, sezona: null, alergeny: null, bez: null,
+  };
+
   function prepniZivinu(id: string): void {
     const dalsi = ziviny.includes(id) ? ziviny.filter((one) => one !== id) : [...ziviny, id];
     // Druh železa dává smysl jen se zaškrtnutým železem; jinak by zůstal
@@ -184,10 +231,7 @@ export function IngredientsScreen(): ReactNode {
   }
 
   function zrusFiltry(): void {
-    nastavFiltry({
-      q: null, kat: null, ziv: null, fe: null, sila: null, denik: null,
-      oblibene: null, ted: null, sezona: null, alergeny: null, bez: null,
-    });
+    nastavFiltry(ZRUSIT_VSE);
   }
 
   return (
@@ -363,13 +407,7 @@ export function IngredientsScreen(): ReactNode {
       </p>
 
       {visible.length === 0 ? (
-        <p
-          className="rounded-xl bg-surface p-4 text-sm text-muted"
-          data-testid="prazdny-stav"
-        >
-          Nic neodpovídá. Nejspíš je podmínek najednou moc. Zkus ubrat některou
-          živinu, povolit všechny kategorie nebo klepnout na „zrušit filtry“.
-        </p>
+        <PrazdnyStav co="surovina" zapnute={zapnuteFiltry} zrusVse={ZRUSIT_VSE} />
       ) : (
         // Dlaždice po dvou, ne řádky přes celou šířku. Řádek u krátkého
         // názvu nechával polovinu obrazovky prázdnou a přitom se na jednu
@@ -481,7 +519,7 @@ function IngredientTile({
         potvrzeni="Přidáno"
         zeptejSe={{
           nadpis: `${ingredient.nameCz} do nákupu`,
-          vychozi: vychoziMnozstvi(ingredient.id),
+          vychozi: vychoziMnozstviSuroviny(ingredient.id),
         }}
         testId={`do-nakupu-surovina-${ingredient.id}`}
       />

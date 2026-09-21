@@ -63,3 +63,38 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check:sources
+
+  rychlost:
+    name: Rychlost prvního načtení
+    runs-on: ubuntu-latest
+    # Při 3,5 MB precache a hlavním chunku přes 900 kB se hodí znát LCP
+    # na pomalé síti a sledovat ho v čase (audit 17. 9. 2026, kapitola 10
+    # bod 6). Měření na sdíleném runneru kolísá, takže je to **informace
+    # pro člověka, ne brána** — celý krok je `continue-on-error` a i
+    # podmínky v lighthouserc.json jsou varování. Tvrdé brány zůstávají
+    # tam, kde neblikají: `npm run validate` a axe v e2e.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Náhled, ne `staticDistDir`: aplikace běží na podadresáři `/BLW/`
+      # a servírovaná z kořene by si nenačetla vlastní balíky.
+      - name: Spustit náhled
+        run: |
+          npm run preview -- --port 4173 --host 127.0.0.1 &
+          npx --yes wait-on http://127.0.0.1:4173/BLW/ --timeout 60000
+      - name: Lighthouse
+        # Bez `--no-sandbox` Chrome v kontejneru nenastartuje; příznak je
+        # v lighthouserc.json, aby se totéž dalo spustit i lokálně.
+        run: npx --yes @lhci/cli@0.14.x autorun --config=lighthouserc.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report
+          retention-days: 7

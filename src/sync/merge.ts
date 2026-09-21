@@ -188,6 +188,18 @@ function mergeCasovane<T>(
 }
 
 /** Jsou hodnoty ve tvaru, který umí tahle verze? Starší zálohy mají tvar 1. */
+/**
+ * Jedna hodnota se značkou času — `{ hodnota, kdy }`.
+ *
+ * Kontroluje se i typ `kdy`: bez čísla by se konflikt nedal rozhodnout a
+ * `NaN` by v porovnání tiše prohrálo pokaždé.
+ */
+function jeCasovanaHodnota(value: unknown): boolean {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
+  const zaznam = value as Record<string, unknown>;
+  return 'hodnota' in zaznam && jeCas(zaznam['kdy']);
+}
+
 function jeCasovanaMapa(value: unknown): boolean {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
   return Object.values(value as Record<string, unknown>).every(
@@ -326,6 +338,9 @@ export function prevedStav(raw: unknown): { stav: HouseholdState; zahozeno: Zaho
     members: Array.isArray(vstup['members'])
       ? (vstup['members'] as unknown[]).filter((uid): uid is string => typeof uid === 'string')
       : [],
+    ...(jeCasovanaHodnota(vstup['nakupDospelych'])
+      ? { nakupDospelych: vstup['nakupDospelych'] as CasovanaHodnota<number> }
+      : {}),
     ...(jeCasovanaMapa(vstup['memberClenstvi'])
       ? {
           memberClenstvi: vstup['memberClenstvi'] as Record<string, CasovanaHodnota<boolean>>,
@@ -349,6 +364,21 @@ export function prevedStav(raw: unknown): { stav: HouseholdState; zahozeno: Zaho
     schemaVersion: SCHEMA_VERSION,
   };
   return { stav, zahozeno };
+}
+
+/**
+ * Z dvou časovaných hodnot ta pozdější; při shodě vzdálená.
+ *
+ * Stejné pravidlo jako v `mergeCasovane`, jen pro jedinou hodnotu místo mapy:
+ * server je autorita, ať se dva telefony nepřetahují donekonečna.
+ */
+function novejsi<T>(
+  local: CasovanaHodnota<T> | undefined,
+  remote: CasovanaHodnota<T> | undefined,
+): CasovanaHodnota<T> | undefined {
+  if (local === undefined) return remote;
+  if (remote === undefined) return local;
+  return local.kdy > remote.kdy ? local : remote;
 }
 
 /** Značka času v časované mapě. Bez ní se nedá rozhodnout žádný konflikt. */
@@ -435,6 +465,7 @@ export function mergeHouseholdState(
   remote: HouseholdState,
 ): HouseholdState {
   const clenstvi = mergeCasovane<boolean>(clenstviZeStavu(local), clenstviZeStavu(remote));
+  const dospelych = novejsi(local.nakupDospelych, remote.nakupDospelych);
   const videno = jenProCleny(mergeSeenAt(local.memberSeenAt, remote.memberSeenAt), clenstvi);
   const popisy = jenProCleny(mergeLabels(local.memberLabels, remote.memberLabels), clenstvi);
   const plany = mergePlany(local.plans, remote.plans);
@@ -451,6 +482,9 @@ export function mergeHouseholdState(
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.
     tastings: mergeTastings(local.tastings, remote.tastings),
     favorites: mergeCasovane(local.favorites, remote.favorites),
+    // Jedna hodnota, ne mapa: vyhrává pozdější zápis. Bez značky času by
+    // telefon, který se přihlásil později, vnutil svou starší volbu.
+    ...(dospelych === undefined ? {} : { nakupDospelych: dospelych }),
     recipeNotes: mergeCasovane(local.recipeNotes, remote.recipeNotes),
     ...(plany === undefined ? {} : { plans: plany }),
     ...(nakup === undefined ? {} : { nakup }),

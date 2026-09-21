@@ -1,6 +1,6 @@
 # CLAUDE.md — pravidla projektu Drobek
 
-Tento soubor čti vždy. Plná specifikace je v `docs/SPEC.md`, zdravotní pravidla v `docs/BEZPECNOST.md`, seznam surovin v `docs/SUROVINY-SEZNAM.md`, fáze a cíle v `docs/GOALS.md`.
+Tento soubor čti vždy. Plná specifikace je v `docs/SPEC.md`, zdravotní pravidla v `docs/BEZPECNOST.md`, seznam surovin v `docs/SUROVINY-SEZNAM.md`, fáze a cíle v `docs/GOALS.md`, opravy katalogu bez nasazení v `docs/OPRAVY.md`.
 
 ## Co stavíme
 

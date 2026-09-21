@@ -22,14 +22,19 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '.
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { NakupTlacitko } from '../components/NakupTlacitko';
-import { vychoziMnozstvi } from '@/nakup/seznam';
+import { vychoziMnozstviSuroviny } from '@/data/mnozstviVychozi';
 import { NotFoundScreen } from './NotFoundScreen';
 import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
+import { useDuvodOpravy, useOpravaSuroviny } from '@/storage/opravyStore';
 
 /** Detail suroviny — pořadí odshora podle docs/SPEC.md kap. 4.2: bezpečnost první. */
 export function IngredientDetailScreen(): ReactNode {
   const { id = '' } = useParams();
-  const ingredient = ingredientById.get(id);
+  // Oprava katalogu bez nasazení (src/data/opravy.ts). Když žádná není,
+  // je to přesně ta surovina z balíku.
+  const oprava = useOpravaSuroviny(id);
+  const duvodOpravy = useDuvodOpravy(id);
+  const ingredient = oprava ?? ingredientById.get(id);
   const state = useHouseholdStore((store) => store.state);
   const toggleFavorite = useHouseholdStore((store) => store.toggleFavorite);
 
@@ -95,7 +100,7 @@ export function IngredientDetailScreen(): ReactNode {
             popis={`${ingredient.nameCz} do nákupu`}
             zeptejSe={{
               nadpis: `${ingredient.nameCz} do nákupu`,
-              vychozi: vychoziMnozstvi(ingredient.id),
+              vychozi: vychoziMnozstviSuroviny(ingredient.id),
             }}
             testId="surovina-do-nakupu"
           />
@@ -235,6 +240,19 @@ export function IngredientDetailScreen(): ReactNode {
           history={history}
         />
       </section>
+
+      {duvodOpravy !== null && (
+        // Oprava přišla mimo nasazení, takže rodič musí vědět, že se text
+        // změnil a proč. Tichá změna zdravotního údaje by byla horší než
+        // žádná (docs/OPRAVY.md).
+        <p
+          data-testid="duvod-opravy"
+          className="rounded-xl border border-line bg-surface p-3 text-xs leading-relaxed text-muted"
+        >
+          <strong className="font-semibold text-ink">Opraveno po vydání aplikace: </strong>
+          {duvodOpravy}
+        </p>
+      )}
 
       <SourceDisclosure sources={ingredient.sources} testId="prepinac-zdroju" />
 

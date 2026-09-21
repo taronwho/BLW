@@ -74,6 +74,8 @@ interface HouseholdStore {
   odeberZNakupu(ingredientId: string): Promise<void>;
   prepniKoupeno(ingredientId: string): Promise<void>;
   nastavMnozstvi(ingredientId: string, mnozstvi: string | null): Promise<void>;
+  /** Pro kolik dospělých se vaří — přepočet množství v nákupu. */
+  nastavPocetDospelych(pocet: number): Promise<void>;
   vyprazdniNakup(jenKoupene?: boolean): Promise<void>;
   importState(raw: unknown): Promise<Zahozeno>;
 }
@@ -578,6 +580,19 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
         ...stav,
         nakup: { ...(stav.nakup ?? {}), [ingredientId]: { hodnota: nova, kdy: Date.now() } },
       });
+    },
+
+    /**
+     * Pro kolik dospělých se vaří.
+     *
+     * Ukládá se se značkou času do stavu domácnosti, ne do prohlížeče:
+     * vaří se pro tutéž rodinu, ať nakupuje kterýkoli rodič.
+     */
+    async nastavPocetDospelych(pocet: number): Promise<void> {
+      const stav = get().state;
+      const cisty = Math.round(pocet);
+      if (!Number.isFinite(cisty) || cisty < 1) return;
+      await persist({ ...stav, nakupDospelych: { hodnota: cisty, kdy: Date.now() } });
     },
 
     /** Uklidí seznam: buď jen odškrtnuté položky, nebo celý. */

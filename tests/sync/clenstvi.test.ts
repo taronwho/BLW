@@ -144,3 +144,33 @@ describe('sloučení členství', () => {
     );
   });
 });
+
+/**
+ * Počet dospělých se synchronizuje jako všechno ostatní.
+ *
+ * Vaří se pro tutéž rodinu, ať nakupuje kterýkoli rodič — nastavení tedy
+ * nepatří do prohlížeče, ale do stavu domácnosti, a při konfliktu musí
+ * rozhodnout čas, ne to, kdo se připojil později.
+ */
+describe('počet dospělých v nákupu', () => {
+  function stav(over: Partial<HouseholdState>): HouseholdState {
+    return { ...emptyHouseholdState(), ...over };
+  }
+
+  it('vyhrává pozdější zápis', () => {
+    const local = stav({ nakupDospelych: { hodnota: 4, kdy: 100 } });
+    const remote = stav({ nakupDospelych: { hodnota: 2, kdy: 50 } });
+    expect(mergeHouseholdState(local, remote).nakupDospelych?.hodnota).toBe(4);
+    expect(mergeHouseholdState(remote, local).nakupDospelych?.hodnota).toBe(4);
+  });
+
+  it('zná-li hodnotu jen jedna strana, převezme se', () => {
+    const local = stav({ nakupDospelych: { hodnota: 6, kdy: 1 } });
+    expect(mergeHouseholdState(local, stav({})).nakupDospelych?.hodnota).toBe(6);
+    expect(mergeHouseholdState(stav({}), local).nakupDospelych?.hodnota).toBe(6);
+  });
+
+  it('bez nastavení nezůstane ve stavu prázdný klíč', () => {
+    expect('nakupDospelych' in mergeHouseholdState(stav({}), stav({}))).toBe(false);
+  });
+});

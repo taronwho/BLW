@@ -1,8 +1,9 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import type { ReactNode } from 'react';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { AppShell } from './components/AppShell';
 import { DisclaimerGate } from './DisclaimerGate';
+import { useOpravyStore } from '@/storage/opravyStore';
 import { JoinHousehold } from './JoinHousehold';
 import { ScrollToTop } from './components/ScrollToTop';
 import { UpdatePrompt } from './UpdatePrompt';
@@ -96,6 +97,14 @@ function Nacita(): ReactNode {
 }
 
 export function App(): ReactNode {
+  // Opravy katalogu se stahují až po prvním vykreslení a na ničem se na ně
+  // nečeká (src/data/opravy.ts). Bez sítě se použije poslední uložená
+  // podoba, bez ní katalog z balíku.
+  const nactiOpravy = useOpravyStore((store) => store.nacti);
+  useEffect(() => {
+    void nactiOpravy();
+  }, [nactiOpravy]);
+
   return (
     <HashRouter>
       <ScrollToTop />

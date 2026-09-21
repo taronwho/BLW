@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { ingredients, recipes } from '../../src/data';
-import { hledejRecepty, hledejSuroviny, pripravDotaz } from '../../src/app/lib/hledaciIndex';
+import { hledejRecepty } from '../../src/app/lib/hledaciIndexReceptu';
+import { hledejSuroviny } from '../../src/app/lib/hledaciIndexSurovin';
+import { pripravDotaz } from '../../src/app/lib/hledaciZaznam';
 import { matchesIngredient, matchesRecipe } from '../../src/app/lib/search';
 
 const podleId = new Map(ingredients.map((item) => [item.id, item]));

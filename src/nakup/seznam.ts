@@ -1,11 +1,13 @@
 import { ingredientById, recipeById, recipes } from '@/data';
 import type { HouseholdState, Ingredient, IngredientCategory } from '@/types';
 import { nakupniPolozky } from './pocty';
+import { nasobekProDospele, vynasobSoucet } from './porce';
 import {
   popisMnozstvi,
   popisSouctu,
   rozeberMnozstvi,
   sectiMnozstvi,
+  spojSoucty,
   type Soucet,
 } from './mnozstvi';
 
@@ -71,13 +73,27 @@ function poradiKategorie(kategorie: IngredientCategory): number {
  */
 export function sestavNakupniSeznam(state: HouseholdState): NakupniRadek[] {
   const radky: NakupniRadek[] = [];
+  // Kuchařka je psaná na dva dospělé. Kdo vaří pro víc, nastaví si počet
+  // v seznamu a množství se přepočítá (kapitola 10 bod 2 auditu).
+  const nasobek = nasobekProDospele(state.nakupDospelych?.hodnota);
   for (const { id, polozka } of nakupniPolozky(state)) {
     const ingredient = ingredientById.get(id);
     if (ingredient === undefined) continue;
-    const zapisy = polozka.davky
-      .map((davka) => davka.mnozstvi)
-      .filter((text): text is string => text !== undefined && text.trim().length > 0);
-    const soucet = sectiMnozstvi(zapisy);
+    // Násobí se jen to, co pochází z receptu. Co si rodič přidal sám,
+    // napsal pro svou domácnost a přepočítávat mu to by bylo drzé.
+    const zapis = (davka: { mnozstvi?: string }): string => (davka.mnozstvi ?? '').trim();
+    const zReceptuZapisy = polozka.davky
+      .filter((davka) => davka.recipeId !== undefined)
+      .map(zapis)
+      .filter((text) => text.length > 0);
+    const rucniZapisy = polozka.davky
+      .filter((davka) => davka.recipeId === undefined)
+      .map(zapis)
+      .filter((text) => text.length > 0);
+    const soucet = spojSoucty(
+      vynasobSoucet(sectiMnozstvi(zReceptuZapisy), nasobek),
+      sectiMnozstvi(rucniZapisy),
+    );
     const zReceptu = popisSouctu(soucet);
     const rucni = (polozka.rucniMnozstvi ?? '').trim();
     radky.push({
