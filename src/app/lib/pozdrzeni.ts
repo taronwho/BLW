@@ -14,13 +14,13 @@ export const POZDRZENI_MS = 150;
  * Sto padesát milisekund je pod prahem, kdy si člověk všimne prodlevy, a
  * přitom pokryje běžné tempo psaní na mobilu.
  */
-export function usePozdrzeno<T>(hodnota: T, ms: number = POZDRZENI_MS): T {
+export function usePozdrzeno(hodnota: string, ms: number = POZDRZENI_MS): string {
   const [pozdrzena, setPozdrzena] = useState(hodnota);
 
   useEffect(() => {
     // Prázdné pole se propíše hned. Když rodič smaže dotaz křížkem, čeká
     // na celý seznam, ne na to, až doběhne časovač.
-    if (hodnota === ('' as unknown as T)) {
+    if (hodnota === '') {
       setPozdrzena(hodnota);
       return;
     }
