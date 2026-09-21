@@ -29,10 +29,10 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, RECIPE_CATEGORY_LABELS } from './labe
  */
 
 /** Nejkratší slovo, u kterého se povolí jeden překlep. Kratší by mátlo. */
-const MIN_FUZZY = 5;
+export const MIN_FUZZY = 5;
 
 /** Damerau–Levenshteinova vzdálenost s předčasným koncem na `limit`. */
-function vzdalenost(a: string, b: string, limit: number): number {
+export function vzdalenost(a: string, b: string, limit: number): number {
   if (Math.abs(a.length - b.length) > limit) return limit + 1;
   let predchozi2: number[] = [];
   let predchozi: number[] = Array.from({ length: b.length + 1 }, (_, i) => i);
@@ -60,7 +60,7 @@ function vzdalenost(a: string, b: string, limit: number): number {
   return predchozi[b.length] as number;
 }
 
-function slova(text: string): string[] {
+export function slova(text: string): string[] {
   return normalize(text)
     .split(/[^a-z0-9]+/)
     .filter((word) => word.length > 0);

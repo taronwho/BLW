@@ -47,7 +47,8 @@ import { recipeAllergens, recipeChokingRisk, recipeIsVegetarian } from '../lib/d
 import { RECIPE_CATEGORY_LABELS } from '../lib/labels';
 import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
 import { useFiltrAlergenu } from '../lib/allergenFilter';
-import { matchesIngredient, matchesRecipe } from '../lib/search';
+import { hledejRecepty, hledejSuroviny } from '../lib/hledaciIndex';
+import { usePozdrzeno } from '../lib/pozdrzeni';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { RECIPE_SORTS } from '../lib/sorting';
 import { sortRecipes } from '../lib/sortingRecipes';
@@ -161,16 +162,17 @@ export function RecipesScreen(): ReactNode {
     });
   }
 
+  // Hledá se až chvíli po dopsání a nad předpočítaným indexem. Dřív se
+  // pro všech 494 receptů stavělo při každém stisku nové pole názvů složek
+  // a synonym — tisíce normalizací na jedno písmeno (audit 17. 9. 2026,
+  // nález 6.1).
+  const hledane = usePozdrzeno(query);
+  const shody = useMemo(() => hledejRecepty(hledane), [hledane]);
+
   const visible = useMemo(
     () =>
       recipes.filter((recipe) => {
-        // I synonyma — „jablka" musí najít recepty s jablkem, ne jen ten,
-        // který to slovo má v názvu.
-        const names = recipe.ingredients.flatMap((ref) => {
-          const item = ingredientById.get(ref.ingredientId);
-          return item === undefined ? [] : [item.nameCz, ...item.altNamesCz];
-        });
-        if (!matchesRecipe(recipe, query, names)) return false;
+        if (shody !== null && !shody.has(recipe.id)) return false;
         if (category !== 'vse' && recipe.category !== category) return false;
         if (time !== 'vse' && recipe.timeMinutes > Number(time)) return false;
         if (vegetarianOnly && !recipeIsVegetarian(recipe)) return false;
@@ -181,8 +183,12 @@ export function RecipesScreen(): ReactNode {
         if (jednoduche && !jeJednoduchaUprava(recipe)) return false;
         if (!vyhovujeZivinam(recipeNutrients(recipe), ziviny, druhZeleza, sila))
           return false;
-        if (bezAlergenu.vybrane.some((skupina) => recipeAllergens(recipe).includes(skupina)))
-          return false;
+        // Odvození alergenů ven ze `.some()`: uvnitř se počítalo znovu
+        // za každý odškrtnutý alergen.
+        if (bezAlergenu.vybrane.length > 0) {
+          const alergeny = recipeAllergens(recipe);
+          if (bezAlergenu.vybrane.some((skupina) => alergeny.includes(skupina))) return false;
+        }
         if (
           pantrySet.size > 0 &&
           !recipe.ingredients.some((ref) => pantrySet.has(ref.ingredientId))
@@ -192,7 +198,7 @@ export function RecipesScreen(): ReactNode {
         return true;
       }),
     [
-      query,
+      shody,
       category,
       time,
       ziviny,
@@ -213,13 +219,12 @@ export function RecipesScreen(): ReactNode {
   const { zobrazene, zbyva, nacistDalsi, konecSeznamu } =
     usePostupneZobrazeni(serazene);
 
-  const pantryChoices = useMemo(
-    () =>
-      ingredients
-        .filter((item) => matchesIngredient(item, pantryQuery))
-        .slice(0, 40),
-    [pantryQuery],
-  );
+  const pantryHledane = usePozdrzeno(pantryQuery);
+  const pantryChoices = useMemo(() => {
+    const shody = hledejSuroviny(pantryHledane);
+    const vyhovujici = shody === null ? ingredients : ingredients.filter((i) => shody.has(i.id));
+    return vyhovujici.slice(0, 40);
+  }, [pantryHledane]);
 
   return (
     <section className="flex flex-col gap-4" aria-labelledby="recepty-nadpis">

@@ -327,7 +327,7 @@ export const prvniUpravyMlecne: Recipe[] = [
     reviewStatus: 'verified',
   },
   {
-    id: 'jahlova-kase-na-kozim-mlece',
+    id: 'jahlova-kase-na-kozim-mlece-s-jablkem',
     titleCz: 'Jáhlová kaše na kozím mléce s jablkem',
     category: 'snidane',
     minAgeMonths: 12,

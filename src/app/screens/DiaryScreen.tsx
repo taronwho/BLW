@@ -1,4 +1,4 @@
-import { CalendarDays, Sparkles } from 'lucide-react';
+import { CalendarDays, Printer, Sparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
@@ -65,9 +65,21 @@ export function DiaryScreen(): ReactNode {
 
   return (
     <section className="flex flex-col gap-5" aria-labelledby="denik-nadpis">
-      <h1 id="denik-nadpis" className="text-xl font-bold">
-        Deník
-      </h1>
+      <div className="flex items-center justify-between gap-2">
+        <h1 id="denik-nadpis" className="text-xl font-bold">
+          Deník
+        </h1>
+        {/* Kvůli tomuhle se deník vede: vzít do ordinace seznam toho, co
+            dítě jedlo. Záloha v JSONu je pro aplikaci, ne pro člověka. */}
+        <Link
+          to="/denik/tisk"
+          data-testid="denik-tisk"
+          className="flex shrink-0 items-center gap-1.5 rounded-xl border border-line px-3 py-1.5 text-xs font-semibold"
+        >
+          <Printer aria-hidden="true" className="h-4 w-4" />
+          Výpis pro pediatra
+        </Link>
+      </div>
 
       <section aria-labelledby="statistiky-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
         <h2 id="statistiky-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">

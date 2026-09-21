@@ -45,6 +45,14 @@ const GuideDetailScreen = lazy(() =>
 const DiaryScreen = lazy(() =>
   import('./screens/DiaryScreen').then((m) => ({ default: m.DiaryScreen })),
 );
+/**
+ * Výpis deníku k tisku. Vlastní chunk: do ordinace se jde párkrát za rok
+ * a zbytek času by se tahal zbytečně.
+ */
+const DenikTiskScreen = lazy(() =>
+  import('./screens/DenikTiskScreen').then((m) => ({ default: m.DenikTiskScreen })),
+);
+
 const HouseholdScreen = lazy(() =>
   import('./screens/HouseholdScreen').then((m) => ({ default: m.HouseholdScreen })),
 );
@@ -109,7 +117,10 @@ export function App(): ReactNode {
               <Route path="/plan" element={<PlanScreen />} />
               <Route path="/plan/den/:cislo" element={<PlanDenScreen />} />
               <Route path="/x/:klic" element={<AdminScreen />} />
+              {/* Statická adresa vyhraje nad `/denik`; výpis je zvlášť,
+                  aby šel vytisknout bez navigace kolem. */}
               <Route path="/denik" element={<DiaryScreen />} />
+              <Route path="/denik/tisk" element={<DenikTiskScreen />} />
               <Route path="/domacnost" element={<HouseholdScreen />} />
               <Route path="/domacnost/pripojit/:kod" element={<JoinHousehold />} />
               {/* Ne tiché přesměrování na úvod — stará záložka si zaslouží

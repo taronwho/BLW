@@ -673,8 +673,8 @@ export const breakfast2: Recipe[] = [
     reviewStatus: 'verified',
   },
   {
-    id: 'podmaslove-livanecky',
-    titleCz: 'Podmáslové lívanečky',
+    id: 'spaldove-livanecky-s-boruvkami',
+    titleCz: 'Špaldové lívanečky s borůvkami',
     category: 'snidane',
     minAgeMonths: 6,
     timeMinutes: 25,
@@ -717,7 +717,7 @@ export const breakfast2: Recipe[] = [
     reviewStatus: 'verified',
   },
   {
-    id: 'jahlova-kase-na-kozim-mlece',
+    id: 'jahlova-kase-na-kozim-mlece-s-hruskou',
     titleCz: 'Jáhlová kaše na kozím mléce s hruškou',
     category: 'snidane',
     minAgeMonths: 12,

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { catalog } from '../../src/data';
+import { safetyRules } from '../../src/safety/rules';
 import type { Catalog, Ingredient, SourceRef } from '../../src/types';
 import {
   MAX_STARI_MESICU,
@@ -15,7 +16,8 @@ function zdroj(url: string, accessedAt = '2026-09-12'): SourceRef {
 }
 
 function surovina(id: string, sources: SourceRef[]): Ingredient {
-  return { id, sources } as unknown as Ingredient;
+  // `nameCz` tu není kosmetika: podle něj pravidla poznají surovinu od receptu.
+  return { id, nameCz: id, sources } as unknown as Ingredient;
 }
 
 function katalog(ingredients: Ingredient[]): Catalog {
@@ -140,5 +142,39 @@ describe('zkontrolujZdroje', () => {
   it('strop i lhůta jsou čísla, ne nekonečno', () => {
     expect(STROP_POLOZEK_NA_URL).toBeGreaterThan(0);
     expect(MAX_STARI_MESICU).toBeGreaterThan(0);
+  });
+});
+
+/**
+ * Idčka musí být jedinečná.
+ *
+ * Katalog hlásil 494 receptů, ale dva páry sdílely idčko: dva recepty
+ * byly z adresy `/recepty/:id` nedosažitelné a v seznamu se překreslovaly
+ * pod stejným klíčem. Objevilo se to až při stavbě hledacího indexu,
+ * protože ten ukládá výsledky do množiny idček.
+ */
+describe('unique-ids', () => {
+  it('skutečný katalog má jedinečná idčka', () => {
+    for (const [kind, polozky] of [
+      ['surovina', catalog.ingredients],
+      ['recept', catalog.recipes],
+    ] as const) {
+      const videna = new Map<string, number>();
+      for (const p of polozky) videna.set(p.id, (videna.get(p.id) ?? 0) + 1);
+      const duplicity = [...videna].filter(([, n]) => n > 1).map(([id]) => id);
+      expect(duplicity, `${kind}: duplicitní idčka`).toEqual([]);
+    }
+  });
+
+  it('pravidlo duplicitu nahlásí jako chybu, ne varování', () => {
+    const pravidlo = safetyRules.find((r) => r.id === 'unique-ids');
+    expect(pravidlo).toBeDefined();
+    expect(pravidlo?.severity).toBe('error');
+    const dvakrat = katalog([
+      surovina('mrkev', [zdroj('https://www.nhs.uk/a/')]),
+      surovina('mrkev', [zdroj('https://www.nhs.uk/a/')]),
+    ]);
+    const zprava = pravidlo?.check(dvakrat.ingredients[0] as Ingredient, dvakrat);
+    expect(zprava).toContain('mrkev');
   });
 });

@@ -13,6 +13,7 @@ import { COMPOSITION } from '@/data/composition';
 import { NutrientBadge } from '../components/NutrientBadge';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { SourceDisclosure, SourceLinks } from '../components/SourceList';
+import { NahlasitNepresnost } from '../components/NahlasitNepresnost';
 import { NakupTlacitko } from '../components/NakupTlacitko';
 import { slozkyDoNakupu } from '@/nakup/seznam';
 import { StageSwitch } from '../components/StageSwitch';
@@ -269,6 +270,7 @@ export function RecipeDetailScreen(): ReactNode {
           testId="zdroje-receptu"
         />
         <SurovinoveZdroje recipe={recipe} />
+        <NahlasitNepresnost druh="Recept" nazev={recipe.titleCz} id={recipe.id} />
       </div>
     </article>
   );

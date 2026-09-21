@@ -269,3 +269,24 @@ export async function pretekajiciPrvky(page: Page, tolerance = 1): Promise<Prete
     }));
   }, tolerance);
 }
+
+/**
+ * Napíše dotaz do hledání a počká, až se propíše do seznamu.
+ *
+ * Hledání je od 21. 9. 2026 pozdržené o 150 ms — katalog se nepřepočítává
+ * při každém stisku klávesy (audit 17. 9. 2026, nález 6.1). Test, který
+ * hned po `fill()` klepne na první položku, by tedy sáhl na starý seznam.
+ * Řádek s počtem má `aria-live`, takže čekat na jeho změnu je totéž, co
+ * čeká rodič.
+ */
+export async function hledejVSeznamu(
+  page: Page,
+  poleTestId: string,
+  pocetTestId: string,
+  dotaz: string,
+): Promise<void> {
+  const pocet = page.getByTestId(pocetTestId);
+  const pred = (await pocet.textContent()) ?? '';
+  await page.getByTestId(poleTestId).fill(dotaz);
+  await expect(pocet).not.toHaveText(pred);
+}

@@ -42,7 +42,8 @@ import { inSeason, suitableNow, tastedIds } from '../lib/derive';
 import { CATEGORY_LABELS } from '../lib/labels';
 import { ALLERGEN_TOGGLE_OPTIONS } from '../lib/allergenOptions';
 import { useFiltrAlergenu } from '../lib/allergenFilter';
-import { matchesIngredient } from '../lib/search';
+import { hledejSuroviny } from '../lib/hledaciIndex';
+import { usePozdrzeno } from '../lib/pozdrzeni';
 import { useUrlBatch, useUrlFlag, useUrlList, useUrlText } from '../lib/urlState';
 import { INGREDIENT_SORTS, sortIngredients } from '../lib/sorting';
 import type { SortKey } from '../lib/sorting';
@@ -98,10 +99,15 @@ export function IngredientsScreen(): ReactNode {
   const months = ageInMonths(useNarozeniAktivniho());
   const month = new Date().getMonth() + 1;
 
+  // Hledá se až chvíli po dopsání a nad předpočítaným indexem, ne nad
+  // katalogem znovu při každém stisku (audit 17. 9. 2026, nález 6.1).
+  const hledane = usePozdrzeno(query);
+  const shody = useMemo(() => hledejSuroviny(hledane), [hledane]);
+
   const visible = useMemo(
     () =>
       ingredients.filter((item) => {
-        if (!matchesIngredient(item, query)) return false;
+        if (shody !== null && !shody.has(item.id)) return false;
         if (category !== 'vse' && item.category !== category) return false;
         // Podmínky se sčítají, takže jde hledat i „sezónní zelenina, kterou
         // jsme ještě neochutnali". Dřív se volby vylučovaly a tohle nešlo.
@@ -119,7 +125,7 @@ export function IngredientsScreen(): ReactNode {
         return true;
       }),
     [
-      query,
+      shody,
       category,
       denik,
       oblibene,

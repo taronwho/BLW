@@ -41,8 +41,25 @@ export function recipeChokingRisk(recipe: Recipe): ChokingRisk {
   return highestRisk(recipeIngredients(recipe).map((item) => item.chokingRisk));
 }
 
+/**
+ * Alergeny se odvozují ze složek, a to není zadarmo: projít složky receptu
+ * znamená sáhnout do katalogu za každou z nich. Filtr v Receptech volal
+ * tuhle funkci uvnitř `.some()`, takže při čtrnácti odškrtnutých alergenech
+ * se celé odvození počítalo čtrnáctkrát na jeden recept a znovu při každém
+ * stisku klávesy.
+ *
+ * Kuchařka se za běhu nemění, takže výsledek stačí spočítat jednou.
+ * `WeakMap` proto, že klíčem je samotný recept — kdyby se katalog někdy
+ * načítal po částech, staré objekty nic nedrží.
+ */
+const alergenyReceptu = new WeakMap<Recipe, string[]>();
+
 export function recipeAllergens(recipe: Recipe): string[] {
-  return [...new Set(recipeIngredients(recipe).flatMap((item) => item.allergens))];
+  const hotove = alergenyReceptu.get(recipe);
+  if (hotove !== undefined) return hotove;
+  const spoctene = [...new Set(recipeIngredients(recipe).flatMap((item) => item.allergens))];
+  alergenyReceptu.set(recipe, spoctene);
+  return spoctene;
 }
 
 /**

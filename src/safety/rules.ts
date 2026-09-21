@@ -734,6 +734,51 @@ const hazardNotesComplete: SafetyRule = {
   },
 };
 
+/**
+ * Dvě položky se stejným idčkem jsou jedna položka.
+ *
+ * Katalog hlásil 494 receptů, ale dva páry sdílely idčko, takže dva z nich
+ * byly z adresy `/recepty/:id` nedosažitelné a v seznamu se překreslovaly
+ * pod stejným klíčem. `duplicate-detection` je nechytilo: to porovnává
+ * nadpisy, a „Jáhlová kaše … s hruškou" a „… s jablkem" se liší.
+ *
+ * Tohle je chyba, ne varování — nedosažitelný recept není kosmetika.
+ *
+ * Počty se pro katalog spočítají jednou a schovají do `WeakMap`; bez toho
+ * by se pro každou z 795 položek procházel celý katalog znovu.
+ */
+const pocetIdVKatalogu = new WeakMap<Catalog, Map<string, number>>();
+
+function pocetVyskytuId(catalog: Catalog, id: string, kind: 'ingredient' | 'recipe'): number {
+  let mapa = pocetIdVKatalogu.get(catalog);
+  if (mapa === undefined) {
+    mapa = new Map<string, number>();
+    for (const i of catalog.ingredients) {
+      const klic = `ingredient:${i.id}`;
+      mapa.set(klic, (mapa.get(klic) ?? 0) + 1);
+    }
+    for (const r of catalog.recipes) {
+      const klic = `recipe:${r.id}`;
+      mapa.set(klic, (mapa.get(klic) ?? 0) + 1);
+    }
+    pocetIdVKatalogu.set(catalog, mapa);
+  }
+  return mapa.get(`${kind}:${id}`) ?? 0;
+}
+
+const uniqueIds: SafetyRule = {
+  id: 'unique-ids',
+  severity: 'error',
+  appliesTo: 'both',
+  description: 'Žádné dvě suroviny ani dva recepty nesdílejí idčko.',
+  check(item, catalog) {
+    const kind = isIngredient(item) ? 'ingredient' : 'recipe';
+    const pocet = pocetVyskytuId(catalog, item.id, kind);
+    if (pocet <= 1) return null;
+    return `Idčko „${item.id}" má ${pocet} položky. Jedna z nich je z adresy nedosažitelná.`;
+  },
+};
+
 const duplicateDetection: SafetyRule = {
   id: 'duplicate-detection',
   severity: 'warning',
@@ -1149,6 +1194,7 @@ export const safetyRules: readonly SafetyRule[] = [
   nitrateNote,
   hazardCoverage,
   hazardNotesComplete,
+  uniqueIds,
   duplicateDetection,
   textUniqueness,
   lengthSanity,

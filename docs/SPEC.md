@@ -220,6 +220,7 @@ Povinná pravidla (minimum, doplň další podle `BEZPECNOST.md`):
 | `nitrate-note` | warning | suroviny s `hazards: ['dusicnany']` mají pokyn neohřívat opakovaně |
 | `hazard-coverage` | error | surovina zakázaná do 12 měsíců podle `BEZPECNOST.md` kap. 2 nese odpovídající hazard — med `botulismus`, sůl a bujón `sul`, cukr a sirup `cukr`. Tabulka je v `src/safety/hazard-coverage.ts` |
 | `hazard-notes-complete` | error | ke každému hazardu je v `hazardNotes` vysvětlení a žádné vysvětlení nevisí bez hazardu |
+| `unique-ids` | error | žádné dvě suroviny ani dva recepty nesdílejí `id` — jinak je jedna z nich z adresy nedosažitelná |
 | `duplicate-detection` | warning | žádné dvě suroviny se stejným `nameCz` nebo překrývajícím se `altNamesCz`; žádné dva recepty se stejným `titleCz` |
 | `text-uniqueness` | warning | žádné dva popisy `serving` nejsou shodné na >85 % (odhalí generování šablonou) |
 | `length-sanity` | warning | `serving` má 80–400 znaků; `chokingReason` není obecná fráze ze zakázaného seznamu („dbejte opatrnosti", „konzultujte s lékařem") |

@@ -5,6 +5,7 @@ import { ingredients, recipes } from '@/data';
 import {
   SCREENS,
   acceptDisclaimer,
+  hledejVSeznamu,
   horizontalOverflow,
   pretekajiciPrvky,
   navLink,
@@ -142,7 +143,7 @@ test('proklik ze suroviny na recept a zpět', async ({ page }) => {
 test('zaškrtnutí ochutnáno se propíše do deníku', async ({ page }) => {
   await acceptDisclaimer(page);
   await navLink(page, 'Suroviny').click();
-  await page.getByTestId('hledat-surovinu').fill('brokolice');
+  await hledejVSeznamu(page, 'hledat-surovinu', 'pocet-surovin', 'brokolice');
 
   // Fajfka v seznamu otevře tutéž nabídku jako detail suroviny, jedno
   // klepnutí už nic samo neuloží, rodič vybírá množství i reakci.
@@ -1595,8 +1596,54 @@ test('náhodný recept jde vylosovat z úvodní obrazovky i z kuchařky', async 
 
   // Z kuchařky: losuje se z toho, co je právě vidět.
   await navLink(page, 'Recepty').click();
-  await page.getByTestId('hledat-recept').fill('polévka');
+  await hledejVSeznamu(page, 'hledat-recept', 'pocet-receptu', 'polévka');
   await page.getByTestId('recepty-nahoda').click();
   await expect(page.getByTestId('recept-do-nakupu')).toBeVisible();
   await expect(page.locator('h1').first()).toContainText(/polévka/i);
+});
+
+test('výpis deníku pro pediatra se dá otevřít a obsahuje zapsanou ochutnávku', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+
+  // Nejdřív něco zapsat — prázdný výpis by neprokázal nic.
+  await navLink(page, 'Suroviny').click();
+  await hledejVSeznamu(page, 'hledat-surovinu', 'pocet-surovin', 'brokolice');
+  await page.getByTestId(/^ochutnano-/).first().click();
+  const okenko = page.getByTestId('okenko-ochutnavky');
+  await okenko.getByTestId('volba-mnozstvi-snedla-cast').click();
+  await okenko.getByTestId('volba-reakce-kozni').click();
+  await okenko.getByTestId('ochutnavka-ulozit').click();
+  await expect(okenko).toBeHidden();
+
+  await navLink(page, 'Deník').click();
+  await page.getByTestId('denik-tisk').click();
+
+  await expect(page.getByTestId('tisk-tabulka')).toContainText(/brokolice/i);
+  // Reakce se vytáhne nahoru — kvůli ní se k lékaři jde.
+  await expect(page.getByTestId('tisk-reakce-seznam')).toContainText(/brokolice/i);
+  await expect(page.locator('h1')).toContainText('Ema');
+  await expect(page.getByTestId('tisk-hlavicka')).toContainText('Celkem 1 záznam, 1 surovina.');
+  await expect(page.getByTestId('tisk-alergeny-seznam')).toBeVisible();
+
+  // Tlačítko tisku je na papíře k ničemu, takže má třídu, která ho schová.
+  await expect(page.getByTestId('tisk-spustit')).toHaveClass(/./);
+  await page.getByTestId('tisk-zpet').click();
+  await expect(page.getByTestId('pocet-ochutnanych')).toBeVisible();
+});
+
+test('nepřesnost jde nahlásit z detailu suroviny i receptu', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await navLink(page, 'Suroviny').click();
+  await hledejVSeznamu(page, 'hledat-surovinu', 'pocet-surovin', 'brokolice');
+  await page.getByRole('link', { name: /brokolice/i }).first().click();
+
+  const odkaz = page.getByTestId('nahlasit-nepresnost');
+  await expect(odkaz).toBeVisible();
+  const href = await odkaz.getAttribute('href');
+  expect(href).toContain('github.com/taronwho/BLW/issues/new');
+  expect(href).toContain('brokolice');
+  // Nová záložka, ať rodič nepřijde o rozečtený detail.
+  await expect(odkaz).toHaveAttribute('target', '_blank');
+  await expect(odkaz).toHaveAttribute('rel', /noopener/);
 });

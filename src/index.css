@@ -136,3 +136,43 @@
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Tisk výpisu pro pediatra.
+ *
+ * Papír není displej: navigace, spodní lišta a tlačítka na něm nemají co
+ * dělat a barevné plochy zbytečně žerou toner. `.jen-na-obrazovku` zmizí,
+ * `.tisk-list` se roztáhne přes celou stránku a tabulka se nesmí zlomit
+ * uprostřed řádku — lékař by pak četl datum na jedné stránce a reakci na
+ * druhé.
+ */
+@media print {
+  .jen-na-obrazovku {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .tisk-list {
+    max-width: none;
+    padding: 0;
+    font-size: 11pt;
+  }
+
+  .tisk-list tr,
+  .tisk-list li,
+  .tisk-list section {
+    break-inside: avoid;
+  }
+
+  .tisk-list thead {
+    display: table-header-group;
+  }
+
+  a[href]::after {
+    content: '';
+  }
+}

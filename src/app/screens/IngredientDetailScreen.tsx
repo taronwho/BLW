@@ -10,6 +10,7 @@ import { GripHint } from '../components/GripHint';
 import { ReadinessNote } from '../components/ReadinessNote';
 import { NutrientBlock } from '../components/NutrientBlock';
 import { SourceDisclosure } from '../components/SourceList';
+import { NahlasitNepresnost } from '../components/NahlasitNepresnost';
 import { StageSwitch } from '../components/StageSwitch';
 import { TastingLog } from '../components/TastingLog';
 import { ageInMonths, stageForAge, STAGE_LABELS } from '../lib/age';
@@ -236,6 +237,8 @@ export function IngredientDetailScreen(): ReactNode {
       </section>
 
       <SourceDisclosure sources={ingredient.sources} testId="prepinac-zdroju" />
+
+      <NahlasitNepresnost druh="Surovina" nazev={ingredient.nameCz} id={ingredient.id} />
 
     </article>
   );

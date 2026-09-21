@@ -652,6 +652,24 @@ describe('nitrate-note', () => {
   });
 });
 
+describe('unique-ids', () => {
+  it('projde katalog bez duplicitních idček', () => {
+    expectPass('unique-ids', makeIngredient(), catalog);
+  });
+
+  it('zachytí dva recepty se stejným idčkem', () => {
+    // Přesně tohle bylo v katalogu do 21. 9. 2026 dvakrát: dva recepty
+    // sdílely idčko, takže jeden z nich nešel z adresy otevřít.
+    const prvni = catalog.recipes[0];
+    expect(prvni).toBeDefined();
+    const dvakrat = {
+      ...catalog,
+      recipes: [prvni, { ...prvni, titleCz: 'Jiný název' }],
+    } as typeof catalog;
+    expectFail('unique-ids', prvni as never, dvakrat);
+  });
+});
+
 describe('duplicate-detection', () => {
   it('projde katalog bez duplicit', () => {
     expectPass('duplicate-detection', makeIngredient(), catalog);
@@ -1068,6 +1086,7 @@ describe('pokrytí pravidel', () => {
       'nitrate-note',
       'hazard-coverage',
       'hazard-notes-complete',
+      'unique-ids',
       'duplicate-detection',
       'text-uniqueness',
       'length-sanity',
