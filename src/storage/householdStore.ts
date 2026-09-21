@@ -13,6 +13,8 @@ import type {
 } from '@/types';
 import {
   activeChildren,
+  clenoveZeStavu,
+  clenstviZeStavu,
   emptyHouseholdState,
   MAX_MEMBERS,
   mergeHouseholdState,
@@ -366,16 +368,26 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       });
     },
 
+    /**
+     * Odebrání zařízení z domácnosti.
+     *
+     * Zapisuje se náhrobek se značkou času, ne prosté vymazání z pole.
+     * Dokud se `members` slučovalo sjednocením, druhý telefon odebrané
+     * zařízení při dalším sloučení vrátil (audit 17. 9. 2026, nález 7.4).
+     */
     async removeMember(uid: string): Promise<void> {
       const stav = get().state;
-      if (!stav.members.includes(uid)) return;
+      const clenstvi = clenstviZeStavu(stav);
+      if (clenstvi[uid]?.hodnota !== true) return;
+      const noveClenstvi = { ...clenstvi, [uid]: { hodnota: false, kdy: Date.now() } };
       const seenAt = { ...stav.memberSeenAt };
       delete seenAt[uid];
       const popisy = { ...stav.memberLabels };
       delete popisy[uid];
       await persist({
         ...stav,
-        members: stav.members.filter((one) => one !== uid),
+        members: clenoveZeStavu(noveClenstvi),
+        memberClenstvi: noveClenstvi,
         memberSeenAt: seenAt,
         memberLabels: popisy,
       });
@@ -603,11 +615,30 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
   };
 });
 
+/**
+ * Přidá tohle zařízení mezi členy domácnosti.
+ *
+ * Členství se zapisuje se značkou času do `memberClenstvi` a `members` se
+ * z něj odvodí — pole je jen to, co čtou `firestore.rules`. Zařízení,
+ * které rodič odebral a které si aplikaci otevře znovu, se tím přihlásí
+ * zpátky: párovací kód je v tomhle modelu členství (docs/SPEC.md kap. 7),
+ * takže odebrání znamená „uvolni místo", ne „zakaž přístup".
+ *
+ * Čas se nepřepisuje, když už členství platí. Jinak by se pořadí podle
+ * délky členství měnilo při každém otevření aplikace a „pět nejdéle
+ * přihlášených" by znamenalo „pět, které se naposled dívaly".
+ */
 function withMember(state: HouseholdState, uid: string): HouseholdState {
-  const members = state.members.includes(uid) ? state.members : [...state.members, uid];
+  const clenstvi = clenstviZeStavu(state);
+  const stavajici = clenstvi[uid];
+  const noveClenstvi = {
+    ...clenstvi,
+    [uid]: stavajici?.hodnota === true ? stavajici : { hodnota: true, kdy: Date.now() },
+  };
   return {
     ...state,
-    members,
+    members: clenoveZeStavu(noveClenstvi),
+    memberClenstvi: noveClenstvi,
     memberSeenAt: { ...state.memberSeenAt, [uid]: Date.now() },
     // Popis se přepisuje při každém připojení: rodič si aplikaci může mezitím
     // nainstalovat a z „Chrome" se stane „Nainstalovaná aplikace".

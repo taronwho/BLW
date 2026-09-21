@@ -1,4 +1,5 @@
 import type { Catalog, SourceRef } from '@/types';
+import { rozdilVMesicich, rozeberIsoDatum } from '@/text/datum';
 import type { Severity } from './types';
 
 /**
@@ -108,21 +109,16 @@ export function pouzitiDomen(catalog: Catalog): PouzitiDomeny[] {
 /**
  * Rozdíl dvou ISO dat v celých měsících.
  *
- * Schválně bez `Date`: `accessedAt` je kalendářní datum bez času a
- * převod přes `Date` by u půlnoci na konci měsíce záležel na pásmu
- * prohlížeče. Tady jde o „kolik měsíců od ověření", ne o přesnost na den.
+ * Schválně bez `Date`: `accessedAt` je kalendářní datum bez času a převod
+ * přes `Date` by u půlnoci na konci měsíce záležel na pásmu prohlížeče.
+ * Rozebrání i počítání bydlí v `src/text/datum.ts`, ať v repozitáři není
+ * druhý parser ISO data (audit 17. 9. 2026, nález 5.2).
  */
 export function stariVMesicich(overeno: string, dnes: string): number {
-  const rozeber = (iso: string): [number, number, number] | null => {
-    const shoda = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
-    if (shoda === null) return null;
-    return [Number(shoda[1]), Number(shoda[2]), Number(shoda[3])];
-  };
-  const a = rozeber(overeno);
-  const b = rozeber(dnes);
+  const a = rozeberIsoDatum(overeno);
+  const b = rozeberIsoDatum(dnes);
   if (a === null || b === null) return 0;
-  const mesicu = (b[0] - a[0]) * 12 + (b[1] - a[1]);
-  return b[2] >= a[2] ? mesicu : mesicu - 1;
+  return rozdilVMesicich(a, b);
 }
 
 /**

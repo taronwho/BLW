@@ -1,4 +1,5 @@
 import type { Stage } from '@/types';
+import { dnesIso, rozdilVMesicich, rozeberIsoDatum } from '@/text/datum';
 import { MESIC, ROK, sklonuj } from '@/text/sklonovani';
 
 /** Popisky fází, jak je vidí rodič. */
@@ -8,14 +9,21 @@ export const STAGE_LABELS: Record<Stage, string> = {
   '12m': '12m+',
 };
 
-/** Věk v celých měsících; `null`, když datum narození není vyplněné. */
+/**
+ * Věk v celých měsících; `null`, když datum narození není vyplněné.
+ *
+ * Datum narození se rozebírá na tři čísla, ne přes `Date`. Řetězec
+ * `'2026-03-01'` je pro `Date` UTC půlnoc, ale `now` se čte v místním
+ * čase — západně od Greenwiche by z toho vyšel věk o den (a na přelomu
+ * měsíce o celý měsíc) menší. Věk se počítá z kalendáře, ne z okamžiků
+ * (audit 17. 9. 2026, nález 5.2).
+ */
 export function ageInMonths(birthDate: string, now: Date = new Date()): number | null {
-  if (birthDate.trim().length === 0) return null;
-  const born = new Date(birthDate);
-  if (Number.isNaN(born.getTime())) return null;
-  let months = (now.getFullYear() - born.getFullYear()) * 12 + (now.getMonth() - born.getMonth());
-  if (now.getDate() < born.getDate()) months -= 1;
-  return Math.max(0, months);
+  const born = rozeberIsoDatum(birthDate);
+  if (born === null) return null;
+  const dnes = rozeberIsoDatum(dnesIso(now));
+  if (dnes === null) return null;
+  return Math.max(0, rozdilVMesicich(born, dnes));
 }
 
 /** Fáze předvybraná podle věku dítěte; bez data narození začínáme na 6m+. */

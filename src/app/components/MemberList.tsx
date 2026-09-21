@@ -1,7 +1,7 @@
 import { Smartphone, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
-import { MAX_MEMBERS } from '@/sync/merge';
+import { MAX_MEMBERS, cekajiciClenove, clenstviZeStavu } from '@/sync/merge';
 import { formatDate } from '../lib/labels';
 
 /** Z uid se ukazuje jen začátek — celé je dlouhé a nikomu nic neřekne. */
@@ -26,6 +26,9 @@ export function MemberList(): ReactNode {
 
   const jaUid = status.uid;
   const plno = state.members.length >= MAX_MEMBERS;
+  // Zařízení nad limit. Dřív se šesté tiše zahodilo při slučování a rodič
+  // se o něm nedozvěděl (audit 17. 9. 2026, nález 7.3).
+  const cekajici = cekajiciClenove(clenstviZeStavu(state));
 
   return (
     <section className="flex flex-col gap-2" data-testid="seznam-zarizeni">
@@ -71,6 +74,27 @@ export function MemberList(): ReactNode {
           );
         })}
       </ul>
+
+      {cekajici.length > 0 && (
+        <div
+          className="flex flex-col gap-1 rounded-xl border border-caution bg-caution-soft px-3 py-2"
+          data-testid="cekajici-zarizeni"
+        >
+          <p className="text-sm font-semibold">
+            {cekajici.length === 1 ? 'Jedno zařízení čeká na místo' : `Čekajících zařízení: ${cekajici.length}`}
+          </p>
+          <p className="text-xs leading-relaxed">
+            {/* Nezmizela: v domácnosti jsou zapsaná dál. Jakmile se místo
+                uvolní, připojí se sama a nikdo nemusí zadávat kód znovu. */}
+            Připojila se, ale domácnost má plný počet {MAX_MEMBERS} míst. Odeber některé
+            zařízení výš a nastoupí samo:{' '}
+            {cekajici
+              .map((uid) => state.memberLabels?.[uid] ?? zkratka(uid))
+              .join(', ')}
+            .
+          </p>
+        </div>
+      )}
 
       <p className="text-xs leading-relaxed text-muted">
         {plno

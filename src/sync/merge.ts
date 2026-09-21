@@ -98,8 +98,74 @@ function mergeLabels(
   return { ...local, ...remote };
 }
 
-function mergeUnique(local: readonly string[], remote: readonly string[]): string[] {
-  return [...new Set([...local, ...remote])];
+/**
+ * Členství: kdo v domácnosti je, se značkou času u každého uid.
+ *
+ * Dokud se `members` slučovalo sjednocením, nešlo odebrat nikoho a nic.
+ * Sjednocení umí jen přidávat, takže odebrané zařízení se při dalším
+ * sloučení vrátilo a s ním i jeho popisek a čas — a ty pak rostly
+ * donekonečna (audit 17. 9. 2026, nálezy 7.3 a 7.4).
+ *
+ * Starý dokument `memberClenstvi` nemá, takže se dopočítá z `members`
+ * s časem 0 — „od nepaměti". Jakýkoli pozdější zápis nad ním vyhraje,
+ * stejně jako u oblíbených.
+ */
+export function clenstviZeStavu(
+  state: Pick<HouseholdState, 'members' | 'memberClenstvi'>,
+): Record<string, CasovanaHodnota<boolean>> {
+  const out: Record<string, CasovanaHodnota<boolean>> = {};
+  for (const uid of state.members) out[uid] = { hodnota: true, kdy: 0 };
+  for (const [uid, zaznam] of Object.entries(state.memberClenstvi ?? {})) out[uid] = zaznam;
+  return out;
+}
+
+/**
+ * Pole `members`, jak ho čtou `firestore.rules`.
+ *
+ * Pravidla delší seznam než `MAX_MEMBERS` odmítnou, takže se musí useknout.
+ * Dřív se sekalo `slice(0, 5)` nad sjednocením, kde pořadí určoval lokální
+ * seznam — při šestém zařízení tedy vypadl někdo podle náhody a bez hlášky.
+ * Teď rozhoduje čas připojení: zůstává pět nejdéle přihlášených a ostatní
+ * čekají. V `memberClenstvi` zůstávají, takže jakmile se místo uvolní,
+ * nastoupí sami a nikdo se nemusí připojovat znovu.
+ */
+export function clenoveZeStavu(
+  clenstvi: Readonly<Record<string, CasovanaHodnota<boolean>>>,
+): string[] {
+  return Object.entries(clenstvi)
+    .filter(([, zaznam]) => zaznam.hodnota)
+    .sort((a, b) => a[1].kdy - b[1].kdy || (a[0] < b[0] ? -1 : 1))
+    .map(([uid]) => uid)
+    .slice(0, MAX_MEMBERS);
+}
+
+/** Členové nad `MAX_MEMBERS` — připojení, ale zatím bez místa. */
+export function cekajiciClenove(
+  clenstvi: Readonly<Record<string, CasovanaHodnota<boolean>>>,
+): string[] {
+  return Object.entries(clenstvi)
+    .filter(([, zaznam]) => zaznam.hodnota)
+    .sort((a, b) => a[1].kdy - b[1].kdy || (a[0] < b[0] ? -1 : 1))
+    .map(([uid]) => uid)
+    .slice(MAX_MEMBERS);
+}
+
+/**
+ * Popisky a časy jen pro uid, která v domácnosti opravdu jsou.
+ *
+ * Bez úklidu obě mapy jen rostly: `removeMember` klíče smazal, ale druhý
+ * telefon je při dalším sloučení vrátil.
+ */
+function jenProCleny<T>(
+  mapa: Record<string, T> | undefined,
+  clenstvi: Readonly<Record<string, CasovanaHodnota<boolean>>>,
+): Record<string, T> | undefined {
+  if (mapa === undefined) return undefined;
+  const out: Record<string, T> = {};
+  for (const [uid, hodnota] of Object.entries(mapa)) {
+    if (clenstvi[uid]?.hodnota === true) out[uid] = hodnota;
+  }
+  return out;
 }
 
 /**
@@ -260,6 +326,11 @@ export function prevedStav(raw: unknown): { stav: HouseholdState; zahozeno: Zaho
     members: Array.isArray(vstup['members'])
       ? (vstup['members'] as unknown[]).filter((uid): uid is string => typeof uid === 'string')
       : [],
+    ...(jeCasovanaMapa(vstup['memberClenstvi'])
+      ? {
+          memberClenstvi: vstup['memberClenstvi'] as Record<string, CasovanaHodnota<boolean>>,
+        }
+      : {}),
     ...(vstup['memberSeenAt'] !== null &&
     typeof vstup['memberSeenAt'] === 'object' &&
     !Array.isArray(vstup['memberSeenAt'])
@@ -363,8 +434,9 @@ export function mergeHouseholdState(
   local: HouseholdState,
   remote: HouseholdState,
 ): HouseholdState {
-  const videno = mergeSeenAt(local.memberSeenAt, remote.memberSeenAt);
-  const popisy = mergeLabels(local.memberLabels, remote.memberLabels);
+  const clenstvi = mergeCasovane<boolean>(clenstviZeStavu(local), clenstviZeStavu(remote));
+  const videno = jenProCleny(mergeSeenAt(local.memberSeenAt, remote.memberSeenAt), clenstvi);
+  const popisy = jenProCleny(mergeLabels(local.memberLabels, remote.memberLabels), clenstvi);
   const plany = mergePlany(local.plans, remote.plans);
   const nakup = mergeNakup(local.nakup, remote.nakup);
 
@@ -372,7 +444,8 @@ export function mergeHouseholdState(
     // Děti mají u každé položky vlastní čas, takže dvě zařízení můžou offline
     // přidat každé své a obojí zůstane. Smazané dítě je náhrobek `null`.
     children: mergeCasovane(local.children, remote.children),
-    members: mergeUnique(local.members, remote.members).slice(0, MAX_MEMBERS),
+    members: clenoveZeStavu(clenstvi),
+    memberClenstvi: clenstvi,
     ...(videno === undefined ? {} : { memberSeenAt: videno }),
     ...(popisy === undefined ? {} : { memberLabels: popisy }),
     // Ochutnávky se nikdy neřeší jako konflikt — vždy se spojují.

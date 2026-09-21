@@ -1,3 +1,4 @@
+import { dnesIso, rozeberIsoDatum } from '@/text/datum';
 import type {
   AllergenGroup,
   GuideCategory,
@@ -109,14 +110,20 @@ export function formatSeason(months: readonly number[]): string {
   return names.join(', ');
 }
 
-/** Datum ve tvaru 12. 9. 2026. */
+/**
+ * Datum ve tvaru 12. 9. 2026.
+ *
+ * Bez `Date`: `new Date('2026-03-01')` je UTC půlnoc a čtení přes
+ * `getDate()` v místním čase by západně od Greenwiche ukázalo o den míň
+ * (audit 17. 9. 2026, nález 5.2). Datum ochutnávky je den v kalendáři,
+ * ne okamžik.
+ */
 export function formatDate(iso: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return iso;
-  return `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}`;
+  const datum = rozeberIsoDatum(iso);
+  if (datum === null) return iso;
+  return `${datum.den}. ${datum.mesic}. ${datum.rok}`;
 }
 
 export function todayIso(now: Date = new Date()): string {
-  const offset = now.getTimezoneOffset() * 60_000;
-  return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+  return dnesIso(now);
 }

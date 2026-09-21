@@ -469,8 +469,28 @@ export interface HouseholdState {
    * bez něj by se smazané dítě při slučování vrátilo.
    */
   children: Record<string, CasovanaHodnota<Child | null>>;
-  /** uid členů domácnosti */
+  /**
+   * uid členů domácnosti.
+   *
+   * Tohle pole čtou i `firestore.rules`, takže musí zůstat prostým polem
+   * řetězců. Autorita je ale `memberClenstvi`: `members` se z něj odvozuje
+   * a je useknuté na `MAX_MEMBERS`, protože pravidla delší seznam odmítnou.
+   */
   members: string[];
+  /**
+   * Členství se značkou času (uid → člen ano/ne).
+   *
+   * Dokud bylo `members` jen pole, slučovalo se sjednocením — a sjednocení
+   * umí jen přidávat. Odebrané zařízení se tedy při dalším sloučení vrátilo
+   * a popisky s časy rostly donekonečna (audit 17. 9. 2026, nálezy 7.3 a
+   * 7.4). Stejná vada, jakou projekt už jednou opravil u `favorites`, a
+   * stejné řešení: u každého uid rozhoduje pozdější zápis.
+   *
+   * Odebrané zařízení, které si aplikaci otevře znovu a zná párovací kód,
+   * se přihlásí zpátky. Tak je model přístupu postavený (kód je členství),
+   * takže odebrání znamená „uvolni místo", ne „zakaž přístup".
+   */
+  memberClenstvi?: Record<string, CasovanaHodnota<boolean>>;
   /**
    * Kdy se který člen naposled připojil (uid → čas v ms).
    *

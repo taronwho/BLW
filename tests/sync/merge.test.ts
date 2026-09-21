@@ -260,9 +260,37 @@ describe('poslední přihlášení zařízení', () => {
   });
 
   it('zná-li čas jen jedna strana, převezme se', () => {
-    const local: HouseholdState = { ...emptyHouseholdState(), memberSeenAt: { a: 5 } };
+    const local: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['a'],
+      memberSeenAt: { a: 5 },
+    };
     const merged = mergeHouseholdState(local, emptyHouseholdState());
     expect(merged.memberSeenAt).toEqual({ a: 5 });
+  });
+
+  it('čas ani popis zařízení, které v domácnosti není, se nevleče dál', () => {
+    // ZMĚNA CHOVÁNÍ (audit 17. 9. 2026, nález 7.4). Dřív se obě mapy jen
+    // sjednocovaly, takže `removeMember` klíče smazal a druhý telefon je
+    // při dalším sloučení vrátil — a obě mapy rostly donekonečna. Teď se
+    // uklidí podle členství, které si nese vlastní značku času.
+    const local: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['a'],
+      memberClenstvi: { a: { hodnota: true, kdy: 1 }, b: { hodnota: false, kdy: 9 } },
+      memberSeenAt: { a: 5, b: 7 },
+      memberLabels: { a: 'Telefon', b: 'Starý tablet' },
+    };
+    const remote: HouseholdState = {
+      ...emptyHouseholdState(),
+      members: ['a', 'b'],
+      memberSeenAt: { b: 8 },
+      memberLabels: { b: 'Starý tablet' },
+    };
+    const merged = mergeHouseholdState(local, remote);
+    expect(merged.members).toEqual(['a']);
+    expect(merged.memberSeenAt).toEqual({ a: 5 });
+    expect(merged.memberLabels).toEqual({ a: 'Telefon' });
   });
 
   it('bez časů nezůstane v poli prázdný klíč', () => {

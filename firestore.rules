@@ -29,12 +29,25 @@ service cloud.firestore {
           && request.resource.data.members is list;
       }
 
-      // Deník se jen doplňuje, nikdy nezkracuje.
+      // Připojující se telefon nesmí deník zkrátit.
       //
       // Smazaná ochutnávka zůstává v poli jako náhrobek (`deleted: true`),
       // takže poctivé sloučení počet záznamů nikdy nesníží. Kdo zná párovací
       // kód, se sice smí k domácnosti připojit, ale nesmí týmž zápisem
       // vymazat, co rodiče za měsíce nasbírali.
+      //
+      // Pozor na rozsah (audit 17. 9. 2026, nález 8.4): tahle podmínka je
+      // součástí `pripojujiSe()`, ne `jsemClen()`. **Existující člen deník
+      // zkrátit může.** Není to nedopatření, ale nutnost: `prevedStav()`
+      // zahodí záznam, který neprojde kontrolou tvaru, a po takové opravě
+      // je pole kratší. Kdyby platil zákaz i pro členy, jediný poškozený
+      // záznam by domácnosti zablokoval všechny další zápisy a rodiče by
+      // z hlášky nikdy nepřišli na proč.
+      //
+      // Člen je v tomhle modelu ten, kdo zná párovací kód — tedy někdo,
+      // komu rodič kód sám dal. Jemu se důvěřuje stejně jako u mazání
+      // dětí nebo receptových poznámek. Cizímu, kdo kód uhodne, ne: ten
+      // prochází větví `pripojujiSe()`, kde podmínka platí.
       function nemazeDenik() {
         return request.resource.data.state.tastings.size()
           >= resource.data.state.tastings.size();
