@@ -17,7 +17,8 @@ export function NahlasitNepresnost(props: Hlaseni): ReactNode {
       target="_blank"
       rel="noopener noreferrer"
       data-testid="nahlasit-nepresnost"
-      className="flex items-center gap-1.5 self-start text-xs text-muted underline underline-offset-2"
+      // Dotykový cíl má 44 px na výšku, i když je text drobný (docs/SPEC.md kap. 6).
+      className="flex min-h-[44px] items-center gap-1.5 self-start py-2 text-xs text-muted underline underline-offset-2"
     >
       <Flag aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
       Nahlásit nepřesnost

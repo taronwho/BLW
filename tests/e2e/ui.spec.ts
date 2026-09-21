@@ -1626,8 +1626,14 @@ test('výpis deníku pro pediatra se dá otevřít a obsahuje zapsanou ochutnáv
   await expect(page.getByTestId('tisk-hlavicka')).toContainText('Celkem 1 záznam, 1 surovina.');
   await expect(page.getByTestId('tisk-alergeny-seznam')).toBeVisible();
 
-  // Tlačítko tisku je na papíře k ničemu, takže má třídu, která ho schová.
-  await expect(page.getByTestId('tisk-spustit')).toHaveClass(/./);
+  // Výpis není obrazovka ze SPEC kap. 4 (nemá navigaci ani štítky rizika),
+  // ale dotykové cíle na něm platí stejně jako všude jinde.
+  expect(await tooSmallTargets(page)).toEqual([]);
+  expect(await pretekajiciPrvky(page)).toEqual([]);
+  expect(await horizontalOverflow(page)).toBeLessThanOrEqual(
+    page.viewportSize()?.width ?? 375,
+  );
+
   await page.getByTestId('tisk-zpet').click();
   await expect(page.getByTestId('pocet-ochutnanych')).toBeVisible();
 });

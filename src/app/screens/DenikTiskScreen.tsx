@@ -36,7 +36,7 @@ export function DenikTiskScreen(): ReactNode {
       <div className="jen-na-obrazovku flex items-center justify-between gap-2">
         <Link
           to="/denik"
-          className="flex items-center gap-1 text-sm text-muted"
+          className="flex min-h-[44px] items-center gap-1 text-sm text-muted"
           data-testid="tisk-zpet"
         >
           <ArrowLeft aria-hidden="true" className="h-4 w-4" />
@@ -46,7 +46,7 @@ export function DenikTiskScreen(): ReactNode {
           type="button"
           onClick={() => window.print()}
           data-testid="tisk-spustit"
-          className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white shadow-lift"
+          className="flex min-h-[44px] items-center gap-2 rounded-xl bg-accent px-4 text-sm font-semibold text-white shadow-lift"
         >
           <Printer aria-hidden="true" className="h-4 w-4" />
           Vytisknout
@@ -118,7 +118,17 @@ export function DenikTiskScreen(): ReactNode {
             V deníku zatím nic není. Zapiš první ochutnávku a výpis se naplní.
           </p>
         ) : (
-          <table className="w-full text-left text-xs" data-testid="tisk-tabulka">
+          /* `table-fixed` a procentní šířky: bez nich si tabulka na 320px
+             displeji roztáhne sloupec podle nejdelšího názvu suroviny a
+             vystrčí celou stránku ven. Na papíře se chová stejně. */
+          <table className="w-full table-fixed text-left text-[11px]" data-testid="tisk-tabulka">
+            <colgroup>
+              <col className="w-[18%]" />
+              <col className="w-[26%]" />
+              <col className="w-[18%]" />
+              <col className="w-[18%]" />
+              <col className="w-[20%]" />
+            </colgroup>
             <thead>
               <tr className="border-b border-line">
                 <th scope="col" className="py-1 pr-2 font-semibold">Datum</th>
@@ -130,8 +140,11 @@ export function DenikTiskScreen(): ReactNode {
             </thead>
             <tbody>
               {vypis.radky.map((radek, i) => (
-                <tr key={`${radek.datum}-${radek.surovina}-${i}`} className="border-b border-line/60 align-top">
-                  <td className="whitespace-nowrap py-1 pr-2">{formatDate(radek.datum)}</td>
+                <tr
+                  key={`${radek.datum}-${radek.surovina}-${i}`}
+                  className="border-b border-line/60 align-top [overflow-wrap:anywhere]"
+                >
+                  <td className="py-1 pr-2">{formatDate(radek.datum)}</td>
                   <td className="py-1 pr-2">{radek.surovina}</td>
                   <td className="py-1 pr-2">{radek.mnozstvi}</td>
                   <td className="py-1 pr-2">

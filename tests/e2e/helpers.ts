@@ -96,6 +96,7 @@ export const SCREENS: readonly ScreenDef[] = [
       await expect(page.getByTestId('pocet-ochutnanych')).toBeVisible();
     },
   },
+
   {
     id: 'plan',
     name: 'Plán',

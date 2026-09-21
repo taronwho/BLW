@@ -74,7 +74,7 @@ export function DiaryScreen(): ReactNode {
         <Link
           to="/denik/tisk"
           data-testid="denik-tisk"
-          className="flex shrink-0 items-center gap-1.5 rounded-xl border border-line px-3 py-1.5 text-xs font-semibold"
+          className="flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-xl border border-line px-3 text-xs font-semibold"
         >
           <Printer aria-hidden="true" className="h-4 w-4" />
           Výpis pro pediatra
