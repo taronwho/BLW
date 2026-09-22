@@ -15,8 +15,15 @@ import type { Soucet } from './mnozstvi';
 /** Na kolik dospělých je psaná kuchařka. */
 export const ZAKLAD_DOSPELYCH = 2;
 
-/** Kolik dospělých jde v nákupu nastavit. */
-export const VOLBY_DOSPELYCH: readonly number[] = [2, 3, 4, 5, 6, 8];
+/**
+ * Kolik dospělých jde v nákupu nastavit.
+ *
+ * Jednička je tu schválně a není to okrajový případ: rodič na rodičovské
+ * vaří přes den pro sebe a pro dítě, a to je nejběžnější situace ze všech.
+ * Půlka receptu znamená i půlku dětské porce — komu to nestačí, nechá
+ * dvojku a zbytek si uloží na druhý den.
+ */
+export const VOLBY_DOSPELYCH: readonly number[] = [1, 2, 3, 4, 5, 6, 8];
 
 /**
  * Násobek pro daný počet dospělých.
@@ -36,10 +43,22 @@ export function nasobekProDospele(dospelych: number | undefined): number {
  *
  * Gramy a mililitry na celé, všechno ostatní na půlky: „1,5 lžíce" dává
  * smysl, „1,5 stroužku" taky, ale „1,33 stroužku" je hádanka.
+ *
+ * Nikdy ne na nulu. Nejmenší zápis v kuchařce je čtvrt kusu a při vaření
+ * pro jednoho dospělého by z něj vyšlo 0,125 — po zaokrouhlení „0 kusů",
+ * tedy pokyn nekupovat nic.
+ *
+ * Podlaha je proto půlka, ne čtvrtka, a to schválně: seznam říká, **co
+ * koupit**, ne co dát do hrnce. Osminu papriky si v obchodě nikdo
+ * neutrhne a „0,3 kusu" by navíc vypadalo jako chyba, protože čísla se
+ * v seznamu píšou na jedno desetinné místo.
  */
+const NEJMENSI_KUS = 0.5;
+
 function zaokrouhli(hodnota: number, jednotka: string): number {
-  if (jednotka === 'g' || jednotka === 'ml') return Math.round(hodnota);
-  return Math.round(hodnota * 2) / 2;
+  if (jednotka === 'g' || jednotka === 'ml') return Math.max(1, Math.round(hodnota));
+  const naPulky = Math.round(hodnota * 2) / 2;
+  return naPulky > 0 ? naPulky : NEJMENSI_KUS;
 }
 
 /**

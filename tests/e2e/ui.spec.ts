@@ -1715,6 +1715,15 @@ test('nákupní seznam přepočítá množství podle počtu dospělých', async
   await page.reload();
   await expect(page.getByTestId('nakup-dospelych')).toHaveValue('4');
 
+  // Vaření pro jednoho dospělého je půlka receptu — a podle rodičů na
+  // rodičovské ta nejčastější situace, ne okrajový případ.
+  await page.getByTestId('nakup-dospelych').selectOption('1');
+  await expect(page.getByTestId('nakup-nasobek')).toContainText('0,5×');
+  // Nikde nesmí vyjít nula: to by byl pokyn nekupovat nic.
+  for (const mnozstvi of await page.getByTestId(/^nakup-mnozstvi-/).all()) {
+    expect((await mnozstvi.textContent()) ?? '').not.toMatch(/(^|\s)0(,0)? /);
+  }
+
   await page.getByTestId('nakup-dospelych').selectOption('2');
   await expect(page.getByTestId('nakup-nasobek')).toHaveCount(0);
   await expect(prvni).toHaveText(pred);
