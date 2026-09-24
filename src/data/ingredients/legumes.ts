@@ -12,6 +12,7 @@ import {
   NHS_VEGETARIAN,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  NHS_FOOD_ALLERGY,
 } from './_sources';
 
 /**
@@ -713,7 +714,7 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_ALLERGY, NHS_YOUNG_CHILDREN],
+    sources: [NHS_ALLERGY, NHS_YOUNG_CHILDREN, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
   {

@@ -16,6 +16,7 @@ import {
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
   BP_ARSENIC_EFSA,
+  BP_BEZLEPKOVA_DIETA,
 } from './_sources';
 
 /**
@@ -67,7 +68,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_6M, BP_GLUTEN],
+    sources: [NHS_6M, BP_GLUTEN, BP_BEZLEPKOVA_DIETA],
     reviewStatus: 'verified',
   },
   {
@@ -109,7 +110,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_6M, NHS_7_9M],
+    sources: [NHS_6M, NHS_7_9M, BP_BEZLEPKOVA_DIETA],
     reviewStatus: 'verified',
   },
   {
@@ -411,7 +412,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -457,7 +458,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -499,7 +500,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_FIRST_FOODS],
+    sources: [NHS_AVOID, NHS_FIRST_FOODS, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -1450,8 +1451,10 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_ALLERGY, BP_GLUTEN],
-    reviewStatus: 'verified',
+    sources: [NHS_ALLERGY, BP_GLUTEN, BP_BEZLEPKOVA_DIETA],
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Zařazení ovsa mezi obiloviny s lepkem je doložené. Věta „Oves sám lepek neobsahuje“ ale odporuje zdroji: slovník bezpecnostpotravin.cz (heslo Bezlepková dieta, přečteno 24. 9. 2026) uvádí, že lepek obsahuje i oves, a článek Společnosti pro výživu tamtéž jmenuje ovesnou bílkovinu avenin. Znění věty je potřeba ověřit.',
   },
   {
     id: 'mouka-sojova',

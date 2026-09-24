@@ -199,7 +199,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [9, 10, 11, 12, 1],
     vegetarian: true,
-    sources: [NHS_ALLERGY, NHS_FIRST_FOODS],
+    sources: [NHS_ALLERGY, NHS_FIRST_FOODS, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
   {

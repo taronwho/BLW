@@ -61,7 +61,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_6M],
+    sources: [NHS_YOUNG_CHILDREN, NHS_6M, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -103,7 +103,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, WHO_COMPLEMENTARY],
+    sources: [NHS_YOUNG_CHILDREN, WHO_COMPLEMENTARY, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -187,7 +187,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_6M],
+    sources: [NHS_YOUNG_CHILDREN, NHS_6M, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -229,7 +229,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, MZCR_COMPLEMENTARY],
+    sources: [NHS_YOUNG_CHILDREN, MZCR_COMPLEMENTARY, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -271,7 +271,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID],
+    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -313,7 +313,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID_WEANING],
+    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID_WEANING, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -357,7 +357,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -403,7 +403,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -449,7 +449,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -495,7 +495,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_10_12M],
+    sources: [NHS_AVOID, NHS_10_12M, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -543,7 +543,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -591,7 +591,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -639,7 +639,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -687,7 +687,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -731,7 +731,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -773,7 +773,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID],
+    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -857,7 +857,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID_WEANING],
+    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID_WEANING, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -899,7 +899,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID],
+    sources: [NHS_YOUNG_CHILDREN, NHS_AVOID, NHS_ALLERGY],
     reviewStatus: 'verified',
   },
   {

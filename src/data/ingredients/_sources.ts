@@ -120,11 +120,31 @@ export const NHS_PREP_SAFELY = nhs(
   FETCHED,
 );
 
-/** Zavádění alergenů od šesti měsíců a opakovaná expozice. */
+/**
+ * Zavádění alergenů od šesti měsíců a opakovaná expozice.
+ *
+ * Štítky (přečteno 24. 9. 2026). Stránka jmenuje potraviny, které mohou
+ * vyvolat alergickou reakci, radí zavádět je od 6 měsíců po jedné a ve
+ * velmi malém množství, sledovat reakci a po snesení je dál pravidelně
+ * nabízet; u diagnostikované alergie nebo ekzému se nejdřív poradit
+ * s lékařem. Jednotlivě:
+ * - `mleko`: kravské mléko ve vaření nebo v jídle.
+ * - `vejce`: vejce; odkládání slepičích vajec po 6. až 12. měsíci může
+ *   riziko alergie zvýšit.
+ * - `psenice-lepek`: potraviny s lepkem, výslovně pšenice, ječmen a žito.
+ * - `orechy`: ořechy, podávané rozdrcené nebo mleté.
+ * - `arasidy`: arašídy, rozdrcené nebo mleté; odkládání může riziko alergie
+ *   zvýšit.
+ * - `soja`: sója.
+ * - `ryby`: ryby.
+ * Semínka a „shellfish“ stránka uvádí jen souhrnně, sezam, korýše
+ * a měkkýše zvlášť nejmenuje, proto tyto štítky nemá.
+ */
 export const NHS_ALLERGY = nhs(
   'Baby food allergies',
   '/best-start-in-life/baby/weaning/safe-weaning/food-allergies/',
-  FETCHED,
+  FETCHED_24,
+  ['mleko', 'vejce', 'psenice-lepek', 'orechy', 'arasidy', 'soja', 'ryby'],
 );
 
 /**
@@ -133,8 +153,33 @@ export const NHS_ALLERGY = nhs(
  *
  * OVĚŘENO 13. 9. 2026: staženo a přečteno, věta „you can be allergic to any
  * type of food, including celery, mustard, sesame seeds and lupin flour".
+ *
+ * Štítky (přečteno 24. 9. 2026). Stránka popisuje příznaky potravinové
+ * alergie včetně těžké reakce a mezi nejčastější alergizující potraviny
+ * řadí:
+ * - `mleko`: kravské mléko;
+ * - `vejce`: vejce;
+ * - `arasidy`: arašídy;
+ * - `soja`: sóju;
+ * - `orechy`: skořápkové ořechy, jmenovitě vlašské, mandle, lískové,
+ *   pekanové, kešu, pistácie a para ořechy;
+ * - `korysi`: korýše, jmenovitě krevety, kraby a humry;
+ * - `psenice-lepek`: pšenici.
+ * Dodává, že alergie může být na jakoukoli potravinu, a výslovně jmenuje:
+ * - `celer`: celer;
+ * - `sezam`: sezamová semínka.
  */
-export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/', FETCHED_13);
+export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/', FETCHED_24, [
+  'mleko',
+  'vejce',
+  'arasidy',
+  'soja',
+  'orechy',
+  'korysi',
+  'psenice-lepek',
+  'celer',
+  'sezam',
+]);
 
 /**
  * Ryby: dravé ryby s rtutí, porce tučných ryb, syroví korýši.
@@ -152,12 +197,18 @@ export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/',
  *   rtuť v nich může ovlivnit nervovou soustavu; tuňák má víc rtuti než
  *   jiné ryby a nepočítá se mezi tučné ryby. Limit porcí tuňáka stránka
  *   uvádí jen pro těhotné, ne pro děti.
+ * - `ryby`: alergie na ryby je poměrně častá a může být těžká, kdo reaguje
+ *   na jeden druh ryby, často reaguje i na jiné, a tepelná úprava reakci
+ *   nezmírní.
+ * - `korysi`: totéž platí pro „shellfish“; stránka jmenuje krevety a kraby.
+ * - `mekkysi`: totéž platí pro „shellfish“; stránka jmenuje slávky
+ *   a hřebenatky a mezi „shellfish“ řadí i kalmary.
  */
 export const NHS_FISH = nhs(
   'Fish and shellfish',
   '/live-well/eat-well/food-types/fish-and-shellfish-nutrition/',
   FETCHED_24,
-  ['syrove', 'rtut'],
+  ['syrove', 'rtut', 'ryby', 'korysi', 'mekkysi'],
 );
 
 /**
@@ -226,12 +277,16 @@ export const NHS_TEETHING_SYMPTOMS = nhs(
  * - `arsen`: rýžové nápoje nemají děti do 5 let dostávat místo mléka, protože
  *   mohou obsahovat příliš arsenu; rýže ho přijímá víc než jiné obiloviny,
  *   ale samotnou rýži to nevylučuje a pro rýžové výrobky platí limity.
+ * - `mleko`: stránka zmiňuje alergii na bílkovinu kravského mléka: kozí
+ *   formule pro takové děti vhodná není, protože má velmi podobné bílkoviny
+ *   a alergii vyvolává stejně snadno; při alergii nebo nesnášenlivosti mléka
+ *   se o náhradě radí s lékařem.
  */
 export const NHS_DRINKS = nhs(
   'Drinks and cups for babies and young children',
   '/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/',
   FETCHED_24,
-  ['nepasterizovane', 'cukr', 'arsen'],
+  ['nepasterizovane', 'cukr', 'arsen', 'mleko'],
 );
 
 /**
@@ -430,13 +485,59 @@ export const MZCR_COMPLEMENTARY: SourceRef = {
   tier: 1,
 };
 
-/** Zavádění lepku do výživy kojenců. */
+/**
+ * Zavádění lepku do výživy kojenců.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `psenice-lepek`: lepek je bílkovina z pšenice, žita a ječmene; velmi
+ *   časné zavedení (do 3 měsíců) může souviset s vyšším rizikem celiakie
+ *   a potraviny s lepkem se mají zavádět po jedné, aby šlo sledovat reakci,
+ *   protože patří mezi běžné původce alergií.
+ */
 export const BP_GLUTEN: SourceRef = {
   org: 'Informační centrum bezpečnosti potravin',
   title: 'Zavádění lepku do výživy kojenců',
   url: 'https://bezpecnostpotravin.cz/zavadeni-lepku-do-vyzivy-kojencu/',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['psenice-lepek'],
+};
+
+/**
+ * Heslo „Bezlepková dieta“ ve slovníku Informačního centra bezpečnosti
+ * potravin.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `psenice-lepek`: lepek obsahuje pšenice, žito, ječmen, tritikale a oves;
+ *   při celiakii se vylučují i výrobky z nich (pečivo, strouhanka,
+ *   těstoviny, vločky, kroupy, krupice) a nevhodná je i špalda.
+ */
+export const BP_BEZLEPKOVA_DIETA: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Bezlepková dieta',
+  url: 'https://bezpecnostpotravin.cz/termin/bezlepkova-dieta/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['psenice-lepek'],
+};
+
+/**
+ * Heslo „Alergie na siřičitany“ ve slovníku Informačního centra bezpečnosti
+ * potravin.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `siricitany`: siřičitany se přidávají jako konzervant a proti hnědnutí,
+ *   nejvíc (až 1000 mg/kg) jich bývá v sušeném ovoci a víně; u citlivých
+ *   lidí, hlavně astmatiků, vyvolávají reakce, nejčastěji zúžení průdušek
+ *   během několika minut, a na obalu se uvádějí od 10 mg/kg.
+ */
+export const BP_SIRICITANY: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Alergie na siřičitany',
+  url: 'https://bezpecnostpotravin.cz/termin/alergie-na-siricitany/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['siricitany'],
 };
 
 /** Konzultace EFSA k zavádění příkrmů do diety kojenců. */

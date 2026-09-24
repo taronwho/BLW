@@ -13,6 +13,7 @@ import {
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
   BP_ARSENIC_EFSA,
+  NHS_FOOD_ALLERGY,
 } from './_sources';
 
 /**
@@ -856,7 +857,7 @@ export const other: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_DRINKS, NHS_AVOID],
+    sources: [NHS_DRINKS, NHS_AVOID, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
 ];

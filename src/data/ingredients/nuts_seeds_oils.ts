@@ -11,6 +11,7 @@ import {
   NHS_VEGETARIAN,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  NHS_FOOD_ALLERGY,
 } from './_sources';
 
 /**
@@ -238,7 +239,7 @@ export const nutsSeedsOils: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_ALLERGY, NHS_VEGETARIAN],
+    sources: [NHS_ALLERGY, NHS_VEGETARIAN, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -492,7 +493,7 @@ export const nutsSeedsOils: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_ALLERGY, NHS_AVOID],
+    sources: [NHS_ALLERGY, NHS_AVOID, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -1091,7 +1092,7 @@ export const nutsSeedsOils: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     frequencyLimit: 'Kvůli koncentrovanému selenu jen občas, ne denně.',
-    sources: [NHS_TRACE_MINERALS, NHS_AVOID],
+    sources: [NHS_TRACE_MINERALS, NHS_AVOID, NHS_FOOD_ALLERGY],
     reviewStatus: 'verified',
   },
   {
@@ -1224,7 +1225,9 @@ export const nutsSeedsOils: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_AVOID, NHS_ALLERGY],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Piniové oříšky jsou vedené jako alergen ze skupiny ořechů. Žádný citovaný zdroj je ale mezi alergenními ořechy nejmenuje. NHS Food allergy jmenuje vlašské, mandle, lískové, pekanové, kešu, pistácie a para ořechy. Evropský seznam alergenů na obalu (SZPI na bezpecnostpotravin.cz) uvádí mandle, lískové, vlašské, kešu, pekanové, para, pistácie a makadamie, piniové ne. Zařazení do skupiny je potřeba ověřit.',
   },
   {
     id: 'slunecnicove-maslo',

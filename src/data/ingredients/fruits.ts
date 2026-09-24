@@ -13,6 +13,7 @@ import {
   NHS_PREP_SAFELY,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  BP_SIRICITANY,
 } from './_sources';
 
 /**
@@ -1378,7 +1379,7 @@ export const fruits: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_PREP_SAFELY],
+    sources: [NHS_AVOID, NHS_PREP_SAFELY, BP_SIRICITANY],
     reviewStatus: 'verified',
   },
   {
