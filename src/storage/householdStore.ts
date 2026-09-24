@@ -29,6 +29,7 @@ import {
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
 import { popisZarizeni } from '@/sync/zarizeni';
 import { INTERVAL_SOUHRNU_MS, klicStatistiky } from '@/sync/statistiky';
+import { uklidNahrobky, zaplneni } from '@/sync/velikost';
 import type { SouhrnDomacnosti } from '@/admin/prehled';
 import type { Zahozeno } from '@/sync/validace';
 import { IndexedDbAdapter } from './indexedDb';
@@ -53,6 +54,11 @@ interface HouseholdStore {
   householdCode: string | null;
   /** Které dítě aplikace ukazuje. Jen v tomhle zařízení, nesdílí se. */
   activeChildId: string | null;
+  /**
+   * Kolik z limitu 1 MiB zabírá sdílený dokument domácnosti (0 až 1 a víc).
+   * `null`, dokud domácnost není sdílená — v telefonu se nic neomezuje.
+   */
+  zaplneni: number | null;
 
   init(): Promise<void>;
   connect(code?: string): Promise<void>;
@@ -173,13 +179,28 @@ function writeStoredCode(code: string | null): void {
 }
 
 export const useHouseholdStore = create<HouseholdStore>((set, get) => {
-  /** Uloží nový stav lokálně a, když je připojeno, i do Firestore. */
-  async function persist(next: HouseholdState): Promise<void> {
+  /**
+   * Uloží nový stav lokálně a, když je připojeno, i do Firestore.
+   *
+   * `pripojuji` je první zápis telefonu, který se k domácnosti teprve
+   * připojuje. Při něm se náhrobky neuklízejí: pravidla Firestore takovému
+   * zápisu nedovolí deník zkrátit (`nemazeDenik`) a připojení by selhalo.
+   */
+  async function persist(vstup: HouseholdState, pripojuji = false): Promise<void> {
+    const next = remoteAdapter !== null && !pripojuji ? uklidNahrobky(vstup) : vstup;
     const stored: StoredHousehold = { state: next, updatedAt: Date.now() };
     set({ state: next, updatedAt: stored.updatedAt });
     await local().save(stored);
     if (remoteAdapter === null) return;
     zapisStatistik?.(next);
+    const podil = zaplneni(next);
+    set({ zaplneni: podil });
+    if (podil > 1) {
+      // Server by zápis stejně odmítl. Telefon si data drží dál, jen se
+      // přestanou posílat — a rodič se to musí dozvědět.
+      set({ status: { kind: 'error', message: HLASKA_PLNA_DOMACNOST } });
+      return;
+    }
     try {
       await remoteAdapter.save(stored);
     } catch (error) {
@@ -258,9 +279,11 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       }
       if (remote !== null) {
         const merged = mergeHouseholdState(localState, migrateHouseholdState(remote.state));
-        await persist(withMember(merged, session.uid));
+        // Kdo už členem je, smí při připojení i uklízet; nový telefon ne.
+        const uzJsemClen = migrateHouseholdState(remote.state).members.includes(session.uid);
+        await persist(withMember(merged, session.uid), !uzJsemClen);
       } else {
-        await persist(withMember(localState, session.uid));
+        await persist(withMember(localState, session.uid), true);
       }
 
       // Poslouchá vždycky jen jeden odběr; starý se ruší, ať se změny
@@ -270,12 +293,15 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
         // Novější tvar se ignoruje ze stejného důvodu jako při připojení.
         if (jeZNovejsiVerze(incoming.state)) return;
         const serverovy = migrateHouseholdState(incoming.state);
-        const merged = mergeHouseholdState(get().state, serverovy);
+        // Úklid i tady, jinak by se náhrobek, který druhý telefon už
+        // zahodil, vracel přes zpětný zápis tam a zpátky. Rozhodují jen data,
+        // takže oba telefony vyčistí totéž.
+        const merged = uklidNahrobky(mergeHouseholdState(get().state, serverovy));
         // Čas zápisu musí sedět v paměti i na disku. Dřív se do paměti
         // neukládal vůbec, takže se po přenačtení stránky lišil od toho na
         // disku a další slučování počítalo s jiným časem, než jaký platil.
         const kdy = Date.now();
-        set({ state: merged, updatedAt: kdy });
+        set({ state: merged, updatedAt: kdy, zaplneni: zaplneni(merged) });
         void local().save({ state: merged, updatedAt: kdy });
         // Server přepsal něco, co tenhle telefon ví (dva zápisy offline,
         // dokument se zapisuje celý). Sloučený stav se vrací zpátky, jinak
@@ -283,7 +309,11 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
         // něco dalšího — a kdyby se tenhle telefon mezitím ztratil, byl by
         // záznam pryč. Když už server sloučený stav má, nezapisuje se nic,
         // takže se telefony nepřetahují donekonečna.
-        if (remoteAdapter === adapter && chybiNaServeru(merged, serverovy)) {
+        if (
+          remoteAdapter === adapter &&
+          chybiNaServeru(merged, serverovy) &&
+          zaplneni(merged) <= 1
+        ) {
           void adapter.save({ state: merged, updatedAt: kdy }).catch((error: unknown) => {
             set({ status: { kind: 'error', message: describeError(error) } });
           });
@@ -305,6 +335,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     state: emptyHouseholdState(),
     updatedAt: 0,
     status: { kind: 'local-only' },
+    zaplneni: null,
     householdCode: null,
     activeChildId: null,
 
@@ -334,7 +365,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       remoteAdapter = null;
       zapisStatistik = null;
       writeStoredCode(null);
-      set({ householdCode: null, status: { kind: 'local-only' } });
+      set({ householdCode: null, status: { kind: 'local-only' }, zaplneni: null });
     },
 
     async createHousehold(): Promise<string> {
@@ -729,6 +760,10 @@ function withMember(state: HouseholdState, uid: string): HouseholdState {
  * sem jeho text nikdy nepouští doslova — je nesrozumitelný a v aplikaci pro
  * rodiče nemá co dělat. Podrobnost zůstává v konzoli prohlížeče.
  */
+/** Dokument domácnosti by překročil limit Firestore. */
+const HLASKA_PLNA_DOMACNOST =
+  'Sdílená domácnost je plná: databáze unese na jednu domácnost nejvýš 1 MB a deník ho vyčerpal. Nové záznamy se dál ukládají v tomhle telefonu, ale na druhý telefon už nedojdou. Stáhni si zálohu (Domácnost → Aplikace → Export) a nahlas to autorovi aplikace.';
+
 function describeError(error: unknown): string {
   const text = error instanceof Error ? error.message : String(error);
   // Podrobnost pro ladění, ne pro rodiče.
@@ -736,6 +771,9 @@ function describeError(error: unknown): string {
 
   // Firestore vrátí u zamítnutého zápisu jen „permission-denied“. Nejčastější
   // příčinou je plná domácnost, což ze samotné hlášky nikdo nepozná.
+  if (/maximum allowed size|exceeds the maximum|too large/i.test(text)) {
+    return HLASKA_PLNA_DOMACNOST;
+  }
   if (/permission|insufficient/i.test(text)) {
     return `Zápis odmítnut. Buď je domácnost plná (nejvýš ${MAX_MEMBERS} zařízení. Odeber některé v Domácnosti na jiném telefonu), nebo nemá databáze nahraná pravidla přístupu; to se nastavuje jednou při zprovoznění sdílení.`;
   }

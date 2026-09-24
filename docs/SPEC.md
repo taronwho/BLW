@@ -176,7 +176,16 @@ protože žádný z nich nebyl kosmetický:
   odebrání při sloučení dvou telefonů vždycky vrátilo.
 - **Smazání je náhrobek, ne díra.** `deleted: true` u ochutnávky a `null`
   u dítěte, plánu nebo položky nákupu. Bez toho by je druhý telefon
-  vzkřísil.
+  vzkřísil. Náhrobek ochutnávky se zahodí, až se po smazání (s týdenní
+  rezervou) připojil každý současný člen domácnosti — pak o smazání ví
+  všichni (`uklidNahrobky`, `src/sync/velikost.ts`). Nikdy při zápisu
+  telefonu, který se teprve připojuje, protože ten deník zkrátit nesmí.
+- **Limit 1 MiB na dokument.** Celá domácnost je jeden dokument Firestore.
+  Aplikace velikost měří před každým zápisem, v Domácnosti ukazuje
+  zaplnění (od 70 % upozornění, od 90 % i na úvodní obrazovce) a přes
+  limit na server nezapisuje — data zůstanou v telefonu a rodič dostane
+  srozumitelnou hlášku. Trvalé řešení (ochutnávky jako samostatné
+  dokumenty) přijde, až to zaplnění u skutečných domácností ukáže.
 - **Přibyl 30denní plán** (`plans`, `docs/PLAN-30-DNI.md`) a **nákupní
   seznam** (`nakup`). Obojí rozhodnuto září 2026, viz `CLAUDE.md`.
 - **Surovina nese navíc** `servingForm` (kusové / drobné / kašovité /

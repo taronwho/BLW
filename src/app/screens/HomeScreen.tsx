@@ -15,6 +15,7 @@ import { lists } from "@/data/lists";
 import { SeznamDlazdice } from "../components/SeznamDlazdice";
 import { PlanKarta } from "../components/PlanKarta";
 import { NakupKarta } from "../components/NakupKarta";
+import { ZaplneniNaUvodu } from "../components/ZaplneniDomacnosti";
 import { useHouseholdStore } from "@/storage/householdStore";
 import { STAGE_LABELS, ageInMonths, formatAge, stageForAge } from "../lib/age";
 import { GRIP_LABELS, gripForAge } from "../lib/grip";
@@ -53,6 +54,7 @@ export function HomeScreen(): ReactNode {
           se jinde nedozvíš: podle čeho je aplikace nastavená a kudy se to
           mění. Dřív tu byly dva řádky odznaků a vytlačily zbytek
           rozcestníku pod okraj displeje. */}
+      <ZaplneniNaUvodu />
       <header className="rounded-2xl bg-accent-sheen px-3 py-1 text-white shadow-lift">
         <div className="flex items-center justify-between gap-2">
           {hasChild ? (

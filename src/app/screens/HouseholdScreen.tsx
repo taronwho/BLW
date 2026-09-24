@@ -18,6 +18,7 @@ import { ChildrenSection } from '../components/ChildrenSection';
 import { MemberList } from '../components/MemberList';
 import { ThemePicker } from '../components/ThemePicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
+import { ZaplneniDomacnosti } from '../components/ZaplneniDomacnosti';
 import { ChokingLegend } from '../components/ChokingLegend';
 import { DISCLAIMER_PARAGRAPHS, SOUKROMI_PARAGRAPHS } from '../disclaimer';
 import { useUrlText } from '../lib/urlState';
@@ -96,6 +97,7 @@ export function HouseholdScreen(): ReactNode {
         <>
       <div className="flex flex-col gap-3 rounded-xl bg-surface p-4">
         <SyncStatusBadge status={status} />
+        <ZaplneniDomacnosti />
 
         {householdCode === null ? (
           <button

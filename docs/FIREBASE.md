@@ -102,7 +102,8 @@ neubere a přidat smí nejvýš jedno `uid`. Domácnost unese pět zařízení.
 
 Připojující se člověk navíc nesmí týmž zápisem zkrátit seznam ochutnávek.
 Smazaná ochutnávka zůstává v poli jako náhrobek, takže poctivé sloučení počet
-záznamů nikdy nesníží — kdo zná kód, se smí připojit, ale nesmí přitom smazat,
+záznamů nikdy nesníží (náhrobky uklízí jen telefon, který už členem je;
+připojovací zápis nikdy — viz `docs/SPEC.md` kap. 7) — kdo zná kód, se smí připojit, ale nesmí přitom smazat,
 co rodiče za měsíce nasbírali. Každý zápis taky musí mít správný tvar
 (`state`, `updatedAt`, `members`), aby dokument nešlo přepsat čímkoli.
 
