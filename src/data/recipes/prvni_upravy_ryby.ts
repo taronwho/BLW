@@ -1,5 +1,14 @@
 import type { Recipe } from '@/types';
-import { NHS_FISH, NHS_IRON, NHS_PREP_SAFELY, NHS_VEGETARIAN } from '../ingredients/_sources';
+import {
+  BP_RTUT_SZU,
+  EFSA_FISH_WILD_FARMED,
+  EFSA_MERCURY,
+  NHS_AVOID,
+  NHS_FISH,
+  NHS_IRON,
+  NHS_PREP_SAFELY,
+  NHS_VEGETARIAN,
+} from '../ingredients/_sources';
 
 /**
  * Jednoduché úpravy ryb.
@@ -9,7 +18,7 @@ import { NHS_FISH, NHS_IRON, NHS_PREP_SAFELY, NHS_VEGETARIAN } from '../ingredie
  * vysychání, kvůli kterému se skoro všechny bílé ryby spíš dusí a pečou
  * přikryté, než opékají na prudko.
  *
- * Kde se druh liší, je to v postupu napsané: u dravých ryb limit kvůli rtuti,
+ * Kde se druh liší, je to v postupu napsané: u dravých ryb střídání kvůli rtuti,
  * u tučných kvůli látkám z prostředí, u konzervy kvůli soli.
  *
  * Každý recept má bezmasou variantu, protože matka v téhle rodině rybu nejí.
@@ -249,9 +258,7 @@ export const prvniUpravyRyby: Recipe[] = [
     id: 'tunak-cerstvy-kratce-opeceny',
     titleCz: 'Čerstvý tuňák krátce opečený',
     category: 'obed-vecere',
-    minAgeMonths: 12,
-    minAgeReason:
-      'Tuňák je velká dravá ryba a hromadí se v něm rtuť víc než v malých druzích. Do prvních narozenin se proto nezavádí, i když by dětská porce z hlediska tvaru i měkkosti vyhovovala už od šesti měsíců.',
+    minAgeMonths: 6,
     timeMinutes: 15,
     servings: '2 dospělí + 1 miminko',
     ingredients: [
@@ -264,7 +271,7 @@ export const prvniUpravyRyby: Recipe[] = [
       'Steak z tuňáka otři do sucha a nech ho deset minut mimo lednici, ať není uprostřed ledový.',
       'Pánev potři olivovým olejem a rozpal ji. Steak opékej dvě minuty z každé strany.',
       'Pro dětskou porci se tuňák nenechává uvnitř růžový. Odděl kousek, podlij ho vodou, přiklop a nech tři minuty dojít, dokud není celý světlý.',
-      'Tuňák je velká dravá ryba a hromadí se v něm rtuť víc než v malých druzích. Proto je v plánu až od roku a nejvýš jednou za dva týdny.',
+      'Tuňák je velká dravá ryba a hromadí se v něm rtuť víc než v malých druzích. EFSA proto malým dětem radí vybírat ryby z mnoha druhů a dravým rybám nedávat přednost: tuňák ať je jednou z ryb, ne ta hlavní.',
       'Od tohoto místa se pánev dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
     ],
     babySplitPoint:
@@ -274,9 +281,9 @@ export const prvniUpravyRyby: Recipe[] = [
       'Tuňák je suchý. Promíchej porci s lžící avokáda nebo olivového oleje, jinak ho dítě odloží.',
     ],
     babyServing: {
-      '6m': 'Nepodává se, tuňák patří do jídelníčku až po prvních narozeninách.',
-      '9m': 'Nepodává se, tuňák patří do jídelníčku až po prvních narozeninách.',
-      '12m': 'Propečená vlákna tuňáka promíchaná s avokádem, nejvýš jednou za dva týdny.',
+      '6m': 'Propečená vlákna tuňáka rozmačkaná s avokádem do vláčné kaše, kterou dítě nabírá prsty nebo olizuje z předložené lžíce.',
+      '9m': 'Propečená vlákna tuňáka promíchaná s avokádem, podaná po hrstičkách, které dítě sbírá prsty.',
+      '12m': 'Propečená vlákna tuňáka promíchaná s avokádem; v týdnu ho střídej s jinými rybami.',
     },
     adultSteps: [
       'Zbylý steak osol, nech ho uvnitř růžový a nakrájej ho na plátky přes vlákna.',
@@ -290,16 +297,14 @@ export const prvniUpravyRyby: Recipe[] = [
       'Místo tuňáka se podává 250 g opečené cizrny, která dodá bílkovinu i železo.',
     allergens: ['ryby'],
     tags: ['ryba', 'rychlé'],
-    sources: [NHS_FISH, NHS_PREP_SAFELY],
+    sources: [NHS_FISH, NHS_PREP_SAFELY, EFSA_MERCURY],
     reviewStatus: 'verified',
   },
   {
     id: 'tunak-v-konzerve-pomazanka',
     titleCz: 'Pomazánka z tuňáka v konzervě',
     category: 'obed-vecere',
-    minAgeMonths: 12,
-    minAgeReason:
-      'Konzervovaný tuňák se vyrábí z menších druhů, ale rtuť v něm zůstává a k tomu bývá solený. Do prvních narozenin se proto nezavádí, ačkoli podoba pomazánky by mladší fázi vyhovovala.',
+    minAgeMonths: 6,
     timeMinutes: 8,
     servings: '2 dospělí + 1 miminko',
     ingredients: [
@@ -311,7 +316,7 @@ export const prvniUpravyRyby: Recipe[] = [
       'Tuňáka sceď a propláchni studenou vodou; nálev bývá slaný a dětská porce sůl nesnese.',
       'Avokádo vyloupni z půlek a rozmačkej vidličkou na hladkou kaši.',
       'Vmíchej tuňáka a rozmačkej směs dohladka. Avokádo tady nahrazuje majonézu, dodá tuk i vláčnost.',
-      'Tuňák v konzervě se vyrábí z menších druhů než steaky, takže rtuti obsahuje méně; přesto ho nedávej častěji než jednou týdně.',
+      'Tuňák v konzervě má podle EFSA zřejmě méně rtuti než čerstvý, protože se vyrábí z jiných nebo menších ryb, a SZÚ hodnotí rtuť v konzervách z českého trhu i pro děti jako velmi nízké riziko. I tak ho v týdnu střídej s jinými rybami.',
       'Od tohoto místa se miska dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',
     ],
     babySplitPoint: 'Po kroku 4 odeber lžíci pomazánky do misky, ještě než se miska dochucuje.',
@@ -320,9 +325,9 @@ export const prvniUpravyRyby: Recipe[] = [
       'Namaž pomazánku v silné vrstvě na proužek chleba, ze kterého se stane sousto do ruky.',
     ],
     babyServing: {
-      '6m': 'Nepodává se, tuňák z konzervy patří do jídelníčku až po prvních narozeninách.',
-      '9m': 'Nepodává se, tuňák z konzervy patří do jídelníčku až po prvních narozeninách.',
-      '12m': 'Silná vrstva rybí pomazánky na proužku chleba, nejvýš jednou týdně.',
+      '6m': 'Hladká tuňáková pomazánka na předložené lžíci nebo v tenké vrstvě na proužku opečeného chleba, který dítě drží v pěsti.',
+      '9m': 'Silná vrstva tuňákové pomazánky na proužku chleba nebo lžíce pomazánky vmíchaná do bramborové kaše.',
+      '12m': 'Silná vrstva rybí pomazánky na proužku chleba; v týdnu ho střídej s jinými rybami.',
     },
     adultSteps: [
       'Zbylou pomazánku osol, přidej nasekanou cibulku, kapary a šťávu z citronu.',
@@ -336,7 +341,7 @@ export const prvniUpravyRyby: Recipe[] = [
       'Místo tuňáka se do pomazánky dá 200 g uvařených bílých fazolí, které dodají bílkovinu.',
     allergens: ['ryby'],
     tags: ['ryba', 'rychlé', 'studená kuchyně'],
-    sources: [NHS_FISH, NHS_IRON],
+    sources: [NHS_FISH, NHS_IRON, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU],
     reviewStatus: 'verified',
   },
   {
