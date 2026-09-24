@@ -113,11 +113,19 @@ export const NHS_10_12M = nhs(
   FETCHED,
 );
 
-/** Bezpečná příprava: čtvrcení kulatého ovoce, pecky, kosti, slupky. */
+/**
+ * Bezpečná příprava: čtvrcení kulatého ovoce, pecky, kosti, slupky.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `kosti`: kosti patří spolu s tvrdými a malými kulatými kousky k tomu,
+ *   čím se dítě nejsnáz zadusí, a z masa i ryb se proto před podáním
+ *   odstraňují všechny.
+ */
 export const NHS_PREP_SAFELY = nhs(
   'Preparing food safely for babies',
   '/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/',
-  FETCHED,
+  FETCHED_24,
+  ['kosti'],
 );
 
 /**

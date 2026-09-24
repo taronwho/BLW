@@ -744,7 +744,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_FISH, NHS_ALLERGY],
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
@@ -886,7 +886,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_FISH, NHS_7_9M],
+    sources: [NHS_FISH, NHS_7_9M, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
@@ -1075,7 +1075,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_AVOID, NHS_FISH],
+    sources: [NHS_AVOID, NHS_FISH, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
@@ -1124,7 +1124,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_FISH, NHS_AVOID],
+    sources: [NHS_FISH, NHS_AVOID, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
