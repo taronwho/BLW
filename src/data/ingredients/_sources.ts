@@ -948,3 +948,122 @@ export const MATVARETABELLEN: SourceRef = {
   accessedAt: FETCHED_14,
   tier: 1,
 };
+
+/* ------------------------------------------------------------------ */
+/* Revize 24. 9. 2026: zdroje k surovinám, které byly na needs-review  */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Otázky a odpovědi německého BfR o botulismu v českém překladu na portálu
+ * Bezpečnost potravin.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `botulismus`: spory bakterie jsou odolné vůči teplu a zničí je až
+ *   teploty nad 100 °C, kterých domácnost při vaření ani v troubě uvnitř
+ *   potraviny nedosáhne; spory se běžně vyskytují v medu a u kojenců do
+ *   jednoho roku se ve střevě bez vyvinuté flóry mohou uchytit a tvořit
+ *   toxin, proto se med do roka nedává.
+ */
+export const BP_BOTULISMUS_BFR: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'BfR: Otázky a odpovědi o botulismu',
+  url: 'https://bezpecnostpotravin.cz/bfr-otazky-a-odpovedi-o-botulismu/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['botulismus'],
+};
+
+/**
+ * Hodnocení EFSA o lektinech v potravinách (2026) v českém shrnutí.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `syrove`: nedostatečně uvařené luštěniny jsou zdravotní riziko pro
+ *   všechny věkové skupiny a způsobují nevolnost, zvracení, bolesti břicha
+ *   a průjem; nejúčinnější je namočit je na 6 až 12 hodin, vodu vyměnit
+ *   a vařit aspoň půl hodiny při 100 °C, pára, mikrovlnka a pečení jsou
+ *   méně účinné.
+ */
+export const BP_LEKTINY_EFSA: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title:
+    'EFSA: Lektiny v potravinách – nedostatečně tepelně upravené luštěniny představují zdravotní riziko',
+  url: 'https://bezpecnostpotravin.cz/efsa-lektiny-v-potravinach-nedostatecne-tepelne-upravene-lusteniny-predstavuji-zdravotni-riziko/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['syrove'],
+};
+
+/**
+ * Varování německého BfR před syrovými a nedovařenými fazolemi.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `syrove`: lektin phasin ve fazolích ničí jen vysoké teploty, šetrné
+ *   způsoby jako mírné podušení nebo pára nestačí; způsobuje bolesti břicha
+ *   a nevolnost, v těžších případech krvavý průjem, a ohrožené jsou hlavně
+ *   děti kvůli nízké hmotnosti.
+ */
+export const BP_FAZOLE_BFR: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Vychutnejte si pouze tepelně upravené fazole',
+  url: 'https://bezpecnostpotravin.cz/vychutnejte-si-pouze-tepelne-upravene-fazole/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['syrove'],
+};
+
+/**
+ * Stanovisko EFSA k rtuti v potravinách (2004).
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `rtut`: methylrtuť z ryb je toxická pro nervovou soustavu a vyvíjející
+ *   se mozek; velké dravé ryby jako mečoun a tuňák jí obsahují víc, a proto
+ *   EFSA radí malým dětem, těhotným a kojícím vybírat ryby z mnoha druhů
+ *   a dravým rybám nedávat přednost. Číselný limit porcí pro děti neuvádí.
+ */
+export const EFSA_MERCURY: SourceRef = {
+  org: 'EFSA',
+  title: 'EFSA provides risk assessment on mercury in fish: precautionary advice given to vulnerable groups',
+  url: 'https://www.efsa.europa.eu/en/press/news/040318',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['rtut'],
+};
+
+/**
+ * Stanovisko EFSA k bezpečnosti a výživové hodnotě volně žijících
+ * a chovaných ryb (2005).
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `rtut`: methylrtuti je víc ve velkých dravých rybách jako tuňák; tuňák
+ *   v konzervě má zřejmě méně methylrtuti než čerstvý, protože se vyrábí
+ *   z jiných druhů nebo menších ryb, a tuňák obecný ani křídlatý se
+ *   v konzervách v EU obvykle neprodává.
+ */
+export const EFSA_FISH_WILD_FARMED: SourceRef = {
+  org: 'EFSA',
+  title: 'EFSA provides advice on the safety and nutritional contribution of wild and farmed fish',
+  url: 'https://www.efsa.europa.eu/en/news/efsa-provides-advice-safety-and-nutritional-contribution-wild-and-farmed-fish',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['rtut'],
+};
+
+/**
+ * Informace Centra zdraví, výživy a potravin SZÚ o rtuti v rybích výrobcích
+ * na českém trhu (2020).
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `rtut`: methylrtuť poškozuje nervovou tkáň a hromadí se, ale v rybích
+ *   konzervách a výrobcích z českého trhu je riziko velmi nízké: dítě by
+ *   muselo sníst 11 porcí po 50 g týdně výrobku s nejvyšším naměřeným
+ *   obsahem, aby dosáhlo zdravotního limitu. Opatrnost stránka doporučuje
+ *   těhotným a ženám ve fertilním věku.
+ */
+export const BP_RTUT_SZU: SourceRef = {
+  org: 'Státní zdravotní ústav (na portálu Bezpečnost potravin)',
+  title: 'Nebojte se rtuti v rybích výrobcích na trhu v ČR',
+  url: 'https://bezpecnostpotravin.cz/nebojte-se-rtuti-v-rybich-vyrobcich-na-trhu-v-cr/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['rtut'],
+};

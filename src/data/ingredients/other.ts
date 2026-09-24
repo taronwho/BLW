@@ -14,6 +14,7 @@ import {
   WHO_COMPLEMENTARY,
   BP_ARSENIC_EFSA,
   NHS_FOOD_ALLERGY,
+  BP_BOTULISMUS_BFR,
 } from './_sources';
 
 /**
@@ -467,7 +468,7 @@ export const other: Ingredient[] = [
     hazards: ['botulismus'],
     hazardNotes: {
       botulismus:
-        'Med občas obsahuje spory bakterie, které ve střevě kojence vytvoří toxin. NHS kvůli tomu med do prvního roku nedoporučuje a upozorňuje, že vaření ani pečení na tom nic nemění. Po prvních narozeninách riziko pomine, protože střevo už si se sporami poradí.',
+        'Med občas obsahuje spory bakterie, které ve střevě kojence vytvoří toxin. NHS kvůli tomu med do prvního roku nedoporučuje. Spory jsou podle německého úřadu BfR odolné vůči teplu a zničí je až teploty nad 100 °C, kterých se v domácí kuchyni uvnitř jídla spolehlivě nedosáhne, takže vaření ani pečení riziko neodstraní. Po prvních narozeninách riziko pomine, protože střevo už si se sporami poradí.',
     },
     minAgeMonths: 12,
     prep: {
@@ -479,7 +480,7 @@ export const other: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Ani v devíti měsících se nic nemění. Hranicí je první rok, ne to, co dítě zvládne rozžvýkat. Tepelná úprava riziko neodstraňuje, protože nejde o samotnou bakterii, ale o to, co dokáže vytvořit ve střevě.',
+          'Ani v devíti měsících se nic nemění. Hranicí je první rok, ne to, co dítě zvládne rozžvýkat. Tepelná úprava riziko neodstraňuje, protože spory v medu přežijí i var a toxin si bakterie vytvoří až ve střevě miminka.',
         caution: 'Domácí i pastovaný, květový i lesní. Před prvními narozeninami platí totéž pro všechny.',
       },
       '12m': {
@@ -497,10 +498,8 @@ export const other: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     frequencyLimit: 'Do 12 měsíců vůbec; potom jen výjimečně, je to přidaný cukr.',
-    sources: [NHS_AVOID, NHS_AVOID_WEANING],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Text tvrdí, že podle NHS riziko neodstraní ani vaření či pečení. Stránky NHS citované u medu (Foods to avoid, Food and drinks to avoid, přečteno 24. 9. 2026) říkají jen, že med se do 12 měsíců nedává kvůli kojeneckému botulismu. O tepelné úpravě nemluví. Zákaz do jednoho roku platí; ověřit se musí jen věta o vaření a pečení.',
+    sources: [NHS_AVOID, NHS_AVOID_WEANING, BP_BOTULISMUS_BFR],
+    reviewStatus: 'verified',
   },
   {
     id: 'sul',

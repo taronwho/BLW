@@ -1227,7 +1227,7 @@ export const nutsSeedsOils: Ingredient[] = [
     sources: [NHS_AVOID, NHS_ALLERGY],
     reviewStatus: 'needs-review',
     reviewNote:
-      'Piniové oříšky jsou vedené jako alergen ze skupiny ořechů. Žádný citovaný zdroj je ale mezi alergenními ořechy nejmenuje. NHS Food allergy jmenuje vlašské, mandle, lískové, pekanové, kešu, pistácie a para ořechy. Evropský seznam alergenů na obalu (SZPI na bezpecnostpotravin.cz) uvádí mandle, lískové, vlašské, kešu, pekanové, para, pistácie a makadamie, piniové ne. Zařazení do skupiny je potřeba ověřit.',
+      'Piniové oříšky nejsou na evropském seznamu alergenů, který se uvádí na obalu, a NHS je mezi alergenními ořechy nejmenuje. V Drobkovi jsou mezi ořechy vedené z opatrnosti, takže je zaváděj samostatně a sleduj reakci. Zdroj, který by je mezi alergeny řadil, zatím chybí.',
   },
   {
     id: 'slunecnicove-maslo',

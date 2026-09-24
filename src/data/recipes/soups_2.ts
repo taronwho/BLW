@@ -306,7 +306,7 @@ export const soups2: Recipe[] = [
     babySteps: [
       'Do dětské porce vmíchej půl lžičky ricotty, která polévku zjemní a dodá bílkovinu.',
       'Pokud je porce řídká, zahusti ji lžící rozmačkaného vařeného patizonu.',
-      'Podávej ji hned; uvařený fenykl kvůli dusičnanům znovu neohřívej.',
+      'Podávej ji hned, dokud je teplá.',
     ],
     babyServing: {
       '6m': 'Podávej hustou polévku na předložené lžíci, kterou dítě olizuje samo.',

@@ -1436,11 +1436,8 @@ export const vegetables: Ingredient[] = [
     chokingRisk: 'medium',
     chokingReason:
       'Fenyklová hlíza je složená z pevných vrstev s podélnými vlákny, která se v ústech oddělí a drží pohromadě.',
-    hazards: ['dusicnany'],
-    hazardNotes: {
-      dusicnany:
-        'Fenyklová hlíza se u dusičnanů řadí mezi opatrné položky, ale načtené stanovisko EFSA hodnotí listovou zeleninu a fenykl v něm jmenovaný není, stejně jako není mezi komoditami s limitem v předpisech EU. Opatření je proto preventivní, ne odvozené z měření: nabízej fenykl střídavě s jinou zeleninou, uvařený pokrm rychle zchlaď, nenechávej ho stát v teple a podruhé už ho neohřívej.',
-    },
+    hazards: [],
+    hazardNotes: {},
     minAgeMonths: 6,
     prep: {
       '6m': {
@@ -1467,10 +1464,8 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [9, 10, 11],
     vegetarian: true,
-    sources: [BP_NITRATES_VEG, EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Riziko dusičnanů u fenyklu zdroje nedokládají. Stanovisko EFSA (český souhrn na bezpecnostpotravin.cz) ani tisková zpráva EFSA o listové zelenině fenykl nejmenují. Český souhrn navíc uvádí, že nejméně dusičnanů bývá v semenech a hlízách. Text sám přiznává, že jde o preventivní opatrnost. Rozhodnout, jestli hazard dusičnanů u fenyklu ponechat.',
+    sources: [EMA_FENNEL, NHS_FIRST_FOODS],
+    reviewStatus: 'verified',
   },
   {
     id: 'chrest',

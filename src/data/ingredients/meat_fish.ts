@@ -13,6 +13,9 @@ import {
   NHS_YOUNG_CHILDREN,
   SZU_FIRST_SPOON,
   WHO_COMPLEMENTARY,
+  EFSA_MERCURY,
+  EFSA_FISH_WILD_FARMED,
+  BP_RTUT_SZU,
 } from './_sources';
 
 /**
@@ -1142,11 +1145,12 @@ export const meatFish: Ingredient[] = [
       'Tuňák je po tepelné úpravě suchý a rozpadá se na tuhá zrnitá vlákna, která se v ústech spojí do drolivého sousta.',
     hazards: ['rtut'],
     hazardNotes: {
-      rtut: 'Tuňák je dravá ryba a hromadí ve svalovině rtuť, která může poškodit vyvíjející se nervovou soustavu. Proto se u malých dětí omezuje jeho množství; žralok, mečoun a marlín se dětem nepodávají vůbec.',
+      rtut:
+        'Tuňák je velká dravá ryba a hromadí ve svalovině rtuť, která může poškodit vyvíjející se nervovou soustavu. EFSA proto malým dětem radí vybírat ryby z co nejvíce druhů a velkým dravým rybám, jako je tuňák, nedávat přednost. Žralok, mečoun a marlín se dětem nepodávají vůbec.',
     },
     minAgeMonths: 6,
     frequencyLimit:
-      'Nejvýše jedna malá porce týdně kvůli rtuti; žralok, mečoun a marlín se dětem nepodávají vůbec.',
+      'Kvůli rtuti ho střídej s jinými rybami, ať nepřevažuje; žralok, mečoun a marlín se dětem nepodávají vůbec.',
     prep: {
       '6m': {
         serving:
@@ -1155,12 +1159,12 @@ export const meatFish: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Rozetřený tuňák se dobře hodí do pomazánky na prst chleba nebo do těstovin. Právě proto, že se používá snadno, hlídej, aby se v jídelníčku neobjevoval častěji než jednou týdně.',
+          'Rozetřený tuňák se dobře hodí do pomazánky na prst chleba nebo do těstovin. Právě proto, že se používá snadno, hlídej, aby nevytlačil jiné ryby.',
         caution: 'Zapisuj si porce, tuňák se do jídelníčku dostane nenápadně.',
       },
       '12m': {
         serving:
-          'Batole jí tuňákovou pomazánku nebo kousky čerstvého propečeného tuňáka. Limit kvůli rtuti platí dál a je důležitější než u dospělých, protože dítě má nižší tělesnou hmotnost.',
+          'Batole jí tuňákovou pomazánku nebo kousky čerstvého propečeného tuňáka. I batoleti dávej ryby co nejpestřeji a tuňáka jen jako jednu z nich.',
         caution: 'Sushi a syrové rybí maso nejsou pro děti vhodné.',
       },
     },
@@ -1172,10 +1176,8 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_FISH, NHS_AVOID],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Že tuňák obsahuje víc rtuti než jiné ryby, doložené je (NHS Fish and shellfish). Limit „nejvýše jedna malá porce týdně“ ale NHS pro děti neuvádí; limit porcí tuňáka má jen pro těhotné. Informace SZÚ na bezpecnostpotravin.cz („Nebojte se rtuti v rybích výrobcích“, 2020) naopak hodnotí rtuť v rybích výrobcích z českého trhu u dětí jako velmi nízké riziko. Četnost je potřeba sladit se zdroji.',
+    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY],
+    reviewStatus: 'verified',
   },
   {
     id: 'krevety',
@@ -2004,7 +2006,7 @@ export const meatFish: Ingredient[] = [
     hazards: ['rtut'],
     hazardNotes: {
       rtut:
-        'Tuňák patří mezi ryby s vyšším obsahem rtuti, proto se u něj drží omezené množství. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby. Konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
+        'Tuňák patří mezi ryby s vyšším obsahem rtuti. Konzervovaný má podle EFSA zřejmě méně rtuti než čerstvý, protože se vyrábí z jiných nebo menších ryb, a SZÚ hodnotí rtuť v rybích konzervách z českého trhu i pro děti jako velmi nízké riziko. Přesto ho střídej s jinými rybami. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby. Konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
     },
     minAgeMonths: 6,
     prep: {
@@ -2012,7 +2014,7 @@ export const meatFish: Ingredient[] = [
         serving:
           'Vyber tuňáka ve vlastní šťávě, ne v nálevu se solí, a propláchni ho. Rozeber ho vidličkou na vlákna a vmíchej do bramborové kaše nebo do avokádové pomazánky.',
         caution:
-          'Nedávej ho často. Kvůli rtuti je to ryba na občas, ne na každý týden, a tučnou rybu nenahrazuje.',
+          'Střídej ho s jinými rybami a počítej s tím, že tučnou rybu nenahrazuje.',
       },
       '9m': {
         serving:
@@ -2034,11 +2036,9 @@ export const meatFish: Ingredient[] = [
     seasonCz: [],
     vegetarian: false,
     frequencyLimit:
-      'Kvůli rtuti jen občas, ne jako pravidelná týdenní ryba; tučnou rybu navíc nenahrazuje.',
-    sources: [NHS_FISH, NHS_AVOID],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Že tuňák obsahuje víc rtuti než jiné ryby a nepočítá se mezi tučné ryby, doložené je (NHS Fish and shellfish). Omezení „jen občas, ne každý týden“ ale NHS pro děti neuvádí. Informace SZÚ na bezpecnostpotravin.cz („Nebojte se rtuti v rybích výrobcích“, 2020) hodnotí rtuť v konzervách z českého trhu u dětí jako velmi nízké riziko: limitu by dítě dosáhlo až u 11 porcí po 50 g týdně výrobku s nejvyšším naměřeným obsahem. Četnost je potřeba sladit se zdroji.',
+      'Střídej ho s jinými rybami, ať nepřevažuje; tučnou rybu nenahrazuje.',
+    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU],
+    reviewStatus: 'verified',
   },
   {
     id: 'ancovicky',

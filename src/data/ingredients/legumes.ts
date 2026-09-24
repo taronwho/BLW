@@ -13,6 +13,8 @@ import {
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
   NHS_FOOD_ALLERGY,
+  BP_LEKTINY_EFSA,
+  BP_FAZOLE_BFR,
 } from './_sources';
 
 /**
@@ -286,10 +288,8 @@ export const legumes: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [BP_RAW_BEANS, NHS_VEGETARIAN],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Namáčení, slití vody a var aspoň 30 minut doložené jsou (FSAI na bezpecnostpotravin.cz, přečteno 24. 9. 2026). Stránka ale neuvádí, že pomalé vaření při nízké teplotě nestačí, ani že lektiny způsobují zvracení a průjem. Mluví jen obecně o onemocnění. Tyto dvě věty se musí ověřit.',
+    sources: [BP_RAW_BEANS, NHS_VEGETARIAN, BP_LEKTINY_EFSA, BP_FAZOLE_BFR],
+    reviewStatus: 'verified',
   },
   {
     id: 'fazole-adzuki',

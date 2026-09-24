@@ -733,7 +733,7 @@ export const grains: Ingredient[] = [
     hazards: ['arsen'],
     hazardNotes: {
       arsen:
-        'Neloupaná rýže si ponechává obal zrna, ve kterém se arsen koncentruje nejvíc, takže jí obvykle obsahuje více než rýže bílá. Propláchnutí a vaření v nadbytku vody část arsenu odstraní, přesto ji u malého dítěte nenabízej denně.',
+        'Rýže přijímá z prostředí anorganický arsen a neloupaná není výjimkou. Propláchnutí a vaření v nadbytku vody část arsenu odstraní, přesto ji u malého dítěte nenabízej denně.',
     },
     minAgeMonths: 6,
     prep: {
@@ -745,7 +745,7 @@ export const grains: Ingredient[] = [
       '9m': {
         serving:
           'Rozvařená natural rýže má zemitou chuť a víc vlákniny než bílá. Smíchej ji s dušenou zeleninou a kouskem tofu; rostlinné železo přinese tofu a vitamin C ze zeleniny jeho vstřebání zlepší. Samotná uvařená rýže železa skoro nemá.',
-        caution: 'Vzhledem k obalu zrna ji střídej s jinými obilovinami častěji.',
+        caution: 'Střídej ji s jinými obilovinami, ne každý den.',
       },
       '12m': {
         serving:
@@ -762,9 +762,7 @@ export const grains: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [EFSA_ARSENIC_UPDATE, WHO_COMPLEMENTARY, BP_ARSENIC_EFSA],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Že rýže nese anorganický arsen a že propláchnutí a vaření ve větším množství vody jeho obsah snižuje, doložené je (EFSA a jeho český souhrn na bezpecnostpotravin.cz, přečteno 24. 9. 2026). Tvrzení, že neloupaná rýže má arsenu víc než bílá, protože se drží v obalu zrna, žádný citovaný zdroj neuvádí. To je potřeba ověřit.',
+    reviewStatus: 'verified',
   },
   {
     id: 'ryzove-chlebicky',
@@ -1430,7 +1428,7 @@ export const grains: Ingredient[] = [
         serving:
           'Ovesná mouka je jen jemně semleté vločky: uděláš ji doma za půl minuty v mixéru. Do kaše i do těsta přidá jemnost a zasytí líp než bílá mouka.',
         caution:
-          'Oves sám lepek neobsahuje, ale běžně se zpracovává tam, kde se mele pšenice. Pro bezlepkovou dietu hledej na obalu označení bezlepkový oves.',
+          'Oves se řadí mezi obiloviny s lepkem a navíc se běžně zpracovává tam, kde se mele pšenice. Pro bezlepkovou dietu hledej na obalu označení bezlepkový oves a poraď se s lékařem.',
       },
       '9m': {
         serving:
@@ -1452,9 +1450,7 @@ export const grains: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [NHS_ALLERGY, BP_GLUTEN, BP_BEZLEPKOVA_DIETA],
-    reviewStatus: 'needs-review',
-    reviewNote:
-      'Zařazení ovsa mezi obiloviny s lepkem je doložené. Věta „Oves sám lepek neobsahuje“ ale odporuje zdroji: slovník bezpecnostpotravin.cz (heslo Bezlepková dieta, přečteno 24. 9. 2026) uvádí, že lepek obsahuje i oves, a článek Společnosti pro výživu tamtéž jmenuje ovesnou bílkovinu avenin. Znění věty je potřeba ověřit.',
+    reviewStatus: 'verified',
   },
   {
     id: 'mouka-sojova',
