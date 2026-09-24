@@ -49,6 +49,19 @@ jobs:
           VITE_FIREBASE_STORAGE_BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET || secrets.VITE_FIREBASE_STORAGE_BUCKET }}
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID || secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID || secrets.VITE_FIREBASE_APP_ID }}
+          # App Check (docs/FIREBASE.md). Bez tohohle řádku se klíč do buildu
+          # nedostal, i když ho rodič v nastavení repozitáře vyplnil — a kdo
+          # pak v konzoli zapnul vynucení, zablokoval sdílení všem.
+          VITE_RECAPTCHA_SITE_KEY: ${{ vars.VITE_RECAPTCHA_SITE_KEY || secrets.VITE_RECAPTCHA_SITE_KEY }}
+      - name: Kontrola App Checku
+        env:
+          KLIC: ${{ vars.VITE_RECAPTCHA_SITE_KEY || secrets.VITE_RECAPTCHA_SITE_KEY }}
+        run: |
+          if [ -z "$KLIC" ]; then
+            echo "::warning::VITE_RECAPTCHA_SITE_KEY není nastavený — App Check je vypnutý. V konzoli Firebase proto NEZAPÍNEJ vynucení (Enforce), jinak přestane fungovat sdílení."
+          else
+            echo "App Check: klíč je v buildu."
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

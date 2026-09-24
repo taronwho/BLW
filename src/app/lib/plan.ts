@@ -6,7 +6,12 @@ import type { DuvodJidla, Plan, PlanDen, TypJidla } from '@/plan/typy';
 import type { AllergenGroup, HouseholdState, Ingredient } from '@/types';
 import { ageInMonths } from './age';
 import { todayIso } from './labels';
-import { isAdverse, tastedIds, tastingsByIngredient } from './tastings';
+import {
+  surovinySReakci,
+  tastedIds,
+  tastingsByIngredient,
+  vyrazeneZPlanu,
+} from './tastings';
 import { useAktivniDite } from './dite';
 
 /**
@@ -58,6 +63,20 @@ export function usePlanNastroje(): PlanNastroje {
   const dite = useAktivniDite();
   const state = useHouseholdStore((store) => store.state);
   const ochutnane = useMemo(() => tastedIds(state, dite?.id ?? null), [state, dite]);
+  const vyrazene = useMemo(
+    () => vyrazeneZPlanu(state, dite?.id ?? null, dite?.vyrazene ?? []),
+    [state, dite],
+  );
+  // Alergen suroviny, po které dítě zareagovalo, plán dál sám nenabízí —
+  // ani přes jinou surovinu téže skupiny. Reakce patří pediatrovi a plán
+  // do té doby netlačí nic, co by s ní mohlo souviset.
+  const pozastaveneAlergeny = useMemo(() => {
+    const out = new Set<AllergenGroup>();
+    for (const id of surovinySReakci(state, dite?.id ?? null).keys()) {
+      for (const skupina of ingredientById.get(id)?.allergens ?? []) out.add(skupina);
+    }
+    return out;
+  }, [state, dite]);
 
   const vstup = useCallback(
     (blok: number, navic?: Iterable<string>): VstupPlanu | null =>
@@ -73,8 +92,10 @@ export function usePlanNastroje(): PlanNastroje {
             mesice: ageInMonths(dite.birthDate),
             mesicVRoce: new Date().getMonth() + 1,
             dnes: todayIso(),
+            vyrazene,
+            pozastaveneAlergeny,
           },
-    [dite, ochutnane],
+    [dite, ochutnane, vyrazene, pozastaveneAlergeny],
   );
 
   const sestav = useCallback(
@@ -105,7 +126,10 @@ export const ZNAMYCH_NA_TALIR = 6;
  *
  * Pořadí je od nejčerstvějšího: co dítě jedlo včera, si vybaví spíš než
  * surovinu z prvního týdne. Po nežádoucí reakci se surovina nenabízí, ta
- * patří k pediatrovi, ne zpátky na talíř.
+ * patří k pediatrovi, ne zpátky na talíř. Totéž platí pro suroviny, které
+ * rodič z plánu vyřadil. Hlídá se to u všech tří zdrojů, ne jen u deníku:
+ * dřív se surovina s reakcí vrátila přes novinku z dřívějšího dne nebo
+ * přes seznam známých surovin uložený v plánu.
  */
 export function znameNaTalir(
   plan: Plan,
@@ -113,13 +137,15 @@ export function znameNaTalir(
   state: HouseholdState,
   childId: string | null,
   alergie: readonly AllergenGroup[] = [],
+  vyrazeneRucne: readonly string[] = [],
 ): Ingredient[] {
   const vyloucene = new Set(alergie);
+  const vyrazene = vyrazeneZPlanu(state, childId, vyrazeneRucne);
   const videne = new Set<string>(den.novinka === undefined ? [] : [den.novinka]);
   const out: Ingredient[] = [];
 
   const pridej = (id: string | undefined): void => {
-    if (id === undefined || videne.has(id)) return;
+    if (id === undefined || videne.has(id) || vyrazene.has(id)) return;
     videne.add(id);
     const item = ingredientById.get(id);
     if (item === undefined) return;
@@ -134,7 +160,6 @@ export function znameNaTalir(
 
   // 2. Deník: co dítě opravdu ochutnalo, od poslední ochutnávky.
   const podleSuroviny = [...tastingsByIngredient(state, childId).entries()]
-    .filter(([, udalosti]) => !udalosti.some(isAdverse))
     .sort((a, b) => (a[1][0]?.date ?? '').localeCompare(b[1][0]?.date ?? '') * -1);
   for (const [id] of podleSuroviny) pridej(id);
 

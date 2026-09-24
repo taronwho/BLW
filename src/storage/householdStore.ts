@@ -13,6 +13,7 @@ import type {
 } from '@/types';
 import {
   activeChildren,
+  chybiNaServeru,
   clenoveZeStavu,
   clenstviZeStavu,
   emptyHouseholdState,
@@ -62,6 +63,8 @@ interface HouseholdStore {
   setGrip(id: string, grip: Grip | undefined): Promise<void>;
   toggleReadySign(id: string, sign: ReadySign): Promise<void>;
   toggleChildAllergen(id: string, allergen: AllergenGroup): Promise<void>;
+  /** Vyřadí surovinu z plánu dítěte, nebo ji tam vrátí. */
+  prepniVyrazeni(childId: string, ingredientId: string): Promise<void>;
   removeMember(uid: string): Promise<void>;
   recordTasting(event: Omit<TastingEvent, 'id' | 'createdAt'>): Promise<void>;
   updateTasting(id: string, patch: Partial<Omit<TastingEvent, 'id'>>): Promise<void>;
@@ -228,13 +231,25 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       remoteUnsubscribe = adapter.subscribe((incoming) => {
         // Novější tvar se ignoruje ze stejného důvodu jako při připojení.
         if (jeZNovejsiVerze(incoming.state)) return;
-        const merged = mergeHouseholdState(get().state, migrateHouseholdState(incoming.state));
+        const serverovy = migrateHouseholdState(incoming.state);
+        const merged = mergeHouseholdState(get().state, serverovy);
         // Čas zápisu musí sedět v paměti i na disku. Dřív se do paměti
         // neukládal vůbec, takže se po přenačtení stránky lišil od toho na
         // disku a další slučování počítalo s jiným časem, než jaký platil.
         const kdy = Date.now();
         set({ state: merged, updatedAt: kdy });
         void local().save({ state: merged, updatedAt: kdy });
+        // Server přepsal něco, co tenhle telefon ví (dva zápisy offline,
+        // dokument se zapisuje celý). Sloučený stav se vrací zpátky, jinak
+        // by druhý rodič chybějící záznam neviděl, dokud se tady nezmění
+        // něco dalšího — a kdyby se tenhle telefon mezitím ztratil, byl by
+        // záznam pryč. Když už server sloučený stav má, nezapisuje se nic,
+        // takže se telefony nepřetahují donekonečna.
+        if (remoteAdapter === adapter && chybiNaServeru(merged, serverovy)) {
+          void adapter.save({ state: merged, updatedAt: kdy }).catch((error: unknown) => {
+            set({ status: { kind: 'error', message: describeError(error) } });
+          });
+        }
       });
 
       set({
@@ -361,6 +376,15 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
      * Alergen, na který dítě reaguje. Podle toho se předvyplňuje filtr
      * „bez alergenu" na obou seznamech.
      */
+    async prepniVyrazeni(childId: string, ingredientId: string): Promise<void> {
+      const soucasne = get().state.children[childId]?.hodnota?.vyrazene ?? [];
+      await get().updateChild(childId, {
+        vyrazene: soucasne.includes(ingredientId)
+          ? soucasne.filter((id) => id !== ingredientId)
+          : [...soucasne, ingredientId],
+      });
+    },
+
     async toggleChildAllergen(id: string, allergen: AllergenGroup): Promise<void> {
       const soucasne = get().state.children[id]?.hodnota?.allergens ?? [];
       await get().updateChild(id, {

@@ -316,6 +316,9 @@ vlastní aplikaci od dat.
    `<nick>.github.io` a vrátí **site key**.
 2. Klíč vlož jako proměnnou `VITE_RECAPTCHA_SITE_KEY` — stejným způsobem,
    jakým vkládáš `VITE_FIREBASE_*` (kapitola 7, varianta A nebo B).
+   `.github/workflows/deploy.yml` ji předává buildu jménem; do 24. 9. 2026
+   tam chyběla a klíč se do aplikace nedostal. Log nasazení v kroku
+   *Kontrola App Checku* řekne, jestli klíč v buildu je.
 3. Nasaď a otevři aplikaci. V konzoli Firebase → *App Check* → *Metrics*
    se během pár minut objeví ověřené požadavky.
 

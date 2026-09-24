@@ -22,6 +22,7 @@ import { ALLERGEN_LABELS, CATEGORY_LABELS, formatSeason, HAZARD_LABELS } from '.
 import { readReviewAcks, writeReviewAck } from '../lib/reviewAcks';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { NakupTlacitko } from '../components/NakupTlacitko';
+import { ReakceSuroviny } from '../components/Reakce';
 import { vychoziMnozstviSuroviny } from '@/data/mnozstviVychozi';
 import { NotFoundScreen } from './NotFoundScreen';
 import { useAktivniDiteId, useNarozeniAktivniho } from '../lib/dite';
@@ -127,6 +128,8 @@ export function IngredientDetailScreen(): ReactNode {
           ))}
         </div>
       </header>
+
+      <ReakceSuroviny ingredientId={ingredient.id} />
 
       <section
         aria-labelledby="bezpecnost-nadpis"

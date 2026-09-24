@@ -31,6 +31,11 @@ import { DNU_V_BLOKU, type Plan, type PlanDen, type PlanJidlo, type TypJidla } f
  *     a dušená směs o deseti surovinách by mu den zaplnila neznámými věcmi.
  *  8. Recept nesmí přinést alergen, který dítě ještě nedostalo. Jinak by se
  *     při reakci nepoznalo, co ji způsobilo.
+ *  9. Surovina, po které dítě naposledy zareagovalo, a surovina, kterou
+ *     rodič z plánu vyřadil, se nenabídne vůbec — ani jako novinka, ani
+ *     jako složka receptu. Alergen suroviny s reakcí plán nenabízí ani
+ *     přes jinou surovinu téže skupiny. Reakce patří pediatrovi a plán do
+ *     té doby netlačí nic, co by s ní mohlo souviset.
  */
 
 export interface VstupPlanu {
@@ -39,6 +44,10 @@ export interface VstupPlanu {
   blok: number;
   /** Co už má dítě v deníku. */
   ochutnane: ReadonlySet<string>;
+  /** Suroviny, které plán nenabídne: po reakci a vyřazené rodičem. */
+  vyrazene?: ReadonlySet<string>;
+  /** Alergeny surovin, po kterých dítě zareagovalo. Plán je zatím nenabízí. */
+  pozastaveneAlergeny?: ReadonlySet<AllergenGroup>;
   /** Věk dítěte v měsících; `null`, když není datum narození. */
   mesice: number | null;
   /** Měsíc v roce, 1 až 12. Kvůli sezónnosti. */
@@ -243,6 +252,8 @@ function typyJidel(jidel: number, svacin: number): TypJidla[] {
 interface KontextVyberu {
   mesice: number | null;
   vyloucene: ReadonlySet<AllergenGroup>;
+  /** Suroviny, které plán nenabídne ani jako složku receptu. */
+  vyrazene: ReadonlySet<string>;
   /** Alergeny, které dítě už dostalo. Recept jiný nový alergen přinést nesmí. */
   zavedeneAlergeny: ReadonlySet<AllergenGroup>;
   /** Kolikátý den recept naposledy padl. */
@@ -294,6 +305,7 @@ function jeVhodnyRecept(
   if (recipe.minAgeMonths > (ctx.mesice ?? 6)) return false;
   if (ctx.dnesni.has(recipe.id)) return false;
   if (recipe.allergens.some((skupina) => ctx.vyloucene.has(skupina))) return false;
+  if (recipe.ingredients.some((ref) => ctx.vyrazene.has(ref.ingredientId))) return false;
   // Nový alergen smí do dne přijít jen přes novinku nebo přes plánovanou
   // expozici, ne náhodou jako složka receptu.
   if (recipe.allergens.some((skupina) => !ctx.zavedeneAlergeny.has(skupina))) return false;
@@ -531,20 +543,33 @@ function jidlaDne(
 }
 
 export function sestavPlan(vstup: VstupPlanu): Plan {
-  const vyloucene: ReadonlySet<AllergenGroup> = new Set(vstup.dite.allergens ?? []);
+  const alergieDitete = new Set<AllergenGroup>(vstup.dite.allergens ?? []);
+  // Pro výběr jídel platí alergie dítěte i alergeny pozastavené po reakci.
+  // Do plánu se ale ukládají jen alergie: podle nich se pozná, že plán
+  // vznikl před zápisem nové alergie (`planSediSAlergiemi`).
+  const vyloucene: ReadonlySet<AllergenGroup> = new Set([
+    ...alergieDitete,
+    ...(vstup.pozastaveneAlergeny ?? []),
+  ]);
+  const vyrazene: ReadonlySet<string> = vstup.vyrazene ?? new Set<string>();
   const prvniBlok = vstup.blok === 1;
 
+  // Známé je jen to, co dítě snědlo bez reakce. Surovina s reakcí se
+  // nepočítá ani do zavedených alergenů.
+  const ochutnaneBezVyrazenych = [...vstup.ochutnane].filter((id) => !vyrazene.has(id));
   const zavedeneAlergeny = new Set<AllergenGroup>();
-  const zname = new Set<string>(vstup.ochutnane);
-  for (const id of vstup.ochutnane) {
+  const zname = new Set<string>(ochutnaneBezVyrazenych);
+  for (const id of ochutnaneBezVyrazenych) {
     for (const skupina of ingredientById.get(id)?.allergens ?? []) zavedeneAlergeny.add(skupina);
   }
 
-  const bezne = poradiNovinek(vstup, vyloucene);
+  // Vyřazená surovina se nenabídne ani jako novinka.
+  const nenabizet = new Set<string>([...vstup.ochutnane, ...vyrazene]);
+  const bezne = poradiNovinek({ ...vstup, ochutnane: nenabizet }, vyloucene);
   const alergeny = zastupciAlergenu(bezne, zavedeneAlergeny);
   // První dny mají pevné pořadí podle rady o prvních potravinách; alergeny
   // jdou až za ním, aby první sousta byla co nejjednodušší.
-  const zelenina = prvniBlok ? prvniSousta(vstup.mesice, vyloucene, vstup.ochutnane) : [];
+  const zelenina = prvniBlok ? prvniSousta(vstup.mesice, vyloucene, nenabizet) : [];
   const fronta: Ingredient[] = [
     ...zelenina,
     ...prolozeneNovinky(
@@ -568,6 +593,7 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
     const zaklad = {
       mesice: vstup.mesice,
       vyloucene,
+      vyrazene,
       naposledy,
       dnesni: new Set<string>(),
       zname: new Set(zname),
@@ -650,9 +676,9 @@ export function sestavPlan(vstup: VstupPlanu): Plan {
     childId: vstup.dite.id,
     blok: vstup.blok,
     vytvoreno: vstup.dnes,
-    alergie: [...vyloucene].sort(),
+    alergie: [...alergieDitete].sort(),
     varianta: vstup.varianta ?? 0,
-    zname: [...vstup.ochutnane].sort(),
+    zname: ochutnaneBezVyrazenych.sort(),
     dny,
     stavy: {},
   };

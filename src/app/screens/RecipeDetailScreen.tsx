@@ -16,6 +16,7 @@ import { SourceDisclosure, SourceLinks } from '../components/SourceList';
 import { NahlasitNepresnost } from '../components/NahlasitNepresnost';
 import { useDuvodOpravy, useOpravaReceptu } from '@/storage/opravyStore';
 import { NakupTlacitko } from '../components/NakupTlacitko';
+import { ReakceVReceptu } from '../components/Reakce';
 import { slozkyDoNakupu } from '@/nakup/seznam';
 import { StageSwitch } from '../components/StageSwitch';
 import { ageInMonths, stageForAge } from '../lib/age';
@@ -130,6 +131,8 @@ export function RecipeDetailScreen(): ReactNode {
           Štítek ukazuje nejvyšší riziko ze surovin receptu. Krájení řeš u konkrétní suroviny.
         </p>
       </header>
+
+      <ReakceVReceptu ingredientIds={recipe.ingredients.map((ref) => ref.ingredientId)} />
 
       <IngredientsBlock recipe={recipe} />
 

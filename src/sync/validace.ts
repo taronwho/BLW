@@ -122,6 +122,17 @@ export function platneDite(raw: unknown): Child | null {
     ...(jednaZ<Grip>(raw['grip'], GRIPS) ? { grip: raw['grip'] } : {}),
     ...(znaky === undefined ? {} : { readySigns: znaky }),
     ...(alergeny === undefined ? {} : { allergens: alergeny }),
+    ...(Array.isArray(raw['vyrazene'])
+      ? {
+          vyrazene: [
+            ...new Set(
+              (raw['vyrazene'] as unknown[]).filter(
+                (id): id is string => typeof id === 'string' && id.trim().length > 0,
+              ),
+            ),
+          ],
+        }
+      : {}),
   };
   return dite;
 }

@@ -72,6 +72,37 @@ export function isAdverse(event: TastingEvent): boolean {
 }
 
 /**
+ * Suroviny, po kterých dítě naposledy zareagovalo, s tou poslední ochutnávkou.
+ *
+ * Rozhoduje poslední zápis, ne kterýkoli. Když rodič po poradě s pediatrem
+ * surovinu podá znovu a zapíše ji bez reakce, přestane tu být — jinak by
+ * se jednou zapsaná reakce z plánu i z upozornění už nikdy nedostala.
+ */
+export function surovinySReakci(
+  state: HouseholdState,
+  childId: string | null,
+): Map<string, TastingEvent> {
+  const out = new Map<string, TastingEvent>();
+  for (const [id, udalosti] of tastingsByIngredient(state, childId)) {
+    const posledni = udalosti[0];
+    if (posledni !== undefined && isAdverse(posledni)) out.set(id, posledni);
+  }
+  return out;
+}
+
+/**
+ * Co plán tomuhle dítěti nenabídne: suroviny s reakcí a ty, které rodič
+ * sám vyřadil v detailu suroviny.
+ */
+export function vyrazeneZPlanu(
+  state: HouseholdState,
+  childId: string | null,
+  vyrazeneRucne: readonly string[] = [],
+): Set<string> {
+  return new Set([...surovinySReakci(state, childId).keys(), ...vyrazeneRucne]);
+}
+
+/**
  * Které položky jsou právě teď oblíbené.
  *
  * Stav drží u každé položky i čas posledního přepnutí, aby se odebrání

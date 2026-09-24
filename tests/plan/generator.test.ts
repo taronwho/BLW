@@ -211,6 +211,59 @@ describe('alergie dítěte', () => {
   });
 });
 
+describe('reakce a suroviny vyřazené rodičem', () => {
+  // Vejce s reakcí, brokolice a kiwi vyřazené ručně. Vejce je v deníku,
+  // takže se dřív počítalo jako známé a plán ho dál vařil v receptech.
+  const zadani = vstup({
+    blok: 2,
+    mesice: 10,
+    ochutnane: new Set(['vejce-slepici', 'cuketa', 'brambor', 'mrkev']),
+    vyrazene: new Set(['vejce-slepici', 'brokolice', 'kiwi']),
+    pozastaveneAlergeny: new Set<AllergenGroup>(['vejce']),
+  });
+  const plan = sestavPlan(zadani);
+
+  it('vyřazená surovina se neobjeví ani jako novinka, ani ve složení receptu', () => {
+    for (const den of plan.dny) {
+      for (const id of surovinyDne(den)) {
+        expect(['vejce-slepici', 'brokolice', 'kiwi'].includes(id), `den ${den.cislo}: ${id}`).toBe(
+          false,
+        );
+      }
+    }
+  });
+
+  it('alergen suroviny s reakcí plán nenabídne ani přes jinou surovinu', () => {
+    for (const den of plan.dny) {
+      expect(den.opakovanyAlergen, `den ${den.cislo}`).not.toBe('vejce');
+      for (const id of surovinyDne(den)) {
+        expect(ingredientById.get(id)?.allergens.includes('vejce'), `den ${den.cislo}: ${id}`).not.toBe(
+          true,
+        );
+      }
+    }
+  });
+
+  it('pozastavený alergen se neukládá mezi alergie, jinak by plán hned hlásil neshodu', () => {
+    expect(plan.alergie).toEqual([]);
+  });
+
+  it('surovina s reakcí se do plánu neukládá jako známá', () => {
+    expect(plan.zname).not.toContain('vejce-slepici');
+    expect(plan.zname).toContain('cuketa');
+  });
+
+  it('plán zůstane plnohodnotný', () => {
+    expect(plan.dny).toHaveLength(DNU_V_BLOKU);
+    for (const den of plan.dny) expect(den.jidla.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('první blok vyřazenou zeleninu z prvního týdne přeskočí', () => {
+    const prvni = sestavPlan(vstup({ vyrazene: new Set(['brokolice']) }));
+    expect(prvni.dny.map((den) => den.novinka)).not.toContain('brokolice');
+  });
+});
+
 describe('zásahy rodiče do hotového plánu', () => {
   const plan = sestavPlan(vstup({ mesice: 10 }));
 

@@ -138,9 +138,28 @@ kdykoli přepočítat i otestovat.
 **Odmítnutí není konec.** Přeskočená surovina se v dalším bloku vrátí,
 protože v deníku nebude.
 
-**Reakce patří pediatrovi.** Plán ji sám nezpracovává. Rodič si alergen
-zapíše mezi alergie dítěte a plán ho pak vynechá celý. Aplikace alergii
-nediagnostikuje.
+**Reakce patří pediatrovi.** Aplikace ji nevyhodnocuje ani nediagnostikuje,
+ale plán do ní netlačí dál (rozhodnuto 24. 9. 2026). Rozhoduje *poslední*
+ochutnávka suroviny v deníku:
+
+- Když je u ní reakce (kožní, trávicí, jiná), plán surovinu nenabídne jako
+  novinku, v receptu ani na talíř mezi známé. Její alergenní skupinu
+  pozastaví — nenabídne ji ani přes jinou surovinu téže skupiny. Do
+  `plan.alergie` se pozastavené skupiny nepíšou, ty drží jen alergie
+  zapsané rodičem.
+- Když rodič po poradě s pediatrem surovinu podá znovu a zapíše ji bez
+  reakce, platí zase normálně.
+
+Zvlášť od toho si rodič může v detailu suroviny surovinu **vyřadit z plánu**
+(`Child.vyrazene`, schéma 6). To je pro to, co se alergií zapsat nedá:
+reakce na kiwi nebo rajče, nesnášenlivost, „tohle zatím ne". Vyřazená
+surovina se nenabídne jako novinka ani v receptu; alergen se kvůli ní
+nepozastavuje. Přehled vyřazených s cestou zpátky je v Domácnosti.
+
+Plán sestavený dřív o nové reakci ani vyřazení neví. Detail dne proto
+jídla s takovou surovinou označí a nabídne výměnu dne nebo nový plán —
+stejně jako u alergie zapsané až potom. Alergii rodič dál zapisuje mezi
+alergie dítěte a plán pak vynechá celou skupinu.
 
 **Alergie zapsaná až potom se nepřehlédne.** Plán je hotový rozvrh, ne živý
 dotaz do katalogu, takže o alergii zapsané po sestavení neví. Proto si s sebou

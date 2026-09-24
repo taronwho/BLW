@@ -89,6 +89,45 @@ describe('známé suroviny na talíř', () => {
     expect(ids).not.toContain('vejce-slepici');
   });
 
+  it('surovinu s reakcí nevrátí ani přes seznam známých, ani přes novinku z dřívějška', () => {
+    // Kontrola aplikace 24. 9. 2026: filtr platil jen pro deník, takže se
+    // vejce s kožní reakcí na talíř vrátilo přes plán.
+    const p = plan({
+      dny: [den(1, 'vejce-slepici'), den(2, 'kruti-stehno')],
+      zname: ['vejce-slepici', 'brokolice'],
+    });
+    const state = domacnost({
+      tastings: [ochutnavka({ id: '1', ingredientId: 'vejce-slepici', reaction: 'kozni' })],
+    });
+    const ids = znameNaTalir(p, den(2, 'kruti-stehno'), state, 'dite-1').map((i) => i.id);
+
+    expect(ids).toContain('brokolice');
+    expect(ids).not.toContain('vejce-slepici');
+  });
+
+  it('surovinu, kterou rodič z plánu vyřadil, nenabízí', () => {
+    const p = plan({ dny: [den(1, 'kruti-stehno')], zname: ['kiwi', 'brokolice'] });
+    const ids = znameNaTalir(p, den(1, 'kruti-stehno'), domacnost(), 'dite-1', [], ['kiwi']).map(
+      (i) => i.id,
+    );
+
+    expect(ids).toContain('brokolice');
+    expect(ids).not.toContain('kiwi');
+  });
+
+  it('po nové ochutnávce bez reakce surovinu zase nabízí', () => {
+    const p = plan({ dny: [den(1, 'kruti-stehno')] });
+    const state = domacnost({
+      tastings: [
+        ochutnavka({ id: '1', ingredientId: 'vejce-slepici', reaction: 'kozni', date: '2026-08-01' }),
+        ochutnavka({ id: '2', ingredientId: 'vejce-slepici', reaction: 'zadna', date: '2026-09-10' }),
+      ],
+    });
+    const ids = znameNaTalir(p, den(1, 'kruti-stehno'), state, 'dite-1').map((i) => i.id);
+
+    expect(ids).toContain('vejce-slepici');
+  });
+
   it('vynechá suroviny, které dítě podle profilu nesmí', () => {
     const p = plan({ dny: [den(1, 'kruti-stehno')], zname: ['jogurt-bily-plnotucny', 'brokolice'] });
     const ids = znameNaTalir(p, den(1, 'kruti-stehno'), domacnost(), 'dite-1', ['mleko']).map(

@@ -14,6 +14,7 @@ import { ageInMonths, stageForAge } from '../lib/age';
 import { useAktivniDite } from '../lib/dite';
 import { ALLERGEN_LABELS } from '../lib/labels';
 import { DUVOD_LABELS, TYP_JIDLA_LABELS, useAktivniPlan, znameNaTalir } from '../lib/plan';
+import { vyrazeneZPlanu } from '../lib/tastings';
 import { NotFoundScreen } from './NotFoundScreen';
 
 /**
@@ -49,6 +50,24 @@ function zakazaneVJidle(
   return zakazane.filter((skupina) => nese.has(skupina));
 }
 
+/**
+ * Suroviny jídla, které plán dnes už nenabízí: po reakci v deníku nebo
+ * vyřazené rodičem. Plán mohl vzniknout dřív, než se to stalo, takže se to
+ * stejně jako alergie kontroluje při každém zobrazení.
+ */
+function vyrazeneVJidle(
+  jidlo: { recipeId?: string; ingredientId?: string },
+  vyrazene: ReadonlySet<string>,
+): string[] {
+  const ids = new Set<string>([
+    ...(recipeById.get(jidlo.recipeId ?? '')?.ingredients.map((ref) => ref.ingredientId) ?? []),
+    ...(jidlo.ingredientId === undefined ? [] : [jidlo.ingredientId]),
+  ]);
+  return [...ids]
+    .filter((id) => vyrazene.has(id))
+    .map((id) => ingredientById.get(id)?.nameCz ?? id);
+}
+
 function datum(kdy: number | null): string {
   if (kdy === null) return '';
   return new Date(kdy).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric' });
@@ -68,10 +87,21 @@ export function PlanDenScreen(): ReactNode {
   const faze = stageForAge(ageInMonths(dite?.birthDate ?? ''));
   const novinka = ingredientById.get(den.novinka ?? '');
   const pribylo = pribyleAlergie(plan, dite ?? null);
+  const vyrazene = vyrazeneZPlanu(state, dite?.id ?? null, dite?.vyrazene ?? []);
+  const denMaVyrazene =
+    (den.novinka !== undefined && vyrazene.has(den.novinka)) ||
+    den.jidla.some((jidlo) => vyrazeneVJidle(jidlo, vyrazene).length > 0);
 
   // Co už dítě zná: dřívější dny tohoto bloku, deník a to, co znalo při
   // sestavení bloku. Nabídka na talíř, ne další jídlo navíc.
-  const znameJiz = znameNaTalir(plan, den, state, dite?.id ?? null, dite?.allergens ?? []);
+  const znameJiz = znameNaTalir(
+    plan,
+    den,
+    state,
+    dite?.id ?? null,
+    dite?.allergens ?? [],
+    dite?.vyrazene ?? [],
+  );
 
   // Co se ten den vaří, to se dá rovnou hodit do nákupu.
   const davkyDne = den.jidla.flatMap((jidlo) =>
@@ -167,6 +197,20 @@ export function PlanDenScreen(): ReactNode {
         </p>
       )}
 
+      {denMaVyrazene && (
+        <p
+          data-testid="den-vyrazene"
+          className="flex items-start gap-2 rounded-xl border-2 border-risk/40 bg-risk-soft p-3 text-xs leading-relaxed"
+        >
+          <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-risk" />
+          <span>
+            Tenhle den obsahuje surovinu, po které je v deníku reakce, nebo kterou jste z plánu
+            vyřadili. Jídla s ní jsou níž označená. Den se dá vyměnit, nebo se dá sestavit nový
+            plán, který ji vynechá.
+          </span>
+        </p>
+      )}
+
       {den.opakovanyAlergen !== undefined && (
         <p
           data-testid="den-expozice"
@@ -233,11 +277,16 @@ export function PlanDenScreen(): ReactNode {
             const recept = recipeById.get(jidlo.recipeId ?? '');
             const surovina = ingredientById.get(jidlo.ingredientId ?? '');
             const zakazane = zakazaneVJidle(jidlo, pribylo);
+            const vyrazeneTady = vyrazeneVJidle(jidlo, vyrazene);
             const varovani =
-              zakazane.length === 0 ? null : (
+              zakazane.length === 0 && vyrazeneTady.length === 0 ? null : (
                 <span className="flex items-center gap-1.5 rounded-lg border border-risk/40 bg-risk-soft px-2 py-1 text-[11px] font-semibold text-risk">
                   <AlertTriangle aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
-                  Obsahuje {zakazane.map((skupina) => ALLERGEN_LABELS[skupina]).join(' a ')}
+                  Obsahuje{' '}
+                  {[
+                    ...zakazane.map((skupina) => ALLERGEN_LABELS[skupina]),
+                    ...vyrazeneTady,
+                  ].join(' a ')}
                 </span>
               );
             const stitek = (

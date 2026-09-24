@@ -367,6 +367,15 @@ export interface Child {
    * Aplikace tím nic nediagnostikuje — jen si pamatuje, co rodič sám zadal.
    */
   allergens?: AllergenGroup[];
+  /**
+   * Suroviny, které rodič vyřadil z plánu (id surovin).
+   *
+   * Pro to, co se alergií zapsat nedá: reakce na kiwi nebo rajče, kterou
+   * rodič řeší s pediatrem, nesnášenlivost, nebo prostě „tohle zatím ne".
+   * Plán takovou surovinu nenabídne jako novinku ani v receptu. Aplikace
+   * tím nic nediagnostikuje — jen si pamatuje, co rodič sám vyřadil.
+   */
+  vyrazene?: string[];
 }
 
 /**

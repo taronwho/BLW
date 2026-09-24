@@ -31,8 +31,12 @@ import { platnaOchutnavka, platneDite, type Zahozeno } from './validace';
  * chybějící plán znamená, že si ho rodič ještě nesestavil.
  * 4 → 5: přibyl nákupní seznam (`nakup`). Chybějící seznam znamená prázdný,
  * takže starší stav není co převádět.
+ * 5 → 6: dítě má seznam surovin vyřazených z plánu (`vyrazene`). Chybějící
+ * seznam znamená, že nic vyřazené není. Verze se zvedá kvůli starším
+ * telefonům: ty neznámé pole zahazují, takže by při úpravě dítěte seznam
+ * smazaly. Takhle dokument novější verze odmítnou zapsat.
  */
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 
 export function emptyHouseholdState(): HouseholdState {
   return {
@@ -490,6 +494,41 @@ export function mergeHouseholdState(
     ...(nakup === undefined ? {} : { nakup }),
     schemaVersion: Math.max(local.schemaVersion, remote.schemaVersion),
   };
+}
+
+/**
+ * Otisk stavu pro porovnání „je to totéž?".
+ *
+ * Nezáleží na pořadí klíčů v objektech ani na pořadí ochutnávek a členů —
+ * dvě zařízení je můžou mít seřazené jinak, a přitom jde o stejná data.
+ */
+export function otiskStavu(state: HouseholdState): string {
+  const serazene: HouseholdState = {
+    ...state,
+    members: [...state.members].sort(),
+    tastings: [...state.tastings].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+  };
+  return JSON.stringify(serazene, (_klic, hodnota: unknown) => {
+    if (hodnota === null || typeof hodnota !== 'object' || Array.isArray(hodnota)) return hodnota;
+    const zdroj = hodnota as Record<string, unknown>;
+    const out: Record<string, unknown> = {};
+    for (const klic of Object.keys(zdroj).sort()) {
+      if (zdroj[klic] !== undefined) out[klic] = zdroj[klic];
+    }
+    return out;
+  });
+}
+
+/**
+ * Má sloučený stav něco, co na serveru chybí?
+ *
+ * Dokument domácnosti se zapisuje celý. Když dva telefony zapisovaly
+ * offline, druhý zápis přepsal první a server o jeho ochutnávce neví.
+ * Telefon, který si ji pamatuje, ji musí po sloučení vrátit zpátky —
+ * jinak ji druhý rodič neuvidí, dokud tenhle telefon nezmění něco dalšího.
+ */
+export function chybiNaServeru(slouceny: HouseholdState, server: HouseholdState): boolean {
+  return otiskStavu(slouceny) !== otiskStavu(server);
 }
 
 /** Děti, které v domácnosti opravdu jsou — bez náhrobků, v pořadí zadání. */

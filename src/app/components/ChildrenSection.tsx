@@ -1,6 +1,6 @@
 import { Baby, Check, Plus, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { Child } from '@/types';
 import { ageInMonths, formatAge } from '../lib/age';
@@ -8,6 +8,8 @@ import { useAktivniDite, useDeti } from '../lib/dite';
 import { AllergyPicker } from './AllergyPicker';
 import { GripPicker } from './GripPicker';
 import { ReadinessPicker } from './ReadinessPicker';
+
+const VyrazeneSuroviny = lazy(() => import('./VyrazeneSuroviny'));
 
 /**
  * Děti v domácnosti a nastavení toho vybraného.
@@ -118,6 +120,14 @@ export function ChildrenSection(): ReactNode {
           <div className="rounded-xl bg-surface p-4">
             <AllergyPicker dite={aktivni} />
           </div>
+
+          {(aktivni.vyrazene?.length ?? 0) > 0 && (
+            <div className="rounded-xl bg-surface p-4">
+              <Suspense fallback={null}>
+                <VyrazeneSuroviny dite={aktivni} />
+              </Suspense>
+            </div>
+          )}
         </>
       )}
     </div>
