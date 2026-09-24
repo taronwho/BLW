@@ -33,11 +33,11 @@ export const DATUM_PRAVIDLA_TEMAT = '2026-09-24';
 /**
  * Jak vážné je rizikové tvrzení bez zdroje, který o riziku mluví.
  *
- * Zatím varování, protože katalog štítky teprve dostává. Až bude
- * `nedolozenaTvrzeni` na nule, přepne se na `'error'` a build pak nové
- * nedoložené tvrzení nepustí. Přepnutí je zpřísnění, ne oslabení.
+ * Od 24. 9. 2026 chyba: katalog má doložená všechna riziková tvrzení
+ * (`nedolozenaTvrzeni` je na nule), takže build nové nedoložené tvrzení
+ * nepustí. Přepnutí z varování bylo zpřísnění, ne oslabení.
  */
-export const ZAVAZNOST_TEMAT: Severity = 'warning';
+export const ZAVAZNOST_TEMAT: Severity = 'error';
 
 /**
  * Kolik nedoložených rizikových tvrzení katalog nejvýš smí mít.
