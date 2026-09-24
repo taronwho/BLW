@@ -33,11 +33,65 @@ Blogy, e-shopy, magazíny, Pinterest, recepty od uživatelů: **nikdy**.
 
 `solidstarts.com` je v tier 2, ale jeho texty i fotky jsou chráněný obsah. Odkazovat se na něj smí, přebírat z něj formulace ani blízké parafráze ne — platí pravidlo 3 z `CLAUDE.md`. Totéž pro `nhs.uk`. Z obou se berou **fakta**, ne věty.
 
-### Kolik položek smí stát na jednom odkazu
+### Riziková tvrzení potřebují zdroj, který o riziku mluví
 
-Obecná stránka o zavádění příkrmů nedokládá konkrétní tvrzení o topinamburu. Pravidlo `source-url-cap` v `src/safety/zdroje.ts` proto varuje, jakmile jeden odkaz drží víc než **50 položek** katalogu. Je to varování, ne chyba: stav se nedá spravit jedním commitem, ale `npm run validate:data` ho vypisuje pokaždé, takže se na něj nezapomene.
+Rozhodnutí vlastníka z 24. 9. 2026. Cílem není rozmanitost domén, ale
+**doložení**. Víc úřadů z víc zemí znamená víc rozporů v doporučeních
+(načasování vejce, ryby, kravské mléko), ne víc bezpečí.
 
-Tabulka `ZDROJE PODLE DOMÉN` ve stejném výpisu ukazuje monokulturu. K září 2026 stojí 99 % položek na `nhs.uk`; cíl je dostat pod 70 % a doplnit ESPGHAN a ČPS ČLS JEP, protože česká a britská praxe se liší (vitamin D, načasování lepku, mléko).
+**Rizikové tvrzení** je u suroviny:
+
+- každý `hazard` (dusičnany, rtuť, arsen, vitamin A, sůl, botulismus,
+  nepasterizované, syrové, kosti, cukr),
+- každá alergenová skupina v `allergens`,
+- `chokingRisk: 'high'` (téma `duseni`).
+
+Každé z nich musí mít mezi `sources` suroviny aspoň jeden zdroj, který
+to téma nese v poli `doklada`. Hlídá to pravidlo `claim-source-topic`
+v `src/safety/zdroje.ts`; tabulka `DOLOŽENÍ RIZIKOVÝCH TVRZENÍ` ve
+výpisu `npm run validate:data` ukazuje stav po tématech.
+
+**Jak se štítek `doklada` zapisuje:**
+
+1. Štítek je vlastnost **stránky**, ne suroviny. Zdroj se definuje jednou
+   v `src/data/ingredients/_sources.ts` a všude se používá táž konstanta.
+   Tatáž URL s různými štítky je chyba (`source-topic-consistent`).
+2. Téma se zapíše jen tehdy, když stránka o tom riziku **výslovně mluví**
+   — pojmenuje ho a řekne k němu něco, co tvrzení u suroviny podpírá.
+   Zmínka v seznamu bez vysvětlení nestačí.
+3. Štítek se zapisuje jen po novém přečtení stránky. Zdroj se štítkem
+   musí mít `accessedAt` 24. 9. 2026 nebo pozdější (`source-topic-reread`,
+   chyba).
+4. Když stránka tvrzení u suroviny **odporuje**, štítek se nepřidá,
+   surovina jde na `needs-review` a do `reviewNote` se napíše, v čem je
+   rozpor. Text suroviny se podle toho neopravuje z hlavy.
+
+**Obecná tvrzení** — jak surovinu uvařit, nakrájet ve fázi, kdy je riziko
+nízké nebo střední, sezóna, nápady — smí stát na obecných stránkách
+o příkrmech, a to u libovolného počtu položek. Dřívější strop 50 položek
+na odkaz (`source-url-cap`) se tímto ruší: měřil počet, ne to, jestli
+stránka tvrzení dokládá.
+
+**Pořadí, ve kterém se zdroj hledá:**
+
+1. české úřední: MZd (`mzd.gov.cz`), SZÚ (`szu.gov.cz`), Česká pediatrická
+   společnost (`pediatrics.cz`), `bezpecnostpotravin.cz`,
+2. evropské: EFSA, ESPGHAN, EAACI, EMA, a WHO,
+3. `nhs.uk`,
+4. tier 2 jen tehdy, když nic výš téma nepokrývá.
+
+Zdroj se nebere kvůli tomu, aby byla doména jiná. Když stránka výš v
+pořadí téma pokrývá, stačí ona. Nová doména do `src/safety/domains.ts` se
+přidává jen s rozhodnutím vlastníka.
+
+**Západka a přepnutí na chybu.** `STROP_NEDOLOZENYCH` v
+`src/safety/zdroje.ts` je nejvyšší dovolený počet nedoložených rizikových
+tvrzení. Po každé dávce se sníží na nový stav, nikdy se nezvyšuje, takže
+nová surovina bez doložení rizika neprojde testy ani dnes. Až bude počet na
+nule, `ZAVAZNOST_TEMAT` se přepne z `'warning'` na `'error'`.
+
+Tabulka `ZDROJE PODLE DOMÉN` zůstává ve výpisu jako informace, cíl
+podílu domén už není.
 
 ### Jak často se zdroje čtou znovu
 

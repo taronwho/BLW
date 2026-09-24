@@ -150,7 +150,22 @@ export interface SourceRef {
   accessedAt: string;
   /** 1 = odborná společnost / úřad, 2 = důvěryhodná odborná publikace */
   tier: 1 | 2;
+  /**
+   * Rizika, která stránka **výslovně probírá** (docs/BEZPECNOST.md kap. 1).
+   *
+   * Je to vlastnost stránky, ne suroviny: zapisuje se jen po přečtení a jen
+   * to, o čem stránka opravdu mluví. Rizikové tvrzení u suroviny (hazard,
+   * alergen, vysoké riziko dušení) musí mít aspoň jeden zdroj s tímhle
+   * tématem — pravidlo `claim-source-topic` v src/safety/zdroje.ts.
+   */
+  doklada?: readonly TemaZdroje[];
 }
+
+/**
+ * Téma, které zdroj dokládá: hazard, alergenová skupina, nebo dušení.
+ * Hodnoty se nepřekrývají, takže stačí jeden seznam.
+ */
+export type TemaZdroje = Hazard | AllergenGroup | 'duseni';
 
 export interface StagePrep {
   /** Jak to nakrájet a servírovat. 2–4 věty, konkrétně, česky. */

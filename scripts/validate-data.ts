@@ -10,7 +10,14 @@ import { checkGuides } from '../src/safety/guides';
 import { errorsOf, runSafetyRules, warningsOf } from '../src/safety/run';
 import { safetyRules } from '../src/safety/rules';
 import type { Finding } from '../src/safety/types';
-import { pouzitiDomen, pouzitiUrl, zkontrolujZdroje } from '../src/safety/zdroje';
+import {
+  dolozeniPodleTemat,
+  nedolozenaTvrzeni,
+  pouzitiDomen,
+  pouzitiUrl,
+  STROP_NEDOLOZENYCH,
+  zkontrolujZdroje,
+} from '../src/safety/zdroje';
 import { recipeIsVegetarian } from '../src/app/lib/deriveRecipes';
 import { jeJednoduchaUprava, JEDNODUCHA_MINUT, JEDNODUCHA_SLOZEK } from '../src/data/jednoduche';
 import type { Recipe } from '../src/types';
@@ -135,6 +142,30 @@ function printSourceTable(): void {
 }
 
 /**
+ * Doložení rizikových tvrzení (docs/BEZPECNOST.md kap. 1).
+ *
+ * U každého tématu — hazard, alergen, dušení — kolik surovin ho nese a
+ * u kolika z nich má surovina zdroj, který o tom tématu opravdu mluví.
+ * Nahoře to, kde chybí nejvíc, protože tam se má pokračovat.
+ */
+function printClaimSources(): void {
+  const radky = dolozeniPodleTemat(catalog);
+  const chybi = nedolozenaTvrzeni(catalog).length;
+  const celkem = radky.reduce((soucet, r) => soucet + r.surovin, 0);
+  console.log('\nDOLOŽENÍ RIZIKOVÝCH TVRZENÍ');
+  console.log(pad('téma', 20) + padLeft('surovin', 9) + padLeft('doloženo', 10) + padLeft('chybí', 7));
+  for (const r of radky) {
+    console.log(
+      pad(r.tema, 20) +
+        padLeft(String(r.surovin), 9) +
+        padLeft(String(r.dolozeno), 10) +
+        padLeft(String(r.surovin - r.dolozeno), 7),
+    );
+  }
+  console.log(`  doloženo ${celkem - chybi} z ${celkem}, strop nedoložených ${STROP_NEDOLOZENYCH}`);
+}
+
+/**
  * Kolik z kuchařky jsou plnohodnotné recepty a kolik rychlé úpravy.
  *
  * Audit 17. 9. 2026 (nález 2.3): číslo 494 nese dvě různé věci. „Dušená
@@ -180,10 +211,17 @@ function main(): void {
   printGuideTable();
   printFindings('CHYBY', errors);
   printSourceTable();
+  printClaimSources();
   printFindings('VAROVÁNÍ', warnings);
-  if (zdrojoveNalezy.length > 0) {
+  const zdrojoveChyby = zdrojoveNalezy.filter((n) => n.severity === 'error');
+  const zdrojovaVarovani = zdrojoveNalezy.filter((n) => n.severity === 'warning');
+  if (zdrojoveChyby.length > 0) {
+    console.log('\nCHYBY VE ZDROJÍCH');
+    for (const nalez of zdrojoveChyby) console.log(`  ${nalez.ruleId}: ${nalez.message}`);
+  }
+  if (zdrojovaVarovani.length > 0) {
     console.log('\nVAROVÁNÍ O ZDROJÍCH');
-    for (const nalez of zdrojoveNalezy) console.log(`  ${nalez.ruleId}: ${nalez.message}`);
+    for (const nalez of zdrojovaVarovani) console.log(`  ${nalez.ruleId}: ${nalez.message}`);
   }
 
   const verified = catalog.ingredients.filter((i) => i.reviewStatus === 'verified').length;
@@ -212,8 +250,8 @@ function main(): void {
   console.log(`RAD: ${catalog.guides.length}     (naléhavých: ${urgent})`);
   const polozekVSeznamech = lists.reduce((soucet, one) => soucet + one.polozky.length, 0);
   console.log(`SEZNAMŮ: ${lists.length}   (položek: ${polozekVSeznamech})`);
-  console.log(`CHYB: ${errors.length + guideFindings.length}`);
-  console.log(`VAROVÁNÍ: ${warnings.length + zdrojoveNalezy.length}`);
+  console.log(`CHYB: ${errors.length + guideFindings.length + zdrojoveChyby.length}`);
+  console.log(`VAROVÁNÍ: ${warnings.length + zdrojovaVarovani.length}`);
 
   // Cílové počty z docs/SPEC.md kapitola 9. Dokud se katalog plní, jsou to
   // informativní řádky — ne chyba, jinak by nešlo commitnout ani první dávku.
@@ -231,7 +269,7 @@ function main(): void {
     console.log(`ROZPRACOVÁNO: ${belowTarget.join(', ')}`);
   }
 
-  if (errors.length + guideFindings.length > 0) {
+  if (errors.length + guideFindings.length + zdrojoveChyby.length > 0) {
     console.error('\nValidace selhala — oprav data, ne pravidla.');
     process.exit(1);
   }
