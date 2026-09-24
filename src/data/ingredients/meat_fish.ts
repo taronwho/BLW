@@ -1173,7 +1173,9 @@ export const meatFish: Ingredient[] = [
     seasonCz: [],
     vegetarian: false,
     sources: [NHS_FISH, NHS_AVOID],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Že tuňák obsahuje víc rtuti než jiné ryby, doložené je (NHS Fish and shellfish). Limit „nejvýše jedna malá porce týdně“ ale NHS pro děti neuvádí; limit porcí tuňáka má jen pro těhotné. Informace SZÚ na bezpecnostpotravin.cz („Nebojte se rtuti v rybích výrobcích“, 2020) naopak hodnotí rtuť v rybích výrobcích z českého trhu u dětí jako velmi nízké riziko. Četnost je potřeba sladit se zdroji.',
   },
   {
     id: 'krevety',
@@ -2034,7 +2036,9 @@ export const meatFish: Ingredient[] = [
     frequencyLimit:
       'Kvůli rtuti jen občas, ne jako pravidelná týdenní ryba; tučnou rybu navíc nenahrazuje.',
     sources: [NHS_FISH, NHS_AVOID],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Že tuňák obsahuje víc rtuti než jiné ryby a nepočítá se mezi tučné ryby, doložené je (NHS Fish and shellfish). Omezení „jen občas, ne každý týden“ ale NHS pro děti neuvádí. Informace SZÚ na bezpecnostpotravin.cz („Nebojte se rtuti v rybích výrobcích“, 2020) hodnotí rtuť v konzervách z českého trhu u dětí jako velmi nízké riziko: limitu by dítě dosáhlo až u 11 porcí po 50 g týdně výrobku s nejvyšším naměřeným obsahem. Četnost je potřeba sladit se zdroji.',
   },
   {
     id: 'ancovicky',

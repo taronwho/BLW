@@ -1068,7 +1068,7 @@ export const vegetables: Ingredient[] = [
     ],
     seasonCz: [6, 7, 8, 9, 10],
     vegetarian: true,
-    sources: [EFSA_NITRATE, NHS_FIRST_FOODS],
+    sources: [EFSA_NITRATE, NHS_FIRST_FOODS, BP_NITRATES_VEG],
     reviewStatus: 'verified',
   },
   {
@@ -1468,7 +1468,9 @@ export const vegetables: Ingredient[] = [
     seasonCz: [9, 10, 11],
     vegetarian: true,
     sources: [BP_NITRATES_VEG, EFSA_NITRATE, EMA_FENNEL, NHS_FIRST_FOODS],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Riziko dusičnanů u fenyklu zdroje nedokládají. Stanovisko EFSA (český souhrn na bezpecnostpotravin.cz) ani tisková zpráva EFSA o listové zelenině fenykl nejmenují. Český souhrn navíc uvádí, že nejméně dusičnanů bývá v semenech a hlízách. Text sám přiznává, že jde o preventivní opatrnost. Rozhodnout, jestli hazard dusičnanů u fenyklu ponechat.',
   },
   {
     id: 'chrest',

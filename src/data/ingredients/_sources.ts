@@ -72,12 +72,17 @@ function nhs(
  *   nesou riziko listerií, v tepelně upraveném pokrmu je lze použít.
  * - `syrove`: vejce bez britského razítka se vaří do pevného bílku i žloutku,
  *   syrové a lehce tepelně upravené měkkýše miminku nedávat kvůli otravě.
+ * - `rtut`: žralok, mečoun a marlín obsahují tolik rtuti, že může poškodit
+ *   vyvíjející se nervovou soustavu, proto je děti do 16 let nejedí.
+ * - `arsen`: rýže přijímá víc arsenu než jiné obiloviny, rýžový nápoj proto
+ *   nenahrazuje mléko dětem do 5 let; pro rýži platí limity arsenu, pro
+ *   výrobky pro malé děti přísnější, a rýži samotnou to nevylučuje.
  */
 export const NHS_AVOID = nhs(
   'Foods to avoid giving babies and young children',
   '/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/',
   FETCHED_24,
-  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove'],
+  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove', 'rtut', 'arsen'],
 );
 
 /** První příkrmy, měkké vařené hranolky, velikost soust do ruky. */
@@ -143,16 +148,33 @@ export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/',
  * - `syrove`: mezi „shellfish“ stránka řadí krevety, slávky, hřebenatky
  *   i kalmary; syrové nebo nedovařené mohou nést viry a bakterie, a proto se
  *   miminkům a dětem nedávají.
+ * - `rtut`: děti do 16 let nejedí žraloka, mečouna ani marlína, protože
+ *   rtuť v nich může ovlivnit nervovou soustavu; tuňák má víc rtuti než
+ *   jiné ryby a nepočítá se mezi tučné ryby. Limit porcí tuňáka stránka
+ *   uvádí jen pro těhotné, ne pro děti.
  */
 export const NHS_FISH = nhs(
   'Fish and shellfish',
   '/live-well/eat-well/food-types/fish-and-shellfish-nutrition/',
   FETCHED_24,
-  ['syrove'],
+  ['syrove', 'rtut'],
 );
 
-/** Játra a kumulace retinolu. */
-export const NHS_VITAMIN_A = nhs('Vitamin A', '/conditions/vitamins-and-minerals/vitamin-a/');
+/**
+ * Játra a kumulace retinolu.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `vitamin-a`: játra a jaterní výrobky jsou velmi bohatý zdroj vitaminu A,
+ *   který se v těle ukládá; kdo je jí častěji než jednou týdně, může ho
+ *   přijímat příliš. Doporučení stránky míří na dospělé, dětský limit
+ *   neuvádí.
+ */
+export const NHS_VITAMIN_A = nhs(
+  'Vitamin A',
+  '/conditions/vitamins-and-minerals/vitamin-a/',
+  FETCHED_24,
+  ['vitamin-a'],
+);
 
 /**
  * Plnotučné mléčné výrobky, pasterizace, kravské mléko do vaření.
@@ -165,12 +187,13 @@ export const NHS_VITAMIN_A = nhs('Vitamin A', '/conditions/vitamins-and-minerals
  *   jídly.
  * - `nepasterizovane`: sýry z nepasterizovaného mléka a plísňové měkké sýry
  *   malé děti nejedí kvůli listeriím, zapečené v pokrmu jsou bezpečnější.
+ * - `arsen`: děti do 5 let nemají pít rýžové nápoje kvůli obsahu arsenu.
  */
 export const NHS_YOUNG_CHILDREN = nhs(
   'What to feed young children',
   '/baby/weaning-and-feeding/what-to-feed-young-children/',
   FETCHED_24,
-  ['sul', 'cukr', 'nepasterizovane'],
+  ['sul', 'cukr', 'nepasterizovane', 'arsen'],
 );
 
 /**
@@ -200,12 +223,15 @@ export const NHS_TEETHING_SYMPTOMS = nhs(
  *   roku, a to pasterizované.
  * - `cukr`: slazené nápoje, džusy i „dětské“ čaje obsahují cukr a vedou
  *   k zubnímu kazu, a to i zředěné.
+ * - `arsen`: rýžové nápoje nemají děti do 5 let dostávat místo mléka, protože
+ *   mohou obsahovat příliš arsenu; rýže ho přijímá víc než jiné obiloviny,
+ *   ale samotnou rýži to nevylučuje a pro rýžové výrobky platí limity.
  */
 export const NHS_DRINKS = nhs(
   'Drinks and cups for babies and young children',
   '/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/',
   FETCHED_24,
-  ['nepasterizovane', 'cukr'],
+  ['nepasterizovane', 'cukr', 'arsen'],
 );
 
 /**
@@ -223,12 +249,16 @@ export const NHS_DRINKS = nhs(
  *   otravu.
  * - `syrove`: měkkýše a korýše jen důkladně tepelně upravené, syroví
  *   zvyšují riziko otravy.
+ * - `rtut`: žralok, mečoun a marlín mají hodně rtuti, která může poškodit
+ *   rostoucí nervovou soustavu miminka.
+ * - `arsen`: rýžové nápoje mohou obsahovat příliš arsenu, do 5 let se
+ *   nedávají vůbec.
  */
 export const NHS_AVOID_WEANING = nhs(
   'Food and drinks to avoid – Safe weaning',
   '/best-start-in-life/baby/weaning/safe-weaning/food-and-drinks-to-avoid/',
   FETCHED_24,
-  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove'],
+  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove', 'rtut', 'arsen'],
 );
 
 /** Rostlinné zdroje železa a vliv vitaminu C na jeho vstřebávání. */
@@ -238,13 +268,23 @@ export const NHS_VEGETARIAN = nhs(
   FETCHED,
 );
 
-/** Dusičnany v listové zelenině a riziko pro malé děti. */
+/**
+ * Dusičnany v listové zelenině a riziko pro malé děti.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `dusicnany`: listová zelenina, hlavně špenát a hlávkový salát, obsahuje
+ *   hodně dusičnanů; salát u dětí riziko nepředstavuje, ale u batolat, která
+ *   snědí hodně špenátu (přes 200 g), nelze vyloučit methemoglobinemii. Dětem
+ *   se střevní infekcí se špenát nedává, uvařená listová zelenina nemá stát
+ *   při pokojové teplotě a mixování přeměnu na dusitany urychluje.
+ */
 export const EFSA_NITRATE: SourceRef = {
   org: 'EFSA',
   title: 'EFSA assesses possible health risk for children from nitrate in leafy vegetables',
   url: 'https://www.efsa.europa.eu/en/press/news/contam101209',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['dusicnany'],
 };
 
 /**
@@ -260,13 +300,19 @@ export const EFSA_NITRATE: SourceRef = {
  * Doplněno při auditu: stanovisko EFSA o dusičnanech se týká listové
  * zeleniny (špenát, hlávkový salát) a řepu nejmenuje, takže samotné tvrzení
  * o řepě nepokrývalo.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `dusicnany`: řepa má vysoký obsah dusičnanů, které se v těle mohou měnit
+ *   až na karcinogenní nitrosaminy, a proto u ní víc než jinde platí „všeho
+ *   s mírou“.
  */
 export const BP_BEETROOT: SourceRef = {
   org: 'Informační centrum bezpečnosti potravin',
   title: 'Červená řepa a doporučení „všeho s mírou“',
   url: 'https://bezpecnostpotravin.cz/cervena-repa-a-doporuceni-vseho-s-mirou/',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['dusicnany'],
 };
 
 /**
@@ -276,26 +322,58 @@ export const BP_BEETROOT: SourceRef = {
  * Původně se citoval článek EFSA Journal 3597, ten dnes přesměrovává mimo
  * povolené domény. Tahle tisková zpráva pokrývá stejné hodnocení a EFSA ji
  * hostuje na vlastní doméně, takže se dá načíst.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `arsen`: anorganický arsen je toxičtější forma a v Evropě ho přijímáme
+ *   hlavně z obilných výrobků, rýže, mléčných výrobků a vody; dlouhodobý
+ *   příjem souvisí s kožními změnami, nemocemi srdce a některými nádory.
  */
 export const EFSA_ARSENIC: SourceRef = {
   org: 'EFSA',
   title: 'EFSA publishes dietary exposure estimates for inorganic arsenic',
   url: 'https://www.efsa.europa.eu/en/press/news/140306',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['arsen'],
 };
 
 /**
  * Aktualizované hodnocení rizika anorganického arsenu (2024). Shrnutí EFSA
  * vlastními slovy — plný článek EFSA Journal 8488 vede na Wiley, tedy mimo
  * povolené domény.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `arsen`: už nízký až střední příjem anorganického arsenu souvisí s nádory
+ *   kůže, močového měchýře a plic i s poruchami vývoje nervové soustavy
+ *   a současná expozice spotřebitelů z potravin je zdravotní obava. Které
+ *   potraviny k ní přispívají, shrnutí neuvádí.
  */
 export const EFSA_ARSENIC_UPDATE: SourceRef = {
   org: 'EFSA',
   title: 'Update of the risk assessment of inorganic arsenic in food – plain language summary',
   url: 'https://www.efsa.europa.eu/en/plain-language-summary/update-risk-assessment-inorganic-arsenic-food',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['arsen'],
+};
+
+/**
+ * České shrnutí hodnocení EFSA z ledna 2024 na portálu Bezpečnost potravin.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `arsen`: k příjmu anorganického arsenu v Evropě přispívá hlavně rýže,
+ *   výrobky z rýže a obiloviny; dlouhodobý příjem souvisí s rakovinou kůže
+ *   a EFSA ho hodnotí jako zdravotní obavu. Stránka dodává, že důkladné
+ *   propláchnutí rýže a vaření ve větším množství vody nebo v páře může
+ *   obsah anorganického arsenu snížit.
+ */
+export const BP_ARSENIC_EFSA: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'EFSA: Hodnocení rizik spojených s expozicí anorganickému arsenu v potravinách',
+  url: 'https://bezpecnostpotravin.cz/efsa-hodnoceni-rizik-spojenych-s-expozici-anorganickemu-arsenu-v-potravinach/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['arsen'],
 };
 
 /** Omezující stanovisko k fenyklovým přípravkům u malých dětí. */
@@ -646,13 +724,20 @@ export const BP_TOMATO: SourceRef = {
  *
  * POZOR: hodnocení počítá s dospělým o hmotnosti 60 kg, kojence a malé děti
  * neřeší, a fenykl se v něm nevyskytuje vůbec.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `dusicnany`: dusičnanů je nejvíc v listech a nejméně v semenech
+ *   a hlízách, listová zelenina jich má obecně víc a rukola nejvíc ze všech
+ *   měřených druhů; mytí, loupání a vaření příjem snižují. Přínos zeleniny
+ *   podle EFSA riziko převažuje.
  */
 export const BP_NITRATES_VEG: SourceRef = {
   org: 'Informační centrum bezpečnosti potravin',
   title: 'Stanovisko EFSA k dusičnanům v zelenině',
   url: 'https://bezpecnostpotravin.cz/stanovisko-efsa-k-dusicnanum-v-zelenine/',
-  accessedAt: FETCHED_13,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['dusicnany'],
 };
 
 

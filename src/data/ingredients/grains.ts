@@ -15,6 +15,7 @@ import {
   NHS_FIRST_FOODS,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  BP_ARSENIC_EFSA,
 } from './_sources';
 
 /**
@@ -669,7 +670,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC, NHS_DRINKS],
+    sources: [EFSA_ARSENIC, NHS_DRINKS, BP_ARSENIC_EFSA],
     reviewStatus: 'verified',
   },
   {
@@ -714,7 +715,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC, NHS_AVOID],
+    sources: [EFSA_ARSENIC, NHS_AVOID, BP_ARSENIC_EFSA],
     reviewStatus: 'verified',
   },
   {
@@ -759,8 +760,10 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC_UPDATE, WHO_COMPLEMENTARY],
-    reviewStatus: 'verified',
+    sources: [EFSA_ARSENIC_UPDATE, WHO_COMPLEMENTARY, BP_ARSENIC_EFSA],
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Že rýže nese anorganický arsen a že propláchnutí a vaření ve větším množství vody jeho obsah snižuje, doložené je (EFSA a jeho český souhrn na bezpecnostpotravin.cz, přečteno 24. 9. 2026). Tvrzení, že neloupaná rýže má arsenu víc než bílá, protože se drží v obalu zrna, žádný citovaný zdroj neuvádí. To je potřeba ověřit.',
   },
   {
     id: 'ryzove-chlebicky',
@@ -806,7 +809,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC, NHS_AVOID],
+    sources: [EFSA_ARSENIC, NHS_AVOID, BP_ARSENIC_EFSA],
     reviewStatus: 'verified',
   },
   {
@@ -1319,7 +1322,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC, NHS_AVOID],
+    sources: [EFSA_ARSENIC, NHS_AVOID, BP_ARSENIC_EFSA],
     reviewStatus: 'verified',
   },
   {
@@ -1619,7 +1622,7 @@ export const grains: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [EFSA_ARSENIC, NHS_FIRST_FOODS],
+    sources: [EFSA_ARSENIC, NHS_FIRST_FOODS, BP_ARSENIC_EFSA, NHS_AVOID],
     reviewStatus: 'verified',
   },
   {

@@ -12,6 +12,7 @@ import {
   NHS_DRINKS,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  BP_ARSENIC_EFSA,
 } from './_sources';
 
 /**
@@ -729,7 +730,7 @@ export const other: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     frequencyLimit: 'Do pěti let se jako náhrada mléka nepodává.',
-    sources: [NHS_DRINKS, NHS_AVOID],
+    sources: [NHS_DRINKS, NHS_AVOID, BP_ARSENIC_EFSA],
     reviewStatus: 'verified',
   },
   {
