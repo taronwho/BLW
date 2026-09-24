@@ -1788,10 +1788,10 @@ export const snacksBaking2: Recipe[] = [
     titleCz: 'Sleď na chlebu s jablkem a cibulkou',
     category: 'svaciny-peceni',
     minAgeMonths: 6,
-    timeMinutes: 15,
+    timeMinutes: 30,
     servings: '2 dospělí + 1 miminko',
     ingredients: [
-      { ingredientId: 'sled', amount: '2 filety', track: 'meat' },
+      { ingredientId: 'sled', amount: '2 čerstvé filety', track: 'meat' },
       { ingredientId: 'jablko', amount: '1 sladké', track: 'all' },
       { ingredientId: 'jarni-cibulka', amount: '1 stonek', track: 'all' },
       { ingredientId: 'chleb-kvaskovy', amount: '4 krajíce', track: 'all' },
@@ -1800,21 +1800,21 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'tvaroh-mekky', amount: '150 g', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Filety sledě propláchni ve studené vodě a osuš je; nakládaný sleď bývá slaný, proto se pro dětskou porci propírá.',
+      'Troubu rozehřej na 200 °C. Čerstvé filety sledě polož na plech s pečicím papírem a peč 12 minut, dokud maso nezbělá. Nakládaný ani uzený sleď nepoužívej, je solený a do dětské porce nepatří.',
+      'Upečené filety nech zchladnout, rozeber je na vločky a projeď prsty proti šupinám; sleď má drobné kosti.',
       'Jablko nastrouhej nahrubo a jarní cibulku nasekej nadrobno.',
       'Zakysanou smetanu rozmíchej s jablkem a cibulkou na pomazánku.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dvě lžíce pomazánky bez ryby, dřív než se do zbytku přidává sleď.',
+      'Po kroku 4 odeber dvě lžíce pomazánky bez ryby, dřív než se do zbytku přidává sleď.',
     babySteps: [
-      'Malý kousek propláchnutého sledě rozmačkej vidličkou a prohmatej prsty; sleď má drobné kosti.',
+      'Lžičku upečeného sledě rozmačkej vidličkou a ještě jednou prohmatej prsty kvůli kůstkám.',
       'Vmíchej ho do odebrané pomazánky a zakápni kapkou citronu.',
-      'Porci drž malou, i propláchnutý sleď zůstává slanější než čerstvá ryba.',
     ],
     babyServing: {
-      '6m': 'Podávej potřený proužek chleba dlouhý jako dospělý prst; vrstva pomazánky s rybou má být tenká, sleď je i po propláchnutí slanější než čerstvá ryba.',
-      '9m': 'Proužky nakrájej kratší, na dva prsty, a pomazánku s rybou nech hustší; porce sledě zůstává malá.',
-      '12m': 'Batole si pomazánku s rybou maže samo lžící; porci sledě drž malou a chleba nakrájej na sousta.',
+      '6m': 'Podávej potřený proužek chleba dlouhý jako dospělý prst, aby konec čouhal z pěsti; vrstva pomazánky s rybou má být tenká.',
+      '9m': 'Proužky nakrájej kratší, na dva prsty, a pomazánku s rybou nech hustší.',
+      '12m': 'Batole si pomazánku s rybou maže samo lžící; chleba nakrájej na sousta.',
     },
     adultSteps: [
       'Zbytek sledě nakrájej na kousky a vmíchej do pomazánky, osol a opepři.',

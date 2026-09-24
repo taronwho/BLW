@@ -1967,14 +1967,14 @@ export const lunchesDinners2: Recipe[] = [
     baseSteps: [
       'Troubu rozehřej na 180 °C. Brambory oloupej a nakrájej na tenká kolečka, šalotku nasekej nadrobno.',
       'Crème fraîche rozmíchej s mlékem, přidej nasekanou šalotku a snítky tymiánu.',
-      'Brambory vrstvi do zapékací misky, každou vrstvu přelij směsí a navrch rozlož oba sýry.',
-      'Peč čtyřicet minut, dokud brambory nezměknou a sýry se úplně nerozpustí: tepelná úprava je u zrajících sýrů podmínka.',
+      'Brambory vrstvi do zapékací misky a každou vrstvu přelij směsí. Navrch rozlož oba sýry, ale jeden roh misky nech bez sýra: niva i zrající kozí sýr jsou slané a z tohohle rohu se bere dětská porce.',
+      'Peč čtyřicet minut, dokud brambory nezměknou a sýry se úplně nerozpustí: tepelná úprava je u zrajících sýrů podmínka i pro dospělou část.',
     ],
     babySplitPoint:
-      'Po kroku 4 naber dvě lžíce ze středu gratinu do misky, dřív než se zbytek dochucuje pro dospělé.',
+      'Po kroku 4 naber dvě lžíce z rohu bez sýra do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou, ať v ní nezůstane celé kolečko brambory.',
-      'Zkontroluj, že je sýr v porci opravdu rozpuštěný, ne jen změklý.',
+      'Zkontroluj, že do porce nesklouzl sýr ze sousední části; brambory s crème fraîche jsou jemné i bez něj.',
       'Nech vychladnout na teplotu ruky a odstraň snítky tymiánu.',
     ],
     babyServing: {

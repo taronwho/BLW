@@ -1137,8 +1137,10 @@ export const dairyEggs: Ingredient[] = [
     allergens: ['mleko'],
     isKeyAllergen: true,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['sul'],
+    hazardNotes: {
+      sul: 'Hermelín patří mezi zrající sýry a sůl je součástí jeho výroby, takže je slanější než tvaroh nebo ricotta. Pro dítě do prvního roku platí malá porce propečeného sýra a v ten den žádné další slané potraviny.',
+    },
     minAgeMonths: 6,
     prep: {
       '6m': {
@@ -1180,8 +1182,10 @@ export const dairyEggs: Ingredient[] = [
     allergens: ['mleko'],
     isKeyAllergen: true,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['sul'],
+    hazardNotes: {
+      sul: 'Niva patří k nejslanějším sýrům, sůl je součástí zrání modrých sýrů. NHS slané potraviny miminku nedoporučuje kvůli ledvinám, proto se do prvního roku používá nanejvýš jako malá chuť v horkém jídle, ne jako složka porce, a v ten den už nic dalšího slaného.',
+    },
     minAgeMonths: 6,
     prep: {
       '6m': {
@@ -1192,7 +1196,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'V devíti měsících rozpusť špetku nivy v horké omáčce na zelenině. Jedna špetka nahradí solení a dítě dostane chuť, kterou jinak nezná.',
+          'V devíti měsících stačí špetka nivy rozpuštěná v horké omáčce na zelenině. Víc ne, niva je slaná a do dětské porce patří jen jako chuť.',
         caution: 'Studený drobený sýr na salát nepatří do porce pro dítě ani po prvním roce.',
       },
       '12m': {
@@ -1223,8 +1227,10 @@ export const dairyEggs: Ingredient[] = [
     allergens: ['mleko'],
     isKeyAllergen: true,
     chokingRisk: 'low',
-    hazards: [],
-    hazardNotes: {},
+    hazards: ['sul'],
+    hazardNotes: {
+      sul: 'Zrající kozí sýr se solí při výrobě podobně jako ostatní zrající sýry, takže je slanější než čerstvý tvaroh nebo ricotta. Pro dítě do prvního roku platí malá porce v tepelně upraveném jídle a v ten den žádné další slané potraviny.',
+    },
     minAgeMonths: 6,
     prep: {
       '6m': {

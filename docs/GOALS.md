@@ -66,8 +66,8 @@ udělat nejde, aniž by se vymýšlela vata. Kolik jich je, měří
 `jeJednoduchaUprava` v `src/data/jednoduche.ts`.
 
 Pravdivě k tomu patří i druhá půlka (audit 17. 9. 2026, nález 2.3): ke
-21. 9. 2026 je v kuchařce **202 jednoduchých úprav a 292 plnohodnotných
-receptů** a **90 z těch plnohodnotných má tři kroky, ne čtyři**. Nejde
+24. 9. 2026 je v kuchařce **202 jednoduchých úprav a 292 plnohodnotných
+receptů** a **89 z těch plnohodnotných má tři kroky, ne čtyři**. Nejde
 tedy jen o úpravy o jedné složce — je to otevřený úkol na doplnění kroků
 tam, kde recept skutečně víc kroků má. Čísla vypisuje `npm run
 validate:data` v bloku `SLOŽITOST RECEPTŮ`, takže se nedají přehlédnout.
