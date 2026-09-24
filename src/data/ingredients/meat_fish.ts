@@ -16,6 +16,7 @@ import {
   EFSA_MERCURY,
   EFSA_FISH_WILD_FARMED,
   BP_RTUT_SZU,
+  usdaFdc,
 } from './_sources';
 
 /**
@@ -2003,27 +2004,28 @@ export const meatFish: Ingredient[] = [
     allergens: ['ryby'],
     isKeyAllergen: true,
     chokingRisk: 'low',
-    hazards: ['rtut'],
+    hazards: ['rtut', 'sul'],
     hazardNotes: {
+      sul: 'Tuňák v konzervě se běžně solí, a to i ten ve vlastní šťávě: databáze USDA uvádí u scezeného tuňáka konzervovaného ve vodě 247 mg sodíku na 100 g, tedy asi 0,6 g soli. NHS slané potraviny miminku nedoporučuje, protože nejsou dobré pro jeho ledviny, a proto se tuňák z konzervy zavádí až po prvních narozeninách.',
       rtut:
         'Tuňák patří mezi ryby s vyšším obsahem rtuti. Konzervovaný má podle EFSA zřejmě méně rtuti než čerstvý, protože se vyrábí z jiných nebo menších ryb, a SZÚ hodnotí rtuť v rybích konzervách z českého trhu i pro děti jako velmi nízké riziko. Přesto ho střídej s jinými rybami. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby. Konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
     },
-    minAgeMonths: 6,
+    minAgeMonths: 12,
     prep: {
       '6m': {
         serving:
-          'Vyber tuňáka ve vlastní šťávě, ne v nálevu se solí, a propláchni ho. Rozeber ho vidličkou na vlákna a vmíchej do bramborové kaše nebo do avokádové pomazánky.',
+          'Do prvních narozenin se nepodává, tuňák z konzervy bývá solený i ve vlastní šťávě. Když chceš rybu, uvař doma čerstvou bílou rybu nebo lososa bez soli.',
         caution:
-          'Střídej ho s jinými rybami a počítej s tím, že tučnou rybu nenahrazuje.',
+          'Rybí pomazánky z konzervy jsou stejně slané jako tuňák samotný.',
       },
       '9m': {
         serving:
-          'V devíti měsících se hodí do pomazánky na proužek pečiva nebo do těstovinového salátu. Konzerva je praktická, ale čerstvá bílá ryba je pro běžný jídelníček lepší základ.',
-        caution: 'Otevřenou konzervu přendej do skla a spotřebuj do druhého dne.',
+          'Ani v devíti měsících tuňák z konzervy nepatří na talíř. Čerstvá ryba připravená doma dodá stejné živiny úplně bez soli.',
+        caution: 'Kontroluj složení hotových rybích salátů, bývají slané.',
       },
       '12m': {
         serving:
-          'Batole jí tuňáka v pomazánce i v těstovinách. Pořád platí, že do dvou doporučených porcí ryb týdně se počítá spíš čerstvá ryba.',
+          'Batole jí tuňáka v pomazánce i v těstovinách; před použitím ho sceď a propláchni. Pořád platí, že do dvou doporučených porcí ryb týdně se počítá spíš čerstvá ryba.',
         caution: 'Tuňáka v oleji sceď; olej z konzervy bývá slaný.',
       },
     },
@@ -2036,8 +2038,8 @@ export const meatFish: Ingredient[] = [
     seasonCz: [],
     vegetarian: false,
     frequencyLimit:
-      'Střídej ho s jinými rybami, ať nepřevažuje; tučnou rybu nenahrazuje.',
-    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU],
+      'Do 12 měsíců ne kvůli soli; potom ho střídej s jinými rybami, ať nepřevažuje. Tučnou rybu nenahrazuje.',
+    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU, usdaFdc('Fish, tuna, light, canned in water, drained solids', 173709)],
     reviewStatus: 'verified',
   },
   {

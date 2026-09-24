@@ -2328,7 +2328,7 @@ export const lunchesDinners2: Recipe[] = [
     servings: '2 dospělí + 1 miminko',
     ingredients: [
       { ingredientId: 'krabi-maso-bile', amount: '150 g', track: 'meat' },
-      { ingredientId: 'tunak-v-konzerve', amount: '1 konzerva', track: 'meat' },
+      { ingredientId: 'tunak-v-konzerve', amount: '1 konzerva', track: 'meat', adultOnly: true },
       { ingredientId: 'avokado', amount: '1 zralé', track: 'all' },
       { ingredientId: 'limetka', amount: 'půlka', track: 'all' },
       { ingredientId: 'chleb-kvaskovy', amount: '4 krajíce', track: 'all' },
@@ -2336,21 +2336,21 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cizrna', amount: '200 g vařené', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Tuňáka ve vlastní šťávě sceď a propláchni, ať z něj odejde co nejvíc nálevu.',
+      'Tuňáka ve vlastní šťávě sceď a propláchni. Do dětské porce nepatří, tuňák z konzervy bývá solený.',
       'Avokádo rozmačkej vidličkou s limetkovou šťávou a nasekanou pažitkou.',
       'Používej jedině bílé krabí maso z klepet a nožiček; hnědé maso z krunýře do dětské porce nepatří.',
     ],
     babySplitPoint:
       'Po kroku 2 odeber dvě lžíce avokádového základu, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
-      'Do odebraného základu vmíchej lžičku bílého krabího masa a lžičku rozebraného tuňáka.',
+      'Do odebraného základu vmíchej dvě lžičky bílého krabího masa.',
       'Krabí maso prohmatej prsty, mezi vlákny zůstávají úlomky krunýře.',
       'Krajíc chleba nakrájej na proužky široké jako dospělý prst a hustou vrstvu pomazánky na ně nanes.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek chleba dlouhý jako dospělý prst potřený pomazánkou s krabím masem a tuňákem, aby konec čouhal z pěsti.',
-      '9m': 'Proužky nakrájej kratší, na dva prsty, a pomazánku s rybou nech hustší.',
-      '12m': 'Batole si pomazánku s krabím masem a tuňákem maže samo lžící; chleba nakrájej na sousta.',
+      '6m': 'Podávej proužek chleba dlouhý jako dospělý prst potřený pomazánkou s krabím masem, aby konec čouhal z pěsti.',
+      '9m': 'Proužky nakrájej kratší, na dva prsty, a pomazánku s krabím masem nech hustší.',
+      '12m': 'Batole si pomazánku s krabím masem maže samo lžící; chleba nakrájej na sousta.',
     },
     adultSteps: [
       'Do zbytku základu vmíchej zbylé krabí maso a tuňáka, osol a opepři.',

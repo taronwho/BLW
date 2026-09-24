@@ -304,7 +304,7 @@ export const prvniUpravyRyby: Recipe[] = [
     id: 'tunak-v-konzerve-pomazanka',
     titleCz: 'Pomazánka z tuňáka v konzervě',
     category: 'obed-vecere',
-    minAgeMonths: 6,
+    minAgeMonths: 12,
     timeMinutes: 8,
     servings: '2 dospělí + 1 miminko',
     ingredients: [
@@ -325,8 +325,8 @@ export const prvniUpravyRyby: Recipe[] = [
       'Namaž pomazánku v silné vrstvě na proužek chleba, ze kterého se stane sousto do ruky.',
     ],
     babyServing: {
-      '6m': 'Hladká tuňáková pomazánka na předložené lžíci nebo v tenké vrstvě na proužku opečeného chleba, který dítě drží v pěsti.',
-      '9m': 'Silná vrstva tuňákové pomazánky na proužku chleba nebo lžíce pomazánky vmíchaná do bramborové kaše.',
+      '6m': 'Nepodává se, tuňák z konzervy bývá solený a do prvních narozenin nepatří.',
+      '9m': 'Nepodává se, tuňák z konzervy bývá solený a do prvních narozenin nepatří.',
       '12m': 'Silná vrstva rybí pomazánky na proužku chleba; v týdnu ho střídej s jinými rybami.',
     },
     adultSteps: [
