@@ -1471,7 +1471,7 @@ export const fruits: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_AVOID_WEANING],
+    sources: [NHS_AVOID, NHS_AVOID_WEANING, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {

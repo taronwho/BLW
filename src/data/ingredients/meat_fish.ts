@@ -1899,7 +1899,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_FISH, NHS_ALLERGY],
+    sources: [NHS_FISH, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {

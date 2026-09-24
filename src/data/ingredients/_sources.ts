@@ -77,19 +77,31 @@ function nhs(
  * - `arsen`: rýže přijímá víc arsenu než jiné obiloviny, rýžový nápoj proto
  *   nenahrazuje mléko dětem do 5 let; pro rýži platí limity arsenu, pro
  *   výrobky pro malé děti přísnější, a rýži samotnou to nevylučuje.
+ * - `duseni`: celé ořechy a arašídy se dětem do 5 let nedávají, protože se
+ *   jimi mohou zadusit; od začátku příkrmu jen drcené nebo mleté v jídle
+ *   a ořechové máslo jen natřené, ne samotné.
  */
 export const NHS_AVOID = nhs(
   'Foods to avoid giving babies and young children',
   '/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/',
   FETCHED_24,
-  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove', 'rtut', 'arsen'],
+  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove', 'rtut', 'arsen', 'duseni'],
 );
 
-/** První příkrmy, měkké vařené hranolky, velikost soust do ruky. */
+/**
+ * První příkrmy, měkké vařené hranolky, velikost soust do ruky.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `duseni`: kvůli riziku dušení se nedávají tvrdé potraviny jako celé
+ *   ořechy, syrová mrkev nebo jablko; z ovoce se vyndávají tvrdá jádra
+ *   a pecky, z masa a ryb kosti, a malé kulaté kousky jako hrozny a cherry
+ *   rajčata se krájí na čtvrtky. U jídla má být dospělý vždy u dítěte.
+ */
 export const NHS_FIRST_FOODS = nhs(
   "Your baby's first solid foods",
   '/baby/weaning-and-feeding/babys-first-solid-foods/',
-  FETCHED,
+  FETCHED_24,
+  ['duseni'],
 );
 
 /** Co nabízet kolem 6 měsíců. */
@@ -120,12 +132,20 @@ export const NHS_10_12M = nhs(
  * - `kosti`: kosti patří spolu s tvrdými a malými kulatými kousky k tomu,
  *   čím se dítě nejsnáz zadusí, a z masa i ryb se proto před podáním
  *   odstraňují všechny.
+ * - `duseni`: při přípravě se má myslet na velikost, tvar a texturu sousta
+ *   a vyhýbat se kulatým tvarům a tvrdým kouskům. Malé kulaté plody (hrozny,
+ *   třešně, bobule, cherry rajčata) se čtvrtí, pecky a tvrdá jádra se
+ *   odstraňují, tvrdé ovoce a zelenina (jablko, mrkev, celer) se krájí na
+ *   tenké hranolky nebo u nejmenších dětí strouhá či vaří. Sýr se strouhá
+ *   nebo krájí na proužky, ořechy a semínka se drtí, celé ořechy ani popcorn
+ *   se do 5 let nedávají. Rozinky a jiné sušené ovoce se do roka krájí na
+ *   malé kousky.
  */
 export const NHS_PREP_SAFELY = nhs(
   'Preparing food safely for babies',
   '/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/',
   FETCHED_24,
-  ['kosti'],
+  ['kosti', 'duseni'],
 );
 
 /**

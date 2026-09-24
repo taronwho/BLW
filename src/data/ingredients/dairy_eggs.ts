@@ -10,6 +10,7 @@ import {
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
   BP_KOJENCI,
+  NHS_PREP_SAFELY,
 } from './_sources';
 
 /**
@@ -403,7 +404,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY],
+    sources: [NHS_AVOID, NHS_YOUNG_CHILDREN, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
@@ -1379,7 +1380,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_AVOID, NHS_ALLERGY],
+    sources: [NHS_AVOID, NHS_ALLERGY, NHS_PREP_SAFELY],
     reviewStatus: 'verified',
   },
   {
