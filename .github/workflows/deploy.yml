@@ -62,7 +62,7 @@ jobs:
           else
             echo "App Check: klíč je v buildu."
           fi
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
