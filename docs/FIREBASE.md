@@ -238,7 +238,7 @@ Pro lokální vývoj slouží `.env.local` podle vzoru v `.env.local.example`.
 
 ## Přehled o používání aplikace
 
-V aplikaci je obrazovka s počty: kolik je domácností, zařízení, dětí
+V aplikaci je obrazovka s anonymními počty: kolik je domácností, zařízení, dětí
 a ochutnávek, jak jsou staré děti, jaká zařízení se připojila a které
 suroviny se v denících objevují nejčastěji. Nikde na ni nevede odkaz
 a v navigaci není.
@@ -282,10 +282,17 @@ a dál neprojde.
 
 Co je dobré vědět:
 
-- **Heslo je to jediné, co ten výpis chrání.** Kdo ho zná, přečte si
-  všechny dokumenty domácností, ne jen počty. Obrazovka sama ukazuje pouze
-  souhrny a nic osobního nezobrazuje, ale technicky má přihlášený účet plné
-  právo číst. Zacházej s heslem podle toho a nepoužívej ho nikde jinde.
+- **Přehled čte jen anonymní počty** (od 24. 9. 2026). Každý sdílený
+  telefon si nejvýš jednou za hodinu spočítá souhrn své domácnosti
+  (`src/admin/prehled.ts`, `souhrnDomacnosti`) a zapíše ho do kolekce
+  `statistiky` pod otiskem SHA-256 párovacího kódu. Souhrn nese jen čísla:
+  žádná jména, data narození, poznámky, uid ani kód. Správcovský účet smí
+  číst jen tuhle kolekci; výpis `households` pravidla nedovolí nikomu.
+  Domácnost se v přehledu objeví, až se její telefon s novou verzí připojí.
+- **Heslo pořád chrání ten výpis**, i když v něm už nic osobního není.
+  Zacházej s ním podle toho a nepoužívej ho nikde jinde.
+- Jako vlastník projektu vidíš v konzoli Firebase všechno bez ohledu na
+  pravidla. Aplikace to rodičům v Nastavení → Soukromí říká.
 - Přihlášení běží ve vlastní instanci Firebase, oddělené od té, kterou má
   aplikace pro rodiče. Anonymní účet zařízení se tím nepřepíše.
 - Rodičovská část aplikace pravidlo nepotřebuje a nic se jí nemění.

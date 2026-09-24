@@ -5,7 +5,62 @@ rules_version = '2';
 // zná, do domácnosti patří; kdo ho nezná, dokument nenajde, protože výpis
 // kolekce je zakázaný a kód má 10 znaků Crockford Base32.
 service cloud.firestore {
+  // Správce přehledu o používání.
+  //
+  // Nestačí být přihlášený: musí jít o účet s tímhle e-mailem, přihlášený
+  // heslem. Anonymní účet, kterým jezdí aplikace pro rodiče, sem nedosáhne,
+  // protože e-mail vůbec nemá. Účet se zakládá ručně ve Firebase konzoli
+  // (Authentication, poskytovatel Email/Password) a heslo k němu je jediné,
+  // co výpis chrání. Postup je v docs/FIREBASE.md.
+  //
+  // Ověřenou adresu pravidlo nevyžaduje. Účet založený v konzoli je
+  // neověřený a konzole ověřovací e-mail poslat neumí, takže by ta
+  // podmínka jen znemožnila přihlášení. Adresu si stejně vybírá správce
+  // projektu, ne přihlašující se člověk, takže se tím nic neotevírá.
+  //
+  // Od 24. 9. 2026 správce **nečte dokumenty domácností vůbec**, jen
+  // kolekci `statistiky` s anonymními počty.
+  function jsemSpravce() {
+    return request.auth != null
+      && request.auth.token.email == 'taronwho@gmail.com'
+      && request.auth.token.firebase.sign_in_provider == 'password';
+  }
+
   match /databases/{db}/documents {
+    // Anonymní souhrny domácností pro přehled o používání.
+    //
+    // Každý telefon si ze své domácnosti spočítá jen čísla
+    // (src/admin/prehled.ts) a zapíše je pod otiskem SHA-256 párovacího
+    // kódu — ze statistik se tak kód ani domácnost dohledat nedají.
+    // Pravidlo hlídá tvar: jen povolené klíče, čísla a mapy počtů
+    // s omezenou velikostí, aby se sem nedal uložit volný text.
+    match /statistiky/{otisk} {
+      function jePocet(hodnota) {
+        return hodnota is int && hodnota >= 0;
+      }
+      function maTvarSouhrnu() {
+        let d = request.resource.data;
+        return d.keys().hasOnly(['verze', 'schema', 'zarizeni', 'zarizeniPodleTypu', 'deti',
+            'detiPodleFaze', 'ochutnavky', 'smazaneOchutnavky', 'oblibene',
+            'poznamkyURecepu', 'suroviny', 'naposledy'])
+          && d.keys().hasAll(['verze', 'schema', 'zarizeni', 'zarizeniPodleTypu', 'deti',
+            'detiPodleFaze', 'ochutnavky', 'smazaneOchutnavky', 'oblibene',
+            'poznamkyURecepu', 'suroviny', 'naposledy'])
+          && jePocet(d.verze) && jePocet(d.schema) && jePocet(d.zarizeni)
+          && jePocet(d.deti) && jePocet(d.ochutnavky) && jePocet(d.smazaneOchutnavky)
+          && jePocet(d.oblibene) && jePocet(d.poznamkyURecepu) && jePocet(d.naposledy)
+          && d.zarizeniPodleTypu is map && d.zarizeniPodleTypu.size() <= 20
+          && d.detiPodleFaze is map && d.detiPodleFaze.size() <= 10
+          && d.suroviny is map && d.suroviny.size() <= 50;
+      }
+
+      allow get, list: if jsemSpravce();
+      allow create, update: if request.auth != null
+        && otisk.matches('^[0-9a-f]{64}$')
+        && maTvarSouhrnu();
+      allow delete: if false;
+    }
+
     match /households/{householdId} {
       function prihlaseny() {
         return request.auth != null;
@@ -67,28 +122,10 @@ service cloud.firestore {
           && nemazeDenik();
       }
 
-      // Přehled o používání aplikace.
-      //
-      // Jediná výjimka ze zákazu výpisu. Nestačí být přihlášený: musí jít
-      // o účet s tímhle e-mailem, přihlášený heslem. Anonymní účet, kterým
-      // jezdí aplikace pro rodiče, sem nedosáhne, protože e-mail vůbec
-      // nemá. Účet se zakládá ručně ve Firebase konzoli (Authentication,
-      // poskytovatel Email/Password) a heslo k němu je jediné, co ten výpis
-      // chrání. Postup je v docs/FIREBASE.md.
-      //
-      // Ověřenou adresu pravidlo nevyžaduje. Účet založený v konzoli je
-      // neověřený a konzole ověřovací e-mail poslat neumí, takže by ta
-      // podmínka jen znemožnila přihlášení. Adresu si stejně vybírá
-      // správce projektu, ne přihlašující se člověk, takže se tím nic
-      // neotevírá: kdokoli jiný má e-mail jiný a dál neprojde.
-      function jsemSpravce() {
-        return request.auth != null
-          && request.auth.token.email == 'taronwho@gmail.com'
-          && request.auth.token.firebase.sign_in_provider == 'password';
-      }
-
       allow get: if prihlaseny();
-      allow list: if jsemSpravce(); // jinak zákaz enumerace domácností
+      // Výpis domácností nesmí nikdo, ani správce (kontrola 24. 9. 2026).
+      // Přehled o používání čte jen anonymní souhrny z `statistiky` níž.
+      allow list: if false;
       allow create: if prihlaseny() && maTvar() && noviClenove() == [request.auth.uid];
       allow update: if maTvar()
         && noviClenove().size() <= 5

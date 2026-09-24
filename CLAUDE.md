@@ -42,6 +42,7 @@ statická PWA.
 - Když si nejsi jistý zdravotní informací, **raději ji neuveď** a označ položku k revizi.
 - Ke každé fázi z `docs/GOALS.md` na konci **vypiš plný výstup `npm run validate` do konverzace.** Evaluátor `/goal` nespouští příkazy — vidí jen to, co napíšeš. Bez vypsaného výstupu nemůže fázi uzavřít.
 - Nepiš do konverzace shrnutí typu „vše hotovo a funguje" bez doloženého výstupu příkazu. To je nejhorší selhání v tomhle projektu.
+- **Hotové změny vždy rovnou nasaď** (rozhodnutí vlastníka 24. 9. 2026): po zelené validaci je sluč do `main` a pushni — push do `main` spustí deploy. Neptej se předem. Když se mění `firestore.rules`, řekni to výslovně: pravidla se z repozitáře nenasazují, vlastník je musí publikovat v konzoli Firebase.
 
 ## Příkazy
 

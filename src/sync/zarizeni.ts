@@ -73,3 +73,17 @@ export function popisZarizeni(): string {
   }
   return 'Prohlížeč';
 }
+
+/**
+ * Všechny popisy, které `popisZarizeni` umí vrátit.
+ *
+ * Přehled o používání bere jen tyhle. Popis v dokumentu domácnosti smí
+ * zapsat kterýkoli člen, takže by v něm teoreticky mohlo být cokoli —
+ * a do anonymních počtů nesmí proniknout nic, co by napsal člověk.
+ */
+export const ZNAME_POPISY_ZARIZENI: ReadonlySet<string> = new Set([
+  ...VESTAVENE.map(([, nazev]) => `Prohlížeč v ${nazev}`),
+  'Nainstalovaná aplikace',
+  ...PROHLIZECE.map(([, nazev]) => nazev),
+  'Prohlížeč',
+]);

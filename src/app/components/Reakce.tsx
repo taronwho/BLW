@@ -50,11 +50,11 @@ export function ReakceSuroviny({ ingredientId }: { ingredientId: string }): Reac
               <p>Poznámka: {reakce.note}</p>
             )}
             <p>
-              Reakci proberte s pediatrem. Plán tuhle surovinu
+              Reakci prober s pediatrem. Plán tuhle surovinu
               {surovina !== undefined && surovina.allergens.length > 0
                 ? ` ani alergen ${surovina.allergens.map((a) => ALLERGEN_LABELS[a]).join(', ')}`
                 : ''}{' '}
-              zatím sám nenabízí. Až ji znovu podáte a zapíšete bez reakce, vrátí se.
+              zatím sám nenabízí. Až ji znovu podáš a zapíšeš bez reakce, vrátí se.
             </p>
           </div>
         </div>
@@ -65,7 +65,7 @@ export function ReakceSuroviny({ ingredientId }: { ingredientId: string }): Reac
           <p className="text-sm leading-relaxed text-muted">
             {vyrazena
               ? `Vyřazeno z plánu pro ${kdo}. Plán tuhle surovinu nenabídne jako novinku ani v receptu.`
-              : `Nechcete, aby plán tuhle surovinu nabízel (${kdo})? Třeba kvůli nesnášenlivosti nebo radě pediatra.`}
+              : `Nechceš, aby plán tuhle surovinu nabízel (${kdo})? Třeba kvůli nesnášenlivosti nebo radě pediatra.`}
           </p>
           <button
             type="button"
@@ -111,7 +111,7 @@ export function ReakceVReceptu({ ingredientIds }: { ingredientIds: readonly stri
         {sReakci.length > 0 && (
           <p>
             <strong className="font-semibold text-risk">V deníku je reakce na: </strong>
-            <SeznamSurovin ids={sReakci} />. Reakci proberte s pediatrem.
+            <SeznamSurovin ids={sReakci} />. Reakci prober s pediatrem.
           </p>
         )}
         {vyrazene.length > 0 && (

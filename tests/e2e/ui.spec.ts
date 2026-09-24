@@ -1799,3 +1799,42 @@ test('otevření surovin nestahuje kuchařku', async ({ page }) => {
   // S kuchařkou to bylo přes 400 kB komprimovaně.
   expect(kb).toBeLessThan(320);
 });
+
+test('reakce v deníku se ukáže u suroviny i receptu a surovina jde vyřadit z plánu', async ({
+  page,
+}) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-01-10');
+
+  await page.goto('./#/suroviny/kiwi');
+  await expect(page.getByTestId('upozorneni-reakce')).toHaveCount(0);
+  await page.getByTestId('ochutnano-kiwi').click();
+  await page.getByTestId('volba-reakce-kozni').click();
+  await page.getByTestId('ochutnavka-ulozit').click();
+
+  // Upozornění připomene zapsanou reakci a odkáže na pediatra.
+  const upozorneni = page.getByTestId('upozorneni-reakce');
+  await expect(upozorneni).toContainText('kožní reakce');
+  await expect(upozorneni).toContainText('pediatrem');
+
+  // Ruční vyřazení z plánu se ukáže i v Domácnosti a jde vrátit.
+  const prepinac = page.getByTestId('prepni-vyrazeni');
+  await expect(prepinac).toHaveAttribute('aria-pressed', 'false');
+  await prepinac.click();
+  await expect(prepinac).toHaveAttribute('aria-pressed', 'true');
+
+  await page.goto('./#/recepty/bezlepkova-ovesna-kase-na-vode-s-kiwi');
+  await expect(page.getByTestId('recept-reakce')).toContainText(/kiwi/i);
+
+  await otevriDomacnost(page, 'deti');
+  const vyrazene = page.getByTestId('vyrazene-suroviny');
+  await expect(vyrazene).toContainText(/kiwi/i);
+  await vyrazene.getByRole('button', { name: 'Vrátit do plánu' }).click();
+  await expect(vyrazene).toHaveCount(0);
+});
+
+test('nastavení říká, co se s daty děje', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await otevriDomacnost(page, 'aplikace');
+  await expect(page.getByTestId('soukromi')).toContainText('anonymní počty');
+});

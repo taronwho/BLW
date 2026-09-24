@@ -31,6 +31,8 @@ vi.mock('../../src/storage/firebaseConfig', () => ({
 
 vi.mock('../../src/storage/firebase', () => ({
   connectFirebase: (...args: unknown[]) => connectFirebase(...args),
+  // Anonymní souhrn pro přehled o používání test nezajímá.
+  zapisSouhrn: async (): Promise<void> => undefined,
   FirestoreAdapter: class {
     async load(): Promise<StoredHousehold | null> {
       return null;

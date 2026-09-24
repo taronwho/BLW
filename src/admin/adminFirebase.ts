@@ -1,9 +1,8 @@
 import { deleteApp, initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
-import { migrateHouseholdState } from '@/sync/merge';
 import { loadFirebaseConfig } from '@/storage/firebaseConfig';
-import type { HouseholdState } from '@/types';
+import { platnySouhrn, type SouhrnDomacnosti } from './prehled';
 
 /**
  * Přihlášení do přehledu o používání aplikace.
@@ -15,11 +14,15 @@ import type { HouseholdState } from '@/types';
  * Kdo se sem dostane, rozhodují pravidla Firestore, ne tahle obrazovka.
  * Formulář se dá otevřít komukoli, ale bez hesla k jedinému povolenému účtu
  * nevrátí server žádná data.
+ *
+ * Čte se jen kolekce `statistiky` s anonymními počty, kterou si plní
+ * telefony rodičů samy. Dokumenty domácností (jména, deníky, poznámky)
+ * správci pravidla nevydají a tenhle kód o ně ani nežádá.
  */
 const APP_NAME = 'drobek-prehled';
 
 export interface PrehledData {
-  stavy: HouseholdState[];
+  souhrny: SouhrnDomacnosti[];
   /** Dokumenty, které se nepodařilo převést na dnešní tvar. */
   nepovedene: number;
 }
@@ -35,21 +38,18 @@ export async function nactiPrehled(email: string, heslo: string): Promise<Prehle
     const auth = getAuth(app);
     await signInWithEmailAndPassword(auth, email.trim(), heslo);
     const db = getFirestore(app);
-    const snapshot = await getDocs(collection(db, 'households'));
+    const snapshot = await getDocs(collection(db, 'statistiky'));
 
-    const stavy: HouseholdState[] = [];
+    const souhrny: SouhrnDomacnosti[] = [];
     let nepovedene = 0;
     snapshot.forEach((dokument) => {
-      const data = dokument.data() as { state?: unknown };
-      try {
-        stavy.push(migrateHouseholdState(data.state));
-      } catch {
-        nepovedene += 1;
-      }
+      const souhrn = platnySouhrn(dokument.data());
+      if (souhrn === null) nepovedene += 1;
+      else souhrny.push(souhrn);
     });
 
     await signOut(auth);
-    return { stavy, nepovedene };
+    return { souhrny, nepovedene };
   } finally {
     // Instance se vždycky uklidí, ať přihlášení projde, nebo ne. Jinak by
     // po nezdaru zůstala viset a druhý pokus by spadl na tom, že aplikace

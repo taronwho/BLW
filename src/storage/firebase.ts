@@ -12,6 +12,7 @@ import {
   type Firestore,
 } from 'firebase/firestore';
 import type { HouseholdState } from '@/types';
+import type { SouhrnDomacnosti } from '@/admin/prehled';
 import { MAX_MEMBERS } from '@/sync/merge';
 import type { FirebaseConfig, StorageAdapter, StoredHousehold } from './types';
 
@@ -117,6 +118,20 @@ interface HouseholdDocument {
 
 function toStored(data: HouseholdDocument): StoredHousehold {
   return { state: data.state, updatedAt: data.updatedAt };
+}
+
+/**
+ * Zapíše anonymní souhrn domácnosti do kolekce `statistiky`.
+ *
+ * Jen čísla (src/admin/prehled.ts). Správce čte tuhle kolekci místo
+ * dokumentů domácností, které mu pravidla nevydají.
+ */
+export async function zapisSouhrn(
+  session: FirebaseSession,
+  klic: string,
+  souhrn: SouhrnDomacnosti,
+): Promise<void> {
+  await setDoc(doc(session.db, 'statistiky', klic), souhrn);
 }
 
 export class FirestoreAdapter implements StorageAdapter {

@@ -50,7 +50,7 @@ function Prehledovka(): ReactNode {
     setChyba(null);
     try {
       const data = await nactiPrehled(email, heslo);
-      setPrehled(spocitejPrehled(data.stavy));
+      setPrehled(spocitejPrehled(data.souhrny));
       setNepovedene(data.nepovedene);
     } catch (error) {
       setChyba(popisChyby(error));
@@ -173,13 +173,15 @@ function Prehledovka(): ReactNode {
               .map(([verze, pocet]) => (
                 <Radka key={verze} popisek={`schéma v${verze}`} hodnota={pocet} />
               ))}
-            {nepovedene > 0 && <Radka popisek="Nečitelných dokumentů" hodnota={nepovedene} />}
+            {nepovedene > 0 && <Radka popisek="Nečitelných souhrnů" hodnota={nepovedene} />}
           </Skupina>
 
           <p className="rounded-xl bg-surface p-3 text-xs leading-relaxed text-muted">
-            Přehled ukazuje jen počty. Jména dětí, párovací kódy, poznámky ani jednotlivé
-            ochutnávky se sem nedostanou. Ke čtení je potřeba heslo k jedinému účtu, který
-            pravidla Firestore jmenují.
+            Přehled ukazuje jen počty, které si každý telefon spočítá sám ze své domácnosti.
+            Jména dětí, data narození, párovací kódy, poznámky ani jednotlivé ochutnávky na
+            server do statistik vůbec nejdou a dokumenty domácností tenhle účet číst nesmí.
+            Domácnosti se sem dostanou až poté, co se jejich telefon s novou verzí aplikace
+            připojí.
           </p>
         </div>
       )}

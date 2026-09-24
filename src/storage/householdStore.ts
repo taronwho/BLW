@@ -28,6 +28,8 @@ import {
 } from '@/sync/merge';
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
 import { popisZarizeni } from '@/sync/zarizeni';
+import { INTERVAL_SOUHRNU_MS, klicStatistiky } from '@/sync/statistiky';
+import type { SouhrnDomacnosti } from '@/admin/prehled';
 import type { Zahozeno } from '@/sync/validace';
 import { IndexedDbAdapter } from './indexedDb';
 import { loadFirebaseConfig } from './firebaseConfig';
@@ -86,6 +88,8 @@ interface HouseholdStore {
 let localAdapter: StorageAdapter | null = null;
 let remoteAdapter: StorageAdapter | null = null;
 let remoteUnsubscribe: (() => void) | null = null;
+/** Zápis anonymního souhrnu pro přehled o používání; `null` bez sdílení. */
+let zapisStatistik: ((stav: HouseholdState) => void) | null = null;
 
 /**
  * O start i o připojení žádá nezávisle několik obrazovek naráz (hlavička,
@@ -96,6 +100,36 @@ let remoteUnsubscribe: (() => void) | null = null;
  */
 let rozjednanyStart: Promise<void> | null = null;
 let rozjednanePripojeni: { id: string; hotovo: Promise<void> } | null = null;
+
+/**
+ * Zapisovač anonymního souhrnu pro přehled o používání.
+ *
+ * Nejvýš jednou za hodinu, protože přehled potřebuje orientační čísla, ne
+ * živý stav. Chyba se jen zaloguje: statistika nesmí rodiči nikdy ukázat
+ * chybovou hlášku ani zdržet zápis deníku. Souhrn i jeho výpočet se
+ * stahují až tady, spolu s Firebase.
+ */
+function pripravZapisStatistik(
+  kod: string,
+  zapis: (klic: string, souhrn: SouhrnDomacnosti) => Promise<void>,
+): (stav: HouseholdState) => void {
+  let naposledy = 0;
+  return (stav) => {
+    const ted = Date.now();
+    if (ted - naposledy < INTERVAL_SOUHRNU_MS) return;
+    naposledy = ted;
+    void (async () => {
+      try {
+        const klic = await klicStatistiky(kod);
+        if (klic === null) return;
+        const { souhrnDomacnosti } = await import('@/admin/prehled');
+        await zapis(klic, souhrnDomacnosti(stav, ted));
+      } catch (chyba) {
+        console.warn('Statistika se nezapsala:', chyba);
+      }
+    })();
+  };
+}
 
 function local(): StorageAdapter {
   localAdapter ??= new IndexedDbAdapter();
@@ -145,6 +179,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
     set({ state: next, updatedAt: stored.updatedAt });
     await local().save(stored);
     if (remoteAdapter === null) return;
+    zapisStatistik?.(next);
     try {
       await remoteAdapter.save(stored);
     } catch (error) {
@@ -196,10 +231,13 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       // Firebase se stahuje až tady, ne při startu aplikace. Knihovna váží
       // víc než celý zbytek kódu a rodič, který sdílení nepoužívá, ji nikdy
       // nepotřebuje — dřív ji stahoval každý při prvním otevření.
-      const { connectFirebase, FirestoreAdapter } = await import('./firebase');
+      const { connectFirebase, FirestoreAdapter, zapisSouhrn } = await import('./firebase');
       const session = await connectFirebase(config);
       const adapter = new FirestoreAdapter(session, householdId);
       remoteAdapter = adapter;
+      zapisStatistik = pripravZapisStatistik(householdId, (klic, souhrn) =>
+        zapisSouhrn(session, klic, souhrn),
+      );
       writeStoredCode(householdId);
 
       const remote = await adapter.load();
@@ -294,6 +332,7 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
       remoteUnsubscribe = null;
       remoteAdapter?.close();
       remoteAdapter = null;
+      zapisStatistik = null;
       writeStoredCode(null);
       set({ householdCode: null, status: { kind: 'local-only' } });
     },

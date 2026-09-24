@@ -204,8 +204,8 @@ export function PlanDenScreen(): ReactNode {
         >
           <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-risk" />
           <span>
-            Tenhle den obsahuje surovinu, po které je v deníku reakce, nebo kterou jste z plánu
-            vyřadili. Jídla s ní jsou níž označená. Den se dá vyměnit, nebo se dá sestavit nový
+            Tenhle den obsahuje surovinu, po které je v deníku reakce, nebo která je vyřazená
+            z plánu. Jídla s ní jsou níž označená. Den se dá vyměnit, nebo se dá sestavit nový
             plán, který ji vynechá.
           </span>
         </p>

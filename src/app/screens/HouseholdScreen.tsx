@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Baby, Copy, Download, KeyRound, Settings2, ShieldAlert, Upload } from 'lucide-react';
+import { Baby, Copy, Download, KeyRound, Lock, Settings2, ShieldAlert, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ingredients } from '@/data/ingredients';
 import { useHouseholdStore } from '@/storage/householdStore';
@@ -19,7 +19,7 @@ import { MemberList } from '../components/MemberList';
 import { ThemePicker } from '../components/ThemePicker';
 import { SyncStatusBadge } from '../SyncStatusBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
-import { DISCLAIMER_PARAGRAPHS } from '../disclaimer';
+import { DISCLAIMER_PARAGRAPHS, SOUKROMI_PARAGRAPHS } from '../disclaimer';
 import { useUrlText } from '../lib/urlState';
 
 /**
@@ -303,6 +303,25 @@ export function HouseholdScreen(): ReactNode {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section
+        aria-labelledby="soukromi-nadpis"
+        data-testid="soukromi"
+        className="flex flex-col gap-2 rounded-xl bg-surface p-4"
+      >
+        <h2
+          id="soukromi-nadpis"
+          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted"
+        >
+          <Lock aria-hidden="true" className="h-4 w-4 shrink-0" />
+          Soukromí
+        </h2>
+        {SOUKROMI_PARAGRAPHS.map((paragraph) => (
+          <p key={paragraph.slice(0, 24)} className="text-xs leading-relaxed text-muted">
+            {paragraph}
+          </p>
+        ))}
       </section>
 
       <section aria-labelledby="zdroje-prehled" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
