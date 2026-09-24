@@ -9,6 +9,7 @@ import {
   NHS_DRINKS,
   NHS_YOUNG_CHILDREN,
   WHO_COMPLEMENTARY,
+  BP_KOJENCI,
 } from './_sources';
 
 /**
@@ -988,7 +989,7 @@ export const dairyEggs: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: true,
-    sources: [NHS_ALLERGY, NHS_AVOID],
+    sources: [NHS_ALLERGY, NHS_AVOID, BP_KOJENCI],
     reviewStatus: 'verified',
   },
   {

@@ -1,4 +1,4 @@
-import type { SourceRef } from '@/types';
+import type { SourceRef, TemaZdroje } from '@/types';
 
 /**
  * Ověřené zdroje katalogu surovin.
@@ -33,15 +33,51 @@ const FETCHED_13 = '2026-09-13';
 /** Ověřeno při přípravě seznamu na zoubkování (curl, HTTP 200). */
 const FETCHED_15 = '2026-09-15';
 
-function nhs(title: string, path: string, accessedAt = FETCHED): SourceRef {
-  return { org: 'NHS', title, url: `https://www.nhs.uk${path}`, accessedAt, tier: 1 };
+/**
+ * Nové čtení kvůli pravidlu `claim-source-topic` (docs/BEZPECNOST.md kap. 1).
+ * Každá stránka s tímto datem byla 24. 9. 2026 znovu stažena (curl, HTTP 200)
+ * a přečtena celá. Komentář nad konstantou říká u každého štítku `doklada`
+ * jednou větou vlastními slovy, co stránka k tématu říká.
+ */
+const FETCHED_24 = '2026-09-24';
+
+function nhs(
+  title: string,
+  path: string,
+  accessedAt = FETCHED,
+  doklada?: readonly TemaZdroje[],
+): SourceRef {
+  return {
+    org: 'NHS',
+    title,
+    url: `https://www.nhs.uk${path}`,
+    accessedAt,
+    tier: 1,
+    ...(doklada === undefined ? {} : { doklada }),
+  };
 }
 
-/** Zákazy pro dětskou linii: sůl, cukr, med, celé ořechy, syrové vejce, rýžové nápoje. */
+/**
+ * Zákazy pro dětskou linii: sůl, cukr, med, celé ořechy, syrové vejce, rýžové nápoje.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `botulismus`: med může obsahovat bakterie, jejichž toxiny ve střevě
+ *   miminka způsobí kojenecký botulismus, proto se nedává do jednoho roku.
+ * - `sul`: sůl škodí ledvinám miminka, nepřidává se do jídla ani do vody na
+ *   vaření, bez bujonu a s vyhýbáním se slaným potravinám (slanina, klobásy,
+ *   krekry, hotová jídla).
+ * - `cukr`: miminko cukr nepotřebuje a sladké svačiny i nápoje včetně džusu
+ *   vedou k zubnímu kazu; med je také cukr.
+ * - `nepasterizovane`: sýry z nepasterizovaného mléka a plísňové měkké sýry
+ *   nesou riziko listerií, v tepelně upraveném pokrmu je lze použít.
+ * - `syrove`: vejce bez britského razítka se vaří do pevného bílku i žloutku,
+ *   syrové a lehce tepelně upravené měkkýše miminku nedávat kvůli otravě.
+ */
 export const NHS_AVOID = nhs(
   'Foods to avoid giving babies and young children',
   '/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/',
-  FETCHED,
+  FETCHED_24,
+  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove'],
 );
 
 /** První příkrmy, měkké vařené hranolky, velikost soust do ruky. */
@@ -102,20 +138,39 @@ export const NHS_FOOD_ALLERGY = nhs('Food allergy', '/conditions/food-allergy/',
  * děti do 16 let nemají jíst žraloka, mečouna ani marlina kvůli rtuti;
  * syrové korýše a měkkýše dětem nedávat vůbec; mezi tučné ryby patří sleď,
  * sardinka, losos, pstruh a makrela, mezi bílé treska a treska aljašská.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `syrove`: mezi „shellfish“ stránka řadí krevety, slávky, hřebenatky
+ *   i kalmary; syrové nebo nedovařené mohou nést viry a bakterie, a proto se
+ *   miminkům a dětem nedávají.
  */
 export const NHS_FISH = nhs(
   'Fish and shellfish',
   '/live-well/eat-well/food-types/fish-and-shellfish-nutrition/',
+  FETCHED_24,
+  ['syrove'],
 );
 
 /** Játra a kumulace retinolu. */
 export const NHS_VITAMIN_A = nhs('Vitamin A', '/conditions/vitamins-and-minerals/vitamin-a/');
 
-/** Plnotučné mléčné výrobky, pasterizace, kravské mléko do vaření. */
+/**
+ * Plnotučné mléčné výrobky, pasterizace, kravské mléko do vaření.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `sul`: do jídla dítěte není třeba sůl přidávat, slaných potravin má být
+ *   málo a vždy se vyplatí číst etikety.
+ * - `cukr`: přidaného cukru má být co nejméně kvůli zubnímu kazu; cukr ze
+ *   sušeného ovoce škodí zubům, proto se sušené ovoce dává k jídlu, ne mezi
+ *   jídly.
+ * - `nepasterizovane`: sýry z nepasterizovaného mléka a plísňové měkké sýry
+ *   malé děti nejedí kvůli listeriím, zapečené v pokrmu jsou bezpečnější.
+ */
 export const NHS_YOUNG_CHILDREN = nhs(
   'What to feed young children',
   '/baby/weaning-and-feeding/what-to-feed-young-children/',
-  FETCHED,
+  FETCHED_24,
+  ['sul', 'cukr', 'nepasterizovane'],
 );
 
 /**
@@ -136,16 +191,44 @@ export const NHS_TEETHING_SYMPTOMS = nhs(
   FETCHED_15,
 );
 
-/** Nápoje: voda od začátku příkrmu, rýžové nápoje do 5 let ne. */
+/**
+ * Nápoje: voda od začátku příkrmu, rýžové nápoje do 5 let ne.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `nepasterizovane`: nepasterizované mléko se malým dětem nedává kvůli
+ *   vyššímu riziku otravy z jídla; kravské mléko jako hlavní nápoj až od
+ *   roku, a to pasterizované.
+ * - `cukr`: slazené nápoje, džusy i „dětské“ čaje obsahují cukr a vedou
+ *   k zubnímu kazu, a to i zředěné.
+ */
 export const NHS_DRINKS = nhs(
   'Drinks and cups for babies and young children',
   '/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/',
+  FETCHED_24,
+  ['nepasterizovane', 'cukr'],
 );
 
-/** Jídla a nápoje, které se do prvního roku nenabízejí. */
+/**
+ * Jídla a nápoje, které se do prvního roku nenabízejí.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `botulismus`: med se do 12 měsíců vynechává úplně, protože obsahuje
+ *   bakterie, které vedou ke kojeneckému botulismu.
+ * - `sul`: slané potraviny (slanina, klobásy, chorizo, krekry, jídla
+ *   z bujonu) miminku nedávat, ledviny je nezvládnou, a sůl nepřidávat.
+ * - `cukr`: sladké svačiny kazí zuby, cukr se do jídla nepřidává, džusy,
+ *   limonády a ochucená mléka mají moc cukru.
+ * - `nepasterizovane`: měkké a plísňové sýry i sýry z nepasterizovaného
+ *   mléka mohou obsahovat listerie; syrové mléko nese bakterie způsobující
+ *   otravu.
+ * - `syrove`: měkkýše a korýše jen důkladně tepelně upravené, syroví
+ *   zvyšují riziko otravy.
+ */
 export const NHS_AVOID_WEANING = nhs(
   'Food and drinks to avoid – Safe weaning',
   '/best-start-in-life/baby/weaning/safe-weaning/food-and-drinks-to-avoid/',
+  FETCHED_24,
+  ['botulismus', 'sul', 'cukr', 'nepasterizovane', 'syrove'],
 );
 
 /** Rostlinné zdroje železa a vliv vitaminu C na jeho vstřebávání. */
@@ -291,14 +374,38 @@ export const BP_COMPLEMENTARY: SourceRef = {
  * Lektiny v syrových a nedostatečně provařených fazolích: namáčení nejméně
  * 12 hodin, slití namáčecí vody, var nejméně 30 minut. Konzervované fazole
  * jsou už provařené.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `syrove`: syrové a nedostatečně tepelně upravené luštěniny způsobují
+ *   onemocnění kvůli lektinům; sušené fazole se namáčejí aspoň 12 hodin,
+ *   voda se slije a vaří se aspoň 30 minut, fazole z konzervy jsou uvařené.
  */
 export const BP_RAW_BEANS: SourceRef = {
   org: 'Informační centrum bezpečnosti potravin',
   title:
     'FSAI: Preventivní doporučení ohledně konzumace tepelně neupravených nebo syrových fazolí',
   url: 'https://bezpecnostpotravin.cz/fsai-preventivni-doporuceni-ohledne-konzumace-tepelne-neupravenych-nebo-syrovych-fazoli/',
-  accessedAt: FETCHED,
+  accessedAt: FETCHED_24,
   tier: 1,
+  doklada: ['syrove'],
+};
+
+/**
+ * Heslo „Kojenci a malé děti“ ve slovníku Informačního centra bezpečnosti
+ * potravin.
+ *
+ * Štítky (přečteno 24. 9. 2026):
+ * - `syrove`: imunita kojenců a malých dětí je slabší, proto se pro ně vejce
+ *   vaří natvrdo, aby byl pevný bílek i žloutek, případně se použije
+ *   pasterizovaná vaječná hmota.
+ */
+export const BP_KOJENCI: SourceRef = {
+  org: 'Informační centrum bezpečnosti potravin',
+  title: 'Kojenci a malé děti',
+  url: 'https://bezpecnostpotravin.cz/termin/kojenci-a-male-deti/',
+  accessedAt: FETCHED_24,
+  tier: 1,
+  doklada: ['syrove'],
 };
 
 /**

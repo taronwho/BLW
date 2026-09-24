@@ -496,7 +496,9 @@ export const other: Ingredient[] = [
     vegetarian: true,
     frequencyLimit: 'Do 12 měsíců vůbec; potom jen výjimečně, je to přidaný cukr.',
     sources: [NHS_AVOID, NHS_AVOID_WEANING],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Text tvrdí, že podle NHS riziko neodstraní ani vaření či pečení. Stránky NHS citované u medu (Foods to avoid, Food and drinks to avoid, přečteno 24. 9. 2026) říkají jen, že med se do 12 měsíců nedává kvůli kojeneckému botulismu. O tepelné úpravě nemluví. Zákaz do jednoho roku platí; ověřit se musí jen věta o vaření a pečení.',
   },
   {
     id: 'sul',

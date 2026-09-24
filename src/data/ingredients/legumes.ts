@@ -286,7 +286,9 @@ export const legumes: Ingredient[] = [
     seasonCz: [],
     vegetarian: true,
     sources: [BP_RAW_BEANS, NHS_VEGETARIAN],
-    reviewStatus: 'verified',
+    reviewStatus: 'needs-review',
+    reviewNote:
+      'Namáčení, slití vody a var aspoň 30 minut doložené jsou (FSAI na bezpecnostpotravin.cz, přečteno 24. 9. 2026). Stránka ale neuvádí, že pomalé vaření při nízké teplotě nestačí, ani že lektiny způsobují zvracení a průjem. Mluví jen obecně o onemocnění. Tyto dvě věty se musí ověřit.',
   },
   {
     id: 'fazole-adzuki',

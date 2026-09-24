@@ -46,7 +46,7 @@ export const ZAVAZNOST_TEMAT: Severity = 'warning';
  * nezvyšuje, takže nová surovina bez doložení rizika neprojde ani teď,
  * dokud je pravidlo jen varování. Test v tests/safety/zdroje.test.ts.
  */
-export const STROP_NEDOLOZENYCH = 225;
+export const STROP_NEDOLOZENYCH = 184;
 
 /** Po roce už „ověřeno" znamená jen „někdy jsme to otevřeli". */
 export const MAX_STARI_MESICU = 12;

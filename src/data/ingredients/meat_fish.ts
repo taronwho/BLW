@@ -1219,7 +1219,7 @@ export const meatFish: Ingredient[] = [
     ],
     seasonCz: [],
     vegetarian: false,
-    sources: [NHS_ALLERGY, NHS_AVOID],
+    sources: [NHS_ALLERGY, NHS_AVOID, NHS_FISH],
     reviewStatus: 'verified',
   },
   {
