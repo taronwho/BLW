@@ -527,7 +527,7 @@ export const prvniUpravyDokonceni: Recipe[] = [
     babySplitPoint: 'Po kroku 4 odeber dvě lžíce rozmočené směsi, ještě než se miska dochucuje.',
     babySteps: [
       'Rozmačkej porci vidličkou a zkontroluj, že v ní nezůstal tvrdý kousek lupínku.',
-      'Kukuřičné lupínky bývají solené i slazené. Pro dítě vyber ty bez přidaného cukru a se solí co nejníž.',
+      'Běžné kukuřičné lupínky bývají solené i slazené. Pro dítě vyber jen ty bez přidaného cukru a bez soli.',
     ],
     babyServing: {
       '6m': 'Rozmočená kaše z lupínků a banánu na naložené lžíci. Suchý lupínek do ruky nikdy.',

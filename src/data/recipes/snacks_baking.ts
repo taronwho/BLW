@@ -216,7 +216,7 @@ export const snacksBaking: Recipe[] = [
       'Po kroku 3 odeber jednu misku hummusu pro miminko, dřív než se zbylé dvě dochutí solí a olejem pro dospělé.',
     babySteps: [
       'Kedlubnové hranolky pro miminko krátce spař nebo podus v páře tři minuty; syrová kedlubna je pro dásně příliš tvrdá.',
-      'Okurku a papriku podávej syrové, ale oloupané, aby slupka nezůstala dítěti v puse.',
+      'Okurku podávej syrovou, ale oloupanou. Papriku pro dítě upeč nebo poduš doměkka a stáhni z ní slupku; syrové proužky jsou do roka příliš křupavé.',
       'Hummus rozetři na hranolek v tenké vrstvě, nebo ho nabídni v misce k namáčení.',
     ],
     babyServing: {
@@ -299,7 +299,7 @@ export const snacksBaking: Recipe[] = [
       'Dětskou třetinu nakrájej na podlouhlé tyčinky, které se v ruce nelámou tak snadno jako čtverečky.',
       'Peč je o dvě minuty kratší dobu, aby byly křehké, ale ne tvrdé jako suchar.',
       'Sezam je v těstě jen mletý, což je jediná podoba, ve které semínka do dětské svačiny patří.',
-      'K dětské porci polož proužek syrové papriky na okusování; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky a z mletého sezamu.',
+      'K dětské porci polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky a z mletého sezamu.',
     ],
     babyServing: {
       '6m': 'Podávej tyčinku dlouhou jako prst, kterou dítě sevře v pěsti; krekr ve slinách rychle měkne.',

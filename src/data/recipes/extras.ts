@@ -272,7 +272,7 @@ export const extras: Recipe[] = [
       'Dětské placky peč o něco menší a silnější, aby se v ruce nelámaly, a jednu rozlom na kontrolu propečení.',
       'Placku nakrájej na pásky široké jako dva prsty a nech ji zchladnout.',
       'Jogurt pro miminko nabídni samostatně bez dochucení, jen s nastříhanou pažitkou.',
-      'K dětské placce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
+      'K dětské placce polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej pásek placky dlouhý přes dlaň a jogurt v ploché misce, do které dítě zaboří konec pásku.',

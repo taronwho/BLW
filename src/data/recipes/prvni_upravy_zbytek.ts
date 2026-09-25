@@ -368,7 +368,7 @@ export const prvniUpravyZbytek: Recipe[] = [
     ],
     baseSteps: [
       'Ricottu propasíruj vidličkou, ať zmizí hrudky.',
-      'Jablko oloupej a nastrouhej najemno. Syrové jablko je pro kojence tvrdé, nastrouhané ale ne.',
+      'Jablko oloupej, nastrouhej najemno a dvě minuty poduš s lžící vody. Syrové jablko se v prvních měsících příkrmu nepodává ani nastrouhané, podušené změkne.',
       'Vmíchej jablko do ricotty a promíchej.',
       'Ricotta je z mléčných výrobků nejjemnější a nejméně slaná, takže se pro první ochutnávky hodí líp než zrající sýry.',
       'Od tohoto místa se miska dělí. Dětská porce jde stranou dřív, než se cokoli dochucuje.',

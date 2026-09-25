@@ -50,7 +50,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětské tyčinky váleč silnější a kratší, aby se daly sevřít v pěsti a kus čouhal ven.',
       'Peč je o pár minut déle, uvnitř nesmí zůstat vlhké těsto.',
       'Nech je úplně vychladnout, horká tyčinka se v puse rozpadá na lepivé sousto.',
-      'K dětské tyčince polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z mletého sezamu.',
+      'K dětské tyčince polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo z mletého sezamu.',
     ],
     babyServing: {
       '6m': 'Podávej silnější tyčinku velikosti prstu, kterou dítě sevře v pěsti a okusuje konec.',
@@ -95,7 +95,7 @@ export const snacksBaking2: Recipe[] = [
       'Z odebraného těsta vytvaruj menší placku a opékej ji pomaleji, ať je propečená skrz.',
       'Placku rozlom a zkontroluj, že uvnitř není syrové těsto ani hořká sodová pachuť.',
       'Nakrájej ji na podlouhlé proužky a nech vychladnout na vlažnou teplotu.',
-      'K dětské placce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
+      'K dětské placce polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej placku nakrájenou na proužky velikosti prstu, které dítěti čouhají z pěsti.',
@@ -185,7 +185,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětskou část nakrájej na podlouhlé proužky velikosti prstu, ne na malé obdélníky.',
       'Celý kmín na ně nesyp, tvrdé zrnko se špatně rozkousává; použij mletý, pokud chceš chuť.',
       'Peč je o dvě minuty kratší dobu, tenké proužky se rychleji připálí.',
-      'K dětské porci polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze žitné mouky a z mletých lněných semínek.',
+      'K dětské porci polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo ze žitné mouky a z mletých lněných semínek.',
     ],
     babyServing: {
       '6m': 'Podávej proužek krekru velikosti prstu; dítě ho okusuje a slinami rozměkčuje.',
@@ -321,7 +321,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětskou část nakrájej na podlouhlé proužky, ne na malé obdélníky, které se špatně drží.',
       'Rozmarýn pro dítě nasekej opravdu najemno, celá jehlička je tvrdá a píchá.',
       'Nech krekry úplně vychladnout, teprve pak jsou dost pevné na uchopení.',
-      'K dětské porci polož proužek papriky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
+      'K dětské porci polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo z cizrnové mouky.',
     ],
     babyServing: {
       '6m': 'Podávej proužek krekru velikosti prstu, který dítě okusuje a rozměkčuje slinami.',
@@ -585,7 +585,7 @@ export const snacksBaking2: Recipe[] = [
       'Dětské bulky tvaruj podlouhlé, ne kulaté, aby se daly sevřít v pěsti.',
       'Semínka používej jen mletá zapracovaná v těstě, celá se na povrchu snadno uvolní.',
       'Nech bulky úplně vychladnout, horké těsto je uvnitř lepivé.',
-      'K dětské bulce polož proužek papriky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky a z mletých dýňových semínek.',
+      'K dětské bulce polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat železo ze špaldové mouky a z mletých dýňových semínek.',
     ],
     babyServing: {
       '6m': 'Podávej podlouhlou bulku rozkrojenou na proužky velikosti prstu bez tvrdé kůrky.',
@@ -714,7 +714,7 @@ export const snacksBaking2: Recipe[] = [
       'Po kroku 1 odeber dvě lžíce dipu do misky, dřív než se do zbytku přidává cokoli na dochucení. Celou ředkvičku odloženou v kroku 2 si nech k ní.',
     babySteps: [
       'Kedlubnové proužky pro dítě krátce povař v páře, syrová kedlubna je pro tenhle věk moc tvrdá.',
-      'Tu odloženou celou ředkvičku nastrouhej do dětského dipu. Celá ani na plátky do téhle porce nepatří, je ostrá a pevná.',
+      'Odloženou ředkvičku poduš v páře doměkka a teprve pak ji jemně nastrouhej do dětského dipu. Syrová je do roka tvrdá a ostrá, celá ani na plátky do téhle porce nepatří.',
       'Okurkový proužek nech syrový, ale oloupaný, slupka se pod dásněmi neroztrhne.',
     ],
     babyServing: {

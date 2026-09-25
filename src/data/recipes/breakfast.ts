@@ -627,13 +627,13 @@ export const breakfast: Recipe[] = [
     baseSteps: [
       'Ředkvičky omyj, odkroj natě a nastrouhej je nahrubo; syrová ředkvička je tvrdá a kulatá, proto se strouhá.',
       'Nastrouhané ředkvičky zlehka vymačkej v dlani, aby pomazánka nebyla vodová.',
-      'Cottage rozmíchej vidličkou, vmíchej ředkvičky a nastříhanou pažitku.',
+      'Cottage rozmíchej vidličkou s nastříhanou pažitkou; ředkvičky zatím nech stranou.',
       'Housky rozkroj a nech je připravené na prkénku.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dvě lžíce pomazánky do misky, dřív než se zbytek dochucuje pro dospělé.',
+      'Po kroku 3 odeber dvě lžíce cottage s pažitkou do misky, dřív než se do zbytku vmíchají ředkvičky a dochucuje se pro dospělé.',
     babySteps: [
-      'Z dětské porce vyber větší kousky ředkvičky nebo je rozmačkej, aby v pomazánce nezůstaly tvrdé kousky.',
+      'Dětská porce zůstává bez ředkvičky: syrová je do roka tvrdá a ostrá a ani nastrouhaná nahrubo do ní nepatří.',
       'Housku pro miminko zbav kůrky a nakrájej střídku na pásky široké jako dva prsty.',
       'Pásky potři pomazánkou v tenké vrstvě; silná vrstva se při kousnutí vytlačí a dítě ji setře po tváři.',
     ],
@@ -643,7 +643,7 @@ export const breakfast: Recipe[] = [
       '12m': 'Nabídni půlku housky namazanou pomazánkou a nech dítě, ať ji samo drží a odkusuje.',
     },
     adultSteps: [
-      'Zbylou pomazánku osol, opepři a rozetři na housky; navrch polož kolečka ředkvičky.',
+      'Do zbylé pomazánky vmíchej vymačkané ředkvičky, osol, opepři a rozetři na housky; navrch polož kolečka ředkvičky.',
       'Kdo jí maso, přidá si k pomazánce plátek šunky ze zásoby.',
     ],
     allergens: ['mleko', 'psenice-lepek'],
@@ -765,7 +765,7 @@ export const breakfast: Recipe[] = [
       'K porci přidej rozmačkané jahody; vitamin C z nich pomáhá vstřebat železo z quinoy i z mletých mandlí.',
     ],
     babyServing: {
-      '6m': 'Nabídni hustou kaši na lžíci předané do ruky a k ní plátek syrového jablka velikosti prstu na okusování.',
+      '6m': 'Nabídni hustou kaši na lžíci předané do ruky a k ní měsíček jablka podušený doměkka; syrové jablko se v tomhle věku nepodává.',
       '9m': 'Kaši podávej hrudkovitou v mělké misce, ať dítě sbírá zrnka quinoy špetkou.',
       '12m': 'Servíruj kaši v misce se lžící a strouhaným jablkem navrch; dítě už zvládne jíst samo.',
     },

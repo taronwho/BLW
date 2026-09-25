@@ -623,7 +623,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Nastrouhané pecorino se hodí do zeleninových omáček, kde nahradí chybějící sůl. Kvůli výraznosti ho dávkuj po malých špetkách a ostatní složky jídla už nedochucuj.',
+          'Nastrouhané pecorino se hodí do zeleninových omáček jako chuť. Je slané, proto ho dávkuj po malých špetkách a ostatní složky jídla už nedochucuj.',
         caution: 'Pro bezmasou verzi jídla sáhni po sýru bez živočišného syřidla.',
       },
       '12m': {

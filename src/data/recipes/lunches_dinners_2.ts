@@ -2520,7 +2520,7 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 odeber dvě lžíce směsi do misky, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou; celá fazole má hladkou slupku a dásně si s ní neporadí.',
-      'Vymačkej do misky limetkovou šťávu a přidej lžíci syrové papriky nakrájené nadrobno. Vitamin C z obojího zlepší vstřebání železa z fazolí.',
+      'Vymačkej do misky limetkovou šťávu. Vitamin C z ní a z dušené papriky ve směsi zlepší vstřebání železa z fazolí.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {

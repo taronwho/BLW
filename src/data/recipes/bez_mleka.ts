@@ -580,10 +580,10 @@ export const bezMleka: Recipe[] = [
     babySteps: [
       'Z odebraného těsta tvaruj podlouhlé placičky velikosti prstu, které se drží líp než kulaté.',
       'Opékej je pomaleji a jednu rozlom, ať víš, že je propečená skrz naskrz.',
-      'Vedle polož proužek syrové papriky na okusování; vitamin C z ní pomáhá vstřebat rostlinné železo z placky.',
+      'Vedle polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní pomáhá vstřebat rostlinné železo z placky.',
     ],
     babyServing: {
-      '6m': 'Podávej placičku ve tvaru prstu, kterou dítě sevře v dlani, a proužek papriky na cucání.',
+      '6m': 'Podávej placičku ve tvaru prstu, kterou dítě sevře v dlani, a proužek upečené papriky bez slupky na cucání.',
       '9m': 'Placičku nalámej na kousky velikosti nehtu a papriku nakrájej na kratší proužky.',
       '12m': 'Servíruj celou placku na talíři s paprikovými proužky vedle; batole si ji samo láme.',
     },
@@ -704,10 +704,10 @@ export const bezMleka: Recipe[] = [
     babySteps: [
       'Pomazánku pro dítě zřeď lžící vody, hustá se lepí na patro a dítě ji nespolkne.',
       'Zkontroluj, že v ní nezůstala celá zrnka cizrny s pevnou slupkou.',
-      'Vedle polož proužek papriky na okusování; vitamin C z ní i z citronu pomáhá vstřebat železo z cizrny.',
+      'Vedle polož proužek papriky upečené doměkka a zbavené slupky; vitamin C z ní i z citronu pomáhá vstřebat železo z cizrny. Syrové proužky jsou do roka příliš křupavé.',
     ],
     babyServing: {
-      '6m': 'Podávej pomazánku rozetřenou v mělké misce a proužek papriky dlouhý jako dospělý prst na cucání.',
+      '6m': 'Podávej pomazánku rozetřenou v mělké misce a proužek upečené papriky bez slupky dlouhý jako dospělý prst na cucání.',
       '9m': 'Nabídni pomazánku v ploché misce, do které dítě dosáhne prsty, a papriku v kratších proužcích.',
       '12m': 'Servíruj pomazánku s paprikovými proužky vedle; batole si je namáčí samo.',
     },

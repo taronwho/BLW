@@ -831,7 +831,7 @@ export const soups2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce polévky do misky, dřív než se hrnec dochucuje pro dospělé. Zkontroluj, že v porci nezůstal kousek bobkového listu.',
     babySteps: [
       'Odebranou porci rozmačkej vidličkou na hrubé pyré; pro první sousta ji můžeš rozmixovat nadobro.',
-      'Přidej lžíci syrové papriky nakrájené nadrobno a povař ji minutu. Paprika je bohatá na vitamin C a ten zlepší vstřebání železa z čočky.',
+      'Přidej lžíci papriky bez slupky nakrájené nadrobno a povař ji pět minut doměkka. Paprika je bohatá na vitamin C a ten zlepší vstřebání železa z čočky.',
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
