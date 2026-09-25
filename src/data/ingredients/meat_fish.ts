@@ -16,7 +16,6 @@ import {
   EFSA_MERCURY,
   EFSA_FISH_WILD_FARMED,
   BP_RTUT_SZU,
-  usdaFdc,
 } from './_sources';
 
 /**
@@ -2006,7 +2005,7 @@ export const meatFish: Ingredient[] = [
     chokingRisk: 'low',
     hazards: ['rtut', 'sul'],
     hazardNotes: {
-      sul: 'Tuňák v konzervě se běžně solí, a to i ten ve vlastní šťávě: databáze USDA uvádí u scezeného tuňáka konzervovaného ve vodě 247 mg sodíku na 100 g, tedy asi 0,6 g soli. NHS slané potraviny miminku nedoporučuje, protože nejsou dobré pro jeho ledviny, a proto se tuňák z konzervy zavádí až po prvních narozeninách.',
+      sul: 'Tuňák v konzervě se běžně solí, a to i ten ve vlastní šťávě; sůl najdeš ve složení na obalu. NHS slané potraviny miminku nedoporučuje, protože nejsou dobré pro jeho ledviny, a proto se tuňák z konzervy zavádí až po prvních narozeninách.',
       rtut:
         'Tuňák patří mezi ryby s vyšším obsahem rtuti. Konzervovaný má podle EFSA zřejmě méně rtuti než čerstvý, protože se vyrábí z jiných nebo menších ryb, a SZÚ hodnotí rtuť v rybích konzervách z českého trhu i pro děti jako velmi nízké riziko. Přesto ho střídej s jinými rybami. NHS navíc upozorňuje, že čerstvý ani konzervovaný tuňák se nepočítá mezi tučné ryby. Konzervováním se obsah omega-3 mastných kyselin snižuje, takže sardinku ani lososa nenahradí.',
     },
@@ -2039,7 +2038,7 @@ export const meatFish: Ingredient[] = [
     vegetarian: false,
     frequencyLimit:
       'Do 12 měsíců ne kvůli soli; potom ho střídej s jinými rybami, ať nepřevažuje. Tučnou rybu nenahrazuje.',
-    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU, usdaFdc('Fish, tuna, light, canned in water, drained solids', 173709)],
+    sources: [NHS_FISH, NHS_AVOID, EFSA_MERCURY, EFSA_FISH_WILD_FARMED, BP_RTUT_SZU],
     reviewStatus: 'verified',
   },
   {
