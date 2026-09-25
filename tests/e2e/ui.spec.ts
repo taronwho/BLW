@@ -60,7 +60,9 @@ for (const screen of SCREENS) {
     await testInfo.attach(`${screen.id}-${width}`, { path: shot, contentType: 'image/png' });
 
     // Po odscrollování dolů se může objevit další obsah, kontrolujeme i to.
-    await page.mouse.wheel(0, 2000);
+    // Posun přes scrollBy, ne kolečkem myši: mobilní WebKit v Playwrightu
+    // `mouse.wheel` nepodporuje a test by spadl dřív, než by cokoli změřil.
+    await page.evaluate(() => window.scrollBy(0, 2000));
     const afterScroll = await horizontalOverflow(page);
     expect(afterScroll, `${screen.name} přetéká po odscrollování`).toBeLessThanOrEqual(width);
   });
@@ -242,7 +244,8 @@ test('nová obrazovka začíná nahoře', async ({ page }) => {
   await navLink(page, 'Recepty').click();
   await expect(page.getByTestId('seznam-receptu')).toBeVisible();
 
-  await page.mouse.wheel(0, 2000);
+  // scrollBy místo kolečka myši, které mobilní WebKit v Playwrightu neumí.
+  await page.evaluate(() => window.scrollBy(0, 2000));
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(500);
 
   await page.getByTestId('seznam-receptu').getByRole('link').first().click();
@@ -703,7 +706,11 @@ test('dlouhý seznam se plní po dávkách', async ({ page }) => {
   const prvni = await karty.count();
   expect(prvni).toBeLessThan(recipes.length);
 
-  await page.getByTestId('nacist-dalsi-recepty').click();
+  // Tlačítko tu není: KonecSeznamu načte další dávku sám, jakmile se
+  // patička objeví na obrazovce. Test proto dělá totéž co rodič, doroluje
+  // na konec. Klepnutí na stavový nápis dřív procházelo jen v Chromiu,
+  // protože klepnutí stránku posunulo; ve WebKitu se nápis mezitím překreslí.
+  await page.getByTestId('nacist-dalsi-recepty').scrollIntoViewIfNeeded();
   await expect.poll(() => karty.count()).toBeGreaterThan(prvni);
 });
 

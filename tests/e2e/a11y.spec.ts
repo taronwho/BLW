@@ -95,11 +95,16 @@ test('okénko živin se dá ovládat klávesnicí', async ({ page }) => {
   await znacka.click();
   await expect(page.getByTestId('okenko-zivin')).toBeVisible();
 
-  // 1. Fokus je uvnitř okénka, ne na značce pod ním.
-  const uvnitr = await page.evaluate(() =>
-    document.querySelector('[data-testid="okenko-zivin"]')?.contains(document.activeElement),
-  );
-  expect(uvnitr).toBe(true);
+  // 1. Fokus je uvnitř okénka, ne na značce pod ním. Okénko ho přesouvá
+  // až po vykreslení, proto se na něj čeká; hned po zobrazení test občas
+  // chytil fokus ještě na značce a na druhý pokus prošel.
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        document.querySelector('[data-testid="okenko-zivin"]')?.contains(document.activeElement),
+      ),
+    )
+    .toBe(true);
 
   // 2. Tab se z okénka nedostane ven.
   for (let i = 0; i < 12; i += 1) await page.keyboard.press('Tab');
