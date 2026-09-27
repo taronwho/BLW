@@ -136,6 +136,7 @@ export interface TastingEvent {
   amount: 'ochutnala' | 'snedla-cast' | 'snedla-vse' | 'odmitla';
   reaction: 'zadna' | 'chutnalo' | 'nelibilo' | 'kozni' | 'travici' | 'jina';
   note?: string;
+  davilo?: boolean;           // dítě se nad soustem dávilo (od schématu 7)
   createdBy: string;          // uid rodiče
   createdAt: number;          // pro řešení konfliktů
   deleted?: boolean;          // měkké smazání, jinak ho sync vzkřísí
@@ -297,6 +298,7 @@ Filtry: kategorie, čas do 20/40 minut, „mám doma" (výběr surovin), „jen 
 - Karta „Klíčové alergeny": 9 položek, u každé počet expozic a datum poslední; zavedený = 3+ expozice bez reakce
 - Statistiky: ochutnáno X z Y surovin, rozpad po kategoriích, oblíbené, odmítnuté (s poznámkou, že odmítnutí je normální a opakovaná nabídka je běžná)
 - „Co dnes zkusit?" — návrh 3 dosud neochutnaných surovin vhodných k věku a sezóně
+- Karta „Dávení": počet zapsaných dávení, podíl ochutnávek s dávením za poslední čtyři týdny po týdnech a suroviny, u kterých se dávení za 28 dní zopakovalo aspoň dvakrát, s odkazem na průvodce tvarem sousta. Dávení se zapisuje u ochutnávky přepínačem „Dávilo se", odděleně od reakce, protože neříká nic o surovině, jen o tvaru sousta. Při zapnutí se ukáže odkaz na první pomoc při dušení. Výpis pro pediatra dávení uvádí u záznamu.
 
 ### 4.6 30denní plán
 Otevírá se z karty na úvodní obrazovce, počítá se pro vybrané dítě.
@@ -307,6 +309,22 @@ Otevírá se z karty na úvodní obrazovce, počítá se pro vybrané dítě.
 - Po dokončení bloku nabídka sestavit dalších třicet dnů; kdykoli jde blok přepočítat znovu nebo plán zrušit
 - Když se alergie dítěte změní až po sestavení, upozorní na to úvodní obrazovka, plán i detail dne a jídla se zakázaným alergenem dostanou štítek
 - Pravidla, podle kterých se plán skládá, jsou v `docs/PLAN-30-DNI.md` a v radě „Jak je postavený 30denní plán"
+
+### 4.6a Co dnes jíme my (`/jime-my`)
+Dětská porce z jídla, které rodina vaří, i mimo recepty v aplikaci.
+- Rodič vybere suroviny jídla hledáním v katalogu nebo rychlým výběrem běžného rodinného jídla (`src/data/jidlaRodiny.ts`); výběr je v adrese
+- Každá surovina dostane verdikt: do porce / s opatrností / vynechat. Vynechat = věk pod `minAgeMonths` (bez data narození se počítá se šesti měsíci), alergie zapsaná u dítěte, reakce v deníku, ruční vyřazení. S opatrností = vysoké riziko dušení, nezavedený klíčový alergen, `needs-review`
+- U toho, co do porce patří, pokyn k úpravě pro fázi dítěte z katalogu, upozornění, hazardy a tvar podle úchopu; u soli, medu a dalších přísad „odeber porci dřív, než ji přidáš"
+- Souhrn: víc nových alergenů naráz, porce bez zdroje železa, rostlinné železo bez vitaminu C — vše podle existujících rad
+- Surovinu mimo katalog aplikace neposuzuje
+- Zápis vybraných surovin do deníku jedním formulářem
+- Logika je v `src/app/lib/jimeMy.ts` a nepřidává vlastní zdravotní tvrzení
+
+### 4.6b Průvodce tvarem sousta (`/tvar-sousta`)
+- Úchop (dlaňový / nůžkový / pinzetový) s kreslenou rukou a tvarem, který z něj plyne; předvybraný podle dítěte, jinak podle věku
+- Ukázky „takhle ne / takhle ano" s obrázky na typických surovinách; pokyn pod obrázky je doslova text katalogu pro zvolenou fázi. Že popisky obrázků odpovídají katalogu, hlídá `tests/data/tvarSousta.test.ts`
+- Zkouška měkkosti a odkazy na související rady a seznam „Pozor na tvar"
+- Obrázky jsou inline SVG (`src/app/components/ObrazkySousta.tsx`) s popisem pro čtečku
 
 ### 4.7 Domácnost a nastavení
 - Jméno a datum narození dcery

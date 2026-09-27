@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import type { ChokingRisk, ServingForm } from '@/types';
 import { ageInMonths } from '../lib/age';
 import { useAktivniDite } from '../lib/dite';
+import { ObrazekUchopu } from './ObrazkySousta';
+import { maObrazek } from '../lib/obrazkySousta';
 import {
   GRIP_LABELS,
   GRIP_SHORT,
@@ -52,9 +54,26 @@ export function GripHint({
         </span>
       </p>
 
-      <p className="text-sm leading-relaxed">{gripShapeAdvice(grip, chokingRisk, servingForm)}</p>
+      <div className="flex items-start gap-3">
+        {maObrazek(`uchop-${grip}`) && (
+          <div className="w-16 shrink-0 rounded-lg border border-line bg-surface p-1">
+            <ObrazekUchopu grip={grip} />
+          </div>
+        )}
+        <p className="min-w-0 flex-1 text-sm leading-relaxed">
+          {gripShapeAdvice(grip, chokingRisk, servingForm)}
+        </p>
+      </div>
 
       {poznamka !== null && <p className="text-xs leading-relaxed text-muted">{poznamka}</p>}
+
+      <Link
+        to="/tvar-sousta"
+        data-testid="odkaz-tvar-sousta"
+        className="flex min-h-touch items-center self-start rounded-lg px-2 text-xs font-semibold text-accent underline"
+      >
+        Průvodce tvarem sousta s obrázky
+      </Link>
 
       {vybrany === undefined && (
         <>

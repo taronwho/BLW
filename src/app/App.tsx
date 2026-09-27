@@ -43,6 +43,14 @@ const GuidesScreen = lazy(() =>
 const GuideDetailScreen = lazy(() =>
   import('./screens/GuideDetailScreen').then((m) => ({ default: m.GuideDetailScreen })),
 );
+/** Průvodce tvarem sousta s obrázky. */
+const TvarSoustaScreen = lazy(() =>
+  import('./screens/TvarSoustaScreen').then((m) => ({ default: m.TvarSoustaScreen })),
+);
+/** „Co dnes jíme my" — dětská porce z jídla rodičů. */
+const JimeMyScreen = lazy(() =>
+  import('./screens/JimeMyScreen').then((m) => ({ default: m.JimeMyScreen })),
+);
 const DiaryScreen = lazy(() =>
   import('./screens/DiaryScreen').then((m) => ({ default: m.DiaryScreen })),
 );
@@ -120,6 +128,8 @@ export function App(): ReactNode {
               <Route path="/recepty/:id" element={<RecipeDetailScreen />} />
               <Route path="/rady" element={<GuidesScreen />} />
               <Route path="/rady/:id" element={<GuideDetailScreen />} />
+              <Route path="/tvar-sousta" element={<TvarSoustaScreen />} />
+              <Route path="/jime-my" element={<JimeMyScreen />} />
               <Route path="/seznamy" element={<ListsScreen />} />
               <Route path="/seznamy/:id" element={<ListDetailScreen />} />
               <Route path="/nakup" element={<NakupScreen />} />

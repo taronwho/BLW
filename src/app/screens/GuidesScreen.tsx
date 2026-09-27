@@ -1,4 +1,4 @@
-import { AlertTriangle, ChevronRight, Search } from 'lucide-react';
+import { AlertTriangle, ChevronRight, Hand, Search } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
@@ -55,6 +55,22 @@ export function GuidesScreen(): ReactNode {
           a praktický provoz.
         </p>
       </div>
+
+      {/* Obrázkový průvodce není rada z katalogu rad, ale patří k nim:
+          správný tvar sousta je nejčastější chyba a nejvíc souvisí
+          s bezpečností. */}
+      <Link
+        to="/tvar-sousta"
+        data-testid="rady-tvar-sousta"
+        className="flex min-h-touch items-center gap-3 rounded-xl border border-accent/30 bg-accent-soft p-3 shadow-soft"
+      >
+        <Hand aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold">Tvar sousta podle úchopu</span>
+          <span className="block text-xs text-ink/75">Obrázkový průvodce: takhle ne, takhle ano</span>
+        </span>
+        <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-accent" />
+      </Link>
 
       <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
         <Search aria-hidden="true" className="h-5 w-5 shrink-0 text-muted" />

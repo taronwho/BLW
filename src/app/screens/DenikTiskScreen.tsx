@@ -66,7 +66,8 @@ export function DenikTiskScreen(): ReactNode {
             : `Záznamy od ${formatDate(vypis.odKdy)} do ${formatDate(vypis.doKdy ?? vypis.odKdy)}. ` +
               // Skloňuje se obojí zvlášť a v prvním pádě: „u 1 surovin"
               // by po předložce vyžadovalo druhý pád a to `sklonuj` neumí.
-              `Celkem ${sklonuj(vypis.radky.length, ZAZNAM)}, ${sklonuj(vypis.surovin, SUROVINA)}.`}
+              `Celkem ${sklonuj(vypis.radky.length, ZAZNAM)}, ${sklonuj(vypis.surovin, SUROVINA)}.` +
+              (vypis.daveni === 0 ? '' : ` Dávení zapsáno ${vypis.daveni}×.`)}
         </p>
         <p className="text-xs text-muted">
           Výpis z aplikace Drobek. Je to záznam rodiče, ne lékařská zpráva — aplikace
@@ -149,6 +150,7 @@ export function DenikTiskScreen(): ReactNode {
                   <td className="py-1 pr-2">{radek.mnozstvi}</td>
                   <td className="py-1 pr-2">
                     {radek.nezadouci ? <strong>{radek.reakce}</strong> : radek.reakce}
+                    {radek.davilo ? ' · dávilo se' : ''}
                   </td>
                   <td className="py-1">{radek.poznamka}</td>
                 </tr>

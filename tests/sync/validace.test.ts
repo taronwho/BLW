@@ -57,6 +57,15 @@ describe('platnaOchutnavka', () => {
     expect(platnaOchutnavka(ochutnavka({ createdBy: undefined }))?.createdBy).toBe('');
   });
 
+  it('dávení přenese, jen když je opravdu true', () => {
+    expect(platnaOchutnavka(ochutnavka({ davilo: true }))?.davilo).toBe(true);
+    for (const jine of [false, 'true', 1, null, undefined]) {
+      const event = platnaOchutnavka(ochutnavka({ davilo: jine }));
+      expect(event).not.toBeNull();
+      expect(Object.hasOwn(event ?? {}, 'davilo')).toBe(false);
+    }
+  });
+
   it('nepřenese cizí pole ze souboru dál', () => {
     const event = platnaOchutnavka(ochutnavka({ skodlivePole: 'cokoli' }));
     expect(Object.hasOwn(event ?? {}, 'skodlivePole')).toBe(false);

@@ -348,6 +348,14 @@ export interface TastingEvent {
   amount: TastingAmount;
   reaction: TastingReaction;
   note?: string;
+  /**
+   * Dítě se nad soustem dávilo (kuckalo, zrudlo, sousto vypudilo).
+   *
+   * Zvlášť od reakce, protože dávení není reakce na surovinu, ale na tvar
+   * a velikost sousta. Ukládá se jen `true`; chybějící pole znamená, že se
+   * nedávilo nebo to rodič nezapsal.
+   */
+  davilo?: boolean;
   /** uid rodiče */
   createdBy: string;
   /** pro řešení konfliktů */

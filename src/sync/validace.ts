@@ -91,6 +91,7 @@ export function platnaOchutnavka(raw: unknown): TastingEvent | null {
     createdAt: raw['createdAt'],
     ...(neprazdnyText(raw['childId']) ? { childId: raw['childId'] } : {}),
     ...(typeof raw['note'] === 'string' ? { note: raw['note'] } : {}),
+    ...(raw['davilo'] === true ? { davilo: true } : {}),
     ...(raw['deleted'] === true ? { deleted: true } : {}),
   };
   return event;

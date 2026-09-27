@@ -29,6 +29,8 @@ export interface VypisRadek {
   poznamka: string;
   /** Kožní, trávicí nebo jiná reakce — to, kvůli čemu se k lékaři jde. */
   nezadouci: boolean;
+  /** Dítě se nad soustem dávilo. Není to reakce na surovinu, jen záznam. */
+  davilo: boolean;
 }
 
 export interface VypisAlergenu {
@@ -52,6 +54,8 @@ export interface DenikVypis {
   alergeny: VypisAlergenu[];
   /** Kolik různých surovin dítě zkusilo. */
   surovin: number;
+  /** U kolika záznamů rodič zapsal dávení. */
+  daveni: number;
 }
 
 /**
@@ -80,6 +84,7 @@ export function sestavVypis(
     reakce: REACTION_LABELS[event.reaction],
     poznamka: event.note ?? '',
     nezadouci: isAdverse(event),
+    davilo: event.davilo === true,
   }));
 
   const alergeny: VypisAlergenu[] = KEY_ALLERGENS.map((skupina) => {
@@ -106,5 +111,6 @@ export function sestavVypis(
     nezadouci: radky.filter((radek) => radek.nezadouci),
     alergeny,
     surovin: new Set(udalosti.map((event) => event.ingredientId)).size,
+    daveni: radky.filter((radek) => radek.davilo).length,
   };
 }

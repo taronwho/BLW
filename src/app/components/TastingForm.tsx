@@ -1,5 +1,6 @@
 import { Check, X } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import type { TastingAmount, TastingReaction } from '@/types';
 import { TASTING_AMOUNTS, TASTING_REACTIONS } from '@/types';
 import { AMOUNT_LABELS, REACTION_LABELS } from '../lib/labels';
@@ -119,6 +120,46 @@ export function TastingForm({
           nebo náhlé ochablosti volej <strong>155</strong>; jinak reakci prober s pediatrem.
         </p>
       )}
+
+      <fieldset className="flex flex-col gap-1.5">
+        <legend className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+          Dávení
+        </legend>
+        {/* Zvlášť od reakce: dávení neříká nic o surovině, jen o tvaru
+            a velikosti sousta. V deníku z něj pak jde vidět, jestli ubývá
+            a u čeho se opakuje. */}
+        <button
+          type="button"
+          aria-pressed={draft.davilo}
+          data-testid="ochutnavka-davilo"
+          onClick={() => setDraft({ ...draft, davilo: !draft.davilo })}
+          className={`min-h-touch w-fit rounded-full border px-3.5 py-2 text-sm font-medium transition ${
+            draft.davilo
+              ? 'border-accent bg-accent text-on-accent shadow-soft'
+              : 'border-line bg-surface text-ink'
+          }`}
+        >
+          Dávilo se
+        </button>
+        <p className="text-xs leading-relaxed text-muted">
+          Kuckalo, zrudlo, sousto vyplivlo a jedlo dál. Je to obrana, ne selhání.{' '}
+          <Link to="/rady/daveni-vs-duseni" className="inline-flex min-h-touch items-center font-medium text-accent underline">
+            Dávení není dušení
+          </Link>
+        </p>
+        {draft.davilo && (
+          <p
+            className="rounded-xl border border-risk/40 bg-risk/10 px-3 py-2 text-xs leading-relaxed"
+            data-testid="ochutnavka-davilo-pozor"
+          >
+            Bylo dítě tiché a nemohlo se nadechnout? To nebylo dávení, ale dušení. Po zásahu
+            stlačením hrudníku nebo břicha vždy volej <strong>155</strong>.{' '}
+            <Link to="/rady/prvni-pomoc-pri-duseni" className="inline-flex min-h-touch items-center font-semibold text-risk underline">
+              První pomoc při dušení
+            </Link>
+          </p>
+        )}
+      </fieldset>
 
       <label className="flex flex-col gap-1.5">
         <span className="text-[11px] font-semibold uppercase tracking-wide text-muted">

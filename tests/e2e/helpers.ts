@@ -89,6 +89,25 @@ export const SCREENS: readonly ScreenDef[] = [
     },
   },
   {
+    id: 'tvar-sousta',
+    name: 'Tvar sousta',
+    open: async (page) => {
+      await navLink(page, 'Domů').click();
+      await page.getByTestId('domu-tvar-sousta').click();
+      await expect(page.getByTestId('ukazky-tvaru')).toBeVisible();
+    },
+  },
+  {
+    id: 'jime-my',
+    name: 'Co dnes jíme my',
+    open: async (page) => {
+      await navLink(page, 'Domů').click();
+      await page.getByTestId('domu-jime-my').click();
+      await page.getByTestId('jime-jidlo-spagety-s-rajcaty').click();
+      await expect(page.getByTestId('jime-souhrn')).toBeVisible();
+    },
+  },
+  {
     id: 'denik',
     name: 'Deník',
     open: async (page) => {

@@ -35,8 +35,11 @@ import { platnaOchutnavka, platneDite, type Zahozeno } from './validace';
  * seznam znamená, že nic vyřazené není. Verze se zvedá kvůli starším
  * telefonům: ty neznámé pole zahazují, takže by při úpravě dítěte seznam
  * smazaly. Takhle dokument novější verze odmítnou zapsat.
+ * 6 → 7: ochutnávka nese příznak dávení (`davilo`). Chybějící příznak
+ * znamená, že se dítě nedávilo. Verze se zvedá ze stejného důvodu jako
+ * u 5 → 6: starší telefon by pole při zápisu zahodil.
  */
-export const SCHEMA_VERSION = 6;
+export const SCHEMA_VERSION = 7;
 
 export function emptyHouseholdState(): HouseholdState {
   return {

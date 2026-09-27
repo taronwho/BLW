@@ -154,3 +154,19 @@ describe('odkazNaHlaseni', () => {
     expect(decodeURIComponent(url)).toContain('`mrkev`');
   });
 });
+
+describe('sestavVypis — dávení', () => {
+  it('označí řádek s dávením a spočítá je, reakci přitom nemění', () => {
+    const vypis = sestavVypis(
+      stav([
+        udalost({ ingredientId: 'jablko', date: '2026-09-01', davilo: true }),
+        udalost({ ingredientId: 'brokolice', date: '2026-09-02' }),
+      ]),
+      DITE,
+    );
+    expect(vypis.daveni).toBe(1);
+    expect(vypis.radky.map((radek) => radek.davilo)).toEqual([true, false]);
+    // Dávení není reakce na surovinu: nesmí skončit mezi nežádoucími.
+    expect(vypis.nezadouci).toHaveLength(0);
+  });
+});

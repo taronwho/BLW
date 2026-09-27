@@ -3,9 +3,11 @@ import {
   BookOpen,
   ChevronRight,
   Dices,
+  Hand,
   LifeBuoy,
   Sparkles,
   Users,
+  UtensilsCrossed,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
@@ -169,26 +171,38 @@ export function HomeScreen(): ReactNode {
       <div className="flex shrink-0 grow-[3] flex-col gap-1">
         <PlanKarta />
 
-      {/* Náhodný recept hned pod plánem: obojí odpovídá na „co dnes vařit",
-          jen jinak. Plán je pořádek, tohle je únik z něj, když se na plán
-          zrovna nechce. Proto je řádka vědomě tišší než karta nad ní —
-          přerušovaný rám, žádná plocha.
-
-          Je to prostý odkaz, ne tlačítko: losuje se až na adrese
-          /recepty/nahoda, aby si úvodní obrazovka kvůli němu nestahovala
-          celou kuchařku. */}
-      <Link
-        to="/recepty/nahoda"
-        data-testid="domu-nahodny-recept"
-        className="flex min-h-touch items-center gap-2.5 rounded-xl border border-dashed border-accent/50 px-2.5 text-accent"
-      >
-        <Dices aria-hidden="true" className="h-5 w-5 shrink-0" />
-        <span className="min-w-0 flex-1 truncate text-[13px] font-semibold">
-          Náhodný recept
-        </span>
-        <span className="shrink-0 text-[11px] text-muted">když nevíš, co vařit</span>
-        <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />
-      </Link>
+      {/* Tři zkratky v jedné řádce, ať rozcestník nenaroste: dětská porce
+          z jídla rodiny (princip BLW), obrázkový průvodce tvarem sousta
+          a náhodný recept. Tišší než karta plánu — přerušovaný rám. */}
+      <div className="grid grid-cols-3 gap-1.5">
+        <Link
+          to="/jime-my"
+          data-testid="domu-jime-my"
+          className="flex min-h-touch flex-col items-center justify-center gap-0.5 rounded-xl border border-dashed border-accent/50 px-1 py-1 text-center text-accent"
+        >
+          <UtensilsCrossed aria-hidden="true" className="h-4 w-4 shrink-0" />
+          <span className="text-[11px] font-semibold leading-tight">Co jíme my</span>
+        </Link>
+        <Link
+          to="/tvar-sousta"
+          data-testid="domu-tvar-sousta"
+          className="flex min-h-touch flex-col items-center justify-center gap-0.5 rounded-xl border border-dashed border-accent/50 px-1 py-1 text-center text-accent"
+        >
+          <Hand aria-hidden="true" className="h-4 w-4 shrink-0" />
+          <span className="text-[11px] font-semibold leading-tight">Tvar sousta</span>
+        </Link>
+        {/* Prostý odkaz, ne tlačítko: losuje se až na adrese
+            /recepty/nahoda, aby si úvodní obrazovka kvůli němu nestahovala
+            celou kuchařku. */}
+        <Link
+          to="/recepty/nahoda"
+          data-testid="domu-nahodny-recept"
+          className="flex min-h-touch flex-col items-center justify-center gap-0.5 rounded-xl border border-dashed border-accent/50 px-1 py-1 text-center text-accent"
+        >
+          <Dices aria-hidden="true" className="h-4 w-4 shrink-0" />
+          <span className="text-[11px] font-semibold leading-tight">Náhodný recept</span>
+        </Link>
+      </div>
       </div>
 
       {/* Nákup a deník, každý na vlastní řádce pod plánem.

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { TastingEvent } from '@/types';
 import { AMOUNT_LABELS, REACTION_LABELS, formatDate } from '../lib/labels';
-import { draftPayload, emptyDraft } from '../lib/tastingDraft';
+import { draftPayload, draftZUdalosti, emptyDraft } from '../lib/tastingDraft';
 import type { Draft } from '../lib/tastingDraft';
 import { TastingForm } from './TastingForm';
 
@@ -51,12 +51,7 @@ export function TastingLog({
   }
 
   function startEdit(event: TastingEvent): void {
-    setDraft({
-      date: event.date,
-      amount: event.amount,
-      reaction: event.reaction,
-      note: event.note ?? '',
-    });
+    setDraft(draftZUdalosti(event));
     setAdding(false);
     setEditingId(event.id);
   }
@@ -127,6 +122,14 @@ export function TastingLog({
                   <span className="text-muted">
                     {AMOUNT_LABELS[event.amount]} · {REACTION_LABELS[event.reaction]}
                   </span>
+                  {event.davilo === true && (
+                    <span
+                      className="ml-1 inline-block rounded-md bg-caution/10 px-1.5 text-xs font-medium text-caution"
+                      data-testid={`davilo-${event.id}`}
+                    >
+                      dávilo se
+                    </span>
+                  )}
                   {event.note !== undefined && event.note.trim().length > 0 && (
                     <span className="mt-1 block text-sm italic text-ink/80">{event.note}</span>
                   )}

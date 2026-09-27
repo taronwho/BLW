@@ -48,7 +48,7 @@ export default defineConfig({
       workbox: {
         // Data jsou statická a jdou cachovat natvrdo — aplikace pak funguje
         // i po vypnutí sítě (akceptační kritérium 9).
-        globPatterns: ['**/*.{js,css,html,woff,woff2,png,svg,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,woff,woff2,png,webp,jpg,svg,webmanifest}'],
         // Firebase se z předběžné cache vyjímá.
         //
         // `src/storage/householdStore.ts` ho schválně stahuje až ve chvíli,

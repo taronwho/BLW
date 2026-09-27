@@ -8,6 +8,7 @@ import { INGREDIENT_CATEGORIES, KEY_ALLERGENS } from '@/types';
 import type { TastingEvent } from '@/types';
 import { ChokingBadge } from '../components/ChokingBadge';
 import { ChokingLegend } from '../components/ChokingLegend';
+import { DaveniPrehled } from '../components/DaveniPrehled';
 import type { DuvodNavrhu } from '../lib/derive';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
 import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
@@ -43,6 +44,7 @@ export function DiaryScreen(): ReactNode {
     return [...map.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1));
   }, [state, diteId]);
 
+  const aktivni = useMemo(() => activeTastings(state, diteId), [state, diteId]);
   const tasted = useMemo(() => tastedIds(state, diteId), [state, diteId]);
   const tips = useMemo(() => suggestions(state, dite, month), [state, dite, month]);
 
@@ -149,6 +151,8 @@ export function DiaryScreen(): ReactNode {
         </p>
       </section>
 
+      <DaveniPrehled udalosti={aktivni} />
+
       <section aria-labelledby="tipy-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
         <h2 id="tipy-nadpis" className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
           <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0" />
@@ -203,6 +207,7 @@ export function DiaryScreen(): ReactNode {
                           </span>
                           <span className="shrink-0 text-xs text-muted">
                             {AMOUNT_LABELS[event.amount]} · {REACTION_LABELS[event.reaction]}
+                            {event.davilo === true ? ' · dávilo se' : ''}
                           </span>
                         </Link>
                         {ingredient !== undefined && <ChokingBadge risk={ingredient.chokingRisk} />}

@@ -9,6 +9,7 @@ import {
   Sparkles,
   Star,
   Timer,
+  UtensilsCrossed,
   X,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -312,6 +313,18 @@ export function RecipesScreen(): ReactNode {
         <OdkazNaNakup testId="recepty-na-nakup" />
         </span>
       </div>
+
+      {/* Kuchařka nepokryje všechno, co rodina vaří. Tohle je cesta pro
+          jídlo, které v ní není: dětská porce z vlastního vaření. */}
+      <Link
+        to="/jime-my"
+        data-testid="recepty-jime-my"
+        className="flex min-h-touch items-center gap-2 rounded-xl border border-dashed border-accent/50 px-3 py-2 text-accent"
+      >
+        <UtensilsCrossed aria-hidden="true" className="h-5 w-5 shrink-0" />
+        <span className="min-w-0 flex-1 text-sm font-semibold">Vaříte něco, co tu není?</span>
+        <span className="shrink-0 text-xs text-muted">porce pro dítě</span>
+      </Link>
 
       <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-surface px-3 shadow-soft">
         <Search aria-hidden="true" className="h-5 w-5 shrink-0 text-muted" />
