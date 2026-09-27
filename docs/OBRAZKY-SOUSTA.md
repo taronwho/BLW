@@ -41,17 +41,19 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 
 **`uchop-nuzkovy`**
 
-Generuj úplně nově, ne jako variaci jiného obrázku: generátor jinak
-převezme pěst z dlaňového úchopu. Ruka leží na tácku, ne zdvižená.
+Generuj úplně nově, ne jako variaci jiného obrázku. Popis „scissor grasp"
+ani „natažený ukazovák" generátory nepochopily (kreslily pěst nebo znak
+„V"); přirovnání k držení klíče funguje líp. Když nástroj bere referenční
+obrázek, dej mu fotku ruky, která drží klíč.
 
 ```
-Side view at table height of a chubby 9-month-old baby's hand resting palm-down on a light high-chair tray. The index finger is stretched out flat and straight along the tray, pointing to the left. The thumb is pressed against the SIDE of the straight index finger, trapping one small soft cube of steamed orange sweet potato (about 1.5 cm) between the thumb pad and the side of the index finger, like the two blades of scissors closing. The tips of the thumb and index finger are far apart and do not touch. The middle, ring and little fingers are curled under the palm. The hand is a chubby baby hand with short fingers, exactly one thumb and four fingers, natural light skin tone, a light blue-grey sleeve at the wrist. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Close-up of a chubby 9-month-old baby's hand holding one small soft cube of steamed orange sweet potato (about 1.5 cm) the same way an adult holds a key: the index finger is gently curled, and the flat pad of the thumb presses the cube against the outer side of the curled index finger. The middle, ring and little fingers are curled into the palm behind the index finger, not extended. Viewed from the thumb side, the thumb and the side of the index finger in the foreground, the cube clearly visible between them. The hand is a chubby baby hand with short fingers, exactly one thumb and four fingers, natural light skin tone, a light blue-grey sleeve at the wrist. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
-Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery, fist, raised hand, hand pointing up, pincer grasp, fingertips touching, pinching with fingertips, OK hand gesture, food held in the fingertips`
+Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery, two fingers extended, V sign, peace sign, pointing finger, straight fingers, thumb on the back of the hand, food between two fingers, fingertip pinch`
 
-Správně: ukazovák rovný, kostka u jeho boku zhruba u prostředního kloubu,
-mezi konečky palce a ukazováku mezera.
+Správně: kostka mezi bříškem palce a bokem ohnutého ukazováku, ostatní
+prsty schované v dlani, žádný natažený prst.
 
 **`uchop-pinzetovy`**
 
