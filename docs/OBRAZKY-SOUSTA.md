@@ -41,11 +41,17 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 
 **`uchop-nuzkovy`**
 
+Generuj úplně nově, ne jako variaci jiného obrázku: generátor jinak
+převezme pěst z dlaňového úchopu. Ruka leží na tácku, ne zdvižená.
+
 ```
-Close-up side view of a 9-month-old baby's hand, seen from the thumb side, palm facing down. The baby holds one small soft cube of steamed orange sweet potato (about 1.5 cm) squeezed between the flat pad of the thumb and the SIDE of the index finger, near the middle joint of the index finger, like closing scissors. The index finger is almost straight and horizontal; the thumb lies flat along the underside of the index finger. The tips of the thumb and index finger do NOT touch each other. The middle, ring and little fingers are loosely curled into the palm. The cube is clearly visible between the thumb pad and the side of the index finger. The hand is a chubby baby hand with short fingers, exactly one thumb and four fingers, natural light skin tone, a light blue-grey sleeve at the wrist. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Side view at table height of a chubby 9-month-old baby's hand resting palm-down on a light high-chair tray. The index finger is stretched out flat and straight along the tray, pointing to the left. The thumb is pressed against the SIDE of the straight index finger, trapping one small soft cube of steamed orange sweet potato (about 1.5 cm) between the thumb pad and the side of the index finger, like the two blades of scissors closing. The tips of the thumb and index finger are far apart and do not touch. The middle, ring and little fingers are curled under the palm. The hand is a chubby baby hand with short fingers, exactly one thumb and four fingers, natural light skin tone, a light blue-grey sleeve at the wrist. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
-Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery, pincer grasp, fingertips touching, pinching with fingertips, closed fist, OK hand gesture, holding with the whole hand`
+Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery, fist, raised hand, hand pointing up, pincer grasp, fingertips touching, pinching with fingertips, OK hand gesture, food held in the fingertips`
+
+Správně: ukazovák rovný, kostka u jeho boku zhruba u prostředního kloubu,
+mezi konečky palce a ukazováku mezera.
 
 **`uchop-pinzetovy`**
 
