@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { ingredientById } from '@/data/ingredients';
-import { acceptDisclaimer, navLink, zalozDite } from './helpers';
+import { acceptDisclaimer, navLink, otevriDomacnost, zalozDite } from './helpers';
 
 /**
  * Tři věci, které dělají z aplikace BLW aplikaci: dětská porce z jídla
@@ -120,7 +120,15 @@ test('co dnes jíme my: dětská porce z rodinného jídla a zápis do deníku',
   await page.getByTestId('recepty-jime-my').click();
   await expect(page.getByTestId('jime-prazdno')).toBeVisible();
 
+  // Rychlý výběr je rozbalovací: zavřený nezabírá místo, po výběru se zavře
+  // a na přepínači je vidět, které jídlo je vybrané.
+  const prepinac = page.getByTestId('jime-jidla-prepinac');
+  await expect(prepinac).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByTestId('jime-jidla')).toHaveCount(0);
+  await prepinac.click();
   await page.getByTestId('jime-jidlo-kure-s-bramborem').click();
+  await expect(prepinac).toHaveAttribute('aria-expanded', 'false');
+  await expect(prepinac).toContainText('Pečené kuře s bramborem a mrkví');
   // Sůl do porce do roka nepatří a dá se odebrat dřív, než se přidá.
   const sul = page.getByTestId('jime-ne-sul');
   await expect(sul).toContainText('Až od 12 měsíců');
@@ -165,4 +173,21 @@ test('co dnes jíme my: alergie dítěte a nové alergeny', async ({ page }) => 
   // Nic není zavedené: víc nových alergenů naráz se ohlásí.
   await expect(page.getByTestId('jime-vic-alergenu')).toBeVisible();
   await expect(page.getByTestId('jime-porce-vejce-slepici')).toContainText('nemá zavedený');
+});
+
+test('nastavení dítěte ukazuje úchop obrázkem a tvar sousta, který z něj plyne', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', narozeniPred(9));
+  await otevriDomacnost(page, 'deti');
+
+  const vyber = page.getByTestId('vyber-uchopu');
+  await expect(vyber.locator('img[alt^="Nůžkový úchop"]')).toBeVisible();
+  await expect(page.getByTestId('uchop-tvar')).toHaveCount(0);
+
+  await page.getByTestId('uchop-nuzkovy').click();
+  await expect(page.getByTestId('uchop-tvar')).toContainText('větší kousky na uchopení dvěma prsty');
+
+  await page.getByTestId('uchop-pruvodce').click();
+  await expect(page).toHaveURL(/tvar-sousta\?uchop=nuzkovy/);
+  await expect(page.getByTestId('pruvodce-uchop-nuzkovy')).toHaveAttribute('aria-pressed', 'true');
 });

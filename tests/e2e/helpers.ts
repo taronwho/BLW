@@ -103,6 +103,7 @@ export const SCREENS: readonly ScreenDef[] = [
     open: async (page) => {
       await navLink(page, 'Domů').click();
       await page.getByTestId('domu-jime-my').click();
+      await page.getByTestId('jime-jidla-prepinac').click();
       await page.getByTestId('jime-jidlo-spagety-s-rajcaty').click();
       await expect(page.getByTestId('jime-souhrn')).toBeVisible();
     },

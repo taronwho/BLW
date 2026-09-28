@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   Check,
+  ChevronDown,
   ChevronRight,
   CircleSlash,
   NotebookPen,
@@ -200,8 +201,15 @@ export function JimeMyScreen(): ReactNode {
     [syrovyVyber, najdi],
   );
   const nastavVyber = (ids: readonly string[]): void => nastavSyrovyVyber(zapisVyber(ids));
+  // Které rodinné jídlo je vybrané: to, jehož suroviny přesně sedí na výběr.
+  // Jakmile rodič přidá nebo odebere surovinu, je to už jeho vlastní jídlo.
+  const vybraneJidlo = RODINNA_JIDLA.find((jidlo) => {
+    const ids = jidlo.suroviny.filter((id) => najdi(id) !== undefined);
+    return ids.length === vyber.length && ids.every((id) => vyber.includes(id));
+  });
 
   const [dotaz, setDotaz] = useState('');
+  const [jidlaOtevrena, setJidlaOtevrena] = useState(false);
   const [zapis, setZapis] = useState<Draft | null>(null);
   const [zapsat, setZapsat] = useState<ReadonlySet<string>>(new Set());
   const [zapsano, setZapsano] = useState<number | null>(null);
@@ -332,25 +340,58 @@ export function JimeMyScreen(): ReactNode {
           Z čeho vaříte
         </h2>
 
+        {/* Rozbalovací seznam, ne vodorovný pás: v pásu bylo vidět jen první
+            jídlo a půlka druhého, a že jich je dvanáct, rodič nepoznal. */}
         <div className="flex flex-col gap-1.5">
-          <span className="text-xs text-muted">Rychlý výběr, pak uprav podle sebe</span>
-          <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" data-testid="jime-jidla">
-            {RODINNA_JIDLA.map((jidlo) => (
-              <li key={jidlo.id} className="shrink-0">
-                <button
-                  type="button"
-                  data-testid={`jime-jidlo-${jidlo.id}`}
-                  onClick={() => {
-                    nastavVyber(jidlo.suroviny.filter((id) => najdi(id) !== undefined));
-                    setZapsano(null);
-                  }}
-                  className="min-h-touch rounded-full border border-line bg-paper px-3 text-sm font-medium"
-                >
-                  {jidlo.nazev}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <button
+            type="button"
+            aria-expanded={jidlaOtevrena}
+            aria-controls="jime-jidla"
+            data-testid="jime-jidla-prepinac"
+            onClick={() => setJidlaOtevrena(!jidlaOtevrena)}
+            className="flex min-h-touch w-full items-center gap-2 rounded-2xl border border-line bg-paper px-3 py-2 text-left text-sm"
+          >
+            <UtensilsCrossed aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
+            <span className="min-w-0 flex-1">
+              <span className="block font-medium">
+                {vybraneJidlo === undefined ? 'Vybrat běžné jídlo' : vybraneJidlo.nazev}
+              </span>
+              <span className="block text-xs text-muted">
+                Rychlý výběr surovin, pak uprav podle sebe
+              </span>
+            </span>
+            <ChevronDown
+              aria-hidden="true"
+              className={`h-5 w-5 shrink-0 text-muted transition-transform ${
+                jidlaOtevrena ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          {jidlaOtevrena && (
+            <ul id="jime-jidla" className="flex flex-col gap-1" data-testid="jime-jidla">
+              {RODINNA_JIDLA.map((jidlo) => (
+                <li key={jidlo.id}>
+                  <button
+                    type="button"
+                    data-testid={`jime-jidlo-${jidlo.id}`}
+                    aria-pressed={jidlo.id === vybraneJidlo?.id}
+                    onClick={() => {
+                      nastavVyber(jidlo.suroviny.filter((id) => najdi(id) !== undefined));
+                      setZapsano(null);
+                      setJidlaOtevrena(false);
+                    }}
+                    className={`flex min-h-touch w-full items-center rounded-xl border px-3 text-left text-sm ${
+                      jidlo.id === vybraneJidlo?.id
+                        ? 'border-accent bg-accent-soft font-semibold text-accent'
+                        : 'border-line bg-paper'
+                    }`}
+                  >
+                    {jidlo.nazev}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <label className="flex min-h-touch items-center gap-2 rounded-2xl border border-line bg-paper px-3">

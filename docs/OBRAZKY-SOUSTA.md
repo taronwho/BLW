@@ -141,7 +141,7 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 **`jidlo-jablko-mesicek`**
 
 ```
-A thick peeled apple wedge, steamed until soft and slightly translucent, a little steam rising, top-down view. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+One thick wedge of peeled apple cut from a whole apple like an orange segment, with the core and seeds removed, steamed until soft: pale creamy white flesh that is slightly translucent at the edges, a smooth curved outer side and two flat cut sides, clearly apple and not citrus, with no segment lines or membranes. A little steam rising above it. Top-down view, the wedge lying on its flat side. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
 Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
@@ -149,7 +149,7 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 **`jidlo-jablko-platek`**
 
 ```
-One very thin peeled slice of raw apple, top-down view. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+One very thin wedge-shaped slice of peeled raw apple, cut lengthwise like a thin crescent moon, with the core and seeds removed and no skin: pale creamy white flesh, so thin that it is slightly translucent at the edges. Not a round cross-section, no seeds, no star-shaped core. Top-down view. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
 Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
@@ -181,7 +181,7 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 **`jidlo-arasidy-cele`**
 
 ```
-A few whole shelled peanuts, top-down view. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Five whole shelled peanut kernels without shells: small oval kernels with a thin reddish-brown papery skin, one of them split into its two halves showing the pale inside. No peanut shells, no pods. Top-down view. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
 Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
