@@ -608,7 +608,7 @@ export const legumes: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Tempeh je fermentovaná sója slisovaná do bloku, takže je pevnější než tofu. Pro dítě ho nejdřív deset minut poduš v páře, pak nakrájej na tenké proužky a krátce opeč.',
+          'Tempeh je fermentovaná sója slisovaná do bloku, takže je pevnější než tofu. Pro dítě ho nejdřív deset minut poduš v páře, pak nakrájej na tenké hranolky a krátce opeč.',
         caution: 'Syrový tempeh má nahořklou chuť, vždy ho tepelně uprav.',
       },
       '9m': {
@@ -618,12 +618,12 @@ export const legumes: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí tempeh opečený na proužky nebo nadrobený v omáčce. V bezmasé variantě rodinného pokrmu nahradí maso a dodá výrazně víc bílkovin než samotná zelenina.',
+          'Batole jí tempeh opečený na hranolky nebo nadrobený v omáčce. V bezmasé variantě rodinného pokrmu nahradí maso a dodá výrazně víc bílkovin než samotná zelenina.',
         caution: 'Marinovaný tempeh z obchodu bývá dochucený sójovou omáčkou.',
       },
     },
     prepIdeas: [
-      'podušený a opečený na proužky',
+      'podušený a opečený na hranolky',
       'nadrobený do zeleninové omáčky',
       'nastrouhaný do těstovin',
       'zapečený s rajčaty',

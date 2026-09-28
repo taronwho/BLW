@@ -516,7 +516,7 @@ export const prvniUpravyMaso3: Recipe[] = [
       'Ze šťávy z dušení udělej omáčku k těstovinám.',
     ],
     vegetarianSteps: [
-      'Tofu nakrájej na proužky, osuš, osol a opeč ho na oleji s česnekem.',
+      'Tofu nakrájej na hranolky, osuš, osol a opeč ho na oleji s česnekem.',
       'Zakápni ho citronem stejně jako kalamáry.',
     ],
     vegetarianProteinSwap:

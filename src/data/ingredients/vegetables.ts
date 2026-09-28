@@ -1192,7 +1192,7 @@ export const vegetables: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batole jí okurku i se slupkou nakrájenou na kostky nebo na proužky. Nakládané okurky nech až na pozdější věk, obsahují hodně soli i octa.',
+          'Batole jí okurku i se slupkou nakrájenou na kostky nebo na hranolky. Nakládané okurky nech až na pozdější věk, obsahují hodně soli i octa.',
         caution: 'Kolečka okurky nekrájej, tvar je zbytečně rizikový.',
       },
     },

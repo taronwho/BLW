@@ -90,7 +90,7 @@ test('průvodce tvarem sousta: úchop podle dítěte, obrázky a pokyn z katalog
   await expect(nuzkovy).toHaveAttribute('aria-pressed', 'true');
   await expect(nuzkovy).toContainText('podle věku');
   await expect(
-    page.getByTestId('pruvodce-uchop').getByRole('img', { name: /Proužky a k nim větší kousky/ }),
+    page.getByTestId('pruvodce-uchop').getByRole('img', { name: /Hranolky a k nim větší kousky/ }),
   ).toBeVisible();
 
   await page.getByTestId('pruvodce-uchop-dlanovy').click();

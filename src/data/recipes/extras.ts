@@ -318,7 +318,7 @@ export const extras: Recipe[] = [
       'Brambor rozmačkej vidličkou s lžící vody a vmíchej do něj rybí vločky, aby držely pohromadě.',
     ],
     babyServing: {
-      '6m': 'Podej brambor s vmíchanou rybou jako hustou hromádku na okraji misky, ze které dítě nabírá dlaní. Kousek celeru nabídni jako podlouhlý proužek na délku prstu. Samotné rybí vločky se v pěsti ztratí, proto patří do brambory.',
+      '6m': 'Podej brambor s vmíchanou rybou jako hustou hromádku na okraji misky, ze které dítě nabírá dlaní. Kousek celeru nabídni jako podlouhlý hranolek na délku prstu. Samotné rybí vločky se v pěsti ztratí, proto patří do brambory.',
       '9m': 'Brambor s rybou nakrájej na kostky do dvou centimetrů a celer na kousky velikosti hrášku pro klešťový úchop.',
       '12m': 'Rozděl na talíři hromádku brambor s rybou a hromádku celeru vedle sebe a přidej lžíci; dítě už si nabírá samo.',
     },

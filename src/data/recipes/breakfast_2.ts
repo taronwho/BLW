@@ -354,12 +354,12 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 2 odeber dva plátky melounu stranou, dřív než se zakapávají limetkou.',
     babySteps: [
-      'Plátek melounu nakrájej na podlouhlý proužek velikosti prstu, který dítěti čouhá z pěsti.',
+      'Plátek melounu nakrájej na podlouhlý hranolek velikosti prstu, který dítěti čouhá z pěsti.',
       'Meloun je kluzký, proto ho pro jistotu obal v mletém sezamu, aby se lépe držel.',
-      'Cottage podávej samostatně v misce, dítě si do něj proužek namáčí.',
+      'Cottage podávej samostatně v misce, dítě si do něj hranolek namáčí.',
     ],
     babyServing: {
-      '6m': 'Podávej podlouhlé proužky melounu obalené v mletém sezamu a cottage sýr na lžíci.',
+      '6m': 'Podávej podlouhlé hranolky melounu obalené v mletém sezamu a cottage sýr na lžíci.',
       '9m': 'Nabídni meloun nakrájený na kousky velikosti fazole pro klešťový úchop.',
       '12m': 'Servíruj plátky melounu s cottage sýrem navrch; batole si je bere samo.',
     },
@@ -402,7 +402,7 @@ export const breakfast2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej jogurt s rozmačkaným mangem a nadrobno nasekaným dušeným ananasem na lžíci.',
-      '9m': 'Nabídni měkké proužky dušeného ananasu do ruky a jogurt v misce vedle.',
+      '9m': 'Nabídni měkké hranolky dušeného ananasu do ruky a jogurt v misce vedle.',
       '12m': 'Servíruj misku s kousky ananasu a manga; batole si je nabírá lžící samo.',
     },
     adultSteps: [
@@ -431,7 +431,7 @@ export const breakfast2: Recipe[] = [
     baseSteps: [
       'Toustový chléb opeč, aby krajíc zpevnil a udržel náplň.',
       'Kiwi oloupej a nakrájej na kolečka, tvrdý bílý střed vyřízni.',
-      'Banán oloupej a nakrájej ho podélně na proužky.',
+      'Banán oloupej a nakrájej ho podélně na hranolky.',
       'Mandlové máslo rozředěj lžící horké vody, aby se dalo tence roztírat.',
       'Na opečené krajíce rozetři mandlové máslo a rozlož kiwi s banánem.',
     ],
@@ -919,7 +919,7 @@ export const breakfast2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej kaši na naložené lžíci, nebo ji nanes v husté vrstvě na proužek měkkého pečiva.',
-      '9m': 'Nech kaši hrubší a přidej podélné proužky banánu, dítě si je bere z tácku samo.',
+      '9m': 'Nech kaši hrubší a přidej podélné hranolky banánu, dítě si je bere z tácku samo.',
       '12m': 'Batole jí kaši lžící z misky.',
     },
     adultSteps: [
@@ -959,7 +959,7 @@ export const breakfast2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej kaši na naložené lžíci, nebo ji nanes v husté vrstvě na proužek měkkého pečiva dlouhý jako dospělý prst.',
-      '9m': 'Nech kaši hrubší a přidej podélné proužky banánu, dítě si je bere z tácku samo.',
+      '9m': 'Nech kaši hrubší a přidej podélné hranolky banánu, dítě si je bere z tácku samo.',
       '12m': 'Batole jí kaši lžící z misky; rybíz pořád krájej napůl.',
     },
     adultSteps: [
@@ -1033,12 +1033,12 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
-      'Kiwi oloupej a nakrájej na podélné proužky; tvrdý střed vyřízni, ten se nerozžvýká.',
-      'Polovinu proužků rozmačkej do odebrané kaše a posyp lžičkou mletých dýňových semínek.',
+      'Kiwi oloupej a nakrájej na podélné hranolky; tvrdý střed vyřízni, ten se nerozžvýká.',
+      'Polovinu hranolků rozmačkej do odebrané kaše a posyp lžičkou mletých dýňových semínek.',
       'Kiwi je vydatný zdroj vitaminu C a ten zlepší vstřebání železa z pohanky i z mletých semínek. Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej kaši na naložené lžíci a vedle podélný proužek kiwi dlouhý jako dospělý prst.',
+      '6m': 'Podávej kaši na naložené lžíci a vedle podélný hranolek kiwi dlouhý jako dospělý prst.',
       '9m': 'Nech kaši hrubší a kiwi v kratších proužcích na dva prsty.',
       '12m': 'Batole jí kaši lžící z misky a kiwi nakrájené na sousta.',
     },
@@ -1108,20 +1108,20 @@ export const breakfast2: Recipe[] = [
     ],
     baseSteps: [
       'Špaldové vločky zalij mlékem a vař pět minut, dokud kaše nezhoustne.',
-      'Mango oloupej, odděl dužninu od pecky a nakrájej ji na podélné proužky.',
+      'Mango oloupej, odděl dužninu od pecky a nakrájej ji na podélné hranolky.',
       'Kaši odstav a nech dvě minuty dojít pod pokličkou, zhoustne tím.',
       'Nakrájené mango zakápni šťávou z půlky limetky, ať jeho sladkost dostane kyselý protiklad.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
-      'Polovinu mangových proužků rozmačkej do odebrané kaše, druhou nech vcelku jako sousto do ruky.',
+      'Polovinu mangových hranolků rozmačkej do odebrané kaše, druhou nech vcelku jako sousto do ruky.',
       'Posyp lžičkou mleté mandlové moučky, která nese rostlinné železo.',
       'Mango je dobrým zdrojem vitaminu C, takže se železo z mleté mandlové moučky vstřebá líp. Přidej špetku skořice a nech vychladnout na teplotu ruky.',
       'Do dětské porce limetku jen kápni; vitamin C z ní pomáhá vstřebat železo ze špaldových vloček.',
     ],
     babyServing: {
-      '6m': 'Podávej kaši na naložené lžíci a vedle podélný proužek manga, který dítě uchopí; mango je kluzké, osuš ho utěrkou.',
+      '6m': 'Podávej kaši na naložené lžíci a vedle podélný hranolek manga, který dítě uchopí; mango je kluzké, osuš ho utěrkou.',
       '9m': 'Nech kaši hrubší a mango v kratších proužcích na dva prsty.',
       '12m': 'Batole jí kaši lžící z misky a mango nakrájené na sousta.',
     },
@@ -1279,12 +1279,12 @@ export const breakfast2: Recipe[] = [
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce kaše do misky, dřív než se hrnec dochucuje pro dospělé.',
     babySteps: [
-      'Kiwi oloupej, vyřízni tvrdý střed a nakrájej ho na podélné proužky.',
+      'Kiwi oloupej, vyřízni tvrdý střed a nakrájej ho na podélné hranolky.',
       'Polovinu rozmačkej do odebrané kaše a posyp lžičkou mletých konopných semínek.',
       'Kiwi je vydatný zdroj vitaminu C a ten zlepší vstřebání železa z ječmene i z mletých semínek. Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej kaši na naložené lžíci a vedle podélný proužek kiwi dlouhý jako dospělý prst.',
+      '6m': 'Podávej kaši na naložené lžíci a vedle podélný hranolek kiwi dlouhý jako dospělý prst.',
       '9m': 'Nech kaši hrubší a kiwi v kratších proužcích na dva prsty.',
       '12m': 'Batole jí kaši lžící z misky a kiwi nakrájené na sousta.',
     },
@@ -1314,7 +1314,7 @@ export const breakfast2: Recipe[] = [
     baseSteps: [
       'Mandarinky oloupej a každý díl zbav vnitřní blány, ta je to, co dítě nerozžvýká.',
       'Tvaroh rozdělej vidličkou do hladka.',
-      'Banán nakrájej podélně na proužky.',
+      'Banán nakrájej podélně na hranolky.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce tvarohu do misky, dřív než se zbytek dochucuje pro dospělé.',
@@ -1324,7 +1324,7 @@ export const breakfast2: Recipe[] = [
       'Posyp lžičkou mletého sezamu; vitamin C z mandarinky zlepší vstřebání železa z mletého sezamu i z ovsa.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou směs na naložené lžíci a vedle podélný proužek banánu.',
+      '6m': 'Podávej hustou směs na naložené lžíci a vedle podélný hranolek banánu.',
       '9m': 'Nech směs hustší a přidej kousky mandarinkové dužniny na sbírání prsty.',
       '12m': 'Batole jí misku lžící samo.',
     },
@@ -1407,7 +1407,7 @@ export const breakfast2: Recipe[] = [
       'Vmíchej do porce kousky pomerančové dužiny; vitamin C z nich pomáhá vstřebat železo ze špaldových vloček.',
     ],
     babyServing: {
-      '6m': 'Podávej kaši na naložené lžíci a vedle podélný proužek banánu, který dítě uchopí.',
+      '6m': 'Podávej kaši na naložené lžíci a vedle podélný hranolek banánu, který dítě uchopí.',
       '9m': 'Nech kaši hrubší a banán v kratších proužcích na dva prsty.',
       '12m': 'Batole jí kaši lžící z misky samo.',
     },
@@ -1450,7 +1450,7 @@ export const breakfast2: Recipe[] = [
       'Do dětské porce limetku jen kápni, pár kapek stačí; vitamin C z ní pomáhá vstřebat rostlinné železo z pudinku.',
     ],
     babyServing: {
-      '6m': 'Podávej hustý pudink na naložené lžíci a vedle podélný proužek banánu.',
+      '6m': 'Podávej hustý pudink na naložené lžíci a vedle podélný hranolek banánu.',
       '9m': 'Nech pudink hustší, drží na lžíci líp než řídký; banán nabídni v kratších proužcích.',
       '12m': 'Batole jí pudink lžící z misky samo.',
     },

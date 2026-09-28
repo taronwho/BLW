@@ -121,7 +121,7 @@ export const prvniUpravyMlecne: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Lžíce okurkového dipu na předem naložené lžíci nebo namazaná na proužek pečiva.',
-      '9m': 'Miska dipu vedle proužků zeleniny, do kterých si dítě samo namáčí.',
+      '9m': 'Miska dipu vedle hranolků zeleniny, do kterých si dítě samo namáčí.',
       '12m': 'Stejný dip jako pro dospělé, jen bez soli.',
     },
     adultSteps: [

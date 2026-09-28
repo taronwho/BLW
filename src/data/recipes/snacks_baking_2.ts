@@ -364,7 +364,7 @@ export const snacksBaking2: Recipe[] = [
       'Po kroku 4 odeber jeden namazaný chlebíček stranou, dřív než se sypou mletá semínka a skořice.',
     babySteps: [
       'Zkontroluj, že je kešu máslo opravdu rozředěné; hustá vrstva ořechového másla se lepí na patro.',
-      'Banán nakrájej podélně na proužky velikosti prstu, kolečko je kulaté a klouže.',
+      'Banán nakrájej podélně na hranolky velikosti prstu, kolečko je kulaté a klouže.',
       'Rýžový chlebíček pro dítě rozlom na velký kus, ne na drobky, které se snadno vdechnou.',
       'Na dětský chlebíček polož plátky jahod; vitamin C z nich pomáhá vstřebat železo z kešu másla.',
     ],
@@ -691,7 +691,7 @@ export const snacksBaking2: Recipe[] = [
   },
   {
     id: 'cottage-dip-s-redkvickami',
-    titleCz: 'Cottage dip s ředkvičkami a zeleninovými proužky',
+    titleCz: 'Cottage dip s ředkvičkami a zeleninovými hranolky',
     category: 'svaciny-peceni',
     minAgeMonths: 6,
     timeMinutes: 15,
@@ -706,21 +706,21 @@ export const snacksBaking2: Recipe[] = [
     baseSteps: [
       'Cottage sýr rozmíchej vidličkou s nasekaným koprem do hladkého dipu.',
       'Ředkvičky omyj a odkroj nať i kořínek. Jednu si nech celou stranou pro dětskou porci, zbytek nakrájej na tenké plátky.',
-      'Okurku oloupej a nakrájej ji na dlouhé úzké proužky, ne na kolečka.',
-      'Kedlubnu oloupej a nakrájej ji na stejně dlouhé proužky jako okurku.',
-      'Na talíř navrš dip a kolem něj rozlož zeleninové proužky a plátky ředkviček.',
+      'Okurku oloupej a nakrájej ji na dlouhé úzké hranolky, ne na kolečka.',
+      'Kedlubnu oloupej a nakrájej ji na stejně dlouhé hranolky jako okurku.',
+      'Na talíř navrš dip a kolem něj rozlož zeleninové hranolky a plátky ředkviček.',
     ],
     babySplitPoint:
       'Po kroku 1 odeber dvě lžíce dipu do misky, dřív než se do zbytku přidává cokoli na dochucení. Celou ředkvičku odloženou v kroku 2 si nech k ní.',
     babySteps: [
-      'Kedlubnové proužky pro dítě krátce povař v páře, syrová kedlubna je pro tenhle věk moc tvrdá.',
+      'Kedlubnové hranolky pro dítě krátce povař v páře, syrová kedlubna je pro tenhle věk moc tvrdá.',
       'Odloženou ředkvičku poduš v páře doměkka a teprve pak ji jemně nastrouhej do dětského dipu. Syrová je do roka tvrdá a ostrá, celá ani na plátky do téhle porce nepatří.',
       'Okurkový proužek nech syrový, ale oloupaný, slupka se pod dásněmi neroztrhne.',
     ],
     babyServing: {
-      '6m': 'Podávej dušený kedlubnový proužek velikosti prstu a dip v misce na namáčení.',
-      '9m': 'Nabídni proužky okurky i dušené kedlubny a dip s nastrouhanou ředkvičkou.',
-      '12m': 'Servíruj syrové zeleninové proužky a dip; ředkvičku krájej na tenké plátky.',
+      '6m': 'Podávej dušený kedlubnový hranolek velikosti prstu a dip v misce na namáčení.',
+      '9m': 'Nabídni hranolky okurky i dušené kedlubny a dip s nastrouhanou ředkvičkou.',
+      '12m': 'Servíruj syrové zeleninové hranolky a dip; ředkvičku krájej na tenké plátky.',
     },
     adultSteps: [
       'Dip pro dospělé osol, opepři a doplň ho plátky šunky srolovanými do ruliček.',
@@ -790,14 +790,14 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'chleb-toustovy', amount: '4 krajíce', track: 'all' },
     ],
     baseSteps: [
-      'Mozzarellu sceď a nakrájej ji na podlouhlé proužky, ne na kuličky.',
+      'Mozzarellu sceď a nakrájej ji na podlouhlé hranolky, ne na kuličky.',
       'Rajčata nakrájej na klínky; malá cherry rajčata by musela jít podélně na čtvrtky.',
       'Toustový chléb opeč a nakrájej ho na kostky velikosti sousta.',
       'Na špejle střídavě napichuj mozzarellu, rajče a kostku chleba a posyp je oreganem.',
       'Špejle zakápni dýňovým olejem a podávej je hned, teplem olej ztrácí aroma.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber pár proužků mozzarelly, klínků rajčete a kostek chleba stranou.',
+      'Po kroku 3 odeber pár hranolků mozzarelly, klínků rajčete a kostek chleba stranou.',
     babySteps: [
       'Batoleti špejli nikdy nedávej do ruky, servíruj složky volně na talíři.',
       'Mozzarellu podávej v podlouhlých proužcích; kulatá kulička je typický tvar, který uzavře dýchací cesty.',
@@ -806,7 +806,7 @@ export const snacksBaking2: Recipe[] = [
     babyServing: {
       '6m': 'Recept je stavěný na batole; v šesti měsících nabídni jen rozmačkané rajče bez slupky.',
       '9m': 'V devíti měsících podávej proužek mozzarelly a měkké rajče bez slupky, špejli vynech.',
-      '12m': 'Batoleti dej složky volně na talíři: proužky sýra, klínky rajčete a kostky chleba.',
+      '12m': 'Batoleti dej složky volně na talíři: hranolky sýra, klínky rajčete a kostky chleba.',
     },
     adultSteps: [
       'Špejle pro dospělé osol, opepři a doplň je kostkou šunky.',
@@ -920,19 +920,19 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Grapefruit i pomelo oloupej a každý díl zbav i vnitřní blány: právě ta je u citrusů to, co dítě nerozžvýká.',
-      'Meloun nakrájej na proužky dlouhé jako prst, ne na kostky; proužek se dá uchopit, kostka sklouzne.',
+      'Meloun nakrájej na hranolky dlouhé jako prst, ne na kostky; hranolek se dá uchopit, kostka sklouzne.',
       'Dužninu citrusů rozděl na kousky a smíchej s melounem.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dva proužky melounu a lžíci citrusové dužniny, dřív než se mísa dochucuje pro dospělé.',
+      'Po kroku 3 odeber dva hranolky melounu a lžíci citrusové dužniny, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj, že na odebrané dužnině nezůstal ani kousek blány.',
       'Citrusovou dužninu rozmačkej vidličkou a vmíchej do lžíce řeckého jogurtu, kyselost se tím srovná.',
       'Kůži kolem pusy potři předem tenkou vrstvou tuku, kyselé ovoce ji dráždí.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek melounu dlouhý jako dospělý prst a k němu lžíci jogurtu s rozmačkanou citrusovou dužninou.',
-      '9m': 'Proužky melounu nech kratší, na dva prsty, a dužninu nech v kouscích.',
+      '6m': 'Podávej hranolek melounu dlouhý jako dospělý prst a k němu lžíci jogurtu s rozmačkanou citrusovou dužninou.',
+      '9m': 'Hranolky melounu nech kratší, na dva prsty, a dužninu nech v kouscích.',
       '12m': 'Batole jí salát z misky lžící samo.',
     },
     adultSteps: [
@@ -970,11 +970,11 @@ export const snacksBaking2: Recipe[] = [
     babySteps: [
       'Dužninu liči rozřež podélně na čtvrtky. Celé ani přepůlené se nepodává nikdy, kulatý tvar dýchací cesty uzavře.',
       'Granátová jádra rozmačkej v sítu a protlač; do porce patří jen šťáva, tvrdá jadérka zůstanou v sítu.',
-      'Banán nakrájej podélně na proužky a všechno vmíchej do odebraného jogurtu spolu se lžičkou mletých semínek chia, která necháš deset minut nabobtnat.',
+      'Banán nakrájej podélně na hranolky a všechno vmíchej do odebraného jogurtu spolu se lžičkou mletých semínek chia, která necháš deset minut nabobtnat.',
       'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat rostlinné železo z jogurtové misky.',
     ],
     babyServing: {
-      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek banánu, který dítě uchopí.',
+      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný hranolek banánu, který dítě uchopí.',
       '9m': 'Čtvrtky liči nech v jogurtu, dítě je nabírá lžící; podélné krájení platí dál.',
       '12m': 'Batole jí misku lžící samo. Liči pořád krájej na čtvrtky, ne na půlky.',
     },
@@ -1091,7 +1091,7 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Pistácie, para ořechy i piniové oříšky umel odděleně na jemnou moučku.',
-      'Hrušky oloupej, zbav jádřinců a nakrájej na podélné proužky.',
+      'Hrušky oloupej, zbav jádřinců a nakrájej na podélné hranolky.',
       'Jogurt rozdělej lžící do hladka a rozděl do misek.',
       'Kiwi oloupej a nakrájej na kostky, které rozložíš po jogurtu.',
     ],
@@ -1100,17 +1100,17 @@ export const snacksBaking2: Recipe[] = [
     babySteps: [
       'Vmíchej do odebraného jogurtu lžičku mleté pistáciové moučky a jen špetku mleté moučky z para ořechů. Ta je kvůli selenu položkou na občas, ne na každý den.',
       'Přidej lžičku slunečnicového másla a rozmíchej ho, ať nezůstane v hrudce.',
-      'Vedle nabídni podélný proužek hrušky, který dítě uchopí.',
+      'Vedle nabídni podélný hranolek hrušky, který dítě uchopí.',
       'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat železo z mleté ořechové směsi.',
     ],
     babyServing: {
-      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek hrušky dlouhý jako dospělý prst.',
+      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný hranolek hrušky dlouhý jako dospělý prst.',
       '9m': 'Hrušku nech v kratších proužcích na dva prsty, jogurt dítě nabírá lžící samo.',
       '12m': 'Batole jí misku lžící a hrušku nakrájenou na sousta.',
     },
     adultSteps: [
       'Zbylý jogurt posyp mletými pistáciemi a piniovými oříšky.',
-      'Přidej proužky hrušky a lžíci slunečnicového másla; kdo chce, dosladí si na talíři sám.',
+      'Přidej hranolky hrušky a lžíci slunečnicového másla; kdo chce, dosladí si na talíři sám.',
     ],
     allergens: ['orechy', 'mleko'],
     tags: ['vegetariánské', 'rychlé', 'bez lepku'],
@@ -1218,11 +1218,11 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Papriky rozkroj, zbav jadérek a nakrájej na proužky dlouhé jako prst.',
-      'Mrkev oloupej, nakrájej na stejné proužky a duste ji pět minut, aby změkla.',
+      'Mrkev oloupej, nakrájej na hranolky stejně dlouhé jako paprika a duste je pět minut, aby změkly.',
       'Hummus rozdělej lžící a rozděl do misek.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dvě lžíce hummusu a pár proužků zeleniny, dřív než se mísa dochucuje pro dospělé.',
+      'Po kroku 3 odeber dvě lžíce hummusu a pár kousků zeleniny, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Papriku pro dětskou porci krátce spař, syrová slupka je tuhá a v puse se svine.',
       'Do odebraného hummusu vymačkej kapku citronu; vitamin C z papriky i z citronu zlepší vstřebání železa z cizrny a z mletého sezamu v hummusu.',
@@ -1620,7 +1620,7 @@ export const snacksBaking2: Recipe[] = [
   },
   {
     id: 'tvarohovy-dip-s-mrkvovymi-prouzky',
-    titleCz: 'Tvarohový dip s mrkvovými proužky',
+    titleCz: 'Tvarohový dip s mrkvovými hranolky',
     category: 'svaciny-peceni',
     minAgeMonths: 6,
     timeMinutes: 15,
@@ -1634,20 +1634,20 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'seminka-slunecnicova-mleta', amount: '1 lžíce', track: 'all' },
     ],
     baseSteps: [
-      'Mrkev a papriku nakrájej na proužky dlouhé jako prst.',
-      'Mrkvové proužky duste pět minut, aby změkly; papriku pro dětskou porci krátce spař.',
+      'Mrkev nakrájej na hranolky a papriku na proužky, obojí dlouhé jako prst.',
+      'Mrkvové hranolky duste pět minut, aby změkly; papriku pro dětskou porci krátce spař.',
       'Tvaroh rozdělej vidličkou s nasekanou pažitkou.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber dvě lžíce tvarohu a pár proužků zeleniny, dřív než se mísa dochucuje pro dospělé.',
+      'Po kroku 3 odeber dvě lžíce tvarohu a pár kousků zeleniny, dřív než se mísa dochucuje pro dospělé.',
     babySteps: [
       'Do odebraného tvarohu vmíchej lžičku mletých slunečnicových semínek a kapku citronu.',
       'Paprika i citron nesou vitamin C, který zlepší vstřebání železa z mletých semínek.',
-      'Zkontroluj prstem, že se proužek mrkve dá rozmáčknout.',
+      'Zkontroluj prstem, že se hranolek mrkve dá rozmáčknout.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek dušené mrkve dlouhý jako dospělý prst a dip k němu na lžíci.',
-      '9m': 'Proužky nech kratší, na dva prsty; dítě si je do dipu namáčí samo.',
+      '6m': 'Podávej hranolek dušené mrkve dlouhý jako dospělý prst a dip k němu na lžíci.',
+      '9m': 'Hranolky i proužky nech kratší, na dva prsty; dítě si je do dipu namáčí samo.',
       '12m': 'Batole jí zeleninu s dipem samo a papriku už zvládne syrovou.',
     },
     adultSteps: [
@@ -1716,19 +1716,19 @@ export const snacksBaking2: Recipe[] = [
     ],
     baseSteps: [
       'Kaki musí být úplně zralé a měkké; tvrdé svírá ústa a dítě ho vyplivne.',
-      'Papáju rozkroj, vyber lžící jadérka a dužninu nakrájej na podélné proužky.',
+      'Papáju rozkroj, vyber lžící jadérka a dužninu nakrájej na podélné hranolky.',
       'Jogurt rozdělej lžící do hladka a rozděl do misek.',
     ],
     babySplitPoint:
       'Po kroku 3 naber dvě lžíce jogurtu do misky, dřív než se zbytek dochucuje pro dospělé.',
     babySteps: [
       'Dužninu kaki vyber lžící a rozmačkej ji do odebraného jogurtu; slupku vyhoď, je tuhá.',
-      'Přidej podélný proužek papáji a posyp lžičkou mletých lněných semínek.',
+      'Přidej podélný hranolek papáji a posyp lžičkou mletých lněných semínek.',
       'Papája i kaki nesou vitamin C, takže se železo z mletých semínek vstřebá líp. Zakápni kapkou limetky.',
     ],
     babyServing: {
-      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný proužek papáji, který dítě uchopí.',
-      '9m': 'Proužky nech kratší, na dva prsty, a jogurt hustší.',
+      '6m': 'Podávej jogurt na naložené lžíci a vedle podélný hranolek papáji, který dítě uchopí.',
+      '9m': 'Hranolky nech kratší, na dva prsty, a jogurt hustší.',
       '12m': 'Batole jí misku lžící samo a ovoce si bere rukou.',
     },
     adultSteps: [
@@ -1756,9 +1756,9 @@ export const snacksBaking2: Recipe[] = [
       { ingredientId: 'kiwi', amount: '1 kus', track: 'all' },
     ],
     baseSteps: [
-      'Ananas oloupej, vyřízni tvrdý střed a dužninu nakrájej na podélné proužky.',
+      'Ananas oloupej, vyřízni tvrdý střed a dužninu nakrájej na podélné hranolky.',
       'Tvaroh rozdělej vidličkou do hladka.',
-      'Banán nakrájej podélně na proužky.',
+      'Banán nakrájej podélně na hranolky.',
       'Kiwi oloupej a nakrájej na kostky, které smícháš s ananasem.',
     ],
     babySplitPoint:
@@ -1770,7 +1770,7 @@ export const snacksBaking2: Recipe[] = [
       'Přidej do dětské misky kostky kiwi; vitamin C z nich pomáhá vstřebat železo z mletých slunečnicových semínek.',
     ],
     babyServing: {
-      '6m': 'Podávej tvaroh s nadrobno nakrájeným ananasem na naložené lžíci a vedle podélný proužek banánu.',
+      '6m': 'Podávej tvaroh s nadrobno nakrájeným ananasem na naložené lžíci a vedle podélný hranolek banánu.',
       '9m': 'Ananas nech v kratších proužcích na dva prsty; vlákna pořád krájej napříč.',
       '12m': 'Batole jí misku lžící samo a ovoce si bere rukou.',
     },

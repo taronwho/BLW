@@ -31,13 +31,13 @@ export type ChokingRisk = 'low' | 'medium' | 'high';
  * V jaké podobě se surovina dostane na talíř.
  *
  * Rozhoduje o tom, jestli má u ní vůbec smysl radit tvar sousta. Rada
- * „krájej na proužky dlouhé jako prst" je u amarantu i u ředkvičky nesmysl —
+ * „krájej na hranolky dlouhé jako prst" je u amarantu i u ředkvičky nesmysl —
  * jedno je kaše, druhé je menší než prst samo o sobě. Nesmyslná rada přitom
  * není neškodná: naučí rodiče panel přeskakovat i tam, kde na něm záleží.
  *
- *  - `kusove`   — dá se nakrájet na proužky a kousky (mrkev, kuře, jablko)
+ *  - `kusove`   — dá se nakrájet na hranolky a kousky (mrkev, kuře, jablko)
  *  - `drobne`   — samo o sobě menší než prst; řeší se půlení a čtvrcení,
- *                 ne délka proužku (ředkvička, hrášek, borůvky, těstoviny)
+ *                 ne délka hranolku (ředkvička, hrášek, borůvky, těstoviny)
  *  - `kasovite` — kaše, pyré, pomazánka, mletá surovina; podává se na lžíci
  *                 nebo nanesená na nosiči (amarant, jogurt, tahini)
  *  - `neresi`   — nápoj, tuk, koření, sladidlo; sousto z toho nevzniká

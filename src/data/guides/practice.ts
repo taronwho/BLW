@@ -150,10 +150,10 @@ export const practice: Guide[] = [
     titleCz: 'Úchop rozhoduje o tvaru, věk o výběru',
     category: 'praxe',
     summary:
-      'Jestli nabídnout proužek nebo malý kousek, neurčuje kalendář, ale to, co ruka dítěte právě umí. Co se smí nabízet a jak měkké to musí být, se dál řídí věkem.',
+      'Jestli nabídnout hranolek nebo malý kousek, neurčuje kalendář, ale to, co ruka dítěte právě umí. Co se smí nabízet a jak měkké to musí být, se dál řídí věkem.',
     keyPoints: [
       'Dlaňový úchop: sousto dlouhé jako dospělý prst, aby konec čouhal z pěsti.',
-      'Pinzetový úchop: dítě zvedne hrášek nebo drobek a dlouhé proužky ztrácejí smysl.',
+      'Pinzetový úchop: dítě zvedne hrášek nebo drobek a dlouhé hranolky ztrácejí smysl.',
       'Úchop nemění, co dítě smí dostat: jen jaký tvar mu to podáš.',
       'U potravin s vysokým rizikem dušení rozhoduje pravidlo o tvaru, ne zručnost ruky.',
     ],
@@ -171,10 +171,10 @@ export const practice: Guide[] = [
         heading: 'Jak se úchop mění',
         asList: true,
         body: [
-          'Dlaňový, zhruba od šesti měsíců: celé sousto mizí v pěsti. Krájej na proužky jako dospělý prst.',
-          'Nůžkový, obvykle mezi osmým a desátým měsícem: dítě přitiskne kousek mezi palec a bok ukazováku. Proužky pořád platí, menší kousky už se dají přidat.',
+          'Dlaňový, zhruba od šesti měsíců: celé sousto mizí v pěsti. Krájej na hranolky jako dospělý prst; vroubkovaný nůž udělá zvlněný povrch, který z pěsti tolik neklouže.',
+          'Nůžkový, obvykle mezi osmým a desátým měsícem: dítě přitiskne kousek mezi palec a bok ukazováku. Hranolky pořád platí, menší kousky už se dají přidat.',
           'Klešťový, krátce po něm: sevření mezi palcem a ohnutým ukazovákem, jistější než nůžkový.',
-          'Pinzetový, u většiny dětí mezi devátým a dvanáctým měsícem: sevření mezi bříškem palce a bříškem ukazováku. Dítě zvedne hrášek, kousek těstoviny nebo drobek a dlouhé proužky přestává potřebovat.',
+          'Pinzetový, u většiny dětí mezi devátým a dvanáctým měsícem: sevření mezi bříškem palce a bříškem ukazováku. Dítě zvedne hrášek, kousek těstoviny nebo drobek a dlouhé hranolky přestává potřebovat.',
         ],
       },
       {

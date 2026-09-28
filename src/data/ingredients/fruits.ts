@@ -264,7 +264,7 @@ export const fruits: Ingredient[] = [
       },
       '9m': {
         serving:
-          'Vypeckovanou meruňku krájej na proužky, které dítě uchopí mezi prsty. Slupku už můžeš nechat, pokud je plod měkký a slupka se při zmáčknutí trhá.',
+          'Vypeckovanou meruňku krájej na hranolky, které dítě uchopí mezi prsty. Slupku už můžeš nechat, pokud je plod měkký a slupka se při zmáčknutí trhá.',
         caution: 'Meruňky z kompotu bývají ve sladkém nálevu, vybírej čerstvé.',
       },
       '12m': {
@@ -347,7 +347,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zralou nektarinku oloupej, vypeckuj a rozřež na dlouhé měkké proužky. Pokud je dužina tuhá, nech ji tři minuty v páře, ať povolí a nechá se rozmáčknout mezi prsty.',
+          'Zralou nektarinku oloupej, vypeckuj a rozřež na dlouhé měkké hranolky. Pokud je dužina tuhá, nech ji tři minuty v páře, ať povolí a nechá se rozmáčknout mezi prsty.',
         caution: 'Tvrdá nektarinka z lednice se do téhle fáze nehodí.',
       },
       '9m': {
@@ -362,7 +362,7 @@ export const fruits: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'proužky v páře do měkka',
+      'hranolky v páře do měkka',
       'kostky do bílého jogurtu',
       'rozmačkaná s banánem',
       'zapečená s ovesnými vločkami',
@@ -873,7 +873,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Vydlabej střed s jadérky, odřízni kůru a dužinu nakrájej na silné proužky. Zralý plod voní i přes slupku a dužina se dá rozmáčknout, nezralý zůstává tuhý a bez chuti.',
+          'Vydlabej střed s jadérky, odřízni kůru a dužinu nakrájej na silné hranolky. Zralý plod voní i přes slupku a dužina se dá rozmáčknout, nezralý zůstává tuhý a bez chuti.',
         caution: 'Povrch melounu omyj před krájením, nese bakterie z půdy.',
       },
       '9m': {
@@ -888,7 +888,7 @@ export const fruits: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'proužky do ruky bez kůry',
+      'hranolky do ruky bez kůry',
       'kostky do jogurtu',
       'rozmixovaný na husté pyré',
       'smíchaný s rozmačkaným banánem',
@@ -961,7 +961,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Odřízni slupku i tvrdý střed a z měkké části nakrájej dlouhé proužky přes vlákna, ne po nich. Tuhý plod krátce podus, tepelná úprava vlákna zkrátí a chuť zjemní.',
+          'Odřízni slupku i tvrdý střed a z měkké části nakrájej dlouhé hranolky přes vlákna, ne po nich. Tuhý plod krátce podus, tepelná úprava vlákna zkrátí a chuť zjemní.',
         caution: 'Kyselina v ananasu dráždí bradu, potři ji předem tenkou vrstvou tuku.',
       },
       '9m': {
@@ -976,7 +976,7 @@ export const fruits: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'proužky krátce podušené',
+      'hranolky krátce podušené',
       'kostky zapečené v troubě',
       'rozmixovaný do jogurtu',
       'nakrájený do ovesné kaše',
@@ -1491,7 +1491,7 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Zralou papáju rozkroj, vyber lžící tmavá zrníčka ze středu a dužinu nakrájej na silné proužky. Je tak měkká, že se dá rozmáčknout mezi prsty, a proto je vděčnou první potravinou.',
+          'Zralou papáju rozkroj, vyber lžící tmavá zrníčka ze středu a dužinu nakrájej na silné hranolky. Je tak měkká, že se dá rozmáčknout mezi prsty, a proto je vděčnou první potravinou.',
         caution: 'Nezralá zelená papája je tuhá a v téhle fázi se nehodí.',
       },
       '9m': {
@@ -1506,7 +1506,7 @@ export const fruits: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'proužky do ruky bez zrníček',
+      'hranolky do ruky bez zrníček',
       'rozmačkaná do bílého jogurtu',
       'rozmixovaná s banánem',
       'kostky v ovocném salátu',
@@ -1799,12 +1799,12 @@ export const fruits: Ingredient[] = [
     prep: {
       '6m': {
         serving:
-          'Žlutý meloun je sladší a pevnější než vodní. Nakrájej ho na proužky dlouhé jako dospělý prst, ne na kostky: proužek se dá uchopit a kostka sklouzne.',
+          'Žlutý meloun je sladší a pevnější než vodní. Nakrájej ho na hranolky dlouhé jako dospělý prst, ne na kostky: hranolek se dá uchopit a kostka sklouzne.',
         caution: 'Vyber zralý, tvrdý meloun je pro dítě moc pevný na rozžvýkání.',
       },
       '9m': {
         serving:
-          'V devíti měsících nech proužky kratší, na uchopení dvěma prsty. Meloun je z velké části voda, takže se hodí v horkých dnech.',
+          'V devíti měsících nech hranolky kratší, na uchopení dvěma prsty. Meloun je z velké části voda, takže se hodí v horkých dnech.',
         caution: 'Kluzké kousky dítěti vyklouzávají; osuš je kouskem utěrky, líp je udrží.',
       },
       '12m': {
@@ -1814,7 +1814,7 @@ export const fruits: Ingredient[] = [
       },
     },
     prepIdeas: [
-      'proužky dlouhé jako prst',
+      'hranolky dlouhé jako prst',
       'do ovocného salátu',
       'rozmixovaný do jogurtu',
       's mátou pro dospělé',

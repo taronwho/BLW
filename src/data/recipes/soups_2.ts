@@ -700,7 +700,7 @@ export const soups2: Recipe[] = [
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na naložené lžíci a vedle proužek pečené dýně dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou polévku na naložené lžíci a vedle hranolek pečené dýně dlouhý jako dospělý prst.',
       '9m': 'Nech polévku hrubší a kousky dýně tak velké, aby je dítě zvedlo dvěma prsty.',
       '12m': 'Batole jí polévku lžící z misky samo.',
     },
@@ -1003,7 +1003,7 @@ export const soups2: Recipe[] = [
       'Nech vychladnout na teplotu ruky; zázvor je v porci jen v náznaku, ostrý být nemá.',
     ],
     babyServing: {
-      '6m': 'Podávej hustý krém na naložené lžíci a vedle proužek dušené mrkve dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustý krém na naložené lžíci a vedle hranolek dušené mrkve dlouhý jako dospělý prst.',
       '9m': 'Nech krém hrubší a mrkev v kratších proužcích na dva prsty.',
       '12m': 'Batole jí krém lžící z misky samo.',
     },
@@ -1046,7 +1046,7 @@ export const soups2: Recipe[] = [
       'Kápni citronovou šťávu a posyp špetkou nasekané petrželky; vitamin C z citronu pomůže vstřebat železo z jáhel.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou část polévky na naložené lžíci a vedle proužek vařené mrkve dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou část polévky na naložené lžíci a vedle hranolek vařené mrkve dlouhý jako dospělý prst.',
       '9m': 'Nech zeleninu v kouscích na uchopení dvěma prsty a jáhly nech hrubší.',
       '12m': 'Batole jí polévku lžící z misky samo.',
     },
@@ -1088,7 +1088,7 @@ export const soups2: Recipe[] = [
       'Nech vychladnout na teplotu ruky a rozprostři polévku v misce.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou polévku na naložené lžíci a vedle proužek pečeného batátu dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou polévku na naložené lžíci a vedle hranolek pečeného batátu dlouhý jako dospělý prst.',
       '9m': 'Nech polévku hrubší a batát v kratších proužcích na dva prsty.',
       '12m': 'Batole jí polévku lžící z misky samo.',
     },

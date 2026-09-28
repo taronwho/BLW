@@ -87,12 +87,12 @@ describe('úchop nikdy neoslabuje bezpečnost', () => {
    * Rada, která u dané suroviny nedává smysl, není neškodná: naučí rodiče
    * panel přeskakovat i tam, kde na něm záleží.
    */
-  it('u kaše a u drobné suroviny se neradí krájení na proužky', () => {
+  it('u kaše a u drobné suroviny se neradí krájení na hranolky ani proužky', () => {
     for (const grip of GRIPS) {
       for (const risk of RIZIKA) {
         for (const form of ['kasovite', 'drobne'] as const) {
           const rada = gripShapeAdvice(grip, risk, form);
-          expect(rada, `${grip}/${risk}/${form}`).not.toMatch(/Krájej na proužky/);
+          expect(rada, `${grip}/${risk}/${form}`).not.toMatch(/Krájej na (hranolky|proužky)/);
         }
       }
     }

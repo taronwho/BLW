@@ -64,7 +64,7 @@ export function recipeAllergens(recipe: Recipe): string[] {
 
 /**
  * Podoba receptu na talíři. Bere tu nejhrubší složku, kterou jídlo obsahuje:
- * stačí jedna věc, která se dá nakrájet na proužky, a rada o tvaru sousta
+ * stačí jedna věc, která se dá nakrájet na hranolky, a rada o tvaru sousta
  * dává smysl. Když v receptu není nic kusového ani drobného, je to kaše.
  * Recept nikdy nevyjde jako „neřeší se" — jídlo vždycky něco na talíři má.
  */

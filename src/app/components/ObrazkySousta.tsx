@@ -78,7 +78,7 @@ function Soubor({ klic, popis }: { klic: KlicObrazku; popis: string }): ReactNod
 /* ------------------------------------------------------------------ úchopy */
 
 const POPIS_UCHOPU: Record<Grip, string> = {
-  dlanovy: 'Dlaňový úchop: proužek jídla sevřený v celé pěsti, konec čouhá ven',
+  dlanovy: 'Dlaňový úchop: hranolek jídla sevřený v celé pěsti, konec čouhá ven',
   nuzkovy: 'Nůžkový úchop: kousek jídla přitisknutý palcem k boku ukazováku',
   pinzetovy: 'Pinzetový úchop: drobný kousek sevřený mezi bříškem palce a bříškem ukazováku',
 };
@@ -98,8 +98,8 @@ export function ObrazekMekkosti(): ReactNode {
 }
 
 const POPIS_TVARU: Record<Grip, string> = {
-  dlanovy: 'Proužky jídla dlouhé zhruba jako dospělý prst',
-  nuzkovy: 'Proužky a k nim větší kousky, které dítě vezme dvěma prsty',
+  dlanovy: 'Hranolky jídla dlouhé zhruba jako dospělý prst',
+  nuzkovy: 'Hranolky a k nim větší kousky, které dítě vezme dvěma prsty',
   pinzetovy: 'Malé měkké kousky, které dítě sbírá po jednom mezi palcem a ukazovákem',
 };
 

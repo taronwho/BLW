@@ -392,7 +392,7 @@ export const dairyEggs: Ingredient[] = [
       },
       '12m': {
         serving:
-          'Batoleti krájej mozzarellu na proužky nebo na kostky, nikdy ne na celé kuličky. Malé kuličky zůstávají rizikové i po prvním roce, protože jejich tvar se nemění.',
+          'Batoleti krájej mozzarellu na hranolky nebo na kostky, nikdy ne na celé kuličky. Malé kuličky zůstávají rizikové i po prvním roce, protože jejich tvar se nemění.',
         caution: 'Mozzarella z nepasterizovaného mléka do prvního roku nepatří.',
       },
     },

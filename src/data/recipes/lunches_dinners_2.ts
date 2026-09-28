@@ -2065,7 +2065,7 @@ export const lunchesDinners2: Recipe[] = [
       'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej pár dlouhých nudlí přes dlaň a vedle proužek dušené mrkve dlouhý jako dospělý prst.',
+      '6m': 'Podávej pár dlouhých nudlí přes dlaň a vedle hranolek dušené mrkve dlouhý jako dospělý prst.',
       '9m': 'Nudle nastříhej nůžkami na dvoucentimetrové kousky a zeleninu nech v proužcích.',
       '12m': 'Batole jí nudle se zeleninou z misky lžící nebo rukou.',
     },
@@ -2385,18 +2385,18 @@ export const lunchesDinners2: Recipe[] = [
     ],
     baseSteps: [
       'Arašídy i kešu umel na jemnou moučku a rozmixuj je s vodou na hladkou omáčku bez kousků.',
-      'Mrkev a cuketu nakrájej na proužky dlouhé jako prst a duste je na oleji deset minut doměkka.',
+      'Mrkev a cuketu nakrájej na hranolky dlouhé jako prst a duste je na oleji deset minut doměkka.',
       'Rýžové nudle zalij vroucí vodou a nech změknout podle obalu.',
     ],
     babySplitPoint:
-      'Po kroku 2 odeber lžíci hladké ořechové omáčky a pár proužků zeleniny, dřív než se pánev dochucuje pro dospělé.',
+      'Po kroku 2 odeber lžíci hladké ořechové omáčky a pár hranolků zeleniny, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj, že je odebraná omáčka opravdu hladká; kousek mletého ořechu v ní zůstat nesmí.',
-      'Proužky zeleniny zkus rozmáčknout prstem: když to nejde, duste dál.',
+      'Hranolky zeleniny zkus rozmáčknout prstem: když to nejde, duste dál.',
       'Kápni pár kapek limetkové šťávy a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek dušené mrkve dlouhý jako dospělý prst přelitý lžící hladké ořechové omáčky.',
+      '6m': 'Podávej hranolek dušené mrkve dlouhý jako dospělý prst přelitý lžící hladké ořechové omáčky.',
       '9m': 'Přidej pár dlouhých nudlí a zeleninu nech v proužcích, dítě si je bere z tácku samo.',
       '12m': 'Batole jí nudle se zeleninou a omáčkou z misky lžící.',
     },
@@ -2470,18 +2470,18 @@ export const lunchesDinners2: Recipe[] = [
     ],
     baseSteps: [
       'Rýži uvař podle obalu v nesolené vodě.',
-      'Tofu osuš, nakrájej na proužky dlouhé jako prst a opeč je na oleji ze všech stran dozlatova.',
-      'Brokolici rozeber na růžičky, mrkev nakrájej na proužky a duste je pod pokličkou osm minut doměkka.',
+      'Tofu osuš, nakrájej na hranolky dlouhé jako prst a opeč je na oleji ze všech stran dozlatova.',
+      'Brokolici rozeber na růžičky, mrkev nakrájej na hranolky a duste je pod pokličkou osm minut doměkka.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber proužek tofu, růžičku brokolice, proužek mrkve a lžíci rýže, dřív než se pánev dochucuje pro dospělé.',
+      'Po kroku 3 odeber hranolek tofu, růžičku brokolice, hranolek mrkve a lžíci rýže, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Zkontroluj prstem, že se odebraná zelenina dá rozmáčknout; když ne, duste ji dál.',
       'Posyp porci lžičkou mletého sezamu, který nese železo i vápník.',
       'Vymačkej pár kapek limetky. Brokolice i limetka jsou zdroje vitaminu C a ten zlepší vstřebání železa z mletého sezamu i z tofu.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek tofu dlouhý jako dospělý prst, aby konec čouhal z pěsti, a růžičku brokolice, kterou dítě uchopí za stonek.',
+      '6m': 'Podávej hranolek tofu dlouhý jako dospělý prst, aby konec čouhal z pěsti, a růžičku brokolice, kterou dítě uchopí za stonek.',
       '9m': 'Tofu nakrájej na kratší kousky pro dva prsty a rýži nabídni na tácku, ať ji dítě sbírá.',
       '12m': 'Batole jí tofu se zeleninou a rýží z misky lžící samo.',
     },
@@ -2524,7 +2524,7 @@ export const lunchesDinners2: Recipe[] = [
       'Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle proužek pečeného batátu dlouhý jako dospělý prst.',
+      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle hranolek pečeného batátu dlouhý jako dospělý prst.',
       '9m': 'Nech směs hrubší a každou celou fazoli rozmáčkni mezi prsty.',
       '12m': 'Batole jí fazole s batátem z misky lžící; fazole už zvládne celé, když jsou uvařené doměkka.',
     },
@@ -2896,7 +2896,7 @@ export const lunchesDinners2: Recipe[] = [
       'Kápni pár kapek citronu a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej rizoto na naložené lžíci a vedle proužek dušené dýně dlouhý jako dospělý prst.',
+      '6m': 'Podávej rizoto na naložené lžíci a vedle hranolek dušené dýně dlouhý jako dospělý prst.',
       '9m': 'Nech rizoto hrubší, dítě sbírá zrnka i kousky dýně z tácku prsty.',
       '12m': 'Batole jí rizoto lžící z misky samo.',
     },
@@ -3030,7 +3030,7 @@ export const lunchesDinners2: Recipe[] = [
       'Paprika i rajčata v základu dodávají vitamin C, který zlepší vstřebání železa z čočky. Nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle proužek vařené brambory dlouhý jako dospělý prst.',
+      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle hranolek vařené brambory dlouhý jako dospělý prst.',
       '9m': 'Nech zrna čočky celá, ale měkká, a brambory v kouscích na dva prsty.',
       '12m': 'Batole jí zapékanou čočku nakrájenou na sousta z misky.',
     },
@@ -3061,13 +3061,13 @@ export const lunchesDinners2: Recipe[] = [
     ],
     baseSteps: [
       'Bulgur zalij vroucí vodou a nech patnáct minut nabobtnat.',
-      'Tempeh nakrájej na proužky dlouhé jako prst a opeč je na oleji ze všech stran dozlatova.',
+      'Tempeh nakrájej na hranolky dlouhé jako prst a opeč je na oleji ze všech stran dozlatova.',
       'Cibuli a papriku nech změknout, přilij passatu a povař deset minut; vrať do omáčky tempeh.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber proužek tempehu, lžíci omáčky a lžíci bulguru, dřív než se pánev dochucuje pro dospělé.',
+      'Po kroku 3 odeber hranolek tempehu, lžíci omáčky a lžíci bulguru, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
-      'Proužek tempehu rozmačkej vidličkou nebo nakrájej na tenké plátky; tempeh je pevný a celý proužek dítě nerozžvýká.',
+      'Hranolek tempehu rozmačkej vidličkou nebo nakrájej na tenké plátky; tempeh je pevný a celý hranolek dítě nerozžvýká.',
       'Promíchej ho s bulgurem a s omáčkou, ať porce drží pohromadě.',
       'Vymačkej kapku citronu; paprika, rajčata i citron nesou vitamin C a ten zlepší vstřebání železa z tempehu i z bulguru.',
     ],
@@ -3196,12 +3196,12 @@ export const lunchesDinners2: Recipe[] = [
       'Po kroku 3 naber dvě lžíce ragú a kousek ztuhlé polenty, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Fazole v odebrané porci rozmačkej vidličkou; celá fazole má hladkou slupku a dásně si s ní neporadí.',
-      'Polentu nakrájej na proužky dlouhé jako dospělý prst, ne na kostky.',
+      'Polentu nakrájej na hranolky dlouhé jako dospělý prst, ne na kostky.',
       'Vymačkej pár kapek limetky; paprika, rajčata i limetka nesou vitamin C, který zlepší vstřebání železa z fazolí.',
     ],
     babyServing: {
-      '6m': 'Podávej proužek polenty dlouhý jako dospělý prst a k němu lžíci rozmačkaného ragú.',
-      '9m': 'Proužky polenty nech kratší, na dva prsty, a ragú hrubší.',
+      '6m': 'Podávej hranolek polenty dlouhý jako dospělý prst a k němu lžíci rozmačkaného ragú.',
+      '9m': 'Hranolky polenty nech kratší, na dva prsty, a ragú hrubší.',
       '12m': 'Batole jí polentu s ragú nakrájené na sousta z misky.',
     },
     adultSteps: [
@@ -3301,7 +3301,7 @@ export const lunchesDinners2: Recipe[] = [
       'Zelí dochuť jablečným octem a podávej s bramborem.',
     ],
     vegetarianSteps: [
-      'Uzené tofu nakrájej na proužky a opeč je na pánvi dozlatova.',
+      'Uzené tofu nakrájej na hranolky a opeč je na pánvi dozlatova.',
       'Osol, promíchej s dušeným zelím a podávej s bramborem místo masa.',
     ],
     vegetarianProteinSwap:
@@ -3389,7 +3389,7 @@ export const lunchesDinners2: Recipe[] = [
     ],
     babyServing: {
       '6m': 'Podávej vlhký kuskus na naložené lžíci; suchý se rozsype a dítě ho sbírá po zrnku.',
-      '9m': 'Nech kuskus vlhký a přidej proužek okurky, který dítě uchopí dvěma prsty.',
+      '9m': 'Nech kuskus vlhký a přidej hranolek okurky, který dítě uchopí dvěma prsty.',
       '12m': 'Batole jí salát z misky lžící samo.',
     },
     adultSteps: [
@@ -3472,7 +3472,7 @@ export const lunchesDinners2: Recipe[] = [
       'Zakápni olivovým olejem a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle proužek pečené dýně dlouhý jako dospělý prst.',
+      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle hranolek pečené dýně dlouhý jako dospělý prst.',
       '9m': 'Nech směs hrubší a dýni v kratších proužcích na dva prsty.',
       '12m': 'Batole jí cizrnu s dýní z misky lžící samo.',
     },
@@ -3587,7 +3587,7 @@ export const lunchesDinners2: Recipe[] = [
       { ingredientId: 'cocka-beluga', amount: '200 g suché', track: 'vegetarian' },
     ],
     baseSteps: [
-      'Mrkev, pastinák a brambory nakrájej na proužky silné jako prst, pokap olejem a posyp tymiánem.',
+      'Mrkev, pastinák a brambory nakrájej na hranolky silné jako prst, pokap olejem a posyp tymiánem.',
       'Kuřecí stehna polož navrch a peč na 190 °C čtyřicet minut, dokud z masa nevytéká čirá šťáva.',
       'Papriku nakrájej na proužky a přidej ji na posledních deset minut.',
     ],
@@ -3695,7 +3695,7 @@ export const lunchesDinners2: Recipe[] = [
       'Vymačkej kapku limetky. Paprika i limetka nesou vitamin C a ten zlepší vstřebání železa z čočky.',
     ],
     babyServing: {
-      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle proužek pečeného batátu dlouhý jako dospělý prst.',
+      '6m': 'Podávej rozmačkanou směs na naložené lžíci a vedle hranolek pečeného batátu dlouhý jako dospělý prst.',
       '9m': 'Nech zrna čočky celá, ale měkká, a batát v kratších proužcích na dva prsty.',
       '12m': 'Batole jí zapečený batát nakrájený na sousta z misky.',
     },
@@ -3737,7 +3737,7 @@ export const lunchesDinners2: Recipe[] = [
       'Vymačkej kapku limetky; vitamin C v ní zlepší vstřebání železa z edamame i z mletého sezamu.',
     ],
     babyServing: {
-      '6m': 'Podávej vlhkou směs na naložené lžíci a vedle proužek dušené mrkve dlouhý jako dospělý prst.',
+      '6m': 'Podávej vlhkou směs na naložené lžíci a vedle hranolek dušené mrkve dlouhý jako dospělý prst.',
       '9m': 'Nech směs hrubší a mrkev v kratších proužcích; edamame pořád mačkej.',
       '12m': 'Batole jí edamame s rýží z misky lžící samo.',
     },
@@ -3949,18 +3949,18 @@ export const lunchesDinners2: Recipe[] = [
     ],
     baseSteps: [
       'Brambory uvař doměkka a nakrájej na kostky.',
-      'Mrkev nakrájej na proužky dlouhé jako prst a duste ji na oleji deset minut doměkka.',
+      'Mrkev nakrájej na hranolky dlouhé jako prst a duste ji na oleji deset minut doměkka.',
       'Filety tilápie polož na mrkev, přikryj a duste osm minut, dokud maso není celé neprůhledné.',
     ],
     babySplitPoint:
-      'Po kroku 3 odeber kousek tilápie, proužek mrkve a pár kostek brambory, dřív než se pánev dochucuje pro dospělé.',
+      'Po kroku 3 odeber kousek tilápie, hranolek mrkve a pár kostek brambory, dřív než se pánev dochucuje pro dospělé.',
     babySteps: [
       'Tilápii rozeber vidličkou na plátky a každý prohmatej prsty; filet bývá bez kostí, ale kontrolu to nenahradí.',
       'Zkontroluj prstem, že se mrkev dá rozmáčknout.',
       'Zakápni kapkou citronu a lžičkou oleje a nech vychladnout na teplotu ruky.',
     ],
     babyServing: {
-      '6m': 'Podávej plátek tilápie vcelku, aby konec čouhal z pěsti, a vedle proužek dušené mrkve.',
+      '6m': 'Podávej plátek tilápie vcelku, aby konec čouhal z pěsti, a vedle hranolek dušené mrkve.',
       '9m': 'Rybu nech v kouscích na uchopení dvěma prsty a mrkev v kratších proužcích.',
       '12m': 'Batole jí tilápii s mrkví a bramborem z talíře; prohmatání porce platí dál.',
     },

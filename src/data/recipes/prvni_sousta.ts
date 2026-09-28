@@ -93,7 +93,7 @@ export const prvniSousta: Recipe[] = [
   },
   {
     id: 'cuketa-opecena-prouzky',
-    titleCz: 'Cuketa opečená na proužky',
+    titleCz: 'Cuketa opečená na hranolky',
     category: 'obed-vecere',
     minAgeMonths: 6,
     timeMinutes: 10,
@@ -103,16 +103,16 @@ export const prvniSousta: Recipe[] = [
       { ingredientId: 'olej-olivovy', amount: '1 lžíce', track: 'all' },
     ],
     baseSteps: [
-      'Cuketu omyj, konce odkroj a nakrájej ji podélně na proužky silné jako prst dospělého. Slupku nech, drží kus pohromadě.',
+      'Cuketu omyj, konce odkroj a nakrájej ji podélně na hranolky silné jako prst dospělého. Slupku nech, drží kus pohromadě.',
       'Pánev rozpal na střední teplotu a rozetři po ní olivový olej.',
-      'Proužky pokládej na pánev v jedné vrstvě a opékej je tři minuty z každé strany.',
-      'Hotový proužek se dá rozmáčknout mezi prsty, ale ještě se neláme na kousky. Zvenku má být zlatý, uvnitř měkký.',
+      'Hranolky pokládej na pánev v jedné vrstvě a opékej je tři minuty z každé strany.',
+      'Hotový hranolek se dá rozmáčknout mezi prsty, ale ještě se neláme na kousky. Zvenku má být zlatý, uvnitř měkký.',
       'Od tohoto místa se pánev dělí. Dětská porce jde stranou před dochucením.',
     ],
-    babySplitPoint: 'Po kroku 4 odeber dva proužky na talířek, ještě než se pánev dochucuje.',
+    babySplitPoint: 'Po kroku 4 odeber dva hranolky na talířek, ještě než se pánev dochucuje.',
     babySteps: [
-      'Nech proužky vychladnout na teplotu ruky. Cuketa drží teplo uvnitř, takže povrch klame.',
-      'Když proužek hodně klouže, obal ho v hrsti jemné strouhanky nebo mletých vloček, aby se dal udržet.',
+      'Nech hranolky vychladnout na teplotu ruky. Cuketa drží teplo uvnitř, takže povrch klame.',
+      'Když hranolek hodně klouže, obal ho v hrsti jemné strouhanky nebo mletých vloček, aby se dal udržet.',
     ],
     babyServing: {
       '6m': 'Proužek dlouhý jako prst dospělého, který z pěsti vyčnívá. Slupka na jedné straně pomáhá kus udržet pohromadě.',
@@ -120,7 +120,7 @@ export const prvniSousta: Recipe[] = [
       '12m': 'Stejná porce jako pro dospělé, jen bez soli a bez chilli.',
     },
     adultSteps: [
-      'Zbylé proužky osol, posyp utrhanou bazalkou a zakápni citronem. Hodí se k nim i strouhaný parmezán.',
+      'Zbylé hranolky osol, posyp utrhanou bazalkou a zakápni citronem. Hodí se k nim i strouhaný parmezán.',
       'Kdo má rád ostřejší chuť, přidá na pánev v posledních třiceti vteřinách nasekaný česnek.',
     ],
     allergens: [],

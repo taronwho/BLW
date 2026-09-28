@@ -388,7 +388,7 @@ export const breakfast: Recipe[] = [
       'Přidej k porci kousky kiwi; vitamin C z nich pomáhá vstřebat železo z pohanky i z tahini.',
     ],
     babyServing: {
-      '6m': 'Nabídni kaši slepenou do hrudky a proužek banánu dlouhý jako prst, který dítě uchopí a saje z něj.',
+      '6m': 'Nabídni kaši slepenou do hrudky a hranolek banánu dlouhý jako prst, který dítě uchopí a saje z něj.',
       '9m': 'Kaši podávej volnější a banán nakrájej na kostičky ke sbírání špetkou z mělké misky.',
       '12m': 'Servíruj kaši v misce s kolečky banánu navrch a lžičkou tahini zakápnutou přes ni.',
     },
@@ -598,7 +598,7 @@ export const breakfast: Recipe[] = [
       'Přidej k porci kousky pomeranče; vitamin C z nich pomáhá vstřebat železo z ovesných vloček.',
     ],
     babyServing: {
-      '6m': 'Kaši nabídni slepenou do hrudky na okraji misky a k ní proužek banánu delší než dětská dlaň.',
+      '6m': 'Kaši nabídni slepenou do hrudky na okraji misky a k ní hranolek banánu delší než dětská dlaň.',
       '9m': 'Podávej kaši volnější a banán v kostičkách vedle; dítě si obojí sbírá špetkou.',
       '12m': 'Servíruj kaši s kolečky banánu navrch a lžící vedle misky, aby si dítě nabíralo samo.',
     },
@@ -849,7 +849,7 @@ export const breakfast: Recipe[] = [
       'Rozmačkané jahody vmíchej do misky; vitamin C z nich pomáhá vstřebat rostlinné železo z ovesných vloček.',
     ],
     babyServing: {
-      '6m': 'Nabídni hustou hmotu na lžíci a k ní proužek banánu dlouhý jako prst, který dítě sevře v dlani.',
+      '6m': 'Nabídni hustou hmotu na lžíci a k ní hranolek banánu dlouhý jako prst, který dítě sevře v dlani.',
       '9m': 'Podávej hmotu v mělké misce s rozkrojenými borůvkami navrch ke sbírání špetkou.',
       '12m': 'Servíruj misku se lžící a nech dítě, ať si borůvky a banán samo přimíchá; borůvky stále krájej napůl.',
     },

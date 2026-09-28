@@ -42,11 +42,11 @@ export const GRIP_HOW_TO_TELL: Record<Grip, string> = {
 /** Jaký tvar sousta z úchopu plyne. */
 export const GRIP_SHAPE: Record<Grip, string> = {
   dlanovy:
-    'Krájej na proužky dlouhé zhruba jako dospělý prst, aby konec čouhal z pěsti. Cokoli menšího než dětská pěst zmizí v dlani a dítě se k tomu už nedostane.',
+    'Krájej na hranolky dlouhé zhruba jako dospělý prst, aby konec čouhal z pěsti. Cokoli menšího než dětská pěst zmizí v dlani a dítě se k tomu už nedostane. Ze začátku pomáhá vroubkovaný nůž: zvlněný hranolek dítěti z pěsti tolik neklouže.',
   nuzkovy:
-    'Proužky pořád dávají smysl, ale k nim už můžeš přidat i větší kousky na uchopení dvěma prsty. Dítě si samo vybere, co mu jde.',
+    'Hranolky pořád dávají smysl, ale k nim už můžeš přidat i větší kousky na uchopení dvěma prsty. Dítě si samo vybere, co mu jde.',
   pinzetovy:
-    'Dlouhé proužky ztrácejí smysl. Dítě si umí vzít malé kousky a obvykle jim dává přednost. Velikost pořád hlídej podle rizika dušení, ne podle toho, co dítě zvedne.',
+    'Dlouhé hranolky ztrácejí smysl. Dítě si umí vzít malé kousky a obvykle jim dává přednost. Velikost pořád hlídej podle rizika dušení, ne podle toho, co dítě zvedne.',
 };
 
 /** Orientační věk, kdy se úchop objevuje. Není to podmínka ani cíl. */
@@ -115,26 +115,26 @@ export function smallPiecesAllowed(grip: Grip, risk: ChokingRisk): boolean {
 }
 
 /**
- * Tvar sousta u drobné suroviny. Proužek z ředkvičky ani z hrášku neukrojíš,
+ * Tvar sousta u drobné suroviny. Hranolek z ředkvičky ani z hrášku neukrojíš,
  * takže se neřeší délka, ale jestli to dítě vůbec zvedne — a u kulatých kusů
  * pořád platí rozčtvrcení podle pokynu k bezpečnosti.
  */
 const GRIP_SHAPE_DROBNE: Record<Grip, string> = {
   dlanovy:
-    'Tahle surovina je sama o sobě menší než dětská pěst, takže se na proužky nekrájí. Dlaňový úchop si s ní zatím neporadí: nabídni ji rozmačkanou, vmíchanou do kaše nebo nalepenou na proužek něčeho většího, po čem dítě sáhne.',
+    'Tahle surovina je sama o sobě menší než dětská pěst, takže se na hranolky nekrájí. Dlaňový úchop si s ní zatím neporadí: nabídni ji rozmačkanou, vmíchanou do kaše nebo nalepenou na hranolek nebo proužek něčeho většího, po čem dítě sáhne.',
   nuzkovy:
-    'Na proužky se nekrájí: je drobná sama o sobě. Dítě, které už bere kousky mezi palec a bok ukazováku, ji z tácku sebere, ale ještě mu to nepůjde vždycky. Část nabídni volně, část vmíchanou do jídla, ať se nají tak jako tak.',
+    'Na hranolky se nekrájí: je drobná sama o sobě. Dítě, které už bere kousky mezi palec a bok ukazováku, ji z tácku sebere, ale ještě mu to nepůjde vždycky. Část nabídni volně, část vmíchanou do jídla, ať se nají tak jako tak.',
   pinzetovy:
-    'Tohle je přesně velikost pro pinzetový úchop: dítě si ji z tácku sebere po jednom kousku. Délka proužku se tu neřeší, hlídej jen tvar podle pokynu k bezpečnosti výš.',
+    'Tohle je přesně velikost pro pinzetový úchop: dítě si ji z tácku sebere po jednom kousku. Délka hranolku se tu neřeší, hlídej jen tvar podle pokynu k bezpečnosti výš.',
 };
 
 /**
  * Tvar sousta u kaše a pomazánky. Nakrájet se nedá nic, řeší se nosič:
- * naložená lžíce, nebo hustá vrstva na proužku, kterého se dítě chytne.
+ * naložená lžíce, nebo hustá vrstva na proužku chleba či hranolku, kterého se dítě chytne.
  */
 const GRIP_SHAPE_KASOVITE: Record<Grip, string> = {
   dlanovy:
-    'Krájet tu není co. Dej dítěti naloženou lžíci do ruky, nebo nanes hustou vrstvu na proužek dlouhý jako dospělý prst. Na měkký chleba, na vařenou mrkev: aby konec čouhal z pěsti.',
+    'Krájet tu není co. Dej dítěti naloženou lžíci do ruky, nebo nanes hustou vrstvu na nosič dlouhý jako dospělý prst: na proužek měkkého chleba nebo na hranolek vařené mrkve, aby konec čouhal z pěsti.',
   nuzkovy:
     'Krájet tu není co. Dítě už lžíci uchopí líp a zvládne i kratší nosiče: proužek pečiva, kousek dušené zeleniny s nanesenou vrstvou.',
   pinzetovy:
@@ -145,7 +145,7 @@ const GRIP_SHAPE_KASOVITE: Record<Grip, string> = {
  * Věta o tvaru sousta pro konkrétní surovinu a úchop.
  *
  * Podoba na talíři rozhoduje dřív než úchop: u kaše ani u ředkvičky nemá
- * délka proužku smysl a rada, která tam nesedí, učí rodiče panel přeskakovat.
+ * délka hranolku smysl a rada, která tam nesedí, učí rodiče panel přeskakovat.
  */
 export function gripShapeAdvice(grip: Grip, risk: ChokingRisk, form: ServingForm): string {
   if (grip === 'pinzetovy' && risk === 'high') {

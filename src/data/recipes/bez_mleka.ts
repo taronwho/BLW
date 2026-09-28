@@ -47,7 +47,7 @@ export const bezMleka: Recipe[] = [
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou kaši na předložené lžíci, kterou dítě olízne, a vedle proužek manga dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou kaši na předložené lžíci, kterou dítě olízne, a vedle hranolek manga dlouhý jako dospělý prst.',
       '9m': 'Nabídni kaši v mělké misce a kostky manga na tácku pro klešťový úchop.',
       '12m': 'Servíruj kaši v misce se lžící a kostky manga navrch; batole si porci míchá samo.',
     },
@@ -129,7 +129,7 @@ export const bezMleka: Recipe[] = [
       'Vmíchej lžičku mletých mandlí a nech porci zvlažnět.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou kaši na předložené lžíci a vedle proužek dušené hrušky na délku prstu.',
+      '6m': 'Podávej hustou kaši na předložené lžíci a vedle hranolek dušené hrušky na délku prstu.',
       '9m': 'Nabídni kaši v mělké misce a hruškové kostky vedle na sbírání dvěma prsty.',
       '12m': 'Servíruj kaši s hruškou a pomerančovou dužinou navrch; batole jí lžící samo.',
     },
@@ -211,7 +211,7 @@ export const bezMleka: Recipe[] = [
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou kaši na předložené lžíci a vedle proužek kiwi dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou kaši na předložené lžíci a vedle hranolek kiwi dlouhý jako dospělý prst.',
       '9m': 'Nabídni kaši v mělké misce a kiwi v kostkách na sbírání dvěma prsty.',
       '12m': 'Servíruj kaši s kostkami kiwi navrch a lžící vedle; batole jí samo.',
     },
@@ -241,8 +241,8 @@ export const bezMleka: Recipe[] = [
     baseSteps: [
       'Rýži propláchni a zalij kokosovým mlékem zředěným stejným dílem vody.',
       'Vař ji pětadvacet minut na mírném plameni a průběžně míchej, ať se nepřichytí.',
-      'Papáju rozkroj, vyber lžící tmavá zrníčka ze středu a dužinu nakrájej na silné proužky.',
-      'Část proužků rozmačkej vidličkou a vmíchej do hotové kaše.',
+      'Papáju rozkroj, vyber lžící tmavá zrníčka ze středu a dužinu nakrájej na silné hranolky.',
+      'Část hranolků rozmačkej vidličkou a vmíchej do hotové kaše.',
     ],
     babySplitPoint:
       'Po kroku 4 odeber dvě lžíce kaše do misky, dřív než se zbytek dochucuje pro dospělé.',
@@ -252,13 +252,13 @@ export const bezMleka: Recipe[] = [
       'Nech kaši zvlažnět a podávej ji hned, po vychladnutí ztuhne.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou kaši na předložené lžíci a vedle proužek papáji dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou kaši na předložené lžíci a vedle hranolek papáji dlouhý jako dospělý prst.',
       '9m': 'Nabídni kaši v mělké misce a papáju v kostkách pro klešťový úchop.',
       '12m': 'Servíruj kaši s kostkami papáji a lžící vedle; batole si porci míchá samo.',
     },
     adultSteps: [
       'Kaši pro dospělé zakápni limetkovou šťávou a oslaď podle chuti.',
-      'Navrch dej zbylé proužky papáji.',
+      'Navrch dej zbylé hranolky papáji.',
     ],
     allergens: [],
     tags: ['vegetariánské', 'bez lepku', 'kaše'],
@@ -293,7 +293,7 @@ export const bezMleka: Recipe[] = [
       'Přidej lžíci rozmačkaného banánu, který porci zjemní a sladí bez cukru.',
     ],
     babyServing: {
-      '6m': 'Podávej hustý pudink na předložené lžíci, kterou dítě olizuje, a vedle proužek banánu do dlaně.',
+      '6m': 'Podávej hustý pudink na předložené lžíci, kterou dítě olizuje, a vedle hranolek banánu do dlaně.',
       '9m': 'Nabídni pudink v mělké misce a jahody rozkrojené podélně na čtvrtky pro klešťový úchop.',
       '12m': 'Servíruj sklenici s pudinkem, jahodami a kolečky banánu; batole jí lžící samo.',
     },
@@ -335,7 +335,7 @@ export const bezMleka: Recipe[] = [
       'Nech porci zvlažnět a teplotu zkontroluj kapkou na zápěstí.',
     ],
     babyServing: {
-      '6m': 'Podávej hustou kaši rozetřenou na talíři a vedle proužek dušené dýně dlouhý jako dospělý prst.',
+      '6m': 'Podávej hustou kaši rozetřenou na talíři a vedle hranolek dušené dýně dlouhý jako dospělý prst.',
       '9m': 'Nech kaši ztuhnout na plechu, nakrájej ji na hranolky a nabídni je vedle pomerančové dužiny.',
       '12m': 'Servíruj kaši v misce se lžící a pomerančem po straně; batole si porci míchá samo.',
     },
@@ -459,7 +459,7 @@ export const bezMleka: Recipe[] = [
       'Vmíchej kostky kiwi a lžičku mletých mandlí; vitamin C z kiwi pomáhá vstřebat železo z ovsa.',
     ],
     babyServing: {
-      '6m': 'Podávej jogurt s rozmačkaným ovocem na předložené lžíci a vedle proužek kiwi na délku prstu.',
+      '6m': 'Podávej jogurt s rozmačkaným ovocem na předložené lžíci a vedle hranolek kiwi na délku prstu.',
       '9m': 'Nabídni jogurt v mělké misce a kostky kiwi na tácku pro klešťový úchop.',
       '12m': 'Servíruj misku s jogurtem, kiwi a rozmačkanou dření z granátového jablka; batole jí lžící samo.',
     },
@@ -665,7 +665,7 @@ export const bezMleka: Recipe[] = [
       'Vitamin C z jahod pomáhá vstřebat železo ze lnu, proto k sobě ta dvojice patří.',
     ],
     babyServing: {
-      '6m': 'Podávej jogurt s rozmačkanými jahodami na předložené lžíci a vedle proužek banánu do dlaně.',
+      '6m': 'Podávej jogurt s rozmačkanými jahodami na předložené lžíci a vedle hranolek banánu do dlaně.',
       '9m': 'Nabídni jogurt v mělké misce a jahody rozkrojené podélně na čtvrtky pro klešťový úchop.',
       '12m': 'Servíruj misku jogurtu s jahodami a kolečky banánu; batole jí lžící samo.',
     },

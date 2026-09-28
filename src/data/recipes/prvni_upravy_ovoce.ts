@@ -334,7 +334,7 @@ export const prvniUpravyOvoce: Recipe[] = [
   },
   {
     id: 'papaja-na-prouzky',
-    titleCz: 'Papája na proužky',
+    titleCz: 'Papája na hranolky',
     category: 'svaciny-peceni',
     minAgeMonths: 6,
     timeMinutes: 6,
@@ -346,22 +346,22 @@ export const prvniUpravyOvoce: Recipe[] = [
     baseSteps: [
       'Papáju rozpul podélně a lžící vyber černá semínka i vlákna.',
       'Oloupej slupku škrabkou; u zralého plodu jde dolů snadno.',
-      'Nakrájej dužinu na proužky silné jako prst dospělého.',
+      'Nakrájej dužinu na hranolky silné jako prst dospělého.',
       'Bezlepkový oves rozdrť nahrubo na talíři. Papája je nejměkčí z tropického ovoce a klouže nejvíc, takže obalení není volba, ale nutnost.',
       'Od tohoto místa se talíř dělí. Dětská porce se obaluje, porce pro dospělé se dochutí.',
     ],
-    babySplitPoint: 'Po kroku 4 odeber dva proužky a obal je v ovesné moučce, ještě než se zbytek dochucuje.',
+    babySplitPoint: 'Po kroku 4 odeber dva hranolky a obal je v ovesné moučce, ještě než se zbytek dochucuje.',
     babySteps: [
-      'Proužek prováleč v moučce a podej ho hned.',
+      'Hranolek prováleč v moučce a podej ho hned.',
       'Papája je tak měkká, že se dá rozmáčknout dásněmi bez jediného zubu. Pro první ochutnávky je proto vděčná.',
     ],
     babyServing: {
-      '6m': 'Obalený proužek dlouhý jako prst dospělého.',
+      '6m': 'Obalený hranolek dlouhý jako prst dospělého.',
       '9m': 'Kostičky velikosti fazole, obalené, ať jdou sebrat špetkou.',
       '12m': 'Stejná porce jako pro dospělé, jen bez limetky.',
     },
     adultSteps: [
-      'Zbylé proužky zakápni limetkou a posyp chilli; kyselost papáji vytáhne sladkost.',
+      'Zbylé hranolky zakápni limetkou a posyp chilli; kyselost papáji vytáhne sladkost.',
       'Do salátu se hodí nezralá zelená papája nastrouhaná na nudličky.',
     ],
     allergens: [],
