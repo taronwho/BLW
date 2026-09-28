@@ -65,29 +65,34 @@ Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fin
 
 ### Tvar, který z úchopu plyne
 
+Všechny tři obrázky tvaru mají stejnou scénu: shora, jedno světlé
+obdélníkové dřevěné prkénko, **žádná ruka ani prst** (prst vedle proužků
+vycházel obří a useknutý), žádný kulatý talíř. Velikost je daná poměrem
+stran kousků, ne srovnáním s rukou.
+
 **`tvar-dlanovy`**
 
 ```
-Top-down view of three soft steamed vegetable sticks (orange carrot, orange sweet potato, green zucchini with skin), each about as long and thick as an adult index finger, lying side by side next to an adult index finger for size comparison, on a light wooden board. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Top-down view of one light rectangular wooden cutting board. On it lie three cooked vegetable sticks side by side with small gaps between them: one orange carrot stick, one orange sweet potato stick and one green zucchini stick with skin. Each stick is long and slim, about five times longer than it is thick, the size of an adult finger, with soft rounded edges and a matte, slightly moist steamed surface, clearly cooked until soft, not raw and not crunchy. Nothing else on the board, no hands, no fingers. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
-Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
+Negativní: `text, letters, watermark, dark background, cluttered background, cutlery, hand, finger, fingers, thumb, raw vegetables, crudités, sharp edges, cubes, round plate`
 
 **`tvar-nuzkovy`**
 
 ```
-Top-down view of two soft steamed vegetable sticks (as long as an adult finger) and five larger soft bite-size cubes (about 2 cm) of steamed sweet potato and carrot, on a light wooden board. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Top-down view of the same light rectangular wooden cutting board. On the left lie two cooked vegetable sticks (one orange carrot, one orange sweet potato), each long and slim, about five times longer than it is thick. On the right lie five small soft cooked cubes of carrot and sweet potato. Each cube is small: only slightly bigger than the thickness of a stick, so four or five cubes in a row would be as long as one stick. All pieces have soft rounded edges and a matte steamed surface, clearly cooked until soft. Nothing else on the board, no hands, no fingers. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
-Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
+Negativní: `text, letters, watermark, dark background, cluttered background, cutlery, hand, finger, large cubes, big chunks, cubes bigger than the sticks are thick, raw vegetables, sharp edges, round plate`
 
 **`tvar-pinzetovy`**
 
 ```
-Top-down view of small soft pea-size pieces of cooked food scattered on a light baby high-chair tray: cooked green peas, tiny cubes of steamed carrot and small pieces of soft cooked pasta. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
+Top-down view of the same light rectangular wooden cutting board with about fifteen tiny soft cooked pieces scattered loosely with gaps between them: single cooked green peas, tiny cubes of steamed carrot the size of a pea, and small pieces of soft cooked pasta the size of a pea. Every piece is about the size of a pea. No long sticks, nothing else on the board, no hands, no fingers. Soft modern flat illustration for a parenting app, clean simple shapes with subtle shading, warm natural colors, plain light cream background (#F7F5EF), soft even light, centered subject with generous margin, no text, no letters, no numbers, no logos, no watermark, 4:3 aspect ratio.
 ```
 
-Negativní: `text, letters, watermark, extra fingers, missing fingers, fused fingers, deformed hands, dark background, cluttered background, cutlery`
+Negativní: `text, letters, watermark, dark background, cluttered background, cutlery, hand, finger, sticks, large pieces, pile of food, bowl, round plate`
 
 ### Zkouška měkkosti
 
