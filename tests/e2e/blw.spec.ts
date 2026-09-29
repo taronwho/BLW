@@ -194,3 +194,27 @@ test('nastavení dítěte ukazuje úchop obrázkem a tvar sousta, který z něj 
   await expect(page).toHaveURL(/tvar-sousta\?uchop=nuzkovy/);
   await expect(page.getByTestId('pruvodce-uchop-nuzkovy')).toHaveAttribute('aria-pressed', 'true');
 });
+
+test('reakce po ochutnávce je v deníku i u suroviny výrazně vidět', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', narozeniPred(7));
+
+  await page.goto('./#/suroviny/brokolice');
+  await page.getByTestId('ochutnano-brokolice').click();
+  await page.getByTestId('volba-reakce-travici').click();
+  await page.getByTestId('ochutnavka-ulozit').click();
+  await page.getByTestId('ochutnano-brokolice').click();
+  await page.getByTestId('ochutnavka-ulozit').click();
+
+  // V historii suroviny je reakce nadpisem, ne šedým textem na konci řádku.
+  await expect(page.getByTestId('historie-ochutnavek')).toContainText('Trávicí potíže');
+
+  await navLink(page, 'Deník').click();
+  const souhrn = page.getByTestId('denik-reakce');
+  await expect(souhrn).toContainText('Zaznamenané reakce (1)');
+  await expect(souhrn).toContainText('brokolice');
+  await expect(souhrn).toContainText('pediatrem');
+  // Na časové ose je zvýrazněná jen položka s reakcí.
+  await expect(page.locator('[data-testid^="osa-reakce-"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid^="osa-reakce-"]')).toContainText('Trávicí potíže');
+});

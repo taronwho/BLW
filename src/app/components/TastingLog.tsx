@@ -1,9 +1,10 @@
-import { Pencil, Plus, Trash2 } from 'lucide-react';
+import { AlertTriangle, Pencil, Plus, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { useHouseholdStore } from '@/storage/householdStore';
 import type { TastingEvent } from '@/types';
-import { AMOUNT_LABELS, REACTION_LABELS, formatDate } from '../lib/labels';
+import { isAdverse } from '../lib/tastings';
+import { AMOUNT_LABELS, REACTION_LABELS, formatDate, velkym } from '../lib/labels';
 import { draftPayload, draftZUdalosti, emptyDraft } from '../lib/tastingDraft';
 import type { Draft } from '../lib/tastingDraft';
 import { TastingForm } from './TastingForm';
@@ -115,12 +116,23 @@ export function TastingLog({
             ) : (
               <li
                 key={event.id}
-                className="flex items-start gap-2 rounded-xl border border-line bg-surface px-3 py-2"
+                className={`flex items-start gap-2 rounded-xl px-3 py-2 ${
+                  isAdverse(event)
+                    ? 'border-2 border-risk bg-risk-soft'
+                    : 'border border-line bg-surface'
+                }`}
               >
                 <span className="min-w-0 flex-1 text-sm">
+                  {isAdverse(event) && (
+                    <span className="mb-0.5 flex items-center gap-1.5 font-bold text-risk">
+                      <AlertTriangle aria-hidden="true" className="h-4 w-4 shrink-0" />
+                      {velkym(REACTION_LABELS[event.reaction])}
+                    </span>
+                  )}
                   <span className="font-medium">{formatDate(event.date)}</span>{' '}
                   <span className="text-muted">
-                    {AMOUNT_LABELS[event.amount]} · {REACTION_LABELS[event.reaction]}
+                    {AMOUNT_LABELS[event.amount]}
+                    {isAdverse(event) ? '' : ` · ${REACTION_LABELS[event.reaction]}`}
                   </span>
                   {event.davilo === true && (
                     <span

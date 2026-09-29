@@ -1,4 +1,4 @@
-import { CalendarDays, Printer, Sparkles } from 'lucide-react';
+import { AlertTriangle, CalendarDays, Printer, Sparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { ChokingLegend } from '../components/ChokingLegend';
 import { DaveniPrehled } from '../components/DaveniPrehled';
 import type { DuvodNavrhu } from '../lib/derive';
 import { activeTastings, isAdverse, suggestions, tastedIds } from '../lib/derive';
-import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS } from '../lib/labels';
+import { ALLERGEN_LABELS, AMOUNT_LABELS, CATEGORY_LABELS, formatDate, REACTION_LABELS, velkym } from '../lib/labels';
 import { favoriteIds } from '../lib/tastings';
 import { useAktivniDite, useAktivniDiteId } from '../lib/dite';
 
@@ -46,6 +46,14 @@ export function DiaryScreen(): ReactNode {
 
   const aktivni = useMemo(() => activeTastings(state, diteId), [state, diteId]);
   const tasted = useMemo(() => tastedIds(state, diteId), [state, diteId]);
+  // Všechny nežádoucí reakce od nejnovější — kvůli nim se deník vede.
+  const reakce = useMemo(
+    () =>
+      aktivni
+        .filter((event) => isAdverse(event))
+        .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : b.createdAt - a.createdAt)),
+    [aktivni],
+  );
   const tips = useMemo(() => suggestions(state, dite, month), [state, dite, month]);
 
   const refused = useMemo(
@@ -82,6 +90,43 @@ export function DiaryScreen(): ReactNode {
           Výpis pro pediatra
         </Link>
       </div>
+
+      {reakce.length > 0 && (
+        <section
+          aria-labelledby="reakce-nadpis"
+          data-testid="denik-reakce"
+          className="flex flex-col gap-2 rounded-xl border-2 border-risk bg-risk-soft p-4"
+        >
+          <h2
+            id="reakce-nadpis"
+            className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-risk"
+          >
+            <AlertTriangle aria-hidden="true" className="h-5 w-5 shrink-0" />
+            Zaznamenané reakce ({reakce.length})
+          </h2>
+          <ul className="flex flex-col gap-1">
+            {reakce.map((event) => (
+              <li key={event.id}>
+                <Link
+                  to={`/suroviny/${event.ingredientId}`}
+                  className="flex min-h-touch flex-wrap items-center justify-between gap-x-2 text-sm"
+                >
+                  <span className="font-semibold">
+                    {ingredientById.get(event.ingredientId)?.nameCz ?? event.ingredientId}
+                  </span>
+                  <span className="text-xs">
+                    {velkym(REACTION_LABELS[event.reaction])} · {formatDate(event.date)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs leading-relaxed">
+            Aplikace alergii nediagnostikuje. Reakci prober s pediatrem; při otoku rtů či víček,
+            dušnosti, zvracení s bledostí nebo náhlé ochablosti volej <strong>155</strong>.
+          </p>
+        </section>
+      )}
 
       <section aria-labelledby="statistiky-nadpis" className="flex flex-col gap-2 rounded-xl bg-surface p-4">
         <h2 id="statistiky-nadpis" className="text-sm font-semibold uppercase tracking-wide text-muted">
@@ -196,8 +241,24 @@ export function DiaryScreen(): ReactNode {
                 <ul className="flex flex-col gap-2">
                   {events.map((event) => {
                     const ingredient = ingredientById.get(event.ingredientId);
+                    const nezadouci = isAdverse(event);
+                    // Reakce se nesmí ztratit mezi desítkami „bez reakce".
+                    // Proto celá položka zčervená, dostane ikonu a reakci
+                    // velkým písmem, ne jako šedý text na konci řádku.
                     return (
-                      <li key={event.id} className="flex flex-col gap-1">
+                      <li
+                        key={event.id}
+                        data-testid={nezadouci ? `osa-reakce-${event.id}` : undefined}
+                        className={`flex flex-col gap-1 ${
+                          nezadouci ? 'rounded-lg border-2 border-risk bg-risk-soft p-2' : ''
+                        }`}
+                      >
+                        {nezadouci && (
+                          <p className="flex items-center gap-1.5 text-sm font-bold text-risk">
+                            <AlertTriangle aria-hidden="true" className="h-4 w-4 shrink-0" />
+                            {velkym(REACTION_LABELS[event.reaction])}
+                          </p>
+                        )}
                         <Link
                           to={`/suroviny/${event.ingredientId}`}
                           className="flex min-h-touch items-center justify-between gap-2 text-sm"
@@ -206,10 +267,14 @@ export function DiaryScreen(): ReactNode {
                             {ingredient?.nameCz ?? event.ingredientId}
                           </span>
                           <span className="shrink-0 text-xs text-muted">
-                            {AMOUNT_LABELS[event.amount]} · {REACTION_LABELS[event.reaction]}
+                            {AMOUNT_LABELS[event.amount]}
+                            {nezadouci ? '' : ` · ${REACTION_LABELS[event.reaction]}`}
                             {event.davilo === true ? ' · dávilo se' : ''}
                           </span>
                         </Link>
+                        {event.note !== undefined && event.note.trim().length > 0 && (
+                          <p className="text-xs italic leading-relaxed">{event.note}</p>
+                        )}
                         {ingredient !== undefined && <ChokingBadge risk={ingredient.chokingRisk} />}
                       </li>
                     );

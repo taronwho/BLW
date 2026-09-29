@@ -127,3 +127,8 @@ export function formatDate(iso: string): string {
 export function todayIso(now: Date = new Date()): string {
   return dnesIso(now);
 }
+
+/** Text s prvním písmenem velkým — štítky jsou malými, v nadpisu to vypadá jako překlep. */
+export function velkym(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
