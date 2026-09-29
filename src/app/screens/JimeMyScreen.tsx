@@ -16,7 +16,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ingredientById, ingredients } from '@/data/ingredients';
-import { RODINNA_JIDLA } from '@/data/jidlaRodiny';
+import { RODINNA_JIDLA, SKUPINY_JIDEL } from '@/data/jidlaRodiny';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { useOpravyStore } from '@/storage/opravyStore';
 import { normalize } from '@/safety/text';
@@ -368,29 +368,41 @@ export function JimeMyScreen(): ReactNode {
             />
           </button>
           {jidlaOtevrena && (
-            <ul id="jime-jidla" className="flex flex-col gap-1" data-testid="jime-jidla">
-              {RODINNA_JIDLA.map((jidlo) => (
-                <li key={jidlo.id}>
-                  <button
-                    type="button"
-                    data-testid={`jime-jidlo-${jidlo.id}`}
-                    aria-pressed={jidlo.id === vybraneJidlo?.id}
-                    onClick={() => {
-                      nastavVyber(jidlo.suroviny.filter((id) => najdi(id) !== undefined));
-                      setZapsano(null);
-                      setJidlaOtevrena(false);
-                    }}
-                    className={`flex min-h-touch w-full items-center rounded-xl border px-3 text-left text-sm ${
-                      jidlo.id === vybraneJidlo?.id
-                        ? 'border-accent bg-accent-soft font-semibold text-accent'
-                        : 'border-line bg-paper'
-                    }`}
+            <div id="jime-jidla" className="flex flex-col gap-3" data-testid="jime-jidla">
+              {SKUPINY_JIDEL.map((skupina) => (
+                <section key={skupina.id} aria-labelledby={`jime-skupina-${skupina.id}`}>
+                  <h3
+                    id={`jime-skupina-${skupina.id}`}
+                    className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
                   >
-                    {jidlo.nazev}
-                  </button>
-                </li>
+                    {skupina.nazev}
+                  </h3>
+                  <ul className="flex flex-col gap-1">
+                    {RODINNA_JIDLA.filter((jidlo) => jidlo.skupina === skupina.id).map((jidlo) => (
+                      <li key={jidlo.id}>
+                        <button
+                          type="button"
+                          data-testid={`jime-jidlo-${jidlo.id}`}
+                          aria-pressed={jidlo.id === vybraneJidlo?.id}
+                          onClick={() => {
+                            nastavVyber(jidlo.suroviny.filter((id) => najdi(id) !== undefined));
+                            setZapsano(null);
+                            setJidlaOtevrena(false);
+                          }}
+                          className={`flex min-h-touch w-full items-center rounded-xl border px-3 text-left text-sm ${
+                            jidlo.id === vybraneJidlo?.id
+                              ? 'border-accent bg-accent-soft font-semibold text-accent'
+                              : 'border-line bg-paper'
+                          }`}
+                        >
+                          {jidlo.nazev}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
+            </div>
           )}
         </div>
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ingredientById, ingredients } from '../../src/data/ingredients';
-import { RODINNA_JIDLA } from '../../src/data/jidlaRodiny';
+import { RODINNA_JIDLA, SKUPINY_JIDEL } from '../../src/data/jidlaRodiny';
 import {
   EXPOZIC_PRO_ZAVEDENI,
   expoziceBezReakce,
@@ -197,6 +197,28 @@ describe('rodinná jídla pro rychlý výběr', () => {
   it('idčka a názvy jídel jsou jedinečné', () => {
     expect(new Set(RODINNA_JIDLA.map((j) => j.id)).size).toBe(RODINNA_JIDLA.length);
     expect(new Set(RODINNA_JIDLA.map((j) => j.nazev)).size).toBe(RODINNA_JIDLA.length);
+  });
+
+  it('každé jídlo je ve známé skupině a každá skupina má jídla', () => {
+    const skupiny = new Set(SKUPINY_JIDEL.map((s) => s.id));
+    for (const jidlo of RODINNA_JIDLA) expect(skupiny.has(jidlo.skupina), jidlo.id).toBe(true);
+    for (const skupina of SKUPINY_JIDEL) {
+      expect(RODINNA_JIDLA.some((j) => j.skupina === skupina.id), skupina.id).toBe(true);
+    }
+  });
+
+  it('ve skupinách bez masa, sladkých a snídaních není maso ani ryba', () => {
+    const maso = new Set(ingredients.filter((i) => i.category === 'maso-ryby').map((i) => i.id));
+    for (const jidlo of RODINNA_JIDLA.filter((j) => j.skupina !== 'maso' && j.skupina !== 'polevky')) {
+      for (const id of jidlo.suroviny) expect(maso.has(id), `${jidlo.id}: ${id}`).toBe(false);
+    }
+  });
+
+  it('ve skupině s masem má každé jídlo maso nebo rybu', () => {
+    const maso = new Set(ingredients.filter((i) => i.category === 'maso-ryby').map((i) => i.id));
+    for (const jidlo of RODINNA_JIDLA.filter((j) => j.skupina === 'maso')) {
+      expect(jidlo.suroviny.some((id) => maso.has(id)), jidlo.id).toBe(true);
+    }
   });
 
   it('aspoň jedno jídlo je bezmasé — matka je vegetariánka', () => {
