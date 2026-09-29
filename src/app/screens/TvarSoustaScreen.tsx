@@ -44,11 +44,34 @@ function Strana({
   return (
     <figure className="flex min-w-0 flex-1 flex-col gap-1">
       <div
-        className={`rounded-xl border-2 p-2 ${
+        className={`relative rounded-xl border-2 p-2 ${
           spravne ? 'border-safe/50 bg-safe-soft' : 'border-risk/40 bg-risk-soft'
         }`}
       >
         <ObrazekJidla obrazek={proFazi(strana.obrazek, faze)} />
+        {/* „Takhle ne" je přeškrtnuté, ať je to jasné na první pohled —
+            barva rámečku sama nestačí a ikonu pod obrázkem nejde vidět,
+            když rodič jen zběžně roluje. */}
+        {!spravne && (
+          <svg
+            aria-hidden="true"
+            data-testid="preskrtnuti"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)]"
+          >
+            <line
+              x1="4"
+              y1="96"
+              x2="96"
+              y2="4"
+              className="stroke-risk"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+        )}
       </div>
       <figcaption className="flex items-start gap-1 text-xs font-medium leading-snug">
         <Ikona

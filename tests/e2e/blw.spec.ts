@@ -105,6 +105,9 @@ test('průvodce tvarem sousta: úchop podle dítěte, obrázky a pokyn z katalog
   const ukazka = page.getByTestId('ukazka-kulate-plody');
   await expect(ukazka.getByRole('img', { name: /podélně na čtyři/ })).toBeVisible();
   await expect(ukazka.getByRole('img', { name: 'Celá kulička hroznu' })).toBeVisible();
+  // „Takhle ne" je přeškrtnuté, „takhle ano" ne; ukázka bez chyby nemá čáru vůbec.
+  await expect(ukazka.getByTestId('preskrtnuti')).toHaveCount(1);
+  await expect(page.getByTestId('ukazka-brokolice').getByTestId('preskrtnuti')).toHaveCount(0);
 
   // Cesta z detailu suroviny.
   await page.goto('./#/suroviny/jablko');
