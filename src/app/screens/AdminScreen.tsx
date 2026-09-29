@@ -120,6 +120,16 @@ function Prehledovka(): ReactNode {
 
       {prehled !== null && (
         <div className="flex flex-col gap-4" data-testid="prehled-vysledek">
+          {/* Od 24. 9. 2026 se čísla neberou z dokumentů domácností, ale ze
+              souhrnů, které si posílají telefony samy. Domácnost, která od
+              té doby novou verzi neotevřela, v přehledu není — a bez tohohle
+              upozornění to vypadá jako chyba ve sčítání. */}
+          <p className="rounded-xl bg-caution-soft p-3 text-xs leading-relaxed" data-testid="prehled-pokryti">
+            Počítají se jen domácnosti se sdílením (párovacím kódem), jejichž telefon od 24. 9.
+            2026 otevřel aktuální verzi aplikace a poslal souhrn. Domácnost, která aplikaci od té
+            doby neotevřela nebo ještě neklepla na „Obnovit“, tu chybí. Aplikace jen v jednom
+            telefonu bez sdílení se nepočítá nikdy.
+          </p>
           <Skupina nadpis="Kolik lidí to používá">
             <Radka popisek="Domácností celkem" hodnota={prehled.domacnosti} />
             <Radka popisek="Z toho s aspoň jednou ochutnávkou" hodnota={prehled.aktivniDomacnosti} />
