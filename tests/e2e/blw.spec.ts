@@ -218,3 +218,15 @@ test('reakce po ochutnávce je v deníku i u suroviny výrazně vidět', async (
   await expect(page.locator('[data-testid^="osa-reakce-"]')).toHaveCount(1);
   await expect(page.locator('[data-testid^="osa-reakce-"]')).toContainText('Trávicí potíže');
 });
+
+test('plán se dá sestavit s předstihem, ještě před šestým měsícem', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', narozeniPred(5));
+
+  await page.goto('./#/plan');
+  await expect(page.getByTestId('plan-predstih')).toContainText('ještě není šest měsíců');
+  await page.getByTestId('sestavit-plan').click();
+  // Plán není prázdný: první den má jídlo s brokolicí a dá se podle něj nakoupit.
+  await expect(page.getByTestId('plan-dnes')).toContainText(/brokolic/i);
+  await expect(page.getByTestId('plan-predstih')).toBeVisible();
+});

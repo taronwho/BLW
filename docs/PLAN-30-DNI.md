@@ -30,6 +30,26 @@ Původní návrh se ptal na pět věcí. Odpovědi zadavatele:
 K tomu přibylo pokračování: až blok doběhne, sestaví se dalších třicet dnů
 z toho, co za předchozích třicet opravdu proběhlo.
 
+## Plán s předstihem (říjen 2026)
+
+Rodič si plán sestavuje dopředu, aby nakoupil a nachystal se. Dítě mladší
+šesti měsíců by ale dostalo prázdný plán, protože žádná surovina v katalogu
+nemá `minAgeMonths` pod šest. Mladší dítě se proto plánuje jako šestiměsíční
+(`vekProPlan` v `src/plan/generator.ts`) a obrazovka plánu připomene, že
+začátek řídí znaky připravenosti, ne datum. Test: `tests/plan/predstih.test.ts`.
+
+## Běžná česká jídla (říjen 2026)
+
+Plán je rozvrh, podle kterého se nakupuje, a má stát na tom, co česká
+domácnost běžně vaří. Suroviny jako papája, amarant, chia, kokosové mléko
+nebo krevety jsou v `src/plan/bezne.ts`. Plán je nezakazuje, jen odsouvá:
+jako novinka přijdou až po všem běžném a recept s nimi dostane přirážku.
+Pořadí vah: novinka dne (40) > chybějící železo (12) > neběžná surovina
+(6 za kus, nejvýš 10) > neznámé suroviny a složitost. Železo má přednost,
+takže recept s neběžnou surovinou vyhraje, když jen on dodá železo.
+Testy hlídají, že novinka v prvním bloku není neběžná a že jídel
+s neběžnou surovinou je pod 15 %.
+
 ## Kolikrát denně
 
 Opřeno o NHS a WHO, plán bere z obou tu opatrnější hranici.

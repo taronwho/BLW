@@ -34,6 +34,7 @@ import { JidlaDne, NovinkaRadek, PlanDenNahled } from '../components/PlanDenNahl
 import { NakupTlacitko } from '../components/NakupTlacitko';
 import { slozkyDoNakupu } from '@/nakup/seznam';
 import { useAktivniDite } from '../lib/dite';
+import { ageInMonths } from '../lib/age';
 import { ALLERGEN_LABELS } from '../lib/labels';
 import { useAktivniPlan, usePlanNastroje } from '../lib/plan';
 
@@ -70,6 +71,26 @@ const PRAVIDLA = [
 
 export function PlanScreen(): ReactNode {
   const dite = useAktivniDite();
+  const mesice = dite === null ? null : ageInMonths(dite.birthDate);
+  // Plán se dá sestavit s předstihem: mladší dítě se plánuje jako
+  // šestiměsíční (`vekProPlan`). Rodič ale musí vědět, že začátek řídí
+  // připravenost dítěte, ne to, že plán existuje.
+  const predstih =
+    mesice !== null && mesice < 6 ? (
+      <p
+        data-testid="plan-predstih"
+        className="rounded-xl border border-accent/30 bg-accent-soft p-3 text-sm leading-relaxed"
+      >
+        Dítěti ještě není šest měsíců. Plán je připravený na začátek příkrmu, ať můžeš nakoupit
+        a nachystat se předem. Začni, až dítě ukáže znaky připravenosti.{' '}
+        <Link
+          to="/rady/je-dite-pripravene"
+          className="inline-flex min-h-touch items-center font-semibold text-accent underline"
+        >
+          Je dítě připravené?
+        </Link>
+      </p>
+    ) : null;
   const plan = useAktivniPlan();
   const { sestav } = usePlanNastroje();
   const ulozPlan = useHouseholdStore((store) => store.ulozPlan);
@@ -184,6 +205,7 @@ export function PlanScreen(): ReactNode {
             novinka znovu nenabídne.
           </p>
         </header>
+        {predstih}
         <button
           type="button"
           disabled={pracuje}
@@ -256,6 +278,8 @@ export function PlanScreen(): ReactNode {
           />
         </div>
       </header>
+
+      {predstih}
 
       {/* Alergie zapsaná až po sestavení. Plán je hotový rozvrh, takže o ní
           neví a dál nabízí jídlo, které dítě nesmí. Tichá oprava by byla

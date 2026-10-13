@@ -3,6 +3,7 @@ import { nutrientProfile } from '@/data/nutrients';
 import { recipeNutrients } from '@/data/recipeNutrients';
 import type { AllergenGroup, Child, Ingredient, Recipe, RecipeCategory } from '@/types';
 import { KEY_ALLERGENS } from '@/types';
+import { jeNebezna } from './bezne';
 import { frekvence } from './frekvence';
 import { DNU_V_BLOKU, type Plan, type PlanDen, type PlanJidlo, type TypJidla } from './typy';
 
@@ -117,6 +118,9 @@ function jeVhodnaNovinka(
  * alergenních surovin je v katalogu hodně a abeceda je řadila k sobě.
  */
 function prioritaNovinky(item: Ingredient, mesicVRoce: number): number {
+  // Co se v české kuchyni běžně nevaří, přijde na řadu až po všem
+  // ostatním (src/plan/bezne.ts). Nezakazuje se to, jen se to odsouvá.
+  if (jeNebezna(item.id)) return 4;
   if (nutrientProfile(item).iron !== 'nevyznamny') return 1;
   if (item.seasonCz.length > 0 && item.seasonCz.includes(mesicVRoce)) return 2;
   return 3;
@@ -149,7 +153,7 @@ function poradiNovinek(vstup: VstupPlanu, vyloucene: ReadonlySet<AllergenGroup>)
     .sort((a, b) => a.nameCz.localeCompare(b.nameCz, 'cs'));
 
   const out: Ingredient[] = [];
-  for (const priorita of [1, 2, 3]) {
+  for (const priorita of [1, 2, 3, 4]) {
     const skupina = vhodne.filter((item) => prioritaNovinky(item, vstup.mesicVRoce) === priorita);
     const podleKategorii = new Map<string, Ingredient[]>();
     for (const item of skupina) {
@@ -192,6 +196,7 @@ function zastupciAlergenu(
       .filter((item) => item.allergens.includes(skupina) && !out.includes(item))
       .sort(
         (a, b) =>
+          Number(jeNebezna(a.id)) - Number(jeNebezna(b.id)) ||
           a.allergens.length - b.allergens.length ||
           a.minAgeMonths - b.minAgeMonths ||
           a.nameCz.localeCompare(b.nameCz, 'cs'),
@@ -351,9 +356,13 @@ function skoreReceptu(
       (recipe.tags.includes('kaše') ? 6 : 0) +
       (recipe.tags.includes('do ruky') ? -2 : 0)
     : 0;
+  // Recept se surovinou, kterou česká domácnost běžně nemá, vyhraje jen
+  // tehdy, když na daný den nic běžného nesedí (src/plan/bezne.ts).
+  const nebeznych = recipe.ingredients.filter((ref) => jeNebezna(ref.ingredientId)).length;
   return (
-    (maHledanou ? 0 : 16) +
-    (chybiZelezo && !maZelezo ? 4 : 0) +
+    (maHledanou ? 0 : 40) +
+    Math.min(nebeznych * 6, 10) +
+    (chybiZelezo && !maZelezo ? 12 : 0) +
     Math.min(neznamych, 3) +
     slozitost +
     podoba
@@ -542,7 +551,22 @@ function jidlaDne(
   return jidla;
 }
 
-export function sestavPlan(vstup: VstupPlanu): Plan {
+/**
+ * Věk, pro který se plán skládá.
+ *
+ * Plán popisuje začátek příkrmu, a ten přichází kolem šestého měsíce.
+ * Rodič si ho má umět sestavit s předstihem, aby nakoupil a připravil se:
+ * dítě, kterému je pět měsíců a tři týdny, by jinak dostalo prázdný plán,
+ * protože žádná surovina v katalogu nemá `minAgeMonths` pod šest. Mladší
+ * dítě se proto plánuje jako šestiměsíční; kdy s plánem začít, řídí znaky
+ * připravenosti, ne datum (rada „Je dítě připravené?“).
+ */
+export function vekProPlan(mesice: number | null): number | null {
+  return mesice === null ? null : Math.max(mesice, 6);
+}
+
+export function sestavPlan(vstupRodice: VstupPlanu): Plan {
+  const vstup: VstupPlanu = { ...vstupRodice, mesice: vekProPlan(vstupRodice.mesice) };
   const alergieDitete = new Set<AllergenGroup>(vstup.dite.allergens ?? []);
   // Pro výběr jídel platí alergie dítěte i alergeny pozastavené po reakci.
   // Do plánu se ale ukládají jen alergie: podle nich se pozná, že plán
