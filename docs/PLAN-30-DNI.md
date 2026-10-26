@@ -142,6 +142,15 @@ Plán si pamatuje, kolikátá podoba bloku to je. Bez toho vracelo tlačítko
 o půlnoci. Nemoc ani dovolená plán nerozbijí a nikdo se nevrací
 k dvanácti zmeškaným dnům.
 
+**Jídla se odškrtávají i jednotlivě (říjen 2026).** Rodina jí přes den
+víckrát a rodič si chce snídani odškrtnout hned po snídani, ne až večer.
+Každé jídlo dne má proto vlastní „Snědeno“, v přehledu i v detailu dne.
+Den se tím sám neuzavře: jeho odškrtnutí zapisuje novinku do deníku a ptá
+se, jak to šlo, a to se bez rodiče dít nemá. Když je snědené všechno,
+aplikace jen připomene odškrtnout den. V mřížce bloku má rozjedený den
+pod číslem proužek podle podílu snědených jídel. U odškrtnutého dne se
+jídla bez vlastního záznamu počítají jako snědená.
+
 **Jedna novinka, ale ne jedno sousto.** Detail dne připomene posledních pár
 surovin z plánu jako nabídku na talíř. Novinka zůstává jedna kvůli přiřazení
 reakce, ale výběr na talíři k metodě patří a druhé jídlo navíc kvůli němu
@@ -201,6 +210,11 @@ Skládá se ze dvou částí, které se při sloučení chovají jinak:
   zápis;
 - `stavy` se mění pořád a každý den má vlastní značku času, aby se
   odškrtnutí ze dvou telefonů sloučilo místo přepsání.
+- `snezeno` (snědená jednotlivá jídla, klíč `číslo dne:pořadí jídla`) se
+  slučuje stejně jako `stavy`. Je to volitelné pole: starší verze ho
+  přenáší beze změny a sloučení ho nesmaže, proto se schéma nezvedalo.
+  Odložení dne odnese odškrtnutá jídla s obsahem dne, výměna obsahu dne
+  („Jiné jídlo“) je zapomene.
 
 Stavy se slučují jen u téhož bloku sestaveného ve stejnou chvíli. Kdyby se
 přenášely mezi různými sestaveními, odškrtnuté dny starého plánu by označily

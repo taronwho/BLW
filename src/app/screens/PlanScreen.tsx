@@ -27,7 +27,7 @@ import {
   stavDne,
   type StavDne,
 } from '@/plan/typy';
-import { blokDokoncen } from '@/plan/typy';
+import { blokDokoncen, snezenoJidel } from '@/plan/typy';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
 import { JidlaDne, NovinkaRadek, PlanDenNahled } from '../components/PlanDenNahled';
@@ -331,7 +331,7 @@ export function PlanScreen(): ReactNode {
             </Link>
           </div>
           {dnes.novinka !== undefined && <NovinkaRadek id={dnes.novinka} />}
-          <JidlaDne den={dnes} />
+          <JidlaDne plan={plan} den={dnes} />
           <PlanDenAkce plan={plan} den={dnes} onZmena={(cislo, stav) => setPosledni({ cislo, stav })} />
         </section>
       )}
@@ -387,6 +387,8 @@ export function PlanScreen(): ReactNode {
           {plan.dny.map((den) => {
             const stav = stavDne(plan, den.cislo);
             const teď = dnes !== null && den.cislo === dnes.cislo;
+            // Rozjedený den: část jídel je snědená, den ještě odškrtnutý není.
+            const snedenych = stav === 'ceka' ? snezenoJidel(plan, den) : 0;
             const barva =
               stav === 'hotovo'
                 ? 'border-accent bg-accent text-on-accent'
@@ -404,10 +406,18 @@ export function PlanScreen(): ReactNode {
                   type="button"
                   data-testid={`plan-den-${den.cislo}`}
                   aria-haspopup="dialog"
-                  aria-label={`Den ${den.cislo}, ${stav === 'hotovo' ? 'hotovo' : stav === 'preskoceno' ? 'přeskočeno' : 'čeká'}`}
+                  aria-label={`Den ${den.cislo}, ${stav === 'hotovo' ? 'hotovo' : stav === 'preskoceno' ? 'přeskočeno' : snedenych > 0 ? `snědeno ${snedenych} z ${den.jidla.length} jídel` : 'čeká'}`}
                   onClick={() => setNahled(den.cislo)}
-                  className={`flex min-h-touch w-full items-center justify-center rounded-lg border text-sm transition ${barva}`}
+                  className={`relative flex min-h-touch w-full items-center justify-center overflow-hidden rounded-lg border text-sm transition ${barva}`}
                 >
+                  {snedenych > 0 && (
+                    <span
+                      aria-hidden="true"
+                      data-testid={`plan-den-${den.cislo}-rozjedeny`}
+                      className="absolute bottom-0 left-0 h-1 bg-accent"
+                      style={{ width: `${(snedenych / den.jidla.length) * 100}%` }}
+                    />
+                  )}
                   {stav === 'hotovo' ? (
                     <Check aria-hidden="true" className="h-4 w-4" />
                   ) : stav === 'preskoceno' ? (

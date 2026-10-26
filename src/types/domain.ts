@@ -489,6 +489,14 @@ export interface Plan {
    * mezitím odškrtl druhý rodič.
    */
   stavy: Record<string, CasovanaHodnota<StavDne>>;
+  /**
+   * Snědená jednotlivá jídla, klíč `číslo dne:pořadí jídla`.
+   *
+   * Den se odškrtává celý, ale rodina jí přes den víckrát a rodič si chce
+   * odškrtnout snídani hned po snídani. Každé jídlo má vlastní značku času
+   * ze stejného důvodu jako `stavy`. Plán uložený starší verzí pole nemá.
+   */
+  snezeno?: Record<string, CasovanaHodnota<boolean>>;
 }
 
 

@@ -8,6 +8,7 @@ import { denPodleCisla, kdyStavDne, pribyleAlergie, stavDne } from '@/plan/typy'
 import { ChokingBadge } from '../components/ChokingBadge';
 import { IngredientIcon } from '../components/IngredientIcon';
 import { PlanDenAkce } from '../components/PlanDenAkce';
+import { SnezenoTlacitko } from '../components/SnezenoTlacitko';
 import { NakupTlacitko } from '../components/NakupTlacitko';
 import { slozkyDoNakupu } from '@/nakup/seznam';
 import { ageInMonths, stageForAge } from '../lib/age';
@@ -299,9 +300,13 @@ export function PlanDenScreen(): ReactNode {
               </span>
             );
 
+            const snezeno = (nazev: string): ReactNode => (
+              <SnezenoTlacitko plan={plan} cislo={den.cislo} poradi={i} nazev={nazev} siroke />
+            );
+
             if (recept !== undefined) {
               return (
-                <li key={`${jidlo.typ}-${i}`}>
+                <li key={`${jidlo.typ}-${i}`} className="flex flex-col gap-1.5">
                   <Link
                     to={`/recepty/${recept.id}`}
                     className="flex flex-col gap-1.5 rounded-xl border border-line bg-surface p-3 shadow-soft"
@@ -330,13 +335,14 @@ export function PlanDenScreen(): ReactNode {
                       {recept.babyServing[faze]}
                     </span>
                   </Link>
+                  {snezeno(recept.titleCz)}
                 </li>
               );
             }
 
             if (surovina === undefined) return null;
             return (
-              <li key={`${jidlo.typ}-${i}`}>
+              <li key={`${jidlo.typ}-${i}`} className="flex flex-col gap-1.5">
                 <Link
                   to={`/suroviny/${surovina.id}`}
                   className="flex flex-col gap-1.5 rounded-xl border border-line bg-surface p-3 shadow-soft"
@@ -358,6 +364,7 @@ export function PlanDenScreen(): ReactNode {
                     {surovina.prep[faze].serving}
                   </span>
                 </Link>
+                {snezeno(surovina.nameCz)}
               </li>
             );
           })}

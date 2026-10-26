@@ -5,7 +5,7 @@ import type { AllergenGroup, Child, Ingredient, Recipe, RecipeCategory } from '@
 import { KEY_ALLERGENS } from '@/types';
 import { jeNebezna } from './bezne';
 import { frekvence } from './frekvence';
-import { DNU_V_BLOKU, type Plan, type PlanDen, type PlanJidlo, type TypJidla } from './typy';
+import { DNU_V_BLOKU, bezSnezenehoDne, type Plan, type PlanDen, type PlanJidlo, type TypJidla } from './typy';
 
 /**
  * Sestavení třicetidenního plánu.
@@ -729,7 +729,7 @@ export function jinyDen(plan: Plan, cislo: number, vstup: VstupPlanu, varianta: 
     cerstvy.dny.find((den) => den.cislo === cislo);
   if (nahrada === undefined) return plan;
   return {
-    ...plan,
+    ...bezSnezenehoDne(plan, cislo),
     dny: plan.dny.map((den) =>
       den.cislo === cislo
         ? {

@@ -424,6 +424,8 @@ export const MAX_MEMBERS = 5;
  * `stavy` se naopak mění pořád a každý den má vlastní značku času, aby se
  * odškrtnutí ze dvou telefonů sloučilo místo přepsání.
  *
+ * Snědená jednotlivá jídla (`snezeno`) se slučují stejně jako stavy.
+ *
  * Stavy se slučují jen u téhož bloku sestaveného ve stejnou chvíli. Kdyby se
  * přenášely i mezi různými sestaveními, odškrtnuté dny starého plánu by
  * označily úplně jiná jídla toho nového.
@@ -439,7 +441,18 @@ function mergePlany(
     const druhy = (zaznam === local?.[childId] ? remote?.[childId] : local?.[childId])?.hodnota;
     if (vitez === null || druhy === null || druhy === undefined) continue;
     if (vitez.blok !== druhy.blok || vitez.vytvoreno !== druhy.vytvoreno) continue;
-    out[childId] = { ...zaznam, hodnota: { ...vitez, stavy: mergeCasovane(druhy.stavy, vitez.stavy) } };
+    const snezeno =
+      vitez.snezeno === undefined && druhy.snezeno === undefined
+        ? undefined
+        : mergeCasovane(druhy.snezeno ?? {}, vitez.snezeno ?? {});
+    out[childId] = {
+      ...zaznam,
+      hodnota: {
+        ...vitez,
+        stavy: mergeCasovane(druhy.stavy, vitez.stavy),
+        ...(snezeno === undefined ? {} : { snezeno }),
+      },
+    };
   }
   return out;
 }

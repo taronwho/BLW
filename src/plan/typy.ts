@@ -77,7 +77,7 @@ export function odlozDen(plan: Plan, cislo: number): Plan {
   const odkud = denPodleCisla(plan, cislo);
   if (kam === null || kam === undefined || odkud === null) return plan;
   return {
-    ...plan,
+    ...prohodSnezene(plan, cislo, kam.cislo),
     dny: plan.dny.map((den) => {
       if (den.cislo === cislo) return { ...kam, cislo };
       if (den.cislo === kam.cislo) return { ...odkud, cislo: kam.cislo };
@@ -89,4 +89,72 @@ export function odlozDen(plan: Plan, cislo: number): Plan {
 /** Zapíše stav jednoho dne se značkou času. */
 export function sStavemDne(plan: Plan, cislo: number, stav: StavDne, kdy: number): Plan {
   return { ...plan, stavy: { ...plan.stavy, [String(cislo)]: { hodnota: stav, kdy } } };
+}
+
+/** Klíč jednoho jídla v `Plan.snezeno`: číslo dne a pořadí jídla v něm. */
+export function klicJidla(cislo: number, poradi: number): string {
+  return `${cislo}:${poradi}`;
+}
+
+/**
+ * Je jídlo snědené?
+ *
+ * Rozhoduje výslovné odškrtnutí jídla. Kde žádné není, platí stav dne:
+ * odškrtnutý den znamená snědená všechna jeho jídla, aby hotový den
+ * nevypadal, jako by v něm dítě nic nejedlo.
+ */
+export function jeSnezeno(plan: Plan, cislo: number, poradi: number): boolean {
+  return plan.snezeno?.[klicJidla(cislo, poradi)]?.hodnota ?? stavDne(plan, cislo) === 'hotovo';
+}
+
+/** Kolik jídel dne je snědených. */
+export function snezenoJidel(plan: Plan, den: PlanDen): number {
+  return den.jidla.filter((_, poradi) => jeSnezeno(plan, den.cislo, poradi)).length;
+}
+
+/** Zapíše snědení jednoho jídla se značkou času. */
+export function sSnezenym(
+  plan: Plan,
+  cislo: number,
+  poradi: number,
+  snedeno: boolean,
+  kdy: number,
+): Plan {
+  return {
+    ...plan,
+    snezeno: { ...plan.snezeno, [klicJidla(cislo, poradi)]: { hodnota: snedeno, kdy } },
+  };
+}
+
+function cisloZKlice(klic: string): number {
+  return Number(klic.slice(0, klic.indexOf(':')));
+}
+
+/**
+ * Zapomene snědená jídla dne.
+ *
+ * Patří k výměně obsahu dne: odškrtnutá snídaně se týkala jídla, které
+ * v dni už není.
+ */
+export function bezSnezenehoDne(plan: Plan, cislo: number): Plan {
+  if (plan.snezeno === undefined) return plan;
+  const snezeno = Object.fromEntries(
+    Object.entries(plan.snezeno).filter(([klic]) => cisloZKlice(klic) !== cislo),
+  );
+  return { ...plan, snezeno };
+}
+
+/** Odškrtnutá jídla jdou s obsahem dne, když se dny prohodí. */
+function prohodSnezene(plan: Plan, a: number, b: number): Plan {
+  if (plan.snezeno === undefined) return plan;
+  const snezeno = Object.fromEntries(
+    Object.entries(plan.snezeno).map(([klic, hodnota]) => {
+      const cislo = cisloZKlice(klic);
+      const poradi = klic.slice(klic.indexOf(':') + 1);
+      if (cislo === a) return [`${b}:${poradi}`, hodnota];
+      if (cislo === b) return [`${a}:${poradi}`, hodnota];
+      return [klic, hodnota];
+    }),
+  );
+  return { ...plan, snezeno };
 }

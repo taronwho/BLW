@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { ingredientById } from '@/data';
 import { useHouseholdStore } from '@/storage/householdStore';
 import { jinyDen, noveSuroviny } from '@/plan/generator';
-import { odlozDen, stavDne, type Plan, type PlanDen, type StavDne } from '@/plan/typy';
+import { odlozDen, snezenoJidel, stavDne, type Plan, type PlanDen, type StavDne } from '@/plan/typy';
 import { draftPayload, emptyDraft, type Draft } from '../lib/tastingDraft';
 import { useModalFokus } from '../lib/modalFokus';
 import { usePlanNastroje } from '../lib/plan';
@@ -112,9 +112,19 @@ export function PlanDenAkce({
     );
   }
 
+  const vseSnezeno = den.jidla.length > 0 && snezenoJidel(plan, den) === den.jidla.length;
+
   return (
     <>
       <div className="flex flex-col gap-1.5">
+        {/* Jídla se odškrtávají sama, den ne: jeho odškrtnutí zapisuje
+            novinku do deníku a ptá se, jak to šlo. Když je snědené všechno,
+            stačí o tom říct. */}
+        {vseSnezeno && (
+          <p data-testid="den-vse-snezeno" className="text-xs leading-relaxed text-accent-deep">
+            Všechna jídla dne jsou snědená. Odškrtni celý den a plán postoupí na další.
+          </p>
+        )}
         {/* Prázdné zelené tlačítko vypadalo jako už odškrtnutý den: plná
             plocha je v téhle aplikaci všude stav, ne výzva. Obrys
             s průsvitnou zelení zve ke klepnutí a teprve po něm se plocha

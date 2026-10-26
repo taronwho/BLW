@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
 
 /**
@@ -18,13 +18,22 @@ import { useLocation, useNavigationType } from 'react-router-dom';
  *
  * Při POP se fokus nechává být: rodič se vrací tam, kde byl, a přeskočit
  * ho jinam by ho připravilo o kontext, který si právě vyžádal.
+ *
+ * Při REPLACE na téže cestě se nedělá nic. Hledání zapisuje
+ * dotaz do adresy (`replace`), takže první písmeno změnilo typ navigace
+ * z POP na REPLACE — efekt se spustil, fokus odskočil z pole na `<main>`
+ * a na mobilu po prvním písmenu zmizela klávesnice.
  */
 export function ScrollToTop(): null {
-  const { pathname } = useLocation();
+  const { pathname, key } = useLocation();
   const navigationType = useNavigationType();
+  const predchozi = useRef(pathname);
 
   useEffect(() => {
+    const tataCesta = predchozi.current === pathname;
+    predchozi.current = pathname;
     if (navigationType === 'POP') return;
+    if (tataCesta && navigationType === 'REPLACE') return;
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 
     const hlavni = document.getElementById('obsah');
@@ -32,7 +41,7 @@ export function ScrollToTop(): null {
     // `preventScroll`, protože jsme právě odrolovali nahoru a prohlížeč by
     // to zaostřením mohl zase posunout.
     hlavni.focus({ preventScroll: true });
-  }, [pathname, navigationType]);
+  }, [pathname, key, navigationType]);
 
   return null;
 }

@@ -1845,3 +1845,65 @@ test('nastavení říká, co se s daty děje', async ({ page }) => {
   await otevriDomacnost(page, 'aplikace');
   await expect(page.getByTestId('soukromi')).toContainText('anonymní počty');
 });
+
+// Hledání zapisuje dotaz do adresy. Dřív to po prvním písmenu přesunulo
+// fokus na `<main>` jako při přechodu na novou obrazovku a na mobilu
+// zmizela klávesnice.
+for (const [cesta, pole] of [
+  ['recepty', 'hledat-recept'],
+  ['suroviny', 'hledat-surovinu'],
+] as const) {
+  test(`při psaní do hledání (${cesta}) zůstává fokus v poli`, async ({ page }) => {
+    await acceptDisclaimer(page);
+    await page.goto(`./#/${cesta}`);
+    const vstup = page.getByTestId(pole);
+    await vstup.click();
+    await page.keyboard.type('rizo', { delay: 50 });
+    await expect(vstup).toBeFocused();
+    await expect(vstup).toHaveValue('rizo');
+  });
+}
+
+test('v plánu jdou odškrtnout jednotlivá jídla, ne jen celý den', async ({ page }) => {
+  await acceptDisclaimer(page);
+  await zalozDite(page, 'Ema', '2026-03-01');
+  await page.goto('./#/plan');
+  await page.getByTestId('sestavit-plan').click();
+
+  // První dny bývají jen s novinkou; vezme se první den s víc jídly.
+  const jidla = page.getByTestId('den-jidla').getByRole('listitem');
+  let cislo = 0;
+  let pocet = 0;
+  for (let den = 1; den <= 30 && pocet < 2; den++) {
+    await page.goto(`./#/plan/den/${den}`);
+    await expect(jidla.first()).toBeVisible();
+    cislo = den;
+    pocet = await jidla.count();
+  }
+  expect(pocet).toBeGreaterThan(1);
+
+  const prvni = page.getByTestId('jidlo-snezeno-0');
+  await expect(prvni).toHaveAttribute('aria-pressed', 'false');
+  await prvni.click();
+  await expect(prvni).toHaveAttribute('aria-pressed', 'true');
+  // Den zůstává čekat; odškrtnutí jídla ho samo neuzavře.
+  await expect(page.getByTestId('den-stav')).toContainText('čeká');
+  await expect(page.getByTestId('den-vse-snezeno')).toBeHidden();
+
+  // Odškrtnutí vydrží znovunačtení a v mřížce je den vidět jako rozjedený.
+  await page.reload();
+  await expect(page.getByTestId('jidlo-snezeno-0')).toHaveAttribute('aria-pressed', 'true');
+  await page.goto('./#/plan');
+  await expect(page.getByTestId(`plan-den-${cislo}-rozjedeny`)).toBeVisible();
+  await expect(page.getByTestId(`plan-den-${cislo}`)).toHaveAttribute('aria-label', /snědeno 1 z/);
+
+  // Snědené všechno: aplikace připomene odškrtnout den.
+  await page.goto(`./#/plan/den/${cislo}`);
+  for (let i = 1; i < pocet; i++) await page.getByTestId(`jidlo-snezeno-${i}`).click();
+  await expect(page.getByTestId('den-vse-snezeno')).toBeVisible();
+
+  // Jídlo jde vrátit zpátky.
+  await page.getByTestId('jidlo-snezeno-0').click();
+  await expect(page.getByTestId('jidlo-snezeno-0')).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.getByTestId('den-vse-snezeno')).toBeHidden();
+});

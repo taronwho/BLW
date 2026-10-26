@@ -9,6 +9,7 @@ import { useModalFokus } from '../lib/modalFokus';
 import { TYP_JIDLA_LABELS } from '../lib/plan';
 import { ChokingBadge } from './ChokingBadge';
 import { IngredientIcon } from './IngredientIcon';
+import { SnezenoTlacitko } from './SnezenoTlacitko';
 
 /**
  * Nová surovina dne jako řádek s ikonou.
@@ -42,22 +43,23 @@ export function NovinkaRadek({ id }: { id: string }): ReactNode {
  * Když je jediné jídlo dne ta nová surovina bez receptu, vypisovat ji podruhé
  * pod řádkem s novinkou by jen zabralo místo a nic nepřidalo.
  */
-export function JidlaDne({ den }: { den: PlanDen }): ReactNode {
+export function JidlaDne({ plan, den }: { plan: Plan; den: PlanDen }): ReactNode {
   const jenNovinka = den.jidla.every((jidlo) => jidlo.ingredientId === den.novinka);
   if (jenNovinka) return null;
   return (
-    <ul className="flex flex-col gap-1">
+    <ul className="flex flex-col gap-1" data-testid="jidla-dne">
       {den.jidla.map((jidlo, i) => {
         const recept = recipeById.get(jidlo.recipeId ?? '');
         const surovina = ingredientById.get(jidlo.ingredientId ?? '');
         const nazev = recept?.titleCz ?? surovina?.nameCz ?? '';
         if (nazev.length === 0) return null;
         return (
-          <li key={`${jidlo.typ}-${i}`} className="flex items-baseline gap-2 text-xs">
+          <li key={`${jidlo.typ}-${i}`} className="flex items-center gap-2 text-xs">
             <span className="w-14 shrink-0 text-[10px] uppercase tracking-wide text-muted">
               {TYP_JIDLA_LABELS[jidlo.typ]}
             </span>
             <span className="min-w-0 flex-1 truncate font-medium">{nazev}</span>
+            <SnezenoTlacitko plan={plan} cislo={den.cislo} poradi={i} nazev={nazev} />
           </li>
         );
       })}
@@ -151,7 +153,7 @@ export function PlanDenNahled({
           <NovinkaRadek id={den.novinka} />
         )}
 
-        <JidlaDne den={den} />
+        <JidlaDne plan={plan} den={den} />
 
         <Link
           to={`/plan/den/${den.cislo}`}

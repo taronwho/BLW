@@ -28,6 +28,7 @@ import {
 } from '@/sync/merge';
 import { generateHouseholdCode, normalizeHouseholdCode } from '@/sync/householdCode';
 import { popisZarizeni } from '@/sync/zarizeni';
+import { sSnezenym } from '@/plan/typy';
 import { INTERVAL_SOUHRNU_MS, klicStatistiky } from '@/sync/statistiky';
 import { uklidNahrobky, zaplneni } from '@/sync/velikost';
 import type { SouhrnDomacnosti } from '@/admin/prehled';
@@ -81,6 +82,7 @@ interface HouseholdStore {
   setRecipeNote(recipeId: string, note: string): Promise<void>;
   ulozPlan(childId: string, plan: Plan | null): Promise<void>;
   nastavStavDne(childId: string, cislo: number, stav: StavDne): Promise<void>;
+  nastavSnezeno(childId: string, cislo: number, poradi: number, snedeno: boolean): Promise<void>;
   pridejDoNakupu(davky: readonly { ingredientId: string; mnozstvi?: string; recipeId?: string }[]): Promise<void>;
   odeberZNakupu(ingredientId: string): Promise<void>;
   prepniKoupeno(ingredientId: string): Promise<void>;
@@ -594,6 +596,32 @@ export const useHouseholdStore = create<HouseholdStore>((set, get) => {
         plans: {
           ...celkovy.plans,
           [childId]: { hodnota: { ...soucasny, stavy }, kdy: Date.now() },
+        },
+      });
+    },
+
+    /**
+     * Odškrtnutí jednoho jídla dne jako snědeného, nebo jeho vrácení.
+     *
+     * Stejně jako u stavu dne nese jídlo vlastní značku času, aby snídaně
+     * odškrtnutá na jednom telefonu nezmizela, když druhý rodič mezitím
+     * odškrtne oběd.
+     */
+    async nastavSnezeno(
+      childId: string,
+      cislo: number,
+      poradi: number,
+      snedeno: boolean,
+    ): Promise<void> {
+      const soucasny = get().state.plans?.[childId]?.hodnota;
+      if (soucasny === undefined || soucasny === null) return;
+      const ted = Date.now();
+      const celkovy = get().state;
+      await persist({
+        ...celkovy,
+        plans: {
+          ...celkovy.plans,
+          [childId]: { hodnota: sSnezenym(soucasny, cislo, poradi, snedeno, ted), kdy: ted },
         },
       });
     },
